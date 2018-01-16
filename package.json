@@ -1,0 +1,14 @@
+{
+  "name": "heatmaps",
+  "version": "0.0.0",
+  "private": true,
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "start": "concurrently \"yarn server\" \"yarn client\"",
+    "server": "node start-server.js",
+    "client": "node start-client.js"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.1"
+  }
+}
