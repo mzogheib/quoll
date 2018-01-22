@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-
-//something
+import Api from './_utils/api';
 
 class App extends Component {
+  componentDidMount () {
+    Api.getToshlLocations()
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((response) => {
+        console.debug(response)
+      });
+  }
+
   render() {
     return (
       <div className="App">
