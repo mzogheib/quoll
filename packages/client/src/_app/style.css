@@ -1,0 +1,13 @@
+.app {
+    height: 100%;
+    display: flex;
+}
+
+.app__menu {
+    flex-basis: 300px;
+}
+
+.app__map {
+    flex-grow: 1;
+}
+
