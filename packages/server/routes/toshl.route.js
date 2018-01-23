@@ -7,7 +7,7 @@ module.exports = {
 function list(req, res) {
 
   ctrlToshl
-    .list('/entries/locations', { per_page: 10 })
+    .list('/entries/locations', { per_page: 500 })
     .then(onSuccess)
     .catch(onError);
 
