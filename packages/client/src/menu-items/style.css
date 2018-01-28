@@ -1,0 +1,4 @@
+.menu-items {
+    display: flex;
+    flex-direction: column;
+}

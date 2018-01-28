@@ -1,6 +1,5 @@
 import React from 'react';
 import './style.css';
-import Api from '../_utils/api';
 const google = window.google;
 
 export default class Map extends React.Component {
@@ -8,7 +7,7 @@ export default class Map extends React.Component {
     super(props);
     this.state = {
       map: {},
-      locations: []
+      layers: []
     };
   }
 
@@ -20,38 +19,46 @@ export default class Map extends React.Component {
       mapTypeId: 'roadmap',
     });
     this.setState({ map: map });
-
-    Api.getToshlLocations()
-      .then((response) => {
-        this.setState({ locations: response });
-        console.log(response)
-      })
-      .catch((response) => {
-        console.debug(response);
-      });
-
   }
 
-  render() {
-    const heatmapData = this.state.locations.map(location => {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.layers !== this.props.layers) {
+      // Hide existing layers then set to null to delete the layer
+      // TODO: confirm if setting the layer to null in this way is in 
+      // fact deleting it. Are there memory leaks with this approach?
+      const currentLayers = this.state.layers;
+      currentLayers.forEach(layer => {
+        layer.setMap(null);
+        layer = null;
+      });
+      this.setState({ layers: [] });
+
+      const newLayers = nextProps.layers.map(layer => {
+        return new google.maps.visualization.HeatmapLayer({
+          data: this.makeHeatmapLayerData(layer.data),
+          radius: 20,
+          opacity: 0.6,
+          maxIntensity: 50
+        });
+      });
+      this.setState({ layers: newLayers });
+    }
+  }
+
+  makeHeatmapLayerData(locations) {
+    return locations.map(location => {
       return {
         location: new google.maps.LatLng(location.latitude, location.longitude),
         weight: location.expenses.sum
       };
     })
-    
-    let heatmap = new google.maps.visualization.HeatmapLayer({
-      data: heatmapData,
-      radius: 20,
-      opacity: 0.6,
-      maxIntensity: 50
-    });
-    heatmap.setMap(this.state.map);
+  }
+
+  render() {
+    this.state.layers.forEach(layer => { layer.setMap(this.state.map); });
 
     return (
-      <div className='map' id='map'>
-        hello
-      </div>
+      <div className='map' id='map'></div>
     );
   }
 };
