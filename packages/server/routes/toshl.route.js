@@ -5,9 +5,9 @@ module.exports = {
 };
 
 function list(req, res) {
-
+  const params = req.query;
   ctrlToshl
-    .list('/entries/locations', { per_page: 500 })
+    .list('/entries', params)
     .then(onSuccess)
     .catch(onError);
 

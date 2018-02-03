@@ -17,6 +17,6 @@ function list(endpoint, parameters) {
   }
 
   url = baseUrl + endpoint + '?' + urlParams.join('&');
-  
+  console.log(url, parameters, options)
   return axios.get(url, options);
 }
