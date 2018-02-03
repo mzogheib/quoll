@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import './style.css';
 import Menu from '../menu';
 import Map from '../map';
-import Api from '../_utils/api';
+import Toshl from '../_utils/toshl';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      services: []
+      services: [],
+      filter: {}
     };
   }
 
@@ -40,9 +41,9 @@ class App extends Component {
     ];
   }
 
-  getServiceData(serviceId) {
+  getServiceData(serviceId, params) {
     if (serviceId === 'toshl') {
-      return Api.getToshlLocations()
+      return Toshl.getEntries(params)
         .catch((response) => {
           console.debug(response);
         });
@@ -57,7 +58,7 @@ class App extends Component {
       updatedService.active = !updatedService.active;
       if (updatedService.active) {
         // Fetch the data
-        this.getServiceData(updatedService.id)
+        this.getServiceData(updatedService.id, this.state.filter)
           .then(data => {
             updatedService.data = data;
             const updatedServices = this.state.services.map(service => service.id === updatedService.id ? updatedService : service);
@@ -68,18 +69,40 @@ class App extends Component {
         updatedService.data = [];
         const updatedServices = this.state.services.map(service => service.id === updatedService.id ? updatedService : service);
         this.setState({ services: updatedServices });
-  }
+      }
     }
   }
 
+  handleFilterUpdate(filter) {
+    const servicesToUpdate = this.state.services.filter(service => service.active);
+    this.setState({ filter: filter });
+
+    if (!servicesToUpdate.length) {
+      return;
+    }
+
+    const promises = servicesToUpdate.map(service => {
+      return this.getServiceData(service.id, filter)
+      .then(data => {
+        servicesToUpdate.find(ser => ser.id === service.id).data = data;
+      });
+    });
+    
+    Promise.all(promises)
+      .then(data => {
+        // this sets only the active services. need to keep the inactive ones
+        this.setState({ services: servicesToUpdate });
+      })
+  }
+
   render() {
-    const layerData = 
-      this.state.services
-        .filter(service => service.active)
-        .map(service => { return { id: service.id, data: service.data }});
+    const layerData = [];
+      // this.state.services
+      //   .filter(service => service.active)
+      //   .map(service => { return { id: service.id, data: service.data }});
     return (
       <div className='app'>
-        <div className='app__menu'><Menu items={this.state.services} onItemToggle={this.handleItemToggle.bind(this)}></Menu></div>
+        <div className='app__menu'><Menu items={this.state.services} onItemToggle={this.handleItemToggle.bind(this)} onFilterUpdate={this.handleFilterUpdate.bind(this)}></Menu></div>
         <div className='app__map'><Map layers={layerData}></Map></div>
       </div>
     );

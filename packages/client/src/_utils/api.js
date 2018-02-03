@@ -1,14 +1,14 @@
 import axios from 'axios';
 
-const getToshlLocations = () => {
+const get = (endpoint, params) => {
   return new Promise((resolve, reject) => {
     axios
-      .get('/api/toshl')
+      .get(`/api/${endpoint}`, { params })
       .then(response => resolve(response.data))
       .catch(reject);
   });
 };
 
 export default {
-  getToshlLocations
+  get
 };
