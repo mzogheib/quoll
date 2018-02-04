@@ -35,7 +35,7 @@ export default class Map extends React.Component {
 
       const newLayers = nextProps.layers.map(layer => {
         return new google.maps.visualization.HeatmapLayer({
-          data: this.makeHeatmapLayerData(layer.data),
+          data: this.makeHeatmapLayerData(layer),
           radius: 20,
           opacity: 0.6,
           maxIntensity: 50
@@ -49,7 +49,7 @@ export default class Map extends React.Component {
     return locations.map(location => {
       return {
         location: new google.maps.LatLng(location.latitude, location.longitude),
-        weight: location.expenses.sum
+        weight: location.total
       };
     })
   }

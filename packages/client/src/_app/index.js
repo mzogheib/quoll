@@ -43,7 +43,8 @@ class App extends Component {
 
   getServiceData(serviceId, params) {
     if (serviceId === 'toshl') {
-      return Toshl.getEntries(params)
+      // TODO: handle pagination if number of entries exceeds 500
+      return Toshl.getEntries({ ...params, per_page: 500 })
         .catch((response) => {
           console.debug(response);
         });
@@ -94,11 +95,39 @@ class App extends Component {
     Promise.all(promises).then(() => { this.setState({ services: services }); })
   }
 
+  createLayerData(services) {
+    const createToshlHeatmapLayerData = entries => {
+      let locations = [];
+      entries.filter(entry => entry.location)
+        .forEach(entry => {
+          let location = locations.find(loc => loc.latitude === entry.location.latitude && loc.longitude === entry.location.longitude);
+          if (location) {
+            location.total += entry.amount;
+          } else {
+            locations.push({
+              latitude: entry.location.latitude,
+              longitude: entry.location.longitude,
+              total: entry.amount
+            });
+          }
+        });
+      // Multiple total by -1 because toshl expenses are represented as negative values
+      return locations.map(location => { location.total *= -1; return location });
+    };
+
+    return services.map(service => {
+      switch (service.id) {
+        case 'toshl':
+          return createToshlHeatmapLayerData(service.data);
+        default:
+          return [];
+      }
+    });
+  }
+
   render() {
-    const layerData = [];
-      // this.state.services
-      //   .filter(service => service.active)
-      //   .map(service => { return { id: service.id, data: service.data }});
+    const layerData = this.createLayerData(this.state.services);
+    console.log(layerData);
     return (
       <div className='app'>
         <div className='app__menu'><Menu items={this.state.services} onItemToggle={this.handleItemToggle.bind(this)} onFilterUpdate={this.handleFilterUpdate.bind(this)}></Menu></div>
