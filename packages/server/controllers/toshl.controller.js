@@ -1,4 +1,5 @@
 const axios = require('axios');
+const _ = require('lodash');
 const toshlToken = require('./private/toshl-auth.json').token;
 
 module.exports = {
@@ -7,18 +8,21 @@ module.exports = {
   }
 };
 
-const baseUrl = 'https://api.toshl.com/';
+const baseUrl = 'https://api.toshl.com';
 
-function list(endpoint, parameters) {
-  let url;
-  let urlParams = [];
-  let options = { auth: { username: toshlToken, password: null }};
-
-  for (var param in parameters) {
-    urlParams.push(param + '=' + parameters[param]);
-  }
-
-  url = baseUrl + endpoint + '?' + urlParams.join('&');
-  console.log(url, parameters, options)
+const list = (endpoint, parameters) => {
+  const options = { auth: { username: toshlToken, password: null }};
+  // TODO: validate from and to exist in the params
+  const urlParams = getUrlParams(parameters);
+  const url = baseUrl + endpoint + urlParams;
   return axios.get(url, options);
+}
+
+const getUrlParams = params => {
+  if (!params || _.isEmpty(params)) return '';
+
+  let urlParams = [];
+  for (let key in params) urlParams.push(`${key}=${params[key]}`);
+
+  return `?${urlParams.join('&')}`;
 }
