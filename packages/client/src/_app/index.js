@@ -24,33 +24,27 @@ class App extends Component {
         id: 'toshl',
         name: 'Toshl',
         active: false,
-        data: []
+        data: [],
+        fetch: Toshl.getEntries,
+        normalize: Toshl.convertEntriesToLocations
       },
       {
         id: 'instagram',
         name: 'Instagram',
         active: false,
-        data: []
+        data: [],
+        fetch: () => Promise.resolve([]),
+        normalize: () => []
       },
       {
         id: 'strava',
         name: 'Strava',
         active: false,
-        data: []
+        data: [],
+        fetch: () => Promise.resolve([]),
+        normalize: () => []
       }
     ];
-  }
-
-  getServiceData(serviceId, params) {
-    if (serviceId === 'toshl') {
-      // TODO: handle pagination if number of entries exceeds 500
-      return Toshl.getEntries({ ...params, per_page: 500 })
-        .catch((response) => {
-          console.debug(response);
-        });
-    } else {
-      return Promise.resolve([]);
-    }
   }
 
   handleItemToggle(id) {
@@ -60,12 +54,15 @@ class App extends Component {
       serviceToUpdate.active = !serviceToUpdate.active;
       if (serviceToUpdate.active) {
         // Fetch the data
-        this.getServiceData(serviceToUpdate.id, this.state.filter)
+        serviceToUpdate.fetch(this.state.filter)
           .then(data => {
             serviceToUpdate.data = data;
             services = services.map(service => service.id === serviceToUpdate.id ? serviceToUpdate : service);
             this.setState({ services: services });
-          });
+          })
+          .catch((response) => {
+            console.debug(response);
+          });  
       } else {
         // Clear the data
         serviceToUpdate.data = [];
@@ -85,49 +82,21 @@ class App extends Component {
     }
 
     const promises = servicesToUpdate.map(serviceToUpdate => {
-      return this.getServiceData(serviceToUpdate.id, filter)
+      return serviceToUpdate.fetch(filter)
         .then(data => {
           serviceToUpdate.data = data;
           services = services.map(service => service.id === serviceToUpdate.id ? serviceToUpdate : service);
+        })
+        .catch((response) => {
+          console.debug(response);
         });
     });
     
     Promise.all(promises).then(() => { this.setState({ services: services }); })
   }
 
-  createLayerData(services) {
-    const createToshlHeatmapLayerData = entries => {
-      let locations = [];
-      entries.filter(entry => entry.location)
-        .forEach(entry => {
-          let location = locations.find(loc => loc.latitude === entry.location.latitude && loc.longitude === entry.location.longitude);
-          if (location) {
-            location.total += entry.amount;
-          } else {
-            locations.push({
-              latitude: entry.location.latitude,
-              longitude: entry.location.longitude,
-              total: entry.amount
-            });
-          }
-        });
-      // Multiple total by -1 because toshl expenses are represented as negative values
-      return locations.map(location => { location.total *= -1; return location });
-    };
-
-    return services.map(service => {
-      switch (service.id) {
-        case 'toshl':
-          return createToshlHeatmapLayerData(service.data);
-        default:
-          return [];
-      }
-    });
-  }
-
   render() {
-    const layerData = this.createLayerData(this.state.services);
-    console.log(layerData);
+    const layerData = this.state.services.map(service => service.normalize(service.data));
     return (
       <div className='app'>
         <div className='app__menu'><Menu items={this.state.services} onItemToggle={this.handleItemToggle.bind(this)} onFilterUpdate={this.handleFilterUpdate.bind(this)}></Menu></div>
