@@ -3,6 +3,7 @@ import './style.css';
 import Menu from '../menu';
 import Map from '../map';
 import Toshl from '../_utils/toshl';
+import Strava from '../_utils/strava';
 
 class App extends Component {
   constructor(props) {
@@ -41,7 +42,7 @@ class App extends Component {
         name: 'Strava',
         active: false,
         data: [],
-        fetch: () => Promise.resolve([]),
+        fetch: Strava.getActivities,
         normalize: () => []
       }
     ];
@@ -96,7 +97,9 @@ class App extends Component {
   }
 
   render() {
-    const layerData = this.state.services.map(service => service.normalize(service.data));
+    const layerData = this.state.services
+      .filter(service => service.active)
+      .map(service => service.normalize(service.data));
     return (
       <div className='app'>
         <div className='app__menu'><Menu items={this.state.services} onItemToggle={this.handleItemToggle.bind(this)} onFilterUpdate={this.handleFilterUpdate.bind(this)}></Menu></div>
