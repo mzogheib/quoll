@@ -53,46 +53,45 @@ class App extends Component {
   }
 
   handleItemToggle(id) {
-    const updatedService = this.state.services.find(service => service.id === id);
-    if (updatedService) {
-      updatedService.active = !updatedService.active;
-      if (updatedService.active) {
+    let services = this.state.services.slice();
+    const serviceToUpdate = services.find(service => service.id === id);
+    if (serviceToUpdate) {
+      serviceToUpdate.active = !serviceToUpdate.active;
+      if (serviceToUpdate.active) {
         // Fetch the data
-        this.getServiceData(updatedService.id, this.state.filter)
+        this.getServiceData(serviceToUpdate.id, this.state.filter)
           .then(data => {
-            updatedService.data = data;
-            const updatedServices = this.state.services.map(service => service.id === updatedService.id ? updatedService : service);
-            this.setState({ services: updatedServices });
+            serviceToUpdate.data = data;
+            services = services.map(service => service.id === serviceToUpdate.id ? serviceToUpdate : service);
+            this.setState({ services: services });
           });
       } else {
         // Clear the data
-        updatedService.data = [];
-        const updatedServices = this.state.services.map(service => service.id === updatedService.id ? updatedService : service);
-        this.setState({ services: updatedServices });
+        serviceToUpdate.data = [];
+        services = services.map(service => service.id === serviceToUpdate.id ? serviceToUpdate : service);
+        this.setState({ services: services });
       }
     }
   }
 
   handleFilterUpdate(filter) {
-    const servicesToUpdate = this.state.services.filter(service => service.active);
     this.setState({ filter: filter });
+    let services = this.state.services.slice();
+    const servicesToUpdate = services.filter(service => service.active);
 
     if (!servicesToUpdate.length) {
       return;
     }
 
-    const promises = servicesToUpdate.map(service => {
-      return this.getServiceData(service.id, filter)
-      .then(data => {
-        servicesToUpdate.find(ser => ser.id === service.id).data = data;
-      });
+    const promises = servicesToUpdate.map(serviceToUpdate => {
+      return this.getServiceData(serviceToUpdate.id, filter)
+        .then(data => {
+          serviceToUpdate.data = data;
+          services = services.map(service => service.id === serviceToUpdate.id ? serviceToUpdate : service);
+        });
     });
     
-    Promise.all(promises)
-      .then(data => {
-        // this sets only the active services. need to keep the inactive ones
-        this.setState({ services: servicesToUpdate });
-      })
+    Promise.all(promises).then(() => { this.setState({ services: services }); })
   }
 
   render() {
