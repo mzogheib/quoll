@@ -7,4 +7,4 @@ module.exports = router;
 
 router
   .route('/toshl')
-  .get(routeToshl.list)
+  .get(routeToshl.listEntries)

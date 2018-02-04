@@ -1,7 +1,7 @@
 const ctrlToshl = require('../controllers/toshl.controller');
 
 module.exports = {
-  list: list
+  listEntries: list
 };
 
 function list(req, res) {
