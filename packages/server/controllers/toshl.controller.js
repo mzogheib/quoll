@@ -2,7 +2,9 @@ const axios = require('axios');
 const toshlToken = require('./private/toshl-auth.json').token;
 
 module.exports = {
-  list: list
+  entries: { 
+    list: parameters => list('/entries', parameters)
+  }
 };
 
 const baseUrl = 'https://api.toshl.com/';

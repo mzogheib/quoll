@@ -6,11 +6,10 @@ module.exports = {
 
 function list(req, res) {
   const params = req.query;
-  ctrlToshl
-    .list('/entries', params)
+  ctrlToshl.entries
+    .list(params)
     .then(onSuccess)
     .catch(onError);
-
 
   function onSuccess(response) {
     respond({ status: 200, message: response.data });
