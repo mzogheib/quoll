@@ -18,7 +18,7 @@ function authenticate(req, res) {
   }
 
   function onSuccess(response) {
-    respond({ status: 200, message: response.data });
+    respond({ status: 200 });
   }
 
   function onError(error) {
