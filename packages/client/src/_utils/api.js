@@ -9,6 +9,16 @@ const get = (endpoint, params) => {
   });
 };
 
+const post = (endpoint, payload) => {
+  return new Promise((resolve, reject) => {
+    axios
+      .post(`/api/${endpoint}`, payload)
+      .then(response => resolve(response.data))
+      .catch(reject);
+  });
+};
+
 export default {
-  get
+  get,
+  post
 };
