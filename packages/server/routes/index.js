@@ -8,8 +8,9 @@ module.exports = router;
 
 router
   .route('/toshl')
-  .get(routeToshl.listEntries)
+  .get(routeToshl.listEntries);
 
 router
   .route('/strava')
   .get(routeStrave.listActivities)
+  .post(routeStrave.authenticate);
