@@ -11,15 +11,18 @@ function authenticate(req, res) {
   if (!code) {
     respond({ status: 400, message: 'No authorization code provided.'});
   } else {
-    respond({ status: 200, message: 'Here\'s your code back: ' + code});
+    ctrlStrava.oauth
+      .token(code)
+      .then(onSuccess)
+      .catch(onError);
   }
 
   function onSuccess(response) {
-    respond({ status: 200, message: response });
+    respond({ status: 200, message: response.data });
   }
 
   function onError(error) {
-    respond({ status: error.status || 500, message: error.msg });
+    respond({ status: error.response.status || 500, message: error.response.data.message });
   }
 
   function respond(response) {
@@ -29,17 +32,17 @@ function authenticate(req, res) {
 
 function listActivities(req, res) {
   const params = req.query;
-  ctrlStrava.activities
-    .list(params)
+  ctrlStrava.athlete
+    .activities(params)
     .then(onSuccess)
     .catch(onError);
 
   function onSuccess(response) {
-    respond({ status: 200, message: response });
+    respond({ status: 200, message: response.data });
   }
 
   function onError(error) {
-    respond({ status: error.status || 500, message: error.msg });
+    respond({ status: error.response.status || 500, message: error.response.data.message });
   }
 
   function respond(response) {

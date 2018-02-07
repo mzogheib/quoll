@@ -6028,7 +6028,7 @@ request@2.81.0:
     tunnel-agent "^0.6.0"
     uuid "^3.0.0"
 
-request@^2.64.0, request@^2.79.0:
+request@^2.79.0:
   version "2.83.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.83.0.tgz#ca0b65da02ed62935887808e6f510381034e3356"
   dependencies:
@@ -6526,12 +6526,6 @@ static-extend@^0.1.1:
 statuses@~1.3.1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.3.1.tgz#faf51b9eb74aaef3b3acf4ad5f61abf24cb7b93e"
-
-strava-v3@^1.14.0:
-  version "1.14.0"
-  resolved "https://registry.yarnpkg.com/strava-v3/-/strava-v3-1.14.0.tgz#c24160a1770f7003942d83fa2e63cfaa3d2f9580"
-  dependencies:
-    request "^2.64.0"
 
 stream-browserify@^2.0.1:
   version "2.0.1"
