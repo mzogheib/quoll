@@ -21,9 +21,10 @@ class App extends Component {
     
     const queryParams = Utils.parseQueryParams(window.location.search);
     if (queryParams && queryParams.state === 'strava-auth') {
+      // Remove the query params. 
+      window.history.replaceState(null, null, window.location.pathname);
       if (queryParams.code) {
         Strava.authenticate({ code: queryParams.code })
-          .then(response => console.log)
           .catch(response => console.log)
       } else if (queryParams.error && queryParams.error === 'access_denied') {
         console.debug('Strave access denied.');
