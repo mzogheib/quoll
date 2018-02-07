@@ -1,3 +1,7 @@
 .menu-item {
     display: flex;
 }
+
+.menu-item__label {
+    flex-grow: 1;
+}

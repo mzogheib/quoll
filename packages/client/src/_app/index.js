@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './style.css';
 import Menu from '../menu';
 import Map from '../map';
+import Utils from '../_utils/'
 import Toshl from '../_utils/toshl';
 import Strava from '../_utils/strava';
 
@@ -17,6 +18,19 @@ class App extends Component {
   componentDidMount() {
     const services = this.getServices();
     this.setState({ services: services });
+    
+    const queryParams = Utils.parseQueryParams(window.location.search);
+    if (queryParams && queryParams.state === 'strava-auth') {
+      if (queryParams.code) {
+        Strava.authenticate({ code: queryParams.code })
+          .then(response => console.log)
+          .catch(response => console.log)
+      } else if (queryParams.error && queryParams.error === 'access_denied') {
+        console.debug('Strave access denied.');
+      } else {
+        console.debug('Unknown response from Strava.');
+      }
+    }
   }
 
   getServices() {
@@ -41,6 +55,7 @@ class App extends Component {
         id: 'strava',
         name: 'Strava',
         active: false,
+        authUrl: 'https://www.strava.com/oauth/authorize?client_id=8709&response_type=code&redirect_uri=http://localhost:3000&state=strava-auth&scope=view_private',
         data: [],
         fetch: Strava.getActivities,
         normalize: () => []

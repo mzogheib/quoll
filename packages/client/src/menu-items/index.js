@@ -9,6 +9,7 @@ function MenuItems(props) {
         <MenuItem
           key={item.id}
           label={item.name}
+          showAuthLink={item.authUrl}
           onToggle={() => { props.onItemToggle(item.id); }}
         />
       );
