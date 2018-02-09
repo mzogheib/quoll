@@ -19,6 +19,11 @@ class Filter extends Component {
     return `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`
   }
 
+  dateIsSet() {
+    // Assumes an un-set date reduces to an empty string
+    return this.state.date.length > 0;
+  }
+
   handleUpdate() {
     this.props.onUpdate({ from: this.state.date, to: this.state.date });
   }
@@ -33,7 +38,7 @@ class Filter extends Component {
     return (
       <div className='filter'>
         <input type='date' value={this.state.date} onChange={this.handleDateChange.bind(this)}/>
-        <button onClick={this.handleUpdate.bind(this)}>Update</button>
+        <button onClick={this.handleUpdate.bind(this)} disabled={!this.dateIsSet()}>Update</button>
       </div>
     );
   }
