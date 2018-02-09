@@ -2,15 +2,3 @@
     display: flex;
     flex-direction: column;
 }
-
-.filter__input {
-    display: flex;
-}
-
-.filter__input-label {
-    flex-basis: 50px;
-}
-
-.filter__input-text {
-    flex-grow: 1;
-}
