@@ -21,7 +21,7 @@ function authenticate(req, res) {
   }
 
   function onError(error) {
-    respond({ status: error.response.status || 500, message: error.response.data.message });
+    respond({ status: error.status || 500, message: error.message });
   }
 
   function respond(response) {
@@ -36,11 +36,11 @@ function listActivities(req, res) {
     .catch(onError);
 
   function onSuccess(response) {
-    respond({ status: 200, message: response.data });
+    respond({ status: 200, message: response });
   }
 
   function onError(error) {
-    respond({ status: error.response.status || 500, message: error.response.data.message });
+    respond({ status: error.status || 500, message: error.message });
   }
 
   function respond(response) {

@@ -21,7 +21,14 @@ function getAthleteActivities(parameters) {
   const before = getLocalTimestamp(to) + 24 * 60 * 60;
   const perPage = 5;
 
-  return apiStrava.athlete.activities(after, before, perPage);
+  return apiStrava.athlete.activities(after, before, perPage)
+    .then(activities => {
+      const promises = activities.map(activity => {
+        return apiStrava.activities.get(activity.id);
+      });
+
+      return Promise.all(promises);
+    });
 }
 
 const getLocalTimestamp = (d) => {
