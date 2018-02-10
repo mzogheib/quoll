@@ -3,6 +3,7 @@ const utils = require('../../utils');
 const auth = require('./private/strava-auth');
 
 module.exports = {
+    authenticate,
     oauth: {
         token
     },
@@ -13,43 +14,39 @@ module.exports = {
 
 const baseUrl = 'https://www.strava.com';
 const baseApiUrl = `${baseUrl}/api/v3`;
-let accessToken;
+let headers;
+
+// Sets the auth header to be used in each request
+function authenticate(accessToken) {
+    headers = {
+        'Authorization': `Bearer ${accessToken}`
+    };
+}
+
+const get = url => {
+    const options = {
+        headers: headers
+    };
+    return axios.get(url, options);
+}
 
 function token(code) {
     const url = `${baseUrl}/oauth/token`;
-    const options = {
+    const payload = {
         client_id: auth.client_id,
         client_secret: auth.client_secret,
         code: code
     };
-    return axios.post(url, options)
-        .then(response => {
-            // Keep the access token for future requests
-            accessToken = response.data.access_token;
-            return response;
-        });
+    return axios.post(url, payload)
+        .then(response => response.data.access_token);
 }
 
-function athleteActivities(parameters) {
-    const options = {
-        headers: {
-            'Authorization': `Bearer ${accessToken}`
-        }
-    };
-    const from = new Date(parameters.from);
-    const to = new Date(parameters.to);
-    // After and before are not inclusive. So need to convert the to and from dates accordingly.
-    // After = 23:59:59 on the day before the from date
-    // Before = 00:00:00 on the day after the to date
+function athleteActivities(after, before, perPage) {
     const params = {
-        after: getLocalTimestamp(from) - 1,
-        before: getLocalTimestamp(to) + 24 * 60 * 60,
-        per_page: 5
+        after,
+        before,
+        per_page: perPage
     };
     const url = `${baseApiUrl}/athlete/activities${utils.makeUrlParams(params)}`;
-    return axios.get(url, options);
-}
-
-const getLocalTimestamp = (d) => {
-    return Math.round(d.getTime() / 1000) + d.getTimezoneOffset() * 60;
+    return get(url);
 }
