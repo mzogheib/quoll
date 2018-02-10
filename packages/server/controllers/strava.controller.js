@@ -1,4 +1,5 @@
 const axios = require('axios');
+const utils = require('../utils');
 const auth = require('./private/strava-auth');
 
 module.exports = {
@@ -15,7 +16,7 @@ const baseApiUrl = `${baseUrl}/api/v3`;
 let accessToken;
 
 function token(code) {
-  const url = baseUrl + '/oauth/token';
+  const url = `${baseUrl}/oauth/token`;
   const options = {
     client_id: auth.client_id,
     client_secret: auth.client_secret,
@@ -30,14 +31,16 @@ function token(code) {
 }
 
 function athleteActivities (parameters) {
-  const url = `${baseApiUrl}/athlete/activities`
   const options = {
-    after: 1517569790,
-    before: 1518001789,
-    per_page: 100,
     headers: {
       'Authorization': `Bearer ${accessToken}`
     }
   };
+  const params = {
+    after: 1518051679,
+    before: 1518257101,
+    per_page: 5
+  };
+  const url = `${baseApiUrl}/athlete/activities${utils.makeUrlParams(params)}`;
   return axios.get(url, options);
 }
