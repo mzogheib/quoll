@@ -11,8 +11,7 @@ function authenticate(req, res) {
   if (!code) {
     respond({ status: 400, message: 'No authorization code provided.'});
   } else {
-    ctrlStrava.oauth
-      .token(code)
+    ctrlStrava.authenticate(code)
       .then(onSuccess)
       .catch(onError);
   }
@@ -32,8 +31,7 @@ function authenticate(req, res) {
 
 function listActivities(req, res) {
   const params = req.query;
-  ctrlStrava.athlete
-    .activities(params)
+  ctrlStrava.getAthleteActivities(params)
     .then(onSuccess)
     .catch(onError);
 
