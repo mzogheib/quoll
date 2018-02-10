@@ -9,6 +9,9 @@ module.exports = {
     },
     athlete: {
         activities: athleteActivities
+    },
+    activities: {
+        get: getActivity
     }
 };
 
@@ -27,7 +30,11 @@ const get = url => {
     const options = {
         headers: headers
     };
-    return axios.get(url, options);
+    return new Promise((resolve, reject) => {
+        axios.get(url, options)
+            .then(response => resolve(response.data))
+            .catch(error => reject({ status: error.response.status, message: error.response.data.message }));
+    });
 }
 
 function token(code) {
@@ -37,8 +44,11 @@ function token(code) {
         client_secret: auth.client_secret,
         code: code
     };
-    return axios.post(url, payload)
-        .then(response => response.data.access_token);
+    return new Promise((resolve, reject) => {
+        axios.post(url, payload)
+            .then(response => resolve(response.data.access_token))
+            .catch(error => reject({ status: error.response.status, message: error.response.data.message }));
+    });
 }
 
 function athleteActivities(after, before, perPage) {
@@ -48,5 +58,10 @@ function athleteActivities(after, before, perPage) {
         per_page: perPage
     };
     const url = `${baseApiUrl}/athlete/activities${utils.makeUrlParams(params)}`;
+    return get(url);
+}
+
+function getActivity(id) {
+    const url = `${baseApiUrl}/activities/${id}`;
     return get(url);
 }
