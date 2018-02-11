@@ -3,7 +3,7 @@ import mapUtils from '../map/utils';
 
 const getEntries = params => Api.get('toshl', params);
 
-const convertEntriesToMarkers = entries => {
+const getMarkersFromEntries = entries => {
   return entries.filter(entry => entry.location)
     .map(entry => {
       // Assume dollars and get negative amount because toshl expenses are represented as negative values
@@ -16,5 +16,5 @@ const convertEntriesToMarkers = entries => {
 
 export default {
   getEntries,
-  convertEntriesToMarkers
+  getMarkersFromEntries
 };

@@ -42,7 +42,7 @@ class App extends Component {
         active: false,
         data: [],
         fetch: Toshl.getEntries,
-        normalize: Toshl.convertEntriesToMarkers
+        normalize: Toshl.getMarkersFromEntries
       },
       {
         id: 'instagram',
@@ -59,7 +59,7 @@ class App extends Component {
         authUrl: 'https://www.strava.com/oauth/authorize?client_id=8709&response_type=code&redirect_uri=http://localhost:3000&state=strava-auth&scope=view_private',
         data: [],
         fetch: Strava.getActivities,
-        normalize: () => []
+        normalize: Strava.getPolylinesFromActivities
       }
     ];
   }
