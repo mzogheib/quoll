@@ -42,7 +42,7 @@ class App extends Component {
         active: false,
         data: [],
         fetch: Toshl.getEntries,
-        normalize: Toshl.convertEntriesToLocations
+        normalize: Toshl.convertEntriesToMarkers
       },
       {
         id: 'instagram',

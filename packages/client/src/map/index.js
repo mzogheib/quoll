@@ -32,21 +32,14 @@ export default class Map extends React.Component {
       });
       this.setState({ layers: [] });
 
-      const newLayers = nextProps.layers.map(layer => {
-        return this.makeMarkers(layer);
+      const newLayers = nextProps.layers;
+      newLayers.forEach(layer => {
+        layer.forEach(marker => {
+          marker.setMap(this.state.map);
+        });
       });
       this.setState({ layers: newLayers });
     }
-  }
-
-  makeMarkers(locations) {
-    return locations.map(location => {
-      return new google.maps.Marker({
-        position: { lat: location.latitude, lng: location.longitude},
-        map: this.state.map,
-        title: location.total
-      });
-    });
   }
 
   render() {

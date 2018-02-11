@@ -1,27 +1,20 @@
 import Api from './api';
+import mapUtils from '../map/utils';
 
 const getEntries = params => Api.get('toshl', params);
 
-const convertEntriesToLocations = entries => {
-    let locations = [];
-    entries.filter(entry => entry.location)
-      .forEach(entry => {
-        let location = locations.find(loc => loc.latitude === entry.location.latitude && loc.longitude === entry.location.longitude);
-        if (location) {
-          location.total += entry.amount;
-        } else {
-          locations.push({
-            latitude: entry.location.latitude,
-            longitude: entry.location.longitude,
-            total: entry.amount
-          });
-        }
+const convertEntriesToMarkers = entries => {
+  return entries.filter(entry => entry.location)
+    .map(entry => {
+      // Assume dollars and get negative amount because toshl expenses are represented as negative values
+      const title = `$${-entry.amount}`;
+      return mapUtils.makeMarker({
+        longitude: entry.location.longitude, latitude: entry.location.latitude, title: title
       });
-    // Multiple total by -1 because toshl expenses are represented as negative values
-    return locations.map(location => { location.total *= -1; return location });
+    })
 };
 
 export default {
-    getEntries,
-    convertEntriesToLocations
+  getEntries,
+  convertEntriesToMarkers
 };
