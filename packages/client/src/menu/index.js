@@ -8,7 +8,7 @@ function Menu(props) {
     <div className='menu'>
       <div className='menu__title'>Quoll</div>
       <div className='menu__filter'><Filter onUpdate={props.onFilterUpdate}></Filter></div>
-      <div className='menu__items'><MenuItems items={props.items} onItemToggle={props.onItemToggle}></MenuItems></div>
+      <div className='menu__items'><MenuItems items={props.items}></MenuItems></div>
     </div>
   );
 }

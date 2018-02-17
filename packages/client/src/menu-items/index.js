@@ -10,7 +10,6 @@ function MenuItems(props) {
           key={item.id}
           label={item.name}
           showAuthLink={item.authUrl}
-          onToggle={() => { props.onItemToggle(item.id); }}
         />
       );
     });
