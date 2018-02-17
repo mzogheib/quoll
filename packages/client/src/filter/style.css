@@ -1,4 +1,11 @@
 .filter {
     display: flex;
-    flex-direction: column;
+}
+
+.filter__button {
+    flex-basis: 70px;
+}
+
+.filter__date-input {
+    flex-grow: 1;
 }
