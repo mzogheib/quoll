@@ -8,8 +8,7 @@ function MenuItems(props) {
       return (
         <MenuItem
           key={item.id}
-          label={item.name}
-          showAuthLink={item.authUrl}
+          item={item}
         />
       );
     });
