@@ -22,8 +22,8 @@ class MenuItem extends Component {
           <span className='menu-item__summary'>{this.props.item.data.length}</span>
           <button className='menu-item__expand' onClick={this.toggleExpand.bind(this)}>{this.state.isExpanded ? 'Less' : 'More'}</button>
         </div>
-      );      
-    } else {      
+      );
+    } else {
       return (
         <div className='menu-item__summary-wrapper'>
           <a href={this.props.item.authUrl}>Connect</a>
@@ -32,12 +32,16 @@ class MenuItem extends Component {
     }
   }
 
+  disconnect() {
+    this.props.onDisconnect(this.props.item.id);
+  }
+
   renderDetail() {
-    if (this.state.isExpanded) {
+    if (this.props.item.connected && this.state.isExpanded) {
       return (
         <div>
           <div>More Detail</div>
-          <a href={''}>Disconnect</a>
+          <button onClick={this.disconnect.bind(this)}>Disconnect</button>
         </div>
       );
     }

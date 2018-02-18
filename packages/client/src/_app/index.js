@@ -51,6 +51,7 @@ class App extends Component {
         name: 'Toshl',
         connected: true,
         data: [],
+        disconnect: () => { return Promise.resolve() },
         fetch: Toshl.getEntries,
         normalize: Toshl.getMarkersFromEntries
       },
@@ -60,6 +61,7 @@ class App extends Component {
         connected: false,
         authUrl: 'https://www.strava.com/oauth/authorize?client_id=8709&response_type=code&redirect_uri=http://localhost:3000&state=strava-auth&scope=view_private',
         data: [],
+        disconnect: Strava.deauthorize,
         fetch: Strava.getActivities,
         normalize: Strava.getPolylinesFromActivities
       }
@@ -90,13 +92,31 @@ class App extends Component {
     this.setState({ filter: filter }, this.getData);
   }
 
+  handleDisconnect(id) {
+    const dataSources = this.state.dataSources.slice();
+    const dataSource = dataSources.find(ds => ds.id === id);
+    dataSource.disconnect()
+      .then(() => {
+        dataSource.data = [];
+        dataSource.connected = false;
+        this.setState({ dataSources: dataSources });
+      })
+      .catch(console.debug);
+  }
+
   render() {
     const layerData = this.state.dataSources
       .filter(dataSource => dataSource.connected)
       .map(dataSource => dataSource.normalize(dataSource.data));
     return (
       <div className='app'>
-        <div className='app__menu'><Menu items={this.state.dataSources} onFilterUpdate={this.handleFilterUpdate.bind(this)}></Menu></div>
+        <div className='app__menu'>
+          <Menu
+            items={this.state.dataSources}
+            onFilterUpdate={this.handleFilterUpdate.bind(this)}
+            onDisconnect={this.handleDisconnect.bind(this)}
+          />
+        </div>
         <div className='app__map'><Map layers={layerData}></Map></div>
       </div>
     );
