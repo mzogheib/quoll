@@ -30,7 +30,7 @@ class App extends Component {
             const dataSources = this.state.dataSources.slice();
             dataSources.forEach(dataSource => {
               if (dataSource.id === 'strava') {
-                dataSource.connected = true;
+                dataSource.isConnected = true;
               }
             });
             this.setState({ dataSources: dataSources }, this.getData);
@@ -49,7 +49,7 @@ class App extends Component {
       {
         id: 'toshl',
         name: 'Toshl',
-        connected: true,
+        isConnected: true,
         data: [],
         disconnect: () => { return Promise.resolve() },
         fetch: Toshl.getEntries,
@@ -58,7 +58,7 @@ class App extends Component {
       {
         id: 'strava',
         name: 'Strava',
-        connected: false,
+        isConnected: false,
         authUrl: 'https://www.strava.com/oauth/authorize?client_id=8709&response_type=code&redirect_uri=http://localhost:3000&state=strava-auth&scope=view_private',
         data: [],
         disconnect: Strava.deauthorize,
@@ -70,7 +70,7 @@ class App extends Component {
 
   getData() {
     let dataSources = this.state.dataSources.slice();
-    const connectedDataSources = dataSources.filter(dataSource => dataSource.connected);
+    const connectedDataSources = dataSources.filter(dataSource => dataSource.isConnected);
 
     if (!connectedDataSources.length) {
       return;
@@ -98,7 +98,7 @@ class App extends Component {
     dataSource.disconnect()
       .then(() => {
         dataSource.data = [];
-        dataSource.connected = false;
+        dataSource.isConnected = false;
         this.setState({ dataSources: dataSources });
       })
       .catch(console.debug);
@@ -106,7 +106,7 @@ class App extends Component {
 
   render() {
     const layerData = this.state.dataSources
-      .filter(dataSource => dataSource.connected)
+      .filter(dataSource => dataSource.isConnected)
       .map(dataSource => dataSource.normalize(dataSource.data));
     return (
       <div className='app'>

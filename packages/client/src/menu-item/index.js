@@ -16,7 +16,7 @@ class MenuItem extends Component {
   }
 
   renderSummary = () => {
-    if (this.props.item.connected) {
+    if (this.props.item.isConnected) {
       return (
         <div className='menu-item__summary-wrapper'>
           <span className='menu-item__summary'>{this.props.item.data.length}</span>
@@ -37,7 +37,7 @@ class MenuItem extends Component {
   }
 
   renderDetail() {
-    if (this.props.item.connected && this.state.isExpanded) {
+    if (this.props.item.isConnected && this.state.isExpanded) {
       return (
         <div>
           <div>More Detail</div>
