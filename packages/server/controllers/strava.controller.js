@@ -2,12 +2,17 @@ const apiStrava = require('../vendor-apis/strava');
 
 module.exports = {
   authenticate,
+  deauthorize,
   getAthleteActivities
 };
 
 function authenticate(code) {
   return apiStrava.oauth.token(code)
     .then(apiStrava.authenticate);
+}
+
+function deauthorize() {
+  return apiStrava.oauth.deauthorize();
 }
 
 function getAthleteActivities(parameters) {

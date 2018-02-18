@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const routeToshl = require('./toshl.route');
-const routeStrave = require('./strava.route');
+const routeStrava = require('./strava.route');
 
 module.exports = router;
 
@@ -12,5 +12,9 @@ router
 
 router
   .route('/strava')
-  .get(routeStrave.listActivities)
-  .post(routeStrave.authenticate);
+  .get(routeStrava.listActivities)
+  .post(routeStrava.authenticate);
+
+router
+  .route('/strava-deauth')
+  .post(routeStrava.deauthorize);

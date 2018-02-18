@@ -2,6 +2,7 @@ const ctrlStrava = require('../controllers/strava.controller');
 
 module.exports = {
   authenticate,
+  deauthorize,
   listActivities
 };
 
@@ -15,6 +16,24 @@ function authenticate(req, res) {
       .then(onSuccess)
       .catch(onError);
   }
+
+  function onSuccess(response) {
+    respond({ status: 200 });
+  }
+
+  function onError(error) {
+    respond({ status: error.status || 500, message: error.message });
+  }
+
+  function respond(response) {
+    res.status(response.status).json(response.message);
+  }
+}
+
+function deauthorize(req, res) {
+  ctrlStrava.deauthorize()
+    .then(onSuccess)
+    .catch(onError);
 
   function onSuccess(response) {
     respond({ status: 200 });
