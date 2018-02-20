@@ -26,10 +26,14 @@ class MenuItem extends Component {
     } else {
       return (
         <div className='menu-item__summary-wrapper'>
-          <a href={this.props.item.authUrl}>Connect</a>
+          <button onClick={this.connect.bind(this)}>Connect</button>
         </div>
       );
     }
+  }
+
+  connect() {
+    this.props.onConnect(this.props.item.id);
   }
 
   disconnect() {

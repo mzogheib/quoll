@@ -7,12 +7,17 @@ function MenuItems(props) {
     props.onDisconnect(id);
   }
 
+  function handleConnect(id) {
+    props.onConnect(id);
+  }
+
   function renderItems() {
     return props.items.map(item => {
       return (
         <MenuItem
           key={item.id}
           item={item}
+          onConnect={handleConnect}
           onDisconnect={handleDisconnect}
         />
       );

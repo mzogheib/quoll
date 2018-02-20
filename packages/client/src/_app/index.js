@@ -18,8 +18,35 @@ class App extends Component {
   componentDidMount() {
     const dataSources = this.getDataSources();
     this.setState({ dataSources: dataSources });
-    
-    // Handle strava auth
+    this.handleStravaOauth();
+  }
+
+  getDataSources() {
+    return [
+      {
+        id: 'toshl',
+        name: 'Toshl',
+        isConnected: false,
+        data: [],
+        connect: () => { return Promise.resolve() },
+        disconnect: () => { return Promise.resolve() },
+        fetch: Toshl.getEntries,
+        normalize: Toshl.getMarkersFromEntries
+      },
+      {
+        id: 'strava',
+        name: 'Strava',
+        isConnected: false,
+        data: [],
+        connect: () => { window.location.replace(Strava.oauthUrl); },
+        disconnect: Strava.deauthorize,
+        fetch: Strava.getActivities,
+        normalize: Strava.getPolylinesFromActivities
+      }
+    ];
+  }
+
+  handleStravaOauth() {
     const queryParams = Utils.parseQueryParams(window.location.search);
     if (queryParams && queryParams.state === 'strava-auth') {
       // Remove the query params. 
@@ -42,30 +69,6 @@ class App extends Component {
         console.debug('Unknown response from Strava.');
       }
     }
-  }
-
-  getDataSources() {
-    return [
-      {
-        id: 'toshl',
-        name: 'Toshl',
-        isConnected: true,
-        data: [],
-        disconnect: () => { return Promise.resolve() },
-        fetch: Toshl.getEntries,
-        normalize: Toshl.getMarkersFromEntries
-      },
-      {
-        id: 'strava',
-        name: 'Strava',
-        isConnected: false,
-        authUrl: 'https://www.strava.com/oauth/authorize?client_id=8709&response_type=code&redirect_uri=http://localhost:3000&state=strava-auth&scope=view_private',
-        data: [],
-        disconnect: Strava.deauthorize,
-        fetch: Strava.getActivities,
-        normalize: Strava.getPolylinesFromActivities
-      }
-    ];
   }
 
   getData() {
@@ -92,6 +95,12 @@ class App extends Component {
     this.setState({ filter: filter }, this.getData);
   }
 
+  handleConnect(id) {
+    const dataSources = this.state.dataSources.slice();
+    const dataSource = dataSources.find(ds => ds.id === id);
+    dataSource.connect();
+  }
+
   handleDisconnect(id) {
     const dataSources = this.state.dataSources.slice();
     const dataSource = dataSources.find(ds => ds.id === id);
@@ -114,6 +123,7 @@ class App extends Component {
           <Menu
             items={this.state.dataSources}
             onFilterUpdate={this.handleFilterUpdate.bind(this)}
+            onConnect={this.handleConnect.bind(this)}
             onDisconnect={this.handleDisconnect.bind(this)}
           />
         </div>
