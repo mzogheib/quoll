@@ -1,6 +1,9 @@
 import Api from './api';
 import mapUtils from '../map/utils';
 
+const oAuthUrl = 'http://localhost:3000/fake-oauth?redirect_uri=http://localhost:3000&state=toshl';
+const authenticate = () => { return Promise.resolve() };
+const deauthorize = () => { return Promise.resolve() };
 const getEntries = params => Api.get('toshl', params);
 
 const getMarkersFromEntries = entries => {
@@ -15,6 +18,9 @@ const getMarkersFromEntries = entries => {
 };
 
 export default {
+  oAuthUrl,
+  authenticate,
+  deauthorize,
   getEntries,
   getMarkersFromEntries
 };

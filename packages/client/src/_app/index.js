@@ -17,8 +17,7 @@ class App extends Component {
 
   componentDidMount() {
     const dataSources = this.getDataSources();
-    this.setState({ dataSources: dataSources });
-    this.handleStravaOauth();
+    this.setState({ dataSources: dataSources }, this.handleOAuth);
   }
 
   getDataSources() {
@@ -28,8 +27,9 @@ class App extends Component {
         name: 'Toshl',
         isConnected: false,
         data: [],
-        connect: () => { return Promise.resolve() },
-        disconnect: () => { return Promise.resolve() },
+        connect: () => { window.location.replace(Toshl.oAuthUrl); },
+        authenticate: Toshl.authenticate,
+        disconnect: Toshl.deauthorize,
         fetch: Toshl.getEntries,
         normalize: Toshl.getMarkersFromEntries
       },
@@ -38,7 +38,8 @@ class App extends Component {
         name: 'Strava',
         isConnected: false,
         data: [],
-        connect: () => { window.location.replace(Strava.oauthUrl); },
+        connect: () => { window.location.replace(Strava.oAuthUrl); },
+        authenticate: Strava.authenticate,
         disconnect: Strava.deauthorize,
         fetch: Strava.getActivities,
         normalize: Strava.getPolylinesFromActivities
@@ -46,25 +47,34 @@ class App extends Component {
     ];
   }
 
-  handleStravaOauth() {
+  handleOAuth() {
     const queryParams = Utils.parseQueryParams(window.location.search);
-    if (queryParams && queryParams.state === 'strava-auth') {
+    const dataSourceIds = this.state.dataSources.map(ds => ds.id);
+    const dataSourceId = queryParams && queryParams.state;
+
+    if (dataSourceIds.includes(dataSourceId)) {
       // Remove the query params. 
       window.history.replaceState(null, null, window.location.pathname);
+
+      const dataSources = this.state.dataSources.slice();
+      const dataSource = dataSources.find(ds => ds.id === dataSourceId);
+
       if (queryParams.code) {
-        Strava.authenticate({ code: queryParams.code })
-          .then(() => {
-            const dataSources = this.state.dataSources.slice();
-            const dataSource = dataSources.find(ds => ds.id === 'strava');
+        dataSource.authenticate({ code: queryParams.code })
+          .then(() => dataSource.fetch(this.state.filter))
+          .then(data => {
+            dataSource.data = data;
             dataSource.isConnected = true;
-            this.setState({ dataSources: dataSources }, this.getData);
+            this.setState({ dataSources: dataSources });
           })
           .catch(console.debug)
       } else if (queryParams.error && queryParams.error === 'access_denied') {
-        console.debug('Strave access denied.');
+        console.debug(`${dataSource.name} access denied.`);
       } else {
-        console.debug('Unknown response from Strava.');
+        console.debug(`Unknown response from ${dataSource.name}.`);
       }
+    } else {
+      console.debug(`Unknown data source: ${dataSourceId}`);
     }
   }
 
