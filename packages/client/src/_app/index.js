@@ -55,11 +55,8 @@ class App extends Component {
         Strava.authenticate({ code: queryParams.code })
           .then(() => {
             const dataSources = this.state.dataSources.slice();
-            dataSources.forEach(dataSource => {
-              if (dataSource.id === 'strava') {
-                dataSource.isConnected = true;
-              }
-            });
+            const dataSource = dataSources.find(ds => ds.id === 'strava');
+            dataSource.isConnected = true;
             this.setState({ dataSources: dataSources }, this.getData);
           })
           .catch(console.debug)
