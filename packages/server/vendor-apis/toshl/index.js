@@ -4,7 +4,10 @@ const toshlToken = require('./private/toshl-auth.json').token;
 
 module.exports = {
   entries: {
-    list
+    list: listEntries
+  },
+  tags: {
+    list: listTags
   }
 };
 
@@ -25,7 +28,12 @@ const get = url => {
   });
 }
 
-function list(params) {
+function listEntries(params) {
   const url = `${baseApiUrl}/entries${utils.makeUrlParams(params)}`;
+  return get(url);
+}
+
+function listTags() {
+  const url = `${baseApiUrl}/tags`;
   return get(url);
 }
