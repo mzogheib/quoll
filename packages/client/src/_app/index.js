@@ -3,8 +3,7 @@ import './style.css';
 import Menu from '../menu';
 import Map from '../map';
 import Utils from '../_utils/'
-import Toshl from '../_utils/toshl';
-import Strava from '../_utils/strava';
+import dataSourcesConfig from '../data-sources/config';
 
 class App extends Component {
   constructor(props) {
@@ -16,36 +15,23 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const dataSources = this.getDataSources();
+    const dataSources = dataSourcesConfig.map(this.makeDataSource);
     this.setState({ dataSources: dataSources }, this.handleOAuth);
   }
 
-  getDataSources() {
-    return [
-      {
-        id: 'toshl',
-        name: 'Toshl',
-        isConnected: false,
-        data: [],
-        connect: () => { window.location.replace(Toshl.oAuthUrl); },
-        authenticate: Toshl.authenticate,
-        disconnect: Toshl.deauthorize,
-        fetch: Toshl.getEntries,
-        normalize: Toshl.getMarkersFromEntries
-      },
-      {
-        id: 'strava',
-        name: 'Strava',
-        isConnected: false,
-        data: [],
-        connect: () => { window.location.replace(Strava.oAuthUrl); },
-        authenticate: Strava.authenticate,
-        disconnect: Strava.deauthorize,
-        fetch: Strava.getActivities,
-        normalize: Strava.getPolylinesFromActivities
-      }
-    ];
-  }
+  makeDataSource({ id, name, oAuthUrl, authenticate, disconnect, getData, normalize }) {
+    return {
+      id,
+      name,
+      isConnected: false,
+      data: [],
+      connect: () => { window.location.replace(oAuthUrl); },
+      authenticate,
+      disconnect,
+      getData,
+      normalize
+    };
+  };
 
   handleOAuth() {
     const queryParams = Utils.parseQueryParams(window.location.search);
@@ -61,7 +47,7 @@ class App extends Component {
 
       if (queryParams.code) {
         dataSource.authenticate({ code: queryParams.code })
-          .then(() => dataSource.fetch(this.state.filter))
+          .then(() => dataSource.getData(this.state.filter))
           .then(data => {
             dataSource.data = data;
             dataSource.isConnected = true;
@@ -87,7 +73,7 @@ class App extends Component {
     }
 
     const promises = connectedDataSources.map(connectedDataSource => {
-      return connectedDataSource.fetch(this.state.filter)
+      return connectedDataSource.getData(this.state.filter)
         .then(data => {
           connectedDataSource.data = data;
           dataSources = dataSources.map(dataSource => dataSource.id === connectedDataSource.id ? connectedDataSource : dataSource);
