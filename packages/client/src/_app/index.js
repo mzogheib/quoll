@@ -70,18 +70,10 @@ class App extends Component {
   }
 
   getData() {
-    let dataSources = this.state.dataSources.slice();
-    const connectedDataSources = dataSources.filter(dataSource => dataSource.isConnected);
-
-    if (!connectedDataSources.length) {
-      return;
-    }
-
-    const promises = connectedDataSources.map(connectedDataSource => {
-      return connectedDataSource.getData(this.state.filter)
-        .catch(console.debug);
-    });
-
+    const dataSources = this.state.dataSources.slice();
+    const promises = dataSources
+      .filter(dataSource => dataSource.isConnected)
+      .map(connectedDataSource => connectedDataSource.getData(this.state.filter).catch(console.debug));
     Promise.all(promises).then(() => { this.setState({ dataSources: dataSources }); })
   }
 
