@@ -15,23 +15,6 @@ class MenuItem extends Component {
     });
   }
 
-  renderSummary = () => {
-    if (this.props.item.isConnected) {
-      return (
-        <div className='menu-item__summary-wrapper'>
-          <span className='menu-item__summary'>{this.props.item.data.length}</span>
-          <button className='menu-item__expand' onClick={this.toggleExpand.bind(this)}>{this.state.isExpanded ? 'Less' : 'More'}</button>
-        </div>
-      );
-    } else {
-      return (
-        <div className='menu-item__summary-wrapper'>
-          <button onClick={this.connect.bind(this)}>Connect</button>
-        </div>
-      );
-    }
-  }
-
   connect() {
     this.props.onConnect(this.props.item.id);
   }
@@ -40,15 +23,40 @@ class MenuItem extends Component {
     this.props.onDisconnect(this.props.item.id);
   }
 
-  renderDetail() {
-    if (this.props.item.isConnected && this.state.isExpanded) {
+  renderConnect() {
+    return (
+      <div className='menu-item__summary-wrapper'>
+        <button onClick={this.connect.bind(this)}>Connect</button>
+      </div>
+    );
+  }
+
+  renderSummary() {
+    return (
+      <div className='menu-item__summary-wrapper'>
+        <span className='menu-item__summary'>{this.props.item.data.length}</span>
+        <button className='menu-item__expand' onClick={this.toggleExpand.bind(this)}>{this.state.isExpanded ? 'Less' : 'More'}</button>
+      </div>
+    );
+  }
+
+  renderSummaryList() {
+    const summaryList = this.props.item.summarizedData.map((sd, index) => {
       return (
-        <div>
-          <div>More Detail</div>
-          <button onClick={this.disconnect.bind(this)}>Disconnect</button>
+        <div key={index} className='menu-item__summary-list-line'>
+          <span className='menu-item__summary-list-time-label'>{sd.timeLabel}</span>
+          <span className='menu-item__summary-list-label'>{sd.label}</span>
+          <span className='menu-item__summary-list-value'>{sd.value}</span>
         </div>
       );
-    }
+    });
+
+    return (
+      <div>
+        {summaryList}
+        <button onClick={this.disconnect.bind(this)}>Disconnect</button>
+      </div>
+    );
   }
 
   render() {
@@ -56,9 +64,10 @@ class MenuItem extends Component {
       <div>
         <div className='menu-item'>
           <span className='menu-item__name'>{this.props.item.name}</span>
-          {this.renderSummary()}
+          {!this.props.item.isConnected && this.renderConnect()}
+          {this.props.item.isConnected && this.renderSummary()}
         </div>
-        {this.renderDetail()}
+        {this.props.item.isConnected && this.state.isExpanded && this.renderSummaryList()}
       </div>
     );
   }

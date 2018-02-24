@@ -15,3 +15,15 @@
 .menu-item__summary {
     flex-grow: 1;
 }
+
+.menu-item__summary-list-line {
+    display: flex
+}
+
+.menu-item__summary-list-time-label {
+    flex-basis: 80px;
+}
+
+.menu-item__summary-list-label {
+    flex-grow: 1;
+}
