@@ -10,14 +10,23 @@ const getPolylinesFromActivities = activities => {
   return activities.map(activity => mapUtils.makePolyline({ encodedPath: activity.map.polyline}));
 };
 
-const summarizeData = (activities) => {
+const formatDistance = distance => {
+  const kms = (distance / 1000).toLocaleString(
+    undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }
+  );
+  return `${kms} km`;
+}
+
+const makeSummary = activities => {
+  const totalDistance = activities.reduce((accumulator, activity) => accumulator + activity.distance, 0);
+  return activities.length ? formatDistance(totalDistance) : 'None';
+};
+
+const makeSummaryList = (activities) => {
   return activities.map(activity => {
     const timeStamp = new Date(activity.start_date);
 
-    const distanceLabel = (activity.distance / 1000).toLocaleString(
-      undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }
-    );
-    const value = `${distanceLabel} km`;
+    const value = formatDistance(activity.distance);
 
     return {
       timeStamp: timeStamp.getTime(),
@@ -35,5 +44,6 @@ export default {
   deauthorize,
   getActivities,
   getPolylinesFromActivities,
-  summarizeData
+  makeSummary,
+  makeSummaryList
 };

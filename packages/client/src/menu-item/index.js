@@ -34,14 +34,14 @@ class MenuItem extends Component {
   renderSummary() {
     return (
       <div className='menu-item__summary-wrapper'>
-        <span className='menu-item__summary'>{this.props.item.data.length}</span>
+        <span className='menu-item__summary'>{this.props.item.summary}</span>
         <button className='menu-item__expand' onClick={this.toggleExpand.bind(this)}>{this.state.isExpanded ? 'Less' : 'More'}</button>
       </div>
     );
   }
 
   renderSummaryList() {
-    const summaryList = this.props.item.summarizedData.map((sd, index) => {
+    const summaryList = this.props.item.summaryList.map((sd, index) => {
       return (
         <div key={index} className='menu-item__summary-list-line'>
           <span className='menu-item__summary-list-time-label'>{sd.timeLabel}</span>

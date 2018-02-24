@@ -19,13 +19,14 @@ class App extends Component {
     this.setState({ dataSources: dataSources }, this.handleOAuth);
   }
 
-  makeDataSource({ id, name, oAuthUrl, authenticate, disconnect, getData, summarize, normalize }) {
+  makeDataSource({ id, name, oAuthUrl, authenticate, disconnect, getData, makeSummary, makeSummaryList, normalize }) {
     return {
       id,
       name,
       isConnected: false,
       data: [],
-      summarizedData: [],
+      summary: '',
+      summaryList: [],
       connect: () => { window.location.replace(oAuthUrl); },
       authenticate (code) {
         return authenticate(code).then(() => { this.isConnected = true; })
@@ -33,13 +34,16 @@ class App extends Component {
       disconnect () {
         return disconnect().then(() => {
           this.data = [];
+          this.summaryList = [];
+          this.summary = '';
           this.isConnected = false;
         });
       },
       getData (filter) {
         return getData(filter).then(data => {
           this.data = data
-          this.summarizedData = summarize(this.data);
+          this.summaryList = makeSummaryList(this.data);
+          this.summary = makeSummary(this.data);
         });
       },
       normalize

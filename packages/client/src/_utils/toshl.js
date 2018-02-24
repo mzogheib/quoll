@@ -18,7 +18,21 @@ const getMarkersFromEntries = entries => {
     })
 };
 
-const summarizeData = entries => {
+// TODO: Dynamically calculate the user's locale instead of hardcoding en-AU
+const formatAmount = (amount, currencyCode) => {
+  return Math.abs(amount).toLocaleString(
+    'en-AU', { style: 'currency', currency: currencyCode }
+  );
+}
+
+// TODO: Handle multiple currencies. This implementation assumes the first currency is the same as the rest.
+// TODO: Handle incomes. This implementation assumes expenses only
+const makeSummary = entries => {
+  const totalAmount = entries.reduce((accumulator, entry) => accumulator + entry.amount, 0);
+  return entries.length ? formatAmount(totalAmount, entries[0].currency.code) : 'None';
+};
+
+const makeSummaryList = entries => {
   return entries.map(entry => {
     const timeLabel = utils.extractTimeString(entry.desc) || '12:00:00';
     const timeStamp = new Date(`${entry.date} ${timeLabel}`);
@@ -26,9 +40,7 @@ const summarizeData = entries => {
     const tags = entry.tags.join(', ');
     const label = entry.category + (tags ? ', ' + tags : '');
 
-    const value = Math.abs(entry.amount).toLocaleString(
-      'en-AU', { style: 'currency', currency: entry.currency.code }
-    );
+    const value = formatAmount(entry.amount, entry.currency.code);
 
     return {
       timeStamp: timeStamp.getTime(),
@@ -38,7 +50,7 @@ const summarizeData = entries => {
     };
   })
   .sort((a, b) => a.timeStamp - b.timeStamp);
-}
+};
 
 export default {
   oAuthUrl,
@@ -46,5 +58,6 @@ export default {
   deauthorize,
   getEntries,
   getMarkersFromEntries,
-  summarizeData
+  makeSummary,
+  makeSummaryList
 };

@@ -9,7 +9,8 @@ const config = [
     authenticate: Toshl.authenticate,
     disconnect: Toshl.deauthorize,
     getData: Toshl.getEntries,
-    summarize: Toshl.summarizeData,
+    makeSummary: Toshl.makeSummary,
+    makeSummaryList: Toshl.makeSummaryList,
     normalize: Toshl.getMarkersFromEntries
   },
   {
@@ -19,7 +20,8 @@ const config = [
     authenticate: Strava.authenticate,
     disconnect: Strava.deauthorize,
     getData: Strava.getActivities,
-    summarize: Strava.summarizeData,
+    makeSummary: Strava.makeSummary,
+    makeSummaryList: Strava.makeSummaryList,
     normalize: Strava.getPolylinesFromActivities
   }
 ];
