@@ -37,8 +37,7 @@ const makeSummaryList = entries => {
     const timeLabel = utils.extractTimeString(entry.desc) || '12:00:00';
     const timeStamp = new Date(`${entry.date} ${timeLabel}`);
 
-    const tags = entry.tags.join(', ');
-    const label = entry.category + (tags ? ', ' + tags : '');
+    const label = entry.tags.map(tag => tag.name).join(', ');
 
     const value = formatAmount(entry.amount, entry.currency.code);
 
