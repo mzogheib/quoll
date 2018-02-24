@@ -12,10 +12,10 @@ function MenuItems(props) {
   }
 
   function renderItems() {
-    return props.items.map(item => {
+    return props.items.map((item, index) => {
       return (
         <MenuItem
-          key={item.id}
+          key={index}
           item={item}
           onConnect={handleConnect}
           onDisconnect={handleDisconnect}
