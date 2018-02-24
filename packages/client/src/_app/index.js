@@ -26,9 +26,18 @@ class App extends Component {
       isConnected: false,
       data: [],
       connect: () => { window.location.replace(oAuthUrl); },
-      authenticate,
-      disconnect,
-      getData,
+      authenticate (code) {
+        return authenticate(code).then(() => { this.isConnected = true; })
+      },
+      disconnect () {
+        return disconnect().then(() => {
+          this.data = [];
+          this.isConnected = false;
+        });
+      },
+      getData (filter) {
+        return getData(filter).then(data => this.data = data);
+      },
       normalize
     };
   };
@@ -48,11 +57,7 @@ class App extends Component {
       if (queryParams.code) {
         dataSource.authenticate({ code: queryParams.code })
           .then(() => dataSource.getData(this.state.filter))
-          .then(data => {
-            dataSource.data = data;
-            dataSource.isConnected = true;
-            this.setState({ dataSources: dataSources });
-          })
+          .then(() => { this.setState({ dataSources: dataSources }); })
           .catch(console.debug)
       } else if (queryParams.error && queryParams.error === 'access_denied') {
         console.debug(`${dataSource.name} access denied.`);
@@ -74,10 +79,6 @@ class App extends Component {
 
     const promises = connectedDataSources.map(connectedDataSource => {
       return connectedDataSource.getData(this.state.filter)
-        .then(data => {
-          connectedDataSource.data = data;
-          dataSources = dataSources.map(dataSource => dataSource.id === connectedDataSource.id ? connectedDataSource : dataSource);
-        })
         .catch(console.debug);
     });
 
@@ -98,11 +99,7 @@ class App extends Component {
     const dataSources = this.state.dataSources.slice();
     const dataSource = dataSources.find(ds => ds.id === id);
     dataSource.disconnect()
-      .then(() => {
-        dataSource.data = [];
-        dataSource.isConnected = false;
-        this.setState({ dataSources: dataSources });
-      })
+      .then(() => { this.setState({ dataSources: dataSources }); })
       .catch(console.debug);
   }
 
