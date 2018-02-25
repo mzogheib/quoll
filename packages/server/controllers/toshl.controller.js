@@ -1,10 +1,31 @@
 const apiToshl = require('../vendor-apis/toshl');
 
 module.exports = {
+  authenticate,
+  deauthorize,
   getEntries
 };
 
 const cache = {};
+
+function authenticate(code) {
+  return new Promise((resolve, reject) => {
+    if (!code) {
+      reject();
+    } else {
+      apiToshl.authenticate(code);
+      resolve();
+    }
+  });
+}
+
+function deauthorize() {
+  return new Promise((resolve, reject) => {
+    apiToshl.deauthorize();
+    cache = {};
+    resolve();
+  });
+}
 
 function getTags () {
   if (cache.tags) {

@@ -1,8 +1,9 @@
 const axios = require('axios');
 const utils = require('../../utils');
-const toshlToken = require('./private/toshl-auth.json').token;
 
 module.exports = {
+  authenticate,
+  deauthorize,
   entries: {
     list: listEntries
   },
@@ -12,10 +13,19 @@ module.exports = {
 };
 
 const baseApiUrl = 'https://api.toshl.com';
-let auth = {
-  username: toshlToken,
-  password: null
-};
+let auth = {};
+
+// Sets the auth to be used in each request
+function authenticate(token) {
+  auth = {
+    username: token,
+    password: null
+  };
+}
+
+function deauthorize() {
+  auth = {};
+}
 
 const get = url => {
   const options = {
