@@ -10,9 +10,12 @@ router
   .route('/toshl')
   .get(routeToshl.listEntries);
 
-router
+  router
   .route('/strava')
   .get(routeStrava.listActivities)
+
+router
+  .route('/strava-auth')
   .post(routeStrava.authenticate);
 
 router

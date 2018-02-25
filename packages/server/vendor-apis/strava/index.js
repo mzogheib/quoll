@@ -55,11 +55,8 @@ function token(code) {
         client_secret: auth.client_secret,
         code: code
     };
-    return new Promise((resolve, reject) => {
-        axios.post(url, payload)
-            .then(response => resolve(response.data.access_token))
-            .catch(error => reject({ status: error.response.status, message: error.response.data.message }));
-    });
+    return post(url, payload)
+        .then(data => data.access_token);
 }
 
 function deauthorize() {
