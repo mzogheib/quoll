@@ -4,6 +4,9 @@ const utils = require('../../utils');
 module.exports = {
   authenticate,
   deauthorize,
+  me: {
+    get: getMe
+  },
   entries: {
     list: listEntries
   },
@@ -36,6 +39,11 @@ const get = url => {
       .then(response => resolve(response.data))
       .catch(error => reject({ status: error.response.status, message: error.response.data.description }));
   });
+}
+
+function getMe() {
+  const url = `${baseApiUrl}/me`;
+  return get(url);
 }
 
 function listEntries(params) {

@@ -6,17 +6,12 @@ module.exports = {
   getEntries
 };
 
-const cache = {};
+let cache = {};
 
-function authenticate(code) {
-  return new Promise((resolve, reject) => {
-    if (!code) {
-      reject();
-    } else {
-      apiToshl.authenticate(code);
-      resolve();
-    }
-  });
+function authenticate(token) {
+  // Test the token by pinging /me
+  apiToshl.authenticate(token)
+  return apiToshl.me.get();
 }
 
 function deauthorize() {
