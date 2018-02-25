@@ -55,25 +55,27 @@ class App extends Component {
     const dataSourceIds = this.state.dataSources.map(ds => ds.id);
     const dataSourceId = queryParams && queryParams.state;
 
-    if (dataSourceIds.includes(dataSourceId)) {
-      // Remove the query params. 
-      window.history.replaceState(null, null, window.location.pathname);
+    if (dataSourceId) {
+      if (dataSourceIds.includes(dataSourceId)) {
+        // Remove the query params. 
+        window.history.replaceState(null, null, window.location.pathname);
 
-      const dataSources = this.state.dataSources.slice();
-      const dataSource = dataSources.find(ds => ds.id === dataSourceId);
+        const dataSources = this.state.dataSources.slice();
+        const dataSource = dataSources.find(ds => ds.id === dataSourceId);
 
-      if (queryParams.code) {
-        dataSource.authenticate({ code: queryParams.code })
-          .then(() => dataSource.getData(this.state.filter))
-          .then(() => { this.setState({ dataSources: dataSources }); })
-          .catch(console.debug)
-      } else if (queryParams.error && queryParams.error === 'access_denied') {
-        console.debug(`${dataSource.name} access denied.`);
+        if (queryParams.code) {
+          dataSource.authenticate({ code: queryParams.code })
+            .then(() => dataSource.getData(this.state.filter))
+            .then(() => { this.setState({ dataSources: dataSources }); })
+            .catch(alert)
+        } else if (queryParams.error && queryParams.error === 'access_denied') {
+          alert(`${dataSource.name} access denied.`);
+        } else {
+          alert(`Unknown response from ${dataSource.name}.`);
+        }
       } else {
-        console.debug(`Unknown response from ${dataSource.name}.`);
+        alert(`Unknown data source: ${dataSourceId}`);
       }
-    } else {
-      console.debug(`Unknown data source: ${dataSourceId}`);
     }
   }
 
@@ -81,7 +83,7 @@ class App extends Component {
     const dataSources = this.state.dataSources.slice();
     const promises = dataSources
       .filter(dataSource => dataSource.isConnected)
-      .map(connectedDataSource => connectedDataSource.getData(this.state.filter).catch(console.debug));
+      .map(connectedDataSource => connectedDataSource.getData(this.state.filter).catch(alert));
     Promise.all(promises).then(() => { this.setState({ dataSources: dataSources }); })
   }
 
@@ -100,7 +102,7 @@ class App extends Component {
     const dataSource = dataSources.find(ds => ds.id === id);
     dataSource.disconnect()
       .then(() => { this.setState({ dataSources: dataSources }); })
-      .catch(console.debug);
+      .catch(alert);
   }
 
   render() {
