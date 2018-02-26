@@ -8,15 +8,7 @@
     text-align: center;
 }
 
-.menu__filter {
-    flex-basis: 100px;
-}
-
 .menu__items {
     display: flex;
     flex-direction: column;
-}
-
-.menu__item {
-
 }

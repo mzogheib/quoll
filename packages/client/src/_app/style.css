@@ -3,11 +3,16 @@
     display: flex;
 }
 
-.app__menu {
-    flex-basis: 300px;
+.app__map-wrapper {
+    position: relative;
+    flex: 1;
 }
 
 .app__map {
-    flex-grow: 1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
 

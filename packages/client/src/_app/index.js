@@ -119,7 +119,9 @@ class App extends Component {
             onDisconnect={this.handleDisconnect.bind(this)}
           />
         </div>
-        <div className='app__map'><Map layers={layerData}></Map></div>
+        <div className='app__map-wrapper'>
+          <div className='app__map'><Map layers={layerData}></Map></div>
+        </div>
       </div>
     );
   }
