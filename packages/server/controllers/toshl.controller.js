@@ -9,9 +9,8 @@ module.exports = {
 let cache = {};
 
 function authenticate(token) {
-  // Test the token by pinging /me
-  apiToshl.authenticate(token)
-  return apiToshl.me.get();
+  return apiToshl.validateToken(token)
+    .then(apiToshl.authenticate);
 }
 
 function deauthorize() {
