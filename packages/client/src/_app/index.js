@@ -9,6 +9,7 @@ import dataSourcesConfig from '../data-sources/config';
 class App extends Component {
   constructor(props) {
     super(props);
+    this.handleOAuth = this.handleOAuth.bind(this);
     this.state = {
       dataSources: [],
       filter: {}
@@ -26,7 +27,7 @@ class App extends Component {
           ds.isConnected = user.dataSources.find(uds => uds.id === ds.id).isConnected;
           return ds;
         });
-        this.setState({ dataSources: dataSources }, this.handleOAuth);
+        this.setState({ dataSources: dataSources }, () => this.getData().then(this.handleOAuth));
       });
   }
 
@@ -95,7 +96,7 @@ class App extends Component {
     const promises = dataSources
       .filter(dataSource => dataSource.isConnected)
       .map(connectedDataSource => connectedDataSource.getData(this.state.filter).catch(alert));
-    Promise.all(promises).then(() => { this.setState({ dataSources: dataSources }); })
+    return Promise.all(promises).then(() => { this.setState({ dataSources: dataSources }); })
   }
 
   handleFilterUpdate(filter) {
