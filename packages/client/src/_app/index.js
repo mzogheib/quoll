@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './style.css';
 import Menu from '../menu';
 import Map from '../map';
+import User from '../_utils/user';
 import Utils from '../_utils/'
 import dataSourcesConfig from '../data-sources/config';
 
@@ -15,8 +16,18 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const dataSources = dataSourcesConfig.map(this.makeDataSource);
-    this.setState({ dataSources: dataSources }, this.handleOAuth);
+    let dataSources = dataSourcesConfig.map(this.makeDataSource);
+    const userId = User.getCurrentUser();
+    const action = userId ? 'login' : 'signup';
+    User[action](userId)
+      .then(user => {
+        User.setCurrentUser(user.id);
+        dataSources = dataSources.map(ds => {
+          ds.isConnected = user.dataSources.find(uds => uds.id === ds.id).isConnected;
+          return ds;
+        });
+        this.setState({ dataSources: dataSources }, this.handleOAuth);
+      });
   }
 
   makeDataSource({ id, name, oAuthUrl, authenticate, disconnect, getData, makeSummary, makeSummaryList, normalize }) {
