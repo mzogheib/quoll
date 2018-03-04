@@ -10,6 +10,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.handleOAuth = this.handleOAuth.bind(this);
+    this.handleFilterUpdate = this.handleFilterUpdate.bind(this);
+    this.handleConnect = this.handleConnect.bind(this);
+    this.handleDisconnect = this.handleDisconnect.bind(this);
     this.state = {
       dataSources: [],
       filter: {}
@@ -126,9 +129,9 @@ class App extends Component {
         <div className='app__menu'>
           <Menu
             items={this.state.dataSources}
-            onFilterUpdate={this.handleFilterUpdate.bind(this)}
-            onConnect={this.handleConnect.bind(this)}
-            onDisconnect={this.handleDisconnect.bind(this)}
+            onFilterUpdate={this.handleFilterUpdate}
+            onConnect={this.handleConnect}
+            onDisconnect={this.handleDisconnect}
           />
         </div>
         <div className='app__map-wrapper'>
