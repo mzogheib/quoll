@@ -3,8 +3,17 @@ const router = express.Router();
 
 const routeToshl = require('./toshl.route');
 const routeStrava = require('./strava.route');
+const routeUsers = require('./users.route');
 
 module.exports = router;
+
+router
+  .route('/login')
+  .post(routeUsers.login);
+
+router
+  .route('/signup')
+  .post(routeUsers.signup);
 
 router
   .route('/toshl')
