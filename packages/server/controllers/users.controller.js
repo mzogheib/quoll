@@ -3,7 +3,9 @@ const uuidv4 = require('uuid/v4');
 
 module.exports = {
   createUser,
-  login
+  login,
+  get,
+  update
 };
 
 function createUser () {
@@ -26,11 +28,6 @@ function login (userId) {
     if (!user) {
       reject({ status: 404, message: `Could not find user with id: ${userId}` });
     } else {
-      user.dataSources.forEach(uds => {
-        if (uds.accessToken) {
-          getApi(uds.id).authenticate(uds.accessToken);
-        }
-      });
       resolve({ status: 200, message: sanitizeUser(user) });
     }
   });
@@ -47,14 +44,13 @@ function sanitizeUser (user) {
   return sanitizedUser;
 }
 
-function getApi (dataSourceId) {
-  switch (dataSourceId) {
-    case 'strava':
-      return require('../vendor-apis/strava');
-    case 'toshl':
-      return require('../vendor-apis/toshl');
-    default:
-      // TODO handle this case
-      return null;
-  }
+function get (userId) {
+  return new Promise ((resolve, reject) => resolve(storage.get(userId)));
+}
+
+function update (user) {
+  return new Promise ((resolve, reject) => {
+    storage.set(user.id, user);
+    resolve();
+  });
 }

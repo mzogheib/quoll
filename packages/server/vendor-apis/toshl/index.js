@@ -4,8 +4,6 @@ const _ = require('lodash');
 
 module.exports = {
   validateToken,
-  authenticate,
-  deauthorize,
   entries: {
     list: listEntries
   },
@@ -15,7 +13,6 @@ module.exports = {
 };
 
 const baseApiUrl = 'https://api.toshl.com';
-let auth = {};
 
 // Validate the token by pinging the /me endpoint and resolve it if ok.
 function validateToken(token) {
@@ -29,18 +26,6 @@ function validateToken(token) {
   return get(url, options).then(() => token);
 }
 
-// Sets the auth to be used in each request
-function authenticate(token) {
-  auth = {
-    username: token,
-    password: null
-  };
-}
-
-function deauthorize() {
-  auth = {};
-}
-
 function get(url, opts) {
   return new Promise((resolve, reject) => {
     const options = _.defaultsDeep(opts, { auth: auth });
@@ -50,12 +35,12 @@ function get(url, opts) {
   });
 }
 
-function listEntries(params) {
+function listEntries(params, options) {
   const url = `${baseApiUrl}/entries${utils.makeUrlParams(params)}`;
-  return get(url);
+  return get(url, options);
 }
 
-function listTags() {
+function listTags(params, options) {
   const url = `${baseApiUrl}/tags`;
-  return get(url);
+  return get(url, options);
 }
