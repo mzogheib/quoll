@@ -1,9 +1,27 @@
 import axios from 'axios';
 
+const baseUrl = '/api';
+
+let authHeader;
+
+const authenticate = userId => {
+  authHeader = { Authorization: `Basic ${userId}:` };
+};
+
+const request = (method, endpoint, params, payload) => {
+  const options = {
+    method,
+    url: `${baseUrl}/${endpoint}`,
+    params,
+    data: payload,
+    headers: authHeader
+  };
+  return axios(options);
+}
+
 const get = (endpoint, params) => {
   return new Promise((resolve, reject) => {
-    axios
-      .get(`/api/${endpoint}`, { params })
+    request('GET', endpoint, params, null)
       .then(response => resolve(response.data))
       .catch(reject);
   });
@@ -11,14 +29,14 @@ const get = (endpoint, params) => {
 
 const post = (endpoint, payload) => {
   return new Promise((resolve, reject) => {
-    axios
-      .post(`/api/${endpoint}`, payload)
+    request('POST', endpoint, null, payload)
       .then(response => resolve(response.data))
       .catch(reject);
   });
 };
 
 export default {
+  authenticate,
   get,
   post
 };
