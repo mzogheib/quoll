@@ -1,4 +1,4 @@
-const storage = require('../utils/storage');
+const storage = require('../storage');
 const uuidv4 = require('uuid/v4');
 
 module.exports = {
