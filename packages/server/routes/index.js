@@ -17,14 +17,17 @@ router
 
 router
   .route('/toshl')
+  .all(routeUsers.authenticate)
   .get(routeToshl.listEntries);
 
 router
   .route('/toshl-auth')
+  .all(routeUsers.authenticate)
   .post(routeToshl.authenticate);
 
 router
   .route('/toshl-deauth')
+  .all(routeUsers.authenticate)
   .post(routeToshl.deauthorize);
 
   router

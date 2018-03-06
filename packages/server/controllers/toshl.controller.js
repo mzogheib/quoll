@@ -15,17 +15,17 @@ function authenticate(token) {
 
 function deauthorize() {
   return new Promise((resolve, reject) => {
-    apiToshl.deauthorize();
     cache = {};
     resolve();
   });
 }
 
-function getTags (parameters, options) {
+// TODO: store tags on a user or somewhere else
+function getTags (token) {
   if (cache.tags) {
     return Promise.resolve(cache.tags);
   } else {
-    return apiToshl.tags.list(parameters, options)
+    return apiToshl.tags.list(token)
       .then(tags => {
         // Map the array of tags to an object and cache
         cache.tags = tags.reduce((map, tag) => (map[tag.id] = tag.name, map), {});
@@ -34,24 +34,11 @@ function getTags (parameters, options) {
   }
 }
 
-const decorateEntryWithTags = entry => {
-  return getTags()
-    .then(tags => {
-      entry.tags = entry.tags.map(tagId => {
-        return {
-          id: tagId,
-          name: tags[tagId]
-        };
-      });
-      return entry;
-    });
-}
-
-function getEntries (parameters, options) {
+function getEntries (parameters, token) {
   var decoratedEntries;
-  return apiToshl.entries.list(parameters, options)
+  return apiToshl.entries.list(parameters, token)
     .then(entries => { decoratedEntries = entries })
-    .then(() => getTags(null, options))
+    .then(() => getTags(token))
     .then(tags => {
       decoratedEntries.forEach(decoratedEntry => {
         decoratedEntry.tags = decoratedEntry.tags.map(tagId => {

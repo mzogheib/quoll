@@ -13,34 +13,31 @@ module.exports = {
 };
 
 const baseApiUrl = 'https://api.toshl.com';
+const makeAuthHeader = (username, password) => { return { auth: { username, password: null }}; }
 
-// Validate the token by pinging the /me endpoint and resolve it if ok.
-function validateToken(token) {
-  const options = {
-    auth: {
-      username: token,
-      password: null
-    }
-  };
-  const url = `${baseApiUrl}/me`;
-  return get(url, options).then(() => token);
-}
-
-function get(url, opts) {
+function get(url, options) {
   return new Promise((resolve, reject) => {
-    const options = _.defaultsDeep(opts, { auth: auth });
     axios.get(url, options)
       .then(response => resolve(response.data))
       .catch(error => reject({ status: error.response.status, message: error.response.data.description }));
   });
 }
 
-function listEntries(params, options) {
+// Validate the token by pinging the /me endpoint and resolve it if ok.
+function validateToken(token) {
+  const url = `${baseApiUrl}/me`;
+  const options = makeAuthHeader(token);
+  return get(url, options).then(() => token);
+}
+
+function listEntries(params, token) {
   const url = `${baseApiUrl}/entries${utils.makeUrlParams(params)}`;
+  const options = makeAuthHeader(token);
   return get(url, options);
 }
 
-function listTags(params, options) {
+function listTags(token) {
   const url = `${baseApiUrl}/tags`;
+  const options = makeAuthHeader(token);
   return get(url, options);
 }

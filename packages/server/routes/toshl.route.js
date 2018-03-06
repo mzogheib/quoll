@@ -9,7 +9,7 @@ module.exports = {
 
 function authenticate(req, res) {
   const code = req.body.code;
-  const userId = req.headers.authorization.split(' ')[1].split(':')[0];
+  const userId = req.userId;
 
   if (!code) {
     respond({ status: 400, message: 'No authorization code provided.' });
@@ -41,7 +41,15 @@ function authenticate(req, res) {
 }
 
 function deauthorize(req, res) {
+  const userId = req.userId;
+
   ctrlToshl.deauthorize()
+    .then(() => ctrlUsers.get(userId))
+    .then(user => {
+      user.dataSources.find(ds => ds.id === 'toshl').accessToken = null;
+      return user;
+    })
+    .then(ctrlUsers.update)
     .then(onSuccess)
     .catch(onError);
 
@@ -60,11 +68,11 @@ function deauthorize(req, res) {
 
 function list(req, res) {
   const params = req.query;
-  const userId = req.headers.authorization.split(' ')[1].split(':')[0];
+  const userId = req.userId;
 
   ctrlUsers.get(userId)
     .then(user => user.dataSources.find(ds => ds.id === 'toshl').accessToken)
-    .then(token => ctrlToshl.getEntries(params, { auth: { username: token, pasword: null }}))
+    .then(token => ctrlToshl.getEntries(params, token))
     .then(onSuccess)
     .catch(onError);
 

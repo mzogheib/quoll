@@ -2,7 +2,8 @@ const ctrlUsers = require('../controllers/users.controller');
 
 module.exports = {
   login,
-  signup
+  signup,
+  authenticate
 };
 
 function login(req, res) {
@@ -48,4 +49,25 @@ function signup(req, res) {
   }
 }
 
+function authenticate(req, res, next) {
+  const authHeader = req.headers.authorization;
+
+  if (authHeader) {
+    // "Authorization: Basic userId:". Want the userId from that string
+    const userId = authHeader.split(' ')[1].split(':')[0];
+    const user = ctrlUsers.get(userId);
+    if (user) {
+      req.userId = userId;
+      next();
+    } else {
+      respond({ status: 401 , message: 'Unauthorized' });
+    }
+  } else {
+    respond({ status: 403 , message: 'No auth provided' });
+  }
+
+  function respond(response) {
+    res.status(response.status).json(response.message);
+  }
+}
 
