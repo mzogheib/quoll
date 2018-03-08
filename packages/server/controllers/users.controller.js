@@ -4,7 +4,8 @@ module.exports = {
   createUser,
   login,
   get,
-  update
+  setAccessToken,
+  getAccessToken
 };
 
 function createUser () {
@@ -45,4 +46,20 @@ function update (user) {
     userStorage.update(user);
     resolve();
   });
+}
+
+function setAccessToken (userId, dataSourceId, token) {
+  return get(userId)
+    .then(user => {
+      user.dataSources.find(ds => ds.id === dataSourceId).accessToken = token;
+      return user;
+    })
+    .then(update);
+}
+
+function getAccessToken (userId, dataSourceId) {
+  return get(userId)
+    .then(user => {
+      return user.dataSources.find(ds => ds.id === dataSourceId).accessToken;
+    });
 }

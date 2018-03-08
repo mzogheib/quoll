@@ -14,15 +14,8 @@ function authenticate(req, res) {
   if (!code) {
     respond({ status: 400, message: 'No authorization code provided.' });
   } else {
-    let accessToken;
     ctrlToshl.authenticate(code)
-      .then(token => { accessToken = token; })
-      .then(() => ctrlUsers.get(userId))
-      .then(user => {
-        user.dataSources.find(ds => ds.id === 'toshl').accessToken = accessToken;
-        return user;
-      })
-      .then(ctrlUsers.update)
+      .then(token => ctrlUsers.setAccessToken(userId, 'toshl', token))
       .then(onSuccess)
       .catch(onError);
   }
@@ -44,12 +37,7 @@ function deauthorize(req, res) {
   const userId = req.userId;
 
   ctrlToshl.deauthorize()
-    .then(() => ctrlUsers.get(userId))
-    .then(user => {
-      user.dataSources.find(ds => ds.id === 'toshl').accessToken = null;
-      return user;
-    })
-    .then(ctrlUsers.update)
+    .then(() => ctrlUsers.setAccessToken(userId, 'toshl', null))
     .then(onSuccess)
     .catch(onError);
 
@@ -70,8 +58,7 @@ function list(req, res) {
   const params = req.query;
   const userId = req.userId;
 
-  ctrlUsers.get(userId)
-    .then(user => user.dataSources.find(ds => ds.id === 'toshl').accessToken)
+  ctrlUsers.getAccessToken(userId, 'toshl')
     .then(token => ctrlToshl.getEntries(params, token))
     .then(onSuccess)
     .catch(onError);
