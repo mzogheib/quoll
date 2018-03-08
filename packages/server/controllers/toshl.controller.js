@@ -1,4 +1,5 @@
 const apiToshl = require('../vendor-apis/toshl');
+const toshlStorage = require('../storage/toshl.storage');
 
 module.exports = {
   authenticate,
@@ -6,31 +7,33 @@ module.exports = {
   getEntries
 };
 
-let cache = {};
-
 function authenticate(token) {
   return apiToshl.validateToken(token)
     .then(() => token);
 }
 
-function deauthorize() {
+function deauthorize(token) {
   return new Promise((resolve, reject) => {
-    cache = {};
+    toshlStorage.delete(token);
     resolve();
   });
 }
 
-// TODO: store tags on a user or somewhere else
 function getTags (token) {
-  if (cache.tags) {
-    return Promise.resolve(cache.tags);
+  let storedData = toshlStorage.get(token);
+  const storedTags = storedData && storedData.tags;
+  if (storedTags) {
+    return Promise.resolve(storedTags);
   } else {
     return apiToshl.tags.list(token)
       .then(tags => {
-        // Map the array of tags to an object and cache
-        cache.tags = tags.reduce((map, tag) => (map[tag.id] = tag.name, map), {});
-        return cache.tags;
-      });
+        // Map the array of tags to an object and store
+        storedData = toshlStorage.create(token);
+        storedData.tags = tags.reduce((map, tag) => (map[tag.id] = tag.name, map), {});
+        return storedData;
+      })
+      .then(toshlStorage.update)
+      .then(() => storedData.tags);
   }
 }
 

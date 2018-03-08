@@ -36,7 +36,8 @@ function authenticate(req, res) {
 function deauthorize(req, res) {
   const userId = req.userId;
 
-  ctrlToshl.deauthorize()
+  ctrlUsers.getAccessToken(userId, 'toshl')
+    .then(ctrlToshl.deauthorize)
     .then(() => ctrlUsers.setAccessToken(userId, 'toshl', null))
     .then(onSuccess)
     .catch(onError);

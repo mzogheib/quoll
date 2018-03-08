@@ -4,6 +4,7 @@ const localStorage = new LocalStorage('./private/storage');
 module.exports = {
     get,
     set,
+    delete: remove,
     length
 };
 
@@ -13,6 +14,10 @@ function get (key) {
 
 function set (key, data) {
     return localStorage.setItem(key, JSON.stringify(data));
+}
+
+function remove (key) {
+    return localStorage.removeItem(key);
 }
 
 function length () {
