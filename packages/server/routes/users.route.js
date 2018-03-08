@@ -18,8 +18,12 @@ function login(req, res) {
       .catch(onError);
   }
 
-  function onSuccess(response) {
-    respond({ status: 200, message: response.message });
+  function onSuccess(user) {
+    if (!user) {
+      respond({ status: 404, message: `Could not find user with id: ${userId}` });
+    } else {
+      respond({ status: 200, message: user });
+    }
   }
 
   function onError(error) {
@@ -36,8 +40,8 @@ function signup(req, res) {
     .then(onSuccess)
     .catch(onError);
 
-  function onSuccess(response) {
-    respond({ status: 200, message: response.message });
+  function onSuccess(user) {
+    respond({ status: 200, message: user });
   }
 
   function onError(error) {

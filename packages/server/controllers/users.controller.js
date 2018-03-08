@@ -15,22 +15,17 @@ function createUser () {
         { id: 'toshl', accessToken: null },
       ]
     });
-    resolve({ status: 200, message: sanitizeUser(user) });
+    resolve(sanitizeUser(user));
   });
 }
 
 function login (userId) {
-  return new Promise ((resolve, reject) => {
-    const user = userStorage.get(userId);
-    if (!user) {
-      reject({ status: 404, message: `Could not find user with id: ${userId}` });
-    } else {
-      resolve({ status: 200, message: sanitizeUser(user) });
-    }
-  });
+  return get(userId).then(sanitizeUser);
 }
 
 function sanitizeUser (user) {
+  if (!user) return;
+
   const sanitizedUser = user;
   sanitizedUser.dataSources = user.dataSources.map(ds => {
     return {
