@@ -23,6 +23,7 @@ class App extends Component {
     let dataSources = dataSourcesConfig.map(this.makeDataSource);
     const userId = User.getCurrentUser();
     const action = userId ? 'login' : 'signup';
+    // TODO: if login fails then clear that user from localStorage and signup
     User[action](userId)
       .then(user => {
         User.setCurrentUser(user.id);
