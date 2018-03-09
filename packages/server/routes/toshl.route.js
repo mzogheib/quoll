@@ -1,4 +1,5 @@
 const ctrlToshl = require('../controllers/toshl.controller');
+const ctrlUsers = require('../controllers/users.controller');
 
 module.exports = {
   authenticate,
@@ -8,11 +9,13 @@ module.exports = {
 
 function authenticate(req, res) {
   const code = req.body.code;
+  const userId = req.userId;
 
   if (!code) {
-    respond({ status: 400, message: 'No authorization code provided.'});
+    respond({ status: 400, message: 'No authorization code provided.' });
   } else {
     ctrlToshl.authenticate(code)
+      .then(token => ctrlUsers.setAccessToken(userId, 'toshl', token))
       .then(onSuccess)
       .catch(onError);
   }
@@ -31,7 +34,11 @@ function authenticate(req, res) {
 }
 
 function deauthorize(req, res) {
-  ctrlToshl.deauthorize()
+  const userId = req.userId;
+
+  ctrlUsers.getAccessToken(userId, 'toshl')
+    .then(ctrlToshl.deauthorize)
+    .then(() => ctrlUsers.setAccessToken(userId, 'toshl', null))
     .then(onSuccess)
     .catch(onError);
 
@@ -50,7 +57,10 @@ function deauthorize(req, res) {
 
 function list(req, res) {
   const params = req.query;
-  ctrlToshl.getEntries(params)
+  const userId = req.userId;
+
+  ctrlUsers.getAccessToken(userId, 'toshl')
+    .then(token => ctrlToshl.getEntries(params, token))
     .then(onSuccess)
     .catch(onError);
 

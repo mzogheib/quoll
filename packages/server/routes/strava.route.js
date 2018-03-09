@@ -1,4 +1,5 @@
 const ctrlStrava = require('../controllers/strava.controller');
+const ctrlUsers = require('../controllers/users.controller');
 
 module.exports = {
   authenticate,
@@ -8,11 +9,13 @@ module.exports = {
 
 function authenticate(req, res) {
   const code = req.body.code;
+  const userId = req.userId;
 
   if (!code) {
     respond({ status: 400, message: 'No authorization code provided.'});
   } else {
     ctrlStrava.authenticate(code)
+      .then(token => ctrlUsers.setAccessToken(userId, 'strava', token))
       .then(onSuccess)
       .catch(onError);
   }
@@ -31,7 +34,11 @@ function authenticate(req, res) {
 }
 
 function deauthorize(req, res) {
-  ctrlStrava.deauthorize()
+  const userId = req.userId;
+
+  ctrlUsers.getAccessToken(userId, 'strava')
+    .then(ctrlStrava.deauthorize)
+    .then(() => ctrlUsers.setAccessToken(userId, 'strava', null))
     .then(onSuccess)
     .catch(onError);
 
@@ -50,7 +57,10 @@ function deauthorize(req, res) {
 
 function listActivities(req, res) {
   const params = req.query;
-  ctrlStrava.getAthleteActivities(params)
+  const userId = req.userId;
+
+  ctrlUsers.getAccessToken(userId, 'strava')
+    .then(token => ctrlStrava.getAthleteActivities(params, token))
     .then(onSuccess)
     .catch(onError);
 

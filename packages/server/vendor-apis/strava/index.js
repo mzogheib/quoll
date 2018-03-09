@@ -3,7 +3,6 @@ const utils = require('../../utils');
 const auth = require('./private/strava-auth');
 
 module.exports = {
-  authenticate,
   oauth: {
     token,
     deauthorize
@@ -18,21 +17,9 @@ module.exports = {
 
 const baseUrl = 'https://www.strava.com';
 const baseApiUrl = `${baseUrl}/api/v3`;
-let accessToken;
-let headers = {};
+const makeAuthHeader = token => { return { headers: { 'Authorization': `Bearer ${token}` } }; };
 
-// Sets the auth header to be used in each request
-function authenticate(token) {
-  accessToken = token;
-  headers = {
-    'Authorization': `Bearer ${accessToken}`
-  };
-}
-
-const get = url => {
-  const options = {
-    headers: headers
-  };
+const get = (url, options) => {
   return new Promise((resolve, reject) => {
     axios.get(url, options)
       .then(response => resolve(response.data))
@@ -59,29 +46,27 @@ function token(code) {
     .then(data => data.access_token);
 }
 
-function deauthorize() {
+function deauthorize(token) {
   const url = `${baseUrl}/oauth/deauthorize`;
   const payload = {
-    access_token: accessToken
+    access_token: token
   }
-  return post(url, payload)
-    .then(() => {
-      accessToken = null;
-      headers = {};
-    });
+  return post(url, payload);
 }
 
-function athleteActivities(after, before, perPage) {
+function athleteActivities({ after, before, perPage }, token) {
   const params = {
     after,
     before,
     per_page: perPage
   };
   const url = `${baseApiUrl}/athlete/activities${utils.makeUrlParams(params)}`;
-  return get(url);
+  const options = makeAuthHeader(token);
+  return get(url, options);
 }
 
-function getActivity(id) {
+function getActivity({ id }, token) {
   const url = `${baseApiUrl}/activities/${id}`;
-  return get(url);
+  const options = makeAuthHeader(token);
+  return get(url, options);
 }

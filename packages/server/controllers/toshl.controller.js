@@ -1,4 +1,5 @@
 const apiToshl = require('../vendor-apis/toshl');
+const toshlStorage = require('../storage/toshl.storage');
 
 module.exports = {
   authenticate,
@@ -6,52 +7,41 @@ module.exports = {
   getEntries
 };
 
-let cache = {};
-
 function authenticate(token) {
   return apiToshl.validateToken(token)
-    .then(apiToshl.authenticate);
+    .then(() => token);
 }
 
-function deauthorize() {
+function deauthorize(token) {
   return new Promise((resolve, reject) => {
-    apiToshl.deauthorize();
-    cache = {};
+    toshlStorage.delete(token);
     resolve();
   });
 }
 
-function getTags () {
-  if (cache.tags) {
-    return Promise.resolve(cache.tags);
+function getTags (token) {
+  let storedData = toshlStorage.get(token);
+  const storedTags = storedData && storedData.tags;
+  if (storedTags) {
+    return Promise.resolve(storedTags);
   } else {
-    return apiToshl.tags.list()
+    return apiToshl.tags.list(token)
       .then(tags => {
-        // Map the array of tags to an object and cache
-        cache.tags = tags.reduce((map, tag) => (map[tag.id] = tag.name, map), {});
-        return cache.tags;
-      });
+        // Map the array of tags to an object and store
+        storedData = toshlStorage.create(token);
+        storedData.tags = tags.reduce((map, tag) => (map[tag.id] = tag.name, map), {});
+        return storedData;
+      })
+      .then(toshlStorage.update)
+      .then(() => storedData.tags);
   }
 }
 
-const decorateEntryWithTags = entry => {
-  return getTags()
-    .then(tags => {
-      entry.tags = entry.tags.map(tagId => {
-        return {
-          id: tagId,
-          name: tags[tagId]
-        };
-      });
-      return entry;
-    });
-}
-
-function getEntries (parameters) {
+function getEntries (parameters, token) {
   var decoratedEntries;
-  return apiToshl.entries.list(parameters)
+  return apiToshl.entries.list(parameters, token)
     .then(entries => { decoratedEntries = entries })
-    .then(getTags)
+    .then(() => getTags(token))
     .then(tags => {
       decoratedEntries.forEach(decoratedEntry => {
         decoratedEntry.tags = decoratedEntry.tags.map(tagId => {
