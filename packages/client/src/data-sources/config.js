@@ -1,5 +1,5 @@
-import Toshl from '../_utils/toshl';
-import Strava from '../_utils/strava';
+import Toshl from './toshl';
+import Strava from './strava';
 
 const config = [
   {

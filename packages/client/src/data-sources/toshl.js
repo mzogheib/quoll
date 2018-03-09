@@ -1,6 +1,6 @@
-import Api from './api';
+import Api from '../_utils/api';
 import mapUtils from '../map/utils';
-import utils from '.';
+import utils from '../_utils';
 
 const oAuthUrl = 'http://localhost:3000/fake-toshl-auth?redirect_uri=http://localhost:3000&state=toshl';
 const authenticate = payload => Api.post('toshl-auth', payload);
