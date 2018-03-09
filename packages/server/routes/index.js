@@ -30,14 +30,17 @@ router
   .all(routeUsers.authenticate)
   .post(routeToshl.deauthorize);
 
-  router
+router
   .route('/strava')
+  .all(routeUsers.authenticate)
   .get(routeStrava.listActivities)
 
 router
   .route('/strava-auth')
+  .all(routeUsers.authenticate)
   .post(routeStrava.authenticate);
 
 router
   .route('/strava-deauth')
+  .all(routeUsers.authenticate)
   .post(routeStrava.deauthorize);
