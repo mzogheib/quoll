@@ -35,7 +35,7 @@ class App extends Component {
       });
   }
 
-  makeDataSource({ id, name, oAuthUrl, authenticate, disconnect, getData, makeSummary, makeSummaryList, normalize }) {
+  makeDataSource({ id, name, getOauthUrl, authenticate, disconnect, getData, makeSummary, makeSummaryList, normalize }) {
     return {
       id,
       name,
@@ -43,7 +43,7 @@ class App extends Component {
       data: [],
       summary: '',
       summaryList: [],
-      connect: () => { window.location.replace(oAuthUrl); },
+      connect: () => { getOauthUrl().then(url => window.location.replace(url)) },
       authenticate (code) {
         return authenticate(code).then(() => { this.isConnected = true; })
       },

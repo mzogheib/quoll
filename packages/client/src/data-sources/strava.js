@@ -1,7 +1,7 @@
 import Api from '../_utils/api';
 import mapUtils from '../map/utils';
 
-const oAuthUrl = 'https://www.strava.com/oauth/authorize?client_id=8709&response_type=code&redirect_uri=http://localhost:3000&state=strava&scope=view_private';
+const getOauthUrl  = () => Api.get('strava-auth');
 const authenticate = payload => Api.post('strava-auth', payload);
 const deauthorize = () => Api.post('strava-deauth');
 const getActivities = params => Api.get('strava', params);
@@ -39,7 +39,7 @@ const makeSummaryList = (activities) => {
 }
 
 export default {
-  oAuthUrl,
+  getOauthUrl,
   authenticate,
   deauthorize,
   getActivities,

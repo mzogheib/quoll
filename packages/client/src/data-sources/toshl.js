@@ -2,7 +2,7 @@ import Api from '../_utils/api';
 import mapUtils from '../map/utils';
 import utils from '../_utils';
 
-const oAuthUrl = 'http://localhost:3000/fake-toshl-auth?redirect_uri=http://localhost:3000&state=toshl';
+const getOauthUrl  = () => Api.get('toshl-auth');
 const authenticate = payload => Api.post('toshl-auth', payload);
 const deauthorize = () => Api.post('toshl-deauth');
 const getEntries = params => Api.get('toshl', params);
@@ -52,7 +52,7 @@ const makeSummaryList = entries => {
 };
 
 export default {
-  oAuthUrl,
+  getOauthUrl,
   authenticate,
   deauthorize,
   getEntries,
