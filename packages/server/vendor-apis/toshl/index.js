@@ -1,9 +1,11 @@
 const axios = require('axios');
 const utils = require('../../utils');
-const _ = require('lodash');
 
 module.exports = {
   validateToken,
+  oauth: {
+    url: oauthUrl
+  },
   entries: {
     list: listEntries
   },
@@ -21,6 +23,10 @@ function get(url, options) {
       .then(response => resolve(response.data))
       .catch(error => reject({ status: error.response.status, message: error.response.data.description }));
   });
+}
+
+function oauthUrl () {
+  return `http://localhost:3000/fake-toshl-auth?redirect_uri=http://localhost:3000`;
 }
 
 // Validate the token by pinging the /me endpoint and resolve it if ok.
