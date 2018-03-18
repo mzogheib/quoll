@@ -1,6 +1,9 @@
 export default {
     parseQueryParams,
-    extractTimeString
+    extractTimeString,
+    makeRandomString,
+    encode,
+    decode
 };
 
 function parseQueryParams (searchString) {
@@ -32,4 +35,16 @@ function extractTimeString (input) {
     }
 
     return isValid ? match[0] : null;
+}
+
+function makeRandomString (length) {
+    return Math.random().toString(36).substr(2, length);
+}
+
+function encode (obj) {
+    return btoa(JSON.stringify(obj));
+}
+
+function decode (string) {
+    return JSON.parse(atob(string));
 }
