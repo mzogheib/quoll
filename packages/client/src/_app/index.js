@@ -4,7 +4,7 @@ import Menu from '../menu';
 import Map from '../map';
 import User from '../_utils/user';
 import Utils from '../_utils/'
-import dataSourcesConfig from '../data-sources/config';
+import DataSources from '../data-sources';
 
 class App extends Component {
   constructor(props) {
@@ -20,56 +20,19 @@ class App extends Component {
   }
 
   componentDidMount() {
-    let dataSources = dataSourcesConfig.map(this.makeDataSource);
     const userId = User.getCurrentUser();
     const action = userId ? 'login' : 'signup';
     // TODO: if login fails then clear that user from localStorage and signup
     User[action](userId)
       .then(user => {
         User.setCurrentUser(user.id);
-        dataSources = dataSources.map(ds => {
+        const dataSources = DataSources.map(ds => {
           ds.isConnected = user.dataSources.find(uds => uds.id === ds.id).isConnected;
           return ds;
         });
         this.setState({ dataSources: dataSources }, () => this.getData().then(this.handleOAuth));
       });
   }
-
-  makeDataSource({ id, name, getOauthUrl, authenticate, disconnect, getData, makeSummary, makeSummaryList, normalize }) {
-    return {
-      id,
-      name,
-      isConnected: false,
-      data: [],
-      summary: '',
-      summaryList: [],
-      connect () {
-        getOauthUrl().then(url => {
-          const urlWithState = `${url}&state=${this.id}`;
-          window.location.replace(urlWithState);
-        });
-      },
-      authenticate (code) {
-        return authenticate(code).then(() => { this.isConnected = true; })
-      },
-      disconnect () {
-        return disconnect().then(() => {
-          this.data = [];
-          this.summaryList = [];
-          this.summary = '';
-          this.isConnected = false;
-        });
-      },
-      getData (filter) {
-        return getData(filter).then(data => {
-          this.data = data
-          this.summaryList = makeSummaryList(this.data);
-          this.summary = makeSummary(this.data);
-        });
-      },
-      normalize
-    };
-  };
 
   handleOAuth() {
     const queryParams = Utils.parseQueryParams(window.location.search);
