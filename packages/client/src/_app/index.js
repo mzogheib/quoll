@@ -43,7 +43,12 @@ class App extends Component {
       data: [],
       summary: '',
       summaryList: [],
-      connect: () => { getOauthUrl().then(url => window.location.replace(url)) },
+      connect () {
+        getOauthUrl().then(url => {
+          const urlWithState = `${url}&state=${this.id}`;
+          window.location.replace(urlWithState);
+        });
+      },
       authenticate (code) {
         return authenticate(code).then(() => { this.isConnected = true; })
       },

@@ -9,9 +9,7 @@ module.exports = {
 };
 
 function getOAuthUrl(req, res) {
-  // const userId = req.userId;
-
-  const url = `${ctrlToshl.getOAuthUrl()}&redirect_uri=http://localhost:3000&state=toshl`;
+  const url = `${ctrlToshl.getOAuthUrl()}&redirect_uri=http://localhost:3000`;
   onSuccess(url);
 
   function onSuccess(response) {
