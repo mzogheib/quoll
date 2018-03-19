@@ -1,8 +1,11 @@
 const prefix = 'quoll';
-const get = key => JSON.parse(localStorage.getItem(`${prefix}-${key}`));
-const set = (key, data) => localStorage.setItem(`${prefix}-${key}`, JSON.stringify(data));
+const makeKey = key => `${prefix}-${key}`;
+const get = key => JSON.parse(localStorage.getItem(makeKey(key)));
+const set = (key, data) => localStorage.setItem(makeKey(key), JSON.stringify(data));
+const remove = (key) => localStorage.removeItem(makeKey(key))
 
 export default {
     get,
-    set
+    set,
+    delete: remove
 };

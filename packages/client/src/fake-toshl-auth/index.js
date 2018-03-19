@@ -10,7 +10,7 @@ class FakeToshlAuth extends Component {
   }
 
   componentDidMount() {
-    const queryParams = Utils.parseQueryParams(window.location.search);
+    const queryParams = Utils.getQueryParams(window.location.href);
     this.setState({ ...queryParams });
   }
 

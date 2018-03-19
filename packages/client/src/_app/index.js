@@ -5,6 +5,7 @@ import Map from '../map';
 import User from '../_utils/user';
 import Utils from '../_utils/'
 import DataSources from '../data-sources';
+import Storage from '../_utils/storage';
 
 class App extends Component {
   constructor(props) {
@@ -35,30 +36,41 @@ class App extends Component {
   }
 
   handleOAuth() {
-    const queryParams = Utils.parseQueryParams(window.location.search);
-    const dataSourceIds = this.state.dataSources.map(ds => ds.id);
-    const dataSourceId = queryParams && queryParams.state;
+    const queryParams = Utils.getQueryParams(window.location.href);
+    // Remove the query params. This is ok so long as the only query params in use are related to oauth
+    window.history.replaceState(null, null, window.location.pathname);
 
-    if (dataSourceId) {
-      if (dataSourceIds.includes(dataSourceId)) {
-        // Remove the query params. 
-        window.history.replaceState(null, null, window.location.pathname);
+    if (!queryParams) {
+      return;
+    } else {
+      const oauthState = Utils.decode(queryParams.state);
+      const oauthCode = queryParams.code;
+      const oauthError = queryParams.error;
 
-        const dataSources = this.state.dataSources.slice();
-        const dataSource = dataSources.find(ds => ds.id === dataSourceId);
+      const dataSourceId = oauthState.id;
+      const dataSourceIds = this.state.dataSources.map(ds => ds.id);
+      const knownDataSource = dataSourceIds.includes(dataSourceId);
+      const dataSources = this.state.dataSources.slice();
+      const dataSource = knownDataSource ? dataSources.find(ds => ds.id === dataSourceId) : null;
 
-        if (queryParams.code) {
-          dataSource.authenticate({ code: queryParams.code })
-            .then(() => dataSource.getData(this.state.filter))
-            .then(() => { this.setState({ dataSources: dataSources }); })
-            .catch(alert)
-        } else if (queryParams.error && queryParams.error === 'access_denied') {
-          alert(`${dataSource.name} access denied.`);
+      const token = oauthState.token;
+      const storedToken = Storage.get('oauth-state-token');
+      const tokenIsValid = storedToken && token && storedToken === token;
+      Storage.delete('oauth-state-token');
+
+      if (!knownDataSource) {
+        alert(`Unknown data source: ${dataSourceId}`);
+        return;
+      } else if (!tokenIsValid || oauthError === 'access_denied') {
+        alert(`${dataSource.name} access denied.`);
+        return;
+      } else if (oauthCode) {
+        dataSource.authenticate({ code: queryParams.code })
+          .then(() => dataSource.getData(this.state.filter))
+          .then(() => { this.setState({ dataSources: dataSources }); })
+          .catch(alert)
         } else {
           alert(`Unknown response from ${dataSource.name}.`);
-        }
-      } else {
-        alert(`Unknown data source: ${dataSourceId}`);
       }
     }
   }
@@ -78,7 +90,9 @@ class App extends Component {
   handleConnect(id) {
     const dataSources = this.state.dataSources.slice();
     const dataSource = dataSources.find(ds => ds.id === id);
-    dataSource.connect();
+    const token = Utils.makeRandomString();
+    Storage.set('oauth-state-token', token);
+    dataSource.connect(token);
   }
 
   handleDisconnect(id) {
