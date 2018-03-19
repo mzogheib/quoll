@@ -23,6 +23,7 @@ router
 router
   .route('/toshl-auth')
   .all(routeUsers.authenticate)
+  .get(routeToshl.getOAuthUrl)
   .post(routeToshl.authenticate);
 
 router
@@ -38,6 +39,7 @@ router
 router
   .route('/strava-auth')
   .all(routeUsers.authenticate)
+  .get(routeStrava.getOAuthUrl)
   .post(routeStrava.authenticate);
 
 router

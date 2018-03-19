@@ -2,10 +2,28 @@ const ctrlStrava = require('../controllers/strava.controller');
 const ctrlUsers = require('../controllers/users.controller');
 
 module.exports = {
+  getOAuthUrl,
   authenticate,
   deauthorize,
   listActivities
 };
+
+function getOAuthUrl(req, res) {
+  const url = `${ctrlStrava.getOAuthUrl()}&redirect_uri=http://localhost:3000`;
+  onSuccess(url);
+
+  function onSuccess(response) {
+    respond({ status: 200, message: response });
+  }
+
+  function onError(error) {
+    respond({ status: error.status || 500, message: error.message });
+  }
+
+  function respond(response) {
+    res.status(response.status).json(response.message);
+  }
+}
 
 function authenticate(req, res) {
   const code = req.body.code;

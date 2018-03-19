@@ -4,7 +4,8 @@ import Menu from '../menu';
 import Map from '../map';
 import User from '../_utils/user';
 import Utils from '../_utils/'
-import dataSourcesConfig from '../data-sources/config';
+import DataSources from '../data-sources';
+import Storage from '../_utils/storage';
 
 class App extends Component {
   constructor(props) {
@@ -20,14 +21,13 @@ class App extends Component {
   }
 
   componentDidMount() {
-    let dataSources = dataSourcesConfig.map(this.makeDataSource);
     const userId = User.getCurrentUser();
     const action = userId ? 'login' : 'signup';
     // TODO: if login fails then clear that user from localStorage and signup
     User[action](userId)
       .then(user => {
         User.setCurrentUser(user.id);
-        dataSources = dataSources.map(ds => {
+        const dataSources = DataSources.map(ds => {
           ds.isConnected = user.dataSources.find(uds => uds.id === ds.id).isConnected;
           return ds;
         });
@@ -35,62 +35,42 @@ class App extends Component {
       });
   }
 
-  makeDataSource({ id, name, oAuthUrl, authenticate, disconnect, getData, makeSummary, makeSummaryList, normalize }) {
-    return {
-      id,
-      name,
-      isConnected: false,
-      data: [],
-      summary: '',
-      summaryList: [],
-      connect: () => { window.location.replace(oAuthUrl); },
-      authenticate (code) {
-        return authenticate(code).then(() => { this.isConnected = true; })
-      },
-      disconnect () {
-        return disconnect().then(() => {
-          this.data = [];
-          this.summaryList = [];
-          this.summary = '';
-          this.isConnected = false;
-        });
-      },
-      getData (filter) {
-        return getData(filter).then(data => {
-          this.data = data
-          this.summaryList = makeSummaryList(this.data);
-          this.summary = makeSummary(this.data);
-        });
-      },
-      normalize
-    };
-  };
-
   handleOAuth() {
-    const queryParams = Utils.parseQueryParams(window.location.search);
-    const dataSourceIds = this.state.dataSources.map(ds => ds.id);
-    const dataSourceId = queryParams && queryParams.state;
+    const queryParams = Utils.getQueryParams(window.location.href);
+    // Remove the query params. This is ok so long as the only query params in use are related to oauth
+    window.history.replaceState(null, null, window.location.pathname);
 
-    if (dataSourceId) {
-      if (dataSourceIds.includes(dataSourceId)) {
-        // Remove the query params. 
-        window.history.replaceState(null, null, window.location.pathname);
+    if (!queryParams) {
+      return;
+    } else {
+      const oauthState = Utils.decode(queryParams.state);
+      const oauthCode = queryParams.code;
+      const oauthError = queryParams.error;
 
-        const dataSources = this.state.dataSources.slice();
-        const dataSource = dataSources.find(ds => ds.id === dataSourceId);
+      const dataSourceId = oauthState.id;
+      const dataSourceIds = this.state.dataSources.map(ds => ds.id);
+      const knownDataSource = dataSourceIds.includes(dataSourceId);
+      const dataSources = this.state.dataSources.slice();
+      const dataSource = knownDataSource ? dataSources.find(ds => ds.id === dataSourceId) : null;
 
-        if (queryParams.code) {
-          dataSource.authenticate({ code: queryParams.code })
-            .then(() => dataSource.getData(this.state.filter))
-            .then(() => { this.setState({ dataSources: dataSources }); })
-            .catch(alert)
-        } else if (queryParams.error && queryParams.error === 'access_denied') {
-          alert(`${dataSource.name} access denied.`);
+      const token = oauthState.token;
+      const storedToken = Storage.get('oauth-state-token');
+      const tokenIsValid = storedToken && token && storedToken === token;
+      Storage.delete('oauth-state-token');
+
+      if (!knownDataSource) {
+        alert(`Unknown data source: ${dataSourceId}`);
+        return;
+      } else if (!tokenIsValid || oauthError === 'access_denied') {
+        alert(`${dataSource.name} access denied.`);
+        return;
+      } else if (oauthCode) {
+        dataSource.authenticate({ code: queryParams.code })
+          .then(() => dataSource.getData(this.state.filter))
+          .then(() => { this.setState({ dataSources: dataSources }); })
+          .catch(alert)
         } else {
           alert(`Unknown response from ${dataSource.name}.`);
-        }
-      } else {
-        alert(`Unknown data source: ${dataSourceId}`);
       }
     }
   }
@@ -110,7 +90,9 @@ class App extends Component {
   handleConnect(id) {
     const dataSources = this.state.dataSources.slice();
     const dataSource = dataSources.find(ds => ds.id === id);
-    dataSource.connect();
+    const token = Utils.makeRandomString();
+    Storage.set('oauth-state-token', token);
+    dataSource.connect(token);
   }
 
   handleDisconnect(id) {

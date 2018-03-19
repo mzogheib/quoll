@@ -2,10 +2,15 @@ const apiToshl = require('../vendor-apis/toshl');
 const toshlStorage = require('../storage/toshl.storage');
 
 module.exports = {
+  getOAuthUrl,
   authenticate,
   deauthorize,
   getEntries
 };
+
+function getOAuthUrl() {
+  return apiToshl.oauth.url();
+}
 
 function authenticate(token) {
   return apiToshl.validateToken(token)

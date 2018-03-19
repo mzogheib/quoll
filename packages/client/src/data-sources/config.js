@@ -1,11 +1,11 @@
-import Toshl from '../_utils/toshl';
-import Strava from '../_utils/strava';
+import Toshl from './toshl';
+import Strava from './strava';
 
 const config = [
   {
     id: 'toshl',
     name: 'Toshl',
-    oAuthUrl: Toshl.oAuthUrl,
+    getOauthUrl: Toshl.getOauthUrl,
     authenticate: Toshl.authenticate,
     disconnect: Toshl.deauthorize,
     getData: Toshl.getEntries,
@@ -16,7 +16,7 @@ const config = [
   {
     id: 'strava',
     name: 'Strava',
-    oAuthUrl: Strava.oAuthUrl,
+    getOauthUrl: Strava.getOauthUrl,
     authenticate: Strava.authenticate,
     disconnect: Strava.deauthorize,
     getData: Strava.getActivities,

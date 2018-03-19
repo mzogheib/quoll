@@ -4,6 +4,7 @@ const auth = require('./private/strava-auth');
 
 module.exports = {
   oauth: {
+    url: oauthUrl,
     token,
     deauthorize
   },
@@ -16,6 +17,7 @@ module.exports = {
 };
 
 const baseUrl = 'https://www.strava.com';
+const baseOauthUrl = `${baseUrl}/oauth`;
 const baseApiUrl = `${baseUrl}/api/v3`;
 const makeAuthHeader = token => { return { headers: { 'Authorization': `Bearer ${token}` } }; };
 
@@ -35,8 +37,12 @@ const post = (url, payload) => {
   });
 }
 
+function oauthUrl () {
+  return `${baseOauthUrl}/authorize?client_id=8709&response_type=code&scope=view_private`;
+}
+
 function token(code) {
-  const url = `${baseUrl}/oauth/token`;
+  const url = `${baseOauthUrl}/token`;
   const payload = {
     client_id: auth.client_id,
     client_secret: auth.client_secret,
@@ -47,7 +53,7 @@ function token(code) {
 }
 
 function deauthorize(token) {
-  const url = `${baseUrl}/oauth/deauthorize`;
+  const url = `${baseOauthUrl}/deauthorize`;
   const payload = {
     access_token: token
   }
