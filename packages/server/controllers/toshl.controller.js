@@ -12,9 +12,8 @@ function getOAuthUrl() {
   return apiToshl.oauth.url();
 }
 
-function authenticate(token) {
-  return apiToshl.validateToken(token)
-    .then(() => token);
+function authenticate(code) {
+  return apiToshl.oauth.token(code);
 }
 
 function deauthorize(token) {
