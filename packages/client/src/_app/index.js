@@ -43,7 +43,9 @@ class App extends Component {
     if (!queryParams) {
       return;
     } else {
-      const oauthState = Utils.decode(queryParams.state);
+      // HACK: toshl isn't returning the state param so fake it
+      // https://github.com/mzogheib/quoll/issues/9
+      const oauthState = queryParams.state ? Utils.decode(queryParams.state) : { id: 'toshl', token: Storage.get('oauth-state-token') };
       const oauthCode = queryParams.code;
       const oauthError = queryParams.error;
 
