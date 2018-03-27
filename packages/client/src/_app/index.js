@@ -37,15 +37,13 @@ class App extends Component {
 
   handleOAuth() {
     const queryParams = Utils.getQueryParams(window.location.href);
-    // Remove the query params. This is ok so long as the only query params in use are related to oauth
-    window.history.replaceState(null, null, window.location.pathname);
-
-    if (!queryParams) {
+    
+    if (!queryParams || !queryParams.state) {
       return;
     } else {
-      // HACK: toshl isn't returning the state param so fake it
-      // https://github.com/mzogheib/quoll/issues/9
-      const oauthState = queryParams.state ? Utils.decode(queryParams.state) : { id: 'toshl', token: Storage.get('oauth-state-token') };
+      // Looks like oauth so remove the query params
+      window.history.replaceState(null, null, window.location.pathname);
+      const oauthState = Utils.decode(queryParams.state);
       const oauthCode = queryParams.code;
       const oauthError = queryParams.error;
 
