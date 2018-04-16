@@ -15,8 +15,8 @@ function authenticate(code) {
   return apiStrava.oauth.token(code);
 }
 
-function deauthorize(token) {
-  return apiStrava.oauth.deauthorize(token);
+function deauthorize(auth) {
+  return apiStrava.oauth.deauthorize(auth.access_token);
 }
 
 function getAthleteActivities(parameters, token) {
