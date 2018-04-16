@@ -33,7 +33,13 @@ function authenticate(req, res) {
     respond({ status: 400, message: 'No authorization code provided.' });
   } else {
     ctrlToshl.authenticate(code)
-      .then(data => ctrlUsers.setVendorAuth(userId, 'toshl', data))
+      .then(data => {
+        // Calculate and store unix timestamp of when the access_token will expire
+        // Substract a small amount to account for lag
+        const expires_in = (data.expires_in || 3600) - 300;
+        data.expiry_time = Math.floor(Date.now() / 1000 + expires_in);
+        ctrlUsers.setVendorAuth(userId, 'toshl', data)
+      })
       .then(onSuccess)
       .catch(onError);
   }
