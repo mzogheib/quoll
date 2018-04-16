@@ -16,11 +16,9 @@ function authenticate(code) {
   return apiToshl.oauth.token(code);
 }
 
-function deauthorize(token) {
-  return new Promise((resolve, reject) => {
-    toshlStorage.delete(token);
-    resolve();
-  });
+function deauthorize(auth) {
+  return apiToshl.oauth.deauthorize(auth)
+    .then(() => { toshlStorage.delete(auth.access_token); });
 }
 
 function getTags (token) {

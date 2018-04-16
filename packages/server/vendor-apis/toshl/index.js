@@ -1,12 +1,13 @@
 const axios = require('axios');
 const utils = require('../../utils');
 const auth = require('./private/toshl-auth');
+const querystring = require('querystring');
 
 module.exports = {
-  validateToken,
   oauth: {
     url: oauthUrl,
-    token
+    token,
+    deauthorize
   },
   entries: {
     list: listEntries
@@ -42,7 +43,6 @@ function oauthUrl () {
 
 function token(code) {
   const url = `${baseOauthUrl}/token`;
-  const querystring = require('querystring');
   const payload = {
     code: code,
     grant_type: 'authorization_code',
@@ -60,11 +60,13 @@ function token(code) {
   return post(url, querystring.stringify(payload), options);
 }
 
-// Validate the token by pinging the /me endpoint and resolve it if ok.
-function validateToken(token) {
-  const url = `${baseApiUrl}/me`;
-  const options = makeAuthHeader(token);
-  return get(url, options).then(() => token);
+function deauthorize(auth) {
+  const url = `${baseOauthUrl}/revoke`;
+  const payload = {
+    refresh_token: auth.refresh_token
+  };
+  const options = makeAuthHeader(auth.access_token);
+  return post(url, querystring.stringify(payload), options);
 }
 
 function listEntries(params, token) {
