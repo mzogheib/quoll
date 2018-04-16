@@ -18,7 +18,7 @@ module.exports = {
 
 const baseApiUrl = 'https://api.toshl.com';
 const baseOauthUrl = 'https://toshl.com/oauth2';
-const makeAuthHeader = (username, password) => { return { auth: { username, password: null }}; }
+const makeAuthHeader = token => { return { headers: { 'Authorization': `Bearer ${token}` } }; };
 
 function get(url, options) {
   return new Promise((resolve, reject) => {
