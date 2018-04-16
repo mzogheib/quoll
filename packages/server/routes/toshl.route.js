@@ -33,7 +33,7 @@ function authenticate(req, res) {
     respond({ status: 400, message: 'No authorization code provided.' });
   } else {
     ctrlToshl.authenticate(code)
-      .then(token => ctrlUsers.setAccessToken(userId, 'toshl', token))
+      .then(data => ctrlUsers.setVendorAuth(userId, 'toshl', data))
       .then(onSuccess)
       .catch(onError);
   }
@@ -54,9 +54,9 @@ function authenticate(req, res) {
 function deauthorize(req, res) {
   const userId = req.userId;
 
-  ctrlUsers.getAccessToken(userId, 'toshl')
+  ctrlUsers.getVendorAuth(userId, 'toshl')
     .then(ctrlToshl.deauthorize)
-    .then(() => ctrlUsers.setAccessToken(userId, 'toshl', null))
+    .then(() => ctrlUsers.setVendorAuth(userId, 'toshl', null))
     .then(onSuccess)
     .catch(onError);
 
@@ -77,8 +77,8 @@ function list(req, res) {
   const params = req.query;
   const userId = req.userId;
 
-  ctrlUsers.getAccessToken(userId, 'toshl')
-    .then(token => ctrlToshl.getEntries(params, token))
+  ctrlUsers.getVendorAuth(userId, 'toshl')
+    .then(auth => ctrlToshl.getEntries(params, auth.access_token))
     .then(onSuccess)
     .catch(onError);
 

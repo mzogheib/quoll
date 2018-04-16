@@ -4,16 +4,16 @@ module.exports = {
   createUser,
   login,
   get,
-  setAccessToken,
-  getAccessToken
+  setVendorAuth,
+  getVendorAuth
 };
 
 function createUser () {
   return new Promise ((resolve, reject) => {
     const user = userStorage.create({
       dataSources: [
-        { id: 'strava', accessToken: null },
-        { id: 'toshl', accessToken: null },
+        { id: 'strava', vendorAuth: null },
+        { id: 'toshl', vendorAuth: null },
       ]
     });
     resolve(sanitizeUser(user));
@@ -31,7 +31,7 @@ function sanitizeUser (user) {
   sanitizedUser.dataSources = user.dataSources.map(ds => {
     return {
       id: ds.id,
-      isConnected: !!ds.accessToken
+      isConnected: !!ds.vendorAuth
     };
   });
   return sanitizedUser;
@@ -48,18 +48,18 @@ function update (user) {
   });
 }
 
-function setAccessToken (userId, dataSourceId, token) {
+function setVendorAuth (userId, dataSourceId, data) {
   return get(userId)
     .then(user => {
-      user.dataSources.find(ds => ds.id === dataSourceId).accessToken = token;
+      user.dataSources.find(ds => ds.id === dataSourceId).vendorAuth = data;
       return user;
     })
     .then(update);
 }
 
-function getAccessToken (userId, dataSourceId) {
+function getVendorAuth (userId, dataSourceId) {
   return get(userId)
     .then(user => {
-      return user.dataSources.find(ds => ds.id === dataSourceId).accessToken;
+      return user.dataSources.find(ds => ds.id === dataSourceId).vendorAuth;
     });
 }

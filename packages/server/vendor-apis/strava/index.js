@@ -48,8 +48,7 @@ function token(code) {
     client_secret: auth.client_secret,
     code: code
   };
-  return post(url, payload)
-    .then(data => data.access_token);
+  return post(url, payload);
 }
 
 function deauthorize(token) {

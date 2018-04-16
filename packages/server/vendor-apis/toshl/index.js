@@ -57,8 +57,7 @@ function token(code) {
       "Content-Type": 'application/x-www-form-urlencoded'
     }
   };
-  return post(url, querystring.stringify(payload), options)
-    .then(data => data.access_token);
+  return post(url, querystring.stringify(payload), options);
 }
 
 // Validate the token by pinging the /me endpoint and resolve it if ok.
