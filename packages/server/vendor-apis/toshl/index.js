@@ -1,12 +1,14 @@
 const axios = require('axios');
 const utils = require('../../utils');
 const auth = require('./private/toshl-auth');
+const querystring = require('querystring');
 
 module.exports = {
-  validateToken,
   oauth: {
     url: oauthUrl,
-    token
+    token,
+    deauthorize,
+    refresh: refreshAuth
   },
   entries: {
     list: listEntries
@@ -18,7 +20,8 @@ module.exports = {
 
 const baseApiUrl = 'https://api.toshl.com';
 const baseOauthUrl = 'https://toshl.com/oauth2';
-const makeAuthHeader = (username, password) => { return { auth: { username, password: null }}; }
+const makeBearerAuthHeader = token => { return { Authorization: `Bearer ${token}` }; };
+const makeBasicAuthHeader = (username, password) => { return { username: auth.client_id, password: auth.client_secret }; };
 
 function get(url, options) {
   return new Promise((resolve, reject) => {
@@ -30,7 +33,9 @@ function get(url, options) {
 
 function post(url, payload, options) {
   return new Promise((resolve, reject) => {
-    return axios.post(url, payload, options)
+    options.headers = options.headers || {};
+    options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+    return axios.post(url, querystring.stringify(payload), options)
       .then(response => resolve(response.data))
       .catch(error => reject({ status: error.response.status, message: error.response.data }));
   });
@@ -42,40 +47,52 @@ function oauthUrl () {
 
 function token(code) {
   const url = `${baseOauthUrl}/token`;
-  const querystring = require('querystring');
   const payload = {
     code: code,
     grant_type: 'authorization_code',
     redirect_uri: 'http://localhost:3000'
   };
   options = {
-    auth: {
-      username: auth.client_id,
-      password: auth.client_secret
-    },
-    headers: {
-      "Content-Type": 'application/x-www-form-urlencoded'
-    }
+    auth: makeBasicAuthHeader(auth.client_id, auth.client_secret)
   };
-  return post(url, querystring.stringify(payload), options)
-    .then(data => data.access_token);
+  return post(url, payload, options);
 }
 
-// Validate the token by pinging the /me endpoint and resolve it if ok.
-function validateToken(token) {
-  const url = `${baseApiUrl}/me`;
-  const options = makeAuthHeader(token);
-  return get(url, options).then(() => token);
+function deauthorize(auth) {
+  const url = `${baseOauthUrl}/revoke`;
+  const payload = {
+    refresh_token: auth.refresh_token
+  };
+  const options = {
+    headers: makeBearerAuthHeader(auth.access_token)
+  };
+  return post(url, payload, options);
+}
+
+function refreshAuth(expiredAuth) {
+  const url = `${baseOauthUrl}/token`;
+  const payload = {
+    grant_type: 'refresh_token',
+    refresh_token: expiredAuth.refresh_token
+  };
+  options = {
+    auth: makeBasicAuthHeader(auth.client_id, auth.client_secret)
+  };
+  return post(url, payload, options);
 }
 
 function listEntries(params, token) {
   const url = `${baseApiUrl}/entries${utils.makeUrlParams(params)}`;
-  const options = makeAuthHeader(token);
+  const options = {
+    headers: makeBearerAuthHeader(token)
+  };
   return get(url, options);
 }
 
 function listTags(token) {
   const url = `${baseApiUrl}/tags`;
-  const options = makeAuthHeader(token);
+  const options = {
+    headers: makeBearerAuthHeader(token)
+  };
   return get(url, options);
 }

@@ -33,7 +33,7 @@ function authenticate(req, res) {
     respond({ status: 400, message: 'No authorization code provided.'});
   } else {
     ctrlStrava.authenticate(code)
-      .then(token => ctrlUsers.setAccessToken(userId, 'strava', token))
+      .then(data => ctrlUsers.setVendorAuth(userId, 'strava', data))
       .then(onSuccess)
       .catch(onError);
   }
@@ -54,9 +54,9 @@ function authenticate(req, res) {
 function deauthorize(req, res) {
   const userId = req.userId;
 
-  ctrlUsers.getAccessToken(userId, 'strava')
+  ctrlUsers.getVendorAuth(userId, 'strava')
     .then(ctrlStrava.deauthorize)
-    .then(() => ctrlUsers.setAccessToken(userId, 'strava', null))
+    .then(() => ctrlUsers.setVendorAuth(userId, 'strava', null))
     .then(onSuccess)
     .catch(onError);
 
@@ -77,8 +77,8 @@ function listActivities(req, res) {
   const params = req.query;
   const userId = req.userId;
 
-  ctrlUsers.getAccessToken(userId, 'strava')
-    .then(token => ctrlStrava.getAthleteActivities(params, token))
+  ctrlUsers.getVendorAuth(userId, 'strava')
+    .then(auth => ctrlStrava.getAthleteActivities(params, auth.access_token))
     .then(onSuccess)
     .catch(onError);
 

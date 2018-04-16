@@ -5,6 +5,7 @@ module.exports = {
   getOAuthUrl,
   authenticate,
   deauthorize,
+  checkAuth,
   listEntries: list
 };
 
@@ -33,7 +34,10 @@ function authenticate(req, res) {
     respond({ status: 400, message: 'No authorization code provided.' });
   } else {
     ctrlToshl.authenticate(code)
-      .then(token => ctrlUsers.setAccessToken(userId, 'toshl', token))
+      .then(data => {
+        data.expiry_time = calculateExpiryTime(data.expires_in);
+        return ctrlUsers.setVendorAuth(userId, 'toshl', data);
+      })
       .then(onSuccess)
       .catch(onError);
   }
@@ -54,9 +58,9 @@ function authenticate(req, res) {
 function deauthorize(req, res) {
   const userId = req.userId;
 
-  ctrlUsers.getAccessToken(userId, 'toshl')
+  ctrlUsers.getVendorAuth(userId, 'toshl')
     .then(ctrlToshl.deauthorize)
-    .then(() => ctrlUsers.setAccessToken(userId, 'toshl', null))
+    .then(() => ctrlUsers.setVendorAuth(userId, 'toshl', null))
     .then(onSuccess)
     .catch(onError);
 
@@ -73,12 +77,39 @@ function deauthorize(req, res) {
   }
 }
 
+function checkAuth(req, res, next) {
+  const userId = req.userId;
+
+  ctrlUsers.getVendorAuth(userId, 'toshl')
+    .then(auth => {
+      const nowUnix = Math.floor(Date.now() / 1000);
+      if (nowUnix < auth.expiry_time) {
+        next();
+      } else {
+        ctrlToshl.refreshAuth(auth)
+          .then(data => {
+            data.expiry_time = calculateExpiryTime(data.expires_in);
+            return ctrlUsers.setVendorAuth(userId, 'toshl', data).then(next);
+          })
+          .catch(onError);
+      }
+    });
+
+  function onError(error) {
+    respond({ status: error.status || 500, message: error.message });
+  }
+
+  function respond(response) {
+    res.status(response.status).json(response.message);
+  }
+}
+
 function list(req, res) {
   const params = req.query;
   const userId = req.userId;
 
-  ctrlUsers.getAccessToken(userId, 'toshl')
-    .then(token => ctrlToshl.getEntries(params, token))
+  ctrlUsers.getVendorAuth(userId, 'toshl')
+    .then(auth => ctrlToshl.getEntries(params, auth.access_token))
     .then(onSuccess)
     .catch(onError);
 
@@ -93,4 +124,9 @@ function list(req, res) {
   function respond(response) {
     res.status(response.status).json(response.message);
   }
+}
+
+function calculateExpiryTime(expiresIn) {
+  // Substract a small amount to account for lag
+  return Math.floor(Date.now() / 1000 + (expiresIn || 3600) - 300);
 }
