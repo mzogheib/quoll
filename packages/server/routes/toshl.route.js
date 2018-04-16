@@ -5,6 +5,7 @@ module.exports = {
   getOAuthUrl,
   authenticate,
   deauthorize,
+  checkAuth,
   listEntries: list
 };
 
@@ -38,7 +39,7 @@ function authenticate(req, res) {
         // Substract a small amount to account for lag
         const expires_in = (data.expires_in || 3600) - 300;
         data.expiry_time = Math.floor(Date.now() / 1000 + expires_in);
-        ctrlUsers.setVendorAuth(userId, 'toshl', data)
+        return ctrlUsers.setVendorAuth(userId, 'toshl', data);
       })
       .then(onSuccess)
       .catch(onError);
@@ -61,14 +62,44 @@ function deauthorize(req, res) {
   const userId = req.userId;
 
   ctrlUsers.getVendorAuth(userId, 'toshl')
-    .then(ctrlToshl.deauthorize)
-    .then(() => ctrlUsers.setVendorAuth(userId, 'toshl', null))
-    .then(onSuccess)
+  .then(ctrlToshl.deauthorize)
+  .then(() => ctrlUsers.setVendorAuth(userId, 'toshl', null))
+  .then(onSuccess)
     .catch(onError);
 
   function onSuccess(response) {
     respond({ status: 200 });
   }
+
+  function onError(error) {
+    respond({ status: error.status || 500, message: error.message });
+  }
+
+  function respond(response) {
+    res.status(response.status).json(response.message);
+  }
+}
+
+function checkAuth(req, res, next) {
+  const userId = req.userId;
+
+  ctrlUsers.getVendorAuth(userId, 'toshl')
+    .then(auth => {
+      const nowUnix = Math.floor(Date.now() / 1000);
+      if (nowUnix < auth.expiry_time) {
+        next();
+      } else {
+        ctrlToshl.refreshAuth(auth)
+          .then(data => {
+            // Calculate and store unix timestamp of when the access_token will expire
+            // Substract a small amount to account for lag
+            const expires_in = (data.expires_in || 3600) - 300;
+            data.expiry_time = Math.floor(Date.now() / 1000 + expires_in);
+            return ctrlUsers.setVendorAuth(userId, 'toshl', data).then(next);
+          })
+          .catch(onError);
+      }
+    });
 
   function onError(error) {
     respond({ status: error.status || 500, message: error.message });

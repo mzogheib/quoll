@@ -7,7 +7,8 @@ module.exports = {
   oauth: {
     url: oauthUrl,
     token,
-    deauthorize
+    deauthorize,
+    refresh: refreshAuth
   },
   entries: {
     list: listEntries
@@ -66,6 +67,24 @@ function deauthorize(auth) {
     refresh_token: auth.refresh_token
   };
   const options = makeAuthHeader(auth.access_token);
+  return post(url, querystring.stringify(payload), options);
+}
+
+function refreshAuth(expiredAuth) {
+  const url = `${baseOauthUrl}/token`;
+  const payload = {
+    grant_type: 'refresh_token',
+    refresh_token: expiredAuth.refresh_token
+  };
+  options = {
+    auth: {
+      username: auth.client_id,
+      password: auth.client_secret
+    },
+    headers: {
+      "Content-Type": 'application/x-www-form-urlencoded'
+    }
+  };
   return post(url, querystring.stringify(payload), options);
 }
 

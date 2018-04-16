@@ -18,6 +18,7 @@ router
 router
   .route('/toshl')
   .all(routeUsers.authenticate)
+  .all(routeToshl.checkAuth)
   .get(routeToshl.listEntries);
 
 router

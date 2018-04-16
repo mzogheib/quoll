@@ -5,6 +5,7 @@ module.exports = {
   getOAuthUrl,
   authenticate,
   deauthorize,
+  refreshAuth,
   getEntries
 };
 
@@ -19,6 +20,14 @@ function authenticate(code) {
 function deauthorize(auth) {
   return apiToshl.oauth.deauthorize(auth)
     .then(() => { toshlStorage.delete(auth.access_token); });
+}
+
+function refreshAuth(auth) {
+  return apiToshl.oauth.refresh(auth)
+    .then(newAuth => {
+      toshlStorage.delete(auth.access_token);
+      return newAuth;
+    });
 }
 
 function getTags (token) {
