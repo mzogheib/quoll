@@ -20,7 +20,8 @@ module.exports = {
 
 const baseApiUrl = 'https://api.toshl.com';
 const baseOauthUrl = 'https://toshl.com/oauth2';
-const makeAuthHeader = token => { return { headers: { 'Authorization': `Bearer ${token}` } }; };
+const makeBearerAuthHeader = token => { return { Authorization: `Bearer ${token}` }; };
+const makeBasicAuthHeader = (username, password) => { return { username: auth.client_id, password: auth.client_secret }; };
 
 function get(url, options) {
   return new Promise((resolve, reject) => {
@@ -32,7 +33,9 @@ function get(url, options) {
 
 function post(url, payload, options) {
   return new Promise((resolve, reject) => {
-    return axios.post(url, payload, options)
+    options.headers = options.headers || {};
+    options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+    return axios.post(url, querystring.stringify(payload), options)
       .then(response => resolve(response.data))
       .catch(error => reject({ status: error.response.status, message: error.response.data }));
   });
@@ -50,15 +53,9 @@ function token(code) {
     redirect_uri: 'http://localhost:3000'
   };
   options = {
-    auth: {
-      username: auth.client_id,
-      password: auth.client_secret
-    },
-    headers: {
-      "Content-Type": 'application/x-www-form-urlencoded'
-    }
+    auth: makeBasicAuthHeader(auth.client_id, auth.client_secret)
   };
-  return post(url, querystring.stringify(payload), options);
+  return post(url, payload, options);
 }
 
 function deauthorize(auth) {
@@ -66,8 +63,10 @@ function deauthorize(auth) {
   const payload = {
     refresh_token: auth.refresh_token
   };
-  const options = makeAuthHeader(auth.access_token);
-  return post(url, querystring.stringify(payload), options);
+  const options = {
+    headers: makeBearerAuthHeader(auth.access_token)
+  };
+  return post(url, payload, options);
 }
 
 function refreshAuth(expiredAuth) {
@@ -77,25 +76,23 @@ function refreshAuth(expiredAuth) {
     refresh_token: expiredAuth.refresh_token
   };
   options = {
-    auth: {
-      username: auth.client_id,
-      password: auth.client_secret
-    },
-    headers: {
-      "Content-Type": 'application/x-www-form-urlencoded'
-    }
+    auth: makeBasicAuthHeader(auth.client_id, auth.client_secret)
   };
-  return post(url, querystring.stringify(payload), options);
+  return post(url, payload, options);
 }
 
 function listEntries(params, token) {
   const url = `${baseApiUrl}/entries${utils.makeUrlParams(params)}`;
-  const options = makeAuthHeader(token);
+  const options = {
+    headers: makeBearerAuthHeader(token)
+  };
   return get(url, options);
 }
 
 function listTags(token) {
   const url = `${baseApiUrl}/tags`;
-  const options = makeAuthHeader(token);
+  const options = {
+    headers: makeBearerAuthHeader(token)
+  };
   return get(url, options);
 }
