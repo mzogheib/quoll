@@ -1,50 +1,60 @@
 import React from 'react';
 import './style.css';
+import mapUtils from './utils';
 const google = window.google;
 
 export default class Map extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      map: {},
-      layers: []
+      markerLayers: [],
+      polylineLayers: []
     };
   }
 
   componentDidMount() {
     const melbourne = new google.maps.LatLng(-37.8079033, 144.9759344);
-    let map = new google.maps.Map(document.getElementById('map'), {
+    this.map = new google.maps.Map(this.refs.map, {
       center: melbourne,
       zoom: 14,
       mapTypeId: 'roadmap',
     });
-    this.setState({ map: map });
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.layers !== this.props.layers) {
-      // Hide existing layers then set to null to delete the layer
-      const currentLayers = this.state.layers;
-      currentLayers.forEach(layer => {
-        layer.forEach(marker => {
-          marker.setMap(null);
-        });
-      });
-      this.setState({ layers: [] });
+    // Remove existing markers and polylines then replace with new ones
+    this.state.markerLayers.forEach(layer => layer.forEach(marker => marker.setMap(null)));
+    this.state.polylineLayers.forEach(layer => layer.forEach(polyline => polyline.setMap(null)));
 
-      const newLayers = nextProps.layers;
-      newLayers.forEach(layer => {
+    this.setState({ markerLayers: [], polylineLayers: [] }, () => {
+      const markerLayers = nextProps.markerDataLayers.map(layer => layer.map(mapUtils.makeMarker));
+      const polylineLayers = nextProps.polylineDataLayers.map(layer => layer.map(mapUtils.makePolyline));
+
+      const bounds = new google.maps.LatLngBounds();
+      markerLayers.forEach(layer => {
         layer.forEach(marker => {
-          marker.setMap(this.state.map);
+          bounds.extend(marker.getPosition());
+          marker.setMap(this.map);
         });
       });
-      this.setState({ layers: newLayers });
-    }
+      polylineLayers.forEach(layer => {
+        layer.forEach(polyline => {
+          polyline.getPath().forEach(position => bounds.extend(position));
+          polyline.setMap(this.map);
+        });
+      });
+
+      if (!bounds.isEmpty()) {
+        this.map.fitBounds(bounds);
+      }
+
+      this.setState({ markerLayers: markerLayers, polylineLayers: polylineLayers });
+    });
   }
 
   render() {
     return (
-      <div className='map' id='map'></div>
+      <div className='map' ref='map'></div>
     );
   }
 };

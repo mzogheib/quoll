@@ -1,5 +1,4 @@
 import Api from '../_utils/api';
-import mapUtils from '../map/utils';
 import utils from '../_utils';
 
 const getOauthUrl  = () => Api.get('toshl-auth');
@@ -7,15 +6,13 @@ const authenticate = payload => Api.post('toshl-auth', payload);
 const deauthorize = () => Api.post('toshl-deauth');
 const getEntries = params => Api.get('toshl', params);
 
-const getMarkersFromEntries = entries => {
-  return entries.filter(entry => entry.location)
-    .map(entry => {
-      // Assume dollars and get negative amount because toshl expenses are represented as negative values
-      const title = `$${-entry.amount}`;
-      return mapUtils.makeMarker({
-        longitude: entry.location.longitude, latitude: entry.location.latitude, title: title
-      });
-    })
+const makeMarkerDataFromEntries = entries => {
+  return entries.filter(entry => entry.location).map(entry => {
+    return {
+      latitude: entry.location.latitude,
+      longitude: entry.location.longitude
+    };
+  });
 };
 
 // TODO: Dynamically calculate the user's locale instead of hardcoding en-AU
@@ -56,7 +53,7 @@ export default {
   authenticate,
   deauthorize,
   getEntries,
-  getMarkersFromEntries,
+  makeMarkerDataFromEntries,
   makeSummary,
   makeSummaryList
 };

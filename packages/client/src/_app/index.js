@@ -104,9 +104,14 @@ class App extends Component {
   }
 
   render() {
-    const layerData = this.state.dataSources
+    const markerDataLayers = this.state.dataSources
       .filter(dataSource => dataSource.isConnected)
-      .map(dataSource => dataSource.normalize(dataSource.data));
+      .filter(dataSource => dataSource.isMarker)
+      .map(dataSource => dataSource.makeMapData(dataSource.data));
+    const polylineDataLayers = this.state.dataSources
+      .filter(dataSource => dataSource.isConnected)
+      .filter(dataSource => dataSource.isPolyline)
+      .map(dataSource => dataSource.makeMapData(dataSource.data));
     return (
       <div className='app'>
         <div className='app__menu'>
@@ -118,7 +123,9 @@ class App extends Component {
           />
         </div>
         <div className='app__map-wrapper'>
-          <div className='app__map'><Map layers={layerData}></Map></div>
+          <div className='app__map'>
+            <Map markerDataLayers={markerDataLayers} polylineDataLayers={polylineDataLayers}></Map>
+          </div>
         </div>
       </div>
     );
