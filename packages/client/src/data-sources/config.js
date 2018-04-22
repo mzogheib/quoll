@@ -11,7 +11,8 @@ const config = [
     getData: Toshl.getEntries,
     makeSummary: Toshl.makeSummary,
     makeSummaryList: Toshl.makeSummaryList,
-    normalize: Toshl.getMarkersFromEntries
+    makeMapData: Toshl.makeMarkerDataFromEntries,
+    isMarker: true
   },
   {
     id: 'strava',
@@ -22,7 +23,8 @@ const config = [
     getData: Strava.getActivities,
     makeSummary: Strava.makeSummary,
     makeSummaryList: Strava.makeSummaryList,
-    normalize: Strava.getPolylinesFromActivities
+    makeMapData: Strava.makePolylineDataFromActivities,
+    isPolyline: true
   }
 ];
 

@@ -3,7 +3,7 @@ import utils from '../_utils';
 
 export default config.map(make);
 
-function make({ id, name, getOauthUrl, authenticate, disconnect, getData, makeSummary, makeSummaryList, normalize }) {
+function make({ id, name, getOauthUrl, authenticate, disconnect, getData, makeSummary, makeSummaryList, makeMapData, isMarker, isPolyline }) {
   return {
     id,
     name,
@@ -39,6 +39,8 @@ function make({ id, name, getOauthUrl, authenticate, disconnect, getData, makeSu
         this.summary = makeSummary(this.data);
       });
     },
-    normalize
+    makeMapData,
+    isMarker,
+    isPolyline
   };
 };

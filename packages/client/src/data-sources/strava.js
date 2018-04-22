@@ -1,14 +1,13 @@
 import Api from '../_utils/api';
-import mapUtils from '../map/utils';
 
 const getOauthUrl  = () => Api.get('strava-auth');
 const authenticate = payload => Api.post('strava-auth', payload);
 const deauthorize = () => Api.post('strava-deauth');
 const getActivities = params => Api.get('strava', params);
 
-const getPolylinesFromActivities = activities => {
-  return activities.map(activity => mapUtils.makePolyline({ encodedPath: activity.map.polyline}));
-};
+const makePolylineDataFromActivities = activities => activities.map(activity => {
+  return { encodedPath: activity.map.polyline };
+});
 
 const formatDistance = distance => {
   const kms = (distance / 1000).toLocaleString(
@@ -43,7 +42,7 @@ export default {
   authenticate,
   deauthorize,
   getActivities,
-  getPolylinesFromActivities,
+  makePolylineDataFromActivities,
   makeSummary,
   makeSummaryList
 };
