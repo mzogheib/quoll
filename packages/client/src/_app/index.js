@@ -31,7 +31,8 @@ class App extends Component {
           ds.isConnected = user.dataSources.find(uds => uds.id === ds.id).isConnected;
           return ds;
         });
-        this.setState({ dataSources: dataSources }, () => this.getData().then(this.handleOAuth));
+        this.refreshDataSources(dataSources, this.state.filter).then(newDataSources => 
+          this.setState({ dataSources: dataSources }, this.handleOAuth))
       });
   }
 
@@ -75,21 +76,19 @@ class App extends Component {
     }
   }
 
-  getData() {
-    const dataSources = this.state.dataSources.slice();
-    const promises = dataSources
+  refreshDataSources(dataSources, filter) {
+    const promises = dataSources.slice()
       .filter(dataSource => dataSource.isConnected)
-      .map(connectedDataSource => connectedDataSource.getData(this.state.filter).catch(alert));
-    return Promise.all(promises).then(() => { this.setState({ dataSources: dataSources }); })
+      .map(connectedDataSource => connectedDataSource.getData(filter).catch(alert));
+    return Promise.all(promises).then(() => dataSources);
   }
 
   handleFilterUpdate(filter) {
-    this.setState({ filter: filter }, this.getData);
+    this.refreshDataSources(this.state.dataSources, filter).then(dataSources => this.setState({ filter: filter, dataSources: dataSources}));
   }
 
   handleConnect(id) {
-    const dataSources = this.state.dataSources.slice();
-    const dataSource = dataSources.find(ds => ds.id === id);
+    const dataSource = this.state.dataSources.slice().find(ds => ds.id === id);
     const token = Utils.makeRandomString();
     Storage.set('oauth-state-token', token);
     dataSource.connect(token);
