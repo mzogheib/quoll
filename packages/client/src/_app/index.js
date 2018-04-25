@@ -31,7 +31,10 @@ class App extends Component {
           ds.isConnected = user.dataSources.find(uds => uds.id === ds.id).isConnected;
           return ds;
         });
-        this.setState({ dataSources: dataSources }, () => this.getData().then(this.handleOAuth));
+        this.setState({ dataSources: dataSources }, () =>
+          this.getData(this.state.filter).then(newDataSources => 
+            this.setState({ dataSources: dataSources }, this.handleOAuth))
+        );
       });
   }
 
@@ -75,16 +78,16 @@ class App extends Component {
     }
   }
 
-  getData() {
+  getData(filter) {
     const dataSources = this.state.dataSources.slice();
     const promises = dataSources
       .filter(dataSource => dataSource.isConnected)
-      .map(connectedDataSource => connectedDataSource.getData(this.state.filter).catch(alert));
-    return Promise.all(promises).then(() => { this.setState({ dataSources: dataSources }); })
+      .map(connectedDataSource => connectedDataSource.getData(filter).catch(alert));
+    return Promise.all(promises).then(() => dataSources);
   }
 
   handleFilterUpdate(filter) {
-    this.setState({ filter: filter }, this.getData);
+    this.getData(filter).then(dataSources => this.setState({ filter: filter, dataSources: dataSources}));
   }
 
   handleConnect(id) {
