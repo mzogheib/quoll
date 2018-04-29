@@ -20,6 +20,11 @@ export default class Map extends React.Component {
       zoom: 14,
       mapTypeId: 'roadmap',
     });
+
+    this.map.addListener('click', event => {
+      if (event.placeId) this.resetAllMapElements();
+    });
+
   }
 
   componentWillReceiveProps(nextProps) {
