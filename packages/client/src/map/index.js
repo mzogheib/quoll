@@ -51,6 +51,9 @@ export default class Map extends React.Component {
             utils.highlightMarker(item.marker);
             item.infoWindow.open(this.map, item.marker);
           });
+          item.infoWindow.addListener('closeclick', () => {
+            this.resetAllMapElements();
+          });
         });
       });
       polylineLayers.forEach(layer => {
@@ -62,6 +65,9 @@ export default class Map extends React.Component {
             utils.highlightPolyline(item.polyline)
             item.infoWindow.setPosition(event.latLng);
             item.infoWindow.open(this.map);
+          });
+          item.infoWindow.addListener('closeclick', () => {
+            this.resetAllMapElements();
           });
         });
       });
