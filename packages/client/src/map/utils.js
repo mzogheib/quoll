@@ -33,7 +33,7 @@ function makeInfoWindow({ title, subTitle, description }) {
   const contentString = '<div>' +
   `<h1>${title}</h1>` +
   `<h2>${subTitle}</h2>` +
-  `<p>${description}</p>` +
+  `<p>${description.replace(/(?:\r\n|\r|\n)/g, '<br>')}</p>` +
   '</div>';
   return new google.maps.InfoWindow({
     content: contentString
