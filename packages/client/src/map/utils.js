@@ -29,11 +29,11 @@ function makeMarker({longitude, latitude, title, map}) {
 }
 
 function highlightMarker(marker) {
-  marker.setOptions({ icon: `http://www.googlemapsmarkers.com/v1/${Colors.marker.highlighted.substr(1)}` });
+  marker.setOptions({ icon: `http://www.googlemapsmarkers.com/v1/${Colors.marker.highlighted.substr(1)}`, zIndex: 1000 });
 }
 
 function unHighlightMarker(marker) {
-  marker.setOptions({ icon: `http://www.googlemapsmarkers.com/v1/${Colors.marker.default.substr(1)}` });
+  marker.setOptions({ icon: `http://www.googlemapsmarkers.com/v1/${Colors.marker.default.substr(1)}`, zIndex: 500 });
 }
 
 function decodePath(path) {
@@ -53,11 +53,11 @@ function makePolyline({ encodedPath, map }) {
 }
 
 function highlightPolyline(polyline) {
-  polyline.setOptions({ strokeColor: Colors.polyline.highlighted });
+  polyline.setOptions({ strokeColor: Colors.polyline.highlighted, zIndex: 1000 });
 }
 
 function unHighlightPolyline(polyline) {
-  polyline.setOptions({ strokeColor: Colors.polyline.default });
+  polyline.setOptions({ strokeColor: Colors.polyline.default, zIndex: 500  });
 }
 
 function makeInfoWindow({ title, subTitle, description }) {
