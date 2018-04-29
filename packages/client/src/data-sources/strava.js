@@ -1,4 +1,5 @@
 import Api from '../_utils/api';
+import utils from '../_utils';
 
 const getOauthUrl  = () => Api.get('strava-auth');
 const authenticate = payload => Api.post('strava-auth', payload);
@@ -6,7 +7,14 @@ const deauthorize = () => Api.post('strava-deauth');
 const getActivities = params => Api.get('strava', params);
 
 const makePolylineDataFromActivities = activities => activities.map(activity => {
-  return { encodedPath: activity.map.polyline };
+  const startTime = utils.getTwentyFourHourTime(activity.start_date_local);
+  const distance = formatDistance(activity.distance);
+  return { 
+    encodedPath: activity.map.polyline,
+    title: `${activity.type} ${distance}`,
+    subTitle: startTime,
+    description: activity.description || ''
+  };
 });
 
 const formatDistance = distance => {

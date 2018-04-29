@@ -2,6 +2,8 @@ export default {
   getQueryParams,
   addQueryParams,
   extractTimeString,
+  getTwentyFourHourTime,
+  startsWithTime,
   makeRandomString,
   encode,
   decode
@@ -48,6 +50,16 @@ function extractTimeString(input) {
   }
 
   return isValid ? match[0] : null;
+}
+
+function getTwentyFourHourTime (ISOString) {
+  const stringToMatch = ISOString || new Date().toISOString();
+  const timeMatch = stringToMatch.match(TIME_FORMAT_REGEX);
+  return timeMatch.length ? timeMatch[0] : null;
+}
+
+function startsWithTime(string) {
+  return TIME_FORMAT_REGEX.test(string.substr(0, 8));
 }
 
 function makeRandomString(length) {
