@@ -34,16 +34,10 @@ export default class Map extends React.Component {
 
     this.setState({ markerLayers: [], polylineLayers: [] }, () => {
       const markerLayers = nextProps.markerDataLayers.map(layer => layer.map(item => {
-        return { 
-          marker: mapUtils.makeMarker(item),
-          infoWindow: mapUtils.makeInfoWindow(item)
-        };
+        return { marker: mapUtils.makeMarker(item), infoWindow: mapUtils.makeInfoWindow(item) };
       }));
       const polylineLayers = nextProps.polylineDataLayers.map(layer => layer.map(item => {
-        return {
-          polyline: mapUtils.makePolyline(item),
-          infoWindow: mapUtils.makeInfoWindow(item)
-        };
+        return { polyline: mapUtils.makePolyline(item), infoWindow: mapUtils.makeInfoWindow(item) };
       }));
 
       const bounds = new google.maps.LatLngBounds();
@@ -52,6 +46,7 @@ export default class Map extends React.Component {
           bounds.extend(item.marker.getPosition());
           item.marker.setMap(this.map);
           item.marker.addListener('click', () => {
+            this.closeAllInfoWindows();
             item.infoWindow.open(this.map, item.marker);
           });
         });
@@ -61,6 +56,7 @@ export default class Map extends React.Component {
           item.polyline.getPath().forEach(position => bounds.extend(position));
           item.polyline.setMap(this.map);
           item.polyline.addListener('click', event => {
+            this.closeAllInfoWindows();
             item.infoWindow.setPosition(event.latLng);
             item.infoWindow.open(this.map);
           });
@@ -73,6 +69,11 @@ export default class Map extends React.Component {
 
       this.setState({ markerLayers: markerLayers, polylineLayers: polylineLayers });
     });
+  }
+
+  closeAllInfoWindows() {
+    this.state.markerLayers.forEach(layer => layer.forEach(item => item.infoWindow.close()));
+    this.state.polylineLayers.forEach(layer => layer.forEach(item => item.infoWindow.close()));
   }
 
   render() {
