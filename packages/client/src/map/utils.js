@@ -2,7 +2,8 @@ const google = window.google;
 
 export default {
   makeMarker,
-  makePolyline
+  makePolyline,
+  makeInfoWindow
 };
 
 function makeMarker({longitude, latitude, title, map}) {
@@ -26,4 +27,15 @@ function makePolyline({ encodedPath, map }) {
   };
   if (map) polyline.map = map;
   return new google.maps.Polyline(polyline);
+}
+
+function makeInfoWindow({ title, subTitle, description }) {
+  const contentString = '<div>' +
+  `<h1>${title}</h1>` +
+  `<h2>${subTitle}</h2>` +
+  `<p>${description}</p>` +
+  '</div>';
+  return new google.maps.InfoWindow({
+    content: contentString
+  });
 }

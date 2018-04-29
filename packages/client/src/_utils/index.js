@@ -2,6 +2,7 @@ export default {
   getQueryParams,
   addQueryParams,
   extractTimeString,
+  getTwentyFourHourTime,
   makeRandomString,
   encode,
   decode
@@ -48,6 +49,12 @@ function extractTimeString(input) {
   }
 
   return isValid ? match[0] : null;
+}
+
+function getTwentyFourHourTime (ISOString) {
+  const stringToMatch = ISOString || new Date().toISOString();
+  const timeMatch = stringToMatch.match(TIME_FORMAT_REGEX);
+  return timeMatch.length ? timeMatch[0] : null;
 }
 
 function makeRandomString(length) {

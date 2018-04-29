@@ -8,9 +8,15 @@ const getEntries = params => Api.get('toshl', params);
 
 const makeMarkerDataFromEntries = entries => {
   return entries.filter(entry => entry.location).map(entry => {
+    const tags = entry.tags.map(tag => tag.name).join(', ');
+    const amount = formatAmount(entry.amount, entry.currency.code);
+    const time = utils.extractTimeString(entry.desc);
     return {
       latitude: entry.location.latitude,
-      longitude: entry.location.longitude
+      longitude: entry.location.longitude,
+      title: `${tags} ${amount}`,
+      subTitle: time,
+      description: entry.desc
     };
   });
 };
