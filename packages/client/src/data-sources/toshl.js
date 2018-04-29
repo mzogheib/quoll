@@ -1,6 +1,8 @@
 import Api from '../_utils/api';
 import utils from '../_utils';
 
+const DefaultTime = '12:00:00';
+
 const getOauthUrl  = () => Api.get('toshl-auth');
 const authenticate = payload => Api.post('toshl-auth', payload);
 const deauthorize = () => Api.post('toshl-deauth');
@@ -10,13 +12,14 @@ const makeMarkerDataFromEntries = entries => {
   return entries.filter(entry => entry.location).map(entry => {
     const tags = entry.tags.map(tag => tag.name).join(', ');
     const amount = formatAmount(entry.amount, entry.currency.code);
-    const time = utils.extractTimeString(entry.desc);
+    const time = utils.extractTimeString(entry.desc) || DefaultTime;
+    const description = utils.startsWithTime(entry.desc) ? entry.desc.split('\n').slice(2).join('\n') : entry.desc;
     return {
       latitude: entry.location.latitude,
       longitude: entry.location.longitude,
       title: `${tags} ${amount}`,
       subTitle: time,
-      description: entry.desc
+      description: description
     };
   });
 };
@@ -37,7 +40,7 @@ const makeSummary = entries => {
 
 const makeSummaryList = entries => {
   return entries.map(entry => {
-    const timeLabel = utils.extractTimeString(entry.desc) || '12:00:00';
+    const timeLabel = utils.extractTimeString(entry.desc) || DefaultTime;
     const timeStamp = new Date(`${entry.date} ${timeLabel}`);
 
     const label = entry.tags.map(tag => tag.name).join(', ');
