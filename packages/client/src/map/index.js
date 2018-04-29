@@ -1,6 +1,7 @@
 import React from 'react';
 import './style.css';
 import mapUtils from './utils';
+import utils from './utils';
 const google = window.google;
 
 export default class Map extends React.Component {
@@ -46,7 +47,8 @@ export default class Map extends React.Component {
           bounds.extend(item.marker.getPosition());
           item.marker.setMap(this.map);
           item.marker.addListener('click', () => {
-            this.closeAllInfoWindows();
+            this.resetAllMapElements();
+            utils.highlightMarker(item.marker);
             item.infoWindow.open(this.map, item.marker);
           });
         });
@@ -56,7 +58,8 @@ export default class Map extends React.Component {
           item.polyline.getPath().forEach(position => bounds.extend(position));
           item.polyline.setMap(this.map);
           item.polyline.addListener('click', event => {
-            this.closeAllInfoWindows();
+            this.resetAllMapElements();
+            utils.highlightPolyline(item.polyline)
             item.infoWindow.setPosition(event.latLng);
             item.infoWindow.open(this.map);
           });
@@ -71,9 +74,23 @@ export default class Map extends React.Component {
     });
   }
 
+  resetAllMapElements() {
+    this.closeAllInfoWindows();
+    this.resetMarkers();
+    this.resetPolylines();
+  }
+
   closeAllInfoWindows() {
     this.state.markerLayers.forEach(layer => layer.forEach(item => item.infoWindow.close()));
     this.state.polylineLayers.forEach(layer => layer.forEach(item => item.infoWindow.close()));
+  }
+
+  resetMarkers() {
+    this.state.markerLayers.forEach(layer => layer.forEach(item => utils.unHighlightMarker(item.marker)));
+  }
+
+  resetPolylines() {
+    this.state.polylineLayers.forEach(layer => layer.forEach(item => utils.unHighlightPolyline(item.polyline)));
   }
 
   render() {
