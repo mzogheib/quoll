@@ -49,24 +49,22 @@ class App extends Component {
       const oauthError = queryParams.error;
 
       const dataSourceId = oauthState.id;
-      const dataSourceIds = this.state.dataSources.map(ds => ds.id);
-      const knownDataSource = dataSourceIds.includes(dataSourceId);
       const dataSources = this.state.dataSources.slice();
-      const dataSource = knownDataSource ? dataSources.find(ds => ds.id === dataSourceId) : null;
+      const dataSource = dataSources.find(ds => ds.id === dataSourceId);
 
       const token = oauthState.token;
       const storedToken = Storage.get('oauth-state-token');
       const tokenIsValid = storedToken && token && storedToken === token;
       Storage.delete('oauth-state-token');
 
-      if (!knownDataSource) {
+      if (!dataSource) {
         alert(`Unknown data source: ${dataSourceId}`);
         return;
       } else if (!tokenIsValid || oauthError === 'access_denied') {
         alert(`${dataSource.name} access denied.`);
         return;
       } else if (oauthCode) {
-        dataSource.authenticate({ code: queryParams.code })
+        dataSource.authenticate({ code: oauthCode })
           .then(() => dataSource.getData(this.state.filter))
           .then(() => { this.setState({ dataSources: dataSources }); })
           .catch(alert)
