@@ -15,6 +15,7 @@ const makeMarkerDataFromEntries = entries => {
     const time = utils.extractTimeString(entry.desc) || DefaultTime;
     const description = utils.startsWithTime(entry.desc) ? entry.desc.split('\n').slice(2).join('\n') : entry.desc;
     return {
+      id: entry.id,
       latitude: entry.location.latitude,
       longitude: entry.location.longitude,
       title: `${tags} ${amount}`,
@@ -48,6 +49,7 @@ const makeSummaryList = entries => {
     const value = formatAmount(entry.amount, entry.currency.code);
 
     return {
+      id: entry.id,
       timeStamp: timeStamp.getTime(),
       timeLabel: timeLabel,
       label: label,

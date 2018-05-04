@@ -14,9 +14,11 @@ class App extends Component {
     this.handleFilterUpdate = this.handleFilterUpdate.bind(this);
     this.handleConnect = this.handleConnect.bind(this);
     this.handleDisconnect = this.handleDisconnect.bind(this);
+    this.handleSelectLine = this.handleSelectLine.bind(this);
     this.state = {
       dataSources: [],
-      filter: {}
+      filter: {},
+      highlightedItemId: null
     };
   }
 
@@ -100,6 +102,10 @@ class App extends Component {
       .catch(alert);
   }
 
+  handleSelectLine(line) {
+    this.setState({ highlightedItemId: line.id });
+  }
+
   render() {
     const markerDataLayers = this.state.dataSources
       .filter(dataSource => dataSource.isConnected)
@@ -117,11 +123,16 @@ class App extends Component {
             onFilterUpdate={this.handleFilterUpdate}
             onConnect={this.handleConnect}
             onDisconnect={this.handleDisconnect}
+            onSelectLine={this.handleSelectLine}
           />
         </div>
         <div className='app__map-wrapper'>
           <div className='app__map'>
-            <Map markerDataLayers={markerDataLayers} polylineDataLayers={polylineDataLayers}></Map>
+            <Map
+              markerDataLayers={markerDataLayers}
+              polylineDataLayers={polylineDataLayers}
+              highlightedItemId={this.state.highlightedItemId}
+            />
           </div>
         </div>
       </div>

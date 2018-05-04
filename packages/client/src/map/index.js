@@ -40,10 +40,10 @@ export default class Map extends React.Component {
 
     this.setState({ markerLayers: [], polylineLayers: [] }, () => {
       const markerLayers = nextProps.markerDataLayers.map(layer => layer.map(item => {
-        return { marker: mapUtils.makeMarker(item), infoWindow: mapUtils.makeInfoWindow(item) };
+        return { id: item.id, marker: mapUtils.makeMarker(item), infoWindow: mapUtils.makeInfoWindow(item) };
       }));
       const polylineLayers = nextProps.polylineDataLayers.map(layer => layer.map(item => {
-        return { polyline: mapUtils.makePolyline(item), infoWindow: mapUtils.makeInfoWindow(item) };
+        return { id: item.id, polyline: mapUtils.makePolyline(item), infoWindow: mapUtils.makeInfoWindow(item) };
       }));
 
       const bounds = new google.maps.LatLngBounds();
@@ -77,11 +77,26 @@ export default class Map extends React.Component {
         });
       });
 
+      if (nextProps.highlightedItemId) {
+        // Flatten 2D arrays to 1D for convenience
+        const allItems = [].concat(...markerLayers).concat(...polylineLayers);
+        const higlightedItem = allItems.find(item => item.id === nextProps.highlightedItemId);
+        if (higlightedItem) {
+          if (higlightedItem.marker) {
+            higlightedItem.infoWindow.open(this.map, higlightedItem.marker);
+          } else if (higlightedItem.polyline) {
+            const startPoint = higlightedItem.polyline.getPath().getArray()[0];
+            higlightedItem.infoWindow.setPosition(startPoint);
+            higlightedItem.infoWindow.open(this.map);
+          }
+        }
+      }
+
       if (!bounds.isEmpty()) {
         this.map.fitBounds(bounds);
       }
 
-      this.setState({ markerLayers: markerLayers, polylineLayers: polylineLayers });
+      this.setState({ markerLayers, polylineLayers });
     });
   }
 

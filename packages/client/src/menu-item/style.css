@@ -17,7 +17,12 @@
 }
 
 .menu-item__summary-list-line {
-    display: flex
+    display: flex;
+}
+
+.menu-item__summary-list-line:hover {
+    cursor: pointer;
+    background-color: gainsboro;
 }
 
 .menu-item__summary-list-time-label {
