@@ -84,7 +84,7 @@ class App extends Component {
   }
 
   handleFilterUpdate(filter) {
-    this.refreshDataSources(this.state.dataSources, filter).then(dataSources => this.setState({ filter: filter, dataSources: dataSources}));
+    this.refreshDataSources(this.state.dataSources, filter).then(dataSources => this.setState({ filter, dataSources, highlightedItemId: null }));
   }
 
   handleConnect(id) {
