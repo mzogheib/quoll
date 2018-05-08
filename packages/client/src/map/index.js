@@ -28,67 +28,68 @@ export default class Map extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    // TODO: do a better job of managing props and state here.
+    // Markers and polylines are always being rebuilt even if just a highlightedItemId change
+
     // Remove existing markers and polylines then replace with new ones
     this.state.markerLayers.forEach(layer => layer.forEach(item => {
       item.marker.setMap(null);
       item.infoWindow.close();
     }));
-    this.state.polylineLayers.forEach(layer => layer.forEach(item => { 
+    this.state.polylineLayers.forEach(layer => layer.forEach(item => {
       item.polyline.setMap(null);
       item.infoWindow.close();
     }));
 
-    this.setState({ markerLayers: [], polylineLayers: [] }, () => {
-      const markerLayers = nextProps.markerDataLayers.map(layer => layer.map(item => {
-        return { id: item.id, marker: mapUtils.makeMarker(item), infoWindow: mapUtils.makeInfoWindow(item) };
-      }));
-      const polylineLayers = nextProps.polylineDataLayers.map(layer => layer.map(item => {
-        return { id: item.id, polyline: mapUtils.makePolyline(item), infoWindow: mapUtils.makeInfoWindow(item) };
-      }));
+    const markerLayers = nextProps.markerDataLayers.map(layer => layer.map(item => {
+      return { id: item.id, marker: mapUtils.makeMarker(item), infoWindow: mapUtils.makeInfoWindow(item) };
+    }));
+    const polylineLayers = nextProps.polylineDataLayers.map(layer => layer.map(item => {
+      return { id: item.id, polyline: mapUtils.makePolyline(item), infoWindow: mapUtils.makeInfoWindow(item) };
+    }));
 
-      const bounds = new google.maps.LatLngBounds();
-      markerLayers.forEach(layer => {
-        layer.forEach(item => {
-          bounds.extend(item.marker.getPosition());
-          item.marker.setMap(this.map);
-          item.marker.addListener('click', () => {
-            this.resetAllMapElements();
-            this.highlightItem(item);
-          });
-          item.infoWindow.addListener('closeclick', () => {
-            this.resetAllMapElements();
-          });
+    const bounds = new google.maps.LatLngBounds();
+    markerLayers.forEach(layer => {
+      layer.forEach(item => {
+        bounds.extend(item.marker.getPosition());
+        item.marker.setMap(this.map);
+        item.marker.addListener('click', () => {
+          this.resetAllMapElements();
+          this.highlightItem(item);
+        });
+        item.infoWindow.addListener('closeclick', () => {
+          this.resetAllMapElements();
         });
       });
-      polylineLayers.forEach(layer => {
-        layer.forEach(item => {
-          item.polyline.getPath().forEach(position => bounds.extend(position));
-          item.polyline.setMap(this.map);
-          item.polyline.addListener('click', event => {
-            this.resetAllMapElements();
-            this.highlightItem(item, event.latLng);
-          });
-          item.infoWindow.addListener('closeclick', () => {
-            this.resetAllMapElements();
-          });
-        });
-      });
-
-      if (nextProps.highlightedItemId) {
-        // Flatten 2D arrays to 1D for convenience
-        const allItems = [].concat(...markerLayers).concat(...polylineLayers);
-        const higlightedItem = allItems.find(item => item.id === nextProps.highlightedItemId);
-        if (higlightedItem) {
-          this.highlightItem(higlightedItem);
-        }
-      }
-
-      if (!bounds.isEmpty()) {
-        this.map.fitBounds(bounds);
-      }
-
-      this.setState({ markerLayers, polylineLayers });
     });
+    polylineLayers.forEach(layer => {
+      layer.forEach(item => {
+        item.polyline.getPath().forEach(position => bounds.extend(position));
+        item.polyline.setMap(this.map);
+        item.polyline.addListener('click', event => {
+          this.resetAllMapElements();
+          this.highlightItem(item, event.latLng);
+        });
+        item.infoWindow.addListener('closeclick', () => {
+          this.resetAllMapElements();
+        });
+      });
+    });
+
+    if (nextProps.highlightedItemId) {
+      // Flatten 2D arrays to 1D for convenience
+      const allItems = [].concat(...markerLayers).concat(...polylineLayers);
+      const higlightedItem = allItems.find(item => item.id === nextProps.highlightedItemId);
+      if (higlightedItem) {
+        this.highlightItem(higlightedItem);
+      }
+    }
+
+    if (!bounds.isEmpty()) {
+      this.map.fitBounds(bounds);
+    }
+
+    this.setState({ markerLayers, polylineLayers });
   }
 
   highlightItem(item, position) {
