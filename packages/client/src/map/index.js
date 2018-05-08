@@ -53,8 +53,7 @@ export default class Map extends React.Component {
           item.marker.setMap(this.map);
           item.marker.addListener('click', () => {
             this.resetAllMapElements();
-            utils.highlightMarker(item.marker);
-            item.infoWindow.open(this.map, item.marker);
+            this.highlightItem(item);
           });
           item.infoWindow.addListener('closeclick', () => {
             this.resetAllMapElements();
@@ -67,9 +66,7 @@ export default class Map extends React.Component {
           item.polyline.setMap(this.map);
           item.polyline.addListener('click', event => {
             this.resetAllMapElements();
-            utils.highlightPolyline(item.polyline)
-            item.infoWindow.setPosition(event.latLng);
-            item.infoWindow.open(this.map);
+            this.highlightItem(item, event.latLng);
           });
           item.infoWindow.addListener('closeclick', () => {
             this.resetAllMapElements();
@@ -82,15 +79,7 @@ export default class Map extends React.Component {
         const allItems = [].concat(...markerLayers).concat(...polylineLayers);
         const higlightedItem = allItems.find(item => item.id === nextProps.highlightedItemId);
         if (higlightedItem) {
-          if (higlightedItem.marker) {
-            utils.highlightMarker(higlightedItem.marker);
-            higlightedItem.infoWindow.open(this.map, higlightedItem.marker);
-          } else if (higlightedItem.polyline) {
-            const startPoint = higlightedItem.polyline.getPath().getArray()[0];
-            utils.highlightPolyline(higlightedItem.polyline)
-            higlightedItem.infoWindow.setPosition(startPoint);
-            higlightedItem.infoWindow.open(this.map);
-          }
+          this.highlightItem(higlightedItem);
         }
       }
 
@@ -100,6 +89,18 @@ export default class Map extends React.Component {
 
       this.setState({ markerLayers, polylineLayers });
     });
+  }
+
+  highlightItem(item, position) {
+    if (item.marker) {
+      utils.highlightMarker(item.marker);
+      item.infoWindow.open(this.map, item.marker);
+    } else {
+      const infoWindowPosition = position || item.polyline.getPath().getArray()[0];
+      utils.highlightPolyline(item.polyline)
+      item.infoWindow.setPosition(infoWindowPosition);
+      item.infoWindow.open(this.map);
+    }
   }
 
   resetAllMapElements() {
