@@ -83,9 +83,11 @@ export default class Map extends React.Component {
         const higlightedItem = allItems.find(item => item.id === nextProps.highlightedItemId);
         if (higlightedItem) {
           if (higlightedItem.marker) {
+            utils.highlightMarker(higlightedItem.marker);
             higlightedItem.infoWindow.open(this.map, higlightedItem.marker);
           } else if (higlightedItem.polyline) {
             const startPoint = higlightedItem.polyline.getPath().getArray()[0];
+            utils.highlightPolyline(higlightedItem.polyline)
             higlightedItem.infoWindow.setPosition(startPoint);
             higlightedItem.infoWindow.open(this.map);
           }
