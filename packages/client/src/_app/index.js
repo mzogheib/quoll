@@ -18,7 +18,7 @@ class App extends Component {
     this.state = {
       feeds: [],
       filter: {},
-      highlightedItemId: null
+      focussedItemId: null
     };
   }
 
@@ -84,7 +84,7 @@ class App extends Component {
   }
 
   handleFilterUpdate(filter) {
-    this.refreshFeeds(this.state.feeds, filter).then(feeds => this.setState({ filter, feeds, highlightedItemId: null }));
+    this.refreshFeeds(this.state.feeds, filter).then(feeds => this.setState({ filter, feeds, focussedItemId: null }));
   }
 
   handleConnect(id) {
@@ -103,18 +103,21 @@ class App extends Component {
   }
 
   handleSelectLine(line) {
-    this.setState({ highlightedItemId: line.id });
+    this.setState({ focussedItemId: line.id });
   }
 
   render() {
-    const markerDataLayers = this.state.feeds
+    const markerData = this.state.feeds
       .filter(feed => feed.isConnected)
       .filter(feed => feed.isMarker)
-      .map(feed => feed.makeMapData(feed.data));
-    const polylineDataLayers = this.state.feeds
+      .map(feed => feed.makeMapData(feed.data))
+      .reduce((prev, next) => prev.concat(next), []);
+    const polylineData = this.state.feeds
       .filter(feed => feed.isConnected)
       .filter(feed => feed.isPolyline)
-      .map(feed => feed.makeMapData(feed.data));
+      .map(feed => feed.makeMapData(feed.data))
+      .reduce((prev, next) => prev.concat(next), []);
+
     return (
       <div className='app'>
         <div className='app__menu'>
@@ -129,9 +132,9 @@ class App extends Component {
         <div className='app__map-wrapper'>
           <div className='app__map'>
             <Map
-              markerDataLayers={markerDataLayers}
-              polylineDataLayers={polylineDataLayers}
-              highlightedItemId={this.state.highlightedItemId}
+              markerData={markerData}
+              polylineData={polylineData}
+              focussedItemId={this.state.focussedItemId}
             />
           </div>
         </div>

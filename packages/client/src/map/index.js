@@ -8,8 +8,8 @@ export default class Map extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      markerLayers: [],
-      polylineLayers: []
+      markerItems: [],
+      polylineItems: []
     };
   }
 
@@ -29,59 +29,55 @@ export default class Map extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     // TODO: do a better job of managing props and state here.
-    // Markers and polylines are always being rebuilt even if just a highlightedItemId change
+    // Markers and polylines are always being rebuilt even if just a focussedItemId change
 
     // Remove existing markers and polylines then replace with new ones
-    this.state.markerLayers.forEach(layer => layer.forEach(item => {
+    this.state.markerItems.forEach(item => {
       item.marker.setMap(null);
       item.infoWindow.close();
-    }));
-    this.state.polylineLayers.forEach(layer => layer.forEach(item => {
+    });
+    this.state.polylineItems.forEach(item => {
       item.polyline.setMap(null);
       item.infoWindow.close();
-    }));
+    });
 
-    const markerLayers = nextProps.markerDataLayers.map(layer => layer.map(item => {
+    const markerItems = nextProps.markerData.map(item => {
       return { id: item.id, marker: mapUtils.makeMarker(item), infoWindow: mapUtils.makeInfoWindow(item) };
-    }));
-    const polylineLayers = nextProps.polylineDataLayers.map(layer => layer.map(item => {
+    });
+    const polylineItems = nextProps.polylineData.map(item => {
       return { id: item.id, polyline: mapUtils.makePolyline(item), infoWindow: mapUtils.makeInfoWindow(item) };
-    }));
+    });
 
     const bounds = new google.maps.LatLngBounds();
-    markerLayers.forEach(layer => {
-      layer.forEach(item => {
-        bounds.extend(item.marker.getPosition());
-        item.marker.setMap(this.map);
-        item.marker.addListener('click', () => {
-          this.resetAllMapElements();
-          this.highlightItem(item);
-        });
-        item.infoWindow.addListener('closeclick', () => {
-          this.resetAllMapElements();
-        });
+    markerItems.forEach(item => {
+      bounds.extend(item.marker.getPosition());
+      item.marker.setMap(this.map);
+      item.marker.addListener('click', () => {
+        this.resetAllMapElements();
+        this.focusItem(item);
+      });
+      item.infoWindow.addListener('closeclick', () => {
+        this.resetAllMapElements();
       });
     });
-    polylineLayers.forEach(layer => {
-      layer.forEach(item => {
-        item.polyline.getPath().forEach(position => bounds.extend(position));
-        item.polyline.setMap(this.map);
-        item.polyline.addListener('click', event => {
-          this.resetAllMapElements();
-          this.highlightItem(item, event.latLng);
-        });
-        item.infoWindow.addListener('closeclick', () => {
-          this.resetAllMapElements();
-        });
+    polylineItems.forEach(item => {
+      item.polyline.getPath().forEach(position => bounds.extend(position));
+      item.polyline.setMap(this.map);
+      item.polyline.addListener('click', event => {
+        this.resetAllMapElements();
+        this.focusItem(item, event.latLng);
+      });
+      item.infoWindow.addListener('closeclick', () => {
+        this.resetAllMapElements();
       });
     });
 
-    if (nextProps.highlightedItemId) {
+    if (nextProps.focussedItemId) {
       // Flatten 2D arrays to 1D for convenience
-      const allItems = [].concat(...markerLayers).concat(...polylineLayers);
-      const higlightedItem = allItems.find(item => item.id === nextProps.highlightedItemId);
-      if (higlightedItem) {
-        this.highlightItem(higlightedItem);
+      const allItems = markerItems.concat(polylineItems);
+      const focussedItem = allItems.find(item => item.id === nextProps.focussedItemId);
+      if (focussedItem) {
+        this.focusItem(focussedItem);
       }
     }
 
@@ -89,10 +85,10 @@ export default class Map extends React.Component {
       this.map.fitBounds(bounds);
     }
 
-    this.setState({ markerLayers, polylineLayers });
+    this.setState({ markerItems, polylineItems });
   }
 
-  highlightItem(item, position) {
+  focusItem(item, position) {
     if (item.marker) {
       utils.highlightMarker(item.marker);
       item.infoWindow.open(this.map, item.marker);
@@ -111,16 +107,16 @@ export default class Map extends React.Component {
   }
 
   closeAllInfoWindows() {
-    this.state.markerLayers.forEach(layer => layer.forEach(item => item.infoWindow.close()));
-    this.state.polylineLayers.forEach(layer => layer.forEach(item => item.infoWindow.close()));
+    this.state.markerItems.forEach(item => item.infoWindow.close());
+    this.state.polylineItems.forEach(item => item.infoWindow.close());
   }
 
   resetMarkers() {
-    this.state.markerLayers.forEach(layer => layer.forEach(item => utils.unHighlightMarker(item.marker)));
+    this.state.markerItems.forEach(item => utils.unHighlightMarker(item.marker));
   }
 
   resetPolylines() {
-    this.state.polylineLayers.forEach(layer => layer.forEach(item => utils.unHighlightPolyline(item.polyline)));
+    this.state.polylineItems.forEach(item => utils.unHighlightPolyline(item.polyline));
   }
 
   render() {
