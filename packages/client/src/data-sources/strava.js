@@ -10,6 +10,7 @@ const makePolylineDataFromActivities = activities => activities.map(activity => 
   const startTime = utils.getTwentyFourHourTime(activity.start_date_local);
   const distance = formatDistance(activity.distance);
   return { 
+    id: activity.id,
     encodedPath: activity.map.polyline,
     title: `${activity.type} ${distance}`,
     subTitle: startTime,
@@ -36,6 +37,7 @@ const makeSummaryList = (activities) => {
     const value = formatDistance(activity.distance);
 
     return {
+      id: activity.id,
       timeStamp: timeStamp.getTime(),
       timeLabel: timeStamp.toLocaleTimeString(),
       label: activity.type,

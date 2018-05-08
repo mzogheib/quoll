@@ -13,6 +13,7 @@ function Menu(props) {
           items={props.items}
           onConnect={props.onConnect}
           onDisconnect={props.onDisconnect}
+          onSelectLine={props.onSelectLine}
         />
       </div>
     </div>

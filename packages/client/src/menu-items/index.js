@@ -11,6 +11,10 @@ function MenuItems(props) {
     props.onConnect(id);
   }
 
+  function handleSelectLine(line) {
+    props.onSelectLine(line);
+  }
+
   function renderItems() {
     return props.items.map((item, index) => {
       return (
@@ -19,6 +23,7 @@ function MenuItems(props) {
           item={item}
           onConnect={handleConnect}
           onDisconnect={handleDisconnect}
+          onSelectLine={handleSelectLine}
         />
       );
     });

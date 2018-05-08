@@ -23,6 +23,10 @@ class MenuItem extends Component {
     this.props.onDisconnect(this.props.item.id);
   }
 
+  selectLine(line) {
+    this.props.onSelectLine(line)
+  }
+
   renderConnect() {
     return (
       <div className='menu-item__summary-wrapper'>
@@ -43,7 +47,7 @@ class MenuItem extends Component {
   renderSummaryList() {
     const summaryList = this.props.item.summaryList.map((sd, index) => {
       return (
-        <div key={index} className='menu-item__summary-list-line'>
+        <div key={index} onClick={() => this.selectLine(sd)} className='menu-item__summary-list-line'>
           <span className='menu-item__summary-list-time-label'>{sd.timeLabel}</span>
           <span className='menu-item__summary-list-label'>{sd.label}</span>
           <span className='menu-item__summary-list-value'>{sd.value}</span>
