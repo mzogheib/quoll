@@ -4,7 +4,7 @@ import Menu from '../menu';
 import Map from '../map';
 import User from '../_utils/user';
 import Utils from '../_utils/'
-import DataSources from '../data-sources';
+import Feeds from '../feeds';
 import Storage from '../_utils/storage';
 
 class App extends Component {
@@ -16,7 +16,7 @@ class App extends Component {
     this.handleDisconnect = this.handleDisconnect.bind(this);
     this.handleSelectLine = this.handleSelectLine.bind(this);
     this.state = {
-      dataSources: [],
+      feeds: [],
       filter: {},
       highlightedItemId: null
     };
@@ -29,12 +29,12 @@ class App extends Component {
     User[action](userId)
       .then(user => {
         User.setCurrentUser(user.id);
-        const dataSources = DataSources.map(ds => {
-          ds.isConnected = user.dataSources.find(uds => uds.id === ds.id).isConnected;
-          return ds;
+        const feeds = Feeds.map(feed => {
+          feed.isConnected = user.feeds.find(userFeed => userFeed.id === feed.id).isConnected;
+          return feed;
         });
-        this.refreshDataSources(dataSources, this.state.filter).then(newDataSources => 
-          this.setState({ dataSources: dataSources }, this.handleOAuth))
+        this.refreshFeeds(feeds, this.state.filter).then(newFeeds => 
+          this.setState({ feeds: feeds }, this.handleOAuth))
       });
   }
 
@@ -50,55 +50,55 @@ class App extends Component {
       const oauthCode = queryParams.code;
       const oauthError = queryParams.error;
 
-      const dataSourceId = oauthState.id;
-      const dataSources = this.state.dataSources.slice();
-      const dataSource = dataSources.find(ds => ds.id === dataSourceId);
+      const feedId = oauthState.id;
+      const feeds = this.state.feeds.slice();
+      const feed = feeds.find(feed => feed.id === feedId);
 
       const token = oauthState.token;
       const storedToken = Storage.get('oauth-state-token');
       const tokenIsValid = storedToken && token && storedToken === token;
       Storage.delete('oauth-state-token');
 
-      if (!dataSource) {
-        alert(`Unknown data source: ${dataSourceId}`);
+      if (!feed) {
+        alert(`Unknown feed: ${feedId}`);
         return;
       } else if (!tokenIsValid || oauthError === 'access_denied') {
-        alert(`${dataSource.name} access denied.`);
+        alert(`${feed.name} access denied.`);
         return;
       } else if (oauthCode) {
-        dataSource.authenticate({ code: oauthCode })
-          .then(() => dataSource.getData(this.state.filter))
-          .then(() => { this.setState({ dataSources: dataSources }); })
+        feed.authenticate({ code: oauthCode })
+          .then(() => feed.getData(this.state.filter))
+          .then(() => { this.setState({ feeds: feeds }); })
           .catch(alert)
         } else {
-          alert(`Unknown response from ${dataSource.name}.`);
+          alert(`Unknown response from ${feed.name}.`);
       }
     }
   }
 
-  refreshDataSources(dataSources, filter) {
-    const promises = dataSources.slice()
-      .filter(dataSource => dataSource.isConnected)
-      .map(connectedDataSource => connectedDataSource.getData(filter).catch(alert));
-    return Promise.all(promises).then(() => dataSources);
+  refreshFeeds(feeds, filter) {
+    const promises = feeds.slice()
+      .filter(feed => feed.isConnected)
+      .map(connectedFeed => connectedFeed.getData(filter).catch(alert));
+    return Promise.all(promises).then(() => feeds);
   }
 
   handleFilterUpdate(filter) {
-    this.refreshDataSources(this.state.dataSources, filter).then(dataSources => this.setState({ filter, dataSources, highlightedItemId: null }));
+    this.refreshFeeds(this.state.feeds, filter).then(feeds => this.setState({ filter, feeds, highlightedItemId: null }));
   }
 
   handleConnect(id) {
-    const dataSource = this.state.dataSources.slice().find(ds => ds.id === id);
+    const feed = this.state.feeds.slice().find(feed => feed.id === id);
     const token = Utils.makeRandomString();
     Storage.set('oauth-state-token', token);
-    dataSource.connect(token);
+    feed.connect(token);
   }
 
   handleDisconnect(id) {
-    const dataSources = this.state.dataSources.slice();
-    const dataSource = dataSources.find(ds => ds.id === id);
-    dataSource.disconnect()
-      .then(() => { this.setState({ dataSources: dataSources }); })
+    const feeds = this.state.feeds.slice();
+    const feed = feeds.find(feed => feed.id === id);
+    feed.disconnect()
+      .then(() => { this.setState({ feeds: feeds }); })
       .catch(alert);
   }
 
@@ -107,19 +107,19 @@ class App extends Component {
   }
 
   render() {
-    const markerDataLayers = this.state.dataSources
-      .filter(dataSource => dataSource.isConnected)
-      .filter(dataSource => dataSource.isMarker)
-      .map(dataSource => dataSource.makeMapData(dataSource.data));
-    const polylineDataLayers = this.state.dataSources
-      .filter(dataSource => dataSource.isConnected)
-      .filter(dataSource => dataSource.isPolyline)
-      .map(dataSource => dataSource.makeMapData(dataSource.data));
+    const markerDataLayers = this.state.feeds
+      .filter(feed => feed.isConnected)
+      .filter(feed => feed.isMarker)
+      .map(feed => feed.makeMapData(feed.data));
+    const polylineDataLayers = this.state.feeds
+      .filter(feed => feed.isConnected)
+      .filter(feed => feed.isPolyline)
+      .map(feed => feed.makeMapData(feed.data));
     return (
       <div className='app'>
         <div className='app__menu'>
           <Menu
-            items={this.state.dataSources}
+            items={this.state.feeds}
             onFilterUpdate={this.handleFilterUpdate}
             onConnect={this.handleConnect}
             onDisconnect={this.handleDisconnect}

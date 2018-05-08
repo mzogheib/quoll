@@ -11,7 +11,7 @@ module.exports = {
 function createUser () {
   return new Promise ((resolve, reject) => {
     const user = userStorage.create({
-      dataSources: [
+      feeds: [
         { id: 'strava', vendorAuth: null },
         { id: 'toshl', vendorAuth: null },
       ]
@@ -28,10 +28,10 @@ function sanitizeUser (user) {
   if (!user) return;
 
   const sanitizedUser = user;
-  sanitizedUser.dataSources = user.dataSources.map(ds => {
+  sanitizedUser.feeds = user.feeds.map(feed => {
     return {
-      id: ds.id,
-      isConnected: !!ds.vendorAuth
+      id: feed.id,
+      isConnected: !!feed.vendorAuth
     };
   });
   return sanitizedUser;
@@ -48,18 +48,18 @@ function update (user) {
   });
 }
 
-function setVendorAuth (userId, dataSourceId, data) {
+function setVendorAuth (userId, feedId, data) {
   return get(userId)
     .then(user => {
-      user.dataSources.find(ds => ds.id === dataSourceId).vendorAuth = data;
+      user.feeds.find(feed => feed.id === feedId).vendorAuth = data;
       return user;
     })
     .then(update);
 }
 
-function getVendorAuth (userId, dataSourceId) {
+function getVendorAuth (userId, feedId) {
   return get(userId)
     .then(user => {
-      return user.dataSources.find(ds => ds.id === dataSourceId).vendorAuth;
+      return user.feeds.find(feed => feed.id === feedId).vendorAuth;
     });
 }
