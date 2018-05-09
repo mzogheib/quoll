@@ -1,5 +1,4 @@
 const axios = require('axios');
-const utils = require('../../utils');
 const auth = require('./private/toshl-auth');
 const querystring = require('querystring');
 
@@ -20,12 +19,18 @@ module.exports = {
 
 const baseApiUrl = 'https://api.toshl.com';
 const baseOauthUrl = 'https://toshl.com/oauth2';
-const makeBearerAuthHeader = token => { return { Authorization: `Bearer ${token}` }; };
 const makeBasicAuthHeader = (username, password) => { return { username: auth.client_id, password: auth.client_secret }; };
 
-function get(url, options) {
+function get({ baseURL = baseApiUrl, url, headers, params }) {
   return new Promise((resolve, reject) => {
-    axios.get(url, options)
+    const config = {
+      method: 'GET',
+      baseURL,
+      url,
+      headers,
+      params
+    };
+    axios.request(config)
       .then(response => resolve(response.data))
       .catch(error => reject({ status: error.response.status, message: error.response.data.description }));
   });
@@ -64,7 +69,7 @@ function deauthorize(auth) {
     refresh_token: auth.refresh_token
   };
   const options = {
-    headers: makeBearerAuthHeader(auth.access_token)
+    headers: { Authorization: `Bearer ${auth.access_token}` }
   };
   return post(url, payload, options);
 }
@@ -82,17 +87,9 @@ function refreshAuth(expiredAuth) {
 }
 
 function listEntries(params, token) {
-  const url = `${baseApiUrl}/entries${utils.makeUrlParams(params)}`;
-  const options = {
-    headers: makeBearerAuthHeader(token)
-  };
-  return get(url, options);
+  return get({ url: '/entries', headers: { Authorization: `Bearer ${token}` }, params: { ...params } });
 }
 
 function listTags(token) {
-  const url = `${baseApiUrl}/tags`;
-  const options = {
-    headers: makeBearerAuthHeader(token)
-  };
-  return get(url, options);
+  return get({ url: '/tags', headers: { Authorization: `Bearer ${token}` }});
 }
