@@ -51,7 +51,7 @@ function oauthUrl () {
   const params = {
     client_id: auth.client_id,
     response_type: 'code',
-    redirect_uri: 'http://localhost:3000'
+    redirect_uri: auth.redirect_uri
   };
   return `${baseOauthUrl}/authorize?${querystring.stringify(params)}`;
 }
@@ -60,7 +60,7 @@ function token(code) {
   const data = {
     code: code,
     grant_type: 'authorization_code',
-    redirect_uri: 'http://localhost:3000'
+    redirect_uri: auth.redirect_uri
   };
   return post({ url: '/token', auth: { username: auth.client_id, password: auth.client_secret }, data });
 }
