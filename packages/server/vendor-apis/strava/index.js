@@ -49,7 +49,7 @@ const post = ({ baseURL = baseOauthUrl, url, auth, headers, data }) => new Promi
 
 function oauthUrl () {
   const params = {
-    client_id: '8709',
+    client_id: auth.client_id,
     response_type: 'code',
     scope: 'view_private'
   };
