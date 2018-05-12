@@ -80,8 +80,8 @@ function refreshAuth(expiredAuth) {
   return post({ url: '/token', auth: { username: auth.client_id, password: auth.client_secret }, data });
 }
 
-function listEntries(params, token) {
-  return get({ url: '/entries', headers: { Authorization: `Bearer ${token}` }, params: { ...params } });
+function listEntries(from, to, token) {
+  return get({ url: '/entries', headers: { Authorization: `Bearer ${token}` }, params: { from, to } });
 }
 
 function listTags(token) {
