@@ -71,5 +71,8 @@ function encode(obj) {
 }
 
 function decode(string) {
-  return JSON.parse(atob(string));
+  // HACK: URI decoding the input string because Toshl encodes the state param it receives.
+  // However, this is probably a good check regardless. Who knows what types of string can be thrown at this function.
+  // Follow up in https://github.com/mzogheib/quoll/issues/16
+  return JSON.parse(atob(decodeURIComponent(string)));
 }
