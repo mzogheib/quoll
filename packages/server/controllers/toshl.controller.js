@@ -48,9 +48,9 @@ function getTags (token) {
   }
 }
 
-function getEntries (parameters, token) {
+function getEntries (from, to, token) {
   var decoratedEntries;
-  return apiToshl.entries.list(parameters, token)
+  return apiToshl.entries.list(from, to, token)
     .then(entries => { decoratedEntries = entries })
     .then(() => getTags(token))
     .then(tags => {

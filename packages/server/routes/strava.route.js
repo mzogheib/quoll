@@ -9,7 +9,7 @@ module.exports = {
 };
 
 function getOAuthUrl(req, res) {
-  const url = `${ctrlStrava.getOAuthUrl()}&redirect_uri=http://localhost:3000`;
+  const url = ctrlStrava.getOAuthUrl();
   onSuccess(url);
 
   function onSuccess(response) {
@@ -78,7 +78,7 @@ function listActivities(req, res) {
   const userId = req.userId;
 
   ctrlUsers.getVendorAuth(userId, 'strava')
-    .then(auth => ctrlStrava.getAthleteActivities(params, auth.access_token))
+    .then(auth => ctrlStrava.getAthleteActivities(params.from, params.to, auth.access_token))
     .then(onSuccess)
     .catch(onError);
 

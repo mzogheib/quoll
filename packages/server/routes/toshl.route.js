@@ -10,7 +10,7 @@ module.exports = {
 };
 
 function getOAuthUrl(req, res) {
-  const url = `${ctrlToshl.getOAuthUrl()}&redirect_uri=http://localhost:3000`;
+  const url = ctrlToshl.getOAuthUrl();
   onSuccess(url);
 
   function onSuccess(response) {
@@ -109,7 +109,7 @@ function list(req, res) {
   const userId = req.userId;
 
   ctrlUsers.getVendorAuth(userId, 'toshl')
-    .then(auth => ctrlToshl.getEntries(params, auth.access_token))
+    .then(auth => ctrlToshl.getEntries(params.from, params.to, auth.access_token))
     .then(onSuccess)
     .catch(onError);
 
