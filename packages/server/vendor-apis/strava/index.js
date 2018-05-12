@@ -72,7 +72,7 @@ function deauthorize(token) {
   return post({ url: '/deauthorize', data });
 }
 
-function athleteActivities({ after, before, perPage }, token) {
+function athleteActivities(after, before, perPage, token) {
   const params = {
     after,
     before,
@@ -81,6 +81,6 @@ function athleteActivities({ after, before, perPage }, token) {
   return get({ url: '/athlete/activities', headers: { Authorization: `Bearer ${token}` }, params });
 }
 
-function getActivity({ id }, token) {
+function getActivity(id, token) {
   return get({ url: `/activities/${id}`, headers: { Authorization: `Bearer ${token}` }});
 }

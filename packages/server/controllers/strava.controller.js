@@ -19,24 +19,18 @@ function deauthorize(auth) {
   return apiStrava.oauth.deauthorize(auth.access_token);
 }
 
-function getAthleteActivities(parameters, token) {
+function getAthleteActivities(from, to, token) {
   // Convert formatted dates to unix timestamps
   // After = 23:59:59 on the day before the from date
   // Before = 00:00:00 on the day after the to date
-  const from = new Date(parameters.from);
-  const to = new Date(parameters.to);
+  const after = getLocalTimestamp(new Date(from)) - 1;
+  const before = getLocalTimestamp(new Date(to)) + 24 * 60 * 60;
+  const perPage = 5;
 
-  const params = {
-    after: getLocalTimestamp(from) - 1,
-    before: getLocalTimestamp(to) + 24 * 60 * 60,
-    perPage: 5
-  };
-
-  return apiStrava.athlete.activities(params, token)
+  return apiStrava.athlete.activities(after, before, perPage, token)
     .then(activities => {
       const promises = activities.map(activity => {
-        const params = { id: activity.id };
-        return apiStrava.activities.get(params, token);
+        return apiStrava.activities.get(activity.id, token);
       });
 
       return Promise.all(promises);
