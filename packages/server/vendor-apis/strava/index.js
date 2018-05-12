@@ -51,7 +51,8 @@ function oauthUrl () {
   const params = {
     client_id: auth.client_id,
     response_type: 'code',
-    scope: 'view_private'
+    scope: 'view_private',
+    redirect_uri: auth.redirect_uri
   };
   return `${baseOauthUrl}/authorize?${querystring.stringify(params)}`;
 }

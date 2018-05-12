@@ -10,7 +10,7 @@ module.exports = {
 };
 
 function getOAuthUrl(req, res) {
-  const url = `${ctrlToshl.getOAuthUrl()}&redirect_uri=http://localhost:3000`;
+  const url = ctrlToshl.getOAuthUrl();
   onSuccess(url);
 
   function onSuccess(response) {

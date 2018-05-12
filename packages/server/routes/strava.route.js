@@ -9,7 +9,7 @@ module.exports = {
 };
 
 function getOAuthUrl(req, res) {
-  const url = `${ctrlStrava.getOAuthUrl()}&redirect_uri=http://localhost:3000`;
+  const url = ctrlStrava.getOAuthUrl();
   onSuccess(url);
 
   function onSuccess(response) {
