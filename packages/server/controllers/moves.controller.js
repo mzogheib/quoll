@@ -1,5 +1,4 @@
 const apiMoves = require('../vendor-apis/moves');
-const _ = require('lodash');
 
 module.exports = {
   getOAuthUrl,
@@ -29,8 +28,9 @@ function getStoryline (from, to, token) {
     .then(storyline => {
       return storyline.reduce((prev, next) =>
         prev.concat(
-          _.flatten(
-            next.segments
+          // Flatten activities to a 1D array
+          [].concat(
+            ...next.segments
               .filter(segment => SegmentWhitelist.includes(segment.type))
               .map(segment => segment.activities)
           )

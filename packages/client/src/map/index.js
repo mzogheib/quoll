@@ -73,7 +73,6 @@ export default class Map extends React.Component {
     });
 
     if (nextProps.focussedItemId) {
-      // Flatten 2D arrays to 1D for convenience
       const allItems = markerItems.concat(polylineItems);
       const focussedItem = allItems.find(item => item.id === nextProps.focussedItemId);
       if (focussedItem) {
