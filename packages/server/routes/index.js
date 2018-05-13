@@ -60,3 +60,8 @@ router
   .all(routeUsers.authenticate)
   .get(routeMoves.getOAuthUrl)
   .post(routeMoves.authenticate);
+
+router
+  .route('/moves-deauth')
+  .all(routeUsers.authenticate)
+  .post(routeMoves.deauthorize);

@@ -4,6 +4,7 @@ const ctrlUsers = require('../controllers/users.controller');
 module.exports = {
   getOAuthUrl,
   authenticate,
+  deauthorize,
   checkAuth,
   getStoryline
 };
@@ -40,6 +41,26 @@ function authenticate(req, res) {
       .then(onSuccess)
       .catch(onError);
   }
+
+  function onSuccess(response) {
+    respond({ status: 200 });
+  }
+
+  function onError(error) {
+    respond({ status: error.status || 500, message: error.message });
+  }
+
+  function respond(response) {
+    res.status(response.status).json(response.message);
+  }
+}
+
+function deauthorize(req, res) {
+  const userId = req.userId;
+
+  ctrlUsers.setVendorAuth(userId, 'moves', null)
+    .then(onSuccess)
+    .catch(onError);
 
   function onSuccess(response) {
     respond({ status: 200 });
