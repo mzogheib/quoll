@@ -25,11 +25,12 @@ function make({ id, name, getOauthUrl, authenticate, disconnect, getData, makeSu
       return authenticate(code).then(() => { this.isConnected = true; })
     },
     disconnect() {
-      return disconnect().then(() => {
+      return disconnect().then(alert => {
         this.data = [];
         this.summaryList = [];
         this.summary = '';
         this.isConnected = false;
+        return alert;
       });
     },
     getData(filter) {

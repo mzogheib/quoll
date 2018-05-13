@@ -5,7 +5,7 @@ const ActivityBlacklist = ['cycling', 'running'];
 
 const getOauthUrl  = () => Api.get('moves-auth');
 const authenticate = payload => Api.post('moves-auth', payload);
-const deauthorize = () => Promise.resolve([]); // TODO
+const deauthorize = () => Api.post('moves-deauth').then(() => 'Remember to revoke access in the Moves app.');
 const getActivities = params => Api.get('moves', params).then(activities => activities.filter(activity => !ActivityBlacklist.includes(activity.activity)));
 
 const makePolylineDataFromActivities = activities => activities.map(activity => {

@@ -99,7 +99,12 @@ class App extends Component {
     const feeds = this.state.feeds.slice();
     const feed = feeds.find(feed => feed.id === id);
     feed.disconnect()
-      .then(() => { this.setState({ feeds: feeds }); })
+      .then(alertText => {
+        this.setState({ feeds: feeds });
+        if (alertText) {
+          alert(alertText);
+        }
+      })
       .catch(alert);
   }
 
