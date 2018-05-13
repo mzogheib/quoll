@@ -30,7 +30,8 @@ class App extends Component {
       .then(user => {
         User.setCurrentUser(user.id);
         const feeds = Feeds.map(feed => {
-          feed.isConnected = user.feeds.find(userFeed => userFeed.id === feed.id).isConnected;
+          const userFeed = user.feeds.find(userFeed => userFeed.id === feed.id);
+          feed.isConnected = userFeed ? userFeed.isConnected : false;
           return feed;
         });
         this.refreshFeeds(feeds, this.state.filter).then(newFeeds => 
