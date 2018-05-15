@@ -30,7 +30,8 @@ class App extends Component {
       .then(user => {
         User.setCurrentUser(user.id);
         const feeds = Feeds.map(feed => {
-          feed.isConnected = user.feeds.find(userFeed => userFeed.id === feed.id).isConnected;
+          const userFeed = user.feeds.find(userFeed => userFeed.id === feed.id);
+          feed.isConnected = userFeed ? userFeed.isConnected : false;
           return feed;
         });
         this.refreshFeeds(feeds, this.state.filter).then(newFeeds => 
@@ -98,7 +99,12 @@ class App extends Component {
     const feeds = this.state.feeds.slice();
     const feed = feeds.find(feed => feed.id === id);
     feed.disconnect()
-      .then(() => { this.setState({ feeds: feeds }); })
+      .then(alertText => {
+        this.setState({ feeds: feeds });
+        if (alertText) {
+          alert(alertText);
+        }
+      })
       .catch(alert);
   }
 

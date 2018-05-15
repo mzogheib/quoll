@@ -3,6 +3,7 @@ const router = express.Router();
 
 const routeToshl = require('./toshl.route');
 const routeStrava = require('./strava.route');
+const routeMoves = require('./moves.route');
 const routeUsers = require('./users.route');
 
 module.exports = router;
@@ -47,3 +48,20 @@ router
   .route('/strava-deauth')
   .all(routeUsers.authenticate)
   .post(routeStrava.deauthorize);
+
+router
+  .route('/moves')
+  .all(routeUsers.authenticate)
+  .all(routeMoves.checkAuth)
+  .get(routeMoves.getStoryline);
+
+router
+  .route('/moves-auth')
+  .all(routeUsers.authenticate)
+  .get(routeMoves.getOAuthUrl)
+  .post(routeMoves.authenticate);
+
+router
+  .route('/moves-deauth')
+  .all(routeUsers.authenticate)
+  .post(routeMoves.deauthorize);

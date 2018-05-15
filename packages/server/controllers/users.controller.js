@@ -1,4 +1,5 @@
 const userStorage = require('../storage/user.storage');
+const _ = require('lodash');
 
 module.exports = {
   createUser,
@@ -8,14 +9,15 @@ module.exports = {
   getVendorAuth
 };
 
+const DefaultFeeds = [
+  { id: 'strava', vendorAuth: null },
+  { id: 'toshl', vendorAuth: null },
+  { id: 'moves', vendorAuth: null },
+];
+
 function createUser () {
   return new Promise ((resolve, reject) => {
-    const user = userStorage.create({
-      feeds: [
-        { id: 'strava', vendorAuth: null },
-        { id: 'toshl', vendorAuth: null },
-      ]
-    });
+    const user = userStorage.create({ feeds: DefaultFeeds });
     resolve(sanitizeUser(user));
   });
 }
@@ -38,7 +40,10 @@ function sanitizeUser (user) {
 }
 
 function get (userId) {
-  return new Promise ((resolve, reject) => resolve(userStorage.get(userId)));
+  // Apply defaults so that newly added feeds will be appended to existing user feeds
+  const user = userStorage.get(userId);
+  user.feeds = _.defaultsDeep(user.feeds, DefaultFeeds);
+  return new Promise ((resolve, reject) => resolve(user));
 }
 
 function update (user) {

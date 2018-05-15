@@ -1,5 +1,6 @@
 import Toshl from './toshl';
 import Strava from './strava';
+import Moves from './moves';
 
 const config = [
   {
@@ -24,6 +25,18 @@ const config = [
     makeSummary: Strava.makeSummary,
     makeSummaryList: Strava.makeSummaryList,
     makeMapData: Strava.makePolylineDataFromActivities,
+    isPolyline: true
+  },
+  {
+    id: 'moves',
+    name: 'Moves',
+    getOauthUrl: Moves.getOauthUrl,
+    authenticate: Moves.authenticate,
+    disconnect: Moves.deauthorize,
+    getData: Moves.getActivities,
+    makeSummary: Moves.makeSummary,
+    makeSummaryList: Moves.makeSummaryList,
+    makeMapData: Moves.makePolylineDataFromActivities,
     isPolyline: true
   }
 ];
