@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import './style.css';
 import Menu from '../menu';
 import Map from '../map';
-import User from '../_utils/user';
-import Utils from '../_utils/'
-import Feeds from '../feeds';
-import Storage from '../_utils/storage';
+import User from '../../services/user';
+import Utils from '../../services/utils'
+import Feeds from '../../services/feeds';
+import Storage from '../../services/storage';
 
 class App extends Component {
   constructor(props) {

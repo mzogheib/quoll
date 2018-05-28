@@ -1,4 +1,4 @@
-import Api from '../_utils/api';
+import Api from './api';
 import polyline from '@mapbox/polyline';
 
 const ActivityBlacklist = ['cycling', 'running'];

@@ -1,5 +1,5 @@
-import config from './config';
-import utils from '../_utils';
+import config from './feeds-config';
+import utils from './utils';
 
 export default config.map(make);
 
