@@ -1,12 +1,12 @@
-import Api from './api';
+import api from './api';
 import utils from './utils';
 
 const DefaultTime = '12:00:00';
 
-const getOauthUrl  = () => Api.get('toshl-auth');
-const authenticate = payload => Api.post('toshl-auth', payload);
-const deauthorize = () => Api.post('toshl-deauth');
-const getEntries = params => Api.get('toshl', params);
+const getOauthUrl  = () => api.get('toshl-auth');
+const authenticate = payload => api.post('toshl-auth', payload);
+const deauthorize = () => api.post('toshl-deauth');
+const getEntries = params => api.get('toshl', params);
 
 const makeMarkerDataFromEntries = entries => {
   return entries.filter(entry => entry.location).map(entry => {

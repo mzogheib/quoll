@@ -1,7 +1,6 @@
 import React from 'react';
 import './style.css';
 import mapUtils from './utils';
-import utils from './utils';
 const google = window.google;
 
 export default class Map extends React.Component {
@@ -89,11 +88,11 @@ export default class Map extends React.Component {
 
   focusItem(item, position) {
     if (item.marker) {
-      utils.highlightMarker(item.marker);
+      mapUtils.highlightMarker(item.marker);
       item.infoWindow.open(this.map, item.marker);
     } else {
       const infoWindowPosition = position || item.polyline.getPath().getArray()[0];
-      utils.highlightPolyline(item.polyline)
+      mapUtils.highlightPolyline(item.polyline)
       item.infoWindow.setPosition(infoWindowPosition);
       item.infoWindow.open(this.map);
     }
@@ -111,11 +110,11 @@ export default class Map extends React.Component {
   }
 
   resetMarkers() {
-    this.state.markerItems.forEach(item => utils.unHighlightMarker(item.marker));
+    this.state.markerItems.forEach(item => mapUtils.unHighlightMarker(item.marker));
   }
 
   resetPolylines() {
-    this.state.polylineItems.forEach(item => utils.unHighlightPolyline(item.polyline));
+    this.state.polylineItems.forEach(item => mapUtils.unHighlightPolyline(item.polyline));
   }
 
   render() {

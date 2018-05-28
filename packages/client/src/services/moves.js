@@ -1,12 +1,12 @@
-import Api from './api';
+import api from './api';
 import polyline from '@mapbox/polyline';
 
 const ActivityBlacklist = ['cycling', 'running'];
 
-const getOauthUrl  = () => Api.get('moves-auth');
-const authenticate = payload => Api.post('moves-auth', payload);
-const deauthorize = () => Api.post('moves-deauth').then(() => 'Remember to revoke access in the Moves app.');
-const getActivities = params => Api.get('moves', params).then(activities => activities.filter(activity => !ActivityBlacklist.includes(activity.activity)));
+const getOauthUrl  = () => api.get('moves-auth');
+const authenticate = payload => api.post('moves-auth', payload);
+const deauthorize = () => api.post('moves-deauth').then(() => 'Remember to revoke access in the Moves app.');
+const getActivities = params => api.get('moves', params).then(activities => activities.filter(activity => !ActivityBlacklist.includes(activity.activity)));
 
 const makePolylineDataFromActivities = activities => activities.map(activity => {
   const startTime = new Date(formatBasicTimeString(activity.startTime));

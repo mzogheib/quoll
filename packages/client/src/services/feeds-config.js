@@ -1,42 +1,42 @@
-import Toshl from './toshl';
-import Strava from './strava';
-import Moves from './moves';
+import toshl from './toshl';
+import strava from './strava';
+import moves from './moves';
 
 const config = [
   {
     id: 'toshl',
     name: 'Toshl',
-    getOauthUrl: Toshl.getOauthUrl,
-    authenticate: Toshl.authenticate,
-    disconnect: Toshl.deauthorize,
-    getData: Toshl.getEntries,
-    makeSummary: Toshl.makeSummary,
-    makeSummaryList: Toshl.makeSummaryList,
-    makeMapData: Toshl.makeMarkerDataFromEntries,
+    getOauthUrl: toshl.getOauthUrl,
+    authenticate: toshl.authenticate,
+    disconnect: toshl.deauthorize,
+    getData: toshl.getEntries,
+    makeSummary: toshl.makeSummary,
+    makeSummaryList: toshl.makeSummaryList,
+    makeMapData: toshl.makeMarkerDataFromEntries,
     isMarker: true
   },
   {
     id: 'strava',
     name: 'Strava',
-    getOauthUrl: Strava.getOauthUrl,
-    authenticate: Strava.authenticate,
-    disconnect: Strava.deauthorize,
-    getData: Strava.getActivities,
-    makeSummary: Strava.makeSummary,
-    makeSummaryList: Strava.makeSummaryList,
-    makeMapData: Strava.makePolylineDataFromActivities,
+    getOauthUrl: strava.getOauthUrl,
+    authenticate: strava.authenticate,
+    disconnect: strava.deauthorize,
+    getData: strava.getActivities,
+    makeSummary: strava.makeSummary,
+    makeSummaryList: strava.makeSummaryList,
+    makeMapData: strava.makePolylineDataFromActivities,
     isPolyline: true
   },
   {
     id: 'moves',
     name: 'Moves',
-    getOauthUrl: Moves.getOauthUrl,
-    authenticate: Moves.authenticate,
-    disconnect: Moves.deauthorize,
-    getData: Moves.getActivities,
-    makeSummary: Moves.makeSummary,
-    makeSummaryList: Moves.makeSummaryList,
-    makeMapData: Moves.makePolylineDataFromActivities,
+    getOauthUrl: moves.getOauthUrl,
+    authenticate: moves.authenticate,
+    disconnect: moves.deauthorize,
+    getData: moves.getActivities,
+    makeSummary: moves.makeSummary,
+    makeSummaryList: moves.makeSummaryList,
+    makeMapData: moves.makePolylineDataFromActivities,
     isPolyline: true
   }
 ];

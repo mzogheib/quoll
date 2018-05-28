@@ -1,7 +1,8 @@
-import config from './feeds-config';
 import utils from './utils';
 
-export default config.map(make);
+export default {
+  make
+};
 
 function make({ id, name, getOauthUrl, authenticate, disconnect, getData, makeSummary, makeSummaryList, makeMapData, isMarker, isPolyline }) {
   return {

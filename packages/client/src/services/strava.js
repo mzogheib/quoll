@@ -1,10 +1,10 @@
-import Api from './api';
+import api from './api';
 import utils from './utils';
 
-const getOauthUrl  = () => Api.get('strava-auth');
-const authenticate = payload => Api.post('strava-auth', payload);
-const deauthorize = () => Api.post('strava-deauth');
-const getActivities = params => Api.get('strava', params);
+const getOauthUrl  = () => api.get('strava-auth');
+const authenticate = payload => api.post('strava-auth', payload);
+const deauthorize = () => api.post('strava-deauth');
+const getActivities = params => api.get('strava', params);
 
 const makePolylineDataFromActivities = activities => activities.map(activity => {
   const startTime = utils.getTwentyFourHourTime(activity.start_date_local);

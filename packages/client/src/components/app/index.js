@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import './style.css';
 import Menu from '../menu';
 import Map from '../map';
-import User from '../../services/user';
-import Utils from '../../services/utils'
-import Feeds from '../../services/feeds';
-import Storage from '../../services/storage';
+import userService from '../../services/user';
+import utils from '../../services/utils'
+import feedsService from '../../services/feeds';
+import feedsConfig from '../../services/feeds-config';
+import storageService from '../../services/storage';
 
 class App extends Component {
   constructor(props) {
@@ -23,13 +24,13 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const userId = User.getCurrentUser();
+    const userId = userService.getCurrentUser();
     const action = userId ? 'login' : 'signup';
     // TODO: if login fails then clear that user from localStorage and signup
-    User[action](userId)
+    userService[action](userId)
       .then(user => {
-        User.setCurrentUser(user.id);
-        const feeds = Feeds.map(feed => {
+        userService.setCurrentUser(user.id);
+        const feeds = feedsConfig.map(feedsService.make).map(feed => {
           const userFeed = user.feeds.find(userFeed => userFeed.id === feed.id);
           feed.isConnected = userFeed ? userFeed.isConnected : false;
           return feed;
@@ -40,14 +41,14 @@ class App extends Component {
   }
 
   handleOAuth() {
-    const queryParams = Utils.getQueryParams(window.location.href);
+    const queryParams = utils.getQueryParams(window.location.href);
     
     if (!queryParams || !queryParams.state) {
       return;
     } else {
       // Looks like oauth so remove the query params
       window.history.replaceState(null, null, window.location.pathname);
-      const oauthState = Utils.decode(queryParams.state);
+      const oauthState = utils.decode(queryParams.state);
       const oauthCode = queryParams.code;
       const oauthError = queryParams.error;
 
@@ -56,9 +57,9 @@ class App extends Component {
       const feed = feeds.find(feed => feed.id === feedId);
 
       const token = oauthState.token;
-      const storedToken = Storage.get('oauth-state-token');
+      const storedToken = storageService.get('oauth-state-token');
       const tokenIsValid = storedToken && token && storedToken === token;
-      Storage.delete('oauth-state-token');
+      storageService.delete('oauth-state-token');
 
       if (!feed) {
         alert(`Unknown feed: ${feedId}`);
@@ -90,8 +91,8 @@ class App extends Component {
 
   handleConnect(id) {
     const feed = this.state.feeds.slice().find(feed => feed.id === id);
-    const token = Utils.makeRandomString();
-    Storage.set('oauth-state-token', token);
+    const token = utils.makeRandomString();
+    storageService.set('oauth-state-token', token);
     feed.connect(token);
   }
 
