@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './style.css';
 import Menu from '../menu';
 import Map from '../map';
@@ -18,7 +19,6 @@ class App extends Component {
     this.handleSelectLine = this.handleSelectLine.bind(this);
     this.state = {
       feeds: [],
-      filter: {},
       focussedItemId: null
     };
   }
@@ -35,9 +35,13 @@ class App extends Component {
           feed.isConnected = userFeed ? userFeed.isConnected : false;
           return feed;
         });
-        this.refreshFeeds(feeds, this.state.filter).then(newFeeds => 
+        this.refreshFeeds(feeds, this.props.filter).then(newFeeds => 
           this.setState({ feeds: feeds }, this.handleOAuth))
       });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.handleFilterUpdate(nextProps.filter);
   }
 
   handleOAuth() {
@@ -69,7 +73,7 @@ class App extends Component {
         return;
       } else if (oauthCode) {
         feed.authenticate({ code: oauthCode })
-          .then(() => feed.getData(this.state.filter))
+          .then(() => feed.getData(this.props.filter))
           .then(() => { this.setState({ feeds: feeds }); })
           .catch(alert)
         } else {
@@ -86,7 +90,7 @@ class App extends Component {
   }
 
   handleFilterUpdate(filter) {
-    this.refreshFeeds(this.state.feeds, filter).then(feeds => this.setState({ filter, feeds, focussedItemId: null }));
+    this.refreshFeeds(this.state.feeds, filter).then(feeds => this.setState({ feeds, focussedItemId: null }));
   }
 
   handleConnect(id) {
@@ -130,7 +134,6 @@ class App extends Component {
         <div className='app__menu'>
           <Menu
             items={this.state.feeds}
-            onFilterUpdate={this.handleFilterUpdate}
             onConnect={this.handleConnect}
             onDisconnect={this.handleDisconnect}
             onSelectLine={this.handleSelectLine}
@@ -150,4 +153,8 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  filter: state.filter
+});
+
+export default connect(mapStateToProps)(App);

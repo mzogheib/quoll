@@ -1,0 +1,11 @@
+.filter-controls {
+    display: flex;
+}
+
+.filter-controls__button {
+    flex-basis: 70px;
+}
+
+.filter-controls__date-input {
+    flex-grow: 1;
+}

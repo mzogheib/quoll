@@ -1,13 +1,13 @@
 import React from 'react';
 import './style.css';
-import Filter from '../filter';
+import Filter from '../../containers/filter';
 import MenuItems from '../menu-items';
 
 function Menu(props) {
   return (
     <div className='menu'>
       <div className='menu__title'>Quoll</div>
-      <div className='menu__filter'><Filter onUpdate={props.onFilterUpdate} /></div>
+      <div className='menu__filter'><Filter /></div>
       <div className='menu__items'>
         <MenuItems
           items={props.items}

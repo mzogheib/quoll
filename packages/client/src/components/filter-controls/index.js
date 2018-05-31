@@ -39,7 +39,7 @@ class Filter extends Component {
     if (!this.dateIsSet()) {
       return;
     }
-    this.props.onUpdate({ from: this.state.date, to: this.state.date });
+    this.props.setFilter({ from: this.state.date, to: this.state.date });
   }
 
   handleDateChange(e) {
@@ -48,10 +48,10 @@ class Filter extends Component {
 
   render() {
     return (
-      <div className='filter'>
-        <button className='filter__button' onClick={this.previous.bind(this)} disabled={!this.dateIsSet()}>Previous</button>
-        <input className='filter__date-input' type='date' value={this.state.date} onChange={this.handleDateChange.bind(this)}/>
-        <button className='filter__button' onClick={this.next.bind(this)} disabled={!this.dateIsSet()}>Next</button>
+      <div className='filter-controls'>
+        <button className='filter-controls__button' onClick={this.previous.bind(this)} disabled={!this.dateIsSet()}>Previous</button>
+        <input className='filter-controls__date-input' type='date' value={this.state.date} onChange={this.handleDateChange.bind(this)}/>
+        <button className='filter-controls__button' onClick={this.next.bind(this)} disabled={!this.dateIsSet()}>Next</button>
       </div>
     );
   }
