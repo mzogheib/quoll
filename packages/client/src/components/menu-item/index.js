@@ -24,7 +24,7 @@ class MenuItem extends Component {
   }
 
   selectLine(line) {
-    this.props.onSelectLine(line)
+    this.props.setFocussedItem(line.id)
   }
 
   renderConnect() {

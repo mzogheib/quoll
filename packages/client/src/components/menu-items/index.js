@@ -1,6 +1,6 @@
 import React from 'react';
 import './style.css';
-import MenuItem from '../menu-item'
+import MenuItem from '../../containers/menu-item'
 
 function MenuItems(props) {
   function handleDisconnect(id) {
@@ -11,10 +11,6 @@ function MenuItems(props) {
     props.onConnect(id);
   }
 
-  function handleSelectLine(line) {
-    props.onSelectLine(line);
-  }
-
   function renderItems() {
     return props.items.map((item, index) => {
       return (
@@ -23,7 +19,6 @@ function MenuItems(props) {
           item={item}
           onConnect={handleConnect}
           onDisconnect={handleDisconnect}
-          onSelectLine={handleSelectLine}
         />
       );
     });

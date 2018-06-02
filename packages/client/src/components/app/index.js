@@ -8,6 +8,7 @@ import utils from '../../services/utils'
 import feedsService from '../../services/feeds';
 import feedsConfig from '../../services/feeds-config';
 import storageService from '../../services/storage';
+import { setFocussedItem } from '../../actions';
 
 class App extends Component {
   constructor(props) {
@@ -16,10 +17,8 @@ class App extends Component {
     this.handleFilterUpdate = this.handleFilterUpdate.bind(this);
     this.handleConnect = this.handleConnect.bind(this);
     this.handleDisconnect = this.handleDisconnect.bind(this);
-    this.handleSelectLine = this.handleSelectLine.bind(this);
     this.state = {
-      feeds: [],
-      focussedItemId: null
+      feeds: []
     };
   }
 
@@ -41,8 +40,10 @@ class App extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.handleFilterUpdate(nextProps.date);
-  }
+    if (this.props.date !== nextProps.date) {
+      this.handleFilterUpdate(nextProps.date);
+    }
+  };
 
   handleOAuth() {
     const queryParams = utils.getQueryParams(window.location.href);
@@ -90,7 +91,8 @@ class App extends Component {
   }
 
   handleFilterUpdate(date) {
-    this.refreshFeeds(this.state.feeds, date).then(feeds => this.setState({ feeds, focussedItemId: null }));
+    this.refreshFeeds(this.state.feeds, date)
+      .then(feeds => this.setState({ feeds }, () => this.props.setFocussedItem(null)));
   }
 
   handleConnect(id) {
@@ -113,10 +115,6 @@ class App extends Component {
       .catch(alert);
   }
 
-  handleSelectLine(line) {
-    this.setState({ focussedItemId: line.id });
-  }
-
   render() {
     const markerData = this.state.feeds
       .filter(feed => feed.isConnected)
@@ -136,7 +134,6 @@ class App extends Component {
             items={this.state.feeds}
             onConnect={this.handleConnect}
             onDisconnect={this.handleDisconnect}
-            onSelectLine={this.handleSelectLine}
           />
         </div>
         <div className='app__map-wrapper'>
@@ -144,7 +141,7 @@ class App extends Component {
             <Map
               markerData={markerData}
               polylineData={polylineData}
-              focussedItemId={this.state.focussedItemId}
+              focussedItemId={this.props.focussedItemId}
             />
           </div>
         </div>
@@ -154,7 +151,12 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  date: state.date
+  date: state.date,
+  focussedItemId: state.focussedItemId
 });
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch => ({
+  setFocussedItem: id => dispatch(setFocussedItem(id))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
