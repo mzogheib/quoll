@@ -1,10 +1,10 @@
-const filter = (state = {}, action) => {
+const date = (state = {}, action) => {
   switch (action.type) {
-    case 'SET_FILTER':
-      return action.filter
+    case 'SET_DATE':
+      return action.date
     default:
       return state
   }
 };
 
-export default filter;
+export default date;

@@ -1,4 +1,4 @@
-export const setFilter = filter => ({
-  type: 'SET_FILTER',
-  filter
+export const setDate = date => ({
+  type: 'SET_DATE',
+  date
 });

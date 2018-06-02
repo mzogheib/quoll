@@ -1,16 +1,12 @@
 import { connect } from 'react-redux';
-import { setFilter } from '../../actions';
+import { setDate } from '../../actions';
 import FilterControls from '../../components/filter-controls';
 
-const mapStateToProps = state => ({
-  filter: state
-});
-
 const mapDispatchToProps = dispatch => ({
-  setFilter: filter => dispatch(setFilter(filter))
+  setDate: date => dispatch(setDate(date))
 });
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(FilterControls);

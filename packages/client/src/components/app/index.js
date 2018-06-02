@@ -35,13 +35,13 @@ class App extends Component {
           feed.isConnected = userFeed ? userFeed.isConnected : false;
           return feed;
         });
-        this.refreshFeeds(feeds, this.props.filter).then(newFeeds => 
+        this.refreshFeeds(feeds, this.props.date).then(newFeeds => 
           this.setState({ feeds: feeds }, this.handleOAuth))
       });
   }
 
   componentWillReceiveProps(nextProps) {
-    this.handleFilterUpdate(nextProps.filter);
+    this.handleFilterUpdate(nextProps.date);
   }
 
   handleOAuth() {
@@ -73,7 +73,7 @@ class App extends Component {
         return;
       } else if (oauthCode) {
         feed.authenticate({ code: oauthCode })
-          .then(() => feed.getData(this.props.filter))
+          .then(() => feed.getData(this.props.date))
           .then(() => { this.setState({ feeds: feeds }); })
           .catch(alert)
         } else {
@@ -82,15 +82,15 @@ class App extends Component {
     }
   }
 
-  refreshFeeds(feeds, filter) {
+  refreshFeeds(feeds, date) {
     const promises = feeds.slice()
       .filter(feed => feed.isConnected)
-      .map(connectedFeed => connectedFeed.getData(filter).catch(alert));
+      .map(connectedFeed => connectedFeed.getData(date).catch(alert));
     return Promise.all(promises).then(() => feeds);
   }
 
-  handleFilterUpdate(filter) {
-    this.refreshFeeds(this.state.feeds, filter).then(feeds => this.setState({ feeds, focussedItemId: null }));
+  handleFilterUpdate(date) {
+    this.refreshFeeds(this.state.feeds, date).then(feeds => this.setState({ feeds, focussedItemId: null }));
   }
 
   handleConnect(id) {
@@ -154,7 +154,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  filter: state.filter
+  date: state.date
 });
 
 export default connect(mapStateToProps)(App);

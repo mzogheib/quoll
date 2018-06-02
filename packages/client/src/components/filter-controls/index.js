@@ -39,7 +39,7 @@ class Filter extends Component {
     if (!this.dateIsSet()) {
       return;
     }
-    this.props.setFilter({ from: this.state.date, to: this.state.date });
+    this.props.setDate(this.state.date);
   }
 
   handleDateChange(e) {

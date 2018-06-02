@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import filter from './filter';
+import date from './filter';
 
 export default combineReducers({
-  filter
+  date
 });

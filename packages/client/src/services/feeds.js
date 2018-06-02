@@ -34,8 +34,8 @@ function make({ id, name, getOauthUrl, authenticate, disconnect, getData, makeSu
         return alert;
       });
     },
-    getData(filter) {
-      return getData(filter).then(data => {
+    getData(date) {
+      return getData({ from: date, to: date }).then(data => {
         this.data = data
         this.summaryList = makeSummaryList(this.data);
         this.summary = makeSummary(this.data);
