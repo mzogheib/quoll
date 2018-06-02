@@ -1,60 +1,36 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './style.css';
 
-class Filter extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      date: this.getFormattedDate(),
-    };
-  }
+function FilterControls(props) {
 
-  componentDidMount() {
-    this.update();
-  }
-
-  getFormattedDate(d = new Date()) {
-    const dateParts = d.toLocaleDateString().split('/'); // => [dd, mm, yyyy]
+  function formatDate(date) {
+    const dateParts = date.toLocaleDateString().split('/'); // => [dd, mm, yyyy]
     return `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`
   }
 
-  dateIsSet() {
-    // Assumes an un-set date reduces to an empty string
-    return this.state.date.length > 0;
-  }
-
-  previous() {
-    const yesterday = new Date(this.state.date);
+  function previous() {
+    const yesterday = new Date(props.date);
     yesterday.setDate(yesterday.getDate() - 1);
-    this.setState({ date: this.getFormattedDate(yesterday) }, this.update);
+    props.setDate(formatDate(yesterday));
   }
 
-  next() {
-    const tomorrow = new Date(this.state.date);
+  function next() {
+    const tomorrow = new Date(props.date);
     tomorrow.setDate(tomorrow.getDate() + 1);
-    this.setState({ date: this.getFormattedDate(tomorrow) }, this.update);
+    props.setDate(formatDate(tomorrow));
   }
 
-  update() {
-    if (!this.dateIsSet()) {
-      return;
-    }
-    this.props.setDate(this.state.date);
+  function handleDateChange(e) {
+    props.setDate(e.target.value)
   }
 
-  handleDateChange(e) {
-    this.setState({ date: e.target.value }, this.update);
-  }
-
-  render() {
-    return (
-      <div className='date-picker-controls'>
-        <button className='date-picker-controls__button' onClick={this.previous.bind(this)} disabled={!this.dateIsSet()}>Previous</button>
-        <input className='date-picker-controls__date-input' type='date' value={this.state.date} onChange={this.handleDateChange.bind(this)}/>
-        <button className='date-picker-controls__button' onClick={this.next.bind(this)} disabled={!this.dateIsSet()}>Next</button>
-      </div>
-    );
-  }
+  return (
+    <div className='date-picker-controls'>
+      <button className='date-picker-controls__button' onClick={previous}>Previous</button>
+      <input className='date-picker-controls__date-input' type='date' value={props.date} onChange={handleDateChange} />
+      <button className='date-picker-controls__button' onClick={next}>Next</button>
+    </div>
+  );
 }
 
-export default Filter;
+export default FilterControls;
