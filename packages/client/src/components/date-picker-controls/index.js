@@ -48,10 +48,10 @@ class Filter extends Component {
 
   render() {
     return (
-      <div className='filter-controls'>
-        <button className='filter-controls__button' onClick={this.previous.bind(this)} disabled={!this.dateIsSet()}>Previous</button>
-        <input className='filter-controls__date-input' type='date' value={this.state.date} onChange={this.handleDateChange.bind(this)}/>
-        <button className='filter-controls__button' onClick={this.next.bind(this)} disabled={!this.dateIsSet()}>Next</button>
+      <div className='date-picker-controls'>
+        <button className='date-picker-controls__button' onClick={this.previous.bind(this)} disabled={!this.dateIsSet()}>Previous</button>
+        <input className='date-picker-controls__date-input' type='date' value={this.state.date} onChange={this.handleDateChange.bind(this)}/>
+        <button className='date-picker-controls__button' onClick={this.next.bind(this)} disabled={!this.dateIsSet()}>Next</button>
       </div>
     );
   }
