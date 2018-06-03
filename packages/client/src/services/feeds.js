@@ -4,14 +4,10 @@ export default {
   make
 };
 
-function make({ id, name, getOauthUrl, authenticate, disconnect, getData, makeSummary, makeSummaryList, makeMapData, isMarker, isPolyline }) {
+function make({ id, name, getOauthUrl, authenticate, disconnect, getData, makeSummary, makeSummaryList, makeMapData }) {
   return {
     id,
     name,
-    isConnected: false,
-    data: [],
-    summary: '',
-    summaryList: [],
     connect(token) {
       getOauthUrl().then(url => {
         const stateString = utils.encode({
@@ -22,27 +18,13 @@ function make({ id, name, getOauthUrl, authenticate, disconnect, getData, makeSu
         window.location.replace(urlWithState);
       });
     },
-    authenticate(code) {
-      return authenticate(code).then(() => { this.isConnected = true; })
-    },
-    disconnect() {
-      return disconnect().then(alert => {
-        this.data = [];
-        this.summaryList = [];
-        this.summary = '';
-        this.isConnected = false;
-        return alert;
-      });
-    },
+    authenticate,
+    disconnect,
     getData(date) {
-      return getData({ from: date, to: date }).then(data => {
-        this.data = data
-        this.summaryList = makeSummaryList(this.data);
-        this.summary = makeSummary(this.data);
-      });
+      return getData({ from: date, to: date });
     },
     makeMapData,
-    isMarker,
-    isPolyline
+    makeSummary,
+    makeSummaryList
   };
 };

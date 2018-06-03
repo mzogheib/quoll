@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 import './style.css';
 import Menu from '../menu';
 import Map from '../map';
-import userService from '../../services/user';
 import utils from '../../services/utils'
 import feedsService from '../../services/feeds';
 import feedsConfig from '../../services/feeds-config';
 import storageService from '../../services/storage';
-import { setFocussedItem } from '../../actions';
+import { setFocussedItem, setFeeds } from '../../actions';
 
 class App extends Component {
   constructor(props) {
@@ -17,26 +16,13 @@ class App extends Component {
     this.handleFilterUpdate = this.handleFilterUpdate.bind(this);
     this.handleConnect = this.handleConnect.bind(this);
     this.handleDisconnect = this.handleDisconnect.bind(this);
-    this.state = {
-      feeds: []
-    };
+    this.feedServices = feedsConfig.map(feedsService.make);
   }
 
   componentDidMount() {
-    const userId = userService.getCurrentUser();
-    const action = userId ? 'login' : 'signup';
-    // TODO: if login fails then clear that user from localStorage and signup
-    userService[action](userId)
-      .then(user => {
-        userService.setCurrentUser(user.id);
-        const feeds = feedsConfig.map(feedsService.make).map(feed => {
-          const userFeed = user.feeds.find(userFeed => userFeed.id === feed.id);
-          feed.isConnected = userFeed ? userFeed.isConnected : false;
-          return feed;
-        });
-        this.refreshFeeds(feeds, this.props.date).then(newFeeds => 
-          this.setState({ feeds: feeds }, this.handleOAuth))
-      });
+    this.refreshFeeds(this.props.feeds, this.props.date)
+      .then(this.props.setFeeds)
+      .then(this.handleOAuth);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -58,24 +44,29 @@ class App extends Component {
       const oauthError = queryParams.error;
 
       const feedId = oauthState.id;
-      const feeds = this.state.feeds.slice();
-      const feed = feeds.find(feed => feed.id === feedId);
+      const feedService = this.feedServices.find(feed => feed.id === feedId);
+      const feed = this.props.feeds.find(feed => feed.id === feedId);
 
       const token = oauthState.token;
       const storedToken = storageService.get('oauth-state-token');
       const tokenIsValid = storedToken && token && storedToken === token;
       storageService.delete('oauth-state-token');
 
-      if (!feed) {
+      if (!feedService || !feed) {
         alert(`Unknown feed: ${feedId}`);
         return;
       } else if (!tokenIsValid || oauthError === 'access_denied') {
-        alert(`${feed.name} access denied.`);
+        alert(`${feedService.name} access denied.`);
         return;
       } else if (oauthCode) {
-        feed.authenticate({ code: oauthCode })
-          .then(() => feed.getData(this.props.date))
-          .then(() => { this.setState({ feeds: feeds }); })
+        feedService.authenticate({ code: oauthCode })
+          .then(() => this.refreshFeed(feed, this.props.date))
+          .then(refreshedFeed => ({
+            ...refreshedFeed,
+            isConnected: true
+          }))
+          .then(refreshedFeed => this.props.feeds.map(feed => feed.id === refreshedFeed.id ? refreshedFeed : feed))
+          .then(this.props.setFeeds)
           .catch(alert)
         } else {
           alert(`Unknown response from ${feed.name}.`);
@@ -84,54 +75,73 @@ class App extends Component {
   }
 
   refreshFeeds(feeds, date) {
-    const promises = feeds.slice()
-      .filter(feed => feed.isConnected)
-      .map(connectedFeed => connectedFeed.getData(date).catch(alert));
-    return Promise.all(promises).then(() => feeds);
+    const promises = feeds.map(feed => feed.isConnected ? this.refreshFeed(feed, date) : Promise.resolve(feed))
+    return Promise.all(promises);
+  }
+
+  refreshFeed(feed, date) {
+    const feedService = this.feedServices.find(feedService => feedService.id === feed.id);
+    return feedService.getData(date).then(data => ({
+      ...feed,
+      data: data,
+      summary: feedService.makeSummary(data),
+      summaryList: feedService.makeSummaryList(data)
+    }));
   }
 
   handleFilterUpdate(date) {
-    this.refreshFeeds(this.state.feeds, date)
-      .then(feeds => this.setState({ feeds }, () => this.props.setFocussedItem(null)));
+    this.refreshFeeds(this.props.feeds, date)
+      .then(this.props.setFeeds)
+      .then(() => this.props.setFocussedItem(null));
   }
 
   handleConnect(id) {
-    const feed = this.state.feeds.slice().find(feed => feed.id === id);
+    const feedService = this.feedServices.find(feed => feed.id === id);
     const token = utils.makeRandomString();
     storageService.set('oauth-state-token', token);
-    feed.connect(token);
+    feedService.connect(token);
   }
 
   handleDisconnect(id) {
-    const feeds = this.state.feeds.slice();
-    const feed = feeds.find(feed => feed.id === id);
-    feed.disconnect()
+    const feedService = this.feedServices.find(feed => feed.id === id);
+    const feed = this.props.feeds.find(feed => feed.id === id);
+    feedService.disconnect()
       .then(alertText => {
-        this.setState({ feeds: feeds });
         if (alertText) {
           alert(alertText);
         }
+        const disconnectedFeed = {
+          ...feed,
+          isConnected: false,
+          summary: 'None',
+          summaryList: [],
+        };
+        const updatedFeeds = this.props.feeds.map(feed => feed.id === disconnectedFeed.id ? disconnectedFeed : feed);
+        this.props.setFeeds(updatedFeeds)
       })
       .catch(alert);
   }
 
   render() {
-    const markerData = this.state.feeds
+    const connectedMarkerFeeds = this.props.feeds
       .filter(feed => feed.isConnected)
-      .filter(feed => feed.isMarker)
-      .map(feed => feed.makeMapData(feed.data))
+      .filter(feed => feed.isMarker);
+    const markerData = connectedMarkerFeeds
+      .map(feed => this.feedServices.find(fs => fs.id === feed.id).makeMapData(feed.data))
       .reduce((prev, next) => prev.concat(next), []);
-    const polylineData = this.state.feeds
+
+    const connectedPolylineFeeds = this.props.feeds
       .filter(feed => feed.isConnected)
-      .filter(feed => feed.isPolyline)
-      .map(feed => feed.makeMapData(feed.data))
+      .filter(feed => feed.isPolyline);
+    const polylineData = connectedPolylineFeeds
+      .map(feed => this.feedServices.find(fs => fs.id === feed.id).makeMapData(feed.data))
       .reduce((prev, next) => prev.concat(next), []);
 
     return (
       <div className='app'>
         <div className='app__menu'>
           <Menu
-            items={this.state.feeds}
+            items={this.props.feeds}
             onConnect={this.handleConnect}
             onDisconnect={this.handleDisconnect}
           />
@@ -150,13 +160,11 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  date: state.date,
-  focussedItemId: state.focussedItemId
-});
+const mapStateToProps = state => ({ ...state });
 
 const mapDispatchToProps = dispatch => ({
-  setFocussedItem: id => dispatch(setFocussedItem(id))
+  setFocussedItem: id => dispatch(setFocussedItem(id)),
+  setFeeds: feeds => dispatch(setFeeds(feeds))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
