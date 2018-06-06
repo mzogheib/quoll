@@ -1,5 +1,7 @@
 import feedsConfig from '../services/feeds-config';
 
+// TODO: summaryList can have its own reducer. Can also add map data too
+// See how it's done here under 'Handling Actions', https://redux.js.org/advanced/async-actions
 const defaultFeeds = feedsConfig.map(config => ({
   id: config.id,
   name: config.name,
