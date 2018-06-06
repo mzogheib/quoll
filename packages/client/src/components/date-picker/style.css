@@ -1,0 +1,11 @@
+.date-picker {
+    display: flex;
+}
+
+.date-picker__button {
+    flex-basis: 70px;
+}
+
+.date-picker__date-input {
+    flex-grow: 1;
+}

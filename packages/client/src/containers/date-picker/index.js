@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { setDate } from '../../actions';
-import DatePickerControls from '../../components/date-picker-controls';
+import DatePicker from '../../components/date-picker';
 
 const mapStateToProps = state => ({
   date: state.date
@@ -13,4 +13,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(DatePickerControls);
+)(DatePicker);

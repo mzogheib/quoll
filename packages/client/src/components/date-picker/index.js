@@ -25,10 +25,10 @@ function FilterControls(props) {
   }
 
   return (
-    <div className='date-picker-controls'>
-      <button className='date-picker-controls__button' onClick={previous}>Previous</button>
-      <input className='date-picker-controls__date-input' type='date' value={props.date} onChange={handleDateChange} />
-      <button className='date-picker-controls__button' onClick={next}>Next</button>
+    <div className='date-picker'>
+      <button className='date-picker__button' onClick={previous}>Previous</button>
+      <input className='date-picker__date-input' type='date' value={props.date} onChange={handleDateChange} />
+      <button className='date-picker__button' onClick={next}>Next</button>
     </div>
   );
 }
