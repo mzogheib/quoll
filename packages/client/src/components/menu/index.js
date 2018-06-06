@@ -11,8 +11,6 @@ function Menu(props) {
       <div className='menu__items'>
         <MenuItems
           items={props.items}
-          onConnect={props.onConnect}
-          onDisconnect={props.onDisconnect}
         />
       </div>
     </div>

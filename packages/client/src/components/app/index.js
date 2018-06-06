@@ -12,8 +12,6 @@ class App extends Component {
     super(props);
     this.handleOAuth = this.handleOAuth.bind(this);
     this.handleFilterUpdate = this.handleFilterUpdate.bind(this);
-    this.handleConnect = this.handleConnect.bind(this);
-    this.handleDisconnect = this.handleDisconnect.bind(this);
     this.feedServices = feedsConfig.map(feedsService.make);
   }
 
@@ -94,33 +92,6 @@ class App extends Component {
       .then(() => this.props.setFocussedItem(null));
   }
 
-  handleConnect(id) {
-    const feedService = this.feedServices.find(feed => feed.id === id);
-    const token = utils.makeRandomString();
-    storageService.set('oauth-state-token', token);
-    feedService.connect(token);
-  }
-
-  handleDisconnect(id) {
-    const feedService = this.feedServices.find(feed => feed.id === id);
-    const feed = this.props.feeds.find(feed => feed.id === id);
-    feedService.disconnect()
-      .then(alertText => {
-        if (alertText) {
-          alert(alertText);
-        }
-        const disconnectedFeed = {
-          ...feed,
-          isConnected: false,
-          summary: 'None',
-          summaryList: [],
-        };
-        const updatedFeeds = this.props.feeds.map(feed => feed.id === disconnectedFeed.id ? disconnectedFeed : feed);
-        this.props.setFeeds(updatedFeeds)
-      })
-      .catch(alert);
-  }
-
   render() {
     const connectedMarkerFeeds = this.props.feeds
       .filter(feed => feed.isConnected)
@@ -141,8 +112,6 @@ class App extends Component {
         <div className='app__menu'>
           <Menu
             items={this.props.feeds}
-            onConnect={this.handleConnect}
-            onDisconnect={this.handleDisconnect}
           />
         </div>
         <div className='app__map-wrapper'>

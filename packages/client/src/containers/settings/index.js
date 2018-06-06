@@ -1,14 +1,13 @@
 import { connect } from 'react-redux';
 import Settings from '../../components/settings';
-import { connectFeed, disconnectFeed } from '../../actions';
+import { setFeeds } from '../../actions';
 
 const mapStateToProps = state => ({
   feeds: state.feeds
 });
 
 const mapDispatchToProps = dispatch => ({
-  connectFeed: id => dispatch(connectFeed(id)),
-  disconnectFeed: id => dispatch(disconnectFeed(id))
+  setFeeds: feeds => dispatch(setFeeds(feeds))
 });
 
 export default connect(
