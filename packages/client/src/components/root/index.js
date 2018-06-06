@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import './style.css';
 import App from '../../containers/app';
+import Header from '../../components/header';
+import SideBar from '../../containers/side-bar';
 import Settings from '../../containers/settings';
 import userService from '../../services/user';
 
@@ -37,10 +40,18 @@ class Root extends Component {
   renderRoot() {
     return (
       <BrowserRouter>
-        <Switch>
-          <Route path="/settings" component={Settings} />
-          <Route path="/" component={App} />
-        </Switch>
+        <div className='root'>
+          <SideBar />
+          <div className='root__right'>
+            <Header />
+            <div className='root__main'>
+              <Switch>
+                <Route path="/settings" component={Settings} />
+                <Route path="/" component={App} />
+              </Switch>
+            </div>
+          </div>
+        </div>
       </BrowserRouter>
     );
   }
