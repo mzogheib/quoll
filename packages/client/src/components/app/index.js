@@ -83,7 +83,8 @@ class App extends Component {
       ...feed,
       data: data,
       summary: feedService.makeSummary(data),
-      summaryList: feedService.makeSummaryList(data)
+      summaryList: feedService.makeSummaryList(data),
+      mapData: feedService.makeMapData(data)
     }));
   }
 
@@ -125,14 +126,14 @@ class App extends Component {
       .filter(feed => feed.isConnected)
       .filter(feed => feed.isMarker);
     const markerData = connectedMarkerFeeds
-      .map(feed => this.feedServices.find(fs => fs.id === feed.id).makeMapData(feed.data))
+      .map(feed => feed.mapData)
       .reduce((prev, next) => prev.concat(next), []);
 
     const connectedPolylineFeeds = this.props.feeds
       .filter(feed => feed.isConnected)
       .filter(feed => feed.isPolyline);
     const polylineData = connectedPolylineFeeds
-      .map(feed => this.feedServices.find(fs => fs.id === feed.id).makeMapData(feed.data))
+      .map(feed => feed.mapData)
       .reduce((prev, next) => prev.concat(next), []);
 
     return (

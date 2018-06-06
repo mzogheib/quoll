@@ -9,6 +9,7 @@ const defaultFeeds = feedsConfig.map(config => ({
   data: [],
   summary: 'None',
   summaryList: [],
+  mapData: [],
   isMarker: config.isMarker,
   isPolyline: config.isPolyline,
 }));
