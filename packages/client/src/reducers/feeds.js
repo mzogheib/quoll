@@ -19,6 +19,10 @@ const feeds = (state = defaultFeeds, action) => {
       return action.feeds;
     case 'SET_CONNECTED_FEEDS':
       return state.map(feed => action.ids.includes(feed.id) ? { ...feed, isConnected: true } : feed)
+    case 'CONNECT_FEED':
+      return state.map(feed => feed.id === action.id ? { ...feed, isConnected: true } : feed)
+    case 'DISCONNECT_FEED':
+      return state.map(feed => feed.id === action.id ? { ...feed, isConnected: false } : feed)
     default:
       return state;
   }

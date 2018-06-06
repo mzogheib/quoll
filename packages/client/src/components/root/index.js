@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import App from '../../containers/app';
+import Settings from '../../containers/settings';
 import userService from '../../services/user';
 
 class Root extends Component {
@@ -37,6 +38,7 @@ class Root extends Component {
     return (
       <BrowserRouter>
         <Switch>
+          <Route path="/settings" component={Settings} />
           <Route path="/" component={App} />
         </Switch>
       </BrowserRouter>

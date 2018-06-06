@@ -17,3 +17,13 @@ export const setConnectedFeeds = ids => ({
   type: 'SET_CONNECTED_FEEDS',
   ids
 });
+
+export const connectFeed = id => ({
+  type: 'CONNECT_FEED',
+  id
+});
+
+export const disconnectFeed = id => ({
+  type: 'DISCONNECT_FEED',
+  id
+});
