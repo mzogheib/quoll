@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import App from '../../components/app';
+import App from '../../containers/app';
 import userService from '../../services/user';
 import { setConnectedFeeds } from '../../actions';
 

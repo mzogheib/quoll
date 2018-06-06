@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import './style.css';
 import Menu from '../menu';
 import Map from '../map';
@@ -7,7 +6,6 @@ import utils from '../../services/utils'
 import feedsService from '../../services/feeds';
 import feedsConfig from '../../services/feeds-config';
 import storageService from '../../services/storage';
-import { setFocussedItem, setFeeds } from '../../actions';
 
 class App extends Component {
   constructor(props) {
@@ -160,11 +158,4 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => ({ ...state });
-
-const mapDispatchToProps = dispatch => ({
-  setFocussedItem: id => dispatch(setFocussedItem(id)),
-  setFeeds: feeds => dispatch(setFeeds(feeds))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
