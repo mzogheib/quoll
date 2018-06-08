@@ -6,13 +6,12 @@ const google = window.google;
 export default class Map extends React.Component {
   constructor(props) {
     super(props);
-    this.bounds = new google.maps.LatLngBounds();
     this.state = {
       markerItems: [],
       polylineItems: []
     };
   }
-
+  
   componentDidMount() {
     const melbourne = new google.maps.LatLng(-37.8079033, 144.9759344);
     this.map = new google.maps.Map(this.refs.map, {
@@ -27,8 +26,9 @@ export default class Map extends React.Component {
 
     const markerItems = this.makeMarkerItems(this.props.markerData);
     const polylineItems = this.makePolylineItems(this.props.polylineData);
-    if (!this.bounds.isEmpty()) {
-      this.map.fitBounds(this.bounds);
+    const bounds = this.makeBounds(markerItems, polylineItems);
+    if (!bounds.isEmpty()) {
+      this.map.fitBounds(bounds);
     }
     this.setState({ markerItems, polylineItems });
   }
@@ -37,32 +37,35 @@ export default class Map extends React.Component {
     // TODO: do a better job of managing props and state here.
     // Markers and polylines are always being rebuilt even if just a focussedItemId change
 
-    // Remove existing markers and polylines then replace with new ones
-    this.state.markerItems.forEach(item => {
-      item.marker.setMap(null);
-      item.infoWindow.close();
-    });
-    this.state.polylineItems.forEach(item => {
-      item.polyline.setMap(null);
-      item.infoWindow.close();
-    });
-
-    const markerItems = this.makeMarkerItems(nextProps.markerData);
-    const polylineItems = this.makePolylineItems(nextProps.polylineData);
-
-    if (nextProps.focussedItemId) {
-      const allItems = markerItems.concat(polylineItems);
-      const focussedItem = allItems.find(item => item.id === nextProps.focussedItemId);
-      if (focussedItem) {
-        this.focusItem(focussedItem);
+      // Remove existing markers and polylines then replace with new ones
+      this.state.markerItems.forEach(item => {
+        item.marker.setMap(null);
+        item.infoWindow.close();
+      });
+      this.state.polylineItems.forEach(item => {
+        item.polyline.setMap(null);
+        item.infoWindow.close();
+      });
+  
+      const markerItems = this.makeMarkerItems(nextProps.markerData);
+      const polylineItems = this.makePolylineItems(nextProps.polylineData);
+      const bounds = this.makeBounds(markerItems, polylineItems);
+      
+      if (!bounds.isEmpty()) {
+        this.map.fitBounds(bounds);
       }
-    }
 
-    if (!this.bounds.isEmpty()) {
-      this.map.fitBounds(this.bounds);
-    }
+      
+      if (nextProps.focussedItemId) {
+        const allItems = this.state.markerItems.concat(this.state.polylineItems);
+        const focussedItem = allItems.find(item => item.id === nextProps.focussedItemId);
+        if (focussedItem) {
+          this.focusItem(focussedItem);
+        }
 
-    this.setState({ markerItems, polylineItems });
+      }
+
+      this.setState({ markerItems, polylineItems });
   }
 
   makeMarkerItems(markerData) {
@@ -71,7 +74,6 @@ export default class Map extends React.Component {
     });
 
     markerItems.forEach(item => {
-      this.bounds.extend(item.marker.getPosition());
       item.marker.setMap(this.map);
       item.marker.addListener('click', () => {
         this.resetAllMapElements();
@@ -91,7 +93,6 @@ export default class Map extends React.Component {
     });
 
     polylineItems.forEach(item => {
-      item.polyline.getPath().forEach(position => this.bounds.extend(position));
       item.polyline.setMap(this.map);
       item.polyline.addListener('click', event => {
         this.resetAllMapElements();
@@ -103,6 +104,13 @@ export default class Map extends React.Component {
     });
 
     return polylineItems;
+  }
+
+  makeBounds(markerItems, polylineItems) {
+    const bounds = new google.maps.LatLngBounds();
+    markerItems.forEach(item => bounds.extend(item.marker.getPosition()));
+    polylineItems.forEach(item => item.polyline.getPath().forEach(position => bounds.extend(position)));
+    return bounds;
   }
 
   focusItem(item, position) {
