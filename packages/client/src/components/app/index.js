@@ -48,15 +48,9 @@ class App extends Component {
   render() {
     return (
       <div className='app'>
-        <div className='app__menu'>
-          <Menu
-            items={this.props.feeds}
-          />
-        </div>
+        <div className='app__menu'><Menu /></div>
         <div className='app__map-wrapper'>
-          <div className='app__map'>
-            <Map />
-          </div>
+          <div className='app__map'><Map /></div>
         </div>
       </div>
     );
