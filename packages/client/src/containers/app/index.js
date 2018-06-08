@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { setFeeds } from '../../actions';
+import { setFocussedItem, setFeeds } from '../../actions';
 import App from '../../components/app';
 
 const mapStateToProps = state => ({ 
@@ -8,6 +8,7 @@ const mapStateToProps = state => ({
  });
 
 const mapDispatchToProps = dispatch => ({
+  setFocussedItem: id => dispatch(setFocussedItem(id)),
   setFeeds: feeds => dispatch(setFeeds(feeds))
 });
 
