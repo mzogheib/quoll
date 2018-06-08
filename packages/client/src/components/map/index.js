@@ -115,6 +115,7 @@ export default class Map extends React.Component {
       item.infoWindow.setPosition(infoWindowPosition);
       item.infoWindow.open(this.map);
     }
+    this.props.setFocussedItem(item.id);
   }
 
   resetAllMapElements() {
