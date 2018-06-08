@@ -15,24 +15,8 @@ class MenuItem extends Component {
     });
   }
 
-  connect() {
-    this.props.onConnect(this.props.item.id);
-  }
-
-  disconnect() {
-    this.props.onDisconnect(this.props.item.id);
-  }
-
   selectLine(line) {
-    this.props.onSelectLine(line)
-  }
-
-  renderConnect() {
-    return (
-      <div className='menu-item__summary-wrapper'>
-        <button onClick={this.connect.bind(this)}>Connect</button>
-      </div>
-    );
+    this.props.setFocussedItem(line.id)
   }
 
   renderSummary() {
@@ -58,7 +42,6 @@ class MenuItem extends Component {
     return (
       <div>
         {summaryList}
-        <button onClick={this.disconnect.bind(this)}>Disconnect</button>
       </div>
     );
   }
@@ -68,7 +51,7 @@ class MenuItem extends Component {
       <div>
         <div className='menu-item'>
           <span className='menu-item__name'>{this.props.item.name}</span>
-          {!this.props.item.isConnected && this.renderConnect()}
+          {!this.props.item.isConnected && 'Disconnected'}
           {this.props.item.isConnected && this.renderSummary()}
         </div>
         {this.props.item.isConnected && this.state.isExpanded && this.renderSummaryList()}

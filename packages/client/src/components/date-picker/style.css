@@ -1,11 +1,11 @@
-.filter {
+.date-picker {
     display: flex;
 }
 
-.filter__button {
+.date-picker__button {
     flex-basis: 70px;
 }
 
-.filter__date-input {
+.date-picker__date-input {
     flex-grow: 1;
 }

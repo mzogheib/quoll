@@ -1,21 +1,14 @@
 import React from 'react';
 import './style.css';
-import Filter from '../filter';
-import MenuItems from '../menu-items';
+import DatePicker from '../../containers/date-picker';
+import MenuItems from '../../containers/menu-items';
 
-function Menu(props) {
+function Menu() {
   return (
     <div className='menu'>
       <div className='menu__title'>Quoll</div>
-      <div className='menu__filter'><Filter onUpdate={props.onFilterUpdate} /></div>
-      <div className='menu__items'>
-        <MenuItems
-          items={props.items}
-          onConnect={props.onConnect}
-          onDisconnect={props.onDisconnect}
-          onSelectLine={props.onSelectLine}
-        />
-      </div>
+      <div className='menu__filter'><DatePicker /></div>
+      <div className='menu__items'><MenuItems /></div>
     </div>
   );
 }

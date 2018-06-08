@@ -6,6 +6,7 @@ const google = window.google;
 export default class Map extends React.Component {
   constructor(props) {
     super(props);
+    this.bounds = new google.maps.LatLngBounds();
     this.state = {
       markerItems: [],
       polylineItems: []
@@ -24,6 +25,12 @@ export default class Map extends React.Component {
       if (event.placeId) this.resetAllMapElements();
     });
 
+    const markerItems = this.makeMarkerItems(this.props.markerData);
+    const polylineItems = this.makePolylineItems(this.props.polylineData);
+    if (!this.bounds.isEmpty()) {
+      this.map.fitBounds(this.bounds);
+    }
+    this.setState({ markerItems, polylineItems });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -40,16 +47,31 @@ export default class Map extends React.Component {
       item.infoWindow.close();
     });
 
-    const markerItems = nextProps.markerData.map(item => {
+    const markerItems = this.makeMarkerItems(nextProps.markerData);
+    const polylineItems = this.makePolylineItems(nextProps.polylineData);
+
+    if (nextProps.focussedItemId) {
+      const allItems = markerItems.concat(polylineItems);
+      const focussedItem = allItems.find(item => item.id === nextProps.focussedItemId);
+      if (focussedItem) {
+        this.focusItem(focussedItem);
+      }
+    }
+
+    if (!this.bounds.isEmpty()) {
+      this.map.fitBounds(this.bounds);
+    }
+
+    this.setState({ markerItems, polylineItems });
+  }
+
+  makeMarkerItems(markerData) {
+    const markerItems = markerData.map(item => {
       return { id: item.id, marker: mapUtils.makeMarker(item), infoWindow: mapUtils.makeInfoWindow(item) };
     });
-    const polylineItems = nextProps.polylineData.map(item => {
-      return { id: item.id, polyline: mapUtils.makePolyline(item), infoWindow: mapUtils.makeInfoWindow(item) };
-    });
 
-    const bounds = new google.maps.LatLngBounds();
     markerItems.forEach(item => {
-      bounds.extend(item.marker.getPosition());
+      this.bounds.extend(item.marker.getPosition());
       item.marker.setMap(this.map);
       item.marker.addListener('click', () => {
         this.resetAllMapElements();
@@ -59,8 +81,17 @@ export default class Map extends React.Component {
         this.resetAllMapElements();
       });
     });
+
+    return markerItems;
+  }
+
+  makePolylineItems(polylineData) {
+    const polylineItems = polylineData.map(item => {
+      return { id: item.id, polyline: mapUtils.makePolyline(item), infoWindow: mapUtils.makeInfoWindow(item) };
+    });
+
     polylineItems.forEach(item => {
-      item.polyline.getPath().forEach(position => bounds.extend(position));
+      item.polyline.getPath().forEach(position => this.bounds.extend(position));
       item.polyline.setMap(this.map);
       item.polyline.addListener('click', event => {
         this.resetAllMapElements();
@@ -71,19 +102,7 @@ export default class Map extends React.Component {
       });
     });
 
-    if (nextProps.focussedItemId) {
-      const allItems = markerItems.concat(polylineItems);
-      const focussedItem = allItems.find(item => item.id === nextProps.focussedItemId);
-      if (focussedItem) {
-        this.focusItem(focussedItem);
-      }
-    }
-
-    if (!bounds.isEmpty()) {
-      this.map.fitBounds(bounds);
-    }
-
-    this.setState({ markerItems, polylineItems });
+    return polylineItems;
   }
 
   focusItem(item, position) {
@@ -96,6 +115,7 @@ export default class Map extends React.Component {
       item.infoWindow.setPosition(infoWindowPosition);
       item.infoWindow.open(this.map);
     }
+    this.props.setFocussedItem(item.id);
   }
 
   resetAllMapElements() {
