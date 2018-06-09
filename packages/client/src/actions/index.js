@@ -115,7 +115,6 @@ export const signupUser = () => {
   return dispatch => {
     dispatch(setUserAuthenticating())
     return userService.signup().then(user => {
-      userService.setCurrentUser(user.id);
       dispatch(setUserReady());
       return user;
     });

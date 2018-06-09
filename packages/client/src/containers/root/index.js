@@ -9,7 +9,6 @@ const mapDispatchToProps = dispatch => ({
     const userId = userService.getCurrentUser();
     const action = userId ? () => loginUser(userId) : () => signupUser();
     return dispatch(action()).then(user => {
-      userService.setCurrentUser(user.id);
       const connectedFeeds = user.feeds.filter(feed => feed.isConnected).map(feed => feed.id);
       dispatch(setConnectedFeeds(connectedFeeds));
     });
