@@ -132,7 +132,6 @@ export default class Map extends React.Component {
   }
 
   closeAllInfoWindows() {
-    console.log(this.state.makeMarkerItems)
     this.state.markerItems.forEach(item => item.infoWindow.close());
     this.state.polylineItems.forEach(item => item.infoWindow.close());
   }
