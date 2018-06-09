@@ -55,9 +55,8 @@ export default class Map extends React.Component {
         this.map.fitBounds(bounds);
       }
 
-      
       if (nextProps.focussedItemId) {
-        const allItems = this.state.markerItems.concat(this.state.polylineItems);
+        const allItems = markerItems.concat(polylineItems);
         const focussedItem = allItems.find(item => item.id === nextProps.focussedItemId);
         if (focussedItem) {
           this.focusItem(focussedItem);
