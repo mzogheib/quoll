@@ -1,9 +1,19 @@
 import { connect } from 'react-redux';
-import { setConnectedFeeds } from '../../actions';
+import { setConnectedFeeds, loginUser, signupUser } from '../../actions';
 import Root from '../../components/root';
+import userService from '../../services/user';
 
 const mapDispatchToProps = dispatch => ({
-  setConnectedFeeds: ids => dispatch(setConnectedFeeds(ids))
+  // TODO: if login fails then clear that user from localStorage and signup
+  authenticate: () => {
+    const userId = userService.getCurrentUser();
+    const action = userId ? () => loginUser(userId) : () => signupUser();
+    return dispatch(action()).then(user => {
+      userService.setCurrentUser(user.id);
+      const connectedFeeds = user.feeds.filter(feed => feed.isConnected).map(feed => feed.id);
+      dispatch(setConnectedFeeds(connectedFeeds));
+    });
+  }
 });
 
 export default connect(null, mapDispatchToProps)(Root);

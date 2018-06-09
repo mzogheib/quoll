@@ -1,5 +1,6 @@
 import feedsConfig from '../services/feeds-config';
 import feedsService from '../services/feeds';
+import userService from '../services/user';
 
 const feedServices = feedsConfig.map(feedsService.make);
 
@@ -91,3 +92,32 @@ export const refreshFeeds = () => {
     return Promise.all(promises).then(feeds => dispatch(setFeeds(feeds)));
   };
 };
+
+export const setUserAuthenticating = () => ({
+  type: 'SET_USER_AUTHENTICATING'
+});
+
+export const setUserReady = () => ({
+  type: 'SET_USER_READY'
+});
+
+export const loginUser = id => {
+  return dispatch => {
+    dispatch(setUserAuthenticating())
+    return userService.login(id).then(user => {
+      dispatch(setUserReady());
+      return user;
+    });
+  }
+}
+
+export const signupUser = () => {
+  return dispatch => {
+    dispatch(setUserAuthenticating())
+    return userService.signup().then(user => {
+      userService.setCurrentUser(user.id);
+      dispatch(setUserReady());
+      return user;
+    });
+  }
+}
