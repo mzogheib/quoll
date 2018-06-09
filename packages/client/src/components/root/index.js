@@ -9,8 +9,6 @@ import Settings from '../../containers/settings';
 class Root extends Component {
   constructor(props) {
     super(props);
-    this.renderLoading = this.renderLoading.bind(this);
-    this.renderRoot = this.renderRoot.bind(this);
     this.state = {
       isLoading: true
     }
