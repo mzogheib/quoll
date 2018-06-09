@@ -33,6 +33,10 @@ export default class Map extends React.Component {
     this.setState({ markerItems, polylineItems });
   }
 
+  componentWillUnmount() {
+    this.props.setFocussedItem(null);
+  }
+
   componentWillReceiveProps(nextProps) {
     // TODO: do a better job of managing props and state here.
     // Markers and polylines are always being rebuilt even if just a focussedItemId change
