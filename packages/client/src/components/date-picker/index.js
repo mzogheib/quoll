@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 
-function FilterControls(props) {
+function DatePicker(props) {
 
   function formatDate(date) {
     const dateParts = date.toLocaleDateString().split('/'); // => [dd, mm, yyyy]
@@ -33,4 +33,4 @@ function FilterControls(props) {
   );
 }
 
-export default FilterControls;
+export default DatePicker;

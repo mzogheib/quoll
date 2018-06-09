@@ -60,7 +60,7 @@ export const authenticateFeed = (id, code) => {
   };
 };
 
-export const disconnectFeed = (id, code) => {
+export const disconnectFeed = (id) => {
   const feedService = feedServices.find(feed => feed.id === id);
   return (dispatch) => {
     dispatch(setFeedLoading(id));
@@ -69,5 +69,25 @@ export const disconnectFeed = (id, code) => {
       dispatch(setFeedReady(id));
       return alert;
     })
+  };
+};
+
+const refreshFeed = (feed, date) => {
+  const feedService = feedServices.find(feedService => feedService.id === feed.id);
+  return feedService.getData(date).then(data => ({
+    ...feed,
+    data: data,
+    summary: feedService.makeSummary(data),
+    summaryList: feedService.makeSummaryList(data),
+    mapData: feedService.makeMapData(data)
+  }));
+}
+
+export const refreshFeeds = () => {
+  return (dispatch, getState) => {
+    const state = getState();
+    const date = state.date;
+    const promises = state.feeds.map(feed => feed.isConnected ? refreshFeed(feed, date) : Promise.resolve(feed))
+    return Promise.all(promises).then(feeds => dispatch(setFeeds(feeds)));
   };
 };
