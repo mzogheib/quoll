@@ -77,10 +77,11 @@ export default class Map extends React.Component {
       item.marker.setMap(this.map);
       item.marker.addListener('click', () => {
         this.resetAllMapElements();
-        this.focusItem(item);
+        this.props.setFocussedItem(item.id);
       });
       item.infoWindow.addListener('closeclick', () => {
         this.resetAllMapElements();
+        this.props.setFocussedItem(null);
       });
     });
 
@@ -96,10 +97,10 @@ export default class Map extends React.Component {
       item.polyline.setMap(this.map);
       item.polyline.addListener('click', event => {
         this.resetAllMapElements();
-        this.focusItem(item, event.latLng);
+        this.props.setFocussedItem(item.id); // TODO: support focussing at a particular lat lng
       });
       item.infoWindow.addListener('closeclick', () => {
-        this.resetAllMapElements();
+        this.props.setFocussedItem(null);
       });
     });
 
@@ -123,7 +124,6 @@ export default class Map extends React.Component {
       item.infoWindow.setPosition(infoWindowPosition);
       item.infoWindow.open(this.map);
     }
-    this.props.setFocussedItem(item.id);
   }
 
   resetAllMapElements() {
@@ -133,6 +133,7 @@ export default class Map extends React.Component {
   }
 
   closeAllInfoWindows() {
+    console.log(this.state.makeMarkerItems)
     this.state.markerItems.forEach(item => item.infoWindow.close());
     this.state.polylineItems.forEach(item => item.infoWindow.close());
   }
