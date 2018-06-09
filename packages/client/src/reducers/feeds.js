@@ -5,6 +5,7 @@ import feedsConfig from '../services/feeds-config';
 const defaultFeeds = feedsConfig.map(config => ({
   id: config.id,
   name: config.name,
+  isLoading: false,
   isConnected: false,
   data: [],
   summary: 'None',
@@ -20,10 +21,22 @@ const feeds = (state = defaultFeeds, action) => {
       return action.feeds;
     case 'SET_CONNECTED_FEEDS':
       return state.map(feed => action.ids.includes(feed.id) ? { ...feed, isConnected: true } : feed)
-    case 'CONNECT_FEED':
-      return state.map(feed => feed.id === action.id ? { ...feed, isConnected: true } : feed)
-    case 'DISCONNECT_FEED':
-      return state.map(feed => feed.id === action.id ? { ...feed, isConnected: false } : feed)
+    case 'SET_DISCONNECTED_FEEDS':
+      return state.map(feed => action.ids.includes(feed.id) ?
+        {
+          ...feed,
+          isConnected: false,
+          summary: 'None',
+          summaryList: [],
+          data: [],
+          mapData: []
+        } :
+        feed
+      )
+    case 'SET_FEED_LOADING':
+      return state.map(feed => feed.id === action.id ? { ...feed, isLoading: true } : feed)
+    case 'SET_FEED_READY':
+      return state.map(feed => feed.id === action.id ? { ...feed, isLoading: false } : feed)
     default:
       return state;
   }

@@ -1,21 +1,16 @@
 import React from 'react';
 import './style.css';
-import feedsService from '../../services/feeds';
-import feedsConfig from '../../services/feeds-config';
-import utils from '../../services/utils'
+import utils from '../../services/utils';
 import storageService from '../../services/storage';
 
 function Settings(props) {
-  const feedServices = feedsConfig.map(feedsService.make);
 
   handleOAuth()
 
   function handleOAuth() {
     const queryParams = utils.getQueryParams(window.location.href);
     
-    if (!queryParams || !queryParams.state) {
-      return;
-    } else {
+    if (queryParams && queryParams.state) {
       // Looks like oauth so remove the query params
       window.history.replaceState(null, null, window.location.pathname);
       const oauthState = utils.decode(queryParams.state);
@@ -23,7 +18,6 @@ function Settings(props) {
       const oauthError = queryParams.error;
 
       const feedId = oauthState.id;
-      const feedService = feedServices.find(feed => feed.id === feedId);
       const feed = props.feeds.find(feed => feed.id === feedId);
 
       const token = oauthState.token;
@@ -31,63 +25,57 @@ function Settings(props) {
       const tokenIsValid = storedToken && token && storedToken === token;
       storageService.delete('oauth-state-token');
 
-      if (!feedService || !feed) {
-        alert(`Unknown feed: ${feedId}`);
-        return;
+      if (!feed) {
+        return alert(`Unknown feed: ${feedId}`);
       } else if (!tokenIsValid || oauthError === 'access_denied') {
-        alert(`${feedService.name} access denied.`);
-        return;
+        return alert(`${feed.name} access denied.`);
       } else if (oauthCode) {
-        feedService.authenticate({ code: oauthCode })
-          .then(() => ({
-            ...feed,
-            isConnected: true
-          }))
-          .then(connectedFeed => props.feeds.map(feed => feed.id === connectedFeed.id ? connectedFeed : feed))
-          .then(props.setFeeds)
-          .catch(alert)
-        } else {
-          alert(`Unknown response from ${feed.name}.`);
+        return props.authenticate(feedId, oauthCode).catch(alert);
+      } else {
+        return alert(`Unknown response from ${feed.name}.`);
       }
     }
   }
 
   function connectFeed(id) {
-    const feedService = feedServices.find(feed => feed.id === id);
-    const token = utils.makeRandomString();
-    storageService.set('oauth-state-token', token);
-    feedService.connect(token);
+    props.getOauthUrl(id).then(url => {
+      const token = utils.makeRandomString();
+      storageService.set('oauth-state-token', token);
+      const stateString = utils.encode({ id, token });
+      const urlWithState = utils.addQueryParams(url, { state: stateString });
+      window.location.replace(urlWithState);
+    });
   }
 
   function disconnectFeed(id) {
-    const feedService = feedServices.find(feed => feed.id === id);
-    const feed = props.feeds.find(feed => feed.id === id);
-    feedService.disconnect()
+    props.disconnect(id)
       .then(alertText => {
         if (alertText) {
           alert(alertText);
         }
-        const disconnectedFeed = {
-          ...feed,
-          isConnected: false,
-          summary: 'None',
-          summaryList: [],
-          data: [],
-          mapData: []
-        };
-        const updatedFeeds = props.feeds.map(feed => feed.id === disconnectedFeed.id ? disconnectedFeed : feed);
-        props.setFeeds(updatedFeeds)
       })
       .catch(alert);
+  }
+
+  function renderLoading() {
+    return (
+      <div>Loading...</div>
+    );
+  }
+
+  function renderButton(feed) {
+    return (
+      <button onClick={() => feed.isConnected ? disconnectFeed(feed.id) : connectFeed(feed.id)}>
+        {feed.isConnected ? 'Disconnect' : 'Connect'}
+      </button>
+    )
   }
 
   function renderFeed(feed) {
     return (
       <div className='settings__feeds' key={feed.id}>
         <div>{feed.name}</div>
-        <button onClick={() => feed.isConnected ? disconnectFeed(feed.id) : connectFeed(feed.id)}>
-          {feed.isConnected ? 'Disconnect' : 'Connect'}
-        </button>
+        {feed.isLoading ? renderLoading() : renderButton(feed)}
       </div>
     )
   }

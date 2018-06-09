@@ -4,6 +4,7 @@ import './style.css';
 class MenuItem extends Component {
   constructor(props) {
     super(props);
+    this.toggleExpand = this.toggleExpand.bind(this);
     this.state = {
       isExpanded: false
     };
@@ -23,7 +24,7 @@ class MenuItem extends Component {
     return (
       <div className='menu-item__summary-wrapper'>
         <span className='menu-item__summary'>{this.props.item.summary}</span>
-        <button className='menu-item__expand' onClick={this.toggleExpand.bind(this)}>{this.state.isExpanded ? 'Less' : 'More'}</button>
+        <button className='menu-item__expand' onClick={this.toggleExpand}>{this.state.isExpanded ? 'Less' : 'More'}</button>
       </div>
     );
   }

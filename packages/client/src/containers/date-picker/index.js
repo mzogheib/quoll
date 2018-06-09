@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { setDate } from '../../actions';
+import { setDate, refreshFeeds, setFocussedItem } from '../../actions';
 import DatePicker from '../../components/date-picker';
 
 const mapStateToProps = state => ({
@@ -7,10 +7,11 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  setDate: date => dispatch(setDate(date))
+  setDate: date => {
+    dispatch(setDate(date));
+    dispatch(refreshFeeds())
+      .then(() => dispatch(setFocussedItem(null)));
+  }
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(DatePicker);
+export default connect(mapStateToProps, mapDispatchToProps)(DatePicker);
