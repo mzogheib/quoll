@@ -7,6 +7,12 @@ function MenuItems(props) {
     props.onEntryClick(entry.id)
   }
 
+  function renderLoading() {
+    return (
+      <div>Loading...</div>
+    );
+  }
+
   function renderNone() {
     return (
       <div>None</div>
@@ -25,8 +31,9 @@ function MenuItems(props) {
 
   function render() {
     const list = props.feeds.reduce((prev, next) => prev.concat([].concat(...next.summaryList)), []);
+    const isLoading = props.feeds.reduce((prev, next) => prev || next.isLoading, false);
     return (
-      <div className='menu-items'>{list.length ? renderList(list) : renderNone()}</div>
+      <div className='menu-items'>{isLoading ? renderLoading() : list.length ? renderList(list) : renderNone()}</div>
     );
   }
   
