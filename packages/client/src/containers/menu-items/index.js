@@ -1,6 +1,11 @@
 import { connect } from 'react-redux';
+import { setFocussedItem } from '../../actions';
 import MenuItems from '../../components/menu-items';
 
-const mapStateToProps = ({ feeds }) => ({ items: feeds });
+const mapStateToProps = ({ feeds }) => ({ feeds });
 
-export default connect(mapStateToProps)(MenuItems);
+const mapDispatchToProps = dispatch => ({
+    onEntryClick: id => dispatch(setFocussedItem(id))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MenuItems);

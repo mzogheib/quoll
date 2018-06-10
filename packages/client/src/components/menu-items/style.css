@@ -2,3 +2,19 @@
     display: flex;
     flex-direction: column;
 }
+
+.menu-items__entry {
+    display: flex;
+}
+
+.menu-items__entry:hover {
+    cursor: pointer;
+    background-color: gainsboro;
+}
+
+.menu-items__entry-time-label {
+    flex-basis: 80px;
+}
+.menu-items__entry-label {
+    flex-grow: 1;
+}

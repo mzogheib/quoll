@@ -1,23 +1,36 @@
 import React from 'react';
 import './style.css';
-import MenuItem from '../../containers/menu-item'
 
 function MenuItems(props) {
 
-  function renderItems() {
-    return props.items.map((item, index) => {
-      return (
-        <MenuItem
-          key={index}
-          item={item}
-        />
-      );
-    });
+  function handleClick(entry) {
+    props.onEntryClick(entry.id)
   }
 
-  return (
-    <div className='menu-items'>{renderItems()}</div>
-  );
+  function renderNone() {
+    return (
+      <div>None</div>
+    );
+  }
+
+  function renderList(list) {
+    return list.sort((a, b) => a.timeStamp - b.timeStamp).map((entry, index) => (
+      <div key={index} onClick={() => handleClick(entry)} className='menu-items__entry'>
+        <span className='menu-items__entry-time-label'>{entry.timeLabel}</span>
+        <span className='menu-items__entry-label'>{entry.label}</span>
+        <span className='menu-items__entry-value'>{entry.value}</span>
+      </div>
+    ));
+  }
+
+  function render() {
+    const list = props.feeds.reduce((prev, next) => prev.concat([].concat(...next.summaryList)), []);
+    return (
+      <div className='menu-items'>{list.length ? renderList(list) : renderNone()}</div>
+    );
+  }
+  
+  return render();
 }
 
 export default MenuItems;
