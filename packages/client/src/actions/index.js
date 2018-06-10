@@ -75,20 +75,26 @@ export const disconnectFeed = (id) => {
 
 const refreshFeed = (feed, date) => {
   const feedService = feedServices.find(feedService => feedService.id === feed.id);
-  return feedService.getData(date).then(data => ({
-    ...feed,
-    data: data,
-    summary: feedService.makeSummary(data),
-    summaryList: feedService.makeSummaryList(data),
-    mapData: feedService.makeMapData(data)
-  }));
+  return (dispatch) => {
+    dispatch(setFeedLoading(feed.id))
+    return feedService.getData(date).then(data => {
+      dispatch(setFeedReady(feed.id))
+      return {
+        ...feed,
+        data: data,
+        summary: feedService.makeSummary(data),
+        summaryList: feedService.makeSummaryList(data),
+        mapData: feedService.makeMapData(data)
+      };
+    })
+  }
 }
 
 export const refreshFeeds = () => {
   return (dispatch, getState) => {
     const state = getState();
     const date = state.date;
-    const promises = state.feeds.map(feed => feed.isConnected ? refreshFeed(feed, date) : Promise.resolve(feed))
+    const promises = state.feeds.map(feed => feed.isConnected ? dispatch(refreshFeed(feed, date)) : Promise.resolve(feed))
     return Promise.all(promises).then(feeds => dispatch(setFeeds(feeds)));
   };
 };
