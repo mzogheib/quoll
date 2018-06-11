@@ -1,5 +1,5 @@
-import feedsConfig from '../services/feeds-config';
-import feedsService from '../services/feeds';
+import feedsConfig from '../../services/feeds/config';
+import feedsService from '../../services/feeds';
 
 const feedServices = feedsConfig.map(feedsService.make);
 

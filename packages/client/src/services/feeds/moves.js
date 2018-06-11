@@ -1,4 +1,4 @@
-import api from './api';
+import api from '../api';
 import polyline from '@mapbox/polyline';
 
 const ActivityWhitelist = ['walking', 'transport', 'car', 'motorcycle', 'tram', 'train', 'bus'];

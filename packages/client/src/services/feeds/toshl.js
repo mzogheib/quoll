@@ -1,5 +1,5 @@
-import api from './api';
-import utils from './utils';
+import api from '../api';
+import utils from '../utils';
 
 const DefaultTime = '12:00:00';
 
