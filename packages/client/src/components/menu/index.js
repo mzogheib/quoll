@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
-import DatePicker from '../../containers/date-picker';
-import MenuItems from '../../containers/menu-items';
+import DatePicker from '../date-picker';
+import MenuItems from '../menu-items';
 
 function Menu() {
   return (
