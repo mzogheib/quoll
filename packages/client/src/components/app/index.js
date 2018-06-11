@@ -1,24 +1,9 @@
-import React, { Component } from 'react';
-import './style.css';
-import Menu from '../menu';
-import Map from '../../containers/map';
+import { connect } from 'react-redux';
+import { refreshFeeds } from '../../actions';
+import App from './component';
 
-class App extends Component {
+const mapDispatchToProps = dispatch => ({
+  refreshFeeds: () => dispatch(refreshFeeds()),
+});
 
-  componentDidMount() {
-    this.props.refreshFeeds();
-  }
-
-  render() {
-    return (
-      <div className='app'>
-        <div className='app__menu'><Menu /></div>
-        <div className='app__map-wrapper'>
-          <div className='app__map'><Map /></div>
-        </div>
-      </div>
-    );
-  }
-}
-
-export default App;
+export default connect(null, mapDispatchToProps)(App);

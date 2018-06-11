@@ -1,51 +1,18 @@
-import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import './style.css';
-import App from '../../containers/app';
-import Header from '../../components/header';
-import SideBar from '../../containers/side-bar';
-import Settings from '../../containers/settings';
+import { connect } from 'react-redux';
+import { setConnectedFeeds, loginUser, signupUser } from '../../actions';
+import Root from './component';
+import userService from '../../services/user';
 
-class Root extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLoading: true
-    }
+const mapDispatchToProps = dispatch => ({
+  // TODO: if login fails then clear that user from localStorage and signup
+  authenticate: () => {
+    const userId = userService.getCurrentUser();
+    const action = userId ? () => loginUser(userId) : () => signupUser();
+    return dispatch(action()).then(user => {
+      const connectedFeeds = user.feeds.filter(feed => feed.isConnected).map(feed => feed.id);
+      dispatch(setConnectedFeeds(connectedFeeds));
+    });
   }
+});
 
-  componentDidMount() {
-    this.props.authenticate().then(() => this.setState({ isLoading: false }));
-  }
-
-  renderLoading() {
-    return (
-      <div>Loading...</div>
-    );
-  }
-
-  renderRoot() {
-    return (
-      <BrowserRouter>
-        <div className='root'>
-          <SideBar />
-          <div className='root__right'>
-            <Header />
-            <div className='root__main'>
-              <Switch>
-                <Route path="/settings" component={Settings} />
-                <Route path="/" component={App} />
-              </Switch>
-            </div>
-          </div>
-        </div>
-      </BrowserRouter>
-    );
-  }
-
-  render() {
-    return this.state.isLoading ? this.renderLoading() : this.renderRoot();
-  }
-}
-
-export default Root;
+export default connect(null, mapDispatchToProps)(Root);
