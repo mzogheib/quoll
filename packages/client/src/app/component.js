@@ -6,7 +6,7 @@ import Settings from '../routes/settings';
 import Header from '../components/header';
 import SideBar from '../components/side-bar';
 
-class Root extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,14 +24,14 @@ class Root extends Component {
     );
   }
 
-  renderRoot() {
+  renderApp() {
     return (
       <BrowserRouter>
-        <div className='root'>
+        <div className='app'>
           <SideBar />
-          <div className='root__right'>
+          <div className='app__right'>
             <Header />
-            <div className='root__main'>
+            <div className='app__main'>
               <Switch>
                 <Route path="/settings" component={Settings} />
                 <Route path="/" component={Home} />
@@ -44,8 +44,8 @@ class Root extends Component {
   }
 
   render() {
-    return this.state.isLoading ? this.renderLoading() : this.renderRoot();
+    return this.state.isLoading ? this.renderLoading() : this.renderApp();
   }
 }
 
-export default Root;
+export default App;

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { setConnectedFeeds } from '../store/feeds';
 import { loginUser, signupUser } from '../store/user';
-import Root from './component';
+import App from './component';
 import userService from '../services/user';
 
 const mapDispatchToProps = dispatch => ({
@@ -16,4 +16,4 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(null, mapDispatchToProps)(Root);
+export default connect(null, mapDispatchToProps)(App);
