@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './style.css';
-import Menu from '../menu';
-import Map from '../map';
+import Menu from '../../components/menu';
+import Map from '../../components/map';
 
 class App extends Component {
 

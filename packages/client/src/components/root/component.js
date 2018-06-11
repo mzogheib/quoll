@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './style.css';
-import App from '../app';
+import App from '../../routes/app';
+import Settings from '../../routes/settings';
 import Header from '../header';
 import SideBar from '../side-bar';
-import Settings from '../settings';
 
 class Root extends Component {
   constructor(props) {
