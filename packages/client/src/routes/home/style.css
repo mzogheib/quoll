@@ -3,12 +3,12 @@
     display: flex;
 }
 
-.app__map-wrapper {
+.home__map-wrapper {
     position: relative;
     flex: 1;
 }
 
-.app__map {
+.home__map {
     position: absolute;
     top: 0;
     right: 0;

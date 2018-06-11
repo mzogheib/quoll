@@ -12,9 +12,9 @@ class App extends Component {
   render() {
     return (
       <div className='app'>
-        <div className='app__menu'><Menu /></div>
-        <div className='app__map-wrapper'>
-          <div className='app__map'><Map /></div>
+        <div className='home__menu'><Menu /></div>
+        <div className='home__map-wrapper'>
+          <div className='home__map'><Map /></div>
         </div>
       </div>
     );

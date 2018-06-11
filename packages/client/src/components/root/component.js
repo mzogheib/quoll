@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './style.css';
-import App from '../../routes/app';
+import Home from '../../routes/home';
 import Settings from '../../routes/settings';
 import Header from '../header';
 import SideBar from '../side-bar';
@@ -34,7 +34,7 @@ class Root extends Component {
             <div className='root__main'>
               <Switch>
                 <Route path="/settings" component={Settings} />
-                <Route path="/" component={App} />
+                <Route path="/" component={Home} />
               </Switch>
             </div>
           </div>
