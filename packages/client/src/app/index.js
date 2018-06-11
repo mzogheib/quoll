@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import { setConnectedFeeds, loginUser, signupUser } from '../../actions';
+import { setConnectedFeeds, loginUser, signupUser } from '../actions';
 import Root from './component';
-import userService from '../../services/user';
+import userService from '../services/user';
 
 const mapDispatchToProps = dispatch => ({
   // TODO: if login fails then clear that user from localStorage and signup
