@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  setDate: date => {
+  onDateChange: date => {
     dispatch(setDate(date));
     dispatch(refreshFeeds())
       .then(() => dispatch(setFocussedItem(null)));

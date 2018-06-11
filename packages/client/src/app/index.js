@@ -6,7 +6,7 @@ import userService from '../services/user';
 
 const mapDispatchToProps = dispatch => ({
   // TODO: if login fails then clear that user from localStorage and signup
-  authenticate: () => {
+  onMount: () => {
     const userId = userService.getCurrentUser();
     const action = userId ? () => loginUser(userId) : () => signupUser();
     return dispatch(action()).then(user => {

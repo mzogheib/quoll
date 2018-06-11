@@ -11,17 +11,17 @@ function DatePicker(props) {
   function previous() {
     const yesterday = new Date(props.date);
     yesterday.setDate(yesterday.getDate() - 1);
-    props.setDate(formatDate(yesterday));
+    props.onDateChange(formatDate(yesterday));
   }
 
   function next() {
     const tomorrow = new Date(props.date);
     tomorrow.setDate(tomorrow.getDate() + 1);
-    props.setDate(formatDate(tomorrow));
+    props.onDateChange(formatDate(tomorrow));
   }
 
   function handleDateChange(e) {
-    props.setDate(e.target.value)
+    props.onDateChange(e.target.value)
   }
 
   return (

@@ -19,7 +19,7 @@ const mapStateToProps = ({ feeds, focussedItemId }) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  setFocussedItem: id => dispatch(setFocussedItem(id))
+  onElementSelect: id => dispatch(setFocussedItem(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Map);

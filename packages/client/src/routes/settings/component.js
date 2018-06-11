@@ -30,7 +30,7 @@ function Settings(props) {
       } else if (!tokenIsValid || oauthError === 'access_denied') {
         return alert(`${feed.name} access denied.`);
       } else if (oauthCode) {
-        return props.authenticate(feedId, oauthCode).catch(alert);
+        return props.onOauthCodeReceived(feedId, oauthCode).catch(alert);
       } else {
         return alert(`Unknown response from ${feed.name}.`);
       }
@@ -38,7 +38,7 @@ function Settings(props) {
   }
 
   function connectFeed(id) {
-    props.getOauthUrl(id).then(url => {
+    props.onConnect(id).then(url => {
       const token = utils.makeRandomString();
       storageService.set('oauth-state-token', token);
       const stateString = utils.encode({ id, token });
@@ -48,7 +48,7 @@ function Settings(props) {
   }
 
   function disconnectFeed(id) {
-    props.disconnect(id)
+    props.onDisconnect(id)
       .then(alertText => {
         if (alertText) {
           alert(alertText);

@@ -6,7 +6,7 @@ import Map from '../../components/map';
 class App extends Component {
 
   componentDidMount() {
-    this.props.refreshFeeds();
+    this.props.onMount();
   }
 
   render() {

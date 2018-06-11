@@ -15,7 +15,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.props.authenticate().then(() => this.setState({ isLoading: false }));
+    this.props.onMount().then(() => this.setState({ isLoading: false }));
   }
 
   renderLoading() {

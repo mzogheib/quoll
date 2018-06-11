@@ -34,7 +34,7 @@ export default class Map extends React.Component {
   }
 
   componentWillUnmount() {
-    this.props.setFocussedItem(null);
+    this.props.onElementSelect(null);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -80,11 +80,11 @@ export default class Map extends React.Component {
       item.marker.setMap(this.map);
       item.marker.addListener('click', () => {
         this.resetAllMapElements();
-        this.props.setFocussedItem(item.id);
+        this.props.onElementSelect(item.id);
       });
       item.infoWindow.addListener('closeclick', () => {
         this.resetAllMapElements();
-        this.props.setFocussedItem(null);
+        this.props.onElementSelect(null);
       });
     });
 
@@ -100,10 +100,10 @@ export default class Map extends React.Component {
       item.polyline.setMap(this.map);
       item.polyline.addListener('click', event => {
         this.resetAllMapElements();
-        this.props.setFocussedItem(item.id); // TODO: support focussing at a particular lat lng
+        this.props.onElementSelect(item.id); // TODO: support focussing at a particular lat lng
       });
       item.infoWindow.addListener('closeclick', () => {
-        this.props.setFocussedItem(null);
+        this.props.onElementSelect(null);
       });
     });
 
