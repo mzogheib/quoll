@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
-import { setConnectedFeeds, loginUser, signupUser } from '../actions';
+import { setConnectedFeeds } from '../store/feeds';
+import { loginUser, signupUser } from '../store/user';
 import Root from './component';
 import userService from '../services/user';
 

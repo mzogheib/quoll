@@ -1,18 +1,7 @@
 import feedsConfig from '../services/feeds-config';
 import feedsService from '../services/feeds';
-import userService from '../services/user';
 
 const feedServices = feedsConfig.map(feedsService.make);
-
-export const setDate = date => ({
-  type: 'SET_DATE',
-  date
-});
-
-export const setFocussedItem = id => ({
-  type: 'SET_FOCUSSED_ITEM',
-  id
-});
 
 export const setFeeds = feeds => ({
   type: 'SET_FEEDS',
@@ -99,30 +88,47 @@ export const refreshFeeds = () => {
   };
 };
 
-export const setUserAuthenticating = () => ({
-  type: 'SET_USER_AUTHENTICATING'
-});
 
-export const setUserReady = () => ({
-  type: 'SET_USER_READY'
-});
+// TODO: summaryList can have its own reducer. Can also add map data too
+// See how it's done here under 'Handling Actions', https://redux.js.org/advanced/async-actions
+const defaultFeeds = feedsConfig.map(config => ({
+  id: config.id,
+  name: config.name,
+  isLoading: false,
+  isConnected: false,
+  data: [],
+  summary: 'None',
+  summaryList: [],
+  mapData: [],
+  isMarker: config.isMarker,
+  isPolyline: config.isPolyline,
+}));
 
-export const loginUser = id => {
-  return dispatch => {
-    dispatch(setUserAuthenticating())
-    return userService.login(id).then(user => {
-      dispatch(setUserReady());
-      return user;
-    });
+const feeds = (state = defaultFeeds, action) => {
+  switch (action.type) {
+    case 'SET_FEEDS':
+      return action.feeds;
+    case 'SET_CONNECTED_FEEDS':
+      return state.map(feed => action.ids.includes(feed.id) ? { ...feed, isConnected: true } : feed)
+    case 'SET_DISCONNECTED_FEEDS':
+      return state.map(feed => action.ids.includes(feed.id) ?
+        {
+          ...feed,
+          isConnected: false,
+          summary: 'None',
+          summaryList: [],
+          data: [],
+          mapData: []
+        } :
+        feed
+      )
+    case 'SET_FEED_LOADING':
+      return state.map(feed => feed.id === action.id ? { ...feed, isLoading: true } : feed)
+    case 'SET_FEED_READY':
+      return state.map(feed => feed.id === action.id ? { ...feed, isLoading: false } : feed)
+    default:
+      return state;
   }
-}
+};
 
-export const signupUser = () => {
-  return dispatch => {
-    dispatch(setUserAuthenticating())
-    return userService.signup().then(user => {
-      dispatch(setUserReady());
-      return user;
-    });
-  }
-}
+export default feeds;

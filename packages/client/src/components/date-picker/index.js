@@ -1,5 +1,7 @@
 import { connect } from 'react-redux';
-import { setDate, refreshFeeds, setFocussedItem } from '../../actions';
+import { setDate } from '../../store/date';
+import { refreshFeeds } from '../../store/feeds';
+import { setFocussedItem } from '../../store/focussed-item';
 import DatePicker from './component';
 
 const mapStateToProps = state => ({

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { refreshFeeds } from '../../actions';
+import { refreshFeeds } from '../../store/feeds';
 import Home from './component';
 
 const mapDispatchToProps = dispatch => ({

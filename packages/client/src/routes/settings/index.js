@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Settings from './component';
-import { setFeeds, getOauthUrl, authenticateFeed, disconnectFeed } from '../../actions';
+import { setFeeds, getOauthUrl, authenticateFeed, disconnectFeed } from '../../store/feeds';
 
 const mapStateToProps = state => ({
   feeds: state.feeds

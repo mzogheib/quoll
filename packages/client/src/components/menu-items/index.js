@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { setFocussedItem } from '../../actions';
+import { setFocussedItem } from '../../store/focussed-item';
 import MenuItems from './component';
 
 const mapStateToProps = ({ feeds }) => ({ feeds });
