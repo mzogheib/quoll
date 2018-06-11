@@ -1,14 +1,10 @@
-.menu {
+.feed {
     display: flex;
     padding: 10px;
     flex-direction: column;
 }
 
-.menu__title {
-    text-align: center;
-}
-
-.menu__items {
+.feed__entries {
     display: flex;
     flex-direction: column;
 }

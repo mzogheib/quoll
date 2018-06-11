@@ -1,20 +1,20 @@
-.menu-items {
+.feed-entries {
     display: flex;
     flex-direction: column;
 }
 
-.menu-items__entry {
+.feed-entries__entry {
     display: flex;
 }
 
-.menu-items__entry:hover {
+.feed-entries__entry:hover {
     cursor: pointer;
     background-color: gainsboro;
 }
 
-.menu-items__entry-time-label {
+.feed-entries__entry-time-label {
     flex-basis: 80px;
 }
-.menu-items__entry-label {
+.feed-entries__entry-label {
     flex-grow: 1;
 }
