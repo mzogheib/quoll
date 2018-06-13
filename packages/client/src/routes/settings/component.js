@@ -1,5 +1,6 @@
 import React from 'react';
 import './style.css';
+import FeedSettings from '../../components/feed-settings';
 import utils from '../../services/utils';
 import storageService from '../../services/storage';
 
@@ -57,33 +58,26 @@ function Settings(props) {
       .catch(alert);
   }
 
-  function renderLoading() {
-    return (
-      <div>Loading...</div>
-    );
-  }
-
-  function renderButton(feed) {
-    return (
-      <button onClick={() => feed.isConnected ? disconnectFeed(feed.id) : connectFeed(feed.id)}>
-        {feed.isConnected ? 'Disconnect' : 'Connect'}
-      </button>
-    )
-  }
-
   function renderFeed(feed) {
     return (
-      <div className='settings__feeds' key={feed.id}>
-        <div>{feed.name}</div>
-        {feed.isLoading ? renderLoading() : renderButton(feed)}
+      <div className='settings__feed' key={feed.id}>
+        <FeedSettings
+          feed={feed}
+          onConnect={() => connectFeed(feed.id)}
+          onDisconnect={() => disconnectFeed(feed.id)}
+        />
       </div>
     )
   }
 
   return (
     <div className='settings'>
-      Settings
-      {props.feeds.map(renderFeed)}
+      <div className='settings__feeds'>
+        <div className='settings__feeds-title'>Feeds</div>
+        <div className='settings__feeds-list'>
+          {props.feeds.map(renderFeed)}
+        </div>
+      </div>
     </div>
   );
 }

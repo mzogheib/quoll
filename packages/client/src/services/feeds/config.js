@@ -6,6 +6,10 @@ const config = [
   {
     id: 'toshl',
     name: 'Toshl',
+    link: {
+      url: 'https://toshl.com',
+      label: 'toshl.com'
+    },
     getOauthUrl: toshl.getOauthUrl,
     authenticate: toshl.authenticate,
     disconnect: toshl.deauthorize,
@@ -18,6 +22,10 @@ const config = [
   {
     id: 'strava',
     name: 'Strava',
+    link: {
+      url: 'https://www.strava.com',
+      label: 'www.strava.com'
+    },
     getOauthUrl: strava.getOauthUrl,
     authenticate: strava.authenticate,
     disconnect: strava.deauthorize,
@@ -30,6 +38,10 @@ const config = [
   {
     id: 'moves',
     name: 'Moves',
+    link: {
+      url: 'https://www.moves-app.com',
+      label: 'www.moves-app.com'
+    },
     getOauthUrl: moves.getOauthUrl,
     authenticate: moves.authenticate,
     disconnect: moves.deauthorize,

@@ -94,6 +94,7 @@ export const refreshFeeds = () => {
 const defaultFeeds = feedsConfig.map(config => ({
   id: config.id,
   name: config.name,
+  link: config.link,
   isLoading: false,
   isConnected: false,
   data: [],

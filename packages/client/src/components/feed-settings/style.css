@@ -1,0 +1,24 @@
+.feed-settings {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: white;
+  border-radius: 8px;
+}
+
+.feed-settings__logo {
+  width: 75px;
+  height: 75px;
+  background-color: aquamarine;
+}
+
+.feed-settings__info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin: 0 0 0 10px;
+}
+
+.feed-settings__url {
+  text-decoration: none;
+}
