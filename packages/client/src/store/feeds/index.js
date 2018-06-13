@@ -95,6 +95,7 @@ const defaultFeeds = feedsConfig.map(config => ({
   id: config.id,
   name: config.name,
   link: config.link,
+  image: config.image,
   isLoading: false,
   isConnected: false,
   data: [],

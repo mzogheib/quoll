@@ -1,15 +1,20 @@
 .feed-settings {
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 20px 30px 20px 20px;
   background-color: white;
   border-radius: 8px;
 }
 
 .feed-settings__logo {
-  width: 75px;
-  height: 75px;
-  background-color: aquamarine;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feed-settings__logo > img {
+  width: 100%;
 }
 
 .feed-settings__info {
@@ -20,5 +25,26 @@
 }
 
 .feed-settings__url {
+  align-self: flex-start;
   text-decoration: none;
+  font-size: 14px;
+  color: #2F80ED;
+}
+
+.feed-settings__name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.feed-settings__connect {
+  font-size: 14px;
+  color: #2F80ED;
+}
+
+.feed-settings__connect:hover {
+  cursor: pointer;
+}
+
+.feed-settings__loading {
+  font-size: 14px;
 }
