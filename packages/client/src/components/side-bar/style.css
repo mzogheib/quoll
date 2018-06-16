@@ -7,10 +7,12 @@
 
 .side-bar__title {
     color: #6fcf97;
-    flex-basis: 60px;
+    flex-basis: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: Pacifico;
+    font-size: 20px;
 }
 
 .side-bar__nav {
