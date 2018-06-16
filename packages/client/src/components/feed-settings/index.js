@@ -5,7 +5,7 @@ function FeedSettings(props) {
 
   function renderLoading() {
     return (
-      <div className='feed-settings__connect'>Loading...</div>
+      <div className='feed-settings__loading'>Loading...</div>
     );
   }
 
