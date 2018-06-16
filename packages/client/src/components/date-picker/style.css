@@ -1,9 +1,14 @@
 .date-picker {
     display: flex;
+    align-items: center;
 }
 
 .date-picker__button {
     flex-basis: 70px;
+}
+
+.date-picker__button:hover {
+    cursor: pointer;
 }
 
 .date-picker__date-input {

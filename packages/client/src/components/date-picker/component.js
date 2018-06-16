@@ -1,7 +1,10 @@
 import React from 'react';
 import './style.css';
+import PreviousIcon from 'react-icons/lib/md/navigate-before';
+import NextIcon from 'react-icons/lib/md/navigate-next';
 
 function DatePicker(props) {
+  const iconSize = 40;
 
   function formatDate(date) {
     const dateParts = date.toLocaleDateString().split('/'); // => [dd, mm, yyyy]
@@ -26,9 +29,9 @@ function DatePicker(props) {
 
   return (
     <div className='date-picker'>
-      <button className='date-picker__button' onClick={previous}>Previous</button>
+      <PreviousIcon className='date-picker__button' size={iconSize} onClick={previous}/>
       <input className='date-picker__date-input' type='date' value={props.date} onChange={handleDateChange} />
-      <button className='date-picker__button' onClick={next}>Next</button>
+      <NextIcon className='date-picker__button' size={iconSize} onClick={next}/>
     </div>
   );
 }
