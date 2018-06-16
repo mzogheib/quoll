@@ -1,5 +1,12 @@
 import api from '../api';
 import utils from '../utils';
+import config from './config';
+
+const Activities= { 
+  Ride: { label: 'Bike', image: '🚲' },
+  Run: { label: 'Run', image: '🏃‍♂️' },
+  Walk: { label: 'Walk' , image: '🚶‍♂️' },
+};
 
 const getOauthUrl  = () => api.get('strava-auth');
 const authenticate = payload => api.post('strava-auth', payload);
@@ -32,16 +39,20 @@ const makeSummary = activities => {
 
 const makeSummaryList = (activities) => {
   return activities.map(activity => {
+    const stravaConfig = config.find(c => c.id === 'strava');
     const timeStamp = new Date(activity.start_date);
-
+    const image = Activities[activity.type].image;
+    const label = Activities[activity.type].label;
     const value = formatDistance(activity.distance);
 
     return {
       id: activity.id,
+      logo: stravaConfig.image,
       timeStamp: timeStamp.getTime(),
-      timeLabel: timeStamp.toLocaleTimeString(),
-      label: activity.type,
-      value: value
+      timeLabel: timeStamp.toLocaleString('en-Au', { hour: 'numeric', minute: 'numeric', hour12: true }),
+      image,
+      label,
+      value
     };
   })
   .sort((a, b) => a.timeStamp - b.timeStamp);

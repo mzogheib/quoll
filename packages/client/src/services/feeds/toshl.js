@@ -1,5 +1,6 @@
 import api from '../api';
 import utils from '../utils';
+import config from './config';
 
 const DefaultTime = '12:00:00';
 
@@ -41,19 +42,20 @@ const makeSummary = entries => {
 
 const makeSummaryList = entries => {
   return entries.map(entry => {
+    const toshlConfig = config.find(c => c.id === 'toshl');
     const timeLabel = utils.extractTimeString(entry.desc) || DefaultTime;
     const timeStamp = new Date(`${entry.date} ${timeLabel}`);
-
     const label = entry.tags.map(tag => tag.name).join(', ');
-
     const value = formatAmount(entry.amount, entry.currency.code);
 
     return {
       id: entry.id,
+      logo: toshlConfig.image,
       timeStamp: timeStamp.getTime(),
-      timeLabel: timeLabel,
-      label: label,
-      value: value
+      timeLabel: timeStamp.toLocaleString('en-Au', { hour: 'numeric', minute: 'numeric', hour12: true }),
+      image: '💸',
+      label,
+      value
     };
   })
   .sort((a, b) => a.timeStamp - b.timeStamp);

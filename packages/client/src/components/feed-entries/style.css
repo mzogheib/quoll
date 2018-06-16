@@ -2,19 +2,3 @@
     display: flex;
     flex-direction: column;
 }
-
-.feed-entries__entry {
-    display: flex;
-}
-
-.feed-entries__entry:hover {
-    cursor: pointer;
-    background-color: gainsboro;
-}
-
-.feed-entries__entry-time-label {
-    flex-basis: 80px;
-}
-.feed-entries__entry-label {
-    flex-grow: 1;
-}

@@ -3,6 +3,11 @@
     display: flex;
 }
 
+.home__feed {
+    flex-basis: 350px;
+    height: 100%;
+}
+
 .home__map-wrapper {
     position: relative;
     flex: 1;

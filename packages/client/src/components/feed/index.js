@@ -7,7 +7,9 @@ function Feed() {
   return (
     <div className='feed'>
       <div className='feed__filter'><DatePicker /></div>
-      <div className='feed__entries'><FeedEntries /></div>
+      <div className='feed__entries-wrapper'>
+        <div className='feed__entries'><FeedEntries /></div>
+      </div>
     </div>
   );
 }
