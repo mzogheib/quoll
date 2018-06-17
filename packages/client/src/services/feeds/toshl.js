@@ -1,6 +1,7 @@
 import api from '../api';
 import utils from '../utils';
 import config from './config';
+import moment from 'moment';
 
 const DefaultTime = '12:00:00';
 
@@ -20,7 +21,7 @@ const makeMarkerDataFromEntries = entries => {
       latitude: entry.location.latitude,
       longitude: entry.location.longitude,
       title: `${tags} ${amount}`,
-      subTitle: time,
+      subTitle: moment(`${entry.date} ${time}`).format('h:mm a'),
       description: description
     };
   });
@@ -43,16 +44,15 @@ const makeSummary = entries => {
 const makeSummaryList = entries => {
   return entries.map(entry => {
     const toshlConfig = config.find(c => c.id === 'toshl');
-    const timeLabel = utils.extractTimeString(entry.desc) || DefaultTime;
-    const timeStamp = new Date(`${entry.date} ${timeLabel}`);
+    const time = utils.extractTimeString(entry.desc) || DefaultTime;
     const label = entry.tags.map(tag => tag.name).join(', ');
     const value = formatAmount(entry.amount, entry.currency.code);
 
     return {
       id: entry.id,
       logo: toshlConfig.image,
-      timeStamp: timeStamp.getTime(),
-      timeLabel: timeStamp.toLocaleString('en-Au', { hour: 'numeric', minute: 'numeric', hour12: true }),
+      timeStamp: moment(`${entry.date} ${time}`).unix(),
+      timeLabel: moment(`${entry.date} ${time}`).format('h:mm a'),
       image: '💸',
       label,
       value

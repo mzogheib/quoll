@@ -3,45 +3,45 @@ import './style.css';
 import PreviousIcon from 'react-icons/lib/md/navigate-before';
 import NextIcon from 'react-icons/lib/md/navigate-next';
 import Calendar from 'react-calendar';
+import moment from 'moment';
 
 export default class DatePicker extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showCalendar: false
+      showCalendar: false,
+      nextDayDisabled: true
     };
+    this.isNextDayDisabled = this.isNextDayDisabled.bind(this);
     this.previous = this.previous.bind(this);
     this.next = this.next.bind(this);
     this.handleDateClick = this.handleDateClick.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
     this.iconSize = 40;
-    this.today = new Date();
+    this.today = moment().endOf('day');
   }
 
-  formatDate(date) {
-    const dateParts = date.toLocaleDateString().split('/'); // => [dd, mm, yyyy]
-    return `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`
+  componentWillReceiveProps(nextProps) {
+    this.setState({ nextDayDisabled: this.isNextDayDisabled(moment(nextProps.date)) });
+  }
+
+  isNextDayDisabled(date) {
+    return date.add(1, 'day').isAfter(this.today);
   }
 
   previous() {
-    this.setState({ showCalendar: false });
-    const yesterday = new Date(this.props.date);
-    yesterday.setDate(yesterday.getDate() - 1);
-    this.props.onDateChange(this.formatDate(yesterday));
+    const yesterday = moment(this.props.date).subtract(1, 'day');
+    this.handleDateChange(yesterday);
   }
 
   next() {
-    this.setState({ showCalendar: false });
-    const tomorrow = new Date(this.props.date);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    this.props.onDateChange(this.formatDate(tomorrow));
+    const tomorrow = moment(this.props.date).add(1, 'day');
+    this.handleDateChange(tomorrow);
   }
 
   handleDateChange(date) {
+    this.props.onDateChange(moment(date).format('YYYY-MM-DD'));
     this.setState({ showCalendar: false });
-    const dateComponents = date.toLocaleDateString().split('/'); // => [dd, mm, yyyy]
-    const dateString = `${dateComponents[2]}-${dateComponents[1]}-${dateComponents[0]}`
-    this.props.onDateChange(dateString);
   }
 
   handleDateClick() {
@@ -53,7 +53,7 @@ export default class DatePicker extends Component {
       <div className='date-picker__calendar-wrapper'>
         <Calendar
           className='date-picker__calendar'
-          maxDate={this.today}
+          maxDate={this.today.toDate()}
           value={new Date(this.props.date)}
           onChange={this.handleDateChange}
         />
@@ -61,13 +61,31 @@ export default class DatePicker extends Component {
     )
   }
 
+  renderPrevious() {
+    return (
+      <PreviousIcon className='date-picker__button' size={this.iconSize} onClick={this.previous}/>
+    )
+  }
+
+  renderNext() {
+    return (
+      <NextIcon className='date-picker__button' size={this.iconSize} onClick={this.next}/>
+    )
+  }
+
+  renderNextDisabled() {
+    return (
+      <NextIcon className='date-picker__button-disabled' color={'#7f7f7f'} size={this.iconSize}/>
+    )
+  }
+
   render() {
     return (
       <div className='date-picker'>
-        <PreviousIcon className='date-picker__button' size={this.iconSize} onClick={this.previous}/>
+        {this.renderPrevious()}
         <div className='date-picker__date' onClick={this.handleDateClick}>{this.props.date}</div>
         {this.state.showCalendar && this.renderCalendar()}
-        <NextIcon className='date-picker__button' size={this.iconSize} onClick={this.next}/>
+        {this.state.nextDayDisabled ? this.renderNextDisabled() : this.renderNext()}
       </div>
     );
   }

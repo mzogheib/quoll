@@ -12,6 +12,11 @@
     cursor: pointer;
 }
 
+
+.date-picker__button-disabled {
+    flex-basis: 70px;
+}
+
 .date-picker__date {
     flex-grow: 1;
     text-align: center;
