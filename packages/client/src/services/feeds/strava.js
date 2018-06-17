@@ -1,5 +1,12 @@
 import api from '../api';
-import utils from '../utils';
+import config from './config';
+import moment from 'moment';
+
+const Activities= { 
+  Ride: { label: 'Bike', image: '🚲' },
+  Run: { label: 'Run', image: '🏃‍♂️' },
+  Walk: { label: 'Walk' , image: '🚶‍♂️' },
+};
 
 const getOauthUrl  = () => api.get('strava-auth');
 const authenticate = payload => api.post('strava-auth', payload);
@@ -7,13 +14,13 @@ const deauthorize = () => api.post('strava-deauth');
 const getActivities = params => api.get('strava', params);
 
 const makePolylineDataFromActivities = activities => activities.map(activity => {
-  const startTime = utils.getTwentyFourHourTime(activity.start_date_local);
+  const label = Activities[activity.type].label;
   const distance = formatDistance(activity.distance);
   return { 
     id: activity.id,
     encodedPath: activity.map.polyline,
-    title: `${activity.type} ${distance}`,
-    subTitle: startTime,
+    title: `${label} ${distance}`,
+    subTitle: moment(activity.start_date).format('h:mm a'),
     description: activity.description || ''
   };
 });
@@ -32,16 +39,19 @@ const makeSummary = activities => {
 
 const makeSummaryList = (activities) => {
   return activities.map(activity => {
-    const timeStamp = new Date(activity.start_date);
-
+    const stravaConfig = config.find(c => c.id === 'strava');
+    const image = Activities[activity.type].image;
+    const label = Activities[activity.type].label;
     const value = formatDistance(activity.distance);
 
     return {
       id: activity.id,
-      timeStamp: timeStamp.getTime(),
-      timeLabel: timeStamp.toLocaleTimeString(),
-      label: activity.type,
-      value: value
+      logo: stravaConfig.image,
+      timeStamp: moment(activity.start_date).unix(),
+      timeLabel: moment(activity.start_date).format('h:mm a'),
+      image,
+      label,
+      value
     };
   })
   .sort((a, b) => a.timeStamp - b.timeStamp);

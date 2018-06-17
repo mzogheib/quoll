@@ -1,11 +1,46 @@
 .date-picker {
     display: flex;
+    align-items: center;
+    position: relative;
 }
 
 .date-picker__button {
     flex-basis: 70px;
 }
 
-.date-picker__date-input {
+.date-picker__button:hover {
+    cursor: pointer;
+}
+
+
+.date-picker__button-disabled {
+    flex-basis: 70px;
+}
+
+.date-picker__date {
     flex-grow: 1;
+    text-align: center;
+}
+
+.date-picker__date:hover {
+    cursor: pointer;
+}
+
+.date-picker__calendar-wrapper {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+}
+.date-picker__calendar {
+    box-shadow: 2px 2px 12px;
+    max-width: 300px !important;
+    font-family: Roboto !important;
+}
+
+.react-calendar__tile {
+    font-family: Roboto;
 }

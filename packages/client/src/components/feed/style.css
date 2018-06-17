@@ -1,23 +1,19 @@
-.home {
-    height: 100%;
+.feed {
     display: flex;
-}
-
-.home__feed {
-    flex-basis: 350px;
+    flex-direction: column;
     height: 100%;
 }
 
-.home__map-wrapper {
+.feed__entries-wrapper {
     position: relative;
     flex: 1;
 }
 
-.home__map {
+.feed__entries {
+    overflow-y: scroll;
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
 }
-

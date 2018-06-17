@@ -4434,6 +4434,10 @@ lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
 
+lodash.once@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/lodash.once/-/lodash.once-4.1.1.tgz#0dd3971213c7c56df880977d504c88fb471a97ac"
+
 lodash.template@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/lodash.template/-/lodash.template-4.4.0.tgz#e73a0385c8355591746e020b99679c690e68fba0"
@@ -4572,6 +4576,10 @@ meow@^3.3.0, meow@^3.7.0:
     redent "^1.0.0"
     trim-newlines "^1.0.0"
 
+merge-class-names@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/merge-class-names/-/merge-class-names-1.1.1.tgz#3bd2f38eb5418c464a0fef615484fdf6c8932256"
+
 merge-descriptors@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/merge-descriptors/-/merge-descriptors-1.0.1.tgz#b00aaa556dd8b44568150ec9d1b953f3f90cbb61"
@@ -4697,6 +4705,10 @@ mkdirp@0.5.1, mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdi
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.1.tgz#30057438eac6cf7f8c4767f38648d6697d75c903"
   dependencies:
     minimist "0.0.8"
+
+moment@^2.22.2:
+  version "2.22.2"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.2.tgz#3c257f9839fc0e93ff53149632239eb90783ff66"
 
 ms@2.0.0:
   version "2.0.0"
@@ -5760,6 +5772,15 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-calendar@^2.15.2:
+  version "2.15.2"
+  resolved "https://registry.yarnpkg.com/react-calendar/-/react-calendar-2.15.2.tgz#b06320dde797b466786d4e7f6be0d20ec00f8696"
+  dependencies:
+    lodash.once "^4.1.1"
+    merge-class-names "^1.1.1"
+    prop-types "^15.6.0"
+    react-lifecycles-compat "^3.0.4"
+
 react-dev-utils@^4.2.1:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-4.2.1.tgz#9f2763e7bafa1a1b9c52254d2a479deec280f111"
@@ -5795,6 +5816,20 @@ react-dom@^16.2.0:
 react-error-overlay@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-3.0.0.tgz#c2bc8f4d91f1375b3dad6d75265d51cd5eeaf655"
+
+react-icon-base@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-icon-base/-/react-icon-base-2.1.0.tgz#a196e33fdf1e7aaa1fda3aefbb68bdad9e82a79d"
+
+react-icons@^2.2.7:
+  version "2.2.7"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-2.2.7.tgz#d7860826b258557510dac10680abea5ca23cf650"
+  dependencies:
+    react-icon-base "2.1.0"
+
+react-lifecycles-compat@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
 
 react-redux@^5.0.7:
   version "5.0.7"
@@ -6990,6 +7025,10 @@ type-is@~1.6.15:
 typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
+
+typeface-pacifico@^0.0.54:
+  version "0.0.54"
+  resolved "https://registry.yarnpkg.com/typeface-pacifico/-/typeface-pacifico-0.0.54.tgz#fe133a690bdf066ad14213c18939dc6c4e5e51e6"
 
 ua-parser-js@^0.7.9:
   version "0.7.17"

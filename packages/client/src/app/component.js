@@ -30,7 +30,7 @@ class App extends Component {
         <div className='app'>
           <SideBar />
           <div className='app__right'>
-            <Header />
+            <Header label={this.props.routeTitle} />
             <div className='app__main'>
               <Switch>
                 <Route path="/settings" component={Settings} />

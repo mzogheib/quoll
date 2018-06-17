@@ -1,4 +1,25 @@
-.settings__feeds {
+.settings {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
 }
 
+.settings__feeds {
+    width: 100%;
+    max-width: 600px;
+}
+
+.settings__feeds-title {
+    font-weight: bold;
+    font-size: 28px;
+}
+
+.settings__feeds-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.settings__feed {
+    margin: 40px 0 0;
+}

@@ -1,0 +1,4 @@
+.feed-entries {
+    display: flex;
+    flex-direction: column;
+}
