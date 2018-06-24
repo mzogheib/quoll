@@ -25,7 +25,7 @@ function getAthleteActivities(from, to, token) {
   // Before = 00:00:00 on the day after the to date
   const after = getLocalTimestamp(new Date(from)) - 1;
   const before = getLocalTimestamp(new Date(to)) + 24 * 60 * 60;
-  const perPage = 5;
+  const perPage = 20;
 
   return apiStrava.athlete.activities(after, before, perPage, token)
     .then(activities => {
