@@ -11,6 +11,7 @@ class App extends Component {
     super(props);
     this.handleWelcomeCancel = this.handleWelcomeCancel.bind(this);
     this.handleWelcomeConnectFeeds = this.handleWelcomeConnectFeeds.bind(this);
+    this.handleSideBarHelpClick = this.handleSideBarHelpClick.bind(this);
     this.state = {
       isLoading: true,
       showWelcomeModal: false
@@ -33,6 +34,10 @@ class App extends Component {
     this.props.history.push('/settings')
   }
 
+  handleSideBarHelpClick() {
+    this.setState({ showWelcomeModal: true });
+  }
+
   renderLoading() {
     return <div>Loading...</div>;
   }
@@ -40,7 +45,7 @@ class App extends Component {
   renderApp() {
     return (
       <div className='app'>
-        <SideBar />
+        <SideBar onHelpClick={this.handleSideBarHelpClick}/>
         <div className='app__right'>
           <Header />
           <div className='app__main'>
