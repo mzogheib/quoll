@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './style.css';
-import Home from '../routes/home';
-import Settings from '../routes/settings';
+import routes from '../routes';
 import Header from '../components/header';
 import SideBar from '../components/side-bar';
 
@@ -30,11 +29,10 @@ class App extends Component {
         <div className='app'>
           <SideBar />
           <div className='app__right'>
-            <Header label={this.props.routeTitle} />
+            <Header />
             <div className='app__main'>
               <Switch>
-                <Route path="/settings" component={Settings} />
-                <Route path="/" component={Home} />
+                {routes.map((route, index) => <Route key={index} path={route.path} exact={route.exact} component={route.mainComponent} />)}
               </Switch>
             </div>
           </div>

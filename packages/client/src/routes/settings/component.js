@@ -11,7 +11,6 @@ class Settings extends Component {
   }
 
   componentDidMount() {
-    this.props.onMount();
     this.handleOAuth();
   }
 

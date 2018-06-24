@@ -4,8 +4,6 @@ import { loginUser, signupUser } from '../store/user';
 import App from './component';
 import userService from '../services/user';
 
-const mapStateToProps = ({ routeTitle }) => ({ routeTitle });
-
 const mapDispatchToProps = dispatch => ({
   // TODO: if login fails then clear that user from localStorage and signup
   onMount: () => {
@@ -18,4 +16,4 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);
