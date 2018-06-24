@@ -28,13 +28,18 @@
     flex-direction: column;
 }
 
-.side-bar__link {
+.side-bar__item {
     min-height: 50px;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
+    margin: 20px 0 0;
+}
+
+.side-bar__item:hover {
+    cursor: pointer;
 }
 
 .side-bar__link-icon {

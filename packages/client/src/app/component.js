@@ -1,45 +1,61 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import './style.css';
-import Home from '../routes/home';
-import Settings from '../routes/settings';
+import routes from '../routes';
 import Header from '../components/header';
 import SideBar from '../components/side-bar';
+import WelcomeModal from '../components/welcome-modal';
 
 class App extends Component {
   constructor(props) {
     super(props);
+    this.handleWelcomeCancel = this.handleWelcomeCancel.bind(this);
+    this.handleWelcomeConnectFeeds = this.handleWelcomeConnectFeeds.bind(this);
+    this.handleSideBarHelpClick = this.handleSideBarHelpClick.bind(this);
     this.state = {
-      isLoading: true
+      isLoading: true,
+      showWelcomeModal: false
     }
   }
 
   componentDidMount() {
-    this.props.onMount().then(() => this.setState({ isLoading: false }));
+    this.props.onMount().then(() => this.setState({ 
+      isLoading: false,
+      showWelcomeModal: !this.props.feedsConnected
+    }));
+  }
+
+  handleWelcomeCancel() {
+    this.setState({ showWelcomeModal: false });
+  }
+
+  handleWelcomeConnectFeeds() {
+    this.setState({ showWelcomeModal: false });
+    this.props.history.push('/settings')
+  }
+
+  handleSideBarHelpClick() {
+    this.setState({ showWelcomeModal: true });
   }
 
   renderLoading() {
-    return (
-      <div>Loading...</div>
-    );
+    return <div>Loading...</div>;
   }
 
   renderApp() {
     return (
-      <BrowserRouter>
-        <div className='app'>
-          <SideBar />
-          <div className='app__right'>
-            <Header label={this.props.routeTitle} />
-            <div className='app__main'>
-              <Switch>
-                <Route path="/settings" component={Settings} />
-                <Route path="/" component={Home} />
-              </Switch>
-            </div>
+      <div className='app'>
+        <SideBar onHelpClick={this.handleSideBarHelpClick}/>
+        <div className='app__right'>
+          <Header />
+          <div className='app__main'>
+            <Switch>
+              {routes.map((route, index) => <Route key={index} path={route.path} exact={route.exact} component={route.mainComponent} />)}
+            </Switch>
           </div>
         </div>
-      </BrowserRouter>
+        <WelcomeModal isOpen={this.state.showWelcomeModal} onCancel={this.handleWelcomeCancel} onConnectFeeds={this.handleWelcomeConnectFeeds} />
+      </div>
     );
   }
 
