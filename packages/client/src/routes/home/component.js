@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './style.css';
 import Feed from '../../components/feed';
 import Map from '../../components/map';
+import Loader from '../../components/horizontal-loader';
 
 class App extends Component {
 
@@ -16,6 +17,7 @@ class App extends Component {
         <div className='home__map-wrapper'>
           <div className='home__map'><Map /></div>
         </div>
+        {this.props.isLoading && (<div className='home__loader'><Loader/></div>)}
       </div>
     );
   }

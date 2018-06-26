@@ -1,6 +1,7 @@
 .home {
     height: 100%;
     display: flex;
+    position: relative;
 }
 
 .home__feed {
@@ -21,3 +22,8 @@
     left: 0;
 }
 
+.home__loader {
+    position: absolute;
+    left: 0;
+    right: 0;
+}
