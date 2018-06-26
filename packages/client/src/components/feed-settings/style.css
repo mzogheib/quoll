@@ -4,6 +4,14 @@
   padding: 20px 30px 20px 20px;
   background-color: white;
   border-radius: 8px;
+  position: relative;
+}
+
+.feed-settings__loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
 .feed-settings__logo {
@@ -43,6 +51,11 @@
 
 .feed-settings__connect:hover {
   cursor: pointer;
+}
+
+.feed-settings__connect-disabled {
+  font-size: 14px;
+  color: #7f7f7f;
 }
 
 .feed-settings__loading {

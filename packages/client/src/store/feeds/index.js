@@ -28,12 +28,17 @@ export const setFeedReady = id => ({
   id
 });
 
+export const setFeedAuthenticating = (id, value) => ({
+  type: 'SET_FEED_AUTHENTICATING',
+  id,
+  value
+});
+
 export const getOauthUrl = id => {
   const feedService = feedServices.find(feed => feed.id === id);
   return (dispatch) => {
-    dispatch(setFeedLoading(id));
+    dispatch(setFeedAuthenticating(id, true));
     return feedService.getOauthUrl().then(url => {
-      dispatch(setFeedReady(id));
       return url;
     })
   };
@@ -42,10 +47,10 @@ export const getOauthUrl = id => {
 export const authenticateFeed = (id, code) => {
   const feedService = feedServices.find(feed => feed.id === id);
   return (dispatch) => {
-    dispatch(setFeedLoading(id));
+    dispatch(setFeedAuthenticating(id, true));
     return feedService.authenticate({ code }).then(() => {
       dispatch(setConnectedFeeds([id]));
-      dispatch(setFeedReady(id));
+      dispatch(setFeedAuthenticating(id, false));
     })
   };
 };
@@ -53,10 +58,10 @@ export const authenticateFeed = (id, code) => {
 export const disconnectFeed = (id) => {
   const feedService = feedServices.find(feed => feed.id === id);
   return (dispatch) => {
-    dispatch(setFeedLoading(id));
+    dispatch(setFeedAuthenticating(id, true));
     return feedService.disconnect().then(alert => {
       dispatch(setDisconnectedFeeds([id]));
-      dispatch(setFeedReady(id));
+      dispatch(setFeedAuthenticating(id, false));
       return alert;
     })
   };
@@ -98,6 +103,7 @@ const defaultFeeds = feedsConfig.map(config => ({
   image: config.image,
   isLoading: false,
   isConnected: false,
+  isAuthenticating: false,
   data: [],
   summary: 'None',
   summaryList: [],
@@ -128,6 +134,8 @@ const feeds = (state = defaultFeeds, action) => {
       return state.map(feed => feed.id === action.id ? { ...feed, isLoading: true } : feed)
     case 'SET_FEED_READY':
       return state.map(feed => feed.id === action.id ? { ...feed, isLoading: false } : feed)
+    case 'SET_FEED_AUTHENTICATING':
+      return state.map(feed => feed.id === action.id ? { ...feed, isAuthenticating: action.value } : feed)
     default:
       return state;
   }

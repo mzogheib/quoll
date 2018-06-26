@@ -9,24 +9,14 @@ export default class DatePicker extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showCalendar: false,
-      nextDayDisabled: true
+      showCalendar: false
     };
-    this.isNextDayDisabled = this.isNextDayDisabled.bind(this);
     this.previous = this.previous.bind(this);
     this.next = this.next.bind(this);
     this.handleDateClick = this.handleDateClick.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
     this.iconSize = 40;
     this.today = moment().endOf('day');
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({ nextDayDisabled: this.isNextDayDisabled(moment(nextProps.date)) });
-  }
-
-  isNextDayDisabled(date) {
-    return date.add(1, 'day').isAfter(this.today);
   }
 
   previous() {
@@ -45,7 +35,17 @@ export default class DatePicker extends Component {
   }
 
   handleDateClick() {
-    this.setState({ showCalendar: !this.state.showCalendar });
+    if (!this.props.calendarDisabled) {
+      this.setState({ showCalendar: !this.state.showCalendar });
+    }
+  }
+
+  renderDate() {
+    return <div className='date-picker__date' onClick={this.handleDateClick}>{this.props.date}</div>
+  }
+
+  renderDateDisabled() {
+    return <div className='date-picker__date-disabled'>{this.props.date}</div>
   }
 
   renderCalendar() {
@@ -62,30 +62,28 @@ export default class DatePicker extends Component {
   }
 
   renderPrevious() {
-    return (
-      <PreviousIcon className='date-picker__button' size={this.iconSize} onClick={this.previous}/>
-    )
+    return <PreviousIcon className='date-picker__button' size={this.iconSize} onClick={this.previous}/>
   }
 
   renderNext() {
-    return (
-      <NextIcon className='date-picker__button' size={this.iconSize} onClick={this.next}/>
-    )
+    return <NextIcon className='date-picker__button' size={this.iconSize} onClick={this.next}/>
+  }
+
+  renderPrevDisabled() {
+    return <PreviousIcon className='date-picker__button-disabled' color={'#7f7f7f'} size={this.iconSize}/>
   }
 
   renderNextDisabled() {
-    return (
-      <NextIcon className='date-picker__button-disabled' color={'#7f7f7f'} size={this.iconSize}/>
-    )
+    return <NextIcon className='date-picker__button-disabled' color={'#7f7f7f'} size={this.iconSize}/>
   }
 
   render() {
     return (
       <div className='date-picker'>
-        {this.renderPrevious()}
-        <div className='date-picker__date' onClick={this.handleDateClick}>{this.props.date}</div>
+        {this.props.prevDisabled ? this.renderPrevDisabled() : this.renderPrevious()}
+        {this.props.calendarDisabled ? this.renderDateDisabled() : this.renderDate()}
         {this.state.showCalendar && this.renderCalendar()}
-        {this.state.nextDayDisabled ? this.renderNextDisabled() : this.renderNext()}
+        {this.props.nextDisabled ? this.renderNextDisabled() : this.renderNext()}
       </div>
     );
   }
