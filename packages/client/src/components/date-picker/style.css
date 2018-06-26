@@ -12,7 +12,6 @@
     cursor: pointer;
 }
 
-
 .date-picker__button-disabled {
     flex-basis: 70px;
 }
@@ -24,6 +23,12 @@
 
 .date-picker__date:hover {
     cursor: pointer;
+}
+
+.date-picker__date-disabled {
+    flex-grow: 1;
+    text-align: center;
+    color: #7f7f7f;
 }
 
 .date-picker__calendar-wrapper {
