@@ -1,20 +1,20 @@
 import React from 'react';
 import './style.css';
+import Loader from '../horizontal-loader';
 
 function FeedSettings(props) {
 
-  function renderLoading() {
-    return (
-      <div className='feed-settings__loading'>Loading...</div>
-    );
+  function handleButtonClick(feed) {
+    if (feed.isLoading) {
+      return;
+    } else {
+      return feed.isConnected ? props.onDisconnect() : props.onConnect();
+    }
   }
 
   function renderButton(feed) {
     return (
-      <a
-        className='feed-settings__connect'
-        onClick={() => feed.isConnected ? props.onDisconnect() : props.onConnect()}
-      >
+      <a className={feed.isLoading ? 'feed-settings__connect-disabled' : 'feed-settings__connect'} onClick={() => handleButtonClick(feed)}>
         {feed.isConnected ? 'Disconnect' : 'Connect'}
       </a>
     )
@@ -31,9 +31,8 @@ function FeedSettings(props) {
           <div className='feed-settings__name'>{feed.name}</div>
           <a className='feed-settings__url' href={feed.link.url} target='_blank'>{feed.link.label}</a>
         </div>
-        <div>
-          {feed.isLoading ? renderLoading() : renderButton(feed)}
-        </div>
+        <div>{renderButton(feed)}</div>
+        {feed.isLoading && (<div className='feed-settings__loader'><Loader/></div>)}
       </div>
     )
   }
