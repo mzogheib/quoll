@@ -49,12 +49,11 @@ class Settings extends Component {
 
   connectFeed(id) {
     this.props.onConnect(id).then(url => {
-      console.log(url)
       const token = utils.makeRandomString();
       storageService.set('oauth-state-token', token);
       const stateString = utils.encode({ id, token });
       const urlWithState = utils.addQueryParams(url, { state: stateString });
-      window.location.replace(urlWithState);
+      window.location.href = urlWithState;
     });
   }
 
