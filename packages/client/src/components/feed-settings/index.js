@@ -32,7 +32,7 @@ function FeedSettings(props) {
           <a className='feed-settings__url' href={feed.link.url} target='_blank'>{feed.link.label}</a>
         </div>
         <div>{renderButton(feed)}</div>
-        {feed.isLoading && (<div className='feed-settings__loader'><Loader/></div>)}
+        {feed.isAuthenticating && (<div className='feed-settings__loader'><Loader/></div>)}
       </div>
     )
   }
