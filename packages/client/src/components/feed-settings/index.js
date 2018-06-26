@@ -5,7 +5,7 @@ import Loader from '../horizontal-loader';
 function FeedSettings(props) {
 
   function handleButtonClick(feed) {
-    if (feed.isLoading) {
+    if (feed.isAuthenticating) {
       return;
     } else {
       return feed.isConnected ? props.onDisconnect() : props.onConnect();
@@ -14,7 +14,7 @@ function FeedSettings(props) {
 
   function renderButton(feed) {
     return (
-      <a className={feed.isLoading ? 'feed-settings__connect-disabled' : 'feed-settings__connect'} onClick={() => handleButtonClick(feed)}>
+      <a className={feed.isAuthenticating ? 'feed-settings__connect-disabled' : 'feed-settings__connect'} onClick={() => handleButtonClick(feed)}>
         {feed.isConnected ? 'Disconnect' : 'Connect'}
       </a>
     )
