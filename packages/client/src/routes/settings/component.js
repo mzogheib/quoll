@@ -3,6 +3,7 @@ import './style.css';
 import FeedSettings from '../../components/feed-settings';
 import utils from '../../services/utils';
 import storageService from '../../services/storage';
+import querystring from 'querystring';
 
 class Settings extends Component {
   constructor(props) {
@@ -15,7 +16,9 @@ class Settings extends Component {
   }
 
   handleOAuth() {
-    const queryParams = utils.getQueryParams(window.location.href);
+    const searchString = this.props.location.search;
+    // searchString: ?foo=bar
+    const queryParams = querystring.parse(searchString.substr(1));
     
     if (queryParams && queryParams.state) {
       // Looks like oauth so remove the query params
@@ -46,6 +49,7 @@ class Settings extends Component {
 
   connectFeed(id) {
     this.props.onConnect(id).then(url => {
+      console.log(url)
       const token = utils.makeRandomString();
       storageService.set('oauth-state-token', token);
       const stateString = utils.encode({ id, token });

@@ -1,5 +1,6 @@
+import querystring from 'querystring';
+
 export default {
-  getQueryParams,
   addQueryParams,
   extractTimeString,
   startsWithTime,
@@ -8,30 +9,12 @@ export default {
   decode
 };
 
-function getQueryParams(searchString) {
-  const queryString = searchString && searchString.split('?') && searchString.split('?')[1];
-  if (queryString) {
-    const paramPairs = queryString.split('&');
-    const params = {};
-    paramPairs.forEach(paramPair => {
-      const key = decodeURIComponent(paramPair.split('=')[0]);
-      const value = decodeURIComponent(paramPair.split('=')[1]);
-      params[key] = value;
-    });
-    return params;
-  } else {
-    return;
-  }
-};
-
 function addQueryParams(url, params) {
-  const existingParams = getQueryParams(url);
-  const allParams = { ...existingParams, ...params }
-  const keys = Object.keys(allParams);
-  const pairs = keys.map(key => `${encodeURIComponent(key)}=${encodeURIComponent(allParams[key])}`)
-  const queryString = pairs.join('&');
-  const baseUrl = url.split('?')[0];
-  return queryString ? `${baseUrl}?${queryString}` : baseUrl;
+  const baseUrl = url && url.split('?')[0];
+  const searchString = url && url.split('?')[1];
+  const existingParams = querystring.parse(searchString);
+  const allParams = { ...existingParams, ...params };
+  return `${baseUrl}?${querystring.stringify(allParams)}`;
 }
 
 
