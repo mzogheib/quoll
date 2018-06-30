@@ -3,17 +3,11 @@ import { setFocussedItem } from '../../store/focussed-item';
 import Map from './component'
 
 const mapStateToProps = ({ feeds, focussedItemId }) => {
-  const markerData = feeds
-    .filter(feed => feed.isConnected)
-    .filter(feed => feed.isMarker)
-    .map(feed => feed.mapData)
-    .reduce((prev, next) => prev.concat(next), []);
-
-  const polylineData = feeds
-    .filter(feed => feed.isConnected)
-    .filter(feed => feed.isPolyline)
-    .map(feed => feed.mapData)
-    .reduce((prev, next) => prev.concat(next), []);
+  const connectedFeedsMapDataArrays = feeds.filter(feed => feed.isConnected).map(feed => feed.mapData);
+  const connectedFeedsMapData = connectedFeedsMapDataArrays.reduce((prev, next) => prev.concat(next), []);
+  
+  const markerData = connectedFeedsMapData.filter(md => md.latitude && md.longitude);
+  const polylineData = connectedFeedsMapData.filter(md => md.encodedPath);
 
   return { markerData, polylineData, focussedItemId };
 }

@@ -76,8 +76,7 @@ const refreshFeed = (feed, date) => {
       return {
         ...feed,
         data: data,
-        summary: feedService.makeSummary(data),
-        summaryList: feedService.makeSummaryList(data),
+        entries: feedService.makeEntries(data),
         mapData: feedService.makeMapData(data)
       };
     })
@@ -94,7 +93,7 @@ export const refreshFeeds = () => {
 };
 
 
-// TODO: summaryList can have its own reducer. Can also add map data too
+// TODO: entries can have its own reducer. Can also add map data too
 // See how it's done here under 'Handling Actions', https://redux.js.org/advanced/async-actions
 const defaultFeeds = feedsConfig.map(config => ({
   id: config.id,
@@ -105,11 +104,8 @@ const defaultFeeds = feedsConfig.map(config => ({
   isConnected: false,
   isAuthenticating: false,
   data: [],
-  summary: 'None',
-  summaryList: [],
+  entries: [],
   mapData: [],
-  isMarker: config.isMarker,
-  isPolyline: config.isPolyline,
 }));
 
 const feeds = (state = defaultFeeds, action) => {
@@ -123,8 +119,7 @@ const feeds = (state = defaultFeeds, action) => {
         {
           ...feed,
           isConnected: false,
-          summary: 'None',
-          summaryList: [],
+          entries: [],
           data: [],
           mapData: []
         } :

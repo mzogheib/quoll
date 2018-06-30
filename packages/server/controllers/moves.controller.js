@@ -4,7 +4,7 @@ module.exports = {
   getOAuthUrl,
   authenticate,
   refreshAuth,
-  getStoryline
+  getSegments
 };
 
 const SegmentWhitelist = ['move', 'place'];
@@ -22,23 +22,9 @@ function refreshAuth(auth) {
     .then(newAuth => newAuth);
 }
 
-function getStoryline (from, to, token) {
+function getSegments (from, to, token) {
   const trackPoints = true;
   return apiMoves.storyline(from, to, trackPoints, token)
-    .then(storyline => {
-      return storyline.reduce((prev, next) =>
-        prev.concat(
-          // Flatten activities to a 1D array
-          // Note: Moves does not return empty array if there are no `activities` for a segment.
-          // So at the end of this chain need to explicitly filter on activities that exist
-          [].concat(
-            ...next.segments
-              .filter(segment => SegmentWhitelist.includes(segment.type))
-              .map(segment => segment.activities)
-              .filter(activities => activities)
-          )
-        ),
-        []
-      );
-    });
+    // Flatten segments to a 1D array
+    .then(storyline => storyline.reduce((prev, next) => prev.concat([].concat(...next.segments)), []));
 }

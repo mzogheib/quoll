@@ -6,7 +6,7 @@ module.exports = {
   authenticate,
   deauthorize,
   checkAuth,
-  getStoryline
+  getSegments
 };
 
 function getOAuthUrl(req, res) {
@@ -102,12 +102,12 @@ function checkAuth(req, res, next) {
   }
 }
 
-function getStoryline(req, res) {
+function getSegments(req, res) {
   const params = req.query;
   const userId = req.userId;
 
   ctrlUsers.getVendorAuth(userId, 'moves')
-    .then(auth => ctrlMoves.getStoryline(params.from, params.to, auth.access_token))
+    .then(auth => ctrlMoves.getSegments(params.from, params.to, auth.access_token))
     .then(onSuccess)
     .catch(onError);
 
