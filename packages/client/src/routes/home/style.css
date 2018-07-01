@@ -5,8 +5,25 @@
 }
 
 .home__feed {
+    display: flex;
+    flex-direction: column;
     flex-basis: 350px;
+    max-width: 350px;
     height: 100%;
+}
+
+.home__feed-entries-wrapper {
+    position: relative;
+    flex: 1;
+}
+
+.home__feed-entries {
+    overflow-y: scroll;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
 
 .home__map-wrapper {
