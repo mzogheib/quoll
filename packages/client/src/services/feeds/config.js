@@ -15,10 +15,8 @@ const config = [
     authenticate: toshl.authenticate,
     disconnect: toshl.deauthorize,
     getData: toshl.getEntries,
-    makeSummary: toshl.makeSummary,
-    makeSummaryList: toshl.makeSummaryList,
-    makeMapData: toshl.makeMarkerDataFromEntries,
-    isMarker: true
+    makeEntries: toshl.makeEntries,
+    makeMapData: toshl.makeMapData,
   },
   {
     id: 'strava',
@@ -32,10 +30,8 @@ const config = [
     authenticate: strava.authenticate,
     disconnect: strava.deauthorize,
     getData: strava.getActivities,
-    makeSummary: strava.makeSummary,
-    makeSummaryList: strava.makeSummaryList,
-    makeMapData: strava.makePolylineDataFromActivities,
-    isPolyline: true
+    makeEntries: strava.makeEntries,
+    makeMapData: strava.makeMapData,
   },
   {
     id: 'moves',
@@ -49,10 +45,8 @@ const config = [
     authenticate: moves.authenticate,
     disconnect: moves.deauthorize,
     getData: moves.getActivities,
-    makeSummary: moves.makeSummary,
-    makeSummaryList: moves.makeSummaryList,
-    makeMapData: moves.makePolylineDataFromActivities,
-    isPolyline: true
+    makeEntries: moves.makeEntries,
+    makeMapData: moves.makeMapData,
   }
 ];
 

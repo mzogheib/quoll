@@ -10,7 +10,7 @@ const authenticate = payload => api.post('toshl-auth', payload);
 const deauthorize = () => api.post('toshl-deauth');
 const getEntries = params => api.get('toshl', params);
 
-const makeMarkerDataFromEntries = entries => {
+const makeMapData = entries => {
   return entries.filter(entry => entry.location).map(entry => {
     const tags = entry.tags.map(tag => tag.name).join(', ');
     const amount = formatAmount(entry.amount, entry.currency.code);
@@ -34,14 +34,7 @@ const formatAmount = (amount, currencyCode) => {
   );
 }
 
-// TODO: Handle multiple currencies. This implementation assumes the first currency is the same as the rest.
-// TODO: Handle incomes. This implementation assumes expenses only
-const makeSummary = entries => {
-  const totalAmount = entries.reduce((accumulator, entry) => accumulator + entry.amount, 0);
-  return entries.length ? formatAmount(totalAmount, entries[0].currency.code) : 'None';
-};
-
-const makeSummaryList = entries => {
+const makeEntries = entries => {
   return entries.map(entry => {
     const toshlConfig = config.find(c => c.id === 'toshl');
     const time = utils.extractTimeString(entry.desc) || DefaultTime;
@@ -66,7 +59,6 @@ export default {
   authenticate,
   deauthorize,
   getEntries,
-  makeMarkerDataFromEntries,
-  makeSummary,
-  makeSummaryList
+  makeMapData,
+  makeEntries
 };

@@ -4,16 +4,16 @@ import FeedEntry from '../feed-entry';
 
 function FeedEntries(props) {
 
-  function renderEntries(list) {
-    return list.sort((a, b) => a.timeStamp - b.timeStamp).map((entry, index) => (
+  function renderEntries(entries) {
+    return entries.sort((a, b) => a.timeStamp - b.timeStamp).map((entry, index) => (
       <FeedEntry key={index} entry={entry} onClick={() => props.onEntryClick(entry.id)}/>
     ));
   }
 
   function render() {
-    const list = props.feeds.reduce((prev, next) => prev.concat([].concat(...next.summaryList)), []);
+    const entries = props.feeds.reduce((prev, next) => prev.concat([].concat(...next.entries)), []);
     return (
-      <div className='feed-entries'>{renderEntries(list)}</div>
+      <div className='feed-entries'>{renderEntries(entries)}</div>
     );
   }
   

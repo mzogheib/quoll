@@ -53,7 +53,7 @@ router
   .route('/moves')
   .all(routeUsers.authenticate)
   .all(routeMoves.checkAuth)
-  .get(routeMoves.getStoryline);
+  .get(routeMoves.getSegments);
 
 router
   .route('/moves-auth')

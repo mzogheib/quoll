@@ -14,6 +14,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 }
   
 .feed-entry__logo > img {
@@ -23,6 +24,7 @@
 .feed-entry__time-label {
     flex-basis: 75px;
     text-align: right;
+    flex-shrink: 0;
 }
 
 .feed-entry__image {
@@ -33,4 +35,12 @@
 .feed-entry__label {
     flex-grow: 1;
     margin: 0 0 0 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.feed-entry__value {
+    margin: 0 0 0 5px;
+    flex-shrink: 0;
 }

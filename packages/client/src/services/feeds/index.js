@@ -2,7 +2,7 @@ export default {
   make
 };
 
-function make({ id, name, getOauthUrl, authenticate, disconnect, getData, makeSummary, makeSummaryList, makeMapData }) {
+function make({ id, name, getOauthUrl, authenticate, disconnect, getData, makeEntries, makeMapData }) {
   return {
     id,
     name,
@@ -13,7 +13,6 @@ function make({ id, name, getOauthUrl, authenticate, disconnect, getData, makeSu
       return getData({ from: date, to: date });
     },
     makeMapData,
-    makeSummary,
-    makeSummaryList
+    makeEntries
   };
 };

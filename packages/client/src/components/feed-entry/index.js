@@ -10,7 +10,7 @@ function FeedEntry({ entry, onClick }) {
         <div className='feed-entry__time-label'>{entry.timeLabel}</div>
         <div className='feed-entry__image'>{entry.image}</div>
         <div className='feed-entry__label'>{entry.label}</div>
-        <div>{entry.value}</div>
+        <div className='feed-entry__value'>{entry.value}</div>
       </div>
     );
   }
