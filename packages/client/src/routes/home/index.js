@@ -7,7 +7,7 @@ import Home from './component';
 const mapStateToProps = ({ date, feeds }) => ({ 
   date,
   feeds,
-  isLoading: feeds.reduce((previous, current) => previous || current.isLoading, false)
+  isLoading: feeds.reduce((previous, current) => previous || current.isFetching, false)
  });
 
 const mapDispatchToProps = dispatch => ({

@@ -18,14 +18,10 @@ export const setDisconnectedFeeds = ids => ({
   ids
 });
 
-export const setFeedLoading = id => ({
-  type: 'SET_FEED_LOADING',
-  id
-});
-
-export const setFeedReady = id => ({
-  type: 'SET_FEED_READY',
-  id
+export const setFeedFetching = (id, value) => ({
+  type: 'SET_FEED_FETCHING',
+  id,
+  value
 });
 
 export const setFeedAuthenticating = (id, value) => ({
@@ -70,9 +66,9 @@ export const disconnectFeed = (id) => {
 const refreshFeed = (feed, date) => {
   const feedService = feedServices.find(feedService => feedService.id === feed.id);
   return (dispatch) => {
-    dispatch(setFeedLoading(feed.id))
+    dispatch(setFeedFetching(feed.id, true))
     return feedService.getData(date).then(data => {
-      dispatch(setFeedReady(feed.id))
+      dispatch(setFeedFetching(feed.id, false))
       return {
         ...feed,
         data: data,
@@ -100,7 +96,7 @@ const defaultFeeds = feedsConfig.map(config => ({
   name: config.name,
   link: config.link,
   image: config.image,
-  isLoading: false,
+  isFetching: false,
   isConnected: false,
   isAuthenticating: false,
   data: [],
@@ -125,10 +121,8 @@ const feeds = (state = defaultFeeds, action) => {
         } :
         feed
       )
-    case 'SET_FEED_LOADING':
-      return state.map(feed => feed.id === action.id ? { ...feed, isLoading: true } : feed)
-    case 'SET_FEED_READY':
-      return state.map(feed => feed.id === action.id ? { ...feed, isLoading: false } : feed)
+    case 'SET_FEED_FETCHING':
+      return state.map(feed => feed.id === action.id ? { ...feed, isFetching: action.value } : feed)
     case 'SET_FEED_AUTHENTICATING':
       return state.map(feed => feed.id === action.id ? { ...feed, isAuthenticating: action.value } : feed)
     default:
