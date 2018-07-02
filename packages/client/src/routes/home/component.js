@@ -26,19 +26,26 @@ class App extends Component {
             prevDisabled={this.props.isLoading}
             nextDisabled={this.props.isLoading || this.dateIsToday(this.props.date)}
             calendarDisabled={this.props.isLoading}
-            onDateChange={date => this.props.onDateChange(date)}
+            onDateChange={this.props.onDateChange}
           />
           <div className='home__feed-wrapper'>
             <div className='home__feed'>
               <Feed
                 feeds={this.props.feeds}
-                onEntryClick={id => this.props.onEntryClick(id)}
+                onEntryClick={this.props.onEntryClick}
               />
             </div>
           </div>
         </div>
         <div className='home__map-wrapper'>
-          <div className='home__map'><Map /></div>
+          <div className='home__map'>
+            <Map
+              markerData={this.props.markerData}
+              polylineData={this.props.polylineData}
+              focussedItemId={this.props.focussedItemId}
+              onElementSelect={this.props.onEntryClick}
+            />
+          </div>
         </div>
         {this.props.isLoading && (<div className='home__loader'><Loader/></div>)}
       </div>
