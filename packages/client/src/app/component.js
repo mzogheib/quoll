@@ -13,6 +13,7 @@ class App extends Component {
     this.handleWelcomeConnectFeeds = this.handleWelcomeConnectFeeds.bind(this);
     this.handleSideBarHelpClick = this.handleSideBarHelpClick.bind(this);
     this.state = {
+      routeTitle: '',
       isLoading: true,
       showWelcomeModal: false
     }
@@ -20,9 +21,19 @@ class App extends Component {
 
   componentDidMount() {
     this.props.onMount().then(() => this.setState({ 
+      routeTitle: this.getRouteTitleFromLocation(this.props.location),
       isLoading: false,
       showWelcomeModal: !this.props.feedsConnected
     }));
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ routeTitle: this.getRouteTitleFromLocation(nextProps.location) })
+  }
+
+  getRouteTitleFromLocation(location) {
+    const route = routes.find(route => route.path === location.pathname);
+    return (route && route.title) || '';
   }
 
   handleWelcomeCancel() {
@@ -47,7 +58,7 @@ class App extends Component {
       <div className='app'>
         <SideBar onHelpClick={this.handleSideBarHelpClick}/>
         <div className='app__right'>
-          <Header />
+          <Header title={this.state.routeTitle} />
           <div className='app__main'>
             <Switch>
               {routes.map((route, index) => <Route key={index} path={route.path} exact={route.exact} component={route.mainComponent} />)}
