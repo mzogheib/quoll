@@ -14,7 +14,11 @@ function getOAuthUrl() {
 }
 
 function authenticate(code) {
-  return apiToshl.oauth.token(code);
+  return apiToshl.oauth.token(code)
+    .then(data => {
+      const expiry_time = calculateExpiryTime(data.expires_in);
+      return { expiry_time, ...data };
+    });
 }
 
 function deauthorize(auth) {
@@ -25,6 +29,7 @@ function deauthorize(auth) {
 function refreshAuth(auth) {
   return apiToshl.oauth.refresh(auth)
     .then(newAuth => {
+      // Clear cache identified by old access_token
       toshlStorage.delete(auth.access_token);
       return newAuth;
     });
@@ -61,4 +66,9 @@ function getEntries (from, to, token) {
       });
       return decoratedEntries;
     });
+}
+
+function calculateExpiryTime(expiresIn) {
+  // Substract a small amount to account for lag
+  return Math.floor(Date.now() / 1000 + (expiresIn || 3600) - 300);
 }

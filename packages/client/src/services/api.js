@@ -19,17 +19,25 @@ const request = (method, endpoint, params, payload) => {
   return axios(options);
 }
 
-const get = (endpoint, params) => {
+const get = ({ endpoint, params }) => {
   return new Promise((resolve, reject) => {
-    request('GET', endpoint, params, null)
+    request('GET', endpoint, params)
       .then(response => resolve(response.data))
       .catch(reject);
   });
 };
 
-const post = (endpoint, payload) => {
+const post = ({ endpoint, params, payload }) => {
   return new Promise((resolve, reject) => {
-    request('POST', endpoint, null, payload)
+    request('POST', endpoint, params, payload)
+      .then(response => resolve(response.data))
+      .catch(reject);
+  });
+};
+
+const deleteReq = ({ endpoint, params }) => {
+  return new Promise((resolve, reject) => {
+    request('DELETE', endpoint, params)
       .then(response => resolve(response.data))
       .catch(reject);
   });
@@ -38,5 +46,6 @@ const post = (endpoint, payload) => {
 export default {
   authenticate,
   get,
-  post
+  post,
+  delete: deleteReq
 };

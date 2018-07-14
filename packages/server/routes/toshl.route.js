@@ -2,80 +2,9 @@ const ctrlToshl = require('../controllers/toshl.controller');
 const ctrlUsers = require('../controllers/users.controller');
 
 module.exports = {
-  getOAuthUrl,
-  authenticate,
-  deauthorize,
   checkAuth,
   listEntries: list
 };
-
-function getOAuthUrl(req, res) {
-  const url = ctrlToshl.getOAuthUrl();
-  onSuccess(url);
-
-  function onSuccess(response) {
-    respond({ status: 200, message: response });
-  }
-
-  function onError(error) {
-    respond({ status: error.status || 500, message: error.message });
-  }
-
-  function respond(response) {
-    res.status(response.status).json(response.message);
-  }
-}
-
-function authenticate(req, res) {
-  const code = req.body.code;
-  const userId = req.userId;
-
-  if (!code) {
-    respond({ status: 400, message: 'No authorization code provided.' });
-  } else {
-    ctrlToshl.authenticate(code)
-      .then(data => {
-        data.expiry_time = calculateExpiryTime(data.expires_in);
-        return ctrlUsers.setVendorAuth(userId, 'toshl', data);
-      })
-      .then(onSuccess)
-      .catch(onError);
-  }
-
-  function onSuccess(response) {
-    respond({ status: 200 });
-  }
-
-  function onError(error) {
-    respond({ status: error.status || 500, message: error.message });
-  }
-
-  function respond(response) {
-    res.status(response.status).json(response.message);
-  }
-}
-
-function deauthorize(req, res) {
-  const userId = req.userId;
-
-  ctrlUsers.getVendorAuth(userId, 'toshl')
-    .then(ctrlToshl.deauthorize)
-    .then(() => ctrlUsers.setVendorAuth(userId, 'toshl', null))
-    .then(onSuccess)
-    .catch(onError);
-
-  function onSuccess(response) {
-    respond({ status: 200 });
-  }
-
-  function onError(error) {
-    respond({ status: error.status || 500, message: error.message });
-  }
-
-  function respond(response) {
-    res.status(response.status).json(response.message);
-  }
-}
 
 function checkAuth(req, res, next) {
   const userId = req.userId;

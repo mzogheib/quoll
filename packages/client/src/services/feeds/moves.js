@@ -19,10 +19,10 @@ const Activities = {
   bus: { label: 'Bus', image: '🚌' },
 };
 
-const getOauthUrl  = () => api.get('moves-auth');
-const authenticate = payload => api.post('moves-auth', payload);
-const deauthorize = () => api.post('moves-deauth').then(() => 'Remember to revoke access in the Moves app.');
-const getActivities = params => api.get('moves', params).then(segments => segments);
+const getOauthUrl  = () => api.get({ endpoint: 'feed-auth', params: { source: 'moves' }});
+const authenticate = payload => api.post({ endpoint: 'feed-auth', payload, params: { source: 'moves' }});
+const deauthorize = () => api.delete({ endpoint: 'feed-auth', params: { source: 'moves' }}).then(() => 'Remember to revoke access in the Moves app.');
+const getActivities = params => api.get({ endpoint: 'moves', params}).then(segments => segments);
 
 const makeMapData = segments => segments.map(segment => {
   switch (segment.type) {

@@ -4,6 +4,7 @@
 /node_modules
 
 # misc
+/junk
 .DS_Store
 .env.local
 .env.development.local
