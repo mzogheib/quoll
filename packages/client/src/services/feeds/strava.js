@@ -11,7 +11,7 @@ const Activities= {
 const getOauthUrl  = () => api.get({ endpoint: 'feed-auth', params: { source: 'strava' }});
 const authenticate = payload => api.post({ endpoint: 'feed-auth', payload, params: { source: 'strava' }});
 const deauthorize = () => api.delete({ endpoint: 'feed-auth', params: { source: 'strava' }});
-const getActivities = params => api.get({ endpoint: 'strava', params });
+const getActivities = params => api.get({ endpoint: 'feed', params: { source: 'strava', ...params }});
 
 const makeMapData = activities => activities.map(activity => {
   const label = Activities[activity.type].label;

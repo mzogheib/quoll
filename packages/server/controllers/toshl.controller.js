@@ -28,10 +28,11 @@ function deauthorize(auth) {
 
 function refreshAuth(auth) {
   return apiToshl.oauth.refresh(auth)
-    .then(newAuth => {
+    .then(data => {
       // Clear cache identified by old access_token
       toshlStorage.delete(auth.access_token);
-      return newAuth;
+      const expiry_time = calculateExpiryTime(data.expires_in);
+      return { expiry_time, ...data };
     });
 }
 

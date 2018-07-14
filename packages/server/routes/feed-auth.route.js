@@ -21,10 +21,17 @@ const deauthorizeMethods = {
   toshl: ctrlToshl.deauthorize,
 };
 
+const refreshAuthMethods = {
+  moves: ctrlMoves.refreshAuth,
+  strava: ctrlStrava.refreshAuth,
+  toshl: ctrlToshl.refreshAuth,
+};
+
 module.exports = {
   getOAuthUrl,
   authenticate,
-  deauthorize
+  deauthorize,
+  checkAuth
 };
 
 function getOAuthUrl(req, res) {
@@ -32,11 +39,11 @@ function getOAuthUrl(req, res) {
   const respond = ({ status, message }) => res.status(status).json(message);
 
   if (!source) {
-    respond({ status: 400, message: 'No feed source provided.'});
+    respond({ status: 400, message: 'No feed source provided.' });
   } else {
     const url = oAuthUrls[source];
     if (!url) {
-      respond({ status: 404, message: `Unkown feed source: ${source}`});
+      respond({ status: 404, message: `Unkown feed source: ${source}` });
     } else {
       respond({ status: 200, message: url });
     }
@@ -53,7 +60,7 @@ function authenticate(req, res) {
   const onError = () => respond({ status: error.status || 500, message: error.message });
 
   if (!source) {
-    respond({ status: 400, message: 'No feed source provided.'});
+    respond({ status: 400, message: 'No feed source provided.' });
   } else if (!code) {
     respond({ status: 400, message: 'No authorization code provided.' });
   } else {
@@ -69,6 +76,35 @@ function authenticate(req, res) {
   }
 }
 
+function checkAuth(req, res, next) {
+  const { source } = req.query;
+  const { userId } = req;
+
+  const respond = ({ status, message }) => res.status(status).json(message);
+  const onError = () => respond({ status: error.status || 500, message: error.message });
+
+  if (!source) {
+    respond({ status: 400, message: 'No feed source provided.' });
+  } else {
+    const refreshAuthMethod = refreshAuthMethods[source];
+    if (!refreshAuthMethod) {
+      respond({ status: 404, message: `Unkown feed source: ${source}` });
+    } else {
+      ctrlUsers.getVendorAuth(userId, source)
+        .then(auth => {
+          const nowUnix = Math.floor(Date.now() / 1000);
+          if (nowUnix < auth.expiry_time) {
+            next();
+          } else {
+            refreshAuthMethod(auth)
+              .then(data => ctrlUsers.setVendorAuth(userId, source, data).then(next))
+              .catch(onError);
+          }
+        });
+    }
+  }
+}
+
 function deauthorize(req, res) {
   const { source } = req.query;
   const { userId } = req;
@@ -78,11 +114,11 @@ function deauthorize(req, res) {
   const onError = () => respond({ status: error.status || 500, message: error.message });
 
   if (!source) {
-    respond({ status: 400, message: 'No feed source provided.'});
+    respond({ status: 400, message: 'No feed source provided.' });
   } else {
     const deauthorizeMethod = deauthorizeMethods[source];
     if (!deauthorizeMethod) {
-      respond({ status: 404, message: `Unkown feed source: ${source}`});
+      respond({ status: 404, message: `Unkown feed source: ${source}` });
     } else {
       ctrlUsers.getVendorAuth(userId, source)
         .then(deauthorizeMethod)

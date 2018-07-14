@@ -1,11 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const routeToshl = require('./toshl.route');
-const routeStrava = require('./strava.route');
-const routeMoves = require('./moves.route');
 const routeUsers = require('./users.route');
 const routeFeedAuth = require('./feed-auth.route');
+const routeFeed = require('./feed.route');
 
 module.exports = router;
 
@@ -25,18 +23,7 @@ router
   .delete(routeFeedAuth.deauthorize);
 
 router
-  .route('/toshl')
+  .route('/feed')
   .all(routeUsers.authenticate)
-  .all(routeToshl.checkAuth)
-  .get(routeToshl.listEntries);
-
-router
-  .route('/strava')
-  .all(routeUsers.authenticate)
-  .get(routeStrava.listActivities)
-
-router
-  .route('/moves')
-  .all(routeUsers.authenticate)
-  .all(routeMoves.checkAuth)
-  .get(routeMoves.getSegments);
+  .all(routeFeedAuth.checkAuth)
+  .get(routeFeed.get)

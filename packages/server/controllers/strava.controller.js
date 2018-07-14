@@ -4,6 +4,7 @@ module.exports = {
   getOAuthUrl,
   authenticate,
   deauthorize,
+  refreshAuth,
   getAthleteActivities
 };
 
@@ -13,6 +14,10 @@ function getOAuthUrl() {
 
 function authenticate(code) {
   return apiStrava.oauth.token(code);
+}
+
+function refreshAuth(auth) {
+  return Promise.resolve(auth);
 }
 
 function deauthorize(auth) {

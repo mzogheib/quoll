@@ -8,7 +8,7 @@ const DefaultTime = '12:00:00';
 const getOauthUrl  = () => api.get({ endpoint: 'feed-auth', params: { source: 'toshl' }});
 const authenticate = payload => api.post({ endpoint: 'feed-auth', payload, params: { source: 'toshl' }});
 const deauthorize = () => api.delete({ endpoint: 'feed-auth', params: { source: 'toshl' }});
-const getEntries = params => api.get({ endpoint: 'toshl', params });
+const getEntries = params => api.get({ endpoint: 'feed', params: { source: 'toshl', ...params }});
 
 const makeMapData = entries => {
   return entries.filter(entry => entry.location).map(entry => {

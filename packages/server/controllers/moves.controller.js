@@ -28,7 +28,10 @@ function deauthorize() {
 
 function refreshAuth(auth) {
   return apiMoves.oauth.refresh(auth)
-    .then(newAuth => newAuth);
+    .then(data => {
+      const expiry_time = calculateExpiryTime(data.expires_in);
+      return { expiry_time, ...data };
+    });
 }
 
 function getSegments (from, to, token) {
