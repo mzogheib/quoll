@@ -2,6 +2,7 @@ const ctrlMoves = require('../controllers/moves.controller');
 const ctrlStrava = require('../controllers/strava.controller');
 const ctrlToshl = require('../controllers/toshl.controller');
 const ctrlUsers = require('../controllers/users.controller');
+const moment = require('moment');
 
 const oAuthUrls = {
   moves: ctrlMoves.getOAuthUrl(),
@@ -57,7 +58,7 @@ function authenticate(req, res) {
 
   const respond = ({ status, message }) => res.status(status).json(message);
   const onSuccess = () => respond({ status: 200 });
-  const onError = () => respond({ status: error.status || 500, message: error.message });
+  const onError = error => respond({ status: error.status || 500, message: error.message });
 
   if (!source) {
     respond({ status: 400, message: 'No feed source provided.' });
@@ -77,32 +78,31 @@ function authenticate(req, res) {
 }
 
 function checkAuth(req, res, next) {
-  const { source } = req.query;
   const { userId } = req;
 
   const respond = ({ status, message }) => res.status(status).json(message);
-  const onError = () => respond({ status: error.status || 500, message: error.message });
+  const onError = error => respond({ status: error.status || 500, message: error.message });
 
-  if (!source) {
-    respond({ status: 400, message: 'No feed source provided.' });
-  } else {
-    const refreshAuthMethod = refreshAuthMethods[source];
-    if (!refreshAuthMethod) {
-      respond({ status: 404, message: `Unkown feed source: ${source}` });
-    } else {
-      ctrlUsers.getVendorAuth(userId, source)
-        .then(auth => {
-          const nowUnix = Math.floor(Date.now() / 1000);
-          if (nowUnix < auth.expiry_time) {
-            next();
+  ctrlUsers.get(userId)
+    .then(user => {
+      const promises = user.feeds
+        .filter(feed => feed.vendorAuth)
+        .map(connectedFeed => {
+          if (!connectedFeed.vendorAuth.expiry_time) {
+            return Promise.resolve();
+          }
+
+          if (moment().unix() < connectedFeed.vendorAuth.expiry_time) {
+            return Promise.resolve();
           } else {
-            refreshAuthMethod(auth)
-              .then(data => ctrlUsers.setVendorAuth(userId, source, data).then(next))
+            return refreshAuthMethods[connectedFeed.id](connectedFeed.vendorAuth)
+              .then(refreshedAuth => ctrlUsers.setVendorAuth(userId, connectedFeed.id, refreshedAuth))
               .catch(onError);
           }
         });
-    }
-  }
+
+      return Promise.all(promises).then(() => next());
+    })
 }
 
 function deauthorize(req, res) {
@@ -111,7 +111,7 @@ function deauthorize(req, res) {
 
   const respond = ({ status, message }) => res.status(status).json(message);
   const onSuccess = () => respond({ status: 204 });
-  const onError = () => respond({ status: error.status || 500, message: error.message });
+  const onError = error => respond({ status: error.status || 500, message: error.message });
 
   if (!source) {
     respond({ status: 400, message: 'No feed source provided.' });
