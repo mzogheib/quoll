@@ -61,8 +61,8 @@ function adapter(segments) {
         return activities.map(activity => {
           const type = Activities[activity.activity].type;
           const title = Activities[activity.activity].label;
-          const timestampStart = moment(activity.startTime).unix();
-          const timestampEnd = moment(activity.endTime).unix();
+          const timeStart = moment(activity.startTime).unix();
+          const timeEnd = moment(activity.endTime).unix();
           const distance = formatDistance(activity.distance);
           const encodedPath = activity.trackPoints.length && polyline.encode(activity.trackPoints.map(point => [point.lat, point.lon]));
           const startPoint = activity.trackPoints.length && activity.trackPoints[0];
@@ -73,8 +73,8 @@ function adapter(segments) {
             source: 'moves',
             id: uuidv4(),
             type,
-            timestampStart,
-            timestampEnd,
+            timeStart,
+            timeEnd,
             title,
             valueLabel: distance,
             description: null,
@@ -85,18 +85,19 @@ function adapter(segments) {
         })
       case 'place':
         const place = segment.place;
+        const placeTypes = ['home', 'work'];
         const title = `${place.name || 'Place'}`;
-        const timestampStart = moment(segment.startTime).unix();
-        const timestampEnd = moment(segment.endTime).unix();
+        const timeStart = moment(segment.startTime).unix();
+        const timeEnd = moment(segment.endTime).unix();
         const duration = formatDuration(moment(segment.endTime).diff(moment(segment.startTime)));
         const locationStart = { latitude: place.location.lat, longitude: place.location.lon };
         const locationEnd = locationStart;
         return [{
           source: 'moves',
           id: uuidv4(),
-          type: 'place',
-          timestampStart,
-          timestampEnd,
+          type: placeTypes.includes(place.type) ? place.type : 'place',
+          timeStart,
+          timeEnd,
           title,
           valueLabel: duration,
           description: null,

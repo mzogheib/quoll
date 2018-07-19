@@ -79,9 +79,9 @@ function adapter (entries) {
     const type = entry.amount < 0 ? 'expense' : 'income';
     const tags = entry.tags.map(tag => tag.name).join(', ');
     const time = extractTimeString(entry.desc) || DefaultTime;
-    const timestampStart = moment(`${entry.date} ${time}`).unix();
-    const timestampEnd = timestampStart;
-    const locationStart = { latitude: entry.location.latitude, longitude: entry.location.longitude };
+    const timeStart = moment(`${entry.date} ${time}`).unix();
+    const timeEnd = timeStart;
+    const locationStart = entry.location ? { latitude: entry.location.latitude, longitude: entry.location.longitude } : null;
     const locationEnd = locationStart;
     const description = startsWithTime(entry.desc) ? entry.desc.split('\n').slice(2).join('\n') : entry.desc;
     const amount = formatAmount(entry.amount, entry.currency.code);
@@ -89,8 +89,8 @@ function adapter (entries) {
       source: 'toshl',
       id: uuidv4(),
       type,
-      timestampStart,
-      timestampEnd,
+      timeStart,
+      timeEnd,
       title: tags,
       valueLabel: amount,
       description,

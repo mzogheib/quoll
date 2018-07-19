@@ -30,6 +30,6 @@ function get(from, to, user) {
     .then(arraysOfSourceItems =>
       arraysOfSourceItems
         .reduce((prev, next) => prev.concat([].concat(...next)), []) // Flatten
-        .sort((a, b) => a.timestampStart - b.timestampStart)
+        .sort((a, b) => a.timeStart - b.timeStart)
     )
 }

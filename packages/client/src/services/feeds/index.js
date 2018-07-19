@@ -2,17 +2,12 @@ export default {
   make
 };
 
-function make({ id, name, getOauthUrl, authenticate, disconnect, getData, makeEntries, makeMapData }) {
+function make({ id, name, getOauthUrl, authenticate, disconnect }) {
   return {
     id,
     name,
     getOauthUrl,
     authenticate,
-    disconnect,
-    getData(date) {
-      return getData({ from: date, to: date });
-    },
-    makeMapData,
-    makeEntries
+    disconnect
   };
 };

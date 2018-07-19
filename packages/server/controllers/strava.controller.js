@@ -56,8 +56,8 @@ function adapter (activities) {
     const type = Activities[activity.type].type;
     const title = Activities[activity.type].label;
     const distance = formatDistance(activity.distance);
-    const timestampStart = moment(activity.start_date).unix();
-    const timestampEnd = timestampStart + activity.elapsed_time * 1000;
+    const timeStart = moment(activity.start_date).unix();
+    const timeEnd = timeStart + activity.elapsed_time * 1000;
     const description = activity.description;
     const locationStart = { latitude: activity.start_latlng[0], longitude: activity.start_latlng[1] };
     const locationEnd = { latitude: activity.end_latlng[0], longitude: activity.end_latlng[1] };
@@ -66,8 +66,8 @@ function adapter (activities) {
       source: 'strava',
       id: uuidv4(),
       type,
-      timestampStart,
-      timestampEnd,
+      timeStart,
+      timeEnd,
       title,
       valueLabel: distance,
       description,
