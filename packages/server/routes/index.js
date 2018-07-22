@@ -18,6 +18,7 @@ router
 router
   .route('/feed-auth')
   .all(routeUsers.authenticate)
+  .all(routeFeedAuth.checkAuth)
   .get(routeFeedAuth.getOAuthUrl)
   .post(routeFeedAuth.authenticate)
   .delete(routeFeedAuth.deauthorize);
