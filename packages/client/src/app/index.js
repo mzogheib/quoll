@@ -1,6 +1,6 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { setConnectedFeeds } from '../store/feeds';
+import { setFeedConnected } from '../store/feeds';
 import { loginUser, signupUser } from '../store/user';
 import App from './component';
 import userService from '../services/user';
@@ -14,10 +14,9 @@ const mapDispatchToProps = dispatch => ({
   onMount: () => {
     const userId = userService.getCurrentUser();
     const action = userId ? () => loginUser(userId) : () => signupUser();
-    return dispatch(action()).then(user => {
-      const connectedFeeds = user.feeds.filter(feed => feed.isConnected).map(feed => feed.id);
-      dispatch(setConnectedFeeds(connectedFeeds));
-    });
+    return dispatch(action())
+      .then(user => user.feeds)
+      .then(feeds => feeds.forEach(feed => dispatch(setFeedConnected(feed.id, feed.isConnected))))
   }
 });
 

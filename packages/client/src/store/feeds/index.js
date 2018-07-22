@@ -1,13 +1,9 @@
 import feedServices from '../../services/feeds';
 
-export const setConnectedFeeds = ids => ({
-  type: 'SET_CONNECTED_FEEDS',
-  ids
-});
-
-export const setDisconnectedFeeds = ids => ({
-  type: 'SET_DISCONNECTED_FEEDS',
-  ids
+export const setFeedConnected = (id, value) => ({
+  type: 'SET_FEED_CONNECTED',
+  id,
+  value
 });
 
 export const setFeedAuthenticating = (id, value) => ({
@@ -31,7 +27,7 @@ export const authenticateFeed = (id, code) => {
   return (dispatch) => {
     dispatch(setFeedAuthenticating(id, true));
     return feedService.authenticate({ code }).then(() => {
-      dispatch(setConnectedFeeds([id]));
+      dispatch(setFeedConnected(id, true));
       dispatch(setFeedAuthenticating(id, false));
     })
   };
@@ -42,15 +38,13 @@ export const disconnectFeed = (id) => {
   return (dispatch) => {
     dispatch(setFeedAuthenticating(id, true));
     return feedService.disconnect().then(alert => {
-      dispatch(setDisconnectedFeeds([id]));
+      dispatch(setFeedConnected(id, false));
       dispatch(setFeedAuthenticating(id, false));
       return alert;
     })
   };
 };
 
-// TODO: entries can have its own reducer. Can also add map data too
-// See how it's done here under 'Handling Actions', https://redux.js.org/advanced/async-actions
 const defaultFeeds = feedServices.map(config => ({
   id: config.id,
   name: config.name,
@@ -62,10 +56,8 @@ const defaultFeeds = feedServices.map(config => ({
 
 const feeds = (state = defaultFeeds, action) => {
   switch (action.type) {
-    case 'SET_CONNECTED_FEEDS':
-      return state.map(feed => action.ids.includes(feed.id) ? { ...feed, isConnected: true } : feed)
-    case 'SET_DISCONNECTED_FEEDS':
-      return state.map(feed => action.ids.includes(feed.id) ? { ...feed, isConnected: false } : feed )
+    case 'SET_FEED_CONNECTED':
+      return state.map(feed => feed.id === action.id ? { ...feed, isConnected: action.value } : feed)
     case 'SET_FEED_AUTHENTICATING':
       return state.map(feed => feed.id === action.id ? { ...feed, isAuthenticating: action.value } : feed)
     default:
