@@ -1,32 +1,6 @@
-const serviceMoves = require('../services/moves');
-const serviceStrava = require('../services/strava');
-const serviceToshl = require('../services/toshl');
+const dataSourceServices = require('../data-source-services');
 const ctrlUsers = require('../controllers/users.controller');
 const moment = require('moment');
-
-const oAuthUrls = {
-  moves: serviceMoves.getOAuthUrl(),
-  strava: serviceStrava.getOAuthUrl(),
-  toshl: serviceToshl.getOAuthUrl()
-};
-
-const authenticateMethods = {
-  moves: serviceMoves.authenticate,
-  strava: serviceStrava.authenticate,
-  toshl: serviceToshl.authenticate
-}
-
-const deauthorizeMethods = {
-  moves: serviceMoves.deauthorize,
-  strava: serviceStrava.deauthorize,
-  toshl: serviceToshl.deauthorize,
-};
-
-const refreshAuthMethods = {
-  moves: serviceMoves.refreshAuth,
-  strava: serviceStrava.refreshAuth,
-  toshl: serviceToshl.refreshAuth,
-};
 
 module.exports = {
   getOAuthUrl,
@@ -42,7 +16,8 @@ function getOAuthUrl(req, res) {
   if (!source) {
     respond({ status: 400, message: 'No feed source provided.' });
   } else {
-    const url = oAuthUrls[source];
+    const service = dataSourceServices[source];
+    const url = service && service.getOAuthUrl();
     if (!url) {
       respond({ status: 404, message: `Unkown feed source: ${source}` });
     } else {
@@ -65,11 +40,12 @@ function authenticate(req, res) {
   } else if (!code) {
     respond({ status: 400, message: 'No authorization code provided.' });
   } else {
-    const authenticateMethod = authenticateMethods[source];
-    if (!authenticateMethod) {
+    const service = dataSourceServices[source];
+    const authenticate = service && service.authenticate;
+    if (!authenticate) {
       respond({ status: 404, message: `Unkown feed source: ${source}` });
     } else {
-      authenticateMethod(code)
+      authenticate(code)
         .then(data => ctrlUsers.setVendorAuth(userId, source, data))
         .then(onSuccess)
         .catch(onError);
@@ -94,11 +70,17 @@ function checkAuth(req, res, next) {
 
           if (moment().unix() < connectedFeed.vendorAuth.expiry_time) {
             return Promise.resolve();
-          } else {
-            return refreshAuthMethods[connectedFeed.id](connectedFeed.vendorAuth)
-              .then(refreshedAuth => ctrlUsers.setVendorAuth(userId, connectedFeed.id, refreshedAuth))
-              .catch(onError);
           }
+
+          const service = dataSourceServices[connectedFeed.id];
+          const refreshAuth = service && service.refreshAuth;
+          if (!refreshAuth) {
+            return Promise.reject(onError({ status: 404, message: `Unkown feed source: ${connectedFeed.id}` }))
+          }
+
+          return refreshAuth(connectedFeed.vendorAuth)
+            .then(refreshedAuth => ctrlUsers.setVendorAuth(userId, connectedFeed.id, refreshedAuth))
+            .catch(onError);
         });
 
       return Promise.all(promises).then(() => next());
@@ -116,12 +98,13 @@ function deauthorize(req, res) {
   if (!source) {
     respond({ status: 400, message: 'No feed source provided.' });
   } else {
-    const deauthorizeMethod = deauthorizeMethods[source];
-    if (!deauthorizeMethod) {
+    const service = dataSourceServices[source];
+    const deauthorize = service && service.deauthorize;
+    if (!deauthorize) {
       respond({ status: 404, message: `Unkown feed source: ${source}` });
     } else {
       ctrlUsers.getVendorAuth(userId, source)
-        .then(deauthorizeMethod)
+        .then(deauthorize)
         .then(() => ctrlUsers.setVendorAuth(userId, source, null))
         .then(onSuccess)
         .catch(onError);

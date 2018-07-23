@@ -1,18 +1,4 @@
-const serviceMoves = require('../services/moves');
-const serviceStrava = require('../services/strava');
-const serviceToshl = require('../services/toshl');
-
-const getMethods = {
-  moves: serviceMoves.getSegments,
-  strava: serviceStrava.getAthleteActivities,
-  toshl: serviceToshl.getEntries
-};
-
-const adapterMethods = {
-  moves: serviceMoves.adapter,
-  strava: serviceStrava.adapter,
-  toshl: serviceToshl.adapter,
-}
+const dataSourceServices = require('../data-source-services');
 
 module.exports = {
   get
@@ -22,8 +8,8 @@ function get(from, to, user) {
   const promises = user.feeds
     .filter(feed => feed.vendorAuth)
     .map(connectedFeed =>
-      getMethods[connectedFeed.id](from, to, connectedFeed.vendorAuth.access_token)
-        .then(adapterMethods[connectedFeed.id])
+      dataSourceServices[connectedFeed.id].getData(from, to, connectedFeed.vendorAuth.access_token)
+        .then(dataSourceServices[connectedFeed.id].adapter)
     );
 
   return Promise.all(promises)
