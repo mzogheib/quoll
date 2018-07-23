@@ -1,13 +1,13 @@
-const ctrlMoves = require('../controllers/moves.controller');
-const ctrlStrava = require('../controllers/strava.controller');
-const ctrlToshl = require('../controllers/toshl.controller');
+const serviceMoves = require('../services/moves');
+const serviceStrava = require('../services/strava');
+const serviceToshl = require('../services/toshl');
 const ctrlUsers = require('../controllers/users.controller');
 const ctrlFeed = require('../controllers/feed.controller');
 
 const getMethods = {
-  moves: ctrlMoves.getSegments,
-  strava: ctrlStrava.getAthleteActivities,
-  toshl: ctrlToshl.getEntries
+  moves: serviceMoves.getSegments,
+  strava: serviceStrava.getAthleteActivities,
+  toshl: serviceToshl.getEntries
 }
 
 module.exports = {

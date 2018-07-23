@@ -1,31 +1,31 @@
-const ctrlMoves = require('../controllers/moves.controller');
-const ctrlStrava = require('../controllers/strava.controller');
-const ctrlToshl = require('../controllers/toshl.controller');
+const serviceMoves = require('../services/moves');
+const serviceStrava = require('../services/strava');
+const serviceToshl = require('../services/toshl');
 const ctrlUsers = require('../controllers/users.controller');
 const moment = require('moment');
 
 const oAuthUrls = {
-  moves: ctrlMoves.getOAuthUrl(),
-  strava: ctrlStrava.getOAuthUrl(),
-  toshl: ctrlToshl.getOAuthUrl()
+  moves: serviceMoves.getOAuthUrl(),
+  strava: serviceStrava.getOAuthUrl(),
+  toshl: serviceToshl.getOAuthUrl()
 };
 
 const authenticateMethods = {
-  moves: ctrlMoves.authenticate,
-  strava: ctrlStrava.authenticate,
-  toshl: ctrlToshl.authenticate
+  moves: serviceMoves.authenticate,
+  strava: serviceStrava.authenticate,
+  toshl: serviceToshl.authenticate
 }
 
 const deauthorizeMethods = {
-  moves: ctrlMoves.deauthorize,
-  strava: ctrlStrava.deauthorize,
-  toshl: ctrlToshl.deauthorize,
+  moves: serviceMoves.deauthorize,
+  strava: serviceStrava.deauthorize,
+  toshl: serviceToshl.deauthorize,
 };
 
 const refreshAuthMethods = {
-  moves: ctrlMoves.refreshAuth,
-  strava: ctrlStrava.refreshAuth,
-  toshl: ctrlToshl.refreshAuth,
+  moves: serviceMoves.refreshAuth,
+  strava: serviceStrava.refreshAuth,
+  toshl: serviceToshl.refreshAuth,
 };
 
 module.exports = {
