@@ -5,19 +5,19 @@ module.exports = {
   createUser,
   login,
   get,
-  setVendorAuth,
-  getVendorAuth
+  setDataSourceAuth,
+  getDataSourceAuth
 };
 
-const DefaultFeeds = [
-  { id: 'strava', vendorAuth: null },
-  { id: 'toshl', vendorAuth: null },
-  { id: 'moves', vendorAuth: null },
+const DefaultDataSources = [
+  { name: 'strava', auth: null },
+  { name: 'toshl', auth: null },
+  { name: 'moves', auth: null },
 ];
 
 function createUser () {
   return new Promise ((resolve, reject) => {
-    const user = userStorage.create({ feeds: DefaultFeeds });
+    const user = userStorage.create({ dataSources: DefaultDataSources });
     resolve(sanitizeUser(user));
   });
 }
@@ -30,19 +30,19 @@ function sanitizeUser (user) {
   if (!user) return;
 
   const sanitizedUser = user;
-  sanitizedUser.feeds = user.feeds.map(feed => {
+  sanitizedUser.dataSources = user.dataSources.map(dataSource => {
     return {
-      id: feed.id,
-      isConnected: !!feed.vendorAuth
+      name: dataSource.name,
+      isConnected: !!dataSource.auth
     };
   });
   return sanitizedUser;
 }
 
 function get (userId) {
-  // Apply defaults so that newly added feeds will be appended to existing user feeds
+  // Apply defaults so that newly added dataSource will be appended to existing user dataSources
   const user = userStorage.get(userId);
-  user.feeds = _.defaultsDeep(user.feeds, DefaultFeeds);
+  user.dataSources = _.defaultsDeep(user.dataSources, DefaultDataSources);
   return new Promise ((resolve, reject) => resolve(user));
 }
 
@@ -53,18 +53,18 @@ function update (user) {
   });
 }
 
-function setVendorAuth (userId, feedId, data) {
+function setDataSourceAuth (userId, dataSourcName, data) {
   return get(userId)
     .then(user => {
-      user.feeds.find(feed => feed.id === feedId).vendorAuth = data;
+      user.dataSources.find(dataSource => dataSource.name === dataSourcName).auth = data;
       return user;
     })
     .then(update);
 }
 
-function getVendorAuth (userId, feedId) {
+function getDataSourceAuth (userId, dataSourcName) {
   return get(userId)
     .then(user => {
-      return user.feeds.find(feed => feed.id === feedId).vendorAuth;
+      return user.dataSources.find(dataSource => dataSource.name === dataSourcName).auth;
     });
 }

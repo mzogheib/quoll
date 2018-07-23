@@ -1,4 +1,4 @@
-const apiToshl = require('../vendor-apis/toshl');
+const apiToshl = require('../data-source-apis/toshl');
 const toshlStorage = require('../storage/toshl.storage');
 
 module.exports = {
@@ -6,7 +6,7 @@ module.exports = {
   authenticate,
   deauthorize,
   refreshAuth,
-  getEntries
+  getEntries,
 };
 
 function getOAuthUrl() {
@@ -14,7 +14,11 @@ function getOAuthUrl() {
 }
 
 function authenticate(code) {
-  return apiToshl.oauth.token(code);
+  return apiToshl.oauth.token(code)
+    .then(data => {
+      const expiry_time = calculateExpiryTime(data.expires_in);
+      return { expiry_time, ...data };
+    });
 }
 
 function deauthorize(auth) {
@@ -24,9 +28,11 @@ function deauthorize(auth) {
 
 function refreshAuth(auth) {
   return apiToshl.oauth.refresh(auth)
-    .then(newAuth => {
+    .then(data => {
+      // Clear cache identified by old access_token
       toshlStorage.delete(auth.access_token);
-      return newAuth;
+      const expiry_time = calculateExpiryTime(data.expires_in);
+      return { expiry_time, ...data };
     });
 }
 
@@ -61,4 +67,9 @@ function getEntries (from, to, token) {
       });
       return decoratedEntries;
     });
+}
+
+function calculateExpiryTime(expiresIn) {
+  // Substract a small amount to account for lag
+  return Math.floor(Date.now() / 1000 + (expiresIn || 3600) - 300);
 }

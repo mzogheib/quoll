@@ -1,12 +1,12 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { setConnectedFeeds } from '../store/feeds';
+import { setDataSourceConnected } from '../store/dataSources';
 import { loginUser, signupUser } from '../store/user';
 import App from './component';
 import userService from '../services/user';
 
-const mapStateToProps = ({ feeds }) => ({
-    feedsConnected: feeds.reduce((previous, current) => previous || current.isConnected, false)
+const mapStateToProps = ({ dataSources }) => ({
+    dataSourcesConnected: dataSources.reduce((previous, current) => previous || current.isConnected, false)
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -14,10 +14,9 @@ const mapDispatchToProps = dispatch => ({
   onMount: () => {
     const userId = userService.getCurrentUser();
     const action = userId ? () => loginUser(userId) : () => signupUser();
-    return dispatch(action()).then(user => {
-      const connectedFeeds = user.feeds.filter(feed => feed.isConnected).map(feed => feed.id);
-      dispatch(setConnectedFeeds(connectedFeeds));
-    });
+    return dispatch(action())
+      .then(user => user.dataSources)
+      .then(dataSources => dataSources.forEach(dataSource => dispatch(setDataSourceConnected(dataSource.name, dataSource.isConnected))))
   }
 });
 

@@ -3,13 +3,15 @@ import thunkMiddleware from 'redux-thunk';
 import user from './user';
 import date from './date';
 import focussedItemId from './focussed-item';
-import feeds from './feeds';
+import dataSources from './dataSources';
+import feed from './feed';
 
 const reducer = combineReducers({
   user,
   date,
   focussedItemId,
-  feeds
+  dataSources,
+  feed
 });
 
 const store = createStore(reducer, applyMiddleware(thunkMiddleware));

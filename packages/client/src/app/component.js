@@ -10,7 +10,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.handleWelcomeCancel = this.handleWelcomeCancel.bind(this);
-    this.handleWelcomeConnectFeeds = this.handleWelcomeConnectFeeds.bind(this);
+    this.handleWelcomeConnect = this.handleWelcomeConnect.bind(this);
     this.handleSideBarHelpClick = this.handleSideBarHelpClick.bind(this);
     this.state = {
       routeTitle: '',
@@ -23,7 +23,7 @@ class App extends Component {
     this.props.onMount().then(() => this.setState({ 
       routeTitle: this.getRouteTitleFromLocation(this.props.location),
       isLoading: false,
-      showWelcomeModal: !this.props.feedsConnected
+      showWelcomeModal: !this.props.dataSourcesConnected
     }));
   }
 
@@ -40,7 +40,7 @@ class App extends Component {
     this.setState({ showWelcomeModal: false });
   }
 
-  handleWelcomeConnectFeeds() {
+  handleWelcomeConnect() {
     this.setState({ showWelcomeModal: false });
     this.props.history.push('/settings')
   }
@@ -65,7 +65,7 @@ class App extends Component {
             </Switch>
           </div>
         </div>
-        <WelcomeModal isOpen={this.state.showWelcomeModal} onCancel={this.handleWelcomeCancel} onConnectFeeds={this.handleWelcomeConnectFeeds} />
+        <WelcomeModal isOpen={this.state.showWelcomeModal} onCancel={this.handleWelcomeCancel} onConnect={this.handleWelcomeConnect} />
       </div>
     );
   }

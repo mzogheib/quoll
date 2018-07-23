@@ -31,7 +31,7 @@ class App extends Component {
           <div className='home__feed-wrapper'>
             <div className='home__feed'>
               <Feed
-                feeds={this.props.feeds}
+                feed={this.props.feed}
                 onEntryClick={this.props.onEntryClick}
               />
             </div>

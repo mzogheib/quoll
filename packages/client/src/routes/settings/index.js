@@ -1,15 +1,15 @@
 import { connect } from 'react-redux';
 import Settings from './component';
-import { getOauthUrl, authenticateFeed, disconnectFeed } from '../../store/feeds';
+import { getOauthUrl, authenticateDataSource, disconnectDataSource } from '../../store/dataSources';
 
 const mapStateToProps = state => ({
-  feeds: state.feeds
+  dataSources: state.dataSources
 });
 
 const mapDispatchToProps = dispatch => ({
-  onConnect: id => dispatch(getOauthUrl(id)),
-  onOauthCodeReceived: (id, code) => dispatch(authenticateFeed(id, code)),
-  onDisconnect: (id) => dispatch(disconnectFeed(id))
+  onConnect: name => dispatch(getOauthUrl(name)),
+  onOauthCodeReceived: (name, code) => dispatch(authenticateDataSource(name, code)),
+  onDisconnect: name => dispatch(disconnectDataSource(name))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);
