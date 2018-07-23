@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './style.css';
-import FeedSettings from '../../components/feed-settings';
+import DataSourceSettings from '../../components/data-source-settings';
 import utils from '../../services/utils';
 import storageService from '../../services/storage';
 import querystring from 'querystring';
@@ -8,7 +8,7 @@ import querystring from 'querystring';
 class Settings extends Component {
   constructor(props) {
     super(props);
-    this.renderFeed = this.renderFeed.bind(this);
+    this.renderDataSource = this.renderDataSource.bind(this);
   }
 
   componentDidMount() {
@@ -27,38 +27,38 @@ class Settings extends Component {
       const oauthCode = queryParams.code;
       const oauthError = queryParams.error;
 
-      const feedId = oauthState.id;
-      const feed = this.props.feeds.find(feed => feed.id === feedId);
+      const dataSourceName = oauthState.name;
+      const dataSource = this.props.dataSources.find(dataSource => dataSource.name === dataSourceName);
 
       const token = oauthState.token;
       const storedToken = storageService.get('oauth-state-token');
       const tokenIsValid = storedToken && token && storedToken === token;
       storageService.delete('oauth-state-token');
 
-      if (!feed) {
-        return alert(`Unknown feed: ${feedId}`);
+      if (!dataSource) {
+        return alert(`Unknown data source: ${dataSourceName}`);
       } else if (!tokenIsValid || oauthError === 'access_denied') {
-        return alert(`${feed.name} access denied.`);
+        return alert(`${dataSource.name} access denied.`);
       } else if (oauthCode) {
-        return this.props.onOauthCodeReceived(feedId, oauthCode).catch(alert);
+        return this.props.onOauthCodeReceived(dataSourceName, oauthCode).catch(alert);
       } else {
-        return alert(`Unknown response from ${feed.name}.`);
+        return alert(`Unknown response from ${dataSource.name}.`);
       }
     }
   }
 
-  connectFeed(id) {
-    this.props.onConnect(id).then(url => {
+  connectDataSource(name) {
+    this.props.onConnect(name).then(url => {
       const token = utils.makeRandomString();
       storageService.set('oauth-state-token', token);
-      const stateString = utils.encode({ id, token });
+      const stateString = utils.encode({ name, token });
       const urlWithState = utils.addQueryParams(url, { state: stateString });
       window.location.href = urlWithState;
     });
   }
 
-  disconnectFeed(id) {
-    this.props.onDisconnect(id)
+  disconnectDataSource(name) {
+    this.props.onDisconnect(name)
       .then(alertText => {
         if (alertText) {
           alert(alertText);
@@ -67,13 +67,13 @@ class Settings extends Component {
       .catch(alert);
   }
 
-  renderFeed(feed) {
+  renderDataSource(dataSource) {
     return (
-      <div className='settings__feed' key={feed.id}>
-        <FeedSettings
-          feed={feed}
-          onConnect={() => this.connectFeed(feed.id)}
-          onDisconnect={() => this.disconnectFeed(feed.id)}
+      <div className='settings__data-source' key={dataSource.name}>
+        <DataSourceSettings
+          dataSource={dataSource}
+          onConnect={() => this.connectDataSource(dataSource.name)}
+          onDisconnect={() => this.disconnectDataSource(dataSource.name)}
         />
       </div>
     )
@@ -82,10 +82,10 @@ class Settings extends Component {
   render() {
     return (
       <div className='settings'>
-        <div className='settings__feeds'>
-          <div className='settings__feeds-title'>Feeds</div>
-          <div className='settings__feeds-list'>
-            {this.props.feeds.map(this.renderFeed)}
+        <div className='settings__data-sources'>
+          <div className='settings__data-sources-title'>Feeds</div>
+          <div className='settings__data-sources-list'>
+            {this.props.dataSources.map(this.renderDataSource)}
           </div>
         </div>
       </div>

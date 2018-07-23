@@ -6,11 +6,11 @@ module.exports = {
 };
 
 function get(from, to, user) {
-  const promises = user.feeds
-    .filter(feed => feed.vendorAuth)
-    .map(connectedFeed =>
-      dataSourceServices[connectedFeed.id].getData(from, to, connectedFeed.vendorAuth.access_token)
-        .then(dataSourceAdapters[connectedFeed.id].adapter)
+  const promises = user.dataSources
+    .filter(dataSource => dataSource.auth)
+    .map(dataSource =>
+      dataSourceServices[dataSource.name].getData(from, to, dataSource.auth.access_token)
+        .then(dataSourceAdapters[dataSource.name].adapter)
     );
 
   return Promise.all(promises)

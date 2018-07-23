@@ -4,8 +4,8 @@ import moves from './moves';
 
 export default [
   {
-    id: 'toshl',
-    name: 'Toshl',
+    name: 'toshl',
+    title: 'Toshl',
     link: {
       url: 'https://toshl.com',
       label: 'toshl.com'
@@ -16,8 +16,8 @@ export default [
     disconnect: toshl.deauthorize,
   },
   {
-    id: 'strava',
-    name: 'Strava',
+    name: 'strava',
+    title: 'Strava',
     link: {
       url: 'https://www.strava.com',
       label: 'www.strava.com'
@@ -28,8 +28,8 @@ export default [
     disconnect: strava.deauthorize,
   },
   {
-    id: 'moves',
-    name: 'Moves',
+    name: 'moves',
+    title: 'Moves',
     link: {
       url: 'https://www.moves-app.com',
       label: 'www.moves-app.com'

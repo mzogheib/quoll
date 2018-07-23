@@ -3,7 +3,7 @@ import './style.css';
 import Modal from '../modal';
 import CloseIcon from 'react-icons/lib/md/close';
 
-function WelcomeModal({ isOpen, onCancel, onConnectFeeds }) {
+function WelcomeModal({ isOpen, onCancel, onConnect }) {
 
   const renderContent = () => (
     <div className='welcome-modal'>
@@ -11,7 +11,7 @@ function WelcomeModal({ isOpen, onCancel, onConnectFeeds }) {
       <div className='welcome-modal__title'>Quoll</div>
       <div className='welcome-modal__message'><span>Map yo' life.</span></div>
       <div className='welcome-modal__actions'>
-        <button className='welcome-modal__actions-connect' onClick={onConnectFeeds}>Connect Feeds</button>
+        <button className='welcome-modal__actions-connect' onClick={onConnect}>Connect Feeds</button>
       </div>
     </div>
   )

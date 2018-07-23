@@ -46,7 +46,7 @@ function authenticate(req, res) {
       respond({ status: 404, message: `Unkown feed source: ${source}` });
     } else {
       authenticate(code)
-        .then(data => ctrlUsers.setVendorAuth(userId, source, data))
+        .then(data => ctrlUsers.setDataSourceAuth(userId, source, data))
         .then(onSuccess)
         .catch(onError);
     }
@@ -61,25 +61,25 @@ function checkAuth(req, res, next) {
 
   ctrlUsers.get(userId)
     .then(user => {
-      const promises = user.feeds
-        .filter(feed => feed.vendorAuth)
-        .map(connectedFeed => {
-          if (!connectedFeed.vendorAuth.expiry_time) {
+      const promises = user.dataSources
+        .filter(dataSource => dataSource.auth)
+        .map(dataSource => {
+          if (!dataSource.auth.expiry_time) {
             return Promise.resolve();
           }
 
-          if (moment().unix() < connectedFeed.vendorAuth.expiry_time) {
+          if (moment().unix() < dataSource.auth.expiry_time) {
             return Promise.resolve();
           }
 
-          const service = dataSourceServices[connectedFeed.id];
+          const service = dataSourceServices[dataSource.name];
           const refreshAuth = service && service.refreshAuth;
           if (!refreshAuth) {
-            return Promise.reject(onError({ status: 404, message: `Unkown feed source: ${connectedFeed.id}` }))
+            return Promise.reject(onError({ status: 404, message: `Unkown feed source: ${dataSource.name}` }))
           }
 
-          return refreshAuth(connectedFeed.vendorAuth)
-            .then(refreshedAuth => ctrlUsers.setVendorAuth(userId, connectedFeed.id, refreshedAuth))
+          return refreshAuth(dataSource.auth)
+            .then(refreshedAuth => ctrlUsers.setDataSourceAuth(userId, dataSource.name, refreshedAuth))
             .catch(onError);
         });
 
@@ -103,9 +103,9 @@ function deauthorize(req, res) {
     if (!deauthorize) {
       respond({ status: 404, message: `Unkown feed source: ${source}` });
     } else {
-      ctrlUsers.getVendorAuth(userId, source)
+      ctrlUsers.getDataSourceAuth(userId, source)
         .then(deauthorize)
-        .then(() => ctrlUsers.setVendorAuth(userId, source, null))
+        .then(() => ctrlUsers.setDataSourceAuth(userId, source, null))
         .then(onSuccess)
         .catch(onError);
     }

@@ -1,4 +1,4 @@
-.feed-settings {
+.data-source-settings {
   display: flex;
   align-items: center;
   padding: 20px 30px 20px 20px;
@@ -7,57 +7,57 @@
   position: relative;
 }
 
-.feed-settings__loader {
+.data-source-settings__loader {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
 }
 
-.feed-settings__logo {
+.data-source-settings__logo {
   width: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.feed-settings__logo > img {
+.data-source-settings__logo > img {
   width: 100%;
 }
 
-.feed-settings__info {
+.data-source-settings__info {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   margin: 0 0 0 10px;
 }
 
-.feed-settings__url {
+.data-source-settings__url {
   align-self: flex-start;
   text-decoration: none;
   font-size: 14px;
   color: #2F80ED;
 }
 
-.feed-settings__name {
+.data-source-settings__name {
   font-size: 18px;
   font-weight: bold;
 }
 
-.feed-settings__connect {
+.data-source-settings__connect {
   font-size: 14px;
   color: #2F80ED;
 }
 
-.feed-settings__connect:hover {
+.data-source-settings__connect:hover {
   cursor: pointer;
 }
 
-.feed-settings__connect-disabled {
+.data-source-settings__connect-disabled {
   font-size: 14px;
   color: #7f7f7f;
 }
 
-.feed-settings__loading {
+.data-source-settings__loading {
   font-size: 14px;
 }
