@@ -1,4 +1,5 @@
 const dataSourceServices = require('../data-source-services');
+const dataSourceAdapters = require('../data-source-adapters');
 
 module.exports = {
   get
@@ -9,7 +10,7 @@ function get(from, to, user) {
     .filter(feed => feed.vendorAuth)
     .map(connectedFeed =>
       dataSourceServices[connectedFeed.id].getData(from, to, connectedFeed.vendorAuth.access_token)
-        .then(dataSourceServices[connectedFeed.id].adapter)
+        .then(dataSourceAdapters[connectedFeed.id].adapter)
     );
 
   return Promise.all(promises)
