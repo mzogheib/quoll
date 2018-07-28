@@ -4866,9 +4866,9 @@ node-status-codes@^1.0.0:
   dependencies:
     axios "^0.18.0"
 
-"node-toshl@https://github.com/mzogheib/node-toshl.git":
+"node-toshl@https://github.com/mzogheib/node-toshl":
   version "0.1.0"
-  resolved "https://github.com/mzogheib/node-toshl.git#38f0d75279967a705a06f30d24493a240e433601"
+  resolved "https://github.com/mzogheib/node-toshl#c6e8ddf25984711906411864ecd1ec2e4c8d6a22"
   dependencies:
     axios "^0.18.0"
 
