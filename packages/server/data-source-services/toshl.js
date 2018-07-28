@@ -14,7 +14,7 @@ function getOAuthUrl() {
 }
 
 function authenticate(code) {
-  return apiToshl.oauth.token(code)
+  return apiToshl.oauth.token({ code })
     .then(data => {
       const expiry_time = calculateExpiryTime(data.expires_in);
       return { expiry_time, ...data };
@@ -22,12 +22,12 @@ function authenticate(code) {
 }
 
 function deauthorize(auth) {
-  return apiToshl.oauth.deauthorize(auth)
+  return apiToshl.oauth.deauthorize({ ...auth })
     .then(() => { toshlStorage.delete(auth.access_token); });
 }
 
 function refreshAuth(auth) {
-  return apiToshl.oauth.refresh(auth)
+  return apiToshl.oauth.refresh({ ...auth })
     .then(data => {
       // Clear cache identified by old access_token
       toshlStorage.delete(auth.access_token);
@@ -42,7 +42,7 @@ function getTags (token) {
   if (storedTags) {
     return Promise.resolve(storedTags);
   } else {
-    return apiToshl.tags.list(token)
+    return apiToshl.tags.list({ access_token: token })
       .then(tags => {
         // Map the array of tags to an object and store
         storedData = toshlStorage.create(token);
@@ -56,7 +56,7 @@ function getTags (token) {
 
 function getEntries (from, to, token) {
   var decoratedEntries;
-  return apiToshl.entries.list(from, to, token)
+  return apiToshl.entries.list({ from, to, access_token: token })
     .then(entries => { decoratedEntries = entries })
     .then(() => getTags(token))
     .then(tags => {
