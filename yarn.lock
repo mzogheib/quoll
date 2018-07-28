@@ -4860,6 +4860,12 @@ node-status-codes@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/node-status-codes/-/node-status-codes-1.0.0.tgz#5ae5541d024645d32a58fcddc9ceecea7ae3ac2f"
 
+"node-strava@https://github.com/mzogheib/node-strava":
+  version "0.1.0"
+  resolved "https://github.com/mzogheib/node-strava#f1669abaf26298fc07562e83457ee893bb1997cf"
+  dependencies:
+    axios "^0.18.0"
+
 "node-toshl@https://github.com/mzogheib/node-toshl.git":
   version "0.1.0"
   resolved "https://github.com/mzogheib/node-toshl.git#38f0d75279967a705a06f30d24493a240e433601"

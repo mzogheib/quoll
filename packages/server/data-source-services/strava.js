@@ -13,15 +13,15 @@ function getOAuthUrl() {
 }
 
 function authenticate(code) {
-  return apiStrava.oauth.token(code);
+  return apiStrava.oauth.token({ code });
 }
 
 function refreshAuth(auth) {
   return Promise.resolve(auth);
 }
 
-function deauthorize(auth) {
-  return apiStrava.oauth.deauthorize(auth.access_token);
+function deauthorize({ access_token }) {
+  return apiStrava.oauth.deauthorize({ access_token });
 }
 
 function getAthleteActivities(from, to, token) {
@@ -32,10 +32,10 @@ function getAthleteActivities(from, to, token) {
   const before = getLocalTimestamp(new Date(to)) + 24 * 60 * 60;
   const perPage = 20;
 
-  return apiStrava.athlete.activities(after, before, perPage, token)
+  return apiStrava.athlete.activities.list({ after, before, per_page: perPage, access_token: token })
     .then(activities => {
       const promises = activities.map(activity => {
-        return apiStrava.activities.get(activity.id, token);
+        return apiStrava.activities.get({ id: activity.id, access_token: token });
       });
 
       return Promise.all(promises);

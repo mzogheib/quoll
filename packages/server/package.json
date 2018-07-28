@@ -9,6 +9,7 @@
     "express": "^4.16.2",
     "moment": "^2.22.2",
     "node-localstorage": "^1.3.0",
+    "node-strava": "https://github.com/mzogheib/node-strava",
     "node-toshl": "https://github.com/mzogheib/node-toshl.git",
     "uuid": "^3.2.1"
   },
