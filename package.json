@@ -2,7 +2,9 @@
   "name": "quoll",
   "version": "0.0.0",
   "private": true,
-  "workspaces": ["packages/*"],
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "start": "concurrently \"yarn server\" \"yarn client\"",
     "server": "node start-server.js",
