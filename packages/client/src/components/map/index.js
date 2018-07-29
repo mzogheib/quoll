@@ -1,6 +1,7 @@
 import React from 'react';
 import './style.css';
 import mapUtils from './utils';
+import _ from 'lodash';
 const google = window.google;
 
 export default class Map extends React.Component {
@@ -37,11 +38,18 @@ export default class Map extends React.Component {
     this.props.onElementSelect(null);
   }
 
-  componentWillReceiveProps(nextProps) {
-    // TODO: do a better job of managing props and state here.
-    // Markers and polylines are always being rebuilt even if just a focussedItemId change
+  componentDidUpdate(prevProps) {
+    if (this.props.focussedItemId !== prevProps.focussedItemId) {
+      this.resetAllMapElements();
+      const allItems = this.state.markerItems.concat(this.state.polylineItems);
+      const focussedItem = allItems.find(item => item.id === this.props.focussedItemId);
+      if (focussedItem) {
+        this.focusItem(focussedItem);
+      }
+    }
 
-      // Remove existing markers and polylines then replace with new ones
+    // Remove existing markers and polylines then replace with new ones
+    if (!_.isEqual(this.props.markerData, prevProps.markerData) || !_.isEqual(this.props.polylineData, prevProps.polylineData)) {
       this.state.markerItems.forEach(item => {
         item.marker.setMap(null);
         item.infoWindow.close();
@@ -51,24 +59,16 @@ export default class Map extends React.Component {
         item.infoWindow.close();
       });
   
-      const markerItems = this.makeMarkerItems(nextProps.markerData);
-      const polylineItems = this.makePolylineItems(nextProps.polylineData);
+      const markerItems = this.makeMarkerItems(this.props.markerData);
+      const polylineItems = this.makePolylineItems(this.props.polylineData);
       const bounds = this.makeBounds(markerItems, polylineItems);
-      
+  
       if (!bounds.isEmpty()) {
         this.map.fitBounds(bounds);
       }
-
-      if (nextProps.focussedItemId) {
-        const allItems = markerItems.concat(polylineItems);
-        const focussedItem = allItems.find(item => item.id === nextProps.focussedItemId);
-        if (focussedItem) {
-          this.focusItem(focussedItem);
-        }
-
-      }
-
+  
       this.setState({ markerItems, polylineItems });
+    }
   }
 
   makeMarkerItems(markerData) {
