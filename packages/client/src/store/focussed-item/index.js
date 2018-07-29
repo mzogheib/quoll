@@ -1,15 +1,17 @@
-export const setFocussedItem = id => ({
+export const setFocussedItem = (id, latitude, longitude) => ({
   type: 'SET_FOCUSSED_ITEM',
-  id
+  id,
+  latitude,
+  longitude
 });
 
-const focussedItemId = (state = null, action) => {
+const focussedItem = (state = { id: null, latitude: null, longitude: null }, action) => {
   switch (action.type) {
     case 'SET_FOCUSSED_ITEM':
-      return action.id
+      return { id: action.id, latitude: action.latitude, longitude: action.longitude }
     default:
       return state
   }
 };
 
-export default focussedItemId;
+export default focussedItem;

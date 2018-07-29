@@ -5,7 +5,7 @@ import { setFocussedItem } from '../../store/focussed-item';
 import moment from 'moment';
 import Home from './component';
 
-const mapStateToProps = ({ date, feed, focussedItemId }) => {
+const mapStateToProps = ({ date, feed, focussedItem }) => {
   const markerData = feed.entries.filter(entry => !entry.polyline && entry.locationStart)
     .map(entry => ({
       id: entry.id,
@@ -30,7 +30,7 @@ const mapStateToProps = ({ date, feed, focussedItemId }) => {
     feed,
     markerData,
     polylineData,
-    focussedItemId,
+    focussedItem,
     isLoading
   };
 }
@@ -42,7 +42,7 @@ const mapDispatchToProps = dispatch => ({
     return dispatch(fetchFeed())
       .then(() => dispatch(setFocussedItem(null)));
   },
-  onEntryClick: id => dispatch(setFocussedItem(id))
+  onEntryClick: (id, latitude, longitude) => dispatch(setFocussedItem(id, latitude, longitude))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

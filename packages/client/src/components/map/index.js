@@ -39,13 +39,11 @@ export default class Map extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.focussedItemId !== prevProps.focussedItemId) {
-      this.resetAllMapElements();
-      const allItems = this.state.markerItems.concat(this.state.polylineItems);
-      const focussedItem = allItems.find(item => item.id === this.props.focussedItemId);
-      if (focussedItem) {
-        this.focusItem(focussedItem);
-      }
+    this.resetAllMapElements();
+    const allItems = this.state.markerItems.concat(this.state.polylineItems);
+    const item = allItems.find(item => item.id === this.props.focussedItem.id);
+    if (item) {
+      this.focusItem(item, this.props.focussedItem.latitude, this.props.focussedItem.longitude);
     }
 
     // Remove existing markers and polylines then replace with new ones
@@ -78,14 +76,8 @@ export default class Map extends React.Component {
 
     markerItems.forEach(item => {
       item.marker.setMap(this.map);
-      item.marker.addListener('click', () => {
-        this.resetAllMapElements();
-        this.props.onElementSelect(item.id);
-      });
-      item.infoWindow.addListener('closeclick', () => {
-        this.resetAllMapElements();
-        this.props.onElementSelect(null);
-      });
+      item.marker.addListener('click', () => this.props.onElementSelect(item.id));
+      item.infoWindow.addListener('closeclick', () => this.props.onElementSelect(null));
     });
 
     return markerItems;
@@ -100,7 +92,7 @@ export default class Map extends React.Component {
       item.polyline.setMap(this.map);
       item.polyline.addListener('click', event => {
         this.resetAllMapElements();
-        this.props.onElementSelect(item.id); // TODO: support focussing at a particular lat lng
+        this.props.onElementSelect(item.id, event.latLng.lat(), event.latLng.lng());
       });
       item.infoWindow.addListener('closeclick', () => {
         this.props.onElementSelect(null);
@@ -117,12 +109,12 @@ export default class Map extends React.Component {
     return bounds;
   }
 
-  focusItem(item, position) {
+  focusItem(item, lat, lng) {
     if (item.marker) {
       mapUtils.highlightMarker(item.marker);
       item.infoWindow.open(this.map, item.marker);
     } else {
-      const infoWindowPosition = position || item.polyline.getPath().getArray()[0];
+      const infoWindowPosition = (lat && lng && { lat, lng }) || item.polyline.getPath().getArray()[0];
       mapUtils.highlightPolyline(item.polyline)
       item.infoWindow.setPosition(infoWindowPosition);
       item.infoWindow.open(this.map);

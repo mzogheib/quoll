@@ -42,7 +42,7 @@ class App extends Component {
             <Map
               markerData={this.props.markerData}
               polylineData={this.props.polylineData}
-              focussedItemId={this.props.focussedItemId}
+              focussedItem={this.props.focussedItem}
               onElementSelect={this.props.onEntryClick}
             />
           </div>
