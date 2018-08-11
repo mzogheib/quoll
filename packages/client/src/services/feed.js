@@ -1,17 +1,5 @@
 import api from './api';
-
-const SourceConfig = {
-  strava: {
-    image: require('./images/strava-96x96.png'),
-  },
-  moves: {
-    image: require('./images/moves-206x206.png'),
-
-  },
-  toshl: {
-    image: require('./images/toshl-196x196.png'),
-  }
-};
+import dataSources from './data-sources';
 
 const EntryConfig = { 
   home: { label: 'Home', image: '🏠' },
@@ -33,10 +21,10 @@ const EntryConfig = {
 const get = date => api.get({ endpoint: 'feed', params: { from: date, to: date } })
   .then(entries => entries.map(entry => {
     const entryConfig = EntryConfig[entry.type];
-    const sourceConfig = SourceConfig[entry.source];
+    const sourceConfig = dataSources.find(dataSource => dataSource.name === entry.source);
     return ({
       ...entry,
-      logo: sourceConfig.image,
+      logo: sourceConfig && sourceConfig.imageConnected,
       image: (entryConfig && entryConfig.image) || '🤷‍♂️',
     })
   }));

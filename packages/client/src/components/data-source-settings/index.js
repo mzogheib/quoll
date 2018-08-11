@@ -21,11 +21,10 @@ function DataSourceSettings(props) {
   }
 
   function render(dataSource) {
-    const imgStyle = !dataSource.isConnected ? { filter: 'grayscale(100%)' } : {};
     return (
       <div className='data-source-settings'>
         <div className='data-source-settings__logo'>
-          <img src={dataSource.image} alt='data source logo' style={imgStyle} />
+          <img src={dataSource.isConnected ? dataSource.imageConnected : dataSource.imageDisconnected} alt={`${dataSource.name} logo`}/>
         </div>
         <div className='data-source-settings__info'>
           <div className='data-source-settings__name'>{dataSource.title}</div>

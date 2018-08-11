@@ -54,17 +54,15 @@ class Settings extends Component {
       const stateString = utils.encode({ name, token });
       const urlWithState = utils.addQueryParams(url, { state: stateString });
       window.location.href = urlWithState;
-    });
+    }).catch(alert);
   }
 
   disconnectDataSource(name) {
-    this.props.onDisconnect(name)
-      .then(alertText => {
-        if (alertText) {
-          alert(alertText);
-        }
-      })
-      .catch(alert);
+    this.props.onDisconnect(name).then(alertText => {
+      if (alertText) {
+        alert(alertText);
+      }
+    }).catch(alert);
   }
 
   renderDataSource(dataSource) {
