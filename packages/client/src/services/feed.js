@@ -1,6 +1,6 @@
 import api from './api';
 
-const sourceConfig = {
+const SourceConfig = {
   strava: {
     image: require('./images/strava-96x96.png'),
   },
@@ -13,14 +13,14 @@ const sourceConfig = {
   }
 };
 
-const EntryTypes = { 
+const EntryConfig = { 
   home: { label: 'Home', image: '🏠' },
   work: { label: 'Work', image: '🏭' },
   place: { label: 'Place', image: '🏬' },
   walk: { label: 'Walk' , image: '🚶‍♂️' },
   bike: { label: 'Bike' , image: '🚲' },
   run: { label: 'Run' , image: '🏃‍♂️' },
-  transport: { label: 'Transport', image: '✌️' },
+  transport: { label: 'Transport', image: '⏩' },
   car: { label: 'Car', image: '🚗' },
   motorcycle: { label: 'Motorcycle', image: '🏍️' },
   tram: { label: 'Tram', image: '🚊' },
@@ -30,11 +30,16 @@ const EntryTypes = {
   yoga: { label: 'Yoga', image: '🧘‍♂️' },
 };
 
-const get = date => api.get({ endpoint: 'feed', params: { from: date, to: date } }).then(entries => entries.map(entry => ({
-  ...entry,
-  logo: sourceConfig[entry.source].image,
-  image: EntryTypes[entry.type].image,
-})));
+const get = date => api.get({ endpoint: 'feed', params: { from: date, to: date } })
+  .then(entries => entries.map(entry => {
+    const entryConfig = EntryConfig[entry.type];
+    const sourceConfig = SourceConfig[entry.source];
+    return ({
+      ...entry,
+      logo: sourceConfig.image,
+      image: (entryConfig && entryConfig.image) || '🤷‍♂️',
+    })
+  }));
 
 export default {
   get
