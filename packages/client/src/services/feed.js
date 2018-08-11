@@ -2,16 +2,13 @@ import api from './api';
 
 const sourceConfig = {
   strava: {
-    link: { url: 'https://www.strava.com', label: 'www.strava.com' },
     image: require('./images/strava-96x96.png'),
   },
   moves: {
-    link: { url: 'https://www.moves-app.com', label: 'www.moves-app.com' },
     image: require('./images/moves-206x206.png'),
 
   },
   toshl: {
-    link: { url: 'https://toshl.com', label: 'toshl.com' },
     image: require('./images/toshl-196x196.png'),
   }
 };
@@ -30,6 +27,7 @@ const EntryTypes = {
   train: { label: 'Train', image: '🚆' },
   bus: { label: 'Bus', image: '🚌' },
   expense: { label: 'Expense', image: '💸' },
+  yoga: { label: 'Yoga', image: '🧘‍♂️' },
 };
 
 const get = date => api.get({ endpoint: 'feed', params: { from: date, to: date } }).then(entries => entries.map(entry => ({
