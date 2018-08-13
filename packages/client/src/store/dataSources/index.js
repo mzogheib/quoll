@@ -16,9 +16,8 @@ export const getOauthUrl = name => {
   const dataSourceService = dataSourceServices.find(dataSource => dataSource.name === name);
   return (dispatch) => {
     dispatch(setDataSourceAuthenticating(name, true));
-    return dataSourceService.getOauthUrl().then(url => {
-      return url;
-    })
+    return dataSourceService.getOauthUrl().then(url => url)
+      .finally((() => dispatch(setDataSourceAuthenticating(name, false))));
   };
 };
 
@@ -26,10 +25,8 @@ export const authenticateDataSource = (name, code) => {
   const dataSourceService = dataSourceServices.find(dataSource => dataSource.name === name);
   return (dispatch) => {
     dispatch(setDataSourceAuthenticating(name, true));
-    return dataSourceService.authenticate({ code }).then(() => {
-      dispatch(setDataSourceConnected(name, true));
-      dispatch(setDataSourceAuthenticating(name, false));
-    })
+    return dataSourceService.authenticate({ code }).then(() => dispatch(setDataSourceConnected(name, true)))
+      .finally((() => dispatch(setDataSourceAuthenticating(name, false))));
   };
 };
 
@@ -39,17 +36,13 @@ export const disconnectDataSource = (name) => {
     dispatch(setDataSourceAuthenticating(name, true));
     return dataSourceService.disconnect().then(alert => {
       dispatch(setDataSourceConnected(name, false));
-      dispatch(setDataSourceAuthenticating(name, false));
       return alert;
-    })
+    }).finally((() => dispatch(setDataSourceAuthenticating(name, false))));
   };
 };
 
 const defaultDataSources = dataSourceServices.map(config => ({
-  name: config.name,
-  title: config.title,
-  link: config.link,
-  image: config.image,
+  ...config,
   isConnected: false,
   isAuthenticating: false,
 }));

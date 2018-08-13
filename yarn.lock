@@ -4880,6 +4880,12 @@ node-pre-gyp@^0.6.36:
   dependencies:
     axios "^0.18.0"
 
+"node-uber@https://github.com/mzogheib/node-uber":
+  version "0.1.0"
+  resolved "https://github.com/mzogheib/node-uber#890fadc27860f961f6b02058f6c7c7b95b8e1af5"
+  dependencies:
+    axios "^0.18.0"
+
 nodemon@^1.14.11:
   version "1.18.3"
   resolved "https://registry.yarnpkg.com/nodemon/-/nodemon-1.18.3.tgz#46e681ee0dd1b590562e03019b4c5df234f906f9"
