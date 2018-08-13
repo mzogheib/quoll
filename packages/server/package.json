@@ -11,6 +11,7 @@
     "node-moves": "https://github.com/mzogheib/node-moves",
     "node-strava": "https://github.com/mzogheib/node-strava",
     "node-toshl": "https://github.com/mzogheib/node-toshl",
+    "node-uber": "https://github.com/mzogheib/node-uber",
     "uuid": "^3.2.1"
   },
   "scripts": {
