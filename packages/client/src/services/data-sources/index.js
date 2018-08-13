@@ -31,6 +31,19 @@ export default [
     disconnect: strava.deauthorize,
   },
   {
+    name: 'uber',
+    title: 'Uber',
+    link: {
+      url: 'https://www.uber.com',
+      label: 'www.uber.com'
+    },
+    imageConnected: require('../images/uber-256x256.png'),
+    imageDisconnected: require('../images/uber-gray-256x256.png'),
+    getOauthUrl: uber.getOauthUrl,
+    authenticate: uber.authenticate,
+    disconnect: uber.deauthorize,
+  },
+  {
     name: 'moves',
     title: 'Moves',
     link: {
@@ -43,17 +56,4 @@ export default [
     authenticate: moves.authenticate,
     disconnect: moves.deauthorize,
   },
-  {
-    name: 'uber',
-    title: 'Uber',
-    link: {
-      url: 'https://www.uber.com',
-      label: 'www.uber.com'
-    },
-    imageConnected: require('../images/uber-256x256.png'),
-    imageDisconnected: require('../images/uber-gray-256x256.png'),
-    getOauthUrl: uber.getOauthUrl,
-    authenticate: uber.authenticate,
-    disconnect: uber.deauthorize,
-  }
 ];
