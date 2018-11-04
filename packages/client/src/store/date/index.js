@@ -1,8 +1,8 @@
-import moment from 'moment';
+import moment from 'moment'
 export const setDate = date => ({
   type: 'SET_DATE',
-  date
-});
+  date,
+})
 
 const date = (state = moment().format('YYYY-MM-DD'), action) => {
   switch (action.type) {
@@ -11,6 +11,6 @@ const date = (state = moment().format('YYYY-MM-DD'), action) => {
     default:
       return state
   }
-};
+}
 
-export default date;
+export default date

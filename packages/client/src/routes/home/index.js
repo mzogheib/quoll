@@ -1,29 +1,31 @@
-import { connect } from 'react-redux';
-import { setDate } from '../../store/date';
-import { fetchFeed } from '../../store/feed';
-import { setFocussedItem } from '../../store/focussed-item';
-import moment from 'moment';
-import Home from './component';
+import { connect } from 'react-redux'
+import { setDate } from '../../store/date'
+import { fetchFeed } from '../../store/feed'
+import { setFocussedItem } from '../../store/focussed-item'
+import moment from 'moment'
+import Home from './component'
 
 const mapStateToProps = ({ date, feed, focussedItem }) => {
-  const markerData = feed.entries.filter(entry => !entry.polyline && entry.locationStart)
+  const markerData = feed.entries
+    .filter(entry => !entry.polyline && entry.locationStart)
     .map(entry => ({
       id: entry.id,
       latitude: entry.locationStart.latitude,
       longitude: entry.locationStart.longitude,
       title: entry.title,
       subTitle: moment.unix(entry.timeStart).format('h:mm a'),
-      description: entry.description || ''
-    }));
-  const polylineData = feed.entries.filter(entry => entry.polyline)
+      description: entry.description || '',
+    }))
+  const polylineData = feed.entries
+    .filter(entry => entry.polyline)
     .map(entry => ({
       id: entry.id,
       encodedPath: entry.polyline,
       title: entry.title,
       subTitle: moment.unix(entry.timeStart).format('h:mm a'),
-      description: entry.description || ''
-    }));
-  const isLoading = feed.isFetching;
+      description: entry.description || '',
+    }))
+  const isLoading = feed.isFetching
 
   return {
     date,
@@ -31,18 +33,21 @@ const mapStateToProps = ({ date, feed, focussedItem }) => {
     markerData,
     polylineData,
     focussedItem,
-    isLoading
-  };
+    isLoading,
+  }
 }
 
 const mapDispatchToProps = dispatch => ({
   onMount: () => dispatch(fetchFeed()),
   onDateChange: date => {
-    dispatch(setDate(date));
-    return dispatch(fetchFeed())
-      .then(() => dispatch(setFocussedItem(null)));
+    dispatch(setDate(date))
+    return dispatch(fetchFeed()).then(() => dispatch(setFocussedItem(null)))
   },
-  onEntryClick: (id, latitude, longitude) => dispatch(setFocussedItem(id, latitude, longitude))
-});
+  onEntryClick: (id, latitude, longitude) =>
+    dispatch(setFocussedItem(id, latitude, longitude)),
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home)
