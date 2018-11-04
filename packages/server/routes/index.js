@@ -1,19 +1,15 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
 
-const routeUsers = require('./users.route');
-const routeFeedAuth = require('./feed-auth.route');
-const routeFeed = require('./feed.route');
+const routeUsers = require('./users.route')
+const routeFeedAuth = require('./feed-auth.route')
+const routeFeed = require('./feed.route')
 
-module.exports = router;
+module.exports = router
 
-router
-  .route('/login')
-  .post(routeUsers.login);
+router.route('/login').post(routeUsers.login)
 
-router
-  .route('/signup')
-  .post(routeUsers.signup);
+router.route('/signup').post(routeUsers.signup)
 
 router
   .route('/feed-auth')
@@ -21,7 +17,7 @@ router
   .all(routeFeedAuth.checkAuth)
   .get(routeFeedAuth.getOAuthUrl)
   .post(routeFeedAuth.authenticate)
-  .delete(routeFeedAuth.deauthorize);
+  .delete(routeFeedAuth.deauthorize)
 
 router
   .route('/feed')

@@ -10,7 +10,21 @@
     "server": "node start-server.js",
     "client": "node start-client.js"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "./**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
   "devDependencies": {
-    "concurrently": "^3.5.1"
+    "concurrently": "^3.5.1",
+    "husky": "^1.1.3",
+    "lint-staged": "^8.0.4",
+    "prettier": "^1.14.3"
   }
 }

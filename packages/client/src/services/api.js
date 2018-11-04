@@ -1,12 +1,12 @@
-import axios from 'axios';
+import axios from 'axios'
 
-const baseUrl = '/api';
+const baseUrl = '/api'
 
-let authHeader;
+let authHeader
 
 const authenticate = userId => {
-  authHeader = { Authorization: `Basic ${userId}:` };
-};
+  authHeader = { Authorization: `Basic ${userId}:` }
+}
 
 const request = (method, endpoint, params, payload) => {
   const options = {
@@ -14,38 +14,38 @@ const request = (method, endpoint, params, payload) => {
     url: `${baseUrl}/${endpoint}`,
     params,
     data: payload,
-    headers: authHeader
-  };
-  return axios(options);
+    headers: authHeader,
+  }
+  return axios(options)
 }
 
 const get = ({ endpoint, params }) => {
   return new Promise((resolve, reject) => {
     request('GET', endpoint, params)
       .then(response => resolve(response.data))
-      .catch(reject);
-  });
-};
+      .catch(reject)
+  })
+}
 
 const post = ({ endpoint, params, payload }) => {
   return new Promise((resolve, reject) => {
     request('POST', endpoint, params, payload)
       .then(response => resolve(response.data))
-      .catch(reject);
-  });
-};
+      .catch(reject)
+  })
+}
 
 const deleteReq = ({ endpoint, params }) => {
   return new Promise((resolve, reject) => {
     request('DELETE', endpoint, params)
       .then(response => resolve(response.data))
-      .catch(reject);
-  });
-};
+      .catch(reject)
+  })
+}
 
 export default {
   authenticate,
   get,
   post,
-  delete: deleteReq
-};
+  delete: deleteReq,
+}

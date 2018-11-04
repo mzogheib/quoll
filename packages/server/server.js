@@ -1,23 +1,24 @@
-const express = require('express');
-const app = express();
-const bodyParser = require('body-parser');
-const routes = require('./routes');
+const express = require('express')
+const app = express()
+const bodyParser = require('body-parser')
+const routes = require('./routes')
 
-app.set('port', (process.env.PORT || 3001));
+app.set('port', process.env.PORT || 3001)
 
-app.use(bodyParser.urlencoded({
-    extended: false
-}));
-app.use(bodyParser.json());
+app.use(
+  bodyParser.urlencoded({
+    extended: false,
+  })
+)
+app.use(bodyParser.json())
 
 app.use('/api', routes)
 
 // Listen for requests on this port
 const server = app.listen(app.get('port'), () => {
-    const port = server.address().port;
-    console.log('Listening on port ' + port);
-});
-
+  const port = server.address().port
+  console.log('Listening on port ' + port)
+})
 
 // TODO understand wtf is going on with nodemon and express.
 // Seems like the express server stays alive when nodemon restarts the app, which leads to port in use error "Error: listen EADDRINUSE :::3001"
@@ -27,24 +28,26 @@ const server = app.listen(app.get('port'), () => {
 // This function is called when you want the server to die gracefully
 // i.e. wait for existing connections
 const gracefulShutdown = () => {
-    console.log("Received kill signal, shutting down gracefully.");
-    server.close(() => {
-        console.log("Closed out connections.");
-        process.exit(0);
-    });
+  console.log('Received kill signal, shutting down gracefully.')
+  server.close(() => {
+    console.log('Closed out connections.')
+    process.exit(0)
+  })
 
-    // if after 
-    setTimeout(() => {
-        console.error("Could not close connections in time, forcefully shutting down.");
-        process.exit(0);
-    }, 10 * 1000);
+  // if after
+  setTimeout(() => {
+    console.error(
+      'Could not close connections in time, forcefully shutting down.'
+    )
+    process.exit(0)
+  }, 10 * 1000)
 }
 
-// listen for TERM signal .e.g. kill 
-process.on('SIGTERM', gracefulShutdown);
+// listen for TERM signal .e.g. kill
+process.on('SIGTERM', gracefulShutdown)
 
 // listen for INT signal e.g. Ctrl-C
-process.on('SIGINT', gracefulShutdown);
+process.on('SIGINT', gracefulShutdown)
 
 // e.g. used by nodemon, type rs while nodemon is running
-process.once('SIGUSR2', gracefulShutdown);
+process.once('SIGUSR2', gracefulShutdown)

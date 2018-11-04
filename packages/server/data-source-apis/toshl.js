@@ -1,4 +1,4 @@
-const auth = require('./private/toshl-auth');
-const nodeToshl = require('node-toshl');
+const auth = require('./private/toshl-auth')
+const nodeToshl = require('node-toshl')
 
-module.exports = new nodeToshl(auth);
+module.exports = new nodeToshl(auth)

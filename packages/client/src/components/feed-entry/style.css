@@ -1,46 +1,46 @@
 .feed-entry {
-    display: flex;
-    align-items: center;
-    padding: 4px 10px;
+  display: flex;
+  align-items: center;
+  padding: 4px 10px;
 }
 
 .feed-entry:hover {
-    cursor: pointer;
-    background-color: gainsboro;
+  cursor: pointer;
+  background-color: gainsboro;
 }
 
 .feed-entry__logo {
-    width: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
+  width: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
-  
+
 .feed-entry__logo > img {
-    width: 100%;
+  width: 100%;
 }
 
 .feed-entry__time-label {
-    flex-basis: 75px;
-    text-align: right;
-    flex-shrink: 0;
+  flex-basis: 75px;
+  text-align: right;
+  flex-shrink: 0;
 }
 
 .feed-entry__image {
-    font-size: 22px;
-    margin: 0 0 0 10px;
+  font-size: 22px;
+  margin: 0 0 0 10px;
 }
 
 .feed-entry__label {
-    flex-grow: 1;
-    margin: 0 0 0 10px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+  flex-grow: 1;
+  margin: 0 0 0 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .feed-entry__value {
-    margin: 0 0 0 5px;
-    flex-shrink: 0;
+  margin: 0 0 0 5px;
+  flex-shrink: 0;
 }

@@ -1,4 +1,4 @@
-const auth = require('./private/strava-auth');
-const nodeStrava = require('node-strava');
+const auth = require('./private/strava-auth')
+const nodeStrava = require('node-strava')
 
-module.exports = new nodeStrava(auth);
+module.exports = new nodeStrava(auth)
