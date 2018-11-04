@@ -14,9 +14,9 @@ function DataSourceSettings(props) {
 
   function renderButton(dataSource) {
     return (
-      <a className={dataSource.isAuthenticating ? 'data-source-settings__connect-disabled' : 'data-source-settings__connect'} onClick={() => handleButtonClick(dataSource)}>
+      <div className={dataSource.isAuthenticating ? 'data-source-settings__connect-disabled' : 'data-source-settings__connect'} onClick={() => handleButtonClick(dataSource)}>
         {dataSource.isConnected ? 'Disconnect' : 'Connect'}
-      </a>
+      </div>
     )
   }
 
@@ -28,7 +28,7 @@ function DataSourceSettings(props) {
         </div>
         <div className='data-source-settings__info'>
           <div className='data-source-settings__name'>{dataSource.title}</div>
-          <a className='data-source-settings__url' href={dataSource.link.url} target='_blank'>{dataSource.link.label}</a>
+          <a className='data-source-settings__url' href={dataSource.link.url} target='_blank' rel='noopener noreferrer'>{dataSource.link.label}</a>
         </div>
         <div>{renderButton(dataSource)}</div>
         {dataSource.isAuthenticating && (<div className='data-source-settings__loader'><Loader/></div>)}
