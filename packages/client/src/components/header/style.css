@@ -1,11 +1,10 @@
 .header {
-    min-height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #4f4f4f;
-    color: #6fcf97;
-    font-size: 20px;
-    font-weight: 500;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #4f4f4f;
+  color: #6fcf97;
+  font-size: 20px;
+  font-weight: 500;
 }
-

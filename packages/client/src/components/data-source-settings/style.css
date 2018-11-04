@@ -36,7 +36,7 @@
   align-self: flex-start;
   text-decoration: none;
   font-size: 14px;
-  color: #2F80ED;
+  color: #2f80ed;
 }
 
 .data-source-settings__name {
@@ -46,7 +46,7 @@
 
 .data-source-settings__connect {
   font-size: 14px;
-  color: #2F80ED;
+  color: #2f80ed;
 }
 
 .data-source-settings__connect:hover {

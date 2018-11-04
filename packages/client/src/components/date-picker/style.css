@@ -1,51 +1,51 @@
 .date-picker {
-    display: flex;
-    align-items: center;
-    position: relative;
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
 .date-picker__button {
-    flex-basis: 70px;
+  flex-basis: 70px;
 }
 
 .date-picker__button:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .date-picker__button-disabled {
-    flex-basis: 70px;
+  flex-basis: 70px;
 }
 
 .date-picker__date {
-    flex-grow: 1;
-    text-align: center;
+  flex-grow: 1;
+  text-align: center;
 }
 
 .date-picker__date:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .date-picker__date-disabled {
-    flex-grow: 1;
-    text-align: center;
-    color: #7f7f7f;
+  flex-grow: 1;
+  text-align: center;
+  color: #7f7f7f;
 }
 
 .date-picker__calendar-wrapper {
-    position: absolute;
-    top: 40px;
-    right: 0;
-    left: 0;
-    z-index: 1000;
-    display: flex;
-    justify-content: center;
+  position: absolute;
+  top: 40px;
+  right: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
 }
 .date-picker__calendar {
-    box-shadow: 2px 2px 12px;
-    max-width: 300px !important;
-    font-family: Roboto !important;
+  box-shadow: 2px 2px 12px;
+  max-width: 300px !important;
+  font-family: Roboto !important;
 }
 
 .react-calendar__tile {
-    font-family: Roboto;
+  font-family: Roboto;
 }
