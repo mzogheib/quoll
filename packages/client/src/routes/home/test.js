@@ -1,8 +1,10 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import Home from './'
+import ShallowRenderer from 'react-test-renderer/shallow'
+import Home from './component.js'
+
+const renderer = new ShallowRenderer()
 
 it('renders without crashing', () => {
   const div = document.createElement('div')
-  ReactDOM.render(<Home />, div)
+  renderer.render(<Home />, div)
 })
