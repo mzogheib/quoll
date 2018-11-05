@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import './style.css'
+import './style.scss'
 import MapIcon from 'react-icons/lib/md/map'
 import HelpIcon from 'react-icons/lib/md/help-outline'
 import SettingsIcon from 'react-icons/lib/md/settings'

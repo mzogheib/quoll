@@ -1,5 +1,5 @@
 import React from 'react'
-import './style.css'
+import './style.scss'
 import Modal from '../modal'
 import CloseIcon from 'react-icons/lib/md/close'
 

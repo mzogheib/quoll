@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './style.css'
+import './style.scss'
 import PreviousIcon from 'react-icons/lib/md/navigate-before'
 import NextIcon from 'react-icons/lib/md/navigate-next'
 import Calendar from 'react-calendar'

@@ -1,5 +1,5 @@
 import React from 'react'
-import './style.css'
+import './style.scss'
 import mapUtils from './utils'
 import _ from 'lodash'
 const google = window.google

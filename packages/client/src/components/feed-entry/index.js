@@ -1,6 +1,6 @@
 import React from 'react'
 import moment from 'moment'
-import './style.css'
+import './style.scss'
 
 function FeedEntry({ entry, onClick }) {
   function render() {
