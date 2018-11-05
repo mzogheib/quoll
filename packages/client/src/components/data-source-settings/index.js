@@ -50,7 +50,7 @@ function DataSourceSettings(props) {
             {dataSource.link.label}
           </a>
         </div>
-        <div>{renderButton(dataSource)}</div>
+        {renderButton(dataSource)}
         {dataSource.isAuthenticating && (
           <div className="data-source-settings__loader">
             <Loader />
