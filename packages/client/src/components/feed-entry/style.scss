@@ -1,0 +1,46 @@
+.feed-entry {
+  display: flex;
+  align-items: center;
+  padding: 4px 10px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: gainsboro;
+  }
+
+  &__logo {
+    width: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  &__time-label {
+    flex-basis: 75px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  &__image {
+    font-size: 22px;
+    margin: 0 0 0 10px;
+  }
+
+  &__label {
+    flex-grow: 1;
+    margin: 0 0 0 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &__value {
+    margin: 0 0 0 5px;
+    flex-shrink: 0;
+  }
+}

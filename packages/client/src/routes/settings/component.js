@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './style.css'
+import './style.scss'
 import DataSourceSettings from '../../components/data-source-settings'
 import utils from '../../services/utils'
 import storageService from '../../services/storage'

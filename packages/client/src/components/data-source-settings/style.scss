@@ -1,0 +1,59 @@
+.data-source-settings {
+  display: flex;
+  align-items: center;
+  padding: 20px 30px 20px 20px;
+  background-color: white;
+  border-radius: 8px;
+  position: relative;
+
+  &__loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  &__logo {
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin: 0 0 0 10px;
+  }
+
+  &__url {
+    align-self: flex-start;
+    text-decoration: none;
+    font-size: 14px;
+    color: #2f80ed;
+  }
+
+  &__name {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  &__connect {
+    font-size: 14px;
+    color: #2f80ed;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__connect-disabled {
+    font-size: 14px;
+    color: #7f7f7f;
+  }
+}

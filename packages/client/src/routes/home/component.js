@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './style.css'
+import './style.scss'
 import DatePicker from '../../components/date-picker'
 import Feed from '../../components/feed'
 import Map from '../../components/map'

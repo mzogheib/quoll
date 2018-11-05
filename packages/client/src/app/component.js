@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
-import './style.css'
+import './style.scss'
 import routes from '../routes'
 import Header from '../components/header'
 import SideBar from '../components/side-bar'
