@@ -10,6 +10,9 @@ export default {
 }
 
 function addQueryParams(url, params) {
+  if (!url) {
+    return
+  }
   const baseUrl = url && url.split('?')[0]
   const searchString = url && url.split('?')[1]
   const existingParams = querystring.parse(searchString)
