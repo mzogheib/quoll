@@ -19,29 +19,26 @@ const request = (method, endpoint, params, payload) => {
   return axios(options)
 }
 
-const get = ({ endpoint, params }) => {
-  return new Promise((resolve, reject) => {
+const get = ({ endpoint, params }) =>
+  new Promise((resolve, reject) => {
     request('GET', endpoint, params)
       .then(response => resolve(response.data))
       .catch(reject)
   })
-}
 
-const post = ({ endpoint, params, payload }) => {
-  return new Promise((resolve, reject) => {
+const post = ({ endpoint, params, payload }) =>
+  new Promise((resolve, reject) => {
     request('POST', endpoint, params, payload)
       .then(response => resolve(response.data))
       .catch(reject)
   })
-}
 
-const deleteReq = ({ endpoint, params }) => {
-  return new Promise((resolve, reject) => {
+const deleteReq = ({ endpoint, params }) =>
+  new Promise((resolve, reject) => {
     request('DELETE', endpoint, params)
       .then(response => resolve(response.data))
       .catch(reject)
   })
-}
 
 export default {
   authenticate,

@@ -33,70 +33,58 @@ export default class DatePicker extends Component {
     }
   }
 
-  renderDate = () => {
-    return (
-      <div className="date-picker__date" onClick={this.handleDateClick}>
-        {this.props.date}
-      </div>
-    )
-  }
+  renderDate = () => (
+    <div className="date-picker__date" onClick={this.handleDateClick}>
+      {this.props.date}
+    </div>
+  )
 
-  renderDateDisabled = () => {
-    return <div className="date-picker__date-disabled">{this.props.date}</div>
-  }
+  renderDateDisabled = () => (
+    <div className="date-picker__date-disabled">{this.props.date}</div>
+  )
 
-  renderCalendar = () => {
-    return (
-      <div className="date-picker__calendar-wrapper">
-        <Calendar
-          className="date-picker__calendar"
-          maxDate={this.props.maxDate}
-          value={new Date(this.props.date)}
-          onChange={this.handleDateChange}
-        />
-      </div>
-    )
-  }
-
-  renderPrevious = () => {
-    return (
-      <PreviousIcon
-        className="date-picker__button"
-        size={this.iconSize}
-        onClick={this.previous}
+  renderCalendar = () => (
+    <div className="date-picker__calendar-wrapper">
+      <Calendar
+        className="date-picker__calendar"
+        maxDate={this.props.maxDate}
+        value={new Date(this.props.date)}
+        onChange={this.handleDateChange}
       />
-    )
-  }
+    </div>
+  )
 
-  renderNext = () => {
-    return (
-      <NextIcon
-        className="date-picker__button"
-        size={this.iconSize}
-        onClick={this.next}
-      />
-    )
-  }
+  renderPrevious = () => (
+    <PreviousIcon
+      className="date-picker__button"
+      size={this.iconSize}
+      onClick={this.previous}
+    />
+  )
 
-  renderPrevDisabled = () => {
-    return (
-      <PreviousIcon
-        className="date-picker__button-disabled"
-        color={'#7f7f7f'}
-        size={this.iconSize}
-      />
-    )
-  }
+  renderNext = () => (
+    <NextIcon
+      className="date-picker__button"
+      size={this.iconSize}
+      onClick={this.next}
+    />
+  )
 
-  renderNextDisabled = () => {
-    return (
-      <NextIcon
-        className="date-picker__button-disabled"
-        color={'#7f7f7f'}
-        size={this.iconSize}
-      />
-    )
-  }
+  renderPrevDisabled = () => (
+    <PreviousIcon
+      className="date-picker__button-disabled"
+      color={'#7f7f7f'}
+      size={this.iconSize}
+    />
+  )
+
+  renderNextDisabled = () => (
+    <NextIcon
+      className="date-picker__button-disabled"
+      color={'#7f7f7f'}
+      size={this.iconSize}
+    />
+  )
 
   render() {
     return (

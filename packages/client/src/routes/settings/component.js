@@ -70,17 +70,15 @@ class Settings extends Component {
       .catch(alert)
   }
 
-  renderDataSource = dataSource => {
-    return (
-      <div className="settings__data-source" key={dataSource.name}>
-        <DataSourceSettings
-          dataSource={dataSource}
-          onConnect={() => this.connectDataSource(dataSource.name)}
-          onDisconnect={() => this.disconnectDataSource(dataSource.name)}
-        />
-      </div>
-    )
-  }
+  renderDataSource = dataSource => (
+    <div className="settings__data-source" key={dataSource.name}>
+      <DataSourceSettings
+        dataSource={dataSource}
+        onConnect={() => this.connectDataSource(dataSource.name)}
+        onDisconnect={() => this.disconnectDataSource(dataSource.name)}
+      />
+    </div>
+  )
 
   render() {
     return (

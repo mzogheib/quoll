@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { Component } from 'react'
 import './style.scss'
 import mapUtils from './utils'
 import _ from 'lodash'
 const google = window.google
 
-export default class Map extends React.Component {
+export default class Map extends Component {
   state = {
     markerItems: [],
     polylineItems: [],

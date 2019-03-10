@@ -11,9 +11,7 @@ class App extends Component {
     this.props.onMount()
   }
 
-  dateIsToday = date => {
-    return moment(date).isSame(moment(), 'day')
-  }
+  dateIsToday = date => moment(date).isSame(moment(), 'day')
 
   render() {
     return (

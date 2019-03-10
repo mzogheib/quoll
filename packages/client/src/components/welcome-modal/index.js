@@ -3,7 +3,7 @@ import './style.scss'
 import Modal from '../modal'
 import CloseIcon from 'react-icons/lib/md/close'
 
-function WelcomeModal({ isOpen, onCancel, onConnect }) {
+const WelcomeModal = ({ isOpen, onCancel, onConnect }) => {
   const renderContent = () => (
     <div className="welcome-modal">
       <div className="welcome-modal__header">
@@ -25,9 +25,7 @@ function WelcomeModal({ isOpen, onCancel, onConnect }) {
     </div>
   )
 
-  const render = () => <Modal>{renderContent()}</Modal>
-
-  return isOpen && render()
+  return isOpen && <Modal>{renderContent()}</Modal>
 }
 
 export default WelcomeModal

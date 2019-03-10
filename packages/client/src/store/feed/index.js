@@ -10,15 +10,13 @@ export const setEntries = entries => ({
   entries,
 })
 
-export const fetchFeed = () => {
-  return (dispatch, getState) => {
-    const { date } = getState()
-    dispatch(setFeedFetching(true))
-    return feedService
-      .get(date)
-      .then(entries => dispatch(setEntries(entries)))
-      .catch(() => dispatch(setFeedFetching(false)))
-  }
+export const fetchFeed = () => (dispatch, getState) => {
+  const { date } = getState()
+  dispatch(setFeedFetching(true))
+  return feedService
+    .get(date)
+    .then(entries => dispatch(setEntries(entries)))
+    .catch(() => dispatch(setFeedFetching(false)))
 }
 
 const feed = (state = { isFetching: true, entries: [] }, action) => {

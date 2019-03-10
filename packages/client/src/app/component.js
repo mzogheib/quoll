@@ -39,9 +39,7 @@ class App extends Component {
     this.setState({ showWelcomeModal: true })
   }
 
-  renderLoading = () => {
-    return <div>Loading...</div>
-  }
+  renderLoading = () => <div>Loading...</div>
 
   renderApp() {
     return (
