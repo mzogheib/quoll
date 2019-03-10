@@ -6,40 +6,34 @@ import Calendar from 'react-calendar'
 import moment from 'moment'
 
 export default class DatePicker extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      showCalendar: false,
-    }
-    this.previous = this.previous.bind(this)
-    this.next = this.next.bind(this)
-    this.handleDateClick = this.handleDateClick.bind(this)
-    this.handleDateChange = this.handleDateChange.bind(this)
-    this.iconSize = 40
+  iconSize = 40
+
+  state = {
+    showCalendar: false,
   }
 
-  previous() {
+  previous = () => {
     const yesterday = moment(this.props.date).subtract(1, 'day')
     this.handleDateChange(yesterday)
   }
 
-  next() {
+  next = () => {
     const tomorrow = moment(this.props.date).add(1, 'day')
     this.handleDateChange(tomorrow)
   }
 
-  handleDateChange(date) {
+  handleDateChange = date => {
     this.props.onDateChange(moment(date).format('YYYY-MM-DD'))
     this.setState({ showCalendar: false })
   }
 
-  handleDateClick() {
+  handleDateClick = () => {
     if (!this.props.calendarDisabled) {
       this.setState({ showCalendar: !this.state.showCalendar })
     }
   }
 
-  renderDate() {
+  renderDate = () => {
     return (
       <div className="date-picker__date" onClick={this.handleDateClick}>
         {this.props.date}
@@ -47,11 +41,11 @@ export default class DatePicker extends Component {
     )
   }
 
-  renderDateDisabled() {
+  renderDateDisabled = () => {
     return <div className="date-picker__date-disabled">{this.props.date}</div>
   }
 
-  renderCalendar() {
+  renderCalendar = () => {
     return (
       <div className="date-picker__calendar-wrapper">
         <Calendar
@@ -64,7 +58,7 @@ export default class DatePicker extends Component {
     )
   }
 
-  renderPrevious() {
+  renderPrevious = () => {
     return (
       <PreviousIcon
         className="date-picker__button"
@@ -74,7 +68,7 @@ export default class DatePicker extends Component {
     )
   }
 
-  renderNext() {
+  renderNext = () => {
     return (
       <NextIcon
         className="date-picker__button"
@@ -84,7 +78,7 @@ export default class DatePicker extends Component {
     )
   }
 
-  renderPrevDisabled() {
+  renderPrevDisabled = () => {
     return (
       <PreviousIcon
         className="date-picker__button-disabled"
@@ -94,7 +88,7 @@ export default class DatePicker extends Component {
     )
   }
 
-  renderNextDisabled() {
+  renderNextDisabled = () => {
     return (
       <NextIcon
         className="date-picker__button-disabled"

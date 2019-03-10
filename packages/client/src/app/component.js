@@ -7,15 +7,9 @@ import SideBar from '../components/side-bar'
 import WelcomeModal from '../components/welcome-modal'
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.handleWelcomeCancel = this.handleWelcomeCancel.bind(this)
-    this.handleWelcomeConnect = this.handleWelcomeConnect.bind(this)
-    this.handleSideBarHelpClick = this.handleSideBarHelpClick.bind(this)
-    this.state = {
-      isLoading: true,
-      showWelcomeModal: false,
-    }
+  state = {
+    isLoading: true,
+    showWelcomeModal: false,
   }
 
   componentDidMount() {
@@ -32,20 +26,20 @@ class App extends Component {
     return (route && route.title) || ''
   }
 
-  handleWelcomeCancel() {
+  handleWelcomeCancel = () => {
     this.setState({ showWelcomeModal: false })
   }
 
-  handleWelcomeConnect() {
+  handleWelcomeConnect = () => {
     this.setState({ showWelcomeModal: false })
     this.props.history.push('/settings')
   }
 
-  handleSideBarHelpClick() {
+  handleSideBarHelpClick = () => {
     this.setState({ showWelcomeModal: true })
   }
 
-  renderLoading() {
+  renderLoading = () => {
     return <div>Loading...</div>
   }
 

@@ -5,12 +5,9 @@ import _ from 'lodash'
 const google = window.google
 
 export default class Map extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      markerItems: [],
-      polylineItems: [],
-    }
+  state = {
+    markerItems: [],
+    polylineItems: [],
   }
 
   componentDidMount() {
@@ -76,7 +73,7 @@ export default class Map extends React.Component {
     }
   }
 
-  makeMarkerItems(markerData) {
+  makeMarkerItems = markerData => {
     const markerItems = markerData.map(item => {
       return {
         id: item.id,
@@ -98,7 +95,7 @@ export default class Map extends React.Component {
     return markerItems
   }
 
-  makePolylineItems(polylineData) {
+  makePolylineItems = polylineData => {
     const polylineItems = polylineData.map(item => {
       return {
         id: item.id,
@@ -125,7 +122,7 @@ export default class Map extends React.Component {
     return polylineItems
   }
 
-  makeBounds(markerItems, polylineItems) {
+  makeBounds = (markerItems, polylineItems) => {
     const bounds = new google.maps.LatLngBounds()
     markerItems.forEach(item => bounds.extend(item.marker.getPosition()))
     polylineItems.forEach(item =>
@@ -134,7 +131,7 @@ export default class Map extends React.Component {
     return bounds
   }
 
-  focusItem(item, lat, lng) {
+  focusItem = (item, lat, lng) => {
     if (item.marker) {
       mapUtils.highlightMarker(item.marker)
       item.infoWindow.open(this.map, item.marker)
@@ -147,24 +144,24 @@ export default class Map extends React.Component {
     }
   }
 
-  resetAllMapElements() {
+  resetAllMapElements = () => {
     this.closeAllInfoWindows()
     this.resetMarkers()
     this.resetPolylines()
   }
 
-  closeAllInfoWindows() {
+  closeAllInfoWindows = () => {
     this.state.markerItems.forEach(item => item.infoWindow.close())
     this.state.polylineItems.forEach(item => item.infoWindow.close())
   }
 
-  resetMarkers() {
+  resetMarkers = () => {
     this.state.markerItems.forEach(item =>
       mapUtils.unHighlightMarker(item.marker)
     )
   }
 
-  resetPolylines() {
+  resetPolylines = () => {
     this.state.polylineItems.forEach(item =>
       mapUtils.unHighlightPolyline(item.polyline)
     )

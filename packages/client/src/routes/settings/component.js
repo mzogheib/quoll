@@ -6,16 +6,11 @@ import storageService from '../../services/storage'
 import querystring from 'querystring'
 
 class Settings extends Component {
-  constructor(props) {
-    super(props)
-    this.renderDataSource = this.renderDataSource.bind(this)
-  }
-
   componentDidMount() {
     this.handleOAuth()
   }
 
-  handleOAuth() {
+  handleOAuth = () => {
     const searchString = this.props.location.search
     // searchString: ?foo=bar
     const queryParams = querystring.parse(searchString.substr(1))
@@ -51,7 +46,7 @@ class Settings extends Component {
     }
   }
 
-  connectDataSource(name) {
+  connectDataSource = name => {
     this.props
       .onConnect(name)
       .then(url => {
@@ -64,7 +59,7 @@ class Settings extends Component {
       .catch(alert)
   }
 
-  disconnectDataSource(name) {
+  disconnectDataSource = name => {
     this.props
       .onDisconnect(name)
       .then(alertText => {
@@ -75,7 +70,7 @@ class Settings extends Component {
       .catch(alert)
   }
 
-  renderDataSource(dataSource) {
+  renderDataSource = dataSource => {
     return (
       <div className="settings__data-source" key={dataSource.name}>
         <DataSourceSettings
