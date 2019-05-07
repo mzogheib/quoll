@@ -41,7 +41,7 @@ function getHistory(from, to, token) {
   const initialResults = []
   return history(offset, limit, token, fromTime, initialResults).then(results =>
     results.filter(
-      result => result.start_time >= fromTime && result.end_time <= toTime
+      result => result.start_time >= fromTime && result.start_time <= toTime
     )
   )
 }
