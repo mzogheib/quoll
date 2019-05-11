@@ -1,13 +1,17 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './style.scss'
 import DataSourceSettings from '../../components/data-source-settings'
 import utils from '../../services/utils'
 import storageService from '../../services/storage'
 
-class Settings extends Component {
-  connectDataSource = name => {
-    this.props
-      .onConnect(name)
+const Settings = ({
+  onConnect,
+  onDisconnect,
+  onOauthCodeReceived,
+  dataSources,
+}) => {
+  const connectDataSource = name => {
+    onConnect(name)
       .then(url => {
         const token = utils.makeRandomString()
         storageService.set('oauth-state-token', token)
@@ -22,7 +26,7 @@ class Settings extends Component {
             const oauthError = response.error
 
             const dataSourceName = oauthState.name
-            const dataSource = this.props.dataSources.find(
+            const dataSource = dataSources.find(
               dataSource => dataSource.name === dataSourceName
             )
 
@@ -37,8 +41,7 @@ class Settings extends Component {
             } else if (!tokenIsValid || oauthError === 'access_denied') {
               return alert(`${dataSource.name} access denied.`)
             } else if (oauthCode) {
-              return this.props
-                .onOauthCodeReceived(dataSourceName, oauthCode)
+              return onOauthCodeReceived(dataSourceName, oauthCode)
                 .then(() => {
                   delete window.quollOnOAuthSuccess
                 })
@@ -53,9 +56,8 @@ class Settings extends Component {
       .catch(alert)
   }
 
-  disconnectDataSource = name => {
-    this.props
-      .onDisconnect(name)
+  const disconnectDataSource = name => {
+    onDisconnect(name)
       .then(alertText => {
         if (alertText) {
           alert(alertText)
@@ -64,28 +66,26 @@ class Settings extends Component {
       .catch(alert)
   }
 
-  renderDataSource = dataSource => (
+  const renderDataSource = dataSource => (
     <div className="settings__data-source" key={dataSource.name}>
       <DataSourceSettings
         dataSource={dataSource}
-        onConnect={() => this.connectDataSource(dataSource.name)}
-        onDisconnect={() => this.disconnectDataSource(dataSource.name)}
+        onConnect={() => connectDataSource(dataSource.name)}
+        onDisconnect={() => disconnectDataSource(dataSource.name)}
       />
     </div>
   )
 
-  render() {
-    return (
-      <div className="settings">
-        <div className="settings__data-sources">
-          <div className="settings__data-sources-title">Feeds</div>
-          <div className="settings__data-sources-list">
-            {this.props.dataSources.map(this.renderDataSource)}
-          </div>
+  return (
+    <div className="settings">
+      <div className="settings__data-sources">
+        <div className="settings__data-sources-title">Feeds</div>
+        <div className="settings__data-sources-list">
+          {dataSources.map(renderDataSource)}
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default Settings
