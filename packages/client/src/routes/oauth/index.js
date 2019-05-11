@@ -7,7 +7,10 @@ export default ({ location, history }) => {
   // searchString: ?foo=bar
   const queryParams = querystring.parse(searchString.substr(1))
 
-  onOAuthResponse(queryParams, () => history.push('/settings'))
+  onOAuthResponse(queryParams, error => {
+    if (error) alert(error)
+    history.push('/settings')
+  })
 
   return <div>Connecting...</div>
 }

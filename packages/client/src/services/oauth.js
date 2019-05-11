@@ -31,11 +31,19 @@ export const requestAuth = ({ url, name }, callback) => {
 
 // This is called by the OPENED
 export const onOAuthResponse = (response, onError) => {
+  // Perhaps the opener was closed for some reason
+  if (!window.opener) {
+    storageService.delete('oauth-state-token')
+    onError('Could not authenticate feed. Try again.')
+    return
+  }
+
   try {
     window.opener.quollOnOAuthResponse(response)
     delete window.opener.quollOnOAuthResponse
     window.close()
   } catch (error) {
     onError()
+    window.close()
   }
 }
