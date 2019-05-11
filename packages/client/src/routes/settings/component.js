@@ -70,8 +70,8 @@ const Settings = ({
     <div className="settings__data-source" key={dataSource.name}>
       <DataSourceSettings
         dataSource={dataSource}
-        onConnect={() => connectDataSource(dataSource.name)}
-        onDisconnect={() => disconnectDataSource(dataSource.name)}
+        onConnect={connectDataSource}
+        onDisconnect={disconnectDataSource}
       />
     </div>
   )
