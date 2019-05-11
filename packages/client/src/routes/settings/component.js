@@ -3,49 +3,8 @@ import './style.scss'
 import DataSourceSettings from '../../components/data-source-settings'
 import utils from '../../services/utils'
 import storageService from '../../services/storage'
-import querystring from 'querystring'
 
 class Settings extends Component {
-  componentDidMount() {
-    this.handleOAuth()
-  }
-
-  handleOAuth = () => {
-    const searchString = this.props.location.search
-    // searchString: ?foo=bar
-    const queryParams = querystring.parse(searchString.substr(1))
-
-    if (queryParams && queryParams.state) {
-      // Looks like oauth so remove the query params
-      window.history.replaceState(null, null, window.location.pathname)
-      const oauthState = utils.decode(queryParams.state)
-      const oauthCode = queryParams.code
-      const oauthError = queryParams.error
-
-      const dataSourceName = oauthState.name
-      const dataSource = this.props.dataSources.find(
-        dataSource => dataSource.name === dataSourceName
-      )
-
-      const token = oauthState.token
-      const storedToken = storageService.get('oauth-state-token')
-      const tokenIsValid = storedToken && token && storedToken === token
-      storageService.delete('oauth-state-token')
-
-      if (!dataSource) {
-        return alert(`Unknown data source: ${dataSourceName}`)
-      } else if (!tokenIsValid || oauthError === 'access_denied') {
-        return alert(`${dataSource.name} access denied.`)
-      } else if (oauthCode) {
-        return this.props
-          .onOauthCodeReceived(dataSourceName, oauthCode)
-          .catch(alert)
-      } else {
-        return alert(`Unknown response from ${dataSource.name}.`)
-      }
-    }
-  }
-
   connectDataSource = name => {
     this.props
       .onConnect(name)
@@ -54,7 +13,42 @@ class Settings extends Component {
         storageService.set('oauth-state-token', token)
         const stateString = utils.encode({ name, token })
         const urlWithState = utils.addQueryParams(url, { state: stateString })
-        window.location.href = urlWithState
+
+        window.open(urlWithState)
+        window.quollOnOAuthSuccess = response => {
+          if (response && response.state) {
+            const oauthState = utils.decode(response.state)
+            const oauthCode = response.code
+            const oauthError = response.error
+
+            const dataSourceName = oauthState.name
+            const dataSource = this.props.dataSources.find(
+              dataSource => dataSource.name === dataSourceName
+            )
+
+            const token = oauthState.token
+            const storedToken = storageService.get('oauth-state-token')
+            const tokenIsValid = storedToken && token && storedToken === token
+            storageService.delete('oauth-state-token')
+
+            // TODO: replace these alerts with non-blocking modals.
+            if (!dataSource) {
+              return alert(`Unknown data source: ${dataSourceName}`)
+            } else if (!tokenIsValid || oauthError === 'access_denied') {
+              return alert(`${dataSource.name} access denied.`)
+            } else if (oauthCode) {
+              return this.props
+                .onOauthCodeReceived(dataSourceName, oauthCode)
+                .then(() => {
+                  delete window.quollOnOAuthSuccess
+                })
+                .catch(alert)
+            } else {
+              return alert(`Unknown response from ${dataSource.name}.`)
+            }
+          }
+          // Else do nothing.
+        }
       })
       .catch(alert)
   }
