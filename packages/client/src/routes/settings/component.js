@@ -9,30 +9,23 @@ const Settings = ({
   onOauthCodeReceived,
   dataSources,
 }) => {
-  const connectDataSource = name => {
+  const connectDataSource = name =>
     onConnect(name)
       .then(url =>
         requestAuth({ url, name }, ({ dataSourceName, oauthCode, error }) => {
           // TODO: replace these alerts with non-blocking modals.
-          if (error) {
-            return alert(error)
-          }
+          if (error) return alert(error)
 
-          const dataSource = dataSources.find(
-            dataSource => dataSource.name === dataSourceName
-          )
-
-          if (!dataSource) {
+          const dataSource = dataSources.find(ds => ds.name === dataSourceName)
+          if (!dataSource)
             return alert(`Unknown data source: ${dataSourceName}`)
-          }
 
           return onOauthCodeReceived(dataSourceName, oauthCode).catch(alert)
         })
       )
       .catch(alert)
-  }
 
-  const disconnectDataSource = name => {
+  const disconnectDataSource = name =>
     onDisconnect(name)
       .then(alertText => {
         if (alertText) {
@@ -40,7 +33,6 @@ const Settings = ({
         }
       })
       .catch(alert)
-  }
 
   const renderDataSource = dataSource => (
     <div className="settings__data-source" key={dataSource.name}>
