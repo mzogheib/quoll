@@ -1,19 +1,13 @@
 import React from 'react'
 import querystring from 'querystring'
+import { onOAuthResponse } from '../../services/oauth'
 
 export default ({ location, history }) => {
   const searchString = location.search
   // searchString: ?foo=bar
   const queryParams = querystring.parse(searchString.substr(1))
 
-  // Came here from an OAuth redirect
-  if (window.opener && window.opener.quollOnOAuthSuccess) {
-    window.opener.quollOnOAuthSuccess(queryParams)
-    window.close()
-    return <div>Connecting...</div>
-  }
+  onOAuthResponse(queryParams, () => history.push('/settings'))
 
-  // Came here manually?
-  history.push('/settings')
-  return <div>Redirecting...</div>
+  return <div>Connecting...</div>
 }

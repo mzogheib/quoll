@@ -2,6 +2,7 @@ import React from 'react'
 import './style.scss'
 import DataSourceSettings from '../../components/data-source-settings'
 import utils from '../../services/utils'
+import { requestAuth } from '../../services/oauth'
 import storageService from '../../services/storage'
 
 const Settings = ({
@@ -18,8 +19,7 @@ const Settings = ({
         const stateString = utils.encode({ name, token })
         const urlWithState = utils.addQueryParams(url, { state: stateString })
 
-        window.open(urlWithState)
-        window.quollOnOAuthSuccess = response => {
+        requestAuth(urlWithState, response => {
           if (response && response.state) {
             const oauthState = utils.decode(response.state)
             const oauthCode = response.code
@@ -41,17 +41,13 @@ const Settings = ({
             } else if (!tokenIsValid || oauthError === 'access_denied') {
               return alert(`${dataSource.name} access denied.`)
             } else if (oauthCode) {
-              return onOauthCodeReceived(dataSourceName, oauthCode)
-                .then(() => {
-                  delete window.quollOnOAuthSuccess
-                })
-                .catch(alert)
+              return onOauthCodeReceived(dataSourceName, oauthCode).catch(alert)
             } else {
               return alert(`Unknown response from ${dataSource.name}.`)
             }
           }
           // Else do nothing.
-        }
+        })
       })
       .catch(alert)
   }
