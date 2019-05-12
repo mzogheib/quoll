@@ -11,6 +11,8 @@ export default class Map extends Component {
   }
 
   componentDidMount() {
+    const { markerData, polylineData } = this.props
+
     const melbourne = new google.maps.LatLng(-37.8079033, 144.9759344)
     this.map = new google.maps.Map(this.refs.map, {
       center: melbourne,
@@ -22,8 +24,8 @@ export default class Map extends Component {
       if (event.placeId) this.resetAllMapElements()
     })
 
-    const markerItems = this.makeMarkerItems(this.props.markerData)
-    const polylineItems = this.makePolylineItems(this.props.polylineData)
+    const markerItems = this.makeMarkerItems(markerData)
+    const polylineItems = this.makePolylineItems(polylineData)
     const bounds = this.makeBounds(markerItems, polylineItems)
     if (!bounds.isEmpty()) {
       this.map.fitBounds(bounds)
@@ -36,33 +38,30 @@ export default class Map extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    const { focussedItem, markerData, polylineData } = this.props
     this.resetAllMapElements()
     const allItems = this.state.markerItems.concat(this.state.polylineItems)
-    const item = allItems.find(item => item.id === this.props.focussedItem.id)
+    const item = allItems.find(item => item.id === focussedItem.id)
     if (item) {
-      this.focusItem(
-        item,
-        this.props.focussedItem.latitude,
-        this.props.focussedItem.longitude
-      )
+      this.focusItem(item, focussedItem.latitude, focussedItem.longitude)
     }
 
     // Remove existing markers and polylines then replace with new ones
     if (
-      !_.isEqual(this.props.markerData, prevProps.markerData) ||
-      !_.isEqual(this.props.polylineData, prevProps.polylineData)
+      !_.isEqual(markerData, prevProps.markerData) ||
+      !_.isEqual(polylineData, prevProps.polylineData)
     ) {
-      this.state.markerItems.forEach(item => {
-        item.marker.setMap(null)
-        item.infoWindow.close()
+      this.state.markerItems.forEach(({ marker, infoWindow }) => {
+        marker.setMap(null)
+        infoWindow.close()
       })
-      this.state.polylineItems.forEach(item => {
-        item.polyline.setMap(null)
-        item.infoWindow.close()
+      this.state.polylineItems.forEach(({ polyline, infoWindow }) => {
+        polyline.setMap(null)
+        infoWindow.close()
       })
 
-      const markerItems = this.makeMarkerItems(this.props.markerData)
-      const polylineItems = this.makePolylineItems(this.props.polylineData)
+      const markerItems = this.makeMarkerItems(markerData)
+      const polylineItems = this.makePolylineItems(polylineData)
       const bounds = this.makeBounds(markerItems, polylineItems)
 
       if (!bounds.isEmpty()) {
@@ -74,48 +73,40 @@ export default class Map extends Component {
   }
 
   makeMarkerItems = markerData => {
-    const markerItems = markerData.map(item => {
-      return {
-        id: item.id,
-        marker: mapUtils.makeMarker(item),
-        infoWindow: mapUtils.makeInfoWindow(item),
-      }
-    })
+    const { onElementSelect } = this.props
 
-    markerItems.forEach(item => {
-      item.marker.setMap(this.map)
-      item.marker.addListener('click', () =>
-        this.props.onElementSelect(item.id)
-      )
-      item.infoWindow.addListener('closeclick', () =>
-        this.props.onElementSelect(null)
-      )
+    const markerItems = markerData.map(item => ({
+      id: item.id,
+      marker: mapUtils.makeMarker(item),
+      infoWindow: mapUtils.makeInfoWindow(item),
+    }))
+
+    markerItems.forEach(({ marker, id, infoWindow }) => {
+      marker.setMap(this.map)
+      marker.addListener('click', () => onElementSelect(id))
+      infoWindow.addListener('closeclick', () => onElementSelect(null))
     })
 
     return markerItems
   }
 
   makePolylineItems = polylineData => {
-    const polylineItems = polylineData.map(item => {
-      return {
-        id: item.id,
-        polyline: mapUtils.makePolyline(item),
-        infoWindow: mapUtils.makeInfoWindow(item),
-      }
-    })
+    const { onElementSelect } = this.props
 
-    polylineItems.forEach(item => {
-      item.polyline.setMap(this.map)
-      item.polyline.addListener('click', event => {
+    const polylineItems = polylineData.map(item => ({
+      id: item.id,
+      polyline: mapUtils.makePolyline(item),
+      infoWindow: mapUtils.makeInfoWindow(item),
+    }))
+
+    polylineItems.forEach(({ polyline, id, infoWindow }) => {
+      polyline.setMap(this.map)
+      polyline.addListener('click', event => {
         this.resetAllMapElements()
-        this.props.onElementSelect(
-          item.id,
-          event.latLng.lat(),
-          event.latLng.lng()
-        )
+        onElementSelect(id, event.latLng.lat(), event.latLng.lng())
       })
-      item.infoWindow.addListener('closeclick', () => {
-        this.props.onElementSelect(null)
+      infoWindow.addListener('closeclick', () => {
+        onElementSelect(null)
       })
     })
 
@@ -125,8 +116,8 @@ export default class Map extends Component {
   makeBounds = (markerItems, polylineItems) => {
     const bounds = new google.maps.LatLngBounds()
     markerItems.forEach(item => bounds.extend(item.marker.getPosition()))
-    polylineItems.forEach(item =>
-      item.polyline.getPath().forEach(position => bounds.extend(position))
+    polylineItems.forEach(({ polyline }) =>
+      polyline.getPath().forEach(position => bounds.extend(position))
     )
     return bounds
   }
@@ -161,11 +152,10 @@ export default class Map extends Component {
     )
   }
 
-  resetPolylines = () => {
-    this.state.polylineItems.forEach(item =>
-      mapUtils.unHighlightPolyline(item.polyline)
+  resetPolylines = () =>
+    this.state.polylineItems.forEach(({ polyline }) =>
+      mapUtils.unHighlightPolyline(polyline)
     )
-  }
 
   render() {
     return <div className="map" ref="map" />

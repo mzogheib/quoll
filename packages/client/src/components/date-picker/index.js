@@ -87,18 +87,14 @@ export default class DatePicker extends Component {
   )
 
   render() {
+    const { prevDisabled, nextDisabled, calendarDisabled } = this.props
+    const { showCalendar } = this.state
     return (
       <div className="date-picker">
-        {this.props.prevDisabled
-          ? this.renderPrevDisabled()
-          : this.renderPrevious()}
-        {this.props.calendarDisabled
-          ? this.renderDateDisabled()
-          : this.renderDate()}
-        {this.state.showCalendar && this.renderCalendar()}
-        {this.props.nextDisabled
-          ? this.renderNextDisabled()
-          : this.renderNext()}
+        {prevDisabled ? this.renderPrevDisabled() : this.renderPrevious()}
+        {calendarDisabled ? this.renderDateDisabled() : this.renderDate()}
+        {showCalendar && this.renderCalendar()}
+        {nextDisabled ? this.renderNextDisabled() : this.renderNext()}
       </div>
     )
   }
