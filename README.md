@@ -58,9 +58,8 @@ File contents:
 
 ```
 {
-    "client_id": "XXXXXXXXXX",
-    "client_secret": "XXXXXXXXXX",
-    "redirect_uri": "http://localhost:3000/settings"
+  "client_id": "XXXXXXXXXX",
+  "client_secret": "XXXXXXXXXX",
 }
 ```
 
