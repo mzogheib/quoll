@@ -1,4 +1,4 @@
-const apiMoves = require('../data-source-apis/moves')
+const apiMoves = require('../data-source-apis').moves
 
 module.exports = {
   getOAuthUrl,

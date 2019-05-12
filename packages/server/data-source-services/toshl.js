@@ -1,4 +1,4 @@
-const apiToshl = require('../data-source-apis/toshl')
+const apiToshl = require('../data-source-apis').toshl
 const toshlStorage = require('../storage/toshl.storage')
 
 module.exports = {

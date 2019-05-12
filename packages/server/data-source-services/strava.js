@@ -1,4 +1,4 @@
-const apiStrava = require('../data-source-apis/strava')
+const apiStrava = require('../data-source-apis').strava
 
 module.exports = {
   getOAuthUrl,
