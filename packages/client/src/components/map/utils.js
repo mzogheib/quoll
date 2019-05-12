@@ -1,5 +1,5 @@
-const google = window.google
-const Colors = {
+const { google } = window
+export const Colors = {
   marker: {
     default: '#eb4434',
     highlighted: '#0072ff',
@@ -10,52 +10,35 @@ const Colors = {
   },
 }
 
-export default {
-  Colors,
-  makeMarker,
-  highlightMarker,
-  unHighlightMarker,
-  makePolyline,
-  highlightPolyline,
-  unHighlightPolyline,
-  makeInfoWindow,
-}
+const markersBaseUrl = 'http://www.googlemapsmarkers.com/v1/'
 
-function makeMarker({ longitude, latitude, title, map }) {
+export const makeMarker = ({ longitude, latitude, title, map }) => {
   const marker = {
     position: { lng: longitude, lat: latitude },
-    icon: `http://www.googlemapsmarkers.com/v1/${Colors.marker.default.substr(
-      1
-    )}`,
+    icon: `${markersBaseUrl}${Colors.marker.default.substr(1)}`,
   }
   if (title) marker.title = title.toString()
   if (map) marker.map = map
   return new google.maps.Marker(marker)
 }
 
-function highlightMarker(marker) {
+export const highlightMarker = marker => {
   marker.setOptions({
-    icon: `http://www.googlemapsmarkers.com/v1/${Colors.marker.highlighted.substr(
-      1
-    )}`,
+    icon: `${markersBaseUrl}${Colors.marker.highlighted.substr(1)}`,
     zIndex: 1000,
   })
 }
 
-function unHighlightMarker(marker) {
+export const unHighlightMarker = marker => {
   marker.setOptions({
-    icon: `http://www.googlemapsmarkers.com/v1/${Colors.marker.default.substr(
-      1
-    )}`,
+    icon: `${markersBaseUrl}${Colors.marker.default.substr(1)}`,
     zIndex: 500,
   })
 }
 
-function decodePath(path) {
-  return google.maps.geometry.encoding.decodePath(path)
-}
+const decodePath = path => google.maps.geometry.encoding.decodePath(path)
 
-function makePolyline({ encodedPath, map }) {
+export const makePolyline = ({ encodedPath, map }) => {
   const polyline = {
     path: decodePath(encodedPath),
     geodesic: true,
@@ -67,18 +50,16 @@ function makePolyline({ encodedPath, map }) {
   return new google.maps.Polyline(polyline)
 }
 
-function highlightPolyline(polyline) {
+export const highlightPolyline = polyline =>
   polyline.setOptions({
     strokeColor: Colors.polyline.highlighted,
     zIndex: 1000,
   })
-}
 
-function unHighlightPolyline(polyline) {
+export const unHighlightPolyline = polyline =>
   polyline.setOptions({ strokeColor: Colors.polyline.default, zIndex: 500 })
-}
 
-function makeInfoWindow({ title, subTitle, description }) {
+export const makeInfoWindow = ({ title, subTitle, description }) => {
   const contentString =
     '<div>' +
     `<h1>${title}</h1>` +

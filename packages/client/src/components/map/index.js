@@ -1,6 +1,14 @@
 import React, { Component } from 'react'
 import './style.scss'
-import mapUtils from './utils'
+import {
+  makeMarker,
+  makePolyline,
+  highlightMarker,
+  highlightPolyline,
+  unHighlightMarker,
+  unHighlightPolyline,
+  makeInfoWindow,
+} from './utils'
 import _ from 'lodash'
 const google = window.google
 
@@ -77,8 +85,8 @@ export default class Map extends Component {
 
     const markerItems = markerData.map(item => ({
       id: item.id,
-      marker: mapUtils.makeMarker(item),
-      infoWindow: mapUtils.makeInfoWindow(item),
+      marker: makeMarker(item),
+      infoWindow: makeInfoWindow(item),
     }))
 
     markerItems.forEach(({ marker, id, infoWindow }) => {
@@ -95,8 +103,8 @@ export default class Map extends Component {
 
     const polylineItems = polylineData.map(item => ({
       id: item.id,
-      polyline: mapUtils.makePolyline(item),
-      infoWindow: mapUtils.makeInfoWindow(item),
+      polyline: makePolyline(item),
+      infoWindow: makeInfoWindow(item),
     }))
 
     polylineItems.forEach(({ polyline, id, infoWindow }) => {
@@ -115,7 +123,7 @@ export default class Map extends Component {
 
   makeBounds = (markerItems, polylineItems) => {
     const bounds = new google.maps.LatLngBounds()
-    markerItems.forEach(item => bounds.extend(item.marker.getPosition()))
+    markerItems.forEach(({ marker }) => bounds.extend(marker.getPosition()))
     polylineItems.forEach(({ polyline }) =>
       polyline.getPath().forEach(position => bounds.extend(position))
     )
@@ -124,12 +132,12 @@ export default class Map extends Component {
 
   focusItem = (item, lat, lng) => {
     if (item.marker) {
-      mapUtils.highlightMarker(item.marker)
+      highlightMarker(item.marker)
       item.infoWindow.open(this.map, item.marker)
     } else {
       const infoWindowPosition =
         (lat && lng && { lat, lng }) || item.polyline.getPath().getArray()[0]
-      mapUtils.highlightPolyline(item.polyline)
+      highlightPolyline(item.polyline)
       item.infoWindow.setPosition(infoWindowPosition)
       item.infoWindow.open(this.map)
     }
@@ -142,19 +150,16 @@ export default class Map extends Component {
   }
 
   closeAllInfoWindows = () => {
-    this.state.markerItems.forEach(item => item.infoWindow.close())
-    this.state.polylineItems.forEach(item => item.infoWindow.close())
+    this.state.markerItems.forEach(({ infoWindow }) => infoWindow.close())
+    this.state.polylineItems.forEach(({ infoWindow }) => infoWindow.close())
   }
 
-  resetMarkers = () => {
-    this.state.markerItems.forEach(item =>
-      mapUtils.unHighlightMarker(item.marker)
-    )
-  }
+  resetMarkers = () =>
+    this.state.markerItems.forEach(({ marker }) => unHighlightMarker(marker))
 
   resetPolylines = () =>
     this.state.polylineItems.forEach(({ polyline }) =>
-      mapUtils.unHighlightPolyline(polyline)
+      unHighlightPolyline(polyline)
     )
 
   render() {
