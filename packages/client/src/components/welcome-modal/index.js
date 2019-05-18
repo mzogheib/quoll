@@ -25,7 +25,11 @@ const WelcomeModal = ({ isOpen, onCancel, onConnect }) => {
     </div>
   )
 
-  return isOpen && <Modal>{renderContent()}</Modal>
+  return (
+    <Modal isOpen={isOpen} onRequestClose={onCancel} maxWidth={400}>
+      {renderContent()}
+    </Modal>
+  )
 }
 
 export default WelcomeModal
