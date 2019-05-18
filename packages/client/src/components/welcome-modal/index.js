@@ -14,9 +14,7 @@ const WelcomeModal = ({ isOpen, onCancel, onConnect }) => {
         />
       </div>
       <div className="welcome-modal__title">Quoll</div>
-      <div className="welcome-modal__message">
-        <span>Map yo' life.</span>
-      </div>
+      <div className="welcome-modal__message">Map yo' life.</div>
       <div className="welcome-modal__actions">
         <button className="welcome-modal__actions-connect" onClick={onConnect}>
           Connect Feeds
