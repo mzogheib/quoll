@@ -5,7 +5,7 @@ import CloseIcon from 'react-icons/lib/md/close'
 
 const WelcomeModal = ({ isOpen, onCancel, onConnect }) => {
   const renderContent = () => (
-    <div className="welcome-modal">
+    <div>
       <div className="welcome-modal__header">
         <CloseIcon
           className="welcome-modal__cancel"
@@ -24,7 +24,7 @@ const WelcomeModal = ({ isOpen, onCancel, onConnect }) => {
   )
 
   return (
-    <Modal isOpen={isOpen} onRequestClose={onCancel} maxWidth={400}>
+    <Modal className="welcome-modal" isOpen={isOpen} onRequestClose={onCancel}>
       {renderContent()}
     </Modal>
   )
