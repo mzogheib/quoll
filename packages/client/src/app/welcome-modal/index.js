@@ -1,6 +1,6 @@
 import React from 'react'
 import './style.scss'
-import Modal from '../modal'
+import Modal from '../../components/modals/modal'
 import CloseIcon from 'react-icons/lib/md/close'
 
 const WelcomeModal = ({ isOpen, onCancel, onConnect }) => (

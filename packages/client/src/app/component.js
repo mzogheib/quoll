@@ -4,7 +4,7 @@ import './style.scss'
 import routes from '../routes'
 import Header from '../components/header'
 import SideBar from '../components/side-bar'
-import WelcomeModal from '../components/welcome-modal'
+import WelcomeModal from './welcome-modal'
 
 class App extends Component {
   state = {
