@@ -8,20 +8,25 @@ const Settings = ({
   onDisconnect,
   onOauthCodeReceived,
   dataSources,
+  location,
+  history,
 }) => {
+  const { state } = location
+  if (state && state.errorMessage) {
+    alert(state.errorMessage)
+    // Replace the current location without a state so that this error
+    // message doesn't keep getting displayed
+    history.replace('/settings')
+  }
+
   const connectDataSource = name =>
     onConnect(name)
       .then(url =>
-        requestAuth({ url, name }, ({ dataSourceName, oauthCode, error }) => {
-          // TODO: replace these alerts with non-blocking modals.
-          if (error) return alert(error)
-
-          const dataSource = dataSources.find(ds => ds.name === dataSourceName)
-          if (!dataSource)
-            return alert(`Unknown data source: ${dataSourceName}`)
-
-          return onOauthCodeReceived(dataSourceName, oauthCode).catch(alert)
-        })
+        requestAuth(
+          url,
+          code => onOauthCodeReceived(name, code).catch(alert),
+          alert
+        )
       )
       .catch(alert)
 

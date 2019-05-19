@@ -7,10 +7,11 @@ export default ({ location, history }) => {
   // searchString: ?foo=bar
   const queryParams = querystring.parse(searchString.substr(1))
 
-  onOAuthResponse(queryParams, error => {
-    if (error) alert(error)
-    history.push('/settings')
-  })
+  // Pass through any error messages to the settings page, which is where
+  // the user would have started to get here
+  onOAuthResponse(queryParams, errorMessage =>
+    history.push('/settings', { errorMessage })
+  )
 
   return <div>Connecting...</div>
 }
