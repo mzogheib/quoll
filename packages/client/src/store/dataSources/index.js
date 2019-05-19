@@ -44,13 +44,16 @@ export const disconnectDataSource = name => {
   )
   return dispatch => {
     dispatch(setDataSourceAuthenticating(name, true))
-    return dataSourceService
-      .disconnect()
-      .then(alert => {
-        dispatch(setDataSourceConnected(name, false))
-        return alert
-      })
-      .finally(() => dispatch(setDataSourceAuthenticating(name, false)))
+    return (
+      dataSourceService
+        .disconnect()
+        // BE may return a message for further, manual instructions
+        .then(message => {
+          dispatch(setDataSourceConnected(name, false))
+          return message
+        })
+        .finally(() => dispatch(setDataSourceAuthenticating(name, false)))
+    )
   }
 }
 
