@@ -9,10 +9,7 @@ export default ({ className, isOpen, onRequestClose, children }) => (
     className={`modal__content ${className}`}
     overlayClassName="modal__overlay"
     isOpen={isOpen}
-    onRequestClose={() => {
-      console.log('onRequestClose')
-      onRequestClose()
-    }}
+    onRequestClose={onRequestClose}
     shouldCloseOnOverlayClick
   >
     {children}
