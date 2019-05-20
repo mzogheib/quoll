@@ -2,7 +2,7 @@ import React from 'react'
 import './style.scss'
 import Loader from '../HorizontalLoader'
 
-const DataSourceSettings = ({ dataSource, onConnect, onDisconnect }) => {
+const FeedSettings = ({ feed, onConnect, onDisconnect }) => {
   const {
     isAuthenticating,
     isConnected,
@@ -11,7 +11,7 @@ const DataSourceSettings = ({ dataSource, onConnect, onDisconnect }) => {
     name,
     title,
     link,
-  } = dataSource
+  } = feed
   const imgSrc = isConnected ? imageConnected : imageDisconnected
 
   const handleButtonClick = () => {
@@ -22,14 +22,14 @@ const DataSourceSettings = ({ dataSource, onConnect, onDisconnect }) => {
   }
 
   return (
-    <div className="data-source-settings">
-      <div className="data-source-settings__logo">
+    <div className="feed-settings">
+      <div className="feed-settings__logo">
         <img src={imgSrc} alt={`${name} logo`} />
       </div>
-      <div className="data-source-settings__info">
-        <div className="data-source-settings__title">{title}</div>
+      <div className="feed-settings__info">
+        <div className="feed-settings__title">{title}</div>
         <a
-          className="data-source-settings__url"
+          className="feed-settings__url"
           href={link.url}
           target="_blank"
           rel="noopener noreferrer"
@@ -40,15 +40,15 @@ const DataSourceSettings = ({ dataSource, onConnect, onDisconnect }) => {
       <div
         className={
           isAuthenticating
-            ? 'data-source-settings__connect-disabled'
-            : 'data-source-settings__connect'
+            ? 'feed-settings__connect-disabled'
+            : 'feed-settings__connect'
         }
         onClick={handleButtonClick}
       >
         {isConnected ? 'Disconnect' : 'Connect'}
       </div>
       {isAuthenticating && (
-        <div className="data-source-settings__loader">
+        <div className="feed-settings__loader">
           <Loader />
         </div>
       )}
@@ -56,4 +56,4 @@ const DataSourceSettings = ({ dataSource, onConnect, onDisconnect }) => {
   )
 }
 
-export default DataSourceSettings
+export default FeedSettings

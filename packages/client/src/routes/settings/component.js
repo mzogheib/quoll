@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './style.scss'
-import DataSourceSettings from '../../components/DataSourceSettings'
+import FeedSettings from '../../components/FeedSettings'
 import { requestAuth } from '../../services/oauth'
 import AlertModal from '../../components/modals/AlertModal'
 
@@ -28,7 +28,7 @@ class Settings extends Component {
 
   closeModal = () => this.setState({ ...INITIAL_STATE })
 
-  connectDataSource = name => {
+  connectFeed = name => {
     const { onConnect, onOauthCodeReceived } = this.props
 
     const defaultErrorMessage = 'Could not connect feed. Please try again.'
@@ -43,7 +43,7 @@ class Settings extends Component {
       .catch(openErrorModal)
   }
 
-  disconnectDataSource = name =>
+  disconnectFeed = name =>
     this.props
       .onDisconnect(name)
       .then(message => {
@@ -56,26 +56,24 @@ class Settings extends Component {
       )
 
   render() {
-    const { dataSources } = this.props
+    const { feeds } = this.props
     const { showModal, modalMessage } = this.state
 
-    const renderDataSource = dataSource => (
-      <div className="settings__data-source" key={dataSource.name}>
-        <DataSourceSettings
-          dataSource={dataSource}
-          onConnect={this.connectDataSource}
-          onDisconnect={this.disconnectDataSource}
+    const renderFeed = feed => (
+      <div className="settings__feed" key={feed.name}>
+        <FeedSettings
+          feed={feed}
+          onConnect={this.connectFeed}
+          onDisconnect={this.disconnectFeed}
         />
       </div>
     )
 
     return (
       <div className="settings">
-        <div className="settings__data-sources">
-          <div className="settings__data-sources-title">Feeds</div>
-          <div className="settings__data-sources-list">
-            {dataSources.map(renderDataSource)}
-          </div>
+        <div className="settings__feeds">
+          <div className="settings__feeds-title">Feeds</div>
+          <div className="settings__feeds-list">{feeds.map(renderFeed)}</div>
         </div>
         <AlertModal
           isOpen={showModal}

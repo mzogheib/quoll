@@ -3,15 +3,15 @@ import thunkMiddleware from 'redux-thunk'
 import user from './user'
 import date from './date'
 import focussedItem from './focussed-item'
-import dataSources from './dataSources'
-import feed from './feed'
+import feeds from './feeds'
+import timeline from './timeline'
 
 const reducer = combineReducers({
   user,
   date,
   focussedItem,
-  dataSources,
-  feed,
+  feeds,
+  timeline,
 })
 
 const store = createStore(reducer, applyMiddleware(thunkMiddleware))

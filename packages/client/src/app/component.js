@@ -16,7 +16,7 @@ class App extends Component {
     this.props.onMount().then(() =>
       this.setState({
         isLoading: false,
-        showWelcomeModal: !this.props.dataSourcesConnected,
+        showWelcomeModal: !this.props.feedsConnect,
       })
     )
   }

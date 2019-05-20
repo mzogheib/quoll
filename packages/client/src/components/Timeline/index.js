@@ -1,20 +1,20 @@
 import React from 'react'
 import './style.scss'
-import FeedEntry from '../FeedEntry'
+import TimelineEntry from '../TimelineEntry'
 
-const Feed = ({ feed, onEntryClick }) => {
+const Timeline = ({ timeline, onEntryClick }) => {
   const renderEntries = entries =>
     entries
       .sort((a, b) => a.timeStart - b.timeStart)
       .map((entry, index) => (
-        <FeedEntry
+        <TimelineEntry
           key={index}
           entry={entry}
           onClick={() => onEntryClick(entry.id)}
         />
       ))
 
-  return <div className="feed">{renderEntries(feed.entries)}</div>
+  return <div className="timeline">{renderEntries(timeline.entries)}</div>
 }
 
-export default Feed
+export default Timeline

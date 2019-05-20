@@ -1,5 +1,5 @@
 import api from './api'
-import dataSources from './data-sources'
+import feeds from './feeds'
 
 const EntryConfig = {
   home: { label: 'Home', image: '🏠' },
@@ -24,12 +24,10 @@ const get = date =>
     .then(entries =>
       entries.map(entry => {
         const entryConfig = EntryConfig[entry.type]
-        const sourceConfig = dataSources.find(
-          dataSource => dataSource.name === entry.source
-        )
+        const feedConfig = feeds.find(feed => feed.name === entry.source)
         return {
           ...entry,
-          logo: sourceConfig && sourceConfig.imageConnected,
+          logo: feedConfig && feedConfig.imageConnected,
           image: (entryConfig && entryConfig.image) || '🤷‍♂️',
         }
       })
