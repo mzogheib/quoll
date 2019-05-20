@@ -1,4 +1,4 @@
-const dataSourceServices = require('../data-source-services')
+const feedServices = require('../feed-services')
 const ctrlUsers = require('../controllers/users.controller')
 const moment = require('moment')
 
@@ -10,16 +10,16 @@ module.exports = {
 }
 
 function getOAuthUrl(req, res) {
-  const { source } = req.query
+  const { feed } = req.query
   const respond = ({ status, message }) => res.status(status).json(message)
 
-  if (!source) {
-    respond({ status: 400, message: 'No feed source provided.' })
+  if (!feed) {
+    respond({ status: 400, message: 'No feed provided.' })
   } else {
-    const service = dataSourceServices[source]
+    const service = feedServices[feed]
     const url = service && service.getOAuthUrl()
     if (!url) {
-      respond({ status: 404, message: `Unkown feed source: ${source}` })
+      respond({ status: 404, message: `Unkown feed: ${feed}` })
     } else {
       respond({ status: 200, message: url })
     }
@@ -27,7 +27,7 @@ function getOAuthUrl(req, res) {
 }
 
 function authenticate(req, res) {
-  const { source } = req.query
+  const { feed } = req.query
   const { code } = req.body
   const { userId } = req
 
@@ -36,18 +36,18 @@ function authenticate(req, res) {
   const onError = error =>
     respond({ status: error.status || 500, message: error.message })
 
-  if (!source) {
-    respond({ status: 400, message: 'No feed source provided.' })
+  if (!feed) {
+    respond({ status: 400, message: 'No feed provided.' })
   } else if (!code) {
     respond({ status: 400, message: 'No authorization code provided.' })
   } else {
-    const service = dataSourceServices[source]
+    const service = feedServices[feed]
     const authenticate = service && service.authenticate
     if (!authenticate) {
-      respond({ status: 404, message: `Unkown feed source: ${source}` })
+      respond({ status: 404, message: `Unkown feed: ${feed}` })
     } else {
       authenticate(code)
-        .then(data => ctrlUsers.setDataSourceAuth(userId, source, data))
+        .then(data => ctrlUsers.setFeedAuth(userId, feed, data))
         .then(onSuccess)
         .catch(onError)
     }
@@ -62,41 +62,39 @@ function checkAuth(req, res, next) {
     respond({ status: error.status || 500, message: error.message })
 
   ctrlUsers.get(userId).then(user => {
-    const promises = user.dataSources
-      .filter(dataSource => dataSource.auth)
-      .map(dataSource => {
-        if (!dataSource.auth.expiry_time) {
-          return Promise.resolve()
-        }
+    const promises = user.feeds.filter(feed => feed.auth).map(feed => {
+      if (!feed.auth.expiry_time) {
+        return Promise.resolve()
+      }
 
-        if (moment().unix() < dataSource.auth.expiry_time) {
-          return Promise.resolve()
-        }
+      if (moment().unix() < feed.auth.expiry_time) {
+        return Promise.resolve()
+      }
 
-        const service = dataSourceServices[dataSource.name]
-        const refreshAuth = service && service.refreshAuth
-        if (!refreshAuth) {
-          return Promise.reject(
-            onError({
-              status: 404,
-              message: `Unkown feed source: ${dataSource.name}`,
-            })
-          )
-        }
+      const service = feedServices[feed.name]
+      const refreshAuth = service && service.refreshAuth
+      if (!refreshAuth) {
+        return Promise.reject(
+          onError({
+            status: 404,
+            message: `Unkown feed: ${feed.name}`,
+          })
+        )
+      }
 
-        return refreshAuth(dataSource.auth)
-          .then(refreshedAuth =>
-            ctrlUsers.setDataSourceAuth(userId, dataSource.name, refreshedAuth)
-          )
-          .catch(onError)
-      })
+      return refreshAuth(feed.auth)
+        .then(refreshedAuth =>
+          ctrlUsers.setFeedAuth(userId, feed.name, refreshedAuth)
+        )
+        .catch(onError)
+    })
 
     return Promise.all(promises).then(() => next())
   })
 }
 
 function deauthorize(req, res) {
-  const { source } = req.query
+  const { feed } = req.query
   const { userId } = req
 
   const respond = ({ status, message }) => res.status(status).json(message)
@@ -104,18 +102,18 @@ function deauthorize(req, res) {
   const onError = error =>
     respond({ status: error.status || 500, message: error.message })
 
-  if (!source) {
-    respond({ status: 400, message: 'No feed source provided.' })
+  if (!feed) {
+    respond({ status: 400, message: 'No feed provided.' })
   } else {
-    const service = dataSourceServices[source]
+    const service = feedServices[feed]
     const deauthorize = service && service.deauthorize
     if (!deauthorize) {
-      respond({ status: 404, message: `Unkown feed source: ${source}` })
+      respond({ status: 404, message: `Unkown feed: ${feed}` })
     } else {
       ctrlUsers
-        .getDataSourceAuth(userId, source)
+        .getFeedAuth(userId, feed)
         .then(deauthorize)
-        .then(() => ctrlUsers.setDataSourceAuth(userId, source, null))
+        .then(() => ctrlUsers.setFeedAuth(userId, feed, null))
         .then(onSuccess)
         .catch(onError)
     }

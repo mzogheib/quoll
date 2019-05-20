@@ -2,7 +2,7 @@ import utils from './utils'
 import storageService from './storage'
 
 // OAuth Flow
-// 1. User clicks 'connect' on the settings page and BE returns a url for that data source
+// 1. User clicks 'connect' on the settings page and BE returns a url for that feed
 // 2. requestAuth is then called and does the following:
 //    - Stores a local token and attaches it to a state variable on the url from the BE
 //    - Opens a new window at this new url with state variable

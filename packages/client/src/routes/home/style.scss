@@ -11,12 +11,12 @@
     height: 100%;
   }
 
-  &__feed-wrapper {
+  &__timeline-wrapper {
     position: relative;
     flex: 1;
   }
 
-  &__feed {
+  &__timeline {
     overflow-y: scroll;
     position: absolute;
     top: 0;

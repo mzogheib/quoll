@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './style.scss'
 import DatePicker from '../../components/DatePicker'
-import Feed from '../../components/Feed'
+import Timeline from '../../components/Timeline'
 import Map from '../../components/Map'
 import Loader from '../../components/HorizontalLoader'
 import moment from 'moment'
@@ -27,10 +27,10 @@ class App extends Component {
             calendarDisabled={this.props.isLoading}
             onDateChange={this.props.onDateChange}
           />
-          <div className="home__feed-wrapper">
-            <div className="home__feed">
-              <Feed
-                feed={this.props.feed}
+          <div className="home__timeline-wrapper">
+            <div className="home__timeline">
+              <Timeline
+                timeline={this.props.timeline}
                 onEntryClick={this.props.onEntryClick}
               />
             </div>

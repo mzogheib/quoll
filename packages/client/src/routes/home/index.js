@@ -1,12 +1,12 @@
 import { connect } from 'react-redux'
 import { setDate } from '../../store/date'
-import { fetchFeed } from '../../store/feed'
+import { fetchTimeline } from '../../store/timeline'
 import { setFocussedItem } from '../../store/focussed-item'
 import moment from 'moment'
 import Home from './component'
 
-const mapStateToProps = ({ date, feed, focussedItem }) => {
-  const markerData = feed.entries
+const mapStateToProps = ({ date, timeline, focussedItem }) => {
+  const markerData = timeline.entries
     .filter(entry => !entry.polyline && entry.locationStart)
     .map(entry => ({
       id: entry.id,
@@ -16,7 +16,7 @@ const mapStateToProps = ({ date, feed, focussedItem }) => {
       subTitle: moment.unix(entry.timeStart).format('h:mm a'),
       description: entry.description || '',
     }))
-  const polylineData = feed.entries
+  const polylineData = timeline.entries
     .filter(entry => entry.polyline)
     .map(entry => ({
       id: entry.id,
@@ -25,11 +25,11 @@ const mapStateToProps = ({ date, feed, focussedItem }) => {
       subTitle: moment.unix(entry.timeStart).format('h:mm a'),
       description: entry.description || '',
     }))
-  const isLoading = feed.isFetching
+  const isLoading = timeline.isFetching
 
   return {
     date,
-    feed,
+    timeline,
     markerData,
     polylineData,
     focussedItem,
@@ -38,10 +38,10 @@ const mapStateToProps = ({ date, feed, focussedItem }) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  onMount: () => dispatch(fetchFeed()),
+  onMount: () => dispatch(fetchTimeline()),
   onDateChange: date => {
     dispatch(setDate(date))
-    return dispatch(fetchFeed()).then(() => dispatch(setFocussedItem(null)))
+    return dispatch(fetchTimeline()).then(() => dispatch(setFocussedItem(null)))
   },
   onEntryClick: (id, latitude, longitude) =>
     dispatch(setFocussedItem(id, latitude, longitude)),
