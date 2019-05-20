@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import './style.scss'
-import DatePicker from '../../components/date-picker'
-import Feed from '../../components/feed'
-import Map from '../../components/map'
-import Loader from '../../components/horizontal-loader'
+import DatePicker from '../../components/DatePicker'
+import Feed from '../../components/Feed'
+import Map from '../../components/Map'
+import Loader from '../../components/HorizontalLoader'
 import moment from 'moment'
 
 class App extends Component {

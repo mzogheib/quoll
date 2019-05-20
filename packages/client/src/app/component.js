@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import './style.scss'
 import routes from '../routes'
-import Header from '../components/header'
-import SideBar from '../components/side-bar'
-import WelcomeModal from './welcome-modal'
+import Header from '../components/Header'
+import SideBar from '../components/SideBar'
+import WelcomeModal from './WelcomeModal'
 
 class App extends Component {
   state = {

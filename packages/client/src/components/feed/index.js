@@ -1,6 +1,6 @@
 import React from 'react'
 import './style.scss'
-import FeedEntry from '../feed-entry'
+import FeedEntry from '../FeedEntry'
 
 const Feed = ({ feed, onEntryClick }) => {
   const renderEntries = entries =>

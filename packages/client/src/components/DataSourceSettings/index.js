@@ -1,6 +1,6 @@
 import React from 'react'
 import './style.scss'
-import Loader from '../horizontal-loader'
+import Loader from '../HorizontalLoader'
 
 const DataSourceSettings = ({ dataSource, onConnect, onDisconnect }) => {
   const {

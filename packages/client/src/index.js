@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom'
 import './index.scss'
 import 'typeface-pacifico'
 import registerServiceWorker from './registerServiceWorker'
-import App from './app'
+import App from './App'
 import store from './store'
 
 render(

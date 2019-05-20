@@ -1,6 +1,6 @@
-import Home from './home'
-import Settings from './settings'
-import OAuth from './oauth'
+import Home from './Home'
+import Settings from './Settings'
+import OAuth from './OAuth'
 
 export default [
   { path: '/', exact: true, id: 'home', title: 'Home', mainComponent: Home },

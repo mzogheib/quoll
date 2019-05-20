@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import './style.scss'
-import DataSourceSettings from '../../components/data-source-settings'
+import DataSourceSettings from '../../components/DataSourceSettings'
 import { requestAuth } from '../../services/oauth'
-import AlertModal from '../../components/modals/alert-modal'
+import AlertModal from '../../components/modals/AlertModal'
 
 const INITIAL_STATE = {
   showModal: false,
