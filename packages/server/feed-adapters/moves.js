@@ -48,7 +48,7 @@ function adapter(segments) {
             longitude: endPoint.lon,
           }
           return {
-            source: 'moves',
+            feed: 'moves',
             id: uuidv4(),
             type,
             timeStart,
@@ -77,7 +77,7 @@ function adapter(segments) {
         const locationEnd = locationStart
         return [
           {
-            source: 'moves',
+            feed: 'moves',
             id: uuidv4(),
             type: placeTypes.includes(place.type) ? place.type : 'place',
             timeStart,

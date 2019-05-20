@@ -1,5 +1,5 @@
 const ctrlUsers = require('../controllers/users.controller')
-const ctrlFeed = require('../controllers/feed.controller')
+const ctrlTimeline = require('../controllers/timeline.controller')
 
 module.exports = {
   get,
@@ -16,7 +16,7 @@ function get(req, res) {
 
   ctrlUsers
     .get(userId)
-    .then(user => ctrlFeed.get(from, to, user))
+    .then(user => ctrlTimeline.get(from, to, user))
     .then(onSuccess)
     .catch(onError)
 }

@@ -1,5 +1,5 @@
 const moment = require('moment')
-const apiUber = require('../data-source-apis').uber
+const apiUber = require('../feed-apis').uber
 
 module.exports = {
   getOAuthUrl,

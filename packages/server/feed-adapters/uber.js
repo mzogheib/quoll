@@ -19,7 +19,7 @@ function adapter(entries) {
     const description = `Trip in ${entry.start_city.display_name}`
     const amount = formatDuration(timeEnd - timeStart)
     return {
-      source: 'uber',
+      feed: 'uber',
       id: uuidv4(),
       type,
       timeStart,

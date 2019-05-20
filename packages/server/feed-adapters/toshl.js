@@ -29,7 +29,7 @@ function adapter(entries) {
       : entry.desc
     const amount = formatAmount(entry.amount, entry.currency.code)
     return {
-      source: 'toshl',
+      feed: 'toshl',
       id: uuidv4(),
       type,
       timeStart,

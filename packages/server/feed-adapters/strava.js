@@ -32,7 +32,7 @@ function adapter(activities) {
       }
       const polyline = activity.map.polyline
       return {
-        source: 'strava',
+        feed: 'strava',
         id: uuidv4(),
         type,
         timeStart,

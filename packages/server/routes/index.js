@@ -3,7 +3,7 @@ const router = express.Router()
 
 const routeUsers = require('./users.route')
 const routeFeedAuth = require('./feed-auth.route')
-const routeFeed = require('./feed.route')
+const routeTimeline = require('./timeline.route')
 
 module.exports = router
 
@@ -20,7 +20,7 @@ router
   .delete(routeFeedAuth.deauthorize)
 
 router
-  .route('/feed')
+  .route('/timeline')
   .all(routeUsers.authenticate)
   .all(routeFeedAuth.checkAuth)
-  .get(routeFeed.get)
+  .get(routeTimeline.get)

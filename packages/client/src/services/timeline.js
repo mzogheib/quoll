@@ -20,11 +20,11 @@ const EntryConfig = {
 
 const get = date =>
   api
-    .get({ endpoint: 'feed', params: { from: date, to: date } })
+    .get({ endpoint: 'timeline', params: { from: date, to: date } })
     .then(entries =>
       entries.map(entry => {
         const entryConfig = EntryConfig[entry.type]
-        const feedConfig = feeds.find(feed => feed.name === entry.source)
+        const feedConfig = feeds.find(feed => feed.name === entry.feed)
         return {
           ...entry,
           logo: feedConfig && feedConfig.imageConnected,
