@@ -1,0 +1,9 @@
+.primary-button {
+  $background-color: #6fcf97;
+
+  background-color: $background-color;
+
+  &:hover {
+    background-color: darken($background-color, 5%);
+  }
+}
