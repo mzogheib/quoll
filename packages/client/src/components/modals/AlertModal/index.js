@@ -1,7 +1,7 @@
 import React from 'react'
 import './style.scss'
 import Modal from '../Modal'
-import Button from '../../buttons/Button'
+import Button from '../../Button'
 
 const AlertModal = ({ isOpen, message, onClose }) => (
   <Modal className="alert-modal" isOpen={isOpen} onRequestClose={onClose}>
