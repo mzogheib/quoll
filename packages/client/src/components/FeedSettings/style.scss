@@ -42,18 +42,4 @@
     font-size: 18px;
     font-weight: bold;
   }
-
-  &__connect {
-    font-size: 14px;
-    color: #2f80ed;
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
-  &__connect-disabled {
-    font-size: 14px;
-    color: #7f7f7f;
-  }
 }

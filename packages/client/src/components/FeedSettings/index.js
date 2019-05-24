@@ -1,6 +1,7 @@
 import React from 'react'
 import './style.scss'
 import Loader from '../HorizontalLoader'
+import Button from '../Button'
 
 const FeedSettings = ({ feed, onConnect, onDisconnect }) => {
   const {
@@ -37,16 +38,11 @@ const FeedSettings = ({ feed, onConnect, onDisconnect }) => {
           {link.label}
         </a>
       </div>
-      <div
-        className={
-          isAuthenticating
-            ? 'feed-settings__connect-disabled'
-            : 'feed-settings__connect'
-        }
+      <Button.Plain
+        label={isConnected ? 'Disconnect' : 'Connect'}
         onClick={handleButtonClick}
-      >
-        {isConnected ? 'Disconnect' : 'Connect'}
-      </div>
+        disabled={isAuthenticating}
+      />
       {isAuthenticating && (
         <div className="feed-settings__loader">
           <Loader />
