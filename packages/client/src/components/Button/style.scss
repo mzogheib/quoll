@@ -1,6 +1,6 @@
 @mixin makeButtonClass($classname, $background-color, $color) {
   .#{$classname} {
-    border: 0;
+    border: none;
     border-radius: 4px;
     background-color: $background-color;
     height: 36px;
@@ -8,6 +8,22 @@
     color: $color;
     font-size: 14px;
     padding: 0 15px;
+
+    &.--bold {
+      font-weight: 500;
+    }
+
+    &.--hitbox-small {
+      height: unset;
+      min-width: unset;
+      padding: 5px;
+    }
+
+    &.--hitbox-none {
+      height: unset;
+      min-width: unset;
+      padding: 0;
+    }
 
     &.--disabled {
       background-color: lighten($background-color, 10%);
@@ -27,4 +43,5 @@
 }
 
 @include makeButtonClass(default-button, #f2f2f2, #333333);
+@include makeButtonClass(plain-button, transparent, #333333);
 @include makeButtonClass(primary-button, #6fcf97, #333333);
