@@ -47,7 +47,7 @@ export default class DatePicker extends Component {
     <div className="date-picker__calendar-wrapper">
       <Calendar
         className="date-picker__calendar"
-        maxDate={this.props.maxDate}
+        maxDate={new Date(this.props.maxDate)}
         value={new Date(this.props.date)}
         onChange={this.handleDateChange}
       />

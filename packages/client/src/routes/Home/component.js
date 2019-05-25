@@ -19,7 +19,7 @@ class App extends Component {
         <div className="home__left">
           <DatePicker
             date={this.props.date}
-            maxDate={new Date()}
+            maxDate={moment().format('YYYY-MM-DD')}
             prevDisabled={this.props.isLoading}
             nextDisabled={
               this.props.isLoading || this.dateIsToday(this.props.date)
