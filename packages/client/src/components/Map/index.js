@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import './style.scss'
+import PropTypes from 'prop-types'
+import _ from 'lodash'
+
 import {
   makeMarker,
   makePolyline,
@@ -9,10 +11,40 @@ import {
   unHighlightPolyline,
   makeInfoWindow,
 } from './utils'
-import _ from 'lodash'
+import './style.scss'
+
 const google = window.google
 
 export default class Map extends Component {
+  static propTypes = {
+    markerData: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        subTitle: PropTypes.string.isRequired,
+        description: PropTypes.string,
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+      }).isRequired
+    ).isRequired,
+    polylineData: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        subTitle: PropTypes.string.isRequired,
+        description: PropTypes.string,
+        encodedPath: PropTypes.string.isRequired,
+      }).isRequired
+    ).isRequired,
+    // TODO: should the entire focussedItem be undefined if not selected?
+    // Currently its properties are undefined in that case.
+    focussedItem: PropTypes.shape({
+      id: PropTypes.string,
+      latitude: PropTypes.number,
+      longitude: PropTypes.number,
+    }).isRequired,
+  }
+
   state = {
     markerItems: [],
     polylineItems: [],

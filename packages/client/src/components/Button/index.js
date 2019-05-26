@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import './style.scss'
 
 // Filter out falsey values
@@ -38,10 +40,24 @@ const renderBase = ({
   </button>
 )
 
+const propTypes = {
+  label: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
+}
+
+const defaultProps = {
+  disabled: false,
+}
+
 const Button = props => renderBase(props)
+Button.propTypes = propTypes
+Button.defaultProps = defaultProps
 
 Button.Primary = props => renderBase({ variant: 'primary', ...props })
 Button.Primary.displayName = 'PrimaryButton'
+Button.Primary.propTypes = propTypes
+Button.Primary.defaultProps = defaultProps
 
 Button.Plain = props =>
   renderBase({
@@ -51,5 +67,7 @@ Button.Plain = props =>
     ...props,
   })
 Button.Plain.displayName = 'PlainButton'
+Button.Plain.propTypes = propTypes
+Button.Plain.defaultProps = defaultProps
 
 export default Button
