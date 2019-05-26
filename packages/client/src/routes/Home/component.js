@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
-import './style.scss'
+import PropTypes from 'prop-types'
+import moment from 'moment'
+
 import DatePicker from '../../components/DatePicker'
 import Timeline from '../../components/Timeline'
 import Map from '../../components/Map'
 import Loader from '../../components/HorizontalLoader'
-import moment from 'moment'
+import './style.scss'
 
-class App extends Component {
+class Home extends Component {
   componentDidMount() {
     this.props.onMount()
   }
@@ -56,4 +58,16 @@ class App extends Component {
   }
 }
 
-export default App
+Home.propTypes = {
+  date: PropTypes.string.isRequired,
+  timeline: PropTypes.any.isRequired,
+  markerData: PropTypes.any.isRequired,
+  polylineData: PropTypes.any.isRequired,
+  focussedItem: PropTypes.any.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  onMount: PropTypes.func.isRequired,
+  onDateChange: PropTypes.func.isRequired,
+  onEntryClick: PropTypes.func.isRequired,
+}
+
+export default Home

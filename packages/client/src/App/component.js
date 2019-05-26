@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Route, Switch } from 'react-router-dom'
-import './style.scss'
+
 import routes from '../routes'
 import Header from '../components/Header'
 import SideBar from '../components/SideBar'
 import WelcomeModal from './WelcomeModal'
+import './style.scss'
 
 class App extends Component {
   state = {
@@ -72,6 +74,11 @@ class App extends Component {
   render() {
     return this.state.isLoading ? this.renderLoading() : this.renderApp()
   }
+}
+
+App.propTypes = {
+  feedsConnect: PropTypes.bool.isRequired,
+  onMount: PropTypes.func.isRequired,
 }
 
 export default App

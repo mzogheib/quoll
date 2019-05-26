@@ -1,7 +1,9 @@
 import React from 'react'
-import './style.scss'
+import PropTypes from 'prop-types'
+
 import Loader from '../HorizontalLoader'
 import Button from '../Button'
+import './style.scss'
 
 const FeedSettings = ({ feed, onConnect, onDisconnect }) => {
   const {
@@ -50,6 +52,23 @@ const FeedSettings = ({ feed, onConnect, onDisconnect }) => {
       )}
     </div>
   )
+}
+
+FeedSettings.propTypes = {
+  feed: PropTypes.shape({
+    isAuthenticating: PropTypes.bool.isRequired,
+    isConnected: PropTypes.bool.isRequired,
+    imageConnected: PropTypes.string.isRequired,
+    imageDisconnected: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    link: PropTypes.shape({
+      url: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+  onConnect: PropTypes.func.isRequired,
+  onDisconnect: PropTypes.func.isRequired,
 }
 
 export default FeedSettings

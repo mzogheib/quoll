@@ -1,10 +1,12 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
-import './style.scss'
 import MapIcon from 'react-icons/lib/md/map'
 import HelpIcon from 'react-icons/lib/md/help-outline'
 import SettingsIcon from 'react-icons/lib/md/settings'
+
 import routes from '../../routes'
+import './style.scss'
 
 const routesHash = routes.reduce((map, route) => {
   map[route.id] = { ...route }
@@ -50,5 +52,9 @@ const SideBar = ({ onHelpClick }) => (
     </div>
   </div>
 )
+
+SideBar.propTypes = {
+  onHelpClick: PropTypes.func.isRequired,
+}
 
 export default SideBar

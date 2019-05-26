@@ -1,8 +1,10 @@
 import React from 'react'
-import './style.scss'
+import PropTypes from 'prop-types'
+
 import Modal from '../../components/modals/Modal'
 import CloseIcon from 'react-icons/lib/md/close'
 import Button from '../../components/Button'
+import './style.scss'
 
 const WelcomeModal = ({ isOpen, onCancel, onConnect }) => (
   <Modal className="welcome-modal" isOpen={isOpen} onRequestClose={onCancel}>
@@ -20,5 +22,11 @@ const WelcomeModal = ({ isOpen, onCancel, onConnect }) => (
     </div>
   </Modal>
 )
+
+WelcomeModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  onConnect: PropTypes.func.isRequired,
+}
 
 export default WelcomeModal

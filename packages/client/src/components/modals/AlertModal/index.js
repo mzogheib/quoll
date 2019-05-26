@@ -1,7 +1,9 @@
 import React from 'react'
-import './style.scss'
+import PropTypes from 'prop-types'
+
 import Modal from '../Modal'
 import Button from '../../Button'
+import './style.scss'
 
 const AlertModal = ({ isOpen, message, onClose }) => (
   <Modal className="alert-modal" isOpen={isOpen} onRequestClose={onClose}>
@@ -11,5 +13,11 @@ const AlertModal = ({ isOpen, message, onClose }) => (
     </div>
   </Modal>
 )
+
+AlertModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  message: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired,
+}
 
 export default AlertModal

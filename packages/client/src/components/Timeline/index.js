@@ -1,6 +1,8 @@
 import React from 'react'
-import './style.scss'
+import PropTypes from 'prop-types'
+
 import TimelineEntry from '../TimelineEntry'
+import './style.scss'
 
 const Timeline = ({ timeline, onEntryClick }) => {
   const renderEntries = entries =>
@@ -15,6 +17,18 @@ const Timeline = ({ timeline, onEntryClick }) => {
       ))
 
   return <div className="timeline">{renderEntries(timeline.entries)}</div>
+}
+
+Timeline.propTypes = {
+  timeline: PropTypes.shape({
+    entries: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        timeStart: PropTypes.number.isRequired,
+      }).isRequired
+    ).isRequired,
+  }).isRequired,
+  onEntryClick: PropTypes.func.isRequired,
 }
 
 export default Timeline

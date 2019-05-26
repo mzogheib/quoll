@@ -1,11 +1,24 @@
 import React, { Component } from 'react'
-import './style.scss'
+import PropTypes from 'prop-types'
 import PreviousIcon from 'react-icons/lib/md/navigate-before'
 import NextIcon from 'react-icons/lib/md/navigate-next'
 import Calendar from 'react-calendar'
 import moment from 'moment'
 
+import './style.scss'
+
 export default class DatePicker extends Component {
+  static propTypes = {
+    date: PropTypes.string.isRequired,
+    maxDate: PropTypes.string.isRequired,
+    calendarDisabled: PropTypes.bool,
+    onDateChange: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    calendarDisabled: false,
+  }
+
   iconSize = 40
 
   state = {
