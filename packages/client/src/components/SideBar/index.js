@@ -1,11 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
-import MapIcon from 'react-icons/lib/md/map'
-import HelpIcon from 'react-icons/lib/md/help-outline'
-import SettingsIcon from 'react-icons/lib/md/settings'
 
 import routes from '../../routes'
+import Icon from '../Icon'
 import './style.scss'
 
 const routesHash = routes.reduce((map, route) => {
@@ -27,7 +25,7 @@ const SideBar = ({ onHelpClick }) => (
           activeClassName="side-bar__link-active"
         >
           <div className="side-bar__link-icon">
-            <MapIcon size={40} />
+            <Icon.Map size={40} />
           </div>
           <div className="side-bar__link-active-indicator" />
         </NavLink>
@@ -39,13 +37,13 @@ const SideBar = ({ onHelpClick }) => (
           activeClassName="side-bar__link-active"
         >
           <div className="side-bar__link-icon">
-            <SettingsIcon size={40} />
+            <Icon.Settings size={40} />
           </div>
           <div className="side-bar__link-active-indicator" />
         </NavLink>
         <div className="side-bar__item" onClick={onHelpClick}>
           <div className="side-bar__link-icon">
-            <HelpIcon size={40} />
+            <Icon.Help size={40} />
           </div>
         </div>
       </div>

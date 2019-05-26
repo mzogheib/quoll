@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import PreviousIcon from 'react-icons/lib/md/navigate-before'
-import NextIcon from 'react-icons/lib/md/navigate-next'
 import Calendar from 'react-calendar'
 import moment from 'moment'
 
+import Icon from '../Icon'
 import './style.scss'
 
 export default class DatePicker extends Component {
@@ -68,7 +67,7 @@ export default class DatePicker extends Component {
   )
 
   renderPrevious = () => (
-    <PreviousIcon
+    <Icon.Previous
       className="date-picker__button"
       size={this.iconSize}
       onClick={this.previous}
@@ -76,7 +75,7 @@ export default class DatePicker extends Component {
   )
 
   renderNext = () => (
-    <NextIcon
+    <Icon.Next
       className="date-picker__button"
       size={this.iconSize}
       onClick={this.next}
@@ -84,7 +83,7 @@ export default class DatePicker extends Component {
   )
 
   renderPrevDisabled = () => (
-    <PreviousIcon
+    <Icon.Previous
       className="date-picker__button-disabled"
       color={'#7f7f7f'}
       size={this.iconSize}
@@ -92,7 +91,7 @@ export default class DatePicker extends Component {
   )
 
   renderNextDisabled = () => (
-    <NextIcon
+    <Icon.Next
       className="date-picker__button-disabled"
       color={'#7f7f7f'}
       size={this.iconSize}

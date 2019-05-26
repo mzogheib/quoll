@@ -2,14 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import Modal from '../../components/modals/Modal'
-import CloseIcon from 'react-icons/lib/md/close'
+import Icon from '../../components/Icon'
 import Button from '../../components/Button'
 import './style.scss'
 
 const WelcomeModal = ({ isOpen, onCancel, onConnect }) => (
   <Modal className="welcome-modal" isOpen={isOpen} onRequestClose={onCancel}>
     <div className="welcome-modal__header">
-      <CloseIcon
+      <Icon.Close
         className="welcome-modal__cancel"
         size={30}
         onClick={onCancel}
