@@ -91,7 +91,7 @@ Settings.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.shape({
       errorMessage: PropTypes.string,
-    }).isRequired,
+    }),
   }).isRequired,
   history: PropTypes.shape({
     replace: PropTypes.func.isRequired,

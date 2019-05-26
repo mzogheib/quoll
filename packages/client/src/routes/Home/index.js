@@ -29,7 +29,7 @@ const mapStateToProps = ({ date, timeline, focussedItem }) => {
 
   return {
     date,
-    timeline,
+    timelineEntries: timeline.entries,
     markerData,
     polylineData,
     focussedItem,

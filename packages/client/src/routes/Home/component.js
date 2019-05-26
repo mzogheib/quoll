@@ -16,39 +16,44 @@ class Home extends Component {
   dateIsToday = date => moment(date).isSame(moment(), 'day')
 
   render() {
+    const {
+      date,
+      isLoading,
+      onDateChange,
+      timelineEntries,
+      onEntryClick,
+      markerData,
+      polylineData,
+      focussedItem,
+    } = this.props
     return (
       <div className="home">
         <div className="home__left">
           <DatePicker
-            date={this.props.date}
+            date={date}
             maxDate={moment().format('YYYY-MM-DD')}
-            prevDisabled={this.props.isLoading}
-            nextDisabled={
-              this.props.isLoading || this.dateIsToday(this.props.date)
-            }
-            calendarDisabled={this.props.isLoading}
-            onDateChange={this.props.onDateChange}
+            prevDisabled={isLoading}
+            nextDisabled={isLoading || this.dateIsToday(date)}
+            calendarDisabled={isLoading}
+            onDateChange={onDateChange}
           />
           <div className="home__timeline-wrapper">
             <div className="home__timeline">
-              <Timeline
-                timeline={this.props.timeline}
-                onEntryClick={this.props.onEntryClick}
-              />
+              <Timeline entries={timelineEntries} onEntryClick={onEntryClick} />
             </div>
           </div>
         </div>
         <div className="home__map-wrapper">
           <div className="home__map">
             <Map
-              markerData={this.props.markerData}
-              polylineData={this.props.polylineData}
-              focussedItem={this.props.focussedItem}
-              onElementSelect={this.props.onEntryClick}
+              markerData={markerData}
+              polylineData={polylineData}
+              focussedItem={focussedItem}
+              onElementSelect={onEntryClick}
             />
           </div>
         </div>
-        {this.props.isLoading && (
+        {isLoading && (
           <div className="home__loader">
             <Loader />
           </div>
@@ -60,7 +65,7 @@ class Home extends Component {
 
 Home.propTypes = {
   date: PropTypes.string.isRequired,
-  timeline: PropTypes.any.isRequired,
+  timelineEntries: PropTypes.any.isRequired,
   markerData: PropTypes.any.isRequired,
   polylineData: PropTypes.any.isRequired,
   focussedItem: PropTypes.any.isRequired,

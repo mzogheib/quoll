@@ -18,7 +18,7 @@ class App extends Component {
     this.props.onMount().then(() =>
       this.setState({
         isLoading: false,
-        showWelcomeModal: !this.props.feedsConnect,
+        showWelcomeModal: !this.props.areFeedsConnected,
       })
     )
   }
@@ -77,7 +77,7 @@ class App extends Component {
 }
 
 App.propTypes = {
-  feedsConnect: PropTypes.bool.isRequired,
+  areFeedsConnected: PropTypes.bool.isRequired,
   onMount: PropTypes.func.isRequired,
 }
 

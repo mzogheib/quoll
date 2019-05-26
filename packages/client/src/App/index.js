@@ -6,7 +6,7 @@ import App from './component'
 import userService from '../services/user'
 
 const mapStateToProps = ({ feeds }) => ({
-  feedsConnect: feeds.reduce(
+  areFeedsConnected: feeds.reduce(
     (previous, current) => previous || current.isConnected,
     false
   ),
