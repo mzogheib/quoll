@@ -1,8 +1,10 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import querystring from 'querystring'
+
 import { onOAuthResponse } from '../../services/oauth'
 
-export default ({ location, history }) => {
+const OAuth = ({ location, history }) => {
   const searchString = location.search
   // searchString: ?foo=bar
   const queryParams = querystring.parse(searchString.substr(1))
@@ -15,3 +17,14 @@ export default ({ location, history }) => {
 
   return <div>Connecting...</div>
 }
+
+OAuth.propTypes = {
+  location: PropTypes.shape({
+    search: PropTypes.string.isRequired,
+  }).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }),
+}
+
+export default OAuth

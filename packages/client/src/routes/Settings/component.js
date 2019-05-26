@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import './style.scss'
+import PropTypes from 'prop-types'
+
 import FeedSettings from '../../components/FeedSettings'
 import { requestAuth } from '../../services/oauth'
 import AlertModal from '../../components/modals/AlertModal'
+import './style.scss'
 
 const INITIAL_STATE = {
   showModal: false,
@@ -83,6 +85,24 @@ class Settings extends Component {
       </div>
     )
   }
+}
+
+Settings.propTypes = {
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      errorMessage: PropTypes.string,
+    }).isRequired,
+  }).isRequired,
+  history: PropTypes.shape({
+    replace: PropTypes.func.isRequired,
+  }),
+  feeds: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    }).isRequired
+  ).isRequired,
+  onConnect: PropTypes.func.isRequired,
+  onOauthCodeReceived: PropTypes.func.isRequired,
 }
 
 export default Settings
