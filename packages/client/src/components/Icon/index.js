@@ -5,7 +5,7 @@ import Next from 'react-icons/lib/md/navigate-next'
 import Previous from 'react-icons/lib/md/navigate-before'
 import Settings from 'react-icons/lib/md/settings'
 
-const Icon = {
+const icons = {
   Close,
   Help,
   Map,
@@ -13,5 +13,15 @@ const Icon = {
   Previous,
   Settings,
 }
+
+const Icon = Object.entries(icons).reduce((prev, [name, C]) => {
+  // This updates the displayName on the imported component, which may not
+  // be the best idea
+  C.displayName = `Icon.${name}`
+  return {
+    [name]: C,
+    ...prev,
+  }
+}, {})
 
 export default Icon

@@ -7,6 +7,7 @@ export default {
   makeRandomString,
   encode,
   decode,
+  joinClassNames,
 }
 
 function addQueryParams(url, params) {
@@ -59,4 +60,9 @@ function decode(string) {
   // However, this is probably a good check regardless. Who knows what types of string can be thrown at this function.
   // Follow up in https://github.com/mzogheib/quoll/issues/16
   return JSON.parse(atob(decodeURIComponent(string)))
+}
+
+// Filter out falsey values
+function joinClassNames(classNameArray) {
+  return classNameArray.filter(c => c).join(' ')
 }

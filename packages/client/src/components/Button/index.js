@@ -1,10 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import utils from '../../services/utils'
 import './style.scss'
-
-// Filter out falsey values
-const joinClassNames = classNameArray => classNameArray.filter(c => c).join(' ')
 
 const classMap = {
   default: 'default-button',
@@ -26,7 +24,7 @@ const renderBase = ({
   hitboxSize,
 }) => (
   <button
-    className={joinClassNames([
+    className={utils.joinClassNames([
       classMap[variant],
       disabled && '--disabled',
       bold && '--bold',
@@ -55,7 +53,7 @@ Button.propTypes = propTypes
 Button.defaultProps = defaultProps
 
 Button.Primary = props => renderBase({ variant: 'primary', ...props })
-Button.Primary.displayName = 'PrimaryButton'
+Button.Primary.displayName = 'Button.Primary'
 Button.Primary.propTypes = propTypes
 Button.Primary.defaultProps = defaultProps
 
@@ -66,7 +64,7 @@ Button.Plain = props =>
     hitboxSize: 'none',
     ...props,
   })
-Button.Plain.displayName = 'PlainButton'
+Button.Plain.displayName = 'Button.Plain'
 Button.Plain.propTypes = propTypes
 Button.Plain.defaultProps = defaultProps
 
