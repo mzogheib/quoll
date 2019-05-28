@@ -3,18 +3,6 @@
   align-items: center;
   position: relative;
 
-  &__button {
-    flex-basis: 70px;
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
-  &__button-disabled {
-    flex-basis: 70px;
-  }
-
   &__date {
     flex-grow: 1;
     text-align: center;
