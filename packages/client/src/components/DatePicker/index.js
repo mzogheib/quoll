@@ -66,29 +66,31 @@ export default class DatePicker extends Component {
     </div>
   )
 
-  renderPrevious = () => (
-    <IconButton.Previous size={this.iconSize} onClick={this.previous} />
+  renderPrevious = disabled => (
+    <IconButton.Previous
+      disabled={disabled}
+      size={this.iconSize}
+      onClick={this.previous}
+    />
   )
 
-  renderNext = () => (
-    <IconButton.Next size={this.iconSize} onClick={this.next} />
+  renderNext = disabled => (
+    <IconButton.Next
+      disabled={disabled}
+      size={this.iconSize}
+      onClick={this.next}
+    />
   )
-
-  renderPrevDisabled = () => (
-    <IconButton.Previous disabled size={this.iconSize} />
-  )
-
-  renderNextDisabled = () => <IconButton.Next disabled size={this.iconSize} />
 
   render() {
     const { prevDisabled, nextDisabled, calendarDisabled } = this.props
     const { showCalendar } = this.state
     return (
       <div className="date-picker">
-        {prevDisabled ? this.renderPrevDisabled() : this.renderPrevious()}
+        {this.renderPrevious(prevDisabled)}
         {calendarDisabled ? this.renderDateDisabled() : this.renderDate()}
         {showCalendar && this.renderCalendar()}
-        {nextDisabled ? this.renderNextDisabled() : this.renderNext()}
+        {this.renderNext(nextDisabled)}
       </div>
     )
   }
