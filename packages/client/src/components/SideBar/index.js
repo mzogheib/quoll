@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom'
 
 import routes from '../../routes'
 import Icon from '../Icon'
+import IconButton from '../IconButton'
 import './style.scss'
 
 const routesHash = routes.reduce((map, route) => {
@@ -41,9 +42,9 @@ const SideBar = ({ onHelpClick }) => (
           </div>
           <div className="side-bar__link-active-indicator" />
         </NavLink>
-        <div className="side-bar__item" onClick={onHelpClick}>
+        <div className="side-bar__item">
           <div className="side-bar__link-icon">
-            <Icon.Help size={40} />
+            <IconButton.Help onClick={onHelpClick} size={40} />
           </div>
         </div>
       </div>

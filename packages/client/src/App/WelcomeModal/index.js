@@ -2,18 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import Modal from '../../components/modals/Modal'
-import Icon from '../../components/Icon'
+import IconButton from '../../components/IconButton'
 import Button from '../../components/Button'
 import './style.scss'
 
 const WelcomeModal = ({ isOpen, onCancel, onConnect }) => (
   <Modal className="welcome-modal" isOpen={isOpen} onRequestClose={onCancel}>
     <div className="welcome-modal__header">
-      <Icon.Close
-        className="welcome-modal__cancel"
-        size={30}
-        onClick={onCancel}
-      />
+      <IconButton.Close size={30} onClick={onCancel} />
     </div>
     <div className="welcome-modal__title">Quoll</div>
     <div className="welcome-modal__message">Map yo' life.</div>
