@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
-import './style.scss'
+import './index.scss'
 
 const TimelineEntry = ({ entry, onClick }) => (
   <div className="timeline-entry" onClick={onClick}>

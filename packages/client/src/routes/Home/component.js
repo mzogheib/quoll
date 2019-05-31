@@ -6,7 +6,7 @@ import DatePicker from '../../components/DatePicker'
 import Timeline from '../../components/Timeline'
 import Map from '../../components/Map'
 import Loader from '../../components/HorizontalLoader'
-import './style.scss'
+import './index.scss'
 
 class Home extends Component {
   componentDidMount() {

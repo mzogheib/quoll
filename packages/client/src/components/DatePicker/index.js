@@ -4,7 +4,7 @@ import Calendar from 'react-calendar'
 import moment from 'moment'
 
 import IconButton from '../IconButton'
-import './style.scss'
+import './index.scss'
 
 export default class DatePicker extends Component {
   static propTypes = {

@@ -2,7 +2,7 @@ import React from 'react'
 
 import utils from '../../services/utils'
 import IconComponent from '../Icon'
-import './style.scss'
+import './index.scss'
 
 const icons = Object.entries(IconComponent)
 

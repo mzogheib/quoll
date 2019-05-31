@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import Modal from '../Modal'
 import Button from '../../Button'
-import './style.scss'
+import './index.scss'
 
 const AlertModal = ({ isOpen, message, onClose }) => (
   <Modal className="alert-modal" isOpen={isOpen} onRequestClose={onClose}>

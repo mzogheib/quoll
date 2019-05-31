@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 import routes from '../../routes'
 import Icon from '../Icon'
 import IconButton from '../IconButton'
-import './style.scss'
+import './index.scss'
 
 const routesHash = routes.reduce((map, route) => {
   map[route.id] = { ...route }

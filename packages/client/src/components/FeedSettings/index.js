@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import Loader from '../HorizontalLoader'
 import Button from '../Button'
-import './style.scss'
+import './index.scss'
 
 const FeedSettings = ({ feed, onConnect, onDisconnect }) => {
   const {

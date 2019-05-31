@@ -6,7 +6,7 @@ import routes from '../routes'
 import Header from '../components/Header'
 import SideBar from '../components/SideBar'
 import WelcomeModal from './WelcomeModal'
-import './style.scss'
+import './index.scss'
 
 class App extends Component {
   state = {

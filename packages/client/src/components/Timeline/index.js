@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import TimelineEntry from '../TimelineEntry'
-import './style.scss'
+import './index.scss'
 
 const Timeline = ({ entries, onEntryClick }) => (
   <div className="timeline">

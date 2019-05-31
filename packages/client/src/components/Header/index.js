@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import './style.scss'
+import './index.scss'
 
 const Header = ({ title }) => <div className="header">{title}</div>
 

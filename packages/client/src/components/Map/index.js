@@ -11,7 +11,7 @@ import {
   unHighlightPolyline,
   makeInfoWindow,
 } from './utils'
-import './style.scss'
+import './index.scss'
 
 const google = window.google
 

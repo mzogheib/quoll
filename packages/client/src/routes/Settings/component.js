@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import FeedSettings from '../../components/FeedSettings'
 import { requestAuth } from '../../services/oauth'
 import AlertModal from '../../components/modals/AlertModal'
-import './style.scss'
+import './index.scss'
 
 const INITIAL_STATE = {
   showModal: false,

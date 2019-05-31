@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import utils from '../../services/utils'
-import './style.scss'
+import './index.scss'
 
 const classMap = {
   default: 'default-button',

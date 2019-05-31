@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import Modal from '../../components/modals/Modal'
 import IconButton from '../../components/IconButton'
 import Button from '../../components/Button'
-import './style.scss'
+import './index.scss'
 
 const WelcomeModal = ({ isOpen, onCancel, onConnect }) => (
   <Modal className="welcome-modal" isOpen={isOpen} onRequestClose={onCancel}>
