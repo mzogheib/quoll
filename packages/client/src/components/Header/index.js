@@ -2,8 +2,8 @@ import styled from 'styled-components'
 
 import Flex from '../Flex'
 
-const Header = Object.assign(
-  styled(Flex).attrs(({ theme: { colors } }) => ({
+const Header = {
+  ...styled(Flex).attrs(({ theme: { colors } }) => ({
     as: 'header',
     justifyContent: 'center',
     alignItems: 'center',
@@ -13,9 +13,7 @@ const Header = Object.assign(
     fontSize: 20,
     fontWeight: 500,
   }))``,
-  {
-    displayName: 'Header',
-  }
-)
+  displayName: 'Header',
+}
 
 export default Header

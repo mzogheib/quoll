@@ -3,16 +3,14 @@ import { alignItems, justifyContent, flexDirection } from 'styled-system'
 
 import Box from '../Box'
 
-const Flex = Object.assign(
-  styled(Box)`
+const Flex = {
+  ...styled(Box)`
     display: flex;
     ${alignItems};
     ${justifyContent};
     ${flexDirection};
   `,
-  {
-    displayName: 'Flex',
-  }
-)
+  displayName: 'Flex',
+}
 
 export default Flex

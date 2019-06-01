@@ -88,22 +88,25 @@ const defaultProps = {
 // one which could then be extended by Primary and Plain.
 // This avoids classes that have multiple overrides. On the other hand,
 // it ends up creating three sets of distinct styles.
-const Button = Object.assign(styled.button([defaultStyle]), {
+const Button = {
+  ...styled.button([defaultStyle]),
   displayName: 'Button',
   propTypes,
   defaultProps,
-})
+}
 
-Button.Primary = Object.assign(styled.button([primaryStyle]), {
+Button.Primary = {
+  ...styled.button([primaryStyle]),
   displayName: 'Button.Primary',
   propTypes,
   defaultProps,
-})
+}
 
-Button.Plain = Object.assign(styled.button([plainStyle]), {
+Button.Plain = {
+  ...styled.button([plainStyle]),
   displayName: 'Button.Plain',
   propTypes,
   defaultProps,
-})
+}
 
 export default Button
