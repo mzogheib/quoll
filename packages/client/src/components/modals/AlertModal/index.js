@@ -9,7 +9,7 @@ const AlertModal = ({ isOpen, message, onClose }) => (
   <Modal className="alert-modal" isOpen={isOpen} onRequestClose={onClose}>
     <div>{message}</div>
     <div className="alert-modal__actions">
-      <Button label="OK" onClick={onClose} />
+      <Button onClick={onClose}>OK</Button>
     </div>
   </Modal>
 )

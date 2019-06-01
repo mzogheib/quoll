@@ -40,11 +40,9 @@ const FeedSettings = ({ feed, onConnect, onDisconnect }) => {
           {link.label}
         </a>
       </div>
-      <Button.Plain
-        label={isConnected ? 'Disconnect' : 'Connect'}
-        onClick={handleButtonClick}
-        disabled={isAuthenticating}
-      />
+      <Button.Plain onClick={handleButtonClick} disabled={isAuthenticating}>
+        {isConnected ? 'Disconnect' : 'Connect'}
+      </Button.Plain>
       {isAuthenticating && (
         <div className="feed-settings__loader">
           <Loader />

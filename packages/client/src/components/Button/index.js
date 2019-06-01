@@ -1,71 +1,95 @@
-import React from 'react'
+import styled, { css } from 'styled-components'
+import { lighten, darken } from 'polished'
 import PropTypes from 'prop-types'
 
-import utils from '../../services/utils'
-import './index.scss'
+const disabledRules = (disabled, backgroundColor, color) => {
+  if (!disabled) return
 
-const classMap = {
-  default: 'default-button',
-  primary: 'primary-button',
-  plain: 'plain-button',
+  return css`
+    background-color: ${lighten(0.1, backgroundColor)};
+    color: ${lighten(0.4, color)};
+
+    &:hover {
+      cursor: unset;
+      background-color: ${lighten(0.1, backgroundColor)};
+    }
+  `
 }
 
-const hitboxClassMap = {
-  small: '--hitbox-small',
-  none: '--hitbox-none',
-}
+const defaultStyle = ({ theme: { colors }, disabled }) => css`
+  border: none;
+  border-radius: 4px;
 
-const renderBase = ({
-  variant = 'default',
-  label,
-  onClick,
-  disabled,
-  bold,
-  hitboxSize,
-}) => (
-  <button
-    className={utils.joinClassNames([
-      classMap[variant],
-      disabled && '--disabled',
-      bold && '--bold',
-      hitboxClassMap[hitboxSize],
-    ])}
-    onClick={onClick}
-    disabled={disabled}
-    type="button"
-  >
-    {label}
-  </button>
-)
+  height: 36px;
+  min-width: 120px;
+  background-color: ${colors.whiteSmoke};
+  padding: 0 15px;
+
+  color: ${colors.mineShaft};
+  font-size: 14px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: ${darken(0.05, colors.whiteSmoke)};
+  }
+
+  ${disabledRules(disabled, colors.whiteSmoke, colors.mineShaft)};
+`
+
+const primaryStyle = ({ theme: { colors }, disabled }) => css`
+  background-color: ${colors.mediumAquamarine};
+
+  &:hover {
+    cursor: pointer;
+    background-color: ${darken(0.05, colors.mediumAquamarine)};
+  }
+
+  ${disabledRules(disabled, colors.mediumAquamarine, colors.mineShaft)};
+`
+
+const plainStyle = ({ theme: { colors }, disabled }) => css`
+  background-color: ${colors.transparent};
+  font-weight: 500;
+
+  height: unset;
+  min-width: unset;
+  padding: 0;
+
+  &:hover {
+    cursor: pointer;
+    background-color: ${darken(0.05, colors.transparent)};
+  }
+
+  ${disabledRules(disabled, colors.transparent, colors.mineShaft)};
+`
 
 const propTypes = {
-  label: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
+  type: PropTypes.string,
 }
 
 const defaultProps = {
   disabled: false,
+  type: 'button',
 }
 
-const Button = props => renderBase(props)
+const Button = styled.button([defaultStyle])
+Button.displayName = 'Button'
 Button.propTypes = propTypes
 Button.defaultProps = defaultProps
 
-Button.Primary = props => renderBase({ variant: 'primary', ...props })
-Button.Primary.displayName = 'Button.Primary'
-Button.Primary.propTypes = propTypes
-Button.Primary.defaultProps = defaultProps
+const PrimaryButton = styled(Button)([primaryStyle])
+PrimaryButton.displayName = 'Button.Primary'
+PrimaryButton.propTypes = propTypes
+PrimaryButton.defaultProps = defaultProps
 
-Button.Plain = props =>
-  renderBase({
-    variant: 'plain',
-    bold: true,
-    hitboxSize: 'none',
-    ...props,
-  })
-Button.Plain.displayName = 'Button.Plain'
-Button.Plain.propTypes = propTypes
-Button.Plain.defaultProps = defaultProps
+const PlainButton = styled(Button)([plainStyle])
+PlainButton.displayName = 'Button.Plan'
+PlainButton.propTypes = propTypes
+PlainButton.defaultProps = defaultProps
+
+Button.Primary = PrimaryButton
+Button.Plain = PlainButton
 
 export default Button
