@@ -3,6 +3,7 @@
 export default {
   default: {
     colors: {
+      matterhorn: '#4F4F4F',
       mediumAquamarine: '#6FCF97',
       mineShaft: '#333333',
       transparent: 'transparent',

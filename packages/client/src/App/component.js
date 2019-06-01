@@ -48,7 +48,7 @@ class App extends Component {
       <div className="app">
         <SideBar onHelpClick={this.handleSideBarHelpClick} />
         <div className="app__right">
-          <Header title={this.getRouteTitleFromLocation(this.props.location)} />
+          <Header>{this.getRouteTitleFromLocation(this.props.location)}</Header>
           <div className="app__main">
             <Switch>
               {routes.map((route, index) => (

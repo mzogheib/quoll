@@ -1,12 +1,21 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import './index.scss'
+import Flex from '../Flex'
 
-const Header = ({ title }) => <div className="header">{title}</div>
-
-Header.propTypes = {
-  title: PropTypes.string.isRequired,
-}
+const Header = Object.assign(
+  styled(Flex).attrs(({ theme: { colors } }) => ({
+    as: 'header',
+    justifyContent: 'center',
+    alignItems: 'center',
+    minHeight: 40,
+    bg: colors.matterhorn,
+    color: colors.mediumAquamarine,
+    fontSize: 20,
+    fontWeight: 500,
+  }))``,
+  {
+    displayName: 'Header',
+  }
+)
 
 export default Header
