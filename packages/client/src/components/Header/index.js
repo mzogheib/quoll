@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 import Flex from '../Flex'
 
@@ -14,6 +15,9 @@ const Header = {
     fontWeight: 500,
   }))``,
   displayName: 'Header',
+  propTypes: {
+    children: PropTypes.string.isRequired,
+  },
 }
 
 export default Header
