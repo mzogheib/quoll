@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import Flex from '../Flex'
 import TimelineEntry from '../TimelineEntry'
-import './index.scss'
 
 const Timeline = ({ entries, onEntryClick }) => (
-  <div className="timeline">
+  <Flex flexDirection="column">
     {entries.sort((a, b) => a.timeStart - b.timeStart).map((entry, index) => (
       <TimelineEntry
         key={index}
@@ -13,7 +13,7 @@ const Timeline = ({ entries, onEntryClick }) => (
         onClick={() => onEntryClick(entry.id)}
       />
     ))}
-  </div>
+  </Flex>
 )
 
 Timeline.propTypes = {
