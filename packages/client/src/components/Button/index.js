@@ -16,51 +16,61 @@ const disabledRules = (disabled, backgroundColor, color) => {
   `
 }
 
-const defaultStyle = ({ theme: { colors }, disabled }) => css`
+const hitboxRules = noHitbox => {
+  if (!noHitbox) return
+
+  return css`
+    height: unset;
+    min-width: unset;
+    padding: 0;
+  `
+}
+
+const makeStyle = ({ color, backgroundColor, disabled, noHitbox }) => css`
   border: none;
   border-radius: 4px;
 
   height: 36px;
   min-width: 120px;
-  background-color: ${colors.whiteSmoke};
+  background-color: ${backgroundColor};
   padding: 0 15px;
 
-  color: ${colors.mineShaft};
+  color: ${color};
   font-size: 14px;
 
   &:hover {
     cursor: pointer;
-    background-color: ${darken(0.05, colors.whiteSmoke)};
+    background-color: ${darken(0.05, backgroundColor)};
   }
 
-  ${disabledRules(disabled, colors.whiteSmoke, colors.mineShaft)};
+  ${disabledRules(disabled, backgroundColor, color)};
+
+  ${hitboxRules(noHitbox)};
+`
+
+const defaultStyle = ({ theme: { colors }, disabled }) => css`
+  ${makeStyle({
+    color: colors.mineShaft,
+    backgroundColor: colors.whiteSmoke,
+    disabled,
+  })};
 `
 
 const primaryStyle = ({ theme: { colors }, disabled }) => css`
-  background-color: ${colors.mediumAquamarine};
-
-  &:hover {
-    cursor: pointer;
-    background-color: ${darken(0.05, colors.mediumAquamarine)};
-  }
-
-  ${disabledRules(disabled, colors.mediumAquamarine, colors.mineShaft)};
+  ${makeStyle({
+    color: colors.mineShaft,
+    backgroundColor: colors.mediumAquamarine,
+    disabled,
+  })};
 `
 
 const plainStyle = ({ theme: { colors }, disabled }) => css`
-  background-color: ${colors.transparent};
-  font-weight: 500;
-
-  height: unset;
-  min-width: unset;
-  padding: 0;
-
-  &:hover {
-    cursor: pointer;
-    background-color: ${darken(0.05, colors.transparent)};
-  }
-
-  ${disabledRules(disabled, colors.transparent, colors.mineShaft)};
+  ${makeStyle({
+    color: colors.mineShaft,
+    backgroundColor: colors.transparent,
+    disabled,
+    noHitbox: true,
+  })};
 `
 
 const propTypes = {
@@ -74,22 +84,26 @@ const defaultProps = {
   type: 'button',
 }
 
-const Button = styled.button([defaultStyle])
-Button.displayName = 'Button'
-Button.propTypes = propTypes
-Button.defaultProps = defaultProps
+// Choosing to create three separate styled components instead of the base
+// one which could then be extended by Primary and Plain.
+// This avoids classes that have multiple overrides. On the other hand,
+// it ends up creating three sets of distinct styles.
+const Button = Object.assign(styled.button([defaultStyle]), {
+  displayName: 'Button',
+  propTypes,
+  defaultProps,
+})
 
-const PrimaryButton = styled(Button)([primaryStyle])
-PrimaryButton.displayName = 'Button.Primary'
-PrimaryButton.propTypes = propTypes
-PrimaryButton.defaultProps = defaultProps
+Button.Primary = Object.assign(styled.button([primaryStyle]), {
+  displayName: 'Button.Primary',
+  propTypes,
+  defaultProps,
+})
 
-const PlainButton = styled(Button)([plainStyle])
-PlainButton.displayName = 'Button.Plan'
-PlainButton.propTypes = propTypes
-PlainButton.defaultProps = defaultProps
-
-Button.Primary = PrimaryButton
-Button.Plain = PlainButton
+Button.Plain = Object.assign(styled.button([plainStyle]), {
+  displayName: 'Button.Plain',
+  propTypes,
+  defaultProps,
+})
 
 export default Button
