@@ -26,7 +26,7 @@ const hitboxRules = noHitbox => {
   `
 }
 
-const makeStyle = ({ color, backgroundColor, disabled, noHitbox }) => css`
+const makeStyle = ({ color, backgroundColor, bold, disabled, noHitbox }) => css`
   border: none;
   border-radius: 4px;
 
@@ -37,6 +37,7 @@ const makeStyle = ({ color, backgroundColor, disabled, noHitbox }) => css`
 
   color: ${color};
   font-size: 14px;
+  font-weight: ${bold ? 500 : null};
 
   &:hover {
     cursor: pointer;
@@ -68,6 +69,7 @@ const plainStyle = ({ theme: { colors }, disabled }) => css`
   ${makeStyle({
     color: colors.mineShaft,
     backgroundColor: colors.transparent,
+    bold: true,
     disabled,
     noHitbox: true,
   })};
