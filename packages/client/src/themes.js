@@ -8,6 +8,7 @@ export default {
       matterhorn: '#4F4F4F',
       mediumAquamarine: '#6FCF97',
       mineShaft: '#333333',
+      royalBlue: '#2F80ED',
       transparent: 'transparent',
       white: '#FFFFFF',
       whiteSmoke: '#F2F2F2',
