@@ -1,11 +1,16 @@
 import React from 'react'
+import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
-import Flex from '../Flex'
 import TimelineEntry from '../TimelineEntry'
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
 const Timeline = ({ entries, onEntryClick }) => (
-  <Flex flexDirection="column">
+  <Wrapper>
     {entries.sort((a, b) => a.timeStart - b.timeStart).map((entry, index) => (
       <TimelineEntry
         key={index}
@@ -13,7 +18,7 @@ const Timeline = ({ entries, onEntryClick }) => (
         onClick={() => onEntryClick(entry.id)}
       />
     ))}
-  </Flex>
+  </Wrapper>
 )
 
 Timeline.propTypes = {

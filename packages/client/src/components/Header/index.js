@@ -1,19 +1,19 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 
-import Flex from '../Flex'
+const style = ({ theme: { colors } }) => css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 40px;
+  background-color: ${colors.matterhorn};
+  color: ${colors.mediumAquamarine};
+  font-size: 20px;
+  font-weight: 500;
+`
 
 const Header = {
-  ...styled(Flex).attrs(({ theme: { colors } }) => ({
-    as: 'header',
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: 40,
-    bg: colors.matterhorn,
-    color: colors.mediumAquamarine,
-    fontSize: 20,
-    fontWeight: 500,
-  }))``,
+  ...styled.header([style]),
   displayName: 'Header',
   propTypes: {
     children: PropTypes.string.isRequired,
