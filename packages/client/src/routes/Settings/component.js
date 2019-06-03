@@ -8,7 +8,7 @@ import './index.scss'
 
 const INITIAL_STATE = {
   showModal: false,
-  modalMessage: 'Oops, somethign went wrong.',
+  modalMessage: 'Oops, something went wrong.',
 }
 
 class Settings extends Component {

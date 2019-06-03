@@ -1,21 +1,47 @@
 import React from 'react'
+import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 import ReactModal from 'react-modal'
 
-import './index.scss'
-
 ReactModal.setAppElement('#root')
 
-const Modal = ({ className, isOpen, onRequestClose, children }) => (
+// Inspired by https://github.com/reactjs/react-modal/issues/603
+
+const ReactModalAdapter = ({ className, ...props }) => (
   <ReactModal
-    className={`modal__content ${className}`}
-    overlayClassName="modal__overlay"
-    isOpen={isOpen}
-    onRequestClose={onRequestClose}
-    shouldCloseOnOverlayClick
-  >
-    {children}
-  </ReactModal>
+    className={className}
+    overlayClassName={`${className}__overlay`}
+    bodyOpenClassName={`${className}__body-open`}
+    {...props}
+  />
+)
+
+const Modal = styled(ReactModalAdapter)(
+  ({ theme: { colors } }) => css`
+    margin: 200px 0 0;
+    width: 100%;
+    max-width: 400px;
+    background-color: ${colors.white};
+    outline: none;
+    border-radius: 4px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+
+    &__overlay {
+      position: fixed;
+      top: 0px;
+      left: 0px;
+      right: 0px;
+      bottom: 0px;
+      background-color: rgba(196, 196, 196, 0.5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &__body-open {
+      overflow: hidden;
+    }
+  `
 )
 
 Modal.propTypes = {

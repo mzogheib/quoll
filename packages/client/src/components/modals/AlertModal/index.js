@@ -1,17 +1,27 @@
 import React from 'react'
+import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 import Modal from '../Modal'
 import Button from '../../Button'
-import './index.scss'
+
+const StyledModal = styled(Modal)`
+  padding: 20px;
+`
+
+const Actions = styled.div`
+  margin: 30px 0 0;
+  display: flex;
+  justify-content: flex-end;
+`
 
 const AlertModal = ({ isOpen, message, onClose }) => (
-  <Modal className="alert-modal" isOpen={isOpen} onRequestClose={onClose}>
+  <StyledModal isOpen={isOpen} onRequestClose={onClose}>
     <div>{message}</div>
-    <div className="alert-modal__actions">
+    <Actions>
       <Button onClick={onClose}>OK</Button>
-    </div>
-  </Modal>
+    </Actions>
+  </StyledModal>
 )
 
 AlertModal.propTypes = {

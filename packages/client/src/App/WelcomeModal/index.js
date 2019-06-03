@@ -1,21 +1,46 @@
 import React from 'react'
+import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 import Modal from '../../components/modals/Modal'
 import IconButton from '../../components/IconButton'
 import Button from '../../components/Button'
-import './index.scss'
+
+const Header = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+`
+
+const Title = styled.div`
+  text-align: center;
+  font-family: Pacifico;
+  font-size: 48px;
+`
+
+const Message = styled.div`
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+const Actions = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 30px 0 30px;
+`
 
 const WelcomeModal = ({ isOpen, onCancel, onConnect }) => (
-  <Modal className="welcome-modal" isOpen={isOpen} onRequestClose={onCancel}>
-    <div className="welcome-modal__header">
+  <Modal isOpen={isOpen} onRequestClose={onCancel}>
+    <Header>
       <IconButton.Close size={30} onClick={onCancel} />
-    </div>
-    <div className="welcome-modal__title">Quoll</div>
-    <div className="welcome-modal__message">Map yo' life.</div>
-    <div className="welcome-modal__actions">
+    </Header>
+    <Title>Quoll</Title>
+    <Message>Map yo' life.</Message>
+    <Actions>
       <Button.Primary onClick={onConnect}>Connect Feeds</Button.Primary>
-    </div>
+    </Actions>
   </Modal>
 )
 
