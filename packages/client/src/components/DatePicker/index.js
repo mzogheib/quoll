@@ -1,10 +1,46 @@
 import React, { Component } from 'react'
+import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 import Calendar from 'react-calendar'
 import moment from 'moment'
 
 import IconButton from '../IconButton'
-import './index.scss'
+
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  .react-calendar__tile,
+  .react-calendar__navigation__label {
+    font-family: Roboto;
+  }
+`
+
+const DateLabel = styled.div(
+  ({ theme: { colors }, disabled }) => css`
+    flex-grow: 1;
+    text-align: center;
+    cursor: ${disabled ? 'unset' : 'pointer'};
+    color: ${disabled ? colors.grey : 'inherit'};
+  `
+)
+
+const CalendarWrapper = styled.div`
+  position: absolute;
+  top: 40px;
+  right: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+`
+
+const StyledCalendar = styled(Calendar)`
+  box-shadow: 2px 2px 12px;
+  max-width: 300px !important;
+  font-family: Roboto !important;
+`
 
 export default class DatePicker extends Component {
   static propTypes = {
@@ -45,53 +81,34 @@ export default class DatePicker extends Component {
     }
   }
 
-  renderDate = () => (
-    <div className="date-picker__date" onClick={this.handleDateClick}>
-      {this.props.date}
-    </div>
-  )
-
-  renderDateDisabled = () => (
-    <div className="date-picker__date-disabled">{this.props.date}</div>
-  )
-
-  renderCalendar = () => (
-    <div className="date-picker__calendar-wrapper">
-      <Calendar
-        className="date-picker__calendar"
-        maxDate={new Date(this.props.maxDate)}
-        value={new Date(this.props.date)}
-        onChange={this.handleDateChange}
-      />
-    </div>
-  )
-
-  renderPrevious = disabled => (
-    <IconButton.Previous
-      disabled={disabled}
-      size={this.iconSize}
-      onClick={this.previous}
-    />
-  )
-
-  renderNext = disabled => (
-    <IconButton.Next
-      disabled={disabled}
-      size={this.iconSize}
-      onClick={this.next}
-    />
-  )
-
   render() {
     const { prevDisabled, nextDisabled, calendarDisabled } = this.props
     const { showCalendar } = this.state
     return (
-      <div className="date-picker">
-        {this.renderPrevious(prevDisabled)}
-        {calendarDisabled ? this.renderDateDisabled() : this.renderDate()}
-        {showCalendar && this.renderCalendar()}
-        {this.renderNext(nextDisabled)}
-      </div>
+      <Wrapper>
+        <IconButton.Previous
+          disabled={prevDisabled}
+          size={this.iconSize}
+          onClick={this.previous}
+        />
+        <DateLabel disabled={calendarDisabled} onClick={this.handleDateClick}>
+          {this.props.date}
+        </DateLabel>
+        <IconButton.Next
+          disabled={nextDisabled}
+          size={this.iconSize}
+          onClick={this.next}
+        />
+        {showCalendar && (
+          <CalendarWrapper>
+            <StyledCalendar
+              maxDate={new Date(this.props.maxDate)}
+              value={new Date(this.props.date)}
+              onChange={this.handleDateChange}
+            />
+          </CalendarWrapper>
+        )}
+      </Wrapper>
     )
   }
 }

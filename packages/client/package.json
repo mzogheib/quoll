@@ -8,6 +8,7 @@
     "lodash": "^4.17.4",
     "moment": "^2.22.2",
     "node-sass": "^4.10.0",
+    "polished": "^3.4.0",
     "react": "^16.6.0",
     "react-calendar": "^2.15.2",
     "react-dom": "^16.6.0",
@@ -19,6 +20,7 @@
     "react-test-renderer": "^16.6.0",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0",
+    "styled-components": "^4.2.1",
     "typeface-pacifico": "^0.0.54"
   },
   "scripts": {

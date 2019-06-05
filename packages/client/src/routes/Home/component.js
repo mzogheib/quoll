@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
@@ -6,7 +7,53 @@ import DatePicker from '../../components/DatePicker'
 import Timeline from '../../components/Timeline'
 import Map from '../../components/Map'
 import Loader from '../../components/HorizontalLoader'
-import './index.scss'
+
+const Wrapper = styled.div`
+  height: 100%;
+  display: flex;
+  position: relative;
+`
+
+const Left = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-basis: 350px;
+  max-width: 350px;
+  height: 100%;
+`
+
+const TimelineWrapper = styled.div`
+  position: relative;
+  flex: 1;
+`
+
+const TimelineBody = styled.div`
+  overflow-y: scroll;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+`
+
+const MapWrapper = styled.div`
+  position: relative;
+  flex: 1;
+`
+
+const MapBody = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+`
+
+const LoaderWrapper = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+`
 
 class Home extends Component {
   componentDidMount() {
@@ -27,8 +74,8 @@ class Home extends Component {
       focussedItem,
     } = this.props
     return (
-      <div className="home">
-        <div className="home__left">
+      <Wrapper>
+        <Left>
           <DatePicker
             date={date}
             maxDate={moment().format('YYYY-MM-DD')}
@@ -37,28 +84,28 @@ class Home extends Component {
             calendarDisabled={isLoading}
             onDateChange={onDateChange}
           />
-          <div className="home__timeline-wrapper">
-            <div className="home__timeline">
+          <TimelineWrapper>
+            <TimelineBody>
               <Timeline entries={timelineEntries} onEntryClick={onEntryClick} />
-            </div>
-          </div>
-        </div>
-        <div className="home__map-wrapper">
-          <div className="home__map">
+            </TimelineBody>
+          </TimelineWrapper>
+        </Left>
+        <MapWrapper>
+          <MapBody>
             <Map
               markerData={markerData}
               polylineData={polylineData}
               focussedItem={focussedItem}
               onElementSelect={onEntryClick}
             />
-          </div>
-        </div>
+          </MapBody>
+        </MapWrapper>
         {isLoading && (
-          <div className="home__loader">
+          <LoaderWrapper>
             <Loader />
-          </div>
+          </LoaderWrapper>
         )}
-      </div>
+      </Wrapper>
     )
   }
 }

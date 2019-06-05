@@ -1,71 +1,89 @@
-import React from 'react'
+import styled, { css } from 'styled-components'
+import { lighten, darken } from 'polished'
 import PropTypes from 'prop-types'
 
-import utils from '../../services/utils'
-import './index.scss'
+const makeStyle = ({ color, backgroundColor, bold, disabled, noHitbox }) => css`
+  border: none;
+  border-radius: 4px;
 
-const classMap = {
-  default: 'default-button',
-  primary: 'primary-button',
-  plain: 'plain-button',
-}
+  font-size: 14px;
+  font-weight: ${bold ? 500 : null};
 
-const hitboxClassMap = {
-  small: '--hitbox-small',
-  none: '--hitbox-none',
-}
+  height: ${noHitbox ? 'unset' : '36px'};
+  min-width: ${noHitbox ? 'unset' : '120px'};
+  padding: ${noHitbox ? 0 : '0 15px'};
 
-const renderBase = ({
-  variant = 'default',
-  label,
-  onClick,
-  disabled,
-  bold,
-  hitboxSize,
-}) => (
-  <button
-    className={utils.joinClassNames([
-      classMap[variant],
-      disabled && '--disabled',
-      bold && '--bold',
-      hitboxClassMap[hitboxSize],
-    ])}
-    onClick={onClick}
-    disabled={disabled}
-    type="button"
-  >
-    {label}
-  </button>
-)
+  background-color: ${disabled
+    ? lighten(0.1, backgroundColor)
+    : backgroundColor};
+  color: ${disabled ? lighten(0.4, color) : color};
+  cursor: ${disabled ? 'unset' : 'pointer'};
+
+  &:hover {
+    background-color: ${disabled ? 'initial' : darken(0.05, backgroundColor)};
+  }
+`
+
+const defaultStyle = ({ theme: { colors }, disabled }) => css`
+  ${makeStyle({
+    color: colors.mineShaft,
+    backgroundColor: colors.whiteSmoke,
+    disabled,
+  })};
+`
+
+const primaryStyle = ({ theme: { colors }, disabled }) => css`
+  ${makeStyle({
+    color: colors.mineShaft,
+    backgroundColor: colors.mediumAquamarine,
+    disabled,
+  })};
+`
+
+const plainStyle = ({ theme: { colors }, disabled }) => css`
+  ${makeStyle({
+    color: colors.mineShaft,
+    backgroundColor: colors.transparent,
+    bold: true,
+    disabled,
+    noHitbox: true,
+  })};
+`
 
 const propTypes = {
-  label: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
+  type: PropTypes.string,
 }
 
 const defaultProps = {
   disabled: false,
+  type: 'button',
 }
 
-const Button = props => renderBase(props)
-Button.propTypes = propTypes
-Button.defaultProps = defaultProps
+// Choosing to create three separate styled components instead of the base
+// one which could then be extended by Primary and Plain.
+// This avoids classes that have multiple overrides. On the other hand,
+// it ends up creating three sets of distinct styles.
+const Button = {
+  ...styled.button(defaultStyle),
+  displayName: 'Button',
+  propTypes,
+  defaultProps,
+}
 
-Button.Primary = props => renderBase({ variant: 'primary', ...props })
-Button.Primary.displayName = 'Button.Primary'
-Button.Primary.propTypes = propTypes
-Button.Primary.defaultProps = defaultProps
+Button.Primary = {
+  ...styled.button(primaryStyle),
+  displayName: 'Button.Primary',
+  propTypes,
+  defaultProps,
+}
 
-Button.Plain = props =>
-  renderBase({
-    variant: 'plain',
-    bold: true,
-    hitboxSize: 'none',
-    ...props,
-  })
-Button.Plain.displayName = 'Button.Plain'
-Button.Plain.propTypes = propTypes
-Button.Plain.defaultProps = defaultProps
+Button.Plain = {
+  ...styled.button(plainStyle),
+  displayName: 'Button.Plain',
+  propTypes,
+  defaultProps,
+}
 
 export default Button

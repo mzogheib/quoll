@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 
@@ -11,9 +12,12 @@ import {
   unHighlightPolyline,
   makeInfoWindow,
 } from './utils'
-import './index.scss'
 
 const google = window.google
+
+const Wrapper = styled.div`
+  height: 100%;
+`
 
 export default class Map extends Component {
   static propTypes = {
@@ -195,6 +199,6 @@ export default class Map extends Component {
     )
 
   render() {
-    return <div className="map" ref="map" />
+    return <Wrapper ref="map" />
   }
 }

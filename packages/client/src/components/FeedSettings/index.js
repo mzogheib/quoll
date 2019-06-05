@@ -1,9 +1,59 @@
 import React from 'react'
+import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 
 import Loader from '../HorizontalLoader'
 import Button from '../Button'
-import './index.scss'
+
+const Wrapper = styled.div(
+  ({ theme: { colors } }) => css`
+    background-color: ${colors.white};
+    border-radius: 8px;
+  `
+)
+
+const Content = styled.div(
+  ({ isAuthenticating }) => css`
+    display: flex;
+    align-items: center;
+    padding: ${isAuthenticating
+      ? '16px 30px 20px 20px'
+      : '20px 30px 20px 20px'};
+  `
+)
+
+const Logo = styled.div`
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 100%;
+  }
+`
+
+const Info = styled.div`
+  flex-grow: 1;
+  margin: 0 0 0 10px;
+`
+
+const Title = styled.div`
+  font-size: 18px;
+  font-weight: bold;
+`
+
+const Link = styled.a.attrs({
+  target: '_blank',
+  rel: 'noopener noreferrer',
+})(
+  ({ theme: { colors } }) => css`
+    align-self: flex-start;
+    text-decoration: none;
+    font-size: 14px;
+    color: ${colors.royalBlue};
+  `
+)
 
 const FeedSettings = ({ feed, onConnect, onDisconnect }) => {
   const {
@@ -25,32 +75,21 @@ const FeedSettings = ({ feed, onConnect, onDisconnect }) => {
   }
 
   return (
-    <div className="feed-settings">
-      <div className="feed-settings__logo">
-        <img src={imgSrc} alt={`${name} logo`} />
-      </div>
-      <div className="feed-settings__info">
-        <div className="feed-settings__title">{title}</div>
-        <a
-          className="feed-settings__url"
-          href={link.url}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {link.label}
-        </a>
-      </div>
-      <Button.Plain
-        label={isConnected ? 'Disconnect' : 'Connect'}
-        onClick={handleButtonClick}
-        disabled={isAuthenticating}
-      />
-      {isAuthenticating && (
-        <div className="feed-settings__loader">
-          <Loader />
-        </div>
-      )}
-    </div>
+    <Wrapper>
+      {isAuthenticating && <Loader />}
+      <Content isAuthenticating={isAuthenticating}>
+        <Logo>
+          <img src={imgSrc} alt={`${name} logo`} />
+        </Logo>
+        <Info>
+          <Title>{title}</Title>
+          <Link href={link.url}>{link.label}</Link>
+        </Info>
+        <Button.Plain onClick={handleButtonClick} disabled={isAuthenticating}>
+          {isConnected ? 'Disconnect' : 'Connect'}
+        </Button.Plain>
+      </Content>
+    </Wrapper>
   )
 }
 

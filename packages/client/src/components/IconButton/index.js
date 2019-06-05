@@ -1,23 +1,25 @@
 import React from 'react'
+import styled, { css } from 'styled-components'
 
-import utils from '../../services/utils'
 import IconComponent from '../Icon'
-import './index.scss'
 
 const icons = Object.entries(IconComponent)
 
+const Wrapper = styled.button(
+  ({ theme: { colors }, disabled }) => css`
+    border: none;
+    background: transparent;
+    padding: 0;
+    color: ${disabled ? colors.grey : 'unset'};
+    cursor: ${disabled ? 'unset' : 'pointer'};
+  `
+)
+
 const IconButton = icons.reduce((prev, [name, Icon]) => {
   const ButtonComp = ({ onClick, disabled, ...rest }) => (
-    <button
-      className={utils.joinClassNames([
-        'icon-button',
-        disabled && '--disabled',
-      ])}
-      onClick={onClick}
-      disabled={disabled}
-    >
+    <Wrapper onClick={onClick} disabled={disabled}>
       <Icon {...rest} />
-    </button>
+    </Wrapper>
   )
   ButtonComp.displayName = `IconButton.${name}`
   return {

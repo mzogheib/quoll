@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 import { Route, Switch } from 'react-router-dom'
 
@@ -6,7 +7,24 @@ import routes from '../routes'
 import Header from '../components/Header'
 import SideBar from '../components/SideBar'
 import WelcomeModal from './WelcomeModal'
-import './index.scss'
+
+const Wrapper = styled.div(
+  ({ theme: { colors } }) => css`
+    display: flex;
+    height: 100%;
+    background-color: ${colors.whiteSmoke};
+  `
+)
+
+const Content = styled.div`
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+`
+
+const Main = styled.main`
+  height: 100%;
+`
 
 class App extends Component {
   state = {
@@ -45,11 +63,11 @@ class App extends Component {
 
   renderApp() {
     return (
-      <div className="app">
+      <Wrapper>
         <SideBar onHelpClick={this.handleSideBarHelpClick} />
-        <div className="app__right">
-          <Header title={this.getRouteTitleFromLocation(this.props.location)} />
-          <div className="app__main">
+        <Content>
+          <Header>{this.getRouteTitleFromLocation(this.props.location)}</Header>
+          <Main>
             <Switch>
               {routes.map((route, index) => (
                 <Route
@@ -60,14 +78,14 @@ class App extends Component {
                 />
               ))}
             </Switch>
-          </div>
-        </div>
+          </Main>
+        </Content>
         <WelcomeModal
           isOpen={this.state.showWelcomeModal}
           onCancel={this.handleWelcomeCancel}
           onConnect={this.handleWelcomeConnect}
         />
-      </div>
+      </Wrapper>
     )
   }
 
