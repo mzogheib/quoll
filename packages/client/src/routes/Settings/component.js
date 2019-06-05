@@ -1,10 +1,36 @@
 import React, { Component } from 'react'
+import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 import FeedSettings from '../../components/FeedSettings'
 import { requestAuth } from '../../services/oauth'
 import AlertModal from '../../components/modals/AlertModal'
-import './index.scss'
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+`
+
+const Feeds = styled.div`
+  width: 100%;
+  max-width: 600px;
+`
+
+const FeedsTitle = styled.div`
+  font-weight: bold;
+  font-size: 28px;
+`
+
+const FeedsList = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const FeedSettingsWrapper = styled.div`
+  margin: 40px 0 0;
+`
 
 const INITIAL_STATE = {
   showModal: false,
@@ -62,27 +88,27 @@ class Settings extends Component {
     const { showModal, modalMessage } = this.state
 
     const renderFeed = feed => (
-      <div className="settings__feed" key={feed.name}>
+      <FeedSettingsWrapper key={feed.name}>
         <FeedSettings
           feed={feed}
           onConnect={this.connectFeed}
           onDisconnect={this.disconnectFeed}
         />
-      </div>
+      </FeedSettingsWrapper>
     )
 
     return (
-      <div className="settings">
-        <div className="settings__feeds">
-          <div className="settings__feeds-title">Feeds</div>
-          <div className="settings__feeds-list">{feeds.map(renderFeed)}</div>
-        </div>
+      <Wrapper>
+        <Feeds>
+          <FeedsTitle>Feeds</FeedsTitle>
+          <FeedsList>{feeds.map(renderFeed)}</FeedsList>
+        </Feeds>
         <AlertModal
           isOpen={showModal}
           message={modalMessage}
           onClose={this.closeModal}
         />
-      </div>
+      </Wrapper>
     )
   }
 }
