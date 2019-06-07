@@ -38,8 +38,12 @@ const Modal = styled(ReactModalAdapter)(
       align-items: center;
     }
 
+    /* No scroll on mobile Safari as per https://github.com/reactjs/react-modal/issues/191#issuecomment-302172285 */
     &__body-open {
       overflow: hidden;
+      position: fixed;
+      width: 100%;
+      height: 100%;
     }
   `
 )
