@@ -6,6 +6,7 @@ const EntryConfig = {
   work: { label: 'Work', image: '🏭' },
   place: { label: 'Place', image: '🏬' },
   walk: { label: 'Walk', image: '🚶‍♂️' },
+  hike: { label: 'Hike', image: '🥾' },
   bike: { label: 'Bike', image: '🚲' },
   run: { label: 'Run', image: '🏃‍♂️' },
   transport: { label: 'Transport', image: '⏩' },

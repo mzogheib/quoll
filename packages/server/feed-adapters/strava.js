@@ -9,6 +9,7 @@ const Activities = {
   Ride: { type: 'bike', label: 'Bike' },
   Run: { type: 'run', label: 'Run' },
   Walk: { type: 'walk', label: 'Walk' },
+  Hike: { type: 'hike', label: 'Hike' },
   Yoga: { type: 'yoga', label: 'Yoga' },
 }
 
