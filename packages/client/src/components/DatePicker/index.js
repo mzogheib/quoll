@@ -1,20 +1,15 @@
 import React, { Component } from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
-import Calendar from 'react-calendar'
 import moment from 'moment'
 
+import Calendar from '../Calendar'
 import IconButton from '../IconButton'
 
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-
-  .react-calendar__tile,
-  .react-calendar__navigation__label {
-    font-family: Roboto;
-  }
 `
 
 const DateLabel = styled.div(
@@ -35,11 +30,8 @@ const CalendarWrapper = styled.div`
   display: flex;
   justify-content: center;
 `
-
 const StyledCalendar = styled(Calendar)`
   box-shadow: 2px 2px 12px;
-  max-width: 300px !important;
-  font-family: Roboto !important;
 `
 
 export default class DatePicker extends Component {
