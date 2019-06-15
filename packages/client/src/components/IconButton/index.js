@@ -3,8 +3,6 @@ import styled, { css } from 'styled-components'
 
 import IconComponent from '../Icon'
 
-const icons = Object.entries(IconComponent)
-
 const Wrapper = styled.button(
   ({ theme: { colors }, disabled }) => css`
     border: none;
@@ -14,6 +12,8 @@ const Wrapper = styled.button(
     cursor: ${disabled ? 'unset' : 'pointer'};
   `
 )
+
+const icons = Object.entries(IconComponent)
 
 const IconButton = icons.reduce((prev, [name, Icon]) => {
   const ButtonComp = ({ onClick, disabled, ...rest }) => (

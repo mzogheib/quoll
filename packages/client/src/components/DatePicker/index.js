@@ -46,8 +46,6 @@ export default class DatePicker extends Component {
     calendarDisabled: false,
   }
 
-  iconSize = 40
-
   state = {
     showCalendar: false,
   }
@@ -78,19 +76,11 @@ export default class DatePicker extends Component {
     const { showCalendar } = this.state
     return (
       <Wrapper>
-        <IconButton.Previous
-          disabled={prevDisabled}
-          size={this.iconSize}
-          onClick={this.previous}
-        />
+        <IconButton.Previous disabled={prevDisabled} onClick={this.previous} />
         <DateLabel disabled={calendarDisabled} onClick={this.handleDateClick}>
           {this.props.date}
         </DateLabel>
-        <IconButton.Next
-          disabled={nextDisabled}
-          size={this.iconSize}
-          onClick={this.next}
-        />
+        <IconButton.Next disabled={nextDisabled} onClick={this.next} />
         {showCalendar && (
           <CalendarWrapper>
             <StyledCalendar

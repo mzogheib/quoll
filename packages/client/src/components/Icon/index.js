@@ -15,9 +15,11 @@ const icons = {
 }
 
 const Icon = Object.entries(icons).reduce((prev, [name, C]) => {
-  // This updates the displayName on the imported component, which may not
-  // be the best idea
+  // These mutate the imported component, which may not be the best idea
   C.displayName = `Icon.${name}`
+  C.defaultProps = {
+    size: 40,
+  }
   return {
     [name]: C,
     ...prev,

@@ -80,21 +80,21 @@ const SideBar = ({ onHelpClick }) => (
       <NavPrimary>
         <StyledNavLink to={routesHash.home.path} exact activeClassName="active">
           <IconWrapper>
-            <Icon.Map size={40} />
+            <Icon.Map />
           </IconWrapper>
         </StyledNavLink>
       </NavPrimary>
       <nav>
         <StyledNavLink to={routesHash.settings.path} activeClassName="active">
           <IconWrapper>
-            <Icon.Settings size={40} />
+            <Icon.Settings />
           </IconWrapper>
         </StyledNavLink>
       </nav>
     </NavGroup>
     <Help>
       <IconWrapper>
-        <IconButton.Help onClick={onHelpClick} size={40} />
+        <IconButton.Help onClick={onHelpClick} />
       </IconWrapper>
     </Help>
   </Wrapper>
