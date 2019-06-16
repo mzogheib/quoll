@@ -55,15 +55,17 @@ export default class Map extends Component {
     polylineItems: [],
   }
 
-  componentDidMount() {
-    const { markerData, polylineData } = this.props
-
+  onMapMounted = mapRef => {
     const melbourne = new google.maps.LatLng(-37.8079033, 144.9759344)
-    this.map = new google.maps.Map(this.refs.map, {
+    this.map = new google.maps.Map(mapRef, {
       center: melbourne,
       zoom: 14,
       mapTypeId: 'roadmap',
     })
+  }
+
+  componentDidMount() {
+    const { markerData, polylineData } = this.props
 
     this.map.addListener('click', event => {
       if (event.placeId) this.resetAllMapElements()
@@ -200,6 +202,6 @@ export default class Map extends Component {
     )
 
   render() {
-    return <Wrapper ref="map" />
+    return <Wrapper ref={this.onMapMounted} />
   }
 }
