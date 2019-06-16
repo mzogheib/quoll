@@ -6,7 +6,8 @@
     "start": "webpack-dev-server --mode=development --open",
     "build": "webpack --mode=production",
     "test": "echo 'TODO'",
-    "lint": "eslint --ignore-path .gitignore ."
+    "lint": "eslint --ignore-path .gitignore './**/*.js'",
+    "lint:css": "stylelint './**/*.js'"
   },
   "browserslist": [
     ">0.2%",
@@ -49,6 +50,10 @@
     "file-loader": "^4.0.0",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.7.0",
+    "stylelint": "^10.1.0",
+    "stylelint-config-recommended": "^2.2.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.8.0",
     "webpack": "^4.34.0",
     "webpack-cli": "^3.3.4",
     "webpack-dev-server": "^3.7.1"
