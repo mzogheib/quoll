@@ -16,7 +16,11 @@ module.exports = {
       {
         test: /\.m?js$/,
         exclude: /(node_modules|bower_components)/,
-        use: ['babel-loader'],
+        use: [
+          'babel-loader',
+          'eslint-loader',
+          'stylelint-custom-processor-loader',
+        ],
       },
       {
         test: /\.css$/,
