@@ -38,6 +38,25 @@ const INITIAL_STATE = {
 }
 
 class Settings extends Component {
+  static propTypes = {
+    location: PropTypes.shape({
+      state: PropTypes.shape({
+        errorMessage: PropTypes.string,
+      }),
+    }).isRequired,
+    history: PropTypes.shape({
+      replace: PropTypes.func.isRequired,
+    }),
+    feeds: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+      }).isRequired
+    ).isRequired,
+    onConnect: PropTypes.func.isRequired,
+    onDisconnect: PropTypes.func.isRequired,
+    onOauthCodeReceived: PropTypes.func.isRequired,
+  }
+
   state = { ...INITIAL_STATE }
 
   componentDidMount() {
@@ -111,24 +130,6 @@ class Settings extends Component {
       </Wrapper>
     )
   }
-}
-
-Settings.propTypes = {
-  location: PropTypes.shape({
-    state: PropTypes.shape({
-      errorMessage: PropTypes.string,
-    }),
-  }).isRequired,
-  history: PropTypes.shape({
-    replace: PropTypes.func.isRequired,
-  }),
-  feeds: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-    }).isRequired
-  ).isRequired,
-  onConnect: PropTypes.func.isRequired,
-  onOauthCodeReceived: PropTypes.func.isRequired,
 }
 
 export default Settings

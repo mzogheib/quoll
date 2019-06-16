@@ -16,6 +16,10 @@ const ReactModalAdapter = ({ className, ...props }) => (
   />
 )
 
+ReactModalAdapter.propTypes = {
+  className: PropTypes.string,
+}
+
 const Modal = styled(ReactModalAdapter)(
   ({ theme: { colors } }) => css`
     margin: 200px 0 0;

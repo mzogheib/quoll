@@ -39,11 +39,15 @@ export default class DatePicker extends Component {
     date: PropTypes.string.isRequired,
     maxDate: PropTypes.string.isRequired,
     calendarDisabled: PropTypes.bool,
+    prevDisabled: PropTypes.bool,
+    nextDisabled: PropTypes.bool,
     onDateChange: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
     calendarDisabled: false,
+    prevDisabled: false,
+    nextDisabled: false,
   }
 
   state = {

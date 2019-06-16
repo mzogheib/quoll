@@ -27,6 +27,17 @@ const Main = styled.main`
 `
 
 class App extends Component {
+  static propTypes = {
+    areFeedsConnected: PropTypes.bool.isRequired,
+    onMount: PropTypes.func.isRequired,
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+    }).isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired,
+    }).isRequired,
+  }
+
   state = {
     isLoading: true,
     showWelcomeModal: false,
@@ -92,11 +103,6 @@ class App extends Component {
   render() {
     return this.state.isLoading ? this.renderLoading() : this.renderApp()
   }
-}
-
-App.propTypes = {
-  areFeedsConnected: PropTypes.bool.isRequired,
-  onMount: PropTypes.func.isRequired,
 }
 
 export default App

@@ -40,6 +40,7 @@ export default class Map extends Component {
         encodedPath: PropTypes.string.isRequired,
       }).isRequired
     ).isRequired,
+    onElementSelect: PropTypes.func.isRequired,
     // TODO: should the entire focussedItem be undefined if not selected?
     // Currently its properties are undefined in that case.
     focussedItem: PropTypes.shape({

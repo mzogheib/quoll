@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
 import IconComponent from '../Icon'
@@ -21,7 +22,16 @@ const IconButton = icons.reduce((prev, [name, Icon]) => {
       <Icon {...rest} />
     </Wrapper>
   )
+
   ButtonComp.displayName = `IconButton.${name}`
+  ButtonComp.propTypes = {
+    onClick: PropTypes.func.isRequired,
+    disabled: PropTypes.bool,
+  }
+  ButtonComp.defaultProps = {
+    disabled: false,
+  }
+
   return {
     [name]: ButtonComp,
     ...prev,
