@@ -14,7 +14,7 @@ const Header = styled.div`
 
 const Title = styled.div`
   text-align: center;
-  font-family: Pacifico;
+  font-family: Pacifico, Roboto, sans-serif;
   font-size: 48px;
 `
 

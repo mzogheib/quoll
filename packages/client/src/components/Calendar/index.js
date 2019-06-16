@@ -7,7 +7,7 @@ export default styled(Calendar)`
     max-width: 300px;
 
     * {
-      font-family: Roboto;
+      font-family: Roboto, sans-serif;
     }
   }
 `

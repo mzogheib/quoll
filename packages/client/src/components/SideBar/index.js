@@ -28,7 +28,7 @@ const Title = styled.div(
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: Pacifico;
+    font-family: Pacifico, Roboto, sans-serif;
     font-size: 26px;
     margin: 0 0 20px;
   `
