@@ -4,7 +4,7 @@
 
 Visualise your personal data all in one place!
 
-<img src="screenshot.png" alt="screenshot" style="max-width: 700px"/>
+<img src="assets/screenshot.png" alt="screenshot" style="max-width: 700px"/>
 
 Currently supports:
 
