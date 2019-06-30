@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "webpack-dev-server --mode=development --open",
-    "build": "webpack --mode=production",
+    "start": "webpack-dev-server",
+    "build": "echo 'TODO'",
     "test": "echo 'TODO'",
     "lint": "eslint --ignore-path .gitignore './**/*.js'",
     "lint:css": "stylelint './**/*.js'"
@@ -51,6 +51,7 @@
     "file-loader": "^4.0.0",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.7.0",
+    "react-hot-loader": "^4.11.1",
     "stylelint": "^10.1.0",
     "stylelint-config-recommended": "^2.2.0",
     "stylelint-config-styled-components": "^0.1.1",
