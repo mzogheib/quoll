@@ -40,6 +40,7 @@ const Modal = styled(ReactModalAdapter)(
       display: flex;
       flex-direction: column;
       align-items: center;
+      z-index: 1;
     }
 
     /* No scroll on mobile Safari as per https://github.com/reactjs/react-modal/issues/191#issuecomment-302172285 */
