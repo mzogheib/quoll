@@ -1,11 +1,15 @@
+const webpack = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
+  mode: 'development',
+  devtool: 'inline-source-map',
   devServer: {
     stats: 'minimal',
     port: 3000,
+    hot: true,
     historyApiFallback: true,
     proxy: {
       '/api': 'http://localhost:3001',
@@ -37,6 +41,7 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: 'src/index.html',
       favicon: 'src/favicon.ico',
