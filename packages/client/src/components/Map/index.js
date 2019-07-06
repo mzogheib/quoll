@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import _ from 'lodash'
+import { isEqual } from 'lodash'
 
 import {
   makeMarker,
@@ -95,8 +95,8 @@ export default class Map extends Component {
 
     // Remove existing markers and polylines then replace with new ones
     if (
-      !_.isEqual(markerData, prevProps.markerData) ||
-      !_.isEqual(polylineData, prevProps.polylineData)
+      !isEqual(markerData, prevProps.markerData) ||
+      !isEqual(polylineData, prevProps.polylineData)
     ) {
       this.state.markerItems.forEach(({ marker, infoWindow }) => {
         marker.setMap(null)

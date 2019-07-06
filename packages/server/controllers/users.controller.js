@@ -1,5 +1,5 @@
 const userStorage = require('../storage/user.storage')
-const _ = require('lodash')
+const { defaultsDeep } = require('lodash')
 
 module.exports = {
   createUser,
@@ -43,7 +43,7 @@ function sanitizeUser(user) {
 function get(userId) {
   // Apply defaults so that newly added feed will be appended to existing user feeds
   const user = userStorage.get(userId)
-  user.feeds = _.defaultsDeep(user.feeds, DefaultFeeds)
+  user.feeds = defaultsDeep(user.feeds, DefaultFeeds)
   return new Promise((resolve, reject) => resolve(user))
 }
 
