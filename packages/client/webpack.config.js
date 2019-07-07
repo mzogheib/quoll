@@ -1,3 +1,4 @@
+require('dotenv').config()
 const webpack = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -12,7 +13,7 @@ module.exports = {
     hot: true,
     historyApiFallback: true,
     proxy: {
-      '/api': 'http://localhost:3001',
+      '/api': process.env.API_URL,
     },
   },
   module: {

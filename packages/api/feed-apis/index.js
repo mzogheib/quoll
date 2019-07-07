@@ -33,7 +33,7 @@ const apis = [
 module.exports = apis.reduce((exp, api) => {
   const lib = require(`node-${api.name}`)
   const auth = {
-    redirect_uri: 'http://localhost:3000/oauth',
+    redirect_uri: process.env.CLIENT_OAUTH_URL,
     ...api.auth,
   }
   return {
