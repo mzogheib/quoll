@@ -12,9 +12,6 @@ module.exports = {
     port: 3000,
     hot: true,
     historyApiFallback: true,
-    proxy: {
-      '/api': process.env.API_URL,
-    },
   },
   module: {
     rules: [
@@ -42,6 +39,9 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.API_URL': JSON.stringify(process.env.API_URL),
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: 'src/index.html',

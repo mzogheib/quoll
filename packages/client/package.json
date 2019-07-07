@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "webpack-dev-server",
-    "build": "echo 'TODO'",
+    "start": "webpack-dev-server --config webpack.config.development.js",
+    "prebuild": "rm -rf dist",
+    "build": "webpack -p --config webpack.config.production.js",
     "test": "echo 'TODO'",
     "lint": "eslint --ignore-path .gitignore './**/*.js'",
     "lint:css": "stylelint './**/*.js'"
