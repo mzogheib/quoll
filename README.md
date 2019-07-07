@@ -38,7 +38,7 @@ npm install -g yarn
 cd quoll && yarn
 ```
 
-4. Add 3rd party API credential files to `packages/server/feed-apis/private/`. Refer below.
+4. Add 3rd party API credential files to `packages/api/feed-apis/private/`. Refer below.
 
 5. Start the dev servers
 

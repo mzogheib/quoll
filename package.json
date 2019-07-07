@@ -6,8 +6,8 @@
     "packages/*"
   ],
   "scripts": {
-    "start": "concurrently \"yarn server\" \"yarn client\"",
-    "server": "node scripts/start-server.js",
+    "start": "concurrently \"yarn api\" \"yarn client\"",
+    "api": "node scripts/start-api.js",
     "client": "node scripts/start-client.js"
   },
   "husky": {

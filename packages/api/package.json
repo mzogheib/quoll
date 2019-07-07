@@ -1,5 +1,5 @@
 {
-  "name": "quoll-server",
+  "name": "quoll-api",
   "version": "0.0.0",
   "private": true,
   "dependencies": {
