@@ -11,6 +11,9 @@
     "lint:css": "stylelint './**/*.js'",
     "heroku-postbuild": "npm build"
   },
+  "engines": {
+    "node": "8.15.1"
+  },
   "browserslist": [
     ">0.2%",
     "not dead",
@@ -19,6 +22,7 @@
   ],
   "dependencies": {
     "axios": "^0.18.1",
+    "express": "^4.17.1",
     "lodash": "^4.17.4",
     "moment": "^2.22.2",
     "node-sass": "^4.10.0",
