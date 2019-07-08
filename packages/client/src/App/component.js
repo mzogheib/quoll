@@ -39,18 +39,18 @@ class App extends Component {
   }
 
   state = {
-    isLoading: false,
-    showWelcomeModal: true,
+    isLoading: true,
+    showWelcomeModal: false,
   }
 
-  // componentDidMount() {
-  //   this.props.onMount().then(() =>
-  //     this.setState({
-  //       isLoading: false,
-  //       showWelcomeModal: !this.props.areFeedsConnected,
-  //     })
-  //   )
-  // }
+  componentDidMount() {
+    this.props.onMount().then(() =>
+      this.setState({
+        isLoading: false,
+        showWelcomeModal: !this.props.areFeedsConnected,
+      })
+    )
+  }
 
   getRouteTitleFromLocation(location) {
     const route = routes.find(route => route.path === location.pathname)
