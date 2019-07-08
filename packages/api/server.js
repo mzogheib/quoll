@@ -18,7 +18,6 @@ app.use(cors({ origin: process.env.CORS_ALLOWED_ORIGIN }))
 
 app.use('/api', routes)
 
-// temp
 // Listen for requests on this port
 const server = app.listen(app.get('port'), () => {
   const port = server.address().port

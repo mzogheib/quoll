@@ -38,7 +38,8 @@ const mapStateToProps = ({ date, timeline, focussedItem }) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  onMount: () => dispatch(fetchTimeline()),
+  // onMount: () => dispatch(fetchTimeline()),
+  onMount: () => {},
   onDateChange: date => {
     dispatch(setDate(date))
     return dispatch(fetchTimeline()).then(() => dispatch(setFocussedItem(null)))
