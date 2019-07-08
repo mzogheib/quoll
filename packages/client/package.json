@@ -8,8 +8,7 @@
     "build": "webpack -p --config webpack.config.production.js",
     "test": "echo 'TODO'",
     "lint": "eslint --ignore-path .gitignore './**/*.js'",
-    "lint:css": "stylelint './**/*.js'",
-    "heroku-postbuild": "npm build"
+    "lint:css": "stylelint './**/*.js'"
   },
   "engines": {
     "node": "8.15.1"
