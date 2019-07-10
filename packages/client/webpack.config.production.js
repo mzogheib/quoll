@@ -1,10 +1,7 @@
-require('dotenv').config()
-const webpack = require('webpack')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const merge = require('webpack-merge')
+const common = require('./webpack.config.common.js')
 
-module.exports = {
+const config = {
   mode: 'production',
   devtool: 'source-map',
   output: {
@@ -15,36 +12,6 @@ module.exports = {
       chunks: 'all',
     },
   },
-  module: {
-    rules: [
-      {
-        test: /\.m?js$/,
-        exclude: /(node_modules|bower_components)/,
-        use: ['babel-loader'],
-      },
-      {
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
-      },
-      {
-        test: /\.(png|jpg|gif|ico|woff|woff2)$/,
-        use: [
-          {
-            loader: 'file-loader',
-          },
-        ],
-      },
-    ],
-  },
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env.API_URL': JSON.stringify(process.env.API_URL),
-    }),
-    new HtmlWebpackPlugin({
-      template: 'src/index.html',
-      favicon: 'src/favicon.ico',
-    }),
-    new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin(),
-  ],
 }
+
+module.exports = merge(common, config)

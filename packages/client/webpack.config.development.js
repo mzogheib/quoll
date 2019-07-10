@@ -1,15 +1,13 @@
-require('dotenv').config()
 const webpack = require('webpack')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const merge = require('webpack-merge')
+const common = require('./webpack.config.common.js')
 
-module.exports = {
+const config = {
   mode: 'development',
   devtool: 'inline-source-map',
   devServer: {
     stats: 'minimal',
-    port: 3000,
+    port: process.env.PORT || 3000,
     hot: true,
     historyApiFallback: true,
   },
@@ -18,36 +16,11 @@ module.exports = {
       {
         test: /\.m?js$/,
         exclude: /(node_modules|bower_components)/,
-        use: [
-          'babel-loader',
-          'eslint-loader',
-          'stylelint-custom-processor-loader',
-        ],
-      },
-      {
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
-      },
-      {
-        test: /\.(png|jpg|gif|ico|woff|woff2)$/,
-        use: [
-          {
-            loader: 'file-loader',
-          },
-        ],
+        use: ['eslint-loader', 'stylelint-custom-processor-loader'],
       },
     ],
   },
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env.API_URL': JSON.stringify(process.env.API_URL),
-    }),
-    new webpack.HotModuleReplacementPlugin(),
-    new HtmlWebpackPlugin({
-      template: 'src/index.html',
-      favicon: 'src/favicon.ico',
-    }),
-    new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin(),
-  ],
+  plugins: [new webpack.HotModuleReplacementPlugin()],
 }
+
+module.exports = merge(common, config)
