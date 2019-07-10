@@ -1,18 +1,18 @@
+require('dotenv').config()
 const webpack = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  mode: 'development',
-  devtool: 'inline-source-map',
-  devServer: {
-    stats: 'minimal',
-    port: 3000,
-    hot: true,
-    historyApiFallback: true,
-    proxy: {
-      '/api': 'http://localhost:3001',
+  mode: 'production',
+  devtool: 'source-map',
+  output: {
+    filename: 'static/[name].[hash].js',
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
     },
   },
   module: {
@@ -20,11 +20,7 @@ module.exports = {
       {
         test: /\.m?js$/,
         exclude: /(node_modules|bower_components)/,
-        use: [
-          'babel-loader',
-          'eslint-loader',
-          'stylelint-custom-processor-loader',
-        ],
+        use: ['babel-loader'],
       },
       {
         test: /\.css$/,
@@ -41,7 +37,9 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.API_URL': JSON.stringify(process.env.API_URL),
+    }),
     new HtmlWebpackPlugin({
       template: 'src/index.html',
       favicon: 'src/favicon.ico',

@@ -1,4 +1,6 @@
+require('dotenv').config()
 const express = require('express')
+const cors = require('cors')
 const app = express()
 const bodyParser = require('body-parser')
 const routes = require('./routes')
@@ -11,6 +13,8 @@ app.use(
   })
 )
 app.use(bodyParser.json())
+
+app.use(cors({ origin: process.env.CORS_ALLOWED_ORIGIN }))
 
 app.use('/api', routes)
 

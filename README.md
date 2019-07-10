@@ -38,29 +38,12 @@ npm install -g yarn
 cd quoll && yarn
 ```
 
-4. Add 3rd party API credential files to `packages/server/feed-apis/private/`. Refer below.
+4. Add environment variables for 3rd party API credentials. Refer to to `packages/api/feed-apis/` for usage.
 
 5. Start the dev servers
 
 ```
 yarn start
-```
-
-### 3rd Party API credentials
-
-Files to add:
-
-- strava-auth.json
-- toshl-auth.json
-- uber-auth.json
-
-File contents:
-
-```
-{
-  "client_id": "XXXXXXXXXX",
-  "client_secret": "XXXXXXXXXX",
-}
 ```
 
 ## TODO & Issue Tracking

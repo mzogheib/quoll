@@ -3,11 +3,15 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "webpack-dev-server",
-    "build": "echo 'TODO'",
+    "start": "webpack-dev-server --config webpack.config.development.js",
+    "prebuild": "rm -rf dist",
+    "build": "webpack --config webpack.config.production.js",
     "test": "echo 'TODO'",
     "lint": "eslint --ignore-path .gitignore './**/*.js'",
     "lint:css": "stylelint './**/*.js'"
+  },
+  "engines": {
+    "node": "8.15.1"
   },
   "browserslist": [
     ">0.2%",
@@ -17,6 +21,7 @@
   ],
   "dependencies": {
     "axios": "^0.18.1",
+    "express": "^4.17.1",
     "lodash": "^4.17.4",
     "moment": "^2.22.2",
     "node-sass": "^4.10.0",
@@ -43,6 +48,7 @@
     "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.0.0",
+    "dotenv": "^8.0.0",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^5.0.0",
     "eslint-loader": "^2.1.2",
@@ -59,6 +65,7 @@
     "stylelint-processor-styled-components": "^1.8.0",
     "webpack": "^4.34.0",
     "webpack-cli": "^3.3.4",
-    "webpack-dev-server": "^3.7.1"
+    "webpack-dev-server": "^3.7.1",
+    "webpack-merge": "^4.2.1"
   }
 }
