@@ -1,5 +1,5 @@
 const apiToshl = require('../feed-apis').toshl
-const toshlStorage = require('../storage/toshl.storage')
+const ToshlUser = require('../models/toshlUser.model')
 
 module.exports = {
   getOAuthUrl,
@@ -22,39 +22,48 @@ function authenticate(code) {
 
 function deauthorize(auth) {
   return apiToshl.oauth.deauthorize({ ...auth }).then(() => {
-    toshlStorage.delete(auth.access_token)
+    ToshlUser.deleteOne({ accessToken: auth.access_token }, error => {
+      // TODO: handle errors
+    })
   })
 }
 
 function refreshAuth(auth) {
   return apiToshl.oauth.refresh({ ...auth }).then(data => {
     // Clear cache identified by old access_token
-    toshlStorage.delete(auth.access_token)
+    ToshlUser.deleteOne({ accessToken: auth.access_token }, error => {
+      // TODO: handle errors
+    })
     const expiry_time = calculateExpiryTime(data.expires_in)
     return { expiry_time, ...data }
   })
 }
 
-function getTags(token) {
-  let storedData = toshlStorage.get(token)
-  const storedTags = storedData && storedData.tags
-  if (storedTags) {
-    return Promise.resolve(storedTags)
-  } else {
-    return apiToshl.tags
-      .list({ access_token: token })
-      .then(tags => {
-        // Map the array of tags to an object and store
-        storedData = toshlStorage.create(token)
-        storedData.tags = tags.reduce(
-          (map, tag) => ((map[tag.id] = tag.name), map),
-          {}
+function getTags(accessToken) {
+  return new Promise((resolve, reject) => {
+    ToshlUser.findOne({ accessToken }, (error, toshlUser) => {
+      if (error) return reject(error)
+      if (toshlUser && toshlUser.tags) return resolve(toshlUser.tags)
+      return apiToshl.tags.list({ access_token: accessToken }).then(tags => {
+        ToshlUser.create(
+          {
+            accessToken,
+            tags: tags.reduce(
+              (prev, tag) => ({
+                [tag.id]: tag.name,
+                ...prev,
+              }),
+              {}
+            ),
+          },
+          (error, toshlUser) => {
+            if (error) return reject(error)
+            return resolve(toshlUser.tags)
+          }
         )
-        return storedData
       })
-      .then(toshlStorage.update)
-      .then(() => storedData.tags)
-  }
+    })
+  })
 }
 
 function getEntries(from, to, token) {

@@ -1,5 +1,4 @@
-const userStorage = require('../storage/user.storage')
-const { defaultsDeep } = require('lodash')
+const User = require('../models/user.model')
 
 module.exports = {
   createUser,
@@ -18,13 +17,20 @@ const DefaultFeeds = [
 
 function createUser() {
   return new Promise((resolve, reject) => {
-    const user = userStorage.create({ feeds: DefaultFeeds })
-    resolve(sanitizeUser(user))
+    User.create({ feeds: DefaultFeeds }, (error, user) => {
+      if (error) reject(error)
+      else resolve(sanitizeUser(user))
+    })
   })
 }
 
 function login(userId) {
-  return get(userId).then(sanitizeUser)
+  return new Promise((resolve, reject) => {
+    User.findById(userId, (error, user) => {
+      if (error) reject(error)
+      else resolve(sanitizeUser(user))
+    })
+  })
 }
 
 function sanitizeUser(user) {
@@ -41,16 +47,20 @@ function sanitizeUser(user) {
 }
 
 function get(userId) {
-  // Apply defaults so that newly added feed will be appended to existing user feeds
-  const user = userStorage.get(userId)
-  user.feeds = defaultsDeep(user.feeds, DefaultFeeds)
-  return new Promise((resolve, reject) => resolve(user))
+  return new Promise((resolve, reject) => {
+    User.findById(userId, (error, user) => {
+      if (error) reject(error)
+      else resolve(user)
+    })
+  })
 }
 
 function update(user) {
   return new Promise((resolve, reject) => {
-    userStorage.update(user)
-    resolve()
+    User.updateOne({ _id: user._id }, user, error => {
+      if (error) reject(error)
+      else resolve()
+    })
   })
 }
 
