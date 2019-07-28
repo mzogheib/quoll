@@ -23,7 +23,7 @@ const Content = styled.div`
 `
 
 const Main = styled.main`
-  height: 100%;
+  flex-grow: 1;
 `
 
 class App extends Component {
