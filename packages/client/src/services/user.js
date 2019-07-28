@@ -10,12 +10,12 @@ const setCurrentUser = userId => {
 }
 const login = userId =>
   api.post({ endpoint: 'login', payload: { userId } }).then(user => {
-    setCurrentUser(user.id)
+    setCurrentUser(user._id)
     return user
   })
 const signup = () =>
   api.post({ endpoint: 'signup' }).then(user => {
-    setCurrentUser(user.id)
+    setCurrentUser(user._id)
     return user
   })
 
