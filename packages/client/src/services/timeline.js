@@ -1,3 +1,4 @@
+import moment from 'moment'
 import api from './api'
 import feeds from './feeds'
 
@@ -21,7 +22,17 @@ const EntryConfig = {
 
 const get = date =>
   api
-    .get({ endpoint: 'timeline', params: { from: date, to: date } })
+    .get({
+      endpoint: 'timeline',
+      params: {
+        from: moment(date)
+          .startOf('day')
+          .toISOString(),
+        to: moment(date)
+          .endOf('day')
+          .toISOString(),
+      },
+    })
     .then(entries =>
       entries.map(entry => {
         const entryConfig = EntryConfig[entry.type]

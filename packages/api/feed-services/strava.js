@@ -1,3 +1,4 @@
+const moment = require('moment')
 const apiStrava = require('../feed-apis').strava
 
 module.exports = {
@@ -25,11 +26,8 @@ function deauthorize({ access_token }) {
 }
 
 function getAthleteActivities(from, to, token) {
-  // Convert formatted dates to unix timestamps
-  // After = 23:59:59 on the day before the from date
-  // Before = 00:00:00 on the day after the to date
-  const after = getLocalTimestamp(new Date(from)) - 1
-  const before = getLocalTimestamp(new Date(to)) + 24 * 60 * 60
+  const after = moment(from).unix() - 1
+  const before = moment(to).unix() + 1
   const perPage = 20
 
   return apiStrava.athlete.activities
