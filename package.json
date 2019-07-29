@@ -9,7 +9,9 @@
     "start": "concurrently \"yarn api\" \"yarn client\"",
     "api": "node scripts/start-api.js",
     "client": "node scripts/start-client.js",
-    "deploy": "git push heroku-quoll-api master && git push heroku-quoll-client master"
+    "deploy": "concurrently \"yarn deploy:api\" \"yarn deploy:client\"",
+    "deploy:api": "git push heroku-quoll-api master",
+    "deploy:client": "git push heroku-quoll-api master"
   },
   "husky": {
     "hooks": {
