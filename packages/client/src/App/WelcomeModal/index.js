@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import Modal from '../../components/modals/Modal'
 import IconButton from '../../components/IconButton'
-import Button from '../../components/Button'
+import { Button } from '@quoll/ui-components'
 
 const Header = styled.div`
   display: flex;
@@ -39,7 +39,7 @@ const WelcomeModal = ({ isOpen, onCancel, onConnect }) => (
     <Title>Quoll</Title>
     <Message>Map yo' life.</Message>
     <Actions>
-      <Button.Primary onClick={onConnect}>Connect Feeds</Button.Primary>
+      <Button onClick={onConnect}>Connect Feeds</Button>
     </Actions>
   </Modal>
 )
