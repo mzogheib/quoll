@@ -7,6 +7,16 @@ module.exports = {
     // Required in order to import components like: import { Button } from '@quoll/ui-components'
     libraryTarget: 'commonjs-module',
   },
+  externals: [
+    function(context, request, callback) {
+      if (
+        /^(ui-themes|polished|react|react-dom|styled-components)$/.test(request)
+      ) {
+        return callback(null, 'commonjs ' + request)
+      }
+      callback()
+    },
+  ],
   module: {
     rules: [
       {
