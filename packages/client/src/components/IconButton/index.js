@@ -1,8 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-
-import IconComponent from '../Icon'
+import { Icon as IconComponent } from '@quoll/ui-components'
 
 const Wrapper = styled.button(
   ({ theme: { colors }, disabled }) => css`

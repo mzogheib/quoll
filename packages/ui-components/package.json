@@ -12,7 +12,8 @@
     "storybook": "start-storybook"
   },
   "dependencies": {
-    "polished": "^3.4.1"
+    "polished": "^3.4.1",
+    "react-icons": "^3.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
