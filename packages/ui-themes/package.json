@@ -1,0 +1,10 @@
+{
+  "name": "@quoll/ui-themes",
+  "version": "0.1.0",
+  "description": "Theme config to be consumed by client side packages",
+  "main": "index.js",
+  "repository": "https://github.com/mzogheib/quoll",
+  "author": "mzogheib",
+  "license": "MIT",
+  "private": true
+}
