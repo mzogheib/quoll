@@ -2,10 +2,9 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
-import { Icon } from '@quoll/ui-components'
+import { Icon, IconButton } from '@quoll/ui-components'
 
 import routes from '../../routes'
-import IconButton from '../IconButton'
 
 const routesHash = routes.reduce((map, route) => {
   map[route.id] = { ...route }

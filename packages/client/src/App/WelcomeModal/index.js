@@ -1,10 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import { Button, IconButton } from '@quoll/ui-components'
 
 import Modal from '../../components/modals/Modal'
-import IconButton from '../../components/IconButton'
-import { Button } from '@quoll/ui-components'
 
 const Header = styled.div`
   display: flex;

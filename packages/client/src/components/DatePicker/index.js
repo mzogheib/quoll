@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 import moment from 'moment'
+import { IconButton } from '@quoll/ui-components'
 
 import Calendar from '../Calendar'
-import IconButton from '../IconButton'
 
 const Wrapper = styled.div`
   display: flex;
