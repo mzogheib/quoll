@@ -9,9 +9,7 @@ module.exports = {
   },
   externals: [
     function(context, request, callback) {
-      if (
-        /^(ui-themes|polished|react|react-dom|styled-components)$/.test(request)
-      ) {
+      if (/^(ui-themes|react|react-dom|styled-components)$/.test(request)) {
         return callback(null, 'commonjs ' + request)
       }
       callback()
