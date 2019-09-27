@@ -1,3 +1,4 @@
+const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const common = require('./webpack.config.common.js')
@@ -15,7 +16,7 @@ const config = {
     rules: [
       {
         test: /\.m?js$/,
-        exclude: /(node_modules|bower_components)/,
+        include: path.resolve(__dirname), // TODO: this is a hack to only lint this package. Lint other packages.
         use: ['eslint-loader', 'stylelint-custom-processor-loader'],
       },
     ],

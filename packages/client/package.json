@@ -21,6 +21,7 @@
   ],
   "dependencies": {
     "@quoll/ui-components": "0.1.0",
+    "@quoll/ui-themes": "0.1.0",
     "axios": "^0.18.1",
     "express": "^4.17.1",
     "lodash": "^4.17.4",

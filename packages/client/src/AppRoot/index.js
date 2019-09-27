@@ -2,11 +2,12 @@ import React, { Fragment } from 'react'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
+import { QuollUIThemeProvider } from '@quoll/ui-components'
+import themes from '@quoll/ui-themes'
 import 'typeface-pacifico'
 
 import App from '../App'
 import store from '../store'
-import themes from '../themes'
 import 'typeface-pacifico'
 
 const GlobalStyle = createGlobalStyle`
@@ -29,10 +30,12 @@ const AppRoot = () => (
   <Provider store={store}>
     <BrowserRouter>
       <ThemeProvider theme={themes.default}>
-        <Fragment>
-          <App />
-          <GlobalStyle />
-        </Fragment>
+        <QuollUIThemeProvider theme={themes.default}>
+          <Fragment>
+            <App />
+            <GlobalStyle />
+          </Fragment>
+        </QuollUIThemeProvider>
       </ThemeProvider>
     </BrowserRouter>
   </Provider>

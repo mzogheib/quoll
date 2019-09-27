@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import { Button } from '@quoll/ui-components'
 
 import Modal from '../Modal'
-import Button from '../../Button'
 
 const StyledModal = styled(Modal)`
   padding: 20px;

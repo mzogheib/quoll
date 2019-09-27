@@ -1,9 +1,9 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
+import { Button } from '@quoll/ui-components'
 
 import Loader from '../HorizontalLoader'
-import Button from '../Button'
 
 const Wrapper = styled.div(
   ({ theme: { colors } }) => css`
