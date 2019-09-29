@@ -1,6 +1,5 @@
 import React from 'react'
-import styled, { ThemeProvider } from 'styled-components'
-import themes from '@quoll/ui-themes'
+import styled from 'styled-components'
 import { sortBy } from 'lodash'
 
 import IconButton from '.'
@@ -21,30 +20,27 @@ const handleClick = buttonVariation =>
   alert(`Clicked on ${buttonVariation} IconButton!`)
 
 export const Default = () => (
-  <ThemeProvider theme={themes.default}>
-    <Table>
-      <thead>
-        <tr>
-          <th>IconButton</th>
-          <th>Component</th>
-        </tr>
-      </thead>
-      <tbody>
-        {iconNames.map(iconName => {
-          const IconComponent = IconButton[iconName]
-          return (
-            <tr key={iconName}>
-              <td>
-                <IconComponent onClick={() => handleClick(iconName)} />
-              </td>
-              <td>
-                <code
-                >{`<IconButton.${iconName} onClick={handleClick} />`}</code>
-              </td>
-            </tr>
-          )
-        })}
-      </tbody>
-    </Table>
-  </ThemeProvider>
+  <Table>
+    <thead>
+      <tr>
+        <th>IconButton</th>
+        <th>Component</th>
+      </tr>
+    </thead>
+    <tbody>
+      {iconNames.map(iconName => {
+        const IconComponent = IconButton[iconName]
+        return (
+          <tr key={iconName}>
+            <td>
+              <IconComponent onClick={() => handleClick(iconName)} />
+            </td>
+            <td>
+              <code>{`<IconButton.${iconName} onClick={handleClick} />`}</code>
+            </td>
+          </tr>
+        )
+      })}
+    </tbody>
+  </Table>
 )

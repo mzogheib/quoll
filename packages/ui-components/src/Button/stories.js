@@ -1,6 +1,5 @@
 import React from 'react'
-import styled, { ThemeProvider } from 'styled-components'
-import themes from '@quoll/ui-themes'
+import styled from 'styled-components'
 
 import Button from '.'
 
@@ -42,16 +41,14 @@ const renderButton = ({ variation, disabled }) => {
 }
 
 export const Default = () => (
-  <ThemeProvider theme={themes.default}>
-    <Row>
-      {buttonDisabledProp.map(disabled => (
-        <Column key={disabled}>
-          <div>{disabled ? 'Disabled' : 'Enabled'}</div>
-          {buttonVariations.map(variation =>
-            renderButton({ variation, disabled })
-          )}
-        </Column>
-      ))}
-    </Row>
-  </ThemeProvider>
+  <Row>
+    {buttonDisabledProp.map(disabled => (
+      <Column key={disabled}>
+        <div>{disabled ? 'Disabled' : 'Enabled'}</div>
+        {buttonVariations.map(variation =>
+          renderButton({ variation, disabled })
+        )}
+      </Column>
+    ))}
+  </Row>
 )

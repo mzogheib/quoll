@@ -1,6 +1,5 @@
 import React from 'react'
-import styled, { ThemeProvider } from 'styled-components'
-import themes from '@quoll/ui-themes'
+import styled from 'styled-components'
 import { sortBy } from 'lodash'
 
 import Icon from '.'
@@ -18,29 +17,27 @@ const Table = styled.table`
 const iconNames = sortBy(Object.keys(Icon))
 
 export const Default = () => (
-  <ThemeProvider theme={themes.default}>
-    <Table>
-      <thead>
-        <tr>
-          <th>Icon</th>
-          <th>Component</th>
-        </tr>
-      </thead>
-      <tbody>
-        {iconNames.map(iconName => {
-          const IconComponent = Icon[iconName]
-          return (
-            <tr key={iconName}>
-              <td>
-                <IconComponent />
-              </td>
-              <td>
-                <code>{`<Icon.${iconName} />`}</code>
-              </td>
-            </tr>
-          )
-        })}
-      </tbody>
-    </Table>
-  </ThemeProvider>
+  <Table>
+    <thead>
+      <tr>
+        <th>Icon</th>
+        <th>Component</th>
+      </tr>
+    </thead>
+    <tbody>
+      {iconNames.map(iconName => {
+        const IconComponent = Icon[iconName]
+        return (
+          <tr key={iconName}>
+            <td>
+              <IconComponent />
+            </td>
+            <td>
+              <code>{`<Icon.${iconName} />`}</code>
+            </td>
+          </tr>
+        )
+      })}
+    </tbody>
+  </Table>
 )
