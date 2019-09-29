@@ -2,10 +2,11 @@ import styled, { css } from 'styled-components'
 import { lighten, darken } from 'polished'
 import PropTypes from 'prop-types'
 
-const makeStyle = ({ color, backgroundColor, bold, disabled, noHitbox }) => css`
+const makeStyle = ({ font, backgroundColor, bold, disabled, noHitbox }) => css`
   border: none;
   border-radius: 4px;
 
+  font-family: ${font.family};
   font-size: 14px;
   font-weight: ${bold ? 500 : null};
 
@@ -16,7 +17,7 @@ const makeStyle = ({ color, backgroundColor, bold, disabled, noHitbox }) => css`
   background-color: ${disabled
     ? lighten(0.1, backgroundColor)
     : backgroundColor};
-  color: ${disabled ? lighten(0.4, color) : color};
+  color: ${disabled ? lighten(0.4, font.color) : font.color};
   cursor: ${disabled ? 'unset' : 'pointer'};
 
   &:hover {
@@ -24,25 +25,25 @@ const makeStyle = ({ color, backgroundColor, bold, disabled, noHitbox }) => css`
   }
 `
 
-const defaultStyle = ({ theme: { colors }, disabled }) => css`
+const defaultStyle = ({ theme: { colors, font }, disabled }) => css`
   ${makeStyle({
-    color: colors.mineShaft,
+    font,
     backgroundColor: colors.whiteSmoke,
     disabled,
   })};
 `
 
-const primaryStyle = ({ theme: { colors }, disabled }) => css`
+const primaryStyle = ({ theme: { colors, font }, disabled }) => css`
   ${makeStyle({
-    color: colors.mineShaft,
+    font,
     backgroundColor: colors.mediumAquamarine,
     disabled,
   })};
 `
 
-const plainStyle = ({ theme: { colors }, disabled }) => css`
+const plainStyle = ({ theme: { colors, font }, disabled }) => css`
   ${makeStyle({
-    color: colors.mineShaft,
+    font,
     backgroundColor: colors.transparent,
     bold: true,
     disabled,
