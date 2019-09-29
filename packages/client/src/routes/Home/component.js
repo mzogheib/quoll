@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import moment from 'moment'
+import { HorizontalLoader } from '@quoll/ui-components'
 
 import DatePicker from '../../components/DatePicker'
 import Timeline from '../../components/Timeline'
 import Map from '../../components/Map'
-import Loader from '../../components/HorizontalLoader'
 
 const Wrapper = styled.div`
   height: 100%;
@@ -102,7 +102,7 @@ class Home extends Component {
         </MapWrapper>
         {isLoading && (
           <LoaderWrapper>
-            <Loader />
+            <HorizontalLoader />
           </LoaderWrapper>
         )}
       </Wrapper>

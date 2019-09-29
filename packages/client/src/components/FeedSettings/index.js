@@ -1,9 +1,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
-import { Button } from '@quoll/ui-components'
-
-import Loader from '../HorizontalLoader'
+import { Button, HorizontalLoader } from '@quoll/ui-components'
 
 const Wrapper = styled.div(
   ({ theme: { colors } }) => css`
@@ -76,7 +74,7 @@ const FeedSettings = ({ feed, onConnect, onDisconnect }) => {
 
   return (
     <Wrapper>
-      {isAuthenticating && <Loader />}
+      {isAuthenticating && <HorizontalLoader />}
       <Content isAuthenticating={isAuthenticating}>
         <Logo>
           <img src={imgSrc} alt={`${name} logo`} />
