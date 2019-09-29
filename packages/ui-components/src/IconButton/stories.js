@@ -1,0 +1,50 @@
+import React from 'react'
+import styled, { ThemeProvider } from 'styled-components'
+import themes from '@quoll/ui-themes'
+import { sortBy } from 'lodash'
+
+import IconButton from '.'
+
+export default { title: 'IconButton' }
+
+const Table = styled.table`
+  th,
+  td {
+    min-width: 150px;
+    text-align: center;
+  }
+`
+
+const iconNames = sortBy(Object.keys(IconButton))
+
+const handleClick = buttonVariation =>
+  alert(`Clicked on ${buttonVariation} IconButton!`)
+
+export const Default = () => (
+  <ThemeProvider theme={themes.default}>
+    <Table>
+      <thead>
+        <tr>
+          <th>IconButton</th>
+          <th>Component</th>
+        </tr>
+      </thead>
+      <tbody>
+        {iconNames.map(iconName => {
+          const IconComponent = IconButton[iconName]
+          return (
+            <tr key={iconName}>
+              <td>
+                <IconComponent onClick={() => handleClick(iconName)} />
+              </td>
+              <td>
+                <code
+                >{`<IconButton.${iconName} onClick={handleClick} />`}</code>
+              </td>
+            </tr>
+          )
+        })}
+      </tbody>
+    </Table>
+  </ThemeProvider>
+)

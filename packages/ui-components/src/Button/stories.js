@@ -1,8 +1,7 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
 import themes from '@quoll/ui-themes'
 
-import { QuollUIThemeProvider } from '../../index'
 import Button from '.'
 
 export default { title: 'Button' }
@@ -42,8 +41,8 @@ const renderButton = ({ variation, disabled }) => {
   )
 }
 
-export const withText = () => (
-  <QuollUIThemeProvider theme={themes.default}>
+export const Default = () => (
+  <ThemeProvider theme={themes.default}>
     <Row>
       {buttonDisabledProp.map(disabled => (
         <Column key={disabled}>
@@ -54,5 +53,5 @@ export const withText = () => (
         </Column>
       ))}
     </Row>
-  </QuollUIThemeProvider>
+  </ThemeProvider>
 )
