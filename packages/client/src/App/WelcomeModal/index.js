@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 import { Button, IconButton } from '@quoll/ui-components'
 
@@ -11,11 +11,13 @@ const Header = styled.div`
   padding: 10px;
 `
 
-const Title = styled.div`
-  text-align: center;
-  font-family: Pacifico, Roboto, sans-serif;
-  font-size: 48px;
-`
+const Title = styled.div(
+  ({ theme: { font } }) => css`
+    text-align: center;
+    font-family: ${`Pacifico, ${font.family}`};
+    font-size: 48px;
+  `
+)
 
 const Message = styled.div`
   height: 150px;

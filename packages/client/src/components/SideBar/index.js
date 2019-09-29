@@ -21,13 +21,13 @@ const Wrapper = styled.div(
 )
 
 const Title = styled.div(
-  ({ theme: { colors } }) => css`
+  ({ theme: { colors, font } }) => css`
     color: ${colors.mediumAquamarine};
     flex-basis: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: Pacifico, Roboto, sans-serif;
+    font-family: ${`Pacifico, ${font.family}`};
     font-size: 26px;
     margin: 0 0 20px;
   `
