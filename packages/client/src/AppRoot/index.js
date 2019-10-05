@@ -7,7 +7,6 @@ import 'typeface-pacifico'
 
 import App from '../App'
 import store from '../store'
-import 'typeface-pacifico'
 
 const GlobalStyle = createGlobalStyle(
   ({ theme: { font } }) => css`
