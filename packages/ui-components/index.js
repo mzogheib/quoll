@@ -4,9 +4,11 @@ import calendar from './src/Calendar'
 import horizontalLoader from './src/HorizontalLoader'
 import icon from './src/Icon'
 import iconButton from './src/IconButton'
+import modal from './src/Modal'
 
 export const Button = button
 export const Calendar = calendar
 export const HorizontalLoader = horizontalLoader
 export const Icon = icon
 export const IconButton = iconButton
+export const Modal = modal

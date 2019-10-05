@@ -14,7 +14,8 @@
   "dependencies": {
     "polished": "^3.4.1",
     "react-calendar": "^2.19.2",
-    "react-icons": "^3.7.0"
+    "react-icons": "^3.7.0",
+    "react-modal": "^3.10.1"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
