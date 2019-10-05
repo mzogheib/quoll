@@ -1,10 +1,7 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
-
-import Modal from '../../components/modals/Modal'
-import IconButton from '../../components/IconButton'
-import Button from '../../components/Button'
+import { Button, IconButton, Modal } from '@quoll/ui-components'
 
 const Header = styled.div`
   display: flex;
@@ -12,11 +9,13 @@ const Header = styled.div`
   padding: 10px;
 `
 
-const Title = styled.div`
-  text-align: center;
-  font-family: Pacifico, Roboto, sans-serif;
-  font-size: 48px;
-`
+const Title = styled.div(
+  ({ theme: { font } }) => css`
+    text-align: center;
+    font-family: ${`Pacifico, ${font.family}`};
+    font-size: 48px;
+  `
+)
 
 const Message = styled.div`
   height: 150px;
@@ -39,7 +38,7 @@ const WelcomeModal = ({ isOpen, onCancel, onConnect }) => (
     <Title>Quoll</Title>
     <Message>Map yo' life.</Message>
     <Actions>
-      <Button.Primary onClick={onConnect}>Connect Feeds</Button.Primary>
+      <Button onClick={onConnect}>Connect Feeds</Button>
     </Actions>
   </Modal>
 )

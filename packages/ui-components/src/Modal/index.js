@@ -3,8 +3,6 @@ import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 import ReactModal from 'react-modal'
 
-ReactModal.setAppElement('#root')
-
 // Inspired by https://github.com/reactjs/react-modal/issues/603
 
 const ReactModalAdapter = ({ className, ...props }) => (
@@ -52,6 +50,8 @@ const Modal = styled(ReactModalAdapter)(
     }
   `
 )
+
+Modal.setAppElement = id => ReactModal.setAppElement(id)
 
 Modal.propTypes = {
   className: PropTypes.string,

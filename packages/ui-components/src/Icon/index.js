@@ -1,9 +1,11 @@
-import Close from 'react-icons/lib/md/close'
-import Help from 'react-icons/lib/md/help-outline'
-import Map from 'react-icons/lib/md/map'
-import Next from 'react-icons/lib/md/navigate-next'
-import Previous from 'react-icons/lib/md/navigate-before'
-import Settings from 'react-icons/lib/md/settings'
+import {
+  MdClose as Close,
+  MdHelp as Help,
+  MdMap as Map,
+  MdNavigateNext as Next,
+  MdNavigateBefore as Previous,
+  MdSettings as Settings,
+} from 'react-icons/md'
 
 const icons = {
   Close,

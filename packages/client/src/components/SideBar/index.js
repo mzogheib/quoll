@@ -2,10 +2,9 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
+import { Icon, IconButton } from '@quoll/ui-components'
 
 import routes from '../../routes'
-import Icon from '../Icon'
-import IconButton from '../IconButton'
 
 const routesHash = routes.reduce((map, route) => {
   map[route.id] = { ...route }
@@ -22,13 +21,13 @@ const Wrapper = styled.div(
 )
 
 const Title = styled.div(
-  ({ theme: { colors } }) => css`
+  ({ theme: { colors, font } }) => css`
     color: ${colors.mediumAquamarine};
     flex-basis: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: Pacifico, Roboto, sans-serif;
+    font-family: ${`Pacifico, ${font.family}`};
     font-size: 26px;
     margin: 0 0 20px;
   `
