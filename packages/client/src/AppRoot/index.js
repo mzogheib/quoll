@@ -3,6 +3,7 @@ import { css, createGlobalStyle, ThemeProvider } from 'styled-components'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import themes from '@quoll/ui-themes'
+import '@quoll/ui-components/dist/main.css'
 import 'typeface-pacifico'
 
 import App from '../App'
