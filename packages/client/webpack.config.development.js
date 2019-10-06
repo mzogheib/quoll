@@ -16,7 +16,7 @@ const config = {
     rules: [
       {
         test: /\.m?js$/,
-        include: path.resolve(__dirname), // TODO: this is a hack to only lint this package. Lint other packages.
+        include: path.resolve(__dirname),
         use: ['eslint-loader', 'stylelint-custom-processor-loader'],
       },
     ],
