@@ -6,7 +6,6 @@
   "repository": "https://github.com/mzogheib/quoll",
   "author": "mzogheib",
   "license": "MIT",
-  "private": true,
   "scripts": {
     "start": "webpack --config webpack.config.development.js",
     "storybook": "start-storybook"
