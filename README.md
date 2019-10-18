@@ -1,6 +1,7 @@
 # Quoll
 
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
 
 Visualise your personal data all in one place!
 
@@ -17,8 +18,6 @@ Previously supported:
 - [Moves](https://www.moves-app.com/) - Fitness tracking (RIP 🙏)
 
 ## Getting Started
-
-_Note: This project is currently in local development only. Production build & deployment support is coming soon._
 
 1. Clone the repo
 
