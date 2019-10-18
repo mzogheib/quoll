@@ -21,6 +21,11 @@
       "commit-msg": "if [[ $(git rev-parse --abbrev-ref HEAD) = master ]]; then ([[ -n $HUSKY_BYPASS ]] || commitlint -E HUSKY_GIT_PARAMS); fi"
     }
   },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
   "lint-staged": {
     "./**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
       "prettier --write",
