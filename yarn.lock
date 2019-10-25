@@ -9784,9 +9784,9 @@ node-sass@^4.10.0:
     stdout-stream "^1.4.0"
     "true-case-path" "^1.0.2"
 
-"node-strava@https://github.com/mzogheib/node-strava":
-  version "0.1.0"
-  resolved "https://github.com/mzogheib/node-strava#26029a814252cd3dcf9a8de1327f118128b616ea"
+"node-strava@https://github.com/mzogheib/node-strava#0.2.0":
+  version "0.2.0"
+  resolved "https://github.com/mzogheib/node-strava#1f22735f1ad9151fe7b6a6f8c37ad72297e40d61"
   dependencies:
     axios "^0.18.1"
 
