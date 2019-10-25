@@ -14,11 +14,14 @@ function getOAuthUrl() {
 }
 
 function authenticate(code) {
-  return apiStrava.oauth.token({ code })
+  return apiStrava.oauth.token({ code }).then(data => {
+    const expiry_time = calculateExpiryTime(data.expires_in)
+    return { expiry_time, ...data }
+  })
 }
 
-function refreshAuth(auth) {
-  return Promise.resolve(auth)
+function refreshAuth({ refresh_token }) {
+  return apiStrava.oauth.refresh({ refresh_token })
 }
 
 function deauthorize({ access_token }) {
@@ -44,6 +47,7 @@ function getAthleteActivities(from, to, token) {
     })
 }
 
-const getLocalTimestamp = d => {
-  return Math.round(d.getTime() / 1000) + d.getTimezoneOffset() * 60
+function calculateExpiryTime(expiresIn) {
+  // Substract a small amount to account for lag
+  return Math.floor(Date.now() / 1000 + (expiresIn || 3600) - 300)
 }
