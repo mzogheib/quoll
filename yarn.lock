@@ -9786,7 +9786,7 @@ node-sass@^4.10.0:
 
 "node-strava@https://github.com/mzogheib/node-strava":
   version "0.1.0"
-  resolved "https://github.com/mzogheib/node-strava#45c7a94ff9fe2ee67d491a5eaa0471fda4a76cbd"
+  resolved "https://github.com/mzogheib/node-strava#26029a814252cd3dcf9a8de1327f118128b616ea"
   dependencies:
     axios "^0.18.1"
 
