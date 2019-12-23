@@ -15,11 +15,18 @@ function getOAuthUrl() {
   return apiToshl.oauth.url()
 }
 
+const transformAuthResponse = ({
+  expires_in,
+  access_token,
+  refresh_token,
+}) => ({
+  expiry_time: calculateExpiryTime(expires_in),
+  access_token,
+  refresh_token,
+})
+
 function authenticate(code) {
-  return apiToshl.oauth.token({ code }).then(data => {
-    const expiry_time = calculateExpiryTime(data.expires_in)
-    return { expiry_time, ...data }
-  })
+  return apiToshl.oauth.token({ code }).then(transformAuthResponse)
 }
 
 function deauthorize(auth) {
@@ -36,8 +43,7 @@ function refreshAuth(auth) {
     ToshlUser.deleteOne({ accessToken: auth.access_token }, error => {
       // TODO: handle errors
     })
-    const expiry_time = calculateExpiryTime(data.expires_in)
-    return { expiry_time, ...data }
+    return transformAuthResponse(data)
   })
 }
 
