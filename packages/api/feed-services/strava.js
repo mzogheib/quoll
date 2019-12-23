@@ -13,15 +13,22 @@ function getOAuthUrl() {
   return apiStrava.oauth.url()
 }
 
+const transformAuthResponse = ({
+  expires_in,
+  access_token,
+  refresh_token,
+}) => ({
+  expiry_time: calculateExpiryTime(expires_in),
+  access_token,
+  refresh_token,
+})
+
 function authenticate(code) {
-  return apiStrava.oauth.token({ code }).then(data => {
-    const expiry_time = calculateExpiryTime(data.expires_in)
-    return { expiry_time, ...data }
-  })
+  return apiStrava.oauth.token({ code }).then(transformAuthResponse)
 }
 
 function refreshAuth({ refresh_token }) {
-  return apiStrava.oauth.refresh({ refresh_token })
+  return apiStrava.oauth.refresh({ refresh_token }).then(transformAuthResponse)
 }
 
 function deauthorize({ access_token }) {
