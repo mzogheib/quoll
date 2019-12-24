@@ -29,6 +29,8 @@ const Content = styled.div`
 const Main = styled.main`
   flex-grow: 1;
   position: relative;
+  display: flex;
+  flex-direction: column;
 `
 
 class App extends Component {

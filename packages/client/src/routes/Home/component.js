@@ -10,7 +10,7 @@ import Map from '../../components/Map'
 
 const Wrapper = styled.div(
   ({ theme: { media } }) => css`
-    height: 100%;
+    flex: 1;
     display: flex;
     position: relative;
 
@@ -24,12 +24,11 @@ const Left = styled.div(
   ({ theme: { media } }) => css`
     display: flex;
     flex-direction: column;
-    flex-basis: 350px;
+    width: 100%;
     max-width: 350px;
     height: 100%;
 
     ${media.breakpointDown(media.md)`
-      flex-basis: unset;
       max-width: unset;
       width: 100%;
       height: unset;
