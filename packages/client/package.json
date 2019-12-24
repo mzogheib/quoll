@@ -1,6 +1,6 @@
 {
   "name": "@quoll/client",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "private": true,
   "scripts": {
     "start": "webpack-dev-server --config webpack.config.development.js",
@@ -20,8 +20,8 @@
     "not op_mini all"
   ],
   "dependencies": {
-    "@quoll/ui-components": "^0.2.1",
-    "@quoll/ui-themes": "^0.2.0",
+    "@quoll/ui-components": "^0.2.2",
+    "@quoll/ui-themes": "^0.3.0",
     "axios": "^0.18.1",
     "express": "^4.17.1",
     "lodash": "^4.17.4",
