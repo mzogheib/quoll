@@ -19,15 +19,22 @@ const DateLabel = styled.div(
   `
 )
 
-const CalendarWrapper = styled.div`
-  position: absolute;
-  top: 40px;
-  right: 0;
-  left: 0;
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-`
+const CalendarWrapper = styled.div(
+  ({ theme: { media } }) => css`
+    position: absolute;
+    top: 40px;
+    right: 0;
+    left: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+
+    ${media.breakpointDown(media.md)`
+      top: -300px;
+    `};
+  `
+)
+
 const StyledCalendar = styled(Calendar)`
   box-shadow: 2px 2px 12px;
 `
