@@ -6,6 +6,7 @@ import {
   MdNavigateBefore as Previous,
   MdSettings as Settings,
 } from 'react-icons/md'
+import styled from 'styled-components'
 
 const icons = {
   Close,
@@ -23,7 +24,9 @@ const Icon = Object.entries(icons).reduce((prev, [name, C]) => {
     size: 40,
   }
   return {
-    [name]: C,
+    [name]: styled(C)`
+      display: block;
+    `,
     ...prev,
   }
 }, {})

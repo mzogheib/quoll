@@ -6,6 +6,7 @@ import IconComponent from '../Icon'
 
 const Wrapper = styled.button(
   ({ theme: { colors }, disabled }) => css`
+    display: block;
     border: none;
     background: transparent;
     padding: 0;
