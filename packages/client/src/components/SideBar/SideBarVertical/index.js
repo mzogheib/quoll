@@ -4,12 +4,7 @@ import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import { Icon, IconButton } from '@quoll/ui-components'
 
-import routes from '../../../routes'
-
-const routesHash = routes.reduce((map, route) => {
-  map[route.id] = { ...route }
-  return map
-}, {})
+import { routesHash, IconWrapper } from '../common/'
 
 const Wrapper = styled.div(
   ({ theme: { colors } }) => css`
@@ -43,12 +38,6 @@ const NavGroup = styled.div`
 const NavPrimary = styled.nav`
   flex-grow: 1;
 `
-
-const IconWrapper = styled.div(
-  ({ theme: { colors } }) => css`
-    color: ${colors.mediumAquamarine};
-  `
-)
 
 const itemStyle = css`
   min-height: 50px;
