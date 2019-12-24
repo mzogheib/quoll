@@ -9,10 +9,14 @@ import SideBar from '../components/SideBar'
 import WelcomeModal from './WelcomeModal'
 
 const Wrapper = styled.div(
-  ({ theme: { colors } }) => css`
+  ({ theme: { colors, media } }) => css`
     display: flex;
     height: 100%;
     background-color: ${colors.whiteSmoke};
+
+    ${media.breakpointDown(media.md)`
+      flex-direction: column-reverse;
+    `};
   `
 )
 
@@ -24,6 +28,7 @@ const Content = styled.div`
 
 const Main = styled.main`
   flex-grow: 1;
+  position: relative;
 `
 
 class App extends Component {

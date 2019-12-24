@@ -1,22 +1,35 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 
 import SideBarVertical from './SideBarVertical'
+import SideBarHorizontal from './SideBarHorizontal'
 
-const Wrapper = styled.div(
-  ({ theme: { colors } }) => css`
-    display: flex;
-    flex-direction: column;
-    background-color: ${colors.mineShaft};
-    min-width: 100px;
+const WrapperV = styled.div(
+  ({ theme: { media } }) => css`
+    ${media.breakpointDown(media.md)`
+      display: none;
+    `};
+  `
+)
+
+const WrapperH = styled.div(
+  ({ theme: { media } }) => css`
+    ${media.breakpointUp(media.md)`
+      display: none;
+    `};
   `
 )
 
 const SideBar = ({ onHelpClick }) => (
-  <Wrapper>
-    <SideBarVertical onHelpClick={onHelpClick} />
-  </Wrapper>
+  <Fragment>
+    <WrapperV>
+      <SideBarVertical onHelpClick={onHelpClick} />
+    </WrapperV>
+    <WrapperH>
+      <SideBarHorizontal onHelpClick={onHelpClick} />
+    </WrapperH>
+  </Fragment>
 )
 
 SideBar.propTypes = {

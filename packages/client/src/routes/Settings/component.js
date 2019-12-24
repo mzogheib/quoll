@@ -11,6 +11,12 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 40px 20px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow-y: scroll;
 `
 
 const Feeds = styled.div`

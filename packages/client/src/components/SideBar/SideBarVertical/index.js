@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
@@ -10,6 +10,16 @@ const routesHash = routes.reduce((map, route) => {
   map[route.id] = { ...route }
   return map
 }, {})
+
+const Wrapper = styled.div(
+  ({ theme: { colors } }) => css`
+    background-color: ${colors.mineShaft};
+    min-width: 100px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  `
+)
 
 const Title = styled.div(
   ({ theme: { colors, font } }) => css`
@@ -64,7 +74,7 @@ const StyledNavLink = styled(NavLink)(
 const Help = styled.div(itemStyle)
 
 const SideBarVertical = ({ onHelpClick }) => (
-  <Fragment>
+  <Wrapper>
     <Title>Quoll</Title>
     <NavGroup>
       <NavPrimary>
@@ -87,7 +97,7 @@ const SideBarVertical = ({ onHelpClick }) => (
         <IconButton.Help onClick={onHelpClick} />
       </IconWrapper>
     </Help>
-  </Fragment>
+  </Wrapper>
 )
 
 SideBarVertical.propTypes = {
