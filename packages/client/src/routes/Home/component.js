@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import { HorizontalLoader } from '@quoll/ui-components'
@@ -8,19 +8,35 @@ import DatePicker from '../../components/DatePicker'
 import Timeline from '../../components/Timeline'
 import Map from '../../components/Map'
 
-const Wrapper = styled.div`
-  height: 100%;
-  display: flex;
-  position: relative;
-`
+const Wrapper = styled.div(
+  ({ theme: { media } }) => css`
+    height: 100%;
+    display: flex;
+    position: relative;
 
-const Left = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-basis: 350px;
-  max-width: 350px;
-  height: 100%;
-`
+    ${media.breakpointDown(media.md)`
+      flex-direction: column-reverse;
+    `};
+  `
+)
+
+const Left = styled.div(
+  ({ theme: { media } }) => css`
+    display: flex;
+    flex-direction: column;
+    flex-basis: 350px;
+    max-width: 350px;
+    height: 100%;
+
+    ${media.breakpointDown(media.md)`
+      flex-basis: unset;
+      max-width: unset;
+      width: 100%;
+      height: unset;
+      flex: 2;
+    `};
+  `
+)
 
 const TimelineWrapper = styled.div`
   position: relative;
@@ -36,11 +52,16 @@ const TimelineBody = styled.div`
   left: 0;
 `
 
-const MapWrapper = styled.div`
-  position: relative;
-  flex: 1;
-`
+const MapWrapper = styled.div(
+  ({ theme: { media } }) => css`
+    position: relative;
+    flex: 1;
 
+    ${media.breakpointDown(media.md)`
+      flex: 5;
+    `};
+  `
+)
 const MapBody = styled.div`
   position: absolute;
   top: 0;
@@ -51,6 +72,7 @@ const MapBody = styled.div`
 
 const LoaderWrapper = styled.div`
   position: absolute;
+  top: 0;
   left: 0;
   right: 0;
 `

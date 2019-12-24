@@ -1,5 +1,6 @@
-// Color names from https://www.color-blindness.com/color-name-hue/
+import { css } from 'styled-components'
 
+// Color names from https://www.color-blindness.com/color-name-hue/
 const colorPalette = {
   black: '#000000',
   gainsboro: '#DCDCDC',
@@ -13,12 +14,44 @@ const colorPalette = {
   whiteSmoke: '#F2F2F2',
 }
 
+const breakpoints = {
+  xs: 0,
+  sm: 544,
+  md: 768,
+  lg: 992,
+  xl: 1281,
+}
+
+const breakpointUp = size => styles => css`
+  @media (min-width: ${size}px) {
+    ${styles};
+  }
+`
+
+const breakpointDown = size => styles => css`
+  @media (max-width: ${size - 1}px) {
+    ${styles};
+  }
+`
+
+const breakpointBetweenAny = (min, max) => styles => css`
+  @media (min-width: ${min}px) and (max-width: ${max - 1}px) {
+    ${styles};
+  }
+`
+
 export default {
   default: {
     colors: colorPalette,
     font: {
       family: 'Roboto, sans-serif',
       color: colorPalette.mineShaft,
+    },
+    media: {
+      ...breakpoints,
+      breakpointBetweenAny,
+      breakpointUp,
+      breakpointDown,
     },
   },
 }
