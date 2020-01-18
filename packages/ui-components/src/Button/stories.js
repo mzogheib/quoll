@@ -2,18 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Button from '.'
+import Flex from '../Flex'
 
 export default { title: 'Button' }
-
-const Row = styled.div`
-  display: flex;
-`
-
-const Column = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`
 
 const ButtonWrapper = styled.div`
   padding: 20px;
@@ -41,14 +32,14 @@ const renderButton = ({ variation, disabled }) => {
 }
 
 export const Default = () => (
-  <Row>
+  <Flex>
     {buttonDisabledProp.map(disabled => (
-      <Column key={disabled}>
+      <Flex key={disabled} direction="column" alignItems="center">
         <div>{disabled ? 'Disabled' : 'Enabled'}</div>
         {buttonVariations.map(variation =>
           renderButton({ variation, disabled })
         )}
-      </Column>
+      </Flex>
     ))}
-  </Row>
+  </Flex>
 )
