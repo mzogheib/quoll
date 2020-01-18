@@ -2,11 +2,9 @@ import React, { Component } from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 import moment from 'moment'
-import { Calendar, IconButton } from '@quoll/ui-components'
+import { Flex, Calendar, IconButton } from '@quoll/ui-components'
 
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
+const Wrapper = styled(Flex).attrs({ alignItems: 'center' })`
   position: relative;
 `
 
@@ -19,15 +17,13 @@ const DateLabel = styled.div(
   `
 )
 
-const CalendarWrapper = styled.div(
+const CalendarWrapper = styled(Flex).attrs({ justifyContent: 'center' })(
   ({ theme: { media } }) => css`
     position: absolute;
     top: 40px;
     right: 0;
     left: 0;
     z-index: 1;
-    display: flex;
-    justify-content: center;
 
     ${media.breakpointDown(media.md)`
       top: -300px;

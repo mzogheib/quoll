@@ -1,11 +1,9 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
-import { Button, IconButton, Modal } from '@quoll/ui-components'
+import { Flex, Button, IconButton, Modal } from '@quoll/ui-components'
 
-const Header = styled.div`
-  display: flex;
-  justify-content: flex-end;
+const Header = styled(Flex).attrs({ justifyContent: 'flex-end' })`
   padding: 10px;
 `
 
@@ -17,16 +15,16 @@ const Title = styled.div(
   `
 )
 
-const Message = styled.div`
+const Message = styled(Flex).attrs({
+  justifyContent: 'center',
+  alignItems: 'center',
+})`
   height: 150px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `
 
-const Actions = styled.div`
-  display: flex;
-  justify-content: center;
+const Actions = styled(Flex).attrs({
+  justifyContent: 'center',
+})`
   padding: 30px 0 30px;
 `
 

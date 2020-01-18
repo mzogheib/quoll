@@ -2,15 +2,15 @@ import React, { Component } from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 import { Route, Switch } from 'react-router-dom'
+import { Flex } from '@quoll/ui-components'
 
 import routes from '../routes'
 import Header from '../components/Header'
 import SideBar from '../components/SideBar'
 import WelcomeModal from './WelcomeModal'
 
-const Wrapper = styled.div(
+const Wrapper = styled(Flex)(
   ({ theme: { colors, media } }) => css`
-    display: flex;
     height: 100%;
     background-color: ${colors.whiteSmoke};
 
@@ -20,17 +20,13 @@ const Wrapper = styled.div(
   `
 )
 
-const Content = styled.div`
+const Content = styled(Flex).attrs({ direction: 'column' })`
   flex-grow: 1;
-  display: flex;
-  flex-direction: column;
 `
 
-const Main = styled.main`
+const Main = styled(Flex).attrs({ as: 'main', direction: 'column' })`
   flex-grow: 1;
   position: relative;
-  display: flex;
-  flex-direction: column;
 `
 
 class App extends Component {

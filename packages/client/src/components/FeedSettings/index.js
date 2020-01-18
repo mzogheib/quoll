@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
-import { Button, HorizontalLoader } from '@quoll/ui-components'
+import { Box, Flex, Button, HorizontalLoader } from '@quoll/ui-components'
 
 const Wrapper = styled.div(
   ({ theme: { colors } }) => css`
@@ -10,30 +10,27 @@ const Wrapper = styled.div(
   `
 )
 
-const Content = styled.div(
+const Content = styled(Flex).attrs({ alignItems: 'center' })(
   ({ isAuthenticating }) => css`
-    display: flex;
-    align-items: center;
     padding: ${isAuthenticating
       ? '16px 30px 20px 20px'
       : '20px 30px 20px 20px'};
   `
 )
 
-const Logo = styled.div`
+const Logo = styled(Flex).attrs({
+  alignItems: 'center',
+  justifyContent: 'center',
+})`
   width: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
   img {
     width: 100%;
   }
 `
 
-const Info = styled.div`
+const Info = styled(Box).attrs({ ml: 10 })`
   flex-grow: 1;
-  margin: 0 0 0 10px;
 `
 
 const Title = styled.div`

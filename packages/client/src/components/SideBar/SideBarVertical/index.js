@@ -2,37 +2,33 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
-import { Icon, IconButton } from '@quoll/ui-components'
+import { Flex, Icon, IconButton } from '@quoll/ui-components'
 
 import { routesHash, IconWrapper } from '../common/'
 
-const Wrapper = styled.div(
+const Wrapper = styled(Flex).attrs({ direction: 'column' })(
   ({ theme: { colors } }) => css`
     background-color: ${colors.mineShaft};
     min-width: 100px;
     height: 100%;
-    display: flex;
-    flex-direction: column;
   `
 )
 
-const Title = styled.div(
+const Title = styled(Flex).attrs({
+  alignItems: 'center',
+  justifyContent: 'center',
+  mb: 20,
+})(
   ({ theme: { colors, font } }) => css`
     color: ${colors.mediumAquamarine};
     flex-basis: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     font-family: ${`Pacifico, ${font.family}`};
     font-size: 26px;
-    margin: 0 0 20px;
   `
 )
 
-const NavGroup = styled.div`
+const NavGroup = styled(Flex).attrs({ direction: 'column' })`
   flex-grow: 1;
-  display: flex;
-  flex-direction: column;
 `
 
 const NavPrimary = styled.nav`

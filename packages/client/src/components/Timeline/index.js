@@ -1,16 +1,11 @@
 import React from 'react'
-import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import { Flex } from '@quoll/ui-components'
 
 import TimelineEntry from '../TimelineEntry'
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-
 const Timeline = ({ entries, onEntryClick }) => (
-  <Wrapper>
+  <Flex direction="column">
     {entries.sort((a, b) => a.timeStart - b.timeStart).map((entry, index) => (
       <TimelineEntry
         key={index}
@@ -18,7 +13,7 @@ const Timeline = ({ entries, onEntryClick }) => (
         onClick={() => onEntryClick(entry.id)}
       />
     ))}
-  </Wrapper>
+  </Flex>
 )
 
 Timeline.propTypes = {

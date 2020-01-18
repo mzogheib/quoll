@@ -2,15 +2,13 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
-import { Icon, IconButton } from '@quoll/ui-components'
+import { Flex, Icon, IconButton } from '@quoll/ui-components'
 
 import { routesHash, IconWrapper } from '../common/'
 
-const Wrapper = styled.div(
+const Wrapper = styled(Flex).attrs({ justifyContent: 'space-around' })(
   ({ theme: { colors } }) => css`
     background-color: ${colors.mineShaft};
-    display: flex;
-    justify-content: space-around;
     min-height: 55px;
   `
 )

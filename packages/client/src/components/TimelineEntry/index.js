@@ -2,11 +2,10 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 import moment from 'moment'
+import { Box, Flex } from '@quoll/ui-components'
 
-const Wrapper = styled.div(
+const Wrapper = styled(Flex).attrs({ alignItems: 'center' })(
   ({ theme: { colors } }) => css`
-    display: flex;
-    align-items: center;
     padding: 4px 10px;
 
     &:hover {
@@ -16,11 +15,11 @@ const Wrapper = styled.div(
   `
 )
 
-const Logo = styled.div`
+const Logo = styled(Flex).attrs({
+  alignItems: 'center',
+  justifyContent: 'center',
+})`
   width: 25px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   flex-shrink: 0;
 
   img {
@@ -34,21 +33,18 @@ const Time = styled.div`
   flex-shrink: 0;
 `
 
-const Image = styled.div`
+const Image = styled(Box).attrs({ ml: 10 })`
   font-size: 22px;
-  margin: 0 0 0 10px;
 `
 
-const Label = styled.div`
+const Label = styled(Box).attrs({ ml: 10 })`
   flex-grow: 1;
-  margin: 0 0 0 10px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 `
 
-const Value = styled.div`
-  margin: 0 0 0 5px;
+const Value = styled(Box).attrs({ ml: 5 })`
   flex-shrink: 0;
 `
 

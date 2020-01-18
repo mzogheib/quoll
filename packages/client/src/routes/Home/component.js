@@ -2,16 +2,15 @@ import React, { Component } from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 import moment from 'moment'
-import { HorizontalLoader } from '@quoll/ui-components'
+import { Flex, HorizontalLoader } from '@quoll/ui-components'
 
 import DatePicker from '../../components/DatePicker'
 import Timeline from '../../components/Timeline'
 import Map from '../../components/Map'
 
-const Wrapper = styled.div(
+const Wrapper = styled(Flex)(
   ({ theme: { media } }) => css`
     flex: 1;
-    display: flex;
     position: relative;
 
     ${media.breakpointDown(media.md)`
@@ -20,10 +19,8 @@ const Wrapper = styled.div(
   `
 )
 
-const Left = styled.div(
+const Left = styled(Flex).attrs({ direction: 'column' })(
   ({ theme: { media } }) => css`
-    display: flex;
-    flex-direction: column;
     width: 100%;
     max-width: 350px;
     height: 100%;

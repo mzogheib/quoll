@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import { Box, Flex } from '@quoll/ui-components'
 
 import FeedSettings from '../../components/FeedSettings'
 import { requestAuth } from '../../services/oauth'
 import AlertModal from '../../components/modals/AlertModal'
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+const Wrapper = styled(Flex).attrs({
+  direction: 'column',
+  alignItems: 'center',
+})`
   padding: 40px 20px;
   position: absolute;
   top: 0;
@@ -27,15 +28,6 @@ const Feeds = styled.div`
 const FeedsTitle = styled.div`
   font-weight: bold;
   font-size: 28px;
-`
-
-const FeedsList = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-
-const FeedSettingsWrapper = styled.div`
-  margin: 40px 0 0;
 `
 
 const INITIAL_STATE = {
@@ -113,20 +105,20 @@ class Settings extends Component {
     const { showModal, modalMessage } = this.state
 
     const renderFeed = feed => (
-      <FeedSettingsWrapper key={feed.name}>
+      <Box key={feed.name} mt={40}>
         <FeedSettings
           feed={feed}
           onConnect={this.connectFeed}
           onDisconnect={this.disconnectFeed}
         />
-      </FeedSettingsWrapper>
+      </Box>
     )
 
     return (
       <Wrapper>
         <Feeds>
           <FeedsTitle>Feeds</FeedsTitle>
-          <FeedsList>{feeds.map(renderFeed)}</FeedsList>
+          <Flex direction="column">{feeds.map(renderFeed)}</Flex>
         </Feeds>
         <AlertModal
           isOpen={showModal}
