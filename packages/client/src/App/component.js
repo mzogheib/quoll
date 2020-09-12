@@ -92,7 +92,7 @@ class App extends Component {
                   key={index}
                   path={route.path}
                   exact={route.exact}
-                  component={route.mainComponent}
+                  component={() => <route.mainComponent />}
                 />
               ))}
             </Switch>
