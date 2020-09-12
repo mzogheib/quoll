@@ -1,6 +1,6 @@
 {
   "name": "@quoll/ui-themes",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Theme config to be consumed by client side packages",
   "main": "index.js",
   "repository": "https://github.com/mzogheib/quoll",
