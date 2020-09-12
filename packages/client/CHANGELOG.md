@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.7](https://github.com/mzogheib/quoll/compare/@quoll/client@0.3.6...@quoll/client@0.3.7) (2020-09-12)
+
+
+### Bug Fixes
+
+* **client:** add missing route component props ([2c56ee7](https://github.com/mzogheib/quoll/commit/2c56ee7))
+
+
+
+
+
 ## [0.3.6](https://github.com/mzogheib/quoll/compare/@quoll/client@0.3.5...@quoll/client@0.3.6) (2020-09-12)
 
 **Note:** Version bump only for package @quoll/client
