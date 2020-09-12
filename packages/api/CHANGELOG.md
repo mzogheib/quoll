@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.7](https://github.com/mzogheib/quoll/compare/@quoll/api@0.2.6...@quoll/api@0.2.7) (2020-09-12)
+
+
+### Bug Fixes
+
+* **api:** fix uuidv4 import ([8594ed8](https://github.com/mzogheib/quoll/commit/8594ed8))
+
+
+
+
+
 ## [0.2.6](https://github.com/mzogheib/quoll/compare/@quoll/api@0.2.5...@quoll/api@0.2.6) (2020-09-12)
 
 **Note:** Version bump only for package @quoll/api
