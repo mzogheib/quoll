@@ -92,7 +92,12 @@ class App extends Component {
                   key={index}
                   path={route.path}
                   exact={route.exact}
-                  component={() => <route.mainComponent />}
+                  component={({ location, history }) => (
+                    <route.mainComponent
+                      location={location}
+                      history={history}
+                    />
+                  )}
                 />
               ))}
             </Switch>

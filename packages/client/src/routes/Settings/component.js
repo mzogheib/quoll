@@ -52,7 +52,7 @@ class Settings extends Component {
     }).isRequired,
     history: PropTypes.shape({
       replace: PropTypes.func.isRequired,
-    }),
+    }).isRequired,
     feeds: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string.isRequired,
