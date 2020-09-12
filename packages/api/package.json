@@ -20,6 +20,6 @@
     "start": "nodemon server.js"
   },
   "devDependencies": {
-    "nodemon": "^1.14.11"
+    "nodemon": "^2.0.4"
   }
 }
