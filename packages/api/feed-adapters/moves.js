@@ -17,13 +17,13 @@ const Activities = {
 }
 
 function adapter(segments) {
-  return segments.map(segment => {
+  return segments.map((segment) => {
     switch (segment.type) {
       case 'move':
         const activities = segment.activities.filter(
-          activity => Activities[activity.activity]
+          (activity) => Activities[activity.activity]
         )
-        return activities.map(activity => {
+        return activities.map((activity) => {
           const type = Activities[activity.activity].type
           const title = Activities[activity.activity].label
           const timeStart = moment(activity.startTime).unix()
@@ -32,7 +32,7 @@ function adapter(segments) {
           const encodedPath =
             activity.trackPoints.length &&
             polyline.encode(
-              activity.trackPoints.map(point => [point.lat, point.lon])
+              activity.trackPoints.map((point) => [point.lat, point.lon])
             )
           const startPoint =
             activity.trackPoints.length && activity.trackPoints[0]
@@ -96,7 +96,7 @@ function adapter(segments) {
   })
 }
 
-const formatDistance = distance => {
+const formatDistance = (distance) => {
   const kms = (distance / 1000).toLocaleString(undefined, {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
@@ -104,7 +104,7 @@ const formatDistance = distance => {
   return `${kms} km`
 }
 
-const formatDuration = duration => {
+const formatDuration = (duration) => {
   const hours = duration / 1000 / 60 / 60
   if (hours < 1) {
     const minutes = (hours - Math.floor(hours)) * 60

@@ -67,7 +67,7 @@ export default class Map extends Component {
       mapTypeId: 'roadmap',
     })
 
-    this.map.addListener('click', event => {
+    this.map.addListener('click', (event) => {
       if (event.placeId) this.resetAllMapElements()
     })
 
@@ -88,7 +88,7 @@ export default class Map extends Component {
     const { focussedItem, markerData, polylineData } = this.props
     this.resetAllMapElements()
     const allItems = this.state.markerItems.concat(this.state.polylineItems)
-    const item = allItems.find(item => item.id === focussedItem.id)
+    const item = allItems.find((item) => item.id === focussedItem.id)
     if (item) {
       this.focusItem(item, focussedItem.latitude, focussedItem.longitude)
     }
@@ -119,10 +119,10 @@ export default class Map extends Component {
     }
   }
 
-  makeMarkerItems = markerData => {
+  makeMarkerItems = (markerData) => {
     const { onElementSelect } = this.props
 
-    const markerItems = markerData.map(item => ({
+    const markerItems = markerData.map((item) => ({
       id: item.id,
       marker: makeMarker(item),
       infoWindow: makeInfoWindow(item),
@@ -137,10 +137,10 @@ export default class Map extends Component {
     return markerItems
   }
 
-  makePolylineItems = polylineData => {
+  makePolylineItems = (polylineData) => {
     const { onElementSelect } = this.props
 
-    const polylineItems = polylineData.map(item => ({
+    const polylineItems = polylineData.map((item) => ({
       id: item.id,
       polyline: makePolyline(item),
       infoWindow: makeInfoWindow(item),
@@ -148,7 +148,7 @@ export default class Map extends Component {
 
     polylineItems.forEach(({ polyline, id, infoWindow }) => {
       polyline.setMap(this.map)
-      polyline.addListener('click', event => {
+      polyline.addListener('click', (event) => {
         this.resetAllMapElements()
         onElementSelect(id, event.latLng.lat(), event.latLng.lng())
       })
@@ -164,7 +164,7 @@ export default class Map extends Component {
     const bounds = new google.maps.LatLngBounds()
     markerItems.forEach(({ marker }) => bounds.extend(marker.getPosition()))
     polylineItems.forEach(({ polyline }) =>
-      polyline.getPath().forEach(position => bounds.extend(position))
+      polyline.getPath().forEach((position) => bounds.extend(position))
     )
     return bounds
   }

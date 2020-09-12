@@ -69,7 +69,7 @@ export default class DatePicker extends Component {
     this.handleDateChange(tomorrow)
   }
 
-  handleDateChange = date => {
+  handleDateChange = (date) => {
     this.props.onDateChange(moment(date).format('YYYY-MM-DD'))
     this.setState({ showCalendar: false })
   }

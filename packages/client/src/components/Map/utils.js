@@ -22,21 +22,21 @@ export const makeMarker = ({ longitude, latitude, title, map }) => {
   return new google.maps.Marker(marker)
 }
 
-export const highlightMarker = marker => {
+export const highlightMarker = (marker) => {
   marker.setOptions({
     icon: `${markersBaseUrl}${Colors.marker.highlighted.substr(1)}`,
     zIndex: 1000,
   })
 }
 
-export const unHighlightMarker = marker => {
+export const unHighlightMarker = (marker) => {
   marker.setOptions({
     icon: `${markersBaseUrl}${Colors.marker.default.substr(1)}`,
     zIndex: 500,
   })
 }
 
-const decodePath = path => google.maps.geometry.encoding.decodePath(path)
+const decodePath = (path) => google.maps.geometry.encoding.decodePath(path)
 
 export const makePolyline = ({ encodedPath, map }) => {
   const polyline = {
@@ -50,13 +50,13 @@ export const makePolyline = ({ encodedPath, map }) => {
   return new google.maps.Polyline(polyline)
 }
 
-export const highlightPolyline = polyline =>
+export const highlightPolyline = (polyline) =>
   polyline.setOptions({
     strokeColor: Colors.polyline.highlighted,
     zIndex: 1000,
   })
 
-export const unHighlightPolyline = polyline =>
+export const unHighlightPolyline = (polyline) =>
   polyline.setOptions({ strokeColor: Colors.polyline.default, zIndex: 500 })
 
 export const makeInfoWindow = ({ title, subTitle, description }) => {

@@ -11,13 +11,15 @@ const Wrapper = styled.div`
 
 const Timeline = ({ entries, onEntryClick }) => (
   <Wrapper>
-    {entries.sort((a, b) => a.timeStart - b.timeStart).map((entry, index) => (
-      <TimelineEntry
-        key={index}
-        entry={entry}
-        onClick={() => onEntryClick(entry.id)}
-      />
-    ))}
+    {entries
+      .sort((a, b) => a.timeStart - b.timeStart)
+      .map((entry, index) => (
+        <TimelineEntry
+          key={index}
+          entry={entry}
+          onClick={() => onEntryClick(entry.id)}
+        />
+      ))}
   </Wrapper>
 )
 

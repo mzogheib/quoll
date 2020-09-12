@@ -12,20 +12,20 @@ export const setFeedAuthenticating = (name, value) => ({
   value,
 })
 
-export const getOauthUrl = name => {
-  const feedService = feedServices.find(feed => feed.name === name)
-  return dispatch => {
+export const getOauthUrl = (name) => {
+  const feedService = feedServices.find((feed) => feed.name === name)
+  return (dispatch) => {
     dispatch(setFeedAuthenticating(name, true))
     return feedService
       .getOauthUrl()
-      .then(url => url)
+      .then((url) => url)
       .finally(() => dispatch(setFeedAuthenticating(name, false)))
   }
 }
 
 export const authenticateFeed = (name, code) => {
-  const feedService = feedServices.find(feed => feed.name === name)
-  return dispatch => {
+  const feedService = feedServices.find((feed) => feed.name === name)
+  return (dispatch) => {
     dispatch(setFeedAuthenticating(name, true))
     return feedService
       .authenticate({ code })
@@ -34,15 +34,15 @@ export const authenticateFeed = (name, code) => {
   }
 }
 
-export const disconnectFeed = name => {
-  const feedService = feedServices.find(feed => feed.name === name)
-  return dispatch => {
+export const disconnectFeed = (name) => {
+  const feedService = feedServices.find((feed) => feed.name === name)
+  return (dispatch) => {
     dispatch(setFeedAuthenticating(name, true))
     return (
       feedService
         .disconnect()
         // BE may return a message for further, manual instructions
-        .then(message => {
+        .then((message) => {
           dispatch(setFeedConnected(name, false))
           return message
         })
@@ -51,7 +51,7 @@ export const disconnectFeed = name => {
   }
 }
 
-const defaultFeeds = feedServices.map(config => ({
+const defaultFeeds = feedServices.map((config) => ({
   ...config,
   isConnected: false,
   isAuthenticating: false,
@@ -60,18 +60,16 @@ const defaultFeeds = feedServices.map(config => ({
 const feeds = (state = defaultFeeds, action) => {
   switch (action.type) {
     case 'SET_FEED_CONNECTED':
-      return state.map(
-        feed =>
-          feed.name === action.name
-            ? { ...feed, isConnected: action.value }
-            : feed
+      return state.map((feed) =>
+        feed.name === action.name
+          ? { ...feed, isConnected: action.value }
+          : feed
       )
     case 'SET_FEED_AUTHENTICATING':
-      return state.map(
-        feed =>
-          feed.name === action.name
-            ? { ...feed, isAuthenticating: action.value }
-            : feed
+      return state.map((feed) =>
+        feed.name === action.name
+          ? { ...feed, isAuthenticating: action.value }
+          : feed
       )
     default:
       return state

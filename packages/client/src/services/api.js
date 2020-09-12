@@ -4,7 +4,7 @@ const baseUrl = process.env.API_URL
 
 let authHeader
 
-const authenticate = userId => {
+const authenticate = (userId) => {
   authHeader = { Authorization: `Basic ${userId}:` }
 }
 
@@ -22,21 +22,21 @@ const request = (method, endpoint, params, payload) => {
 const get = ({ endpoint, params }) =>
   new Promise((resolve, reject) => {
     request('GET', endpoint, params)
-      .then(response => resolve(response.data))
+      .then((response) => resolve(response.data))
       .catch(reject)
   })
 
 const post = ({ endpoint, params, payload }) =>
   new Promise((resolve, reject) => {
     request('POST', endpoint, params, payload)
-      .then(response => resolve(response.data))
+      .then((response) => resolve(response.data))
       .catch(reject)
   })
 
 const deleteReq = ({ endpoint, params }) =>
   new Promise((resolve, reject) => {
     request('DELETE', endpoint, params)
-      .then(response => resolve(response.data))
+      .then((response) => resolve(response.data))
       .catch(reject)
   })
 

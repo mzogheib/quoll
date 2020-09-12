@@ -25,7 +25,7 @@ export const Default = () => (
       </tr>
     </thead>
     <tbody>
-      {iconNames.map(iconName => {
+      {iconNames.map((iconName) => {
         const IconComponent = Icon[iconName]
         return (
           <tr key={iconName}>

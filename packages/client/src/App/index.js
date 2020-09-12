@@ -12,24 +12,19 @@ const mapStateToProps = ({ feeds }) => ({
   ),
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   // TODO: if login fails then clear that user from localStorage and signup
   onMount: () => {
     const userId = userService.getCurrentUser()
     const action = userId ? () => loginUser(userId) : () => signupUser()
     return dispatch(action())
-      .then(user => user.feeds)
-      .then(feeds =>
-        feeds.forEach(feed =>
+      .then((user) => user.feeds)
+      .then((feeds) =>
+        feeds.forEach((feed) =>
           dispatch(setFeedConnected(feed.name, feed.isConnected))
         )
       )
   },
 })
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(App)
-)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

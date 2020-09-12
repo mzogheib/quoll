@@ -1,11 +1,11 @@
 import timelineService from '../../services/timeline'
 
-export const setTimelineFetching = value => ({
+export const setTimelineFetching = (value) => ({
   type: 'SET_TIMELINE_FETCHING',
   value,
 })
 
-export const setEntries = entries => ({
+export const setEntries = (entries) => ({
   type: 'SET_TIMELINE_ENTRIES',
   entries,
 })
@@ -15,7 +15,7 @@ export const fetchTimeline = () => (dispatch, getState) => {
   dispatch(setTimelineFetching(true))
   return timelineService
     .get(date)
-    .then(entries => dispatch(setEntries(entries)))
+    .then((entries) => dispatch(setEntries(entries)))
     .catch(() => dispatch(setTimelineFetching(false)))
 }
 

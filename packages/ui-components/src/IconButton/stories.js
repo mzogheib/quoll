@@ -16,7 +16,7 @@ const Table = styled.table`
 
 const iconNames = sortBy(Object.keys(IconButton))
 
-const handleClick = buttonVariation =>
+const handleClick = (buttonVariation) =>
   alert(`Clicked on ${buttonVariation} IconButton!`)
 
 export const Default = () => (
@@ -28,7 +28,7 @@ export const Default = () => (
       </tr>
     </thead>
     <tbody>
-      {iconNames.map(iconName => {
+      {iconNames.map((iconName) => {
         const IconComponent = IconButton[iconName]
         return (
           <tr key={iconName}>

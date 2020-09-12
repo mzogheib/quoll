@@ -8,17 +8,17 @@ export const setUserReady = () => ({
   type: 'SET_USER_READY',
 })
 
-export const loginUser = id => dispatch => {
+export const loginUser = (id) => (dispatch) => {
   dispatch(setUserAuthenticating())
-  return userService.login(id).then(user => {
+  return userService.login(id).then((user) => {
     dispatch(setUserReady())
     return user
   })
 }
 
-export const signupUser = () => dispatch => {
+export const signupUser = () => (dispatch) => {
   dispatch(setUserAuthenticating())
-  return userService.signup().then(user => {
+  return userService.signup().then((user) => {
     dispatch(setUserReady())
     return user
   })

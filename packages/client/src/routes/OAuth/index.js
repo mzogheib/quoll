@@ -11,7 +11,7 @@ const OAuth = ({ location, history }) => {
 
   // Pass through any error messages to the settings page, which is where
   // the user would have started to get here
-  onOAuthResponse(queryParams, errorMessage =>
+  onOAuthResponse(queryParams, (errorMessage) =>
     history.push('/settings', { errorMessage })
   )
 

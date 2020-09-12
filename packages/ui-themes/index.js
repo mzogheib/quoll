@@ -22,19 +22,19 @@ const breakpoints = {
   xl: 1281,
 }
 
-const breakpointUp = size => styles => css`
+const breakpointUp = (size) => (styles) => css`
   @media (min-width: ${size}px) {
     ${styles};
   }
 `
 
-const breakpointDown = size => styles => css`
+const breakpointDown = (size) => (styles) => css`
   @media (max-width: ${size - 1}px) {
     ${styles};
   }
 `
 
-const breakpointBetweenAny = (min, max) => styles => css`
+const breakpointBetweenAny = (min, max) => (styles) => css`
   @media (min-width: ${min}px) and (max-width: ${max - 1}px) {
     ${styles};
   }

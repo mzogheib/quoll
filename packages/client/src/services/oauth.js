@@ -19,18 +19,18 @@ const makeToken = () => {
   return token
 }
 
-const getTokenFromState = state => {
+const getTokenFromState = (state) => {
   const { token } = utils.decode(state)
   return token
 }
 
-const isValidToken = token => {
+const isValidToken = (token) => {
   const storedToken = storageService.get('oauth-state-token')
   storageService.delete('oauth-state-token')
   return storedToken && token && storedToken === token
 }
 
-const makeAuthUrl = url => {
+const makeAuthUrl = (url) => {
   const state = utils.encode({ token: makeToken() })
   return utils.addQueryParams(url, { state })
 }
@@ -40,7 +40,7 @@ export const requestAuth = (url, onSuccess, onError) => {
   window.open(makeAuthUrl(url))
 
   // Register the callback that the OPENED window will call
-  window.quollOnOAuthResponse = response => {
+  window.quollOnOAuthResponse = (response) => {
     if (!(response && response.state)) return onError('Unknown response.')
 
     const { code, state, error } = response

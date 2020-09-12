@@ -7,8 +7,8 @@ import Home from './component'
 
 const mapStateToProps = ({ date, timeline, focussedItem }) => {
   const markerData = timeline.entries
-    .filter(entry => !entry.polyline && entry.locationStart)
-    .map(entry => ({
+    .filter((entry) => !entry.polyline && entry.locationStart)
+    .map((entry) => ({
       id: entry.id,
       latitude: entry.locationStart.latitude,
       longitude: entry.locationStart.longitude,
@@ -17,8 +17,8 @@ const mapStateToProps = ({ date, timeline, focussedItem }) => {
       description: entry.description || '',
     }))
   const polylineData = timeline.entries
-    .filter(entry => entry.polyline)
-    .map(entry => ({
+    .filter((entry) => entry.polyline)
+    .map((entry) => ({
       id: entry.id,
       encodedPath: entry.polyline,
       title: entry.title,
@@ -37,9 +37,9 @@ const mapStateToProps = ({ date, timeline, focussedItem }) => {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   onMount: () => dispatch(fetchTimeline()),
-  onDateChange: date => {
+  onDateChange: (date) => {
     dispatch(setDate(date))
     return dispatch(fetchTimeline()).then(() => dispatch(setFocussedItem(null)))
   },
@@ -47,7 +47,4 @@ const mapDispatchToProps = dispatch => ({
     dispatch(setFocussedItem(id, latitude, longitude)),
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

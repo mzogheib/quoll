@@ -81,7 +81,7 @@ class Home extends Component {
     this.props.onMount()
   }
 
-  dateIsToday = date => moment(date).isSame(moment(), 'day')
+  dateIsToday = (date) => moment(date).isSame(moment(), 'day')
 
   render() {
     const {

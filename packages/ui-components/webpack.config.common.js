@@ -9,7 +9,7 @@ module.exports = {
     libraryTarget: 'commonjs-module',
   },
   externals: [
-    function(context, request, callback) {
+    function (context, request, callback) {
       if (/^(ui-themes|react|react-dom|styled-components)$/.test(request)) {
         return callback(null, 'commonjs ' + request)
       }

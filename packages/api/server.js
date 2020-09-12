@@ -6,10 +6,9 @@ const app = express()
 const bodyParser = require('body-parser')
 const routes = require('./routes')
 
-mongoose.connect(
-  process.env.MONGODB_CONNECTION_STRING,
-  { useNewUrlParser: true }
-)
+mongoose.connect(process.env.MONGODB_CONNECTION_STRING, {
+  useNewUrlParser: true,
+})
 
 const db = mongoose.connection
 if (!db) console.log('Error connecting db')

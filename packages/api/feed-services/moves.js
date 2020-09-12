@@ -13,7 +13,7 @@ function getOAuthUrl() {
 }
 
 function authenticate(code) {
-  return apiMoves.oauth.token({ code }).then(data => {
+  return apiMoves.oauth.token({ code }).then((data) => {
     const expiry_time = calculateExpiryTime(data.expires_in)
     return { expiry_time, ...data }
   })
@@ -24,7 +24,7 @@ function deauthorize() {
 }
 
 function refreshAuth({ refresh_token }) {
-  return apiMoves.oauth.refresh({ refresh_token }).then(data => {
+  return apiMoves.oauth.refresh({ refresh_token }).then((data) => {
     const expiry_time = calculateExpiryTime(data.expires_in)
     return { expiry_time, ...data }
   })
@@ -36,7 +36,7 @@ function getSegments(from, to, token) {
     apiMoves.user.storyline.daily
       .get({ from, to, trackPoints, access_token: token })
       // Flatten segments to a 1D array
-      .then(storyline =>
+      .then((storyline) =>
         storyline.reduce(
           (prev, next) => prev.concat([].concat(...next.segments)),
           []

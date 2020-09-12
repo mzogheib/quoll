@@ -1,6 +1,6 @@
 import feeds from '.'
 
-feeds.forEach(feed => {
+feeds.forEach((feed) => {
   it('has a standard schema', () => {
     /* 
     {

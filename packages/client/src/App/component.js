@@ -60,7 +60,7 @@ class App extends Component {
   }
 
   getRouteTitleFromLocation(location) {
-    const route = routes.find(route => route.path === location.pathname)
+    const route = routes.find((route) => route.path === location.pathname)
     return (route && route.title) || ''
   }
 

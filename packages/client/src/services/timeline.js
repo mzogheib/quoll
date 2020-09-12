@@ -20,23 +20,19 @@ const EntryConfig = {
   yoga: { label: 'Yoga', image: '🧘‍♂️' },
 }
 
-const get = date =>
+const get = (date) =>
   api
     .get({
       endpoint: 'timeline',
       params: {
-        from: moment(date)
-          .startOf('day')
-          .toISOString(),
-        to: moment(date)
-          .endOf('day')
-          .toISOString(),
+        from: moment(date).startOf('day').toISOString(),
+        to: moment(date).endOf('day').toISOString(),
       },
     })
-    .then(entries =>
-      entries.map(entry => {
+    .then((entries) =>
+      entries.map((entry) => {
         const entryConfig = EntryConfig[entry.type]
-        const feedConfig = feeds.find(feed => feed.name === entry.feed)
+        const feedConfig = feeds.find((feed) => feed.name === entry.feed)
         return {
           ...entry,
           logo: feedConfig && feedConfig.imageConnected,

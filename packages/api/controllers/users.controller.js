@@ -37,7 +37,7 @@ function sanitizeUser(user) {
   if (!user) return
 
   const sanitizedUser = user
-  sanitizedUser.feeds = user.feeds.map(feed => {
+  sanitizedUser.feeds = user.feeds.map((feed) => {
     return {
       name: feed.name,
       isConnected: !!feed.auth,
@@ -57,7 +57,7 @@ function get(userId) {
 
 function update(user) {
   return new Promise((resolve, reject) => {
-    User.updateOne({ _id: user._id }, user, error => {
+    User.updateOne({ _id: user._id }, user, (error) => {
       if (error) reject(error)
       else resolve()
     })
@@ -66,15 +66,15 @@ function update(user) {
 
 function setFeedAuth(userId, feedName, data) {
   return get(userId)
-    .then(user => {
-      user.feeds.find(feed => feed.name === feedName).auth = data
+    .then((user) => {
+      user.feeds.find((feed) => feed.name === feedName).auth = data
       return user
     })
     .then(update)
 }
 
 function getFeedAuth(userId, feedName) {
-  return get(userId).then(user => {
-    return user.feeds.find(feed => feed.name === feedName).auth
+  return get(userId).then((user) => {
+    return user.feeds.find((feed) => feed.name === feedName).auth
   })
 }

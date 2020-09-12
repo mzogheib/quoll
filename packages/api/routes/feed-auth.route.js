@@ -33,7 +33,7 @@ function authenticate(req, res) {
 
   const respond = ({ status, message }) => res.status(status).json(message)
   const onSuccess = () => respond({ status: 200 })
-  const onError = error =>
+  const onError = (error) =>
     respond({ status: error.status || 500, message: error.message })
 
   if (!feed) {
@@ -47,7 +47,7 @@ function authenticate(req, res) {
       respond({ status: 404, message: `Unkown feed: ${feed}` })
     } else {
       authenticate(code)
-        .then(data => ctrlUsers.setFeedAuth(userId, feed, data))
+        .then((data) => ctrlUsers.setFeedAuth(userId, feed, data))
         .then(onSuccess)
         .catch(onError)
     }
@@ -58,36 +58,38 @@ function checkAuth(req, res, next) {
   const { userId } = req
 
   const respond = ({ status, message }) => res.status(status).json(message)
-  const onError = error =>
+  const onError = (error) =>
     respond({ status: error.status || 500, message: error.message })
 
-  ctrlUsers.get(userId).then(user => {
-    const promises = user.feeds.filter(feed => feed.auth).map(feed => {
-      if (!feed.auth.expiry_time) {
-        return Promise.resolve()
-      }
+  ctrlUsers.get(userId).then((user) => {
+    const promises = user.feeds
+      .filter((feed) => feed.auth)
+      .map((feed) => {
+        if (!feed.auth.expiry_time) {
+          return Promise.resolve()
+        }
 
-      if (moment().unix() < feed.auth.expiry_time) {
-        return Promise.resolve()
-      }
+        if (moment().unix() < feed.auth.expiry_time) {
+          return Promise.resolve()
+        }
 
-      const service = feedServices[feed.name]
-      const refreshAuth = service && service.refreshAuth
-      if (!refreshAuth) {
-        return Promise.reject(
-          onError({
-            status: 404,
-            message: `Unkown feed: ${feed.name}`,
-          })
-        )
-      }
+        const service = feedServices[feed.name]
+        const refreshAuth = service && service.refreshAuth
+        if (!refreshAuth) {
+          return Promise.reject(
+            onError({
+              status: 404,
+              message: `Unkown feed: ${feed.name}`,
+            })
+          )
+        }
 
-      return refreshAuth(feed.auth)
-        .then(refreshedAuth =>
-          ctrlUsers.setFeedAuth(userId, feed.name, refreshedAuth)
-        )
-        .catch(onError)
-    })
+        return refreshAuth(feed.auth)
+          .then((refreshedAuth) =>
+            ctrlUsers.setFeedAuth(userId, feed.name, refreshedAuth)
+          )
+          .catch(onError)
+      })
 
     return Promise.all(promises).then(() => next())
   })
@@ -99,7 +101,7 @@ function deauthorize(req, res) {
 
   const respond = ({ status, message }) => res.status(status).json(message)
   const onSuccess = () => respond({ status: 204 })
-  const onError = error =>
+  const onError = (error) =>
     respond({ status: error.status || 500, message: error.message })
 
   if (!feed) {

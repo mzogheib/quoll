@@ -81,25 +81,25 @@ class Settings extends Component {
 
   closeModal = () => this.setState({ ...INITIAL_STATE })
 
-  connectFeed = name => {
+  connectFeed = (name) => {
     const { onConnect, onOauthCodeReceived } = this.props
 
     const defaultErrorMessage = 'Could not connect feed. Please try again.'
     const openErrorModal = (message = defaultErrorMessage) =>
       this.openModal(message)
 
-    const onRequestAuthSuccess = code =>
+    const onRequestAuthSuccess = (code) =>
       onOauthCodeReceived(name, code).catch(openErrorModal)
 
     onConnect(name)
-      .then(url => requestAuth(url, onRequestAuthSuccess, openErrorModal))
+      .then((url) => requestAuth(url, onRequestAuthSuccess, openErrorModal))
       .catch(openErrorModal)
   }
 
-  disconnectFeed = name =>
+  disconnectFeed = (name) =>
     this.props
       .onDisconnect(name)
-      .then(message => {
+      .then((message) => {
         if (message) {
           this.openModal(message)
         }
@@ -112,7 +112,7 @@ class Settings extends Component {
     const { feeds } = this.props
     const { showModal, modalMessage } = this.state
 
-    const renderFeed = feed => (
+    const renderFeed = (feed) => (
       <FeedSettingsWrapper key={feed.name}>
         <FeedSettings
           feed={feed}

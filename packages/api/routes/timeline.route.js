@@ -10,13 +10,13 @@ function get(req, res) {
   const { userId } = req
 
   const respond = ({ status, message }) => res.status(status).json(message)
-  const onSuccess = data => respond({ status: 200, message: data })
-  const onError = error =>
+  const onSuccess = (data) => respond({ status: 200, message: data })
+  const onError = (error) =>
     respond({ status: error.status || 500, message: error.message })
 
   ctrlUsers
     .get(userId)
-    .then(user => ctrlTimeline.get(from, to, user))
+    .then((user) => ctrlTimeline.get(from, to, user))
     .then(onSuccess)
     .catch(onError)
 }

@@ -15,8 +15,8 @@ const Activities = {
 
 function adapter(activities) {
   return activities
-    .filter(activity => Activities[activity.type])
-    .map(activity => {
+    .filter((activity) => Activities[activity.type])
+    .map((activity) => {
       const type = Activities[activity.type].type
       const title = Activities[activity.type].label
       const distance = formatDistance(activity.distance)
@@ -48,7 +48,7 @@ function adapter(activities) {
     })
 }
 
-const formatDistance = distance => {
+const formatDistance = (distance) => {
   const kms = (distance / 1000).toLocaleString(undefined, {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,

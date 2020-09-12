@@ -31,16 +31,16 @@ function authenticate(code) {
 
 function deauthorize(auth) {
   return apiToshl.oauth.deauthorize({ ...auth }).then(() => {
-    ToshlUser.deleteOne({ accessToken: auth.access_token }, error => {
+    ToshlUser.deleteOne({ accessToken: auth.access_token }, (error) => {
       // TODO: handle errors
     })
   })
 }
 
 function refreshAuth(auth) {
-  return apiToshl.oauth.refresh({ ...auth }).then(data => {
+  return apiToshl.oauth.refresh({ ...auth }).then((data) => {
     // Clear cache identified by old access_token
-    ToshlUser.deleteOne({ accessToken: auth.access_token }, error => {
+    ToshlUser.deleteOne({ accessToken: auth.access_token }, (error) => {
       // TODO: handle errors
     })
     return transformAuthResponse(data)
@@ -52,7 +52,7 @@ function getTags(accessToken) {
     ToshlUser.findOne({ accessToken }, (error, toshlUser) => {
       if (error) return reject(error)
       if (toshlUser && toshlUser.tags) return resolve(toshlUser.tags)
-      return apiToshl.tags.list({ access_token: accessToken }).then(tags => {
+      return apiToshl.tags.list({ access_token: accessToken }).then((tags) => {
         ToshlUser.create(
           {
             accessToken,
@@ -82,13 +82,13 @@ function getEntries(from, to, token) {
   let decoratedEntries
   return apiToshl.entries
     .list({ from: fromDate, to: toDate, access_token: token })
-    .then(entries => {
+    .then((entries) => {
       decoratedEntries = entries
     })
     .then(() => getTags(token))
-    .then(tags => {
-      decoratedEntries.forEach(decoratedEntry => {
-        decoratedEntry.tags = decoratedEntry.tags.map(tagId => {
+    .then((tags) => {
+      decoratedEntries.forEach((decoratedEntry) => {
+        decoratedEntry.tags = decoratedEntry.tags.map((tagId) => {
           return { id: tagId, name: tags[tagId] || 'No tag' }
         })
       })

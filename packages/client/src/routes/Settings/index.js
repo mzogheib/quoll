@@ -6,17 +6,14 @@ import {
   disconnectFeed,
 } from '../../store/feeds'
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   feeds: state.feeds,
 })
 
-const mapDispatchToProps = dispatch => ({
-  onConnect: name => dispatch(getOauthUrl(name)),
+const mapDispatchToProps = (dispatch) => ({
+  onConnect: (name) => dispatch(getOauthUrl(name)),
   onOauthCodeReceived: (name, code) => dispatch(authenticateFeed(name, code)),
-  onDisconnect: name => dispatch(disconnectFeed(name)),
+  onDisconnect: (name) => dispatch(disconnectFeed(name)),
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Settings)
+export default connect(mapStateToProps, mapDispatchToProps)(Settings)

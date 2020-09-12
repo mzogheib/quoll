@@ -42,8 +42,8 @@ function getAthleteActivities(from, to, token) {
 
   return apiStrava.athlete.activities
     .list({ after, before, per_page: perPage, access_token: token })
-    .then(activities => {
-      const promises = activities.map(activity => {
+    .then((activities) => {
+      const promises = activities.map((activity) => {
         return apiStrava.activities.get({
           id: activity.id,
           access_token: token,

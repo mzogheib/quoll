@@ -5,6 +5,6 @@ import themes from '@quoll/ui-themes'
 
 configure(require.context('../src', true, /stories\.js$/), module)
 
-addDecorator(story => (
+addDecorator((story) => (
   <ThemeProvider theme={themes.default}>{story()}</ThemeProvider>
 ))

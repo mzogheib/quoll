@@ -8,9 +8,9 @@ module.exports = {
 const DefaultTime = '12:00:00'
 
 function adapter(entries) {
-  return entries.map(entry => {
+  return entries.map((entry) => {
     const type = entry.amount < 0 ? 'expense' : 'income'
-    const tags = entry.tags.map(tag => tag.name).join(', ')
+    const tags = entry.tags.map((tag) => tag.name).join(', ')
     const time = extractTimeString(entry.desc) || DefaultTime
     const timeStart = moment(`${entry.date} ${time}`).unix()
     const timeEnd = timeStart
@@ -22,10 +22,7 @@ function adapter(entries) {
       : null
     const locationEnd = locationStart
     const description = startsWithTime(entry.desc)
-      ? entry.desc
-          .split('\n')
-          .slice(2)
-          .join('\n')
+      ? entry.desc.split('\n').slice(2).join('\n')
       : entry.desc
     const amount = formatAmount(entry.amount, entry.currency.code)
     return {
@@ -65,8 +62,10 @@ function extractTimeString(input) {
     isValid =
       hour >= 0 &&
       hour < 24 &&
-      (minute >= 0 && minute < 60) &&
-      (second >= 0 && second < 60)
+      minute >= 0 &&
+      minute < 60 &&
+      second >= 0 &&
+      second < 60
   }
 
   return isValid ? match[0] : null

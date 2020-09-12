@@ -2,7 +2,7 @@ import api from '../api'
 
 const getOauthUrl = () =>
   api.get({ endpoint: 'feed-auth', params: { feed: 'moves' } })
-const authenticate = payload =>
+const authenticate = (payload) =>
   api.post({ endpoint: 'feed-auth', payload, params: { feed: 'moves' } })
 const deauthorize = () =>
   api

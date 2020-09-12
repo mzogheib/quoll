@@ -14,7 +14,7 @@ function getOAuthUrl() {
 }
 
 function authenticate(code) {
-  return apiUber.oauth.token({ code }).then(data => {
+  return apiUber.oauth.token({ code }).then((data) => {
     const expiry_time = calculateExpiryTime(data.expires_in)
     return { expiry_time, ...data }
   })
@@ -25,7 +25,7 @@ function deauthorize(auth) {
 }
 
 function refreshAuth(auth) {
-  return apiUber.oauth.refresh(auth).then(data => {
+  return apiUber.oauth.refresh(auth).then((data) => {
     const expiry_time = calculateExpiryTime(data.expires_in)
     return { expiry_time, ...data }
   })
@@ -35,13 +35,17 @@ function getHistory(from, to, token) {
   const offset = 0
   const limit = 50
   const fromTime = moment(from).unix()
-  const toTime = moment(to)
-    .endOf('day')
-    .unix()
+  const toTime = moment(to).endOf('day').unix()
   const initialResults = []
-  return history(offset, limit, token, fromTime, initialResults).then(results =>
+  return history(
+    offset,
+    limit,
+    token,
+    fromTime,
+    initialResults
+  ).then((results) =>
     results.filter(
-      result => result.start_time >= fromTime && result.start_time <= toTime
+      (result) => result.start_time >= fromTime && result.start_time <= toTime
     )
   )
 }
@@ -49,7 +53,7 @@ function getHistory(from, to, token) {
 function history(offset, limit, token, fromTime, results) {
   return apiUber
     .history({ offset, limit, access_token: token })
-    .then(response => {
+    .then((response) => {
       // Get the minTime from response.history
       const minTime = response.history.reduce(
         (min, ride) => (ride.start_time < min ? ride.start_time : min),

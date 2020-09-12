@@ -13,10 +13,7 @@ function login(req, res) {
   if (!userId) {
     respond({ status: 400, message: 'No client key provided.' })
   } else {
-    ctrlUsers
-      .login(userId)
-      .then(onSuccess)
-      .catch(onError)
+    ctrlUsers.login(userId).then(onSuccess).catch(onError)
   }
 
   function onSuccess(user) {
@@ -40,10 +37,7 @@ function login(req, res) {
 }
 
 function signup(req, res) {
-  ctrlUsers
-    .createUser()
-    .then(onSuccess)
-    .catch(onError)
+  ctrlUsers.createUser().then(onSuccess).catch(onError)
 
   function onSuccess(user) {
     respond({ status: 200, message: user })

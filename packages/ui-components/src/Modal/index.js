@@ -51,7 +51,7 @@ const Modal = styled(ReactModalAdapter)(
   `
 )
 
-Modal.setAppElement = id => ReactModal.setAppElement(id)
+Modal.setAppElement = (id) => ReactModal.setAppElement(id)
 
 Modal.propTypes = {
   className: PropTypes.string,

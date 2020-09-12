@@ -33,8 +33,10 @@ function extractTimeString(input) {
     isValid =
       hour >= 0 &&
       hour < 24 &&
-      (minute >= 0 && minute < 60) &&
-      (second >= 0 && second < 60)
+      minute >= 0 &&
+      minute < 60 &&
+      second >= 0 &&
+      second < 60
   }
 
   return isValid ? match[0] : null
@@ -45,9 +47,7 @@ function startsWithTime(string) {
 }
 
 function makeRandomString(length) {
-  return Math.random()
-    .toString(36)
-    .substr(2, length)
+  return Math.random().toString(36).substr(2, length)
 }
 
 function encode(obj) {
