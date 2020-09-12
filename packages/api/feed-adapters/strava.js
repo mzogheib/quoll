@@ -1,5 +1,5 @@
 const moment = require('moment')
-const uuidv4 = require('uuid/v4')
+const { v4: uuidv4 } = require('uuid')
 
 module.exports = {
   adapter,
@@ -32,6 +32,9 @@ function adapter(activities) {
         longitude: activity.end_latlng[1],
       }
       const polyline = activity.map.polyline
+
+      console.log(uuidv4())
+
       return {
         feed: 'strava',
         id: uuidv4(),
