@@ -31,6 +31,9 @@ module.exports = {
         use: [
           {
             loader: 'file-loader',
+            options: {
+              esModule: false,
+            },
           },
         ],
       },
