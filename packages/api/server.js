@@ -8,6 +8,7 @@ const routes = require('./routes')
 
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING, {
   useNewUrlParser: true,
+  useUnifiedTopology: true,
 })
 
 const db = mongoose.connection
