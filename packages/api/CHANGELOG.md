@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.8](https://github.com/mzogheib/quoll/compare/@quoll/api@0.2.7...@quoll/api@0.2.8) (2020-09-13)
+
+**Note:** Version bump only for package @quoll/api
+
+
+
+
+
 ## [0.2.7](https://github.com/mzogheib/quoll/compare/@quoll/api@0.2.6...@quoll/api@0.2.7) (2020-09-12)
 
 
