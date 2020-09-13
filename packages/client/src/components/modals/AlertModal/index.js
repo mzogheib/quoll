@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { Button, Modal } from '@quoll/ui-components'
 
-const StyledModal = styled(Modal)`
+const InnerWrapper = styled.div`
   padding: 20px;
 `
 
@@ -14,12 +14,14 @@ const Actions = styled.div`
 `
 
 const AlertModal = ({ isOpen, message, onClose }) => (
-  <StyledModal isOpen={isOpen} onRequestClose={onClose}>
-    <div>{message}</div>
-    <Actions>
-      <Button onClick={onClose}>OK</Button>
-    </Actions>
-  </StyledModal>
+  <Modal isOpen={isOpen} onRequestClose={onClose}>
+    <InnerWrapper>
+      <div>{message}</div>
+      <Actions>
+        <Button onClick={onClose}>OK</Button>
+      </Actions>
+    </InnerWrapper>
+  </Modal>
 )
 
 AlertModal.propTypes = {
