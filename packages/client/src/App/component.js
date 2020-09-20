@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 import { Route, Switch } from 'react-router-dom'
@@ -33,58 +33,43 @@ const Main = styled.main`
   flex-direction: column;
 `
 
-class App extends Component {
-  static propTypes = {
-    areFeedsConnected: PropTypes.bool.isRequired,
-    onMount: PropTypes.func.isRequired,
-    history: PropTypes.shape({
-      push: PropTypes.func.isRequired,
-    }).isRequired,
-    location: PropTypes.shape({
-      pathname: PropTypes.string.isRequired,
-    }).isRequired,
-  }
+const App = ({ onMount, history, location }) => {
+  const [isLoading, setLoading] = useState(true)
+  const [showWelcomeModal, setShowWelcomeModal] = useState(false)
 
-  state = {
-    isLoading: true,
-    showWelcomeModal: false,
-  }
+  useEffect(() => {
+    onMount().then((areFeedsConnected) => {
+      setLoading(false)
+      setShowWelcomeModal(!areFeedsConnected)
+    })
+  }, [])
 
-  componentDidMount() {
-    this.props.onMount().then(() =>
-      this.setState({
-        isLoading: false,
-        showWelcomeModal: !this.props.areFeedsConnected,
-      })
-    )
-  }
-
-  getRouteTitleFromLocation(location) {
+  const getRouteTitleFromLocation = (location) => {
     const route = routes.find((route) => route.path === location.pathname)
     return (route && route.title) || ''
   }
 
-  handleWelcomeCancel = () => {
-    this.setState({ showWelcomeModal: false })
+  const handleWelcomeCancel = () => {
+    setShowWelcomeModal(false)
   }
 
-  handleWelcomeConnect = () => {
-    this.setState({ showWelcomeModal: false })
-    this.props.history.push('/settings')
+  const handleWelcomeConnect = () => {
+    setShowWelcomeModal(false)
+    history.push('/settings')
   }
 
-  handleSideBarHelpClick = () => {
-    this.setState({ showWelcomeModal: true })
+  const handleSideBarHelpClick = () => {
+    setShowWelcomeModal(true)
   }
 
-  renderLoading = () => <div>Loading...</div>
+  const renderLoading = () => <div>Loading...</div>
 
-  renderApp() {
+  const renderApp = () => {
     return (
       <Wrapper>
-        <SideBar onHelpClick={this.handleSideBarHelpClick} />
+        <SideBar onHelpClick={handleSideBarHelpClick} />
         <Content>
-          <Header>{this.getRouteTitleFromLocation(this.props.location)}</Header>
+          <Header>{getRouteTitleFromLocation(location)}</Header>
           <Main>
             <Switch>
               {routes.map((route, index) => (
@@ -104,17 +89,25 @@ class App extends Component {
           </Main>
         </Content>
         <WelcomeModal
-          isOpen={this.state.showWelcomeModal}
-          onCancel={this.handleWelcomeCancel}
-          onConnect={this.handleWelcomeConnect}
+          isOpen={showWelcomeModal}
+          onCancel={handleWelcomeCancel}
+          onConnect={handleWelcomeConnect}
         />
       </Wrapper>
     )
   }
 
-  render() {
-    return this.state.isLoading ? this.renderLoading() : this.renderApp()
-  }
+  return isLoading ? renderLoading() : renderApp()
+}
+
+App.propTypes = {
+  onMount: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
 }
 
 export default App
