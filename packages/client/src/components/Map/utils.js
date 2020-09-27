@@ -70,3 +70,12 @@ export const makeInfoWindow = ({ title, subTitle, description }) => {
     content: contentString,
   })
 }
+
+export const makeBounds = (markers, polylines) => {
+  const bounds = new window.google.maps.LatLngBounds()
+  markers.forEach((marker) => bounds.extend(marker.getPosition()))
+  polylines.forEach((polyline) =>
+    polyline.getPath().forEach((position) => bounds.extend(position))
+  )
+  return bounds
+}
