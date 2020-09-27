@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
@@ -43,50 +43,30 @@ const INITIAL_STATE = {
   modalMessage: 'Oops, something went wrong.',
 }
 
-class Settings extends Component {
-  static propTypes = {
-    location: PropTypes.shape({
-      state: PropTypes.shape({
-        errorMessage: PropTypes.string,
-      }),
-    }).isRequired,
-    history: PropTypes.shape({
-      replace: PropTypes.func.isRequired,
-    }).isRequired,
-    feeds: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string.isRequired,
-      }).isRequired
-    ).isRequired,
-    onConnect: PropTypes.func.isRequired,
-    onDisconnect: PropTypes.func.isRequired,
-    onOauthCodeReceived: PropTypes.func.isRequired,
-  }
+const Settings = (props) => {
+  const [state, setState] = useState(INITIAL_STATE)
 
-  state = { ...INITIAL_STATE }
+  const openModal = (message = INITIAL_STATE.modalMessage) =>
+    setState({ showModal: true, modalMessage: message })
 
-  componentDidMount() {
-    const { location, history } = this.props
-    const { state } = location
-    if (state && state.errorMessage) {
-      this.openModal(state.errorMessage)
+  useEffect(() => {
+    const { location, history } = props
+    const { state: locationState } = location
+    if (locationState && locationState.errorMessage) {
+      openModal(locationState.errorMessage)
       // Replace the current location without a state so that this error
       // message doesn't keep getting displayed
       history.replace('/settings')
     }
-  }
+  }, [])
 
-  openModal = (message = INITIAL_STATE.modalMessage) =>
-    this.setState({ showModal: true, modalMessage: message })
+  const closeModal = () => setState({ ...INITIAL_STATE })
 
-  closeModal = () => this.setState({ ...INITIAL_STATE })
-
-  connectFeed = (name) => {
-    const { onConnect, onOauthCodeReceived } = this.props
+  const connectFeed = (name) => {
+    const { onConnect, onOauthCodeReceived } = props
 
     const defaultErrorMessage = 'Could not connect feed. Please try again.'
-    const openErrorModal = (message = defaultErrorMessage) =>
-      this.openModal(message)
+    const openErrorModal = (message = defaultErrorMessage) => openModal(message)
 
     const onRequestAuthSuccess = (code) =>
       onOauthCodeReceived(name, code).catch(openErrorModal)
@@ -96,46 +76,61 @@ class Settings extends Component {
       .catch(openErrorModal)
   }
 
-  disconnectFeed = (name) =>
-    this.props
+  const disconnectFeed = (name) =>
+    props
       .onDisconnect(name)
       .then((message) => {
         if (message) {
-          this.openModal(message)
+          openModal(message)
         }
       })
-      .catch(() =>
-        this.openModal('Could not disconnect feed. Please try again.')
-      )
+      .catch(() => openModal('Could not disconnect feed. Please try again.'))
 
-  render() {
-    const { feeds } = this.props
-    const { showModal, modalMessage } = this.state
+  const { feeds } = props
+  const { showModal, modalMessage } = state
 
-    const renderFeed = (feed) => (
-      <FeedSettingsWrapper key={feed.name}>
-        <FeedSettings
-          feed={feed}
-          onConnect={this.connectFeed}
-          onDisconnect={this.disconnectFeed}
-        />
-      </FeedSettingsWrapper>
-    )
+  const renderFeed = (feed) => (
+    <FeedSettingsWrapper key={feed.name}>
+      <FeedSettings
+        feed={feed}
+        onConnect={connectFeed}
+        onDisconnect={disconnectFeed}
+      />
+    </FeedSettingsWrapper>
+  )
 
-    return (
-      <Wrapper>
-        <Feeds>
-          <FeedsTitle>Feeds</FeedsTitle>
-          <FeedsList>{feeds.map(renderFeed)}</FeedsList>
-        </Feeds>
-        <AlertModal
-          isOpen={showModal}
-          message={modalMessage}
-          onClose={this.closeModal}
-        />
-      </Wrapper>
-    )
-  }
+  return (
+    <Wrapper>
+      <Feeds>
+        <FeedsTitle>Feeds</FeedsTitle>
+        <FeedsList>{feeds.map(renderFeed)}</FeedsList>
+      </Feeds>
+      <AlertModal
+        isOpen={showModal}
+        message={modalMessage}
+        onClose={closeModal}
+      />
+    </Wrapper>
+  )
+}
+
+Settings.propTypes = {
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      errorMessage: PropTypes.string,
+    }),
+  }).isRequired,
+  history: PropTypes.shape({
+    replace: PropTypes.func.isRequired,
+  }).isRequired,
+  feeds: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    }).isRequired
+  ).isRequired,
+  onConnect: PropTypes.func.isRequired,
+  onDisconnect: PropTypes.func.isRequired,
+  onOauthCodeReceived: PropTypes.func.isRequired,
 }
 
 export default Settings

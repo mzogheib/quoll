@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 import moment from 'moment'
@@ -39,67 +39,64 @@ const StyledCalendar = styled(Calendar)`
   box-shadow: 2px 2px 12px;
 `
 
-export default class DatePicker extends Component {
-  static propTypes = {
-    date: PropTypes.string.isRequired,
-    maxDate: PropTypes.string.isRequired,
-    calendarDisabled: PropTypes.bool,
-    prevDisabled: PropTypes.bool,
-    nextDisabled: PropTypes.bool,
-    onDateChange: PropTypes.func.isRequired,
+const DatePicker = (props) => {
+  const [showCalendar, setShowCalendar] = useState(false)
+
+  const previous = () => {
+    const yesterday = moment(props.date).subtract(1, 'day')
+    handleDateChange(yesterday)
   }
 
-  static defaultProps = {
-    calendarDisabled: false,
-    prevDisabled: false,
-    nextDisabled: false,
+  const next = () => {
+    const tomorrow = moment(props.date).add(1, 'day')
+    handleDateChange(tomorrow)
   }
 
-  state = {
-    showCalendar: false,
+  const handleDateChange = (date) => {
+    props.onDateChange(moment(date).format('YYYY-MM-DD'))
+    setShowCalendar(false)
   }
 
-  previous = () => {
-    const yesterday = moment(this.props.date).subtract(1, 'day')
-    this.handleDateChange(yesterday)
-  }
-
-  next = () => {
-    const tomorrow = moment(this.props.date).add(1, 'day')
-    this.handleDateChange(tomorrow)
-  }
-
-  handleDateChange = (date) => {
-    this.props.onDateChange(moment(date).format('YYYY-MM-DD'))
-    this.setState({ showCalendar: false })
-  }
-
-  handleDateClick = () => {
-    if (!this.props.calendarDisabled) {
-      this.setState({ showCalendar: !this.state.showCalendar })
+  const handleDateClick = () => {
+    if (!props.calendarDisabled) {
+      setShowCalendar(!showCalendar)
     }
   }
 
-  render() {
-    const { prevDisabled, nextDisabled, calendarDisabled } = this.props
-    const { showCalendar } = this.state
-    return (
-      <Wrapper>
-        <IconButton.Previous disabled={prevDisabled} onClick={this.previous} />
-        <DateLabel disabled={calendarDisabled} onClick={this.handleDateClick}>
-          {this.props.date}
-        </DateLabel>
-        <IconButton.Next disabled={nextDisabled} onClick={this.next} />
-        {showCalendar && (
-          <CalendarWrapper>
-            <StyledCalendar
-              maxDate={new Date(this.props.maxDate)}
-              value={new Date(this.props.date)}
-              onChange={this.handleDateChange}
-            />
-          </CalendarWrapper>
-        )}
-      </Wrapper>
-    )
-  }
+  const { prevDisabled, nextDisabled, calendarDisabled } = props
+  return (
+    <Wrapper>
+      <IconButton.Previous disabled={prevDisabled} onClick={previous} />
+      <DateLabel disabled={calendarDisabled} onClick={handleDateClick}>
+        {props.date}
+      </DateLabel>
+      <IconButton.Next disabled={nextDisabled} onClick={next} />
+      {showCalendar && (
+        <CalendarWrapper>
+          <StyledCalendar
+            maxDate={new Date(props.maxDate)}
+            value={new Date(props.date)}
+            onChange={handleDateChange}
+          />
+        </CalendarWrapper>
+      )}
+    </Wrapper>
+  )
 }
+
+DatePicker.propTypes = {
+  date: PropTypes.string.isRequired,
+  maxDate: PropTypes.string.isRequired,
+  calendarDisabled: PropTypes.bool,
+  prevDisabled: PropTypes.bool,
+  nextDisabled: PropTypes.bool,
+  onDateChange: PropTypes.func.isRequired,
+}
+
+DatePicker.defaultProps = {
+  calendarDisabled: false,
+  prevDisabled: false,
+  nextDisabled: false,
+}
+
+export default DatePicker

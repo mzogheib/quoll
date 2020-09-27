@@ -5,13 +5,6 @@ import { loginUser, signupUser } from '../store/user'
 import App from './component'
 import userService from '../services/user'
 
-const mapStateToProps = ({ feeds }) => ({
-  areFeedsConnected: feeds.reduce(
-    (previous, current) => previous || current.isConnected,
-    false
-  ),
-})
-
 const mapDispatchToProps = (dispatch) => ({
   // TODO: if login fails then clear that user from localStorage and signup
   onMount: () => {
@@ -19,12 +12,14 @@ const mapDispatchToProps = (dispatch) => ({
     const action = userId ? () => loginUser(userId) : () => signupUser()
     return dispatch(action())
       .then((user) => user.feeds)
-      .then((feeds) =>
+      .then((feeds) => {
         feeds.forEach((feed) =>
           dispatch(setFeedConnected(feed.name, feed.isConnected))
         )
-      )
+
+        return feeds.some(({ isConnected }) => isConnected)
+      })
   },
 })
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))
+export default withRouter(connect(null, mapDispatchToProps)(App))

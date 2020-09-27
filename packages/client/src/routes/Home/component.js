@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 import moment from 'moment'
@@ -76,59 +76,57 @@ const LoaderWrapper = styled.div`
   right: 0;
 `
 
-class Home extends Component {
-  componentDidMount() {
-    this.props.onMount()
-  }
+const Home = ({
+  onMount,
+  date,
+  isLoading,
+  onDateChange,
+  timelineEntries,
+  onEntryClick,
+  markerData,
+  polylineData,
+  focussedItem,
+}) => {
+  useEffect(() => {
+    onMount()
+  }, [])
 
-  dateIsToday = (date) => moment(date).isSame(moment(), 'day')
+  const dateIsToday = (date) => moment(date).isSame(moment(), 'day')
 
-  render() {
-    const {
-      date,
-      isLoading,
-      onDateChange,
-      timelineEntries,
-      onEntryClick,
-      markerData,
-      polylineData,
-      focussedItem,
-    } = this.props
-    return (
-      <Wrapper>
-        <Left>
-          <DatePicker
-            date={date}
-            maxDate={moment().format('YYYY-MM-DD')}
-            prevDisabled={isLoading}
-            nextDisabled={isLoading || this.dateIsToday(date)}
-            calendarDisabled={isLoading}
-            onDateChange={onDateChange}
+  return (
+    <Wrapper>
+      <Left>
+        <DatePicker
+          date={date}
+          maxDate={moment().format('YYYY-MM-DD')}
+          prevDisabled={isLoading}
+          nextDisabled={isLoading || dateIsToday(date)}
+          calendarDisabled={isLoading}
+          onDateChange={onDateChange}
+        />
+        <TimelineWrapper>
+          <TimelineBody>
+            <Timeline entries={timelineEntries} onEntryClick={onEntryClick} />
+          </TimelineBody>
+        </TimelineWrapper>
+      </Left>
+      <MapWrapper>
+        <MapBody>
+          <Map
+            markerData={markerData}
+            polylineData={polylineData}
+            focussedItem={focussedItem}
+            onElementSelect={onEntryClick}
           />
-          <TimelineWrapper>
-            <TimelineBody>
-              <Timeline entries={timelineEntries} onEntryClick={onEntryClick} />
-            </TimelineBody>
-          </TimelineWrapper>
-        </Left>
-        <MapWrapper>
-          <MapBody>
-            <Map
-              markerData={markerData}
-              polylineData={polylineData}
-              focussedItem={focussedItem}
-              onElementSelect={onEntryClick}
-            />
-          </MapBody>
-        </MapWrapper>
-        {isLoading && (
-          <LoaderWrapper>
-            <HorizontalLoader />
-          </LoaderWrapper>
-        )}
-      </Wrapper>
-    )
-  }
+        </MapBody>
+      </MapWrapper>
+      {isLoading && (
+        <LoaderWrapper>
+          <HorizontalLoader />
+        </LoaderWrapper>
+      )}
+    </Wrapper>
+  )
 }
 
 Home.propTypes = {
