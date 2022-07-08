@@ -33,8 +33,6 @@ function adapter(activities) {
       }
       const polyline = activity.map.polyline
 
-      console.log(uuidv4())
-
       return {
         feed: 'strava',
         id: uuidv4(),
