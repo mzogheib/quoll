@@ -2,6 +2,7 @@
 const apis = [
   {
     name: 'moves',
+    packageName: 'node-moves',
     auth: {
       client_id: process.env.MOVES_CLIENT_ID,
       client_secret: process.env.MOVES_CLIENT_SECRET,
@@ -9,6 +10,7 @@ const apis = [
   },
   {
     name: 'strava',
+    packageName: 'node-strava',
     auth: {
       client_id: process.env.STRAVA_CLIENT_ID,
       client_secret: process.env.STRAVA_CLIENT_SECRET,
@@ -16,6 +18,7 @@ const apis = [
   },
   {
     name: 'toshl',
+    packageName: 'node-toshl',
     auth: {
       client_id: process.env.TOSHL_CLIENT_ID,
       client_secret: process.env.TOSHL_CLIENT_SECRET,
@@ -23,6 +26,7 @@ const apis = [
   },
   {
     name: 'uber',
+    packageName: 'node-uber',
     auth: {
       client_id: process.env.UBER_CLIENT_ID,
       client_secret: process.env.UBER_CLIENT_SECRET,
@@ -31,7 +35,7 @@ const apis = [
 ]
 
 module.exports = apis.reduce((exp, api) => {
-  const lib = require(`node-${api.name}`)
+  const lib = require(api.packageName)
   const auth = {
     redirect_uri: process.env.CLIENT_OAUTH_URL,
     ...api.auth,
