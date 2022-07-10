@@ -3,14 +3,9 @@ import Settings from './Settings'
 import OAuth from './OAuth'
 
 const routes = [
-  { path: '/', exact: true, id: 'home', title: 'Home', mainComponent: Home },
-  {
-    path: '/settings',
-    id: 'settings',
-    title: 'Settings',
-    mainComponent: Settings,
-  },
-  { path: '/oauth', id: 'oauth', title: 'OAuth', mainComponent: OAuth },
+  { path: '/', exact: true, id: 'home', title: 'Home', component: Home },
+  { path: '/settings', id: 'settings', title: 'Settings', component: Settings },
+  { path: '/oauth', id: 'oauth', title: 'OAuth', component: OAuth },
 ]
 
 export default routes
