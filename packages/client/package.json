@@ -1,6 +1,6 @@
 {
   "name": "@quoll/client",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "private": true,
   "scripts": {
     "start": "webpack-dev-server --config webpack.config.development.js",

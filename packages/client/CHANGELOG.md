@@ -3,43 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.3.8](https://github.com/mzogheib/quoll/compare/@quoll/client@0.3.7...@quoll/client@0.3.8) (2020-09-27)
-
+## [0.3.9](https://github.com/mzogheib/quoll/compare/@quoll/client@0.3.8...@quoll/client@0.3.9) (2022-07-10)
 
 ### Bug Fixes
 
-* **client:** add a styled wrapped div instead of stylng the Modal ([8406551](https://github.com/mzogheib/quoll/commit/8406551))
+- **client:** avoid remounting route components on parent rerender ([#99](https://github.com/mzogheib/quoll/issues/99)) ([f13922e](https://github.com/mzogheib/quoll/commit/f13922e))
 
+## [0.3.8](https://github.com/mzogheib/quoll/compare/@quoll/client@0.3.7...@quoll/client@0.3.8) (2020-09-27)
 
+### Bug Fixes
 
-
+- **client:** add a styled wrapped div instead of stylng the Modal ([8406551](https://github.com/mzogheib/quoll/commit/8406551))
 
 ## [0.3.7](https://github.com/mzogheib/quoll/compare/@quoll/client@0.3.6...@quoll/client@0.3.7) (2020-09-12)
 
-
 ### Bug Fixes
 
-* **client:** add missing route component props ([2c56ee7](https://github.com/mzogheib/quoll/commit/2c56ee7))
-
-
-
-
+- **client:** add missing route component props ([2c56ee7](https://github.com/mzogheib/quoll/commit/2c56ee7))
 
 ## [0.3.6](https://github.com/mzogheib/quoll/compare/@quoll/client@0.3.5...@quoll/client@0.3.6) (2020-09-12)
 
 **Note:** Version bump only for package @quoll/client
 
-
-
-
-
 ## [0.3.5](https://github.com/mzogheib/quoll/compare/@quoll/client@0.3.4...@quoll/client@0.3.5) (2020-09-12)
 
 **Note:** Version bump only for package @quoll/client
-
-
-
-
 
 ## [0.3.4](https://github.com/mzogheib/quoll/compare/@quoll/client@0.3.3...@quoll/client@0.3.4) (2020-09-12)
 
