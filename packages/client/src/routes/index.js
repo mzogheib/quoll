@@ -2,7 +2,7 @@ import Home from './Home'
 import Settings from './Settings'
 import OAuth from './OAuth'
 
-export default [
+const routes = [
   { path: '/', exact: true, id: 'home', title: 'Home', mainComponent: Home },
   {
     path: '/settings',
@@ -12,3 +12,10 @@ export default [
   },
   { path: '/oauth', id: 'oauth', title: 'OAuth', mainComponent: OAuth },
 ]
+
+export default routes
+
+export const routesHash = routes.reduce((map, route) => {
+  map[route.id] = { ...route }
+  return map
+}, {})
