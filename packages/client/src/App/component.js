@@ -77,12 +77,7 @@ const App = ({ onMount, history, location }) => {
                   key={index}
                   path={route.path}
                   exact={route.exact}
-                  component={({ location, history }) => (
-                    <route.mainComponent
-                      location={location}
-                      history={history}
-                    />
-                  )}
+                  component={route.mainComponent}
                 />
               ))}
             </Switch>
