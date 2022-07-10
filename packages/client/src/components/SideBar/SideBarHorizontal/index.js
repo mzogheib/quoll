@@ -4,7 +4,8 @@ import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import { Icon, IconButton } from '@quoll/ui-components'
 
-import { routesHash, IconWrapper } from '../common/'
+import { IconWrapper } from '../common/'
+import { routesHash } from '../../../routes'
 
 const Wrapper = styled.div(
   ({ theme: { colors } }) => css`
