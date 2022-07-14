@@ -3,23 +3,23 @@
   "version": "0.2.9",
   "private": true,
   "dependencies": {
-    "@mapbox/polyline": "^1.1.0",
-    "body-parser": "^1.19.0",
+    "@mapbox/polyline": "^1.1.1",
+    "body-parser": "^1.20.0",
     "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "moment": "^2.27.0",
-    "mongoose": "^5.10.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "moment": "^2.29.4",
+    "mongoose": "^6.4.4",
     "node-moves": "https://github.com/mzogheib/node-moves",
     "node-strava": "https://github.com/mzogheib/node-strava#0.2.0",
     "node-toshl": "https://github.com/mzogheib/node-toshl",
     "node-uber": "https://github.com/mzogheib/node-uber",
-    "uuid": "^8.3.0"
+    "uuid": "^8.3.2"
   },
   "scripts": {
     "start": "nodemon server.js"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.19"
   }
 }
