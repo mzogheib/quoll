@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@mapbox/polyline": "^1.1.0",
-    "body-parser": "^1.19.0",
+    "body-parser": "^1.20.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -14,7 +14,7 @@
     "node-strava": "https://github.com/mzogheib/node-strava#0.2.0",
     "node-toshl": "https://github.com/mzogheib/node-toshl",
     "node-uber": "https://github.com/mzogheib/node-uber",
-    "uuid": "^8.3.0"
+    "uuid": "^8.3.2"
   },
   "scripts": {
     "start": "nodemon server.js"
