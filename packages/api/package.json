@@ -3,7 +3,7 @@
   "version": "0.2.9",
   "private": true,
   "dependencies": {
-    "@mapbox/polyline": "^1.1.0",
+    "@mapbox/polyline": "^1.1.1",
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
