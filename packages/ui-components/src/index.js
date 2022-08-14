@@ -1,10 +1,10 @@
 // TODO: there has to be a better way than this to export these components
-import button from './src/Button'
-import calendar from './src/Calendar'
-import horizontalLoader from './src/HorizontalLoader'
-import icon from './src/Icon'
-import iconButton from './src/IconButton'
-import modal from './src/Modal'
+import button from './Button'
+import calendar from './Calendar'
+import horizontalLoader from './HorizontalLoader'
+import icon from './Icon'
+import iconButton from './IconButton'
+import modal from './Modal'
 
 export const Button = button
 export const Calendar = calendar

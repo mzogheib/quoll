@@ -2,19 +2,74 @@
   "name": "@quoll/ui-components",
   "version": "0.2.6",
   "description": "Design System for the client package",
-  "main": "dist/bundle.js",
+  "main": "dist/index.js",
   "repository": "https://github.com/mzogheib/quoll",
   "author": "mzogheib",
   "license": "MIT",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test --passWithNoTests",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "size": "size-limit",
+    "analyze": "size-limit --why",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
   "dependencies": {
+    "@quoll/ui-themes": "^0.3.1",
     "polished": "^3.4.1",
     "react-calendar": "^2.19.2",
     "react-icons": "^3.7.0",
-    "react-modal": "^3.10.1"
+    "react-modal": "^3.10.1",
+    "styled-components": "^5.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.10",
+    "@size-limit/preset-small-lib": "^8.0.1",
+    "@storybook/addon-essentials": "^6.5.10",
+    "@storybook/addon-info": "^5.3.21",
+    "@storybook/addon-links": "^6.5.10",
+    "@storybook/addons": "^6.5.10",
+    "@storybook/react": "^6.5.10",
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6",
+    "babel-loader": "^8.2.5",
+    "husky": "^8.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-is": "^18.2.0",
+    "size-limit": "^8.0.1",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.4.0",
+    "typescript": "^4.7.4"
   },
   "peerDependencies": {
-    "@quoll/ui-themes": "^0.3.1",
-    "react": "^16.13.1",
-    "styled-components": "^5.2.0"
-  }
+    "react": ">=16"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "module": "dist/ui-components-tsdx.esm.js",
+  "size-limit": [
+    {
+      "path": "dist/ui-components-tsdx.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/ui-components-tsdx.esm.js",
+      "limit": "10 KB"
+    }
+  ]
 }
