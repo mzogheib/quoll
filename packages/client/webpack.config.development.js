@@ -12,15 +12,6 @@ const config = {
     hot: true,
     historyApiFallback: true,
   },
-  module: {
-    rules: [
-      {
-        test: /\.m?js$/,
-        include: path.resolve(__dirname),
-        use: ['eslint-loader', 'stylelint-custom-processor-loader'],
-      },
-    ],
-  },
   plugins: [new webpack.HotModuleReplacementPlugin()],
 }
 
