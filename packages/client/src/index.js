@@ -1,16 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { AppContainer } from 'react-hot-loader'
 
 import AppRoot from './AppRoot'
 
 const render = () => {
-  ReactDOM.render(
-    <AppContainer>
-      <AppRoot />
-    </AppContainer>,
-    document.getElementById('root')
-  )
+  ReactDOM.render(<AppRoot />, document.getElementById('root'))
 }
 
 render()
