@@ -1,14 +1,5 @@
 import querystring from 'querystring'
 
-export default {
-  addQueryParams,
-  extractTimeString,
-  startsWithTime,
-  makeRandomString,
-  encode,
-  decode,
-}
-
 function addQueryParams(url, params) {
   if (!url) {
     return
@@ -60,3 +51,14 @@ function decode(string) {
   // Follow up in https://github.com/mzogheib/quoll/issues/16
   return JSON.parse(atob(decodeURIComponent(string)))
 }
+
+const utilsService = {
+  addQueryParams,
+  extractTimeString,
+  startsWithTime,
+  makeRandomString,
+  encode,
+  decode,
+}
+
+export default utilsService

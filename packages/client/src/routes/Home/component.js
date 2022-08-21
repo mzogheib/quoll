@@ -89,7 +89,7 @@ const Home = ({
 }) => {
   useEffect(() => {
     onMount()
-  }, [])
+  }, [onMount])
 
   const dateIsToday = (date) => moment(date).isSame(moment(), 'day')
 

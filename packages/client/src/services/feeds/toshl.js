@@ -7,8 +7,10 @@ const authenticate = (payload) =>
 const deauthorize = () =>
   api.delete({ endpoint: 'feed-auth', params: { feed: 'toshl' } })
 
-export default {
+const toshlService = {
   getOauthUrl,
   authenticate,
   deauthorize,
 }
+
+export default toshlService

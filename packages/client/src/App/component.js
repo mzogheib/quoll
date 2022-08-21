@@ -42,7 +42,7 @@ const App = ({ onMount, history, location }) => {
       setLoading(false)
       setShowWelcomeModal(!areFeedsConnected)
     })
-  }, [])
+  }, [onMount])
 
   const getRouteTitleFromLocation = (location) => {
     const route = routes.find((route) => route.path === location.pathname)

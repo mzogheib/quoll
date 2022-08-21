@@ -19,8 +19,10 @@ const signup = () =>
     return user
   })
 
-export default {
+const userService = {
   getCurrentUser,
   login,
   signup,
 }
+
+export default userService

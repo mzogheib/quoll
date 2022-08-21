@@ -7,8 +7,10 @@ const authenticate = (payload) =>
 const deauthorize = () =>
   api.delete({ endpoint: 'feed-auth', params: { feed: 'strava' } })
 
-export default {
+const stravaService = {
   getOauthUrl,
   authenticate,
   deauthorize,
 }
+
+export default stravaService

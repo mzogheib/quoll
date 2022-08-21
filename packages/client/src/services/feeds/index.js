@@ -3,7 +3,7 @@ import strava from './strava'
 import moves from './moves'
 import uber from './uber'
 
-export default [
+const feedsService = [
   {
     name: 'toshl',
     title: 'Toshl',
@@ -57,3 +57,5 @@ export default [
     disconnect: moves.deauthorize,
   },
 ]
+
+export default feedsService

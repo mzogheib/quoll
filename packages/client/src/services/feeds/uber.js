@@ -7,8 +7,10 @@ const authenticate = (payload) =>
 const deauthorize = () =>
   api.delete({ endpoint: 'feed-auth', params: { feed: 'uber' } })
 
-export default {
+const uberService = {
   getOauthUrl,
   authenticate,
   deauthorize,
 }
+
+export default uberService

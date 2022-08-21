@@ -5,8 +5,10 @@ const set = (key, data) =>
   localStorage.setItem(makeKey(key), JSON.stringify(data))
 const remove = (key) => localStorage.removeItem(makeKey(key))
 
-export default {
+const storageService = {
   get,
   set,
   delete: remove,
 }
+
+export default storageService

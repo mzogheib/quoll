@@ -40,9 +40,11 @@ const deleteReq = ({ endpoint, params }) =>
       .catch(reject)
   })
 
-export default {
+const apiService = {
   authenticate,
   get,
   post,
   delete: deleteReq,
 }
+
+export default apiService
