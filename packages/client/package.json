@@ -1,6 +1,6 @@
 {
   "name": "@quoll/client",
-  "version": "0.3.10",
+  "version": "0.3.11",
   "private": true,
   "scripts": {
     "start": "react-scripts start",
@@ -24,8 +24,8 @@
     ]
   },
   "dependencies": {
-    "@quoll/ui-components": "^0.2.6",
-    "@quoll/ui-themes": "^0.3.1",
+    "@quoll/ui-components": "^0.2.7",
+    "@quoll/ui-themes": "^0.3.2",
     "axios": "^0.27.2",
     "lodash": "^4.17.20",
     "moment": "^2.27.0",
