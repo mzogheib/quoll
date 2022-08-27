@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+if [[ $(git rev-parse --abbrev-ref HEAD) = master ]]; then ([[ -n $HUSKY_BYPASS ]] || commitlint -E HUSKY_GIT_PARAMS); fi
