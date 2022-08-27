@@ -79,3 +79,77 @@ export const makeBounds = (markers, polylines) => {
   )
   return bounds
 }
+
+export const makePolylineItems = (
+  polylineData,
+  map,
+  onItemClick,
+  onInfoWindowClose
+) => {
+  const polylineItems = polylineData.map((item) => ({
+    id: item.id,
+    polyline: makePolyline(item),
+    infoWindow: makeInfoWindow(item),
+  }))
+
+  polylineItems.forEach(({ polyline, id, infoWindow }) => {
+    polyline.setMap(map)
+    polyline.addListener('click', (event) => {
+      onItemClick(id, event.latLng.lat(), event.latLng.lng())
+    })
+    infoWindow.addListener('closeclick', () => {
+      onInfoWindowClose()
+    })
+  })
+
+  return polylineItems
+}
+
+export const makeMarkerItems = (
+  markerData,
+  map,
+  onItemClick,
+  onInfoWindowClose
+) => {
+  const markerItems = markerData.map((item) => ({
+    id: item.id,
+    marker: makeMarker(item),
+    infoWindow: makeInfoWindow(item),
+  }))
+
+  markerItems.forEach(({ marker, id, infoWindow }) => {
+    marker.setMap(map)
+    marker.addListener('click', () => onItemClick(id))
+    infoWindow.addListener('closeclick', () => onInfoWindowClose(undefined))
+  })
+
+  return markerItems
+}
+
+export const resetAllMapElements = (markerItems, polylineItems) => {
+  markerItems.forEach(({ infoWindow, marker }) => {
+    infoWindow.close()
+    unHighlightMarker(marker)
+  })
+  polylineItems.forEach(({ infoWindow, polyline }) => {
+    infoWindow.close()
+    unHighlightPolyline(polyline)
+  })
+}
+
+export const focussItem = (item, lat, lng, map) => {
+  if (!map) {
+    return
+  }
+
+  if (item.marker) {
+    highlightMarker(item.marker)
+    item.infoWindow.open(map, item.marker)
+  } else {
+    const infoWindowPosition =
+      (lat && lng && { lat, lng }) || item.polyline.getPath().getArray()[0]
+    highlightPolyline(item.polyline)
+    item.infoWindow.setPosition(infoWindowPosition)
+    item.infoWindow.open(map)
+  }
+}

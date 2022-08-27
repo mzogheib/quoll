@@ -1,16 +1,13 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 import {
-  makeMarker,
-  makePolyline,
+  makeMarkerItems,
+  makePolylineItems,
   makeBounds,
-  highlightMarker,
-  highlightPolyline,
-  unHighlightMarker,
-  unHighlightPolyline,
-  makeInfoWindow,
+  focussItem,
+  resetAllMapElements,
 } from './utils'
 
 // TODO: confirm if the hook dependency arrays are ok or not
@@ -24,73 +21,6 @@ const Map = ({ focussedItem, markerData, polylineData, onElementSelect }) => {
   const [polylineItems, setPolylineItems] = useState([])
   const [markerItems, setMarkerItems] = useState([])
   const mapElementRef = useRef(null)
-
-  const makePolylineItems = (polylineData) => {
-    const polylineItems = polylineData.map((item) => ({
-      id: item.id,
-      polyline: makePolyline(item),
-      infoWindow: makeInfoWindow(item),
-    }))
-
-    polylineItems.forEach(({ polyline, id, infoWindow }) => {
-      polyline.setMap(map)
-      polyline.addListener('click', (event) => {
-        onElementSelect(id, event.latLng.lat(), event.latLng.lng())
-      })
-      infoWindow.addListener('closeclick', () => {
-        onElementSelect(undefined)
-      })
-    })
-
-    return polylineItems
-  }
-
-  const makeMarkerItems = (markerData) => {
-    const markerItems = markerData.map((item) => ({
-      id: item.id,
-      marker: makeMarker(item),
-      infoWindow: makeInfoWindow(item),
-    }))
-
-    markerItems.forEach(({ marker, id, infoWindow }) => {
-      marker.setMap(map)
-      marker.addListener('click', () => onElementSelect(id))
-      infoWindow.addListener('closeclick', () => onElementSelect(undefined))
-    })
-
-    return markerItems
-  }
-
-  const resetAllMapElements = useCallback(() => {
-    markerItems.forEach(({ infoWindow, marker }) => {
-      infoWindow.close()
-      unHighlightMarker(marker)
-    })
-    polylineItems.forEach(({ infoWindow, polyline }) => {
-      infoWindow.close()
-      unHighlightPolyline(polyline)
-    })
-  }, [markerItems, polylineItems])
-
-  const focussItem = useCallback(
-    (item, lat, lng) => {
-      if (!map) {
-        return
-      }
-
-      if (item.marker) {
-        highlightMarker(item.marker)
-        item.infoWindow.open(map, item.marker)
-      } else {
-        const infoWindowPosition =
-          (lat && lng && { lat, lng }) || item.polyline.getPath().getArray()[0]
-        highlightPolyline(item.polyline)
-        item.infoWindow.setPosition(infoWindowPosition)
-        item.infoWindow.open(map)
-      }
-    },
-    [map]
-  )
 
   // Set the map on first render
   useEffect(() => {
@@ -128,13 +58,17 @@ const Map = ({ focussedItem, markerData, polylineData, onElementSelect }) => {
       polyline.setMap(null)
       infoWindow.close()
     })
-    setPolylineItems(makePolylineItems(polylineData))
+    setPolylineItems(
+      makePolylineItems(polylineData, map, onElementSelect, onElementSelect)
+    )
 
     markerItems.forEach(({ marker, infoWindow }) => {
       marker.setMap(null)
       infoWindow.close()
     })
-    setMarkerItems(makeMarkerItems(markerData))
+    setMarkerItems(
+      makeMarkerItems(markerData, map, onElementSelect, onElementSelect)
+    )
   }, [uniquePolylineDataReference, uniqueMarkerDataReference])
 
   // Fit map to new map items
@@ -159,19 +93,18 @@ const Map = ({ focussedItem, markerData, polylineData, onElementSelect }) => {
   useEffect(() => {
     const allItems = polylineItems.concat(markerItems)
     const item = allItems.find(({ id }) => id === focussedItem.id)
-    resetAllMapElements()
+    resetAllMapElements(markerItems, polylineItems)
 
     if (item) {
-      focussItem(item, focussedItem.latitude, focussedItem.longitude)
+      focussItem(item, focussedItem.latitude, focussedItem.longitude, map)
     }
   }, [
-    focussItem,
     focussedItem.id,
     focussedItem.latitude,
     focussedItem.longitude,
+    map,
     markerItems,
     polylineItems,
-    resetAllMapElements,
   ])
 
   return <Wrapper ref={mapElementRef} />
