@@ -5,7 +5,7 @@
     "packages/*"
   ],
   "scripts": {
-    "start": "concurrently \"yarn api\" \"yarn client\"",
+    "start": "concurrently \"yarn api\" \"yarn client\" \"yarn ui-components\"",
     "api": "node scripts/start-api.js",
     "client": "node scripts/start-client.js",
     "ui-components": "node scripts/start-ui-components.js",
@@ -13,13 +13,8 @@
     "deploy": "concurrently \"yarn deploy:api\" \"yarn deploy:client\"",
     "deploy:api": "git push heroku-quoll-api master",
     "deploy:client": "git push heroku-quoll-client master",
-    "clean-node-modules": "lerna exec -- rm -rf ./node_modules && rm -rf ./node_modules"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "if [[ $(git rev-parse --abbrev-ref HEAD) = master ]]; then ([[ -n $HUSKY_BYPASS ]] || commitlint -E HUSKY_GIT_PARAMS); fi"
-    }
+    "clean-node-modules": "lerna exec -- rm -rf ./node_modules && rm -rf ./node_modules",
+    "prepare": "husky install"
   },
   "commitlint": {
     "extends": [
@@ -37,7 +32,7 @@
     "@commitlint/config-conventional": "^17.0.3",
     "concurrently": "^5.3.0",
     "cross-env": "^7.0.2",
-    "husky": "^4.3.0",
+    "husky": "^8.0.0",
     "lerna": "^5.1.8",
     "lint-staged": "^10.3.0",
     "prettier": "^2.1.1"

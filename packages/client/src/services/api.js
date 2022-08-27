@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseUrl = process.env.API_URL
+const baseUrl = process.env.REACT_APP_API_URL
 
 let authHeader
 
@@ -40,9 +40,11 @@ const deleteReq = ({ endpoint, params }) =>
       .catch(reject)
   })
 
-export default {
+const apiService = {
   authenticate,
   get,
   post,
   delete: deleteReq,
 }
+
+export default apiService

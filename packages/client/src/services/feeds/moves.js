@@ -9,8 +9,10 @@ const deauthorize = () =>
     .delete({ endpoint: 'feed-auth', params: { feed: 'moves' } })
     .then(() => 'Remember to revoke access in the Moves app.')
 
-export default {
+const movesService = {
   getOauthUrl,
   authenticate,
   deauthorize,
 }
+
+export default movesService

@@ -41,6 +41,8 @@ const get = (date) =>
       })
     )
 
-export default {
+const timelineService = {
   get,
 }
+
+export default timelineService

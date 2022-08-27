@@ -3,101 +3,22 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 import {
-  makeMarker,
-  makePolyline,
+  makeMarkerItems,
+  makePolylineItems,
   makeBounds,
-  highlightMarker,
-  highlightPolyline,
-  unHighlightMarker,
-  unHighlightPolyline,
-  makeInfoWindow,
+  focussItem,
+  resetAllMapElements,
 } from './utils'
-
-// TODO: confirm if the hook dependency arrays are ok or not
 
 const Wrapper = styled.div`
   height: 100%;
 `
 
-const Map = (props) => {
+const Map = ({ focussedItem, markerData, polylineData, onElementSelect }) => {
   const [map, setMap] = useState(null)
   const [polylineItems, setPolylineItems] = useState([])
   const [markerItems, setMarkerItems] = useState([])
   const mapElementRef = useRef(null)
-
-  const makePolylineItems = (polylineData) => {
-    const { onElementSelect } = props
-
-    const polylineItems = polylineData.map((item) => ({
-      id: item.id,
-      polyline: makePolyline(item),
-      infoWindow: makeInfoWindow(item),
-    }))
-
-    polylineItems.forEach(({ polyline, id, infoWindow }) => {
-      polyline.setMap(map)
-      polyline.addListener('click', (event) => {
-        onElementSelect(id, event.latLng.lat(), event.latLng.lng())
-      })
-      infoWindow.addListener('closeclick', () => {
-        onElementSelect(undefined)
-      })
-    })
-
-    return polylineItems
-  }
-
-  const makeMarkerItems = (markerData) => {
-    const { onElementSelect } = props
-
-    const markerItems = markerData.map((item) => ({
-      id: item.id,
-      marker: makeMarker(item),
-      infoWindow: makeInfoWindow(item),
-    }))
-
-    markerItems.forEach(({ marker, id, infoWindow }) => {
-      marker.setMap(map)
-      marker.addListener('click', () => onElementSelect(id))
-      infoWindow.addListener('closeclick', () => onElementSelect(undefined))
-    })
-
-    return markerItems
-  }
-
-  const closeAllInfoWindows = () => {
-    markerItems.forEach(({ infoWindow }) => infoWindow.close())
-    polylineItems.forEach(({ infoWindow }) => infoWindow.close())
-  }
-
-  const resetMarkers = () =>
-    markerItems.forEach(({ marker }) => unHighlightMarker(marker))
-
-  const resetPolylines = () =>
-    polylineItems.forEach(({ polyline }) => unHighlightPolyline(polyline))
-
-  const resetAllMapElements = () => {
-    closeAllInfoWindows()
-    resetMarkers()
-    resetPolylines()
-  }
-
-  const focussItem = (item, lat, lng) => {
-    if (!map) {
-      return
-    }
-
-    if (item.marker) {
-      highlightMarker(item.marker)
-      item.infoWindow.open(map, item.marker)
-    } else {
-      const infoWindowPosition =
-        (lat && lng && { lat, lng }) || item.polyline.getPath().getArray()[0]
-      highlightPolyline(item.polyline)
-      item.infoWindow.setPosition(infoWindowPosition)
-      item.infoWindow.open(map)
-    }
-  }
 
   // Set the map on first render
   useEffect(() => {
@@ -111,9 +32,9 @@ const Map = (props) => {
     )
 
     return () => {
-      props.onElementSelect(undefined)
+      onElementSelect(undefined)
     }
-  }, [])
+  }, [onElementSelect])
 
   // Setup handlers when the map changes
   useEffect(() => {
@@ -122,30 +43,33 @@ const Map = (props) => {
     }
 
     map.addListener('click', (event) => {
-      if (event.placeId) props.onElementSelect(undefined)
+      if (event.placeId) onElementSelect(undefined)
     })
-  }, [map])
+  }, [map, onElementSelect])
 
   // Create and set new map items when data from props change
-  const uniquePolylineDataReference = props.polylineData
-    .map(({ id }) => id)
-    .join('-')
-  const uniqueMarkerDataReference = props.markerData
-    .map(({ id }) => id)
-    .join('-')
+  const uniquePolylineDataReference = polylineData.map(({ id }) => id).join('-')
+  const uniqueMarkerDataReference = markerData.map(({ id }) => id).join('-')
 
+  // TODO: find a better way to do this, which adheres to the eslint warning
   useEffect(() => {
     polylineItems.forEach(({ polyline, infoWindow }) => {
       polyline.setMap(null)
       infoWindow.close()
     })
-    setPolylineItems(makePolylineItems(props.polylineData))
+    setPolylineItems(
+      makePolylineItems(polylineData, map, onElementSelect, onElementSelect)
+    )
 
     markerItems.forEach(({ marker, infoWindow }) => {
       marker.setMap(null)
       infoWindow.close()
     })
-    setMarkerItems(makeMarkerItems(props.markerData))
+    setMarkerItems(
+      makeMarkerItems(markerData, map, onElementSelect, onElementSelect)
+    )
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uniquePolylineDataReference, uniqueMarkerDataReference])
 
   // Fit map to new map items
@@ -153,6 +77,8 @@ const Map = (props) => {
     markerItems.map(({ marker }) => marker),
     polylineItems.map(({ polyline }) => polyline)
   )
+
+  const boundsString = bounds.toString()
 
   useEffect(() => {
     if (!map) {
@@ -162,19 +88,25 @@ const Map = (props) => {
     if (!bounds.isEmpty()) {
       map.fitBounds(bounds)
     }
-  }, [map, bounds.toString()])
+  }, [map, bounds, boundsString])
 
   // Focus or unfocus map item
-  const { focussedItem } = props
   useEffect(() => {
     const allItems = polylineItems.concat(markerItems)
     const item = allItems.find(({ id }) => id === focussedItem.id)
-    resetAllMapElements()
+    resetAllMapElements(markerItems, polylineItems)
 
     if (item) {
-      focussItem(item, focussedItem.latitude, focussedItem.longitude)
+      focussItem(item, focussedItem.latitude, focussedItem.longitude, map)
     }
-  }, [focussedItem.id, focussedItem.latitude, focussedItem.longitude])
+  }, [
+    focussedItem.id,
+    focussedItem.latitude,
+    focussedItem.longitude,
+    map,
+    markerItems,
+    polylineItems,
+  ])
 
   return <Wrapper ref={mapElementRef} />
 }

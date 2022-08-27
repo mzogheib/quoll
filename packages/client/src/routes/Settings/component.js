@@ -58,7 +58,7 @@ const Settings = (props) => {
       // message doesn't keep getting displayed
       history.replace('/settings')
     }
-  }, [])
+  }, [props])
 
   const closeModal = () => setState({ ...INITIAL_STATE })
 
