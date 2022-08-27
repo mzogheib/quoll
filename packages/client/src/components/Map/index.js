@@ -10,8 +10,6 @@ import {
   resetAllMapElements,
 } from './utils'
 
-// TODO: confirm if the hook dependency arrays are ok or not
-
 const Wrapper = styled.div`
   height: 100%;
 `
@@ -53,6 +51,7 @@ const Map = ({ focussedItem, markerData, polylineData, onElementSelect }) => {
   const uniquePolylineDataReference = polylineData.map(({ id }) => id).join('-')
   const uniqueMarkerDataReference = markerData.map(({ id }) => id).join('-')
 
+  // TODO: find a better way to do this, which adheres to the eslint warning
   useEffect(() => {
     polylineItems.forEach(({ polyline, infoWindow }) => {
       polyline.setMap(null)
@@ -69,6 +68,8 @@ const Map = ({ focussedItem, markerData, polylineData, onElementSelect }) => {
     setMarkerItems(
       makeMarkerItems(markerData, map, onElementSelect, onElementSelect)
     )
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uniquePolylineDataReference, uniqueMarkerDataReference])
 
   // Fit map to new map items
