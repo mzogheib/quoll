@@ -41,17 +41,17 @@ const SideBarHorizontal = ({ onHelpClick }) => (
   <Wrapper>
     <Help>
       <IconWrapper>
-        <IconButton.Help onClick={onHelpClick} />
+        <IconButton icon="Help" onClick={onHelpClick} />
       </IconWrapper>
     </Help>
     <StyledNavLink to={routesHash.home.path} exact activeClassName="active">
       <IconWrapper>
-        <Icon.Map />
+        <Icon icon="Map" />
       </IconWrapper>
     </StyledNavLink>
     <StyledNavLink to={routesHash.settings.path} activeClassName="active">
       <IconWrapper>
-        <Icon.Settings />
+        <Icon icon="Settings" />
       </IconWrapper>
     </StyledNavLink>
   </Wrapper>

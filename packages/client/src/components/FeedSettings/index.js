@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
-import { Button, HorizontalLoader } from '@quoll/ui-components'
+import { ButtonPlain, HorizontalLoader } from '@quoll/ui-components'
 
 const Wrapper = styled.div(
   ({ theme: { colors } }) => css`
@@ -83,9 +83,9 @@ const FeedSettings = ({ feed, onConnect, onDisconnect }) => {
           <Title>{title}</Title>
           <Link href={link.url}>{link.label}</Link>
         </Info>
-        <Button.Plain onClick={handleButtonClick} disabled={isAuthenticating}>
+        <ButtonPlain onClick={handleButtonClick} disabled={isAuthenticating}>
           {isConnected ? 'Disconnect' : 'Connect'}
-        </Button.Plain>
+        </ButtonPlain>
       </Content>
     </Wrapper>
   )

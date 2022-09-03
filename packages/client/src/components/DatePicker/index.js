@@ -66,11 +66,11 @@ const DatePicker = (props) => {
   const { prevDisabled, nextDisabled, calendarDisabled } = props
   return (
     <Wrapper>
-      <IconButton.Previous disabled={prevDisabled} onClick={previous} />
+      <IconButton icon="Previous" disabled={prevDisabled} onClick={previous} />
       <DateLabel disabled={calendarDisabled} onClick={handleDateClick}>
         {props.date}
       </DateLabel>
-      <IconButton.Next disabled={nextDisabled} onClick={next} />
+      <IconButton icon="Next" disabled={nextDisabled} onClick={next} />
       {showCalendar && (
         <CalendarWrapper>
           <StyledCalendar

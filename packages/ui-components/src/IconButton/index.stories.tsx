@@ -2,7 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { sortBy } from 'lodash'
 
-import IconButton from '.'
+import { IconButton } from '.'
+import { iconNames } from '../Icon'
 
 export default { title: 'IconButton' }
 
@@ -14,9 +15,7 @@ const Table = styled.table`
   }
 `
 
-const iconNames = sortBy(Object.keys(IconButton))
-
-const handleClick = (buttonVariation) =>
+const handleClick = (buttonVariation: string) =>
   alert(`Clicked on ${buttonVariation} IconButton!`)
 
 export const Default = () => (
@@ -28,15 +27,17 @@ export const Default = () => (
       </tr>
     </thead>
     <tbody>
-      {iconNames.map((iconName) => {
-        const IconComponent = IconButton[iconName]
+      {sortBy(iconNames).map((iconName) => {
         return (
           <tr key={iconName}>
             <td>
-              <IconComponent onClick={() => handleClick(iconName)} />
+              <IconButton
+                icon={iconName}
+                onClick={() => handleClick(iconName)}
+              />
             </td>
             <td>
-              <code>{`<IconButton.${iconName} onClick={handleClick} />`}</code>
+              <code>{`<IconButton icon="${iconName}" onClick={handleClick} />`}</code>
             </td>
           </tr>
         )

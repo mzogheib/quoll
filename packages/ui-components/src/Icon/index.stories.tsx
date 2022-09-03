@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { sortBy } from 'lodash'
 
-import Icon from '.'
+import { Icon, iconNames } from '.'
 
 export default { title: 'Icon' }
 
@@ -14,8 +14,6 @@ const Table = styled.table`
   }
 `
 
-const iconNames = sortBy(Object.keys(Icon))
-
 export const Default = () => (
   <Table>
     <thead>
@@ -25,15 +23,14 @@ export const Default = () => (
       </tr>
     </thead>
     <tbody>
-      {iconNames.map((iconName) => {
-        const IconComponent = Icon[iconName]
+      {sortBy(iconNames).map((iconName) => {
         return (
           <tr key={iconName}>
             <td>
-              <IconComponent />
+              <Icon icon={iconName} />
             </td>
             <td>
-              <code>{`<Icon.${iconName} />`}</code>
+              <code>{`<Icon icon="${iconName}" />`}</code>
             </td>
           </tr>
         )

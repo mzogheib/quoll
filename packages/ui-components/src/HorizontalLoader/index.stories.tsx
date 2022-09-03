@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import HorizontalLoader from '.'
+import { HorizontalLoader } from '.'
 
 export default { title: 'Horizontal Loader' }
 

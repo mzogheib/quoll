@@ -10,11 +10,13 @@ const Wrapper = styled.div`
 `
 
 export const Default = () => {
-  const [date, setDate] = useState(null)
+  const today = new Date()
+  const [date, setDate] = useState<Date | Date[]>(today)
+
   return (
     <Wrapper>
-      <Calendar maxDate={new Date()} value={date} onChange={setDate} />
-      <code>{date && date.toISOString()}</code>
+      <Calendar maxDate={today} value={date} onChange={setDate} />
+      <code>{date.toLocaleString()}</code>
     </Wrapper>
   )
 }

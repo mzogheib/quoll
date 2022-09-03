@@ -1,11 +1,10 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import PropTypes from 'prop-types'
 import ReactModal from 'react-modal'
 
 // Inspired by https://github.com/reactjs/react-modal/issues/603
 
-const ReactModalAdapter = ({ className, ...props }) => (
+const ReactModalAdapter = ({ className, ...props }: ReactModal.Props) => (
   <ReactModal
     className={className}
     overlayClassName={`${className}__overlay`}
@@ -14,11 +13,9 @@ const ReactModalAdapter = ({ className, ...props }) => (
   />
 )
 
-ReactModalAdapter.propTypes = {
-  className: PropTypes.string,
-}
+ReactModalAdapter.setAppElement = (id: string) => ReactModal.setAppElement(id)
 
-const Modal = styled(ReactModalAdapter)(
+export const Modal = styled(ReactModalAdapter)(
   ({ theme: { colors } }) => css`
     margin: 200px 0 0;
     width: 100%;
@@ -50,14 +47,3 @@ const Modal = styled(ReactModalAdapter)(
     }
   `
 )
-
-Modal.setAppElement = (id) => ReactModal.setAppElement(id)
-
-Modal.propTypes = {
-  className: PropTypes.string,
-  isOpen: PropTypes.bool.isRequired,
-  onRequestClose: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired,
-}
-
-export default Modal

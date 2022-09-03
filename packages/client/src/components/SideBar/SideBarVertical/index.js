@@ -70,21 +70,21 @@ const SideBarVertical = ({ onHelpClick }) => (
       <NavPrimary>
         <StyledNavLink to={routesHash.home.path} exact activeClassName="active">
           <IconWrapper>
-            <Icon.Map />
+            <Icon icon="Map" />
           </IconWrapper>
         </StyledNavLink>
       </NavPrimary>
       <nav>
         <StyledNavLink to={routesHash.settings.path} activeClassName="active">
           <IconWrapper>
-            <Icon.Settings />
+            <Icon icon="Settings" />
           </IconWrapper>
         </StyledNavLink>
       </nav>
     </NavGroup>
     <Help>
       <IconWrapper>
-        <IconButton.Help onClick={onHelpClick} />
+        <IconButton icon="Help" onClick={onHelpClick} />
       </IconWrapper>
     </Help>
   </Wrapper>
