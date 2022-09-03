@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import ReactModal from 'react-modal'
 
-import Button from '../Button'
+import { Button } from '../Button'
 
 import Modal from '.'
 
@@ -17,11 +18,15 @@ const Wrapper = styled.div`
   }
 `
 
-const DefaultModal = ({ isOpen, onClose, className }) => (
-  <Modal isOpen={isOpen} onRequestClose={onClose} className={className}>
+const DefaultModal = ({
+  isOpen,
+  onRequestClose,
+  className,
+}: ReactModal.Props) => (
+  <Modal isOpen={isOpen} onRequestClose={onRequestClose} className={className}>
     This is a modal. You can close it by pressing the escape key, clicking
     outside the modal or clicking on the button below.
-    <Button onClick={onClose}>Close modal</Button>
+    <Button onClick={onRequestClose}>Close modal</Button>
   </Modal>
 )
 
@@ -29,15 +34,19 @@ const NarrowModalWrapper = styled(Modal)`
   max-width: 200px;
 `
 
-const NarrowModal = ({ isOpen, onClose, className }) => (
+const NarrowModal = ({
+  isOpen,
+  onRequestClose,
+  className,
+}: ReactModal.Props) => (
   <NarrowModalWrapper
     isOpen={isOpen}
-    onRequestClose={onClose}
+    onRequestClose={onRequestClose}
     className={className}
   >
     This is a narrow modal. You can close it by pressing the escape key,
     clicking outside the modal or clicking on the button below.
-    <Button onClick={onClose}>Close modal</Button>
+    <Button onClick={onRequestClose}>Close modal</Button>
   </NarrowModalWrapper>
 )
 
@@ -54,11 +63,11 @@ export const Default = () => {
       </Button>
       <DefaultModal
         isOpen={isDefaultModalOpen}
-        onClose={() => setDefaultModalOpen(false)}
+        onRequestClose={() => setDefaultModalOpen(false)}
       />
       <NarrowModal
         isOpen={isNarrowModalOpen}
-        onClose={() => setNarrowModalOpen(false)}
+        onRequestClose={() => setNarrowModalOpen(false)}
       />
     </Wrapper>
   )

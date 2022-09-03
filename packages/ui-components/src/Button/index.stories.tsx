@@ -1,7 +1,7 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { StyledComponent } from 'styled-components'
 
-import Button from '.'
+import { Button, ButtonPlain, ButtonPrimary } from '.'
 
 export default { title: 'Button' }
 
@@ -19,22 +19,26 @@ const ButtonWrapper = styled.div`
   padding: 20px;
 `
 
-const handleClick = (buttonVariation) =>
-  alert(`Clicked on ${buttonVariation} Button!`)
+const handleClick = (buttonVariation?: string) =>
+  alert(`Clicked on ${buttonVariation}!`)
 
-const buttonVariations = [null, 'Primary', 'Plain']
+const buttonVariations = [Button, ButtonPrimary, ButtonPlain]
 const buttonDisabledProp = [false, true]
 
-const renderButton = ({ variation, disabled }) => {
-  const ButtonComponent = variation ? Button[variation] : Button
-  const variationLabel = variation || 'Default'
+type RenderButtonParams = {
+  variation: StyledComponent<'button', any>
+  disabled: boolean
+}
+const renderButton = ({ variation, disabled }: RenderButtonParams) => {
+  const ButtonComponent = variation
+  const variationLabel = ButtonComponent.displayName
   return (
     <ButtonWrapper key={`${variationLabel}-${disabled}`}>
       <ButtonComponent
         disabled={disabled}
         onClick={() => handleClick(variationLabel)}
       >
-        {variationLabel} Button
+        {variationLabel}
       </ButtonComponent>
     </ButtonWrapper>
   )
@@ -43,7 +47,7 @@ const renderButton = ({ variation, disabled }) => {
 export const Default = () => (
   <Row>
     {buttonDisabledProp.map((disabled) => (
-      <Column key={disabled}>
+      <Column key={`${disabled}`}>
         <div>{disabled ? 'Disabled' : 'Enabled'}</div>
         {buttonVariations.map((variation) =>
           renderButton({ variation, disabled })
