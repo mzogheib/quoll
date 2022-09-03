@@ -2,9 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import { sortBy } from 'lodash'
 
-import IconButton from '.'
+import Icon, { iconNames } from '.'
 
-export default { title: 'IconButton' }
+export default { title: 'Icon' }
 
 const Table = styled.table`
   th,
@@ -14,29 +14,23 @@ const Table = styled.table`
   }
 `
 
-const iconNames = sortBy(Object.keys(IconButton))
-
-const handleClick = (buttonVariation) =>
-  alert(`Clicked on ${buttonVariation} IconButton!`)
-
 export const Default = () => (
   <Table>
     <thead>
       <tr>
-        <th>IconButton</th>
+        <th>Icon</th>
         <th>Component</th>
       </tr>
     </thead>
     <tbody>
-      {iconNames.map((iconName) => {
-        const IconComponent = IconButton[iconName]
+      {sortBy(iconNames).map((iconName) => {
         return (
           <tr key={iconName}>
             <td>
-              <IconComponent onClick={() => handleClick(iconName)} />
+              <Icon icon={iconName} />
             </td>
             <td>
-              <code>{`<IconButton.${iconName} onClick={handleClick} />`}</code>
+              <code>{`<Icon icon="${iconName}" />`}</code>
             </td>
           </tr>
         )
