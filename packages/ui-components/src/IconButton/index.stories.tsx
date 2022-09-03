@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { sortBy } from 'lodash'
 
-import IconButton from '.'
+import { IconButton } from '.'
 import { iconNames } from '../Icon'
 
 export default { title: 'IconButton' }

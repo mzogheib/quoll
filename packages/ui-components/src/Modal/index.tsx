@@ -15,7 +15,7 @@ const ReactModalAdapter = ({ className, ...props }: ReactModal.Props) => (
 
 ReactModalAdapter.setAppElement = (id: string) => ReactModal.setAppElement(id)
 
-const Modal = styled(ReactModalAdapter)(
+export const Modal = styled(ReactModalAdapter)(
   ({ theme: { colors } }) => css`
     margin: 200px 0 0;
     width: 100%;
@@ -47,5 +47,3 @@ const Modal = styled(ReactModalAdapter)(
     }
   `
 )
-
-export default Modal

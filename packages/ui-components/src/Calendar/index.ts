@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
-import Calendar from 'react-calendar'
+import ReactCalendar from 'react-calendar'
 
-export default styled(Calendar)(
+export const Calendar = styled(ReactCalendar)(
   ({ theme: { font } }) => css`
     &.react-calendar {
       border: none;

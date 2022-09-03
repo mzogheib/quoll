@@ -28,10 +28,8 @@ type OwnProps = {
 
 type Props = OwnProps & IconBaseProps
 
-const Icon = ({ icon, size = 40 }: Props) => {
+export const Icon = ({ icon, size = 40 }: Props) => {
   const Comp = icons[icon]
 
   return <Comp size={size} />
 }
-
-export default Icon

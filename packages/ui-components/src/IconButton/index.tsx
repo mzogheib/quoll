@@ -1,7 +1,7 @@
 import React, { ComponentProps } from 'react'
 import styled, { css } from 'styled-components'
 
-import Icon from '../Icon'
+import { Icon } from '../Icon'
 
 const Wrapper = styled.button(
   ({ theme: { colors }, disabled }) => css`
@@ -19,10 +19,8 @@ type WrapperProps = ComponentProps<typeof Wrapper>
 
 type Props = IconProps & WrapperProps
 
-const IconButton = ({ icon, size, ...buttonProps }: Props) => (
+export const IconButton = ({ icon, size, ...buttonProps }: Props) => (
   <Wrapper {...buttonProps}>
     <Icon icon={icon} size={size} />
   </Wrapper>
 )
-
-export default IconButton

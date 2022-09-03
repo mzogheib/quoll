@@ -27,10 +27,8 @@ const Pill = styled.div(
   `
 )
 
-const HorizontalLoader = () => (
+export const HorizontalLoader = () => (
   <Wrapper>
     <Pill />
   </Wrapper>
 )
-
-export default HorizontalLoader

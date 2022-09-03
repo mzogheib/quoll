@@ -4,7 +4,7 @@ import ReactModal from 'react-modal'
 
 import { Button } from '../Button'
 
-import Modal from '.'
+import { Modal } from '.'
 
 export default { title: 'Modal' }
 
