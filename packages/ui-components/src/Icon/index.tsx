@@ -18,7 +18,7 @@ const icons = {
   Settings,
 }
 
-export type IconName = keyof typeof icons
+type IconName = keyof typeof icons
 
 export const iconNames = Object.keys(icons) as IconName[]
 
