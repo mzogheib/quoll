@@ -18,15 +18,14 @@ const icons = {
 }
 
 const Icon = Object.entries(icons).reduce((prev, [name, C]) => {
-  // These mutate the imported component, which may not be the best idea
-  C.displayName = `Icon.${name}`
-  C.defaultProps = {
-    size: 40,
-  }
+  const Component = styled(C)`
+    display: block;
+  `
+  Component.displayName = `Icon.${name}`
+  Component.defaultProps = { size: 40 }
+
   return {
-    [name]: styled(C)`
-      display: block;
-    `,
+    [name]: Component,
     ...prev,
   }
 }, {})
