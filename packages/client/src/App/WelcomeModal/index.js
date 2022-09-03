@@ -33,7 +33,7 @@ const Actions = styled.div`
 const WelcomeModal = ({ isOpen, onCancel, onConnect }) => (
   <Modal isOpen={isOpen} onRequestClose={onCancel}>
     <Header>
-      <IconButton.Close size={30} onClick={onCancel} />
+      <IconButton icon="Close" size={30} onClick={onCancel} />
     </Header>
     <Title>Quoll</Title>
     <Message>Map yo' life.</Message>
