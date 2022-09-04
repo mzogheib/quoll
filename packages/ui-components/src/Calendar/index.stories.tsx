@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-import Calendar from '.'
+import { Calendar } from '.'
 
 export default { title: 'Calendar' }
 
