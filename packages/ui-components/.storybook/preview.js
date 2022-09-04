@@ -1,5 +1,5 @@
 import { ThemeProvider } from 'styled-components'
-import themes from '@quoll/ui-themes'
+import { themes } from '../src'
 
 export const decorators = [
   (Story) => (
