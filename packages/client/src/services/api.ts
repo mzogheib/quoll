@@ -8,47 +8,48 @@ const authenticate = (userId: string) => {
   authHeader = { Authorization: `Basic ${userId}:` }
 }
 
-const request = (
-  method: AxiosRequestConfig['method'],
-  url: AxiosRequestConfig['url'],
-  params: AxiosRequestConfig['params'],
-  data?: AxiosRequestConfig['data']
-) => {
-  const options: AxiosRequestConfig = {
-    method,
-    baseURL,
-    url,
-    params,
-    data,
-    headers: authHeader,
-  }
-  return axios(options)
-}
-
-type GetParams = { endpoint: string; params: AxiosRequestConfig['params'] }
-const get = ({ endpoint, params }: GetParams) =>
-  new Promise((resolve, reject) => {
-    request('GET', endpoint, params)
-      .then((response) => resolve(response.data))
-      .catch(reject)
-  })
-
-type PostParams = {
+type RequestParams = {
   endpoint: string
   params: AxiosRequestConfig['params']
   payload: AxiosRequestConfig['data']
 }
-const post = ({ endpoint, params, payload }: PostParams) =>
+
+const get = ({ endpoint, params }: RequestParams) =>
   new Promise((resolve, reject) => {
-    request('POST', endpoint, params, payload)
+    axios({
+      method: 'GET',
+      baseURL,
+      url: endpoint,
+      params,
+      headers: authHeader,
+    })
       .then((response) => resolve(response.data))
       .catch(reject)
   })
 
-type DeleteParams = { endpoint: string; params: AxiosRequestConfig['params'] }
-const deleteReq = ({ endpoint, params }: DeleteParams) =>
+const post = ({ endpoint, params, payload }: RequestParams) =>
   new Promise((resolve, reject) => {
-    request('DELETE', endpoint, params)
+    axios({
+      method: 'POST',
+      baseURL,
+      url: endpoint,
+      params,
+      data: payload,
+      headers: authHeader,
+    })
+      .then((response) => resolve(response.data))
+      .catch(reject)
+  })
+
+const deleteReq = ({ endpoint, params }: RequestParams) =>
+  new Promise((resolve, reject) => {
+    axios({
+      method: 'DELETE',
+      baseURL,
+      url: endpoint,
+      params,
+      headers: authHeader,
+    })
       .then((response) => resolve(response.data))
       .catch(reject)
   })
