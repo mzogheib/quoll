@@ -71,18 +71,16 @@ const defaultFeeds = feedServices.map((config) => ({
 }))
 
 const feeds = (state = defaultFeeds, action: FeedAction) => {
-  switch (action.type) {
+  const { type, name, value } = action
+
+  switch (type) {
     case FeedActionType.SetConnected:
       return state.map((feed) =>
-        feed.name === action.name
-          ? { ...feed, isConnected: action.value }
-          : feed
+        feed.name === name ? { ...feed, isConnected: value } : feed
       )
     case FeedActionType.SetAuthenticating:
       return state.map((feed) =>
-        feed.name === action.name
-          ? { ...feed, isAuthenticating: action.value }
-          : feed
+        feed.name === name ? { ...feed, isAuthenticating: value } : feed
       )
     default:
       return state
