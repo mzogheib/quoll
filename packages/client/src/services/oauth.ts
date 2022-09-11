@@ -41,11 +41,9 @@ interface OAuthResponse {
   error?: string
 }
 
-type RequestAuth = (
-  url: string,
-  onSuccess: (code: string) => void,
-  onError: (error: string) => void
-) => void
+type OnSuccess = (code: string) => string
+
+type OnError = (error: string) => void
 
 type QuollOnOAuthResponse = (response?: OAuthResponse) => void
 
@@ -56,7 +54,11 @@ declare global {
 }
 
 // This is called by the OPENER
-export const requestAuth: RequestAuth = (url, onSuccess, onError) => {
+export const requestAuth = (
+  url: string,
+  onSuccess: OnSuccess,
+  onError: OnError
+) => {
   window.open(makeAuthUrl(url))
 
   // Register the callback that the OPENED window will call
@@ -80,13 +82,8 @@ export const requestAuth: RequestAuth = (url, onSuccess, onError) => {
   }
 }
 
-type OnOAuthResponse = (
-  response: OAuthResponse,
-  onError: (error: string) => void
-) => void
-
 // This is called by the OPENED
-export const onOAuthResponse: OnOAuthResponse = (response, onError) => {
+export const onOAuthResponse = (response: OAuthResponse, onError: OnError) => {
   // Perhaps the opener was closed for some reason
   if (!window.opener) {
     storageService.delete('oauth-state-token')
