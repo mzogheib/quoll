@@ -1,6 +1,7 @@
 import { Action, Dispatch } from 'redux'
 
 import feedServices from '../../services/feeds'
+import { FeedName } from '../../services/feeds/types'
 
 enum FeedActionType {
   SetConnected = 'SET_FEED_CONNECTED',
@@ -8,23 +9,23 @@ enum FeedActionType {
 }
 
 interface FeedAction extends Action<FeedActionType> {
-  name: string
+  name: FeedName
   value: boolean
 }
 
-export const setFeedConnected = (name: string, value: boolean) => ({
+export const setFeedConnected = (name: FeedName, value: boolean) => ({
   type: FeedActionType.SetConnected,
   name,
   value,
 })
 
-export const setFeedAuthenticating = (name: string, value: boolean) => ({
+export const setFeedAuthenticating = (name: FeedName, value: boolean) => ({
   type: FeedActionType.SetAuthenticating,
   name,
   value,
 })
 
-export const getOauthUrl = (name: string) => {
+export const getOauthUrl = (name: FeedName) => {
   const feedService = feedServices.find((feed) => feed.name === name)
   return (dispatch: Dispatch) => {
     dispatch(setFeedAuthenticating(name, true))
@@ -35,7 +36,7 @@ export const getOauthUrl = (name: string) => {
   }
 }
 
-export const authenticateFeed = (name: string, code: string) => {
+export const authenticateFeed = (name: FeedName, code: string) => {
   const feedService = feedServices.find((feed) => feed.name === name)
   return (dispatch: Dispatch) => {
     dispatch(setFeedAuthenticating(name, true))
@@ -46,7 +47,7 @@ export const authenticateFeed = (name: string, code: string) => {
   }
 }
 
-export const disconnectFeed = (name: string) => {
+export const disconnectFeed = (name: FeedName) => {
   const feedService = feedServices.find((feed) => feed.name === name)
   return (dispatch: Dispatch) => {
     dispatch(setFeedAuthenticating(name, true))

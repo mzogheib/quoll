@@ -2,10 +2,11 @@ import toshl from './toshl'
 import strava from './strava'
 import moves from './moves'
 import uber from './uber'
+import { FeedName } from './types'
 
 const feedsService = [
   {
-    name: 'toshl',
+    name: FeedName.Toshl,
     title: 'Toshl',
     link: {
       url: 'https://toshl.com',
@@ -18,7 +19,7 @@ const feedsService = [
     disconnect: toshl.deauthorize,
   },
   {
-    name: 'strava',
+    name: FeedName.Strava,
     title: 'Strava',
     link: {
       url: 'https://www.strava.com',
@@ -31,7 +32,7 @@ const feedsService = [
     disconnect: strava.deauthorize,
   },
   {
-    name: 'uber',
+    name: FeedName.Uber,
     title: 'Uber',
     link: {
       url: 'https://www.uber.com',
@@ -44,7 +45,7 @@ const feedsService = [
     disconnect: uber.deauthorize,
   },
   {
-    name: 'moves',
+    name: FeedName.Moves,
     title: 'Moves',
     link: {
       url: 'https://www.moves-app.com',
