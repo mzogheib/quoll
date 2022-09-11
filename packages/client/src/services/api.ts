@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios'
 
-const baseUrl = process.env.REACT_APP_API_URL
+const baseURL = process.env.REACT_APP_API_URL
 
 let authHeader: AxiosRequestConfig['headers']
 
@@ -16,7 +16,8 @@ const request = (
 ) => {
   const options: AxiosRequestConfig = {
     method,
-    url: `${baseUrl}/${url}`,
+    baseURL,
+    url,
     params,
     data,
     headers: authHeader,
