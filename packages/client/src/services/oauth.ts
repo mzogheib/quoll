@@ -14,29 +14,49 @@ import storageService from './storage'
 // 7. That callback then does the response/state/token validation etc
 
 const makeToken = () => {
-  const token = utils.makeRandomString()
+  const token = utils.makeRandomString(10)
   storageService.set('oauth-state-token', token)
   return token
 }
 
-const getTokenFromState = (state) => {
+const getTokenFromState = (state: string) => {
   const { token } = utils.decode(state)
   return token
 }
 
-const isValidToken = (token) => {
+const isValidToken = (token: string) => {
   const storedToken = storageService.get('oauth-state-token')
   storageService.delete('oauth-state-token')
   return storedToken && token && storedToken === token
 }
 
-const makeAuthUrl = (url) => {
+const makeAuthUrl = (url: string) => {
   const state = utils.encode({ token: makeToken() })
   return utils.addQueryParams(url, { state })
 }
 
+interface OAuthResponse {
+  code?: string
+  state?: string
+  error?: string
+}
+
+type RequestAuth = (
+  url: string,
+  onSuccess: (code: string) => void,
+  onError: (error: string) => void
+) => void
+
+type QuollOnOAuthResponse = (response?: OAuthResponse) => void
+
+declare global {
+  interface Window {
+    quollOnOAuthResponse: QuollOnOAuthResponse
+  }
+}
+
 // This is called by the OPENER
-export const requestAuth = (url, onSuccess, onError) => {
+export const requestAuth: RequestAuth = (url, onSuccess, onError) => {
   window.open(makeAuthUrl(url))
 
   // Register the callback that the OPENED window will call
@@ -48,20 +68,25 @@ export const requestAuth = (url, onSuccess, onError) => {
 
     try {
       token = getTokenFromState(state)
-    } catch (error) {
+    } catch {
       storageService.delete('oauth-state-token')
       return onError('Could not authenticate feed. Try again.')
     }
 
-    if (!isValidToken(token) || error === 'access_denied')
+    if (!code || !isValidToken(token) || error === 'access_denied')
       return onError('Access denied.')
 
     onSuccess(code)
   }
 }
 
+type OnOAuthResponse = (
+  response: OAuthResponse,
+  onError: (error: string) => void
+) => void
+
 // This is called by the OPENED
-export const onOAuthResponse = (response, onError) => {
+export const onOAuthResponse: OnOAuthResponse = (response, onError) => {
   // Perhaps the opener was closed for some reason
   if (!window.opener) {
     storageService.delete('oauth-state-token')
