@@ -10,13 +10,13 @@ const authenticate = (userId: string) => {
   authHeader = { Authorization: `Basic ${userId}:` }
 }
 
-type RequestParams = {
+interface RequestParams {
   endpoint: string
   params?: AxiosRequestConfig['params']
   payload?: AxiosRequestConfig['data']
 }
 
-const get = async <ResponseDataType>({ endpoint, params }: RequestParams) => {
+const get = async <ResponseData>({ endpoint, params }: RequestParams) => {
   const config = { headers: authHeader }
 
   const search = new URLSearchParams(params)
@@ -24,15 +24,15 @@ const get = async <ResponseDataType>({ endpoint, params }: RequestParams) => {
 
   const url = `${makeUrl(endpoint)}${searchString}`
 
-  const response = await axios.get<ResponseDataType>(url, config)
+  const response = await axios.get<ResponseData>(url, config)
 
   return response.data
 }
 
-const post = async <ResponseDataType>({ endpoint, payload }: RequestParams) => {
+const post = async <ResponseData>({ endpoint, payload }: RequestParams) => {
   const config = { headers: authHeader }
 
-  const response = await axios.post<ResponseDataType>(
+  const response = await axios.post<ResponseData>(
     makeUrl(endpoint),
     payload,
     config
@@ -41,10 +41,7 @@ const post = async <ResponseDataType>({ endpoint, payload }: RequestParams) => {
   return response.data
 }
 
-const deleteReq = async <ResponseDataType>({
-  endpoint,
-  params,
-}: RequestParams) => {
+const deleteReq = async <ResponseData>({ endpoint, params }: RequestParams) => {
   const config = { headers: authHeader }
 
   const search = new URLSearchParams(params)
@@ -52,7 +49,7 @@ const deleteReq = async <ResponseDataType>({
 
   const url = `${makeUrl(endpoint)}${searchString}`
 
-  const response = await axios.delete<ResponseDataType>(url, config)
+  const response = await axios.delete<ResponseData>(url, config)
 
   return response.data
 }
