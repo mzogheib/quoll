@@ -45,6 +45,7 @@
     "@types/react-modal": "^3.13.1",
     "babel-loader": "^8.2.5",
     "husky": "^8.0.1",
+    "lodash": "^4.17.20",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-is": "^18.2.0",

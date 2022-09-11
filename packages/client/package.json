@@ -26,7 +26,6 @@
   "dependencies": {
     "@quoll/ui-components": "^0.2.7",
     "axios": "^0.27.2",
-    "lodash": "^4.17.20",
     "moment": "^2.27.0",
     "prop-types": "^15.7.2",
     "react": "^18.2.0",
