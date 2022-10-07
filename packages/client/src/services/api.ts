@@ -22,7 +22,7 @@ const get = async <ResponseData>({ endpoint, params }: RequestParams) => {
   const search = new URLSearchParams(params)
   const searchString = search.toString()
 
-  const url = `${makeUrl(endpoint)}${searchString}`
+  const url = `${makeUrl(endpoint)}?${searchString}`
 
   const response = await axios.get<ResponseData>(url, config)
 
