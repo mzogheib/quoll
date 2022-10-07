@@ -1,8 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios'
 
-const makeUrl = (endpoint: string) =>
-  `${process.env.REACT_APP_API_URL}/${endpoint}`
-
 // TODO: come up with a better way than this. Redux or a cookie.
 let authHeader: AxiosRequestConfig['headers']
 
@@ -16,13 +13,21 @@ interface RequestParams {
   payload?: AxiosRequestConfig['data']
 }
 
-const get = async <ResponseData>({ endpoint, params }: RequestParams) => {
-  const config = { headers: authHeader }
+const makeUrl = ({ endpoint, params }: RequestParams) => {
+  const baseUrl = `${process.env.REACT_APP_API_URL}/${endpoint}`
 
   const search = new URLSearchParams(params)
   const searchString = search.toString()
 
-  const url = `${makeUrl(endpoint)}?${searchString}`
+  if (searchString) return `${baseUrl}?${searchString}`
+
+  return baseUrl
+}
+
+const get = async <ResponseData>({ endpoint, params }: RequestParams) => {
+  const config = { headers: authHeader }
+
+  const url = makeUrl({ endpoint, params })
 
   const response = await axios.get<ResponseData>(url, config)
 
@@ -36,10 +41,7 @@ const post = async <ResponseData>({
 }: RequestParams) => {
   const config = { headers: authHeader }
 
-  const search = new URLSearchParams(params)
-  const searchString = search.toString()
-
-  const url = `${makeUrl(endpoint)}?${searchString}`
+  const url = makeUrl({ endpoint, params })
 
   const response = await axios.post<ResponseData>(url, payload, config)
 
@@ -49,10 +51,7 @@ const post = async <ResponseData>({
 const deleteReq = async <ResponseData>({ endpoint, params }: RequestParams) => {
   const config = { headers: authHeader }
 
-  const search = new URLSearchParams(params)
-  const searchString = search.toString()
-
-  const url = `${makeUrl(endpoint)}${searchString}`
+  const url = makeUrl({ endpoint, params })
 
   const response = await axios.delete<ResponseData>(url, config)
 
