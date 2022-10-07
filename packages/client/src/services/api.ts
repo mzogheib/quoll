@@ -29,14 +29,19 @@ const get = async <ResponseData>({ endpoint, params }: RequestParams) => {
   return response.data
 }
 
-const post = async <ResponseData>({ endpoint, payload }: RequestParams) => {
+const post = async <ResponseData>({
+  endpoint,
+  payload,
+  params,
+}: RequestParams) => {
   const config = { headers: authHeader }
 
-  const response = await axios.post<ResponseData>(
-    makeUrl(endpoint),
-    payload,
-    config
-  )
+  const search = new URLSearchParams(params)
+  const searchString = search.toString()
+
+  const url = `${makeUrl(endpoint)}?${searchString}`
+
+  const response = await axios.post<ResponseData>(url, payload, config)
 
   return response.data
 }
