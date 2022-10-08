@@ -11,10 +11,4 @@ it('adds query params to a url', () => {
 
   result = utils.addQueryParams(urlWithQueryParam, params)
   expect(result).toEqual(`${urlWithQueryParam}&foo=bar&biz=1234`)
-
-  result = utils.addQueryParams(urlWithQueryParam)
-  expect(result).toEqual(urlWithQueryParam)
-
-  result = utils.addQueryParams()
-  expect(result).toBeUndefined()
 })

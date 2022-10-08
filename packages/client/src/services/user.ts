@@ -1,28 +1,31 @@
 import api from './api'
 import storage from './storage'
 
+type User = {
+  _id: string
+}
+
 const userKey = 'user'
 
 const getCurrentUser = () => storage.get(userKey)
-const setCurrentUser = (userId) => {
+
+const setCurrentUser = (userId: string) => {
   storage.set(userKey, userId)
   api.authenticate(userId)
 }
-const login = (userId) =>
-  api.post({ endpoint: 'login', payload: { userId } }).then((user) => {
-    setCurrentUser(user._id)
-    return user
-  })
-const signup = () =>
-  api.post({ endpoint: 'signup' }).then((user) => {
+
+const login = (userId: string) =>
+  api.post<User>({ endpoint: 'login', payload: { userId } }).then((user) => {
     setCurrentUser(user._id)
     return user
   })
 
-const userService = {
-  getCurrentUser,
-  login,
-  signup,
-}
+const signup = () =>
+  api.post<User>({ endpoint: 'signup' }).then((user) => {
+    setCurrentUser(user._id)
+    return user
+  })
+
+const userService = { getCurrentUser, login, signup }
 
 export default userService
