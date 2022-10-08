@@ -1,6 +1,6 @@
 import { Action } from 'redux'
 
-import { AppDispatch, RootState } from '..'
+import { AppDispatch, GetState } from '..'
 
 import timelineService, { Entry } from '../../services/timeline'
 
@@ -32,7 +32,7 @@ export const setEntries = (entries: Entry[]): SetTimelineEntriesAction => ({
 })
 
 export const fetchTimeline =
-  () => (dispatch: AppDispatch, getState: () => RootState) => {
+  () => (dispatch: AppDispatch, getState: GetState) => {
     const { date } = getState()
 
     dispatch(setTimelineFetching(true))
