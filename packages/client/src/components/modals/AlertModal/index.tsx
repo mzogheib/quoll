@@ -1,6 +1,4 @@
-import React from 'react'
 import styled from 'styled-components'
-import PropTypes from 'prop-types'
 import { Button, Modal } from '@quoll/ui-components'
 
 const InnerWrapper = styled.div`
@@ -13,7 +11,13 @@ const Actions = styled.div`
   justify-content: flex-end;
 `
 
-const AlertModal = ({ isOpen, message, onClose }) => (
+interface Props {
+  isOpen: boolean
+  message: string
+  onClose: () => void
+}
+
+const AlertModal = ({ isOpen, message, onClose }: Props) => (
   <Modal isOpen={isOpen} onRequestClose={onClose}>
     <InnerWrapper>
       <div>{message}</div>
@@ -23,11 +27,5 @@ const AlertModal = ({ isOpen, message, onClose }) => (
     </InnerWrapper>
   </Modal>
 )
-
-AlertModal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  message: PropTypes.string.isRequired,
-  onClose: PropTypes.func.isRequired,
-}
 
 export default AlertModal

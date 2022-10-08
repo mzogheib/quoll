@@ -1,6 +1,5 @@
-import React from 'react'
 import styled, { css } from 'styled-components'
-import PropTypes from 'prop-types'
+
 import { ButtonPrimary, IconButton, Modal } from '@quoll/ui-components'
 
 const Header = styled.div`
@@ -30,7 +29,13 @@ const Actions = styled.div`
   padding: 30px 0 30px;
 `
 
-const WelcomeModal = ({ isOpen, onCancel, onConnect }) => (
+interface Props {
+  isOpen: boolean
+  onCancel: () => void
+  onConnect: () => void
+}
+
+const WelcomeModal = ({ isOpen, onCancel, onConnect }: Props) => (
   <Modal isOpen={isOpen} onRequestClose={onCancel}>
     <Header>
       <IconButton icon="Close" size={30} onClick={onCancel} />
@@ -42,11 +47,5 @@ const WelcomeModal = ({ isOpen, onCancel, onConnect }) => (
     </Actions>
   </Modal>
 )
-
-WelcomeModal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onCancel: PropTypes.func.isRequired,
-  onConnect: PropTypes.func.isRequired,
-}
 
 export default WelcomeModal

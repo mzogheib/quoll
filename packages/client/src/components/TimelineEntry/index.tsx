@@ -1,7 +1,8 @@
-import React from 'react'
 import styled, { css } from 'styled-components'
-import PropTypes from 'prop-types'
 import moment from 'moment'
+
+import { Entry, getEntryImage } from '../../services/timeline'
+import { getFeedLogo } from '../../services/feeds'
 
 const Wrapper = styled.div(
   ({ theme: { colors } }) => css`
@@ -52,28 +53,26 @@ const Value = styled.div`
   flex-shrink: 0;
 `
 
-const TimelineEntry = ({ entry, onClick }) => (
-  <Wrapper onClick={onClick}>
-    <Logo>
-      <img src={entry.logo} alt="feed logo" />
-    </Logo>
-    <Time>{moment.unix(entry.timeStart).format('h:mm a')}</Time>
-    <Image>{entry.image}</Image>
-    <Label>{entry.title}</Label>
-    <Value>{entry.valueLabel}</Value>
-  </Wrapper>
-)
+interface Props {
+  entry: Entry
+  onClick: () => void
+}
 
-TimelineEntry.propTypes = {
-  entry: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    valueLabel: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    logo: PropTypes.string.isRequired,
-    timeStart: PropTypes.number.isRequired,
-  }).isRequired,
-  onClick: PropTypes.func.isRequired,
+const TimelineEntry = ({ entry, onClick }: Props) => {
+  const logo = getFeedLogo(entry.feed)
+  const image = getEntryImage(entry)
+
+  return (
+    <Wrapper onClick={onClick}>
+      <Logo>
+        <img src={logo} alt="feed logo" />
+      </Logo>
+      <Time>{moment.unix(entry.timeStart).format('h:mm a')}</Time>
+      <Image>{image}</Image>
+      <Label>{entry.title}</Label>
+      <Value>{entry.valueLabel}</Value>
+    </Wrapper>
+  )
 }
 
 export default TimelineEntry

@@ -1,15 +1,19 @@
-import React from 'react'
 import styled from 'styled-components'
-import PropTypes from 'prop-types'
 
 import TimelineEntry from '../TimelineEntry'
+import { Entry } from '../../services/timeline'
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 `
 
-const Timeline = ({ entries, onEntryClick }) => (
+interface Props {
+  entries: Entry[]
+  onEntryClick: (id: string) => void
+}
+
+const Timeline = ({ entries, onEntryClick }: Props) => (
   <Wrapper>
     {entries
       .sort((a, b) => a.timeStart - b.timeStart)
@@ -22,15 +26,5 @@ const Timeline = ({ entries, onEntryClick }) => (
       ))}
   </Wrapper>
 )
-
-Timeline.propTypes = {
-  entries: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      timeStart: PropTypes.number.isRequired,
-    }).isRequired
-  ).isRequired,
-  onEntryClick: PropTypes.func.isRequired,
-}
 
 export default Timeline

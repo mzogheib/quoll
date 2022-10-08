@@ -1,10 +1,8 @@
-import React from 'react'
 import styled, { css } from 'styled-components'
-import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import { Icon, IconButton } from '@quoll/ui-components'
 
-import { IconWrapper } from '../common/'
+import { IconWrapper } from '../common'
 import { routesHash } from '../../../routes'
 
 const Wrapper = styled.div(
@@ -35,9 +33,13 @@ const StyledNavLink = styled(NavLink)(
   `
 )
 
-const Help = styled.div(itemStyle)
+const Help = styled.div(() => itemStyle)
 
-const SideBarHorizontal = ({ onHelpClick }) => (
+interface Props {
+  onHelpClick: () => void
+}
+
+const SideBarHorizontal = ({ onHelpClick }: Props) => (
   <Wrapper>
     <Help>
       <IconWrapper>
@@ -56,9 +58,5 @@ const SideBarHorizontal = ({ onHelpClick }) => (
     </StyledNavLink>
   </Wrapper>
 )
-
-SideBarHorizontal.propTypes = {
-  onHelpClick: PropTypes.func.isRequired,
-}
 
 export default SideBarHorizontal
