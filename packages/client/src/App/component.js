@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, useHistory, useLocation } from 'react-router-dom'
 
 import routes from '../routes'
 import Header from '../components/Header'
@@ -33,7 +33,10 @@ const Main = styled.main`
   flex-direction: column;
 `
 
-const App = ({ onMount, history, location }) => {
+const App = ({ onMount }) => {
+  const history = useHistory()
+  const location = useLocation()
+
   const [isLoading, setLoading] = useState(true)
   const [showWelcomeModal, setShowWelcomeModal] = useState(false)
 

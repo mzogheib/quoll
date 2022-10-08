@@ -1,4 +1,3 @@
-import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { setFeedConnected } from '../store/feeds'
 import { loginUser, signupUser } from '../store/user'
@@ -22,4 +21,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 })
 
-export default withRouter(connect(null, mapDispatchToProps)(App))
+export default connect(null, mapDispatchToProps)(App)
