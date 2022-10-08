@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/mzogheib/quoll/compare/@quoll/client@0.3.14...@quoll/client@0.4.0) (2022-10-08)
+
+### Features
+
+- **client:** change welcome modal text and button ([45ff72a](https://github.com/mzogheib/quoll/commit/45ff72a3ae6c6ddd3cd1daeed67cc63d037439dd))
+
 ## [0.3.14](https://github.com/mzogheib/quoll/compare/@quoll/client@0.3.13...@quoll/client@0.3.14) (2022-10-08)
 
 **Note:** Version bump only for package @quoll/client
