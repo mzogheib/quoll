@@ -1,5 +1,6 @@
-import { Action, Dispatch } from 'redux'
+import { Action } from 'redux'
 
+import { AppDispatch } from '..'
 import feedServices from '../../services/feeds'
 import { FeedName } from '../../services/feeds/types'
 
@@ -39,7 +40,7 @@ export const setFeedAuthenticating = (
 
 export const getOauthUrl = (name: FeedName) => {
   const feedService = feedServices.find((feed) => feed.name === name)
-  return (dispatch: Dispatch) => {
+  return (dispatch: AppDispatch) => {
     dispatch(setFeedAuthenticating(name, true))
     return feedService
       ?.getOauthUrl()
@@ -50,7 +51,7 @@ export const getOauthUrl = (name: FeedName) => {
 
 export const authenticateFeed = (name: FeedName, code: string) => {
   const feedService = feedServices.find((feed) => feed.name === name)
-  return (dispatch: Dispatch) => {
+  return (dispatch: AppDispatch) => {
     dispatch(setFeedAuthenticating(name, true))
     return feedService
       ?.authenticate({ code })
@@ -61,7 +62,7 @@ export const authenticateFeed = (name: FeedName, code: string) => {
 
 export const disconnectFeed = (name: FeedName) => {
   const feedService = feedServices.find((feed) => feed.name === name)
-  return (dispatch: Dispatch) => {
+  return (dispatch: AppDispatch) => {
     dispatch(setFeedAuthenticating(name, true))
     return (
       feedService

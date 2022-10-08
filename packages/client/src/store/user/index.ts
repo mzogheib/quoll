@@ -1,4 +1,6 @@
-import { Action, Dispatch } from 'redux'
+import { Action } from 'redux'
+
+import { AppDispatch } from '..'
 
 import userService from '../../services/user'
 
@@ -20,7 +22,7 @@ export const setUserReady = (): SetUserReadyAction => ({
   type: UserActionType.SetReady,
 })
 
-export const loginUser = (id: string) => (dispatch: Dispatch) => {
+export const loginUser = (id: string) => (dispatch: AppDispatch) => {
   dispatch(setUserAuthenticating())
   return userService.login(id).then((user) => {
     dispatch(setUserReady())
@@ -28,7 +30,7 @@ export const loginUser = (id: string) => (dispatch: Dispatch) => {
   })
 }
 
-export const signupUser = () => (dispatch: Dispatch) => {
+export const signupUser = () => (dispatch: AppDispatch) => {
   dispatch(setUserAuthenticating())
   return userService.signup().then((user) => {
     dispatch(setUserReady())
