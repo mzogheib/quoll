@@ -1,6 +1,5 @@
-import React, { Fragment } from 'react'
+import { Fragment } from 'react'
 import styled, { css } from 'styled-components'
-import PropTypes from 'prop-types'
 
 import SideBarVertical from './SideBarVertical'
 import SideBarHorizontal from './SideBarHorizontal'
@@ -21,7 +20,11 @@ const WrapperH = styled.div(
   `
 )
 
-const SideBar = ({ onHelpClick }) => (
+interface Props {
+  onHelpClick: () => void
+}
+
+const SideBar = ({ onHelpClick }: Props) => (
   <Fragment>
     <WrapperV>
       <SideBarVertical onHelpClick={onHelpClick} />
@@ -31,9 +34,5 @@ const SideBar = ({ onHelpClick }) => (
     </WrapperH>
   </Fragment>
 )
-
-SideBar.propTypes = {
-  onHelpClick: PropTypes.func.isRequired,
-}
 
 export default SideBar
