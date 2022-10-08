@@ -36,9 +36,11 @@ export const signupUser = () => (dispatch: Dispatch) => {
   })
 }
 
+const defaultState = { isAuthenticating: true }
+
 type UserAction = SetUserAuthenticatingAction | SetUserReadyAction
 
-const user = (state = { isAuthenticating: true }, action: UserAction) => {
+const user = (state = defaultState, action: UserAction) => {
   switch (action.type) {
     case UserActionType.SetAuthenticating:
       return { ...state, isAuthenticating: true }

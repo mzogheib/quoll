@@ -8,18 +8,30 @@ enum FeedActionType {
   SetAuthenticating = 'SET_FEED_AUTHENTICATING',
 }
 
-interface FeedAction extends Action<FeedActionType> {
+interface SetFeedConnectedAction extends Action<FeedActionType.SetConnected> {
   name: FeedName
   value: boolean
 }
 
-export const setFeedConnected = (name: FeedName, value: boolean) => ({
+export const setFeedConnected = (
+  name: FeedName,
+  value: boolean
+): SetFeedConnectedAction => ({
   type: FeedActionType.SetConnected,
   name,
   value,
 })
 
-export const setFeedAuthenticating = (name: FeedName, value: boolean) => ({
+interface SetFeedAuthenticatingAction
+  extends Action<FeedActionType.SetAuthenticating> {
+  name: FeedName
+  value: boolean
+}
+
+export const setFeedAuthenticating = (
+  name: FeedName,
+  value: boolean
+): SetFeedAuthenticatingAction => ({
   type: FeedActionType.SetAuthenticating,
   name,
   value,
@@ -64,13 +76,15 @@ export const disconnectFeed = (name: FeedName) => {
   }
 }
 
-const defaultFeeds = feedServices.map((config) => ({
+const defaultState = feedServices.map((config) => ({
   ...config,
   isConnected: false,
   isAuthenticating: false,
 }))
 
-const feeds = (state = defaultFeeds, action: FeedAction) => {
+type FeedAction = SetFeedAuthenticatingAction | SetFeedConnectedAction
+
+const feeds = (state = defaultState, action: FeedAction) => {
   const { type, name, value } = action
 
   switch (type) {

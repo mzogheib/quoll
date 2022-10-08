@@ -4,7 +4,7 @@ enum FocussedItemActionType {
   Set = 'SET_FOCUSSED_ITEM',
 }
 
-interface FocussedItemAction extends Action<FocussedItemActionType> {
+interface SetFocussedItemAction extends Action<FocussedItemActionType.Set> {
   id: string
   latitude: number
   longitude: number
@@ -14,17 +14,18 @@ export const setFocussedItem = (
   id: string,
   latitude: number,
   longitude: number
-) => ({
+): SetFocussedItemAction => ({
   type: FocussedItemActionType.Set,
   id,
   latitude,
   longitude,
 })
 
-const focussedItem = (
-  state = { id: null, latitude: null, longitude: null },
-  action: FocussedItemAction
-) => {
+const defaultState = { id: null, latitude: null, longitude: null }
+
+type FocussedItemAction = SetFocussedItemAction
+
+const focussedItem = (state = defaultState, action: FocussedItemAction) => {
   switch (action.type) {
     case FocussedItemActionType.Set:
       return {
