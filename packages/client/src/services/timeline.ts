@@ -102,7 +102,7 @@ interface MovesEntry {
   polyline: null
 }
 
-type Entry = StravaEntry | ToshlEntry | UberEntry | MovesEntry
+export type Entry = StravaEntry | ToshlEntry | UberEntry | MovesEntry
 
 const get = (date: string) =>
   api
