@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.13](https://github.com/mzogheib/quoll/compare/@quoll/client@0.3.12...@quoll/client@0.3.13) (2022-10-08)
+
+### Bug Fixes
+
+- **client:** replace deprecated querystring with URLSearchParams ([549b9a5](https://github.com/mzogheib/quoll/commit/549b9a5c1e10e80241a2531c8cefc5b44f0e33e9))
+
 ## [0.3.12](https://github.com/mzogheib/quoll/compare/@quoll/client@0.3.11...@quoll/client@0.3.12) (2022-10-08)
 
 **Note:** Version bump only for package @quoll/client
