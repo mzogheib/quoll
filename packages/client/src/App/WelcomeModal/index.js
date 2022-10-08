@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
-import { Button, IconButton, Modal } from '@quoll/ui-components'
+import { ButtonPrimary, IconButton, Modal } from '@quoll/ui-components'
 
 const Header = styled.div`
   display: flex;
@@ -36,9 +36,9 @@ const WelcomeModal = ({ isOpen, onCancel, onConnect }) => (
       <IconButton icon="Close" size={30} onClick={onCancel} />
     </Header>
     <Title>Quoll</Title>
-    <Message>Map yo' life.</Message>
+    <Message>Map ya life!</Message>
     <Actions>
-      <Button onClick={onConnect}>Connect Feeds</Button>
+      <ButtonPrimary onClick={onConnect}>Connect Feeds</ButtonPrimary>
     </Actions>
   </Modal>
 )
