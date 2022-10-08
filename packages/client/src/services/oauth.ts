@@ -32,7 +32,9 @@ const isValidToken = (token: string) => {
 
 const makeAuthUrl = (url: string) => {
   const state = utils.encode({ token: makeToken() })
-  return utils.addQueryParams(url, { state })
+  const newUrl = new URL(url)
+  newUrl.searchParams.append('state', state)
+  return newUrl.toString()
 }
 
 interface OAuthResponse {

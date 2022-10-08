@@ -1,17 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import querystring from 'querystring'
 
 import { onOAuthResponse } from '../../services/oauth'
 
 const OAuth = ({ location, history }) => {
   const searchString = location.search
   // searchString: ?foo=bar
-  const queryParams = querystring.parse(searchString.substr(1))
+  const searchParams = new URLSearchParams(searchString)
+  const searchParamsObj = Object.fromEntries(searchParams)
 
   // Pass through any error messages to the settings page, which is where
   // the user would have started to get here
-  onOAuthResponse(queryParams, (errorMessage) =>
+  onOAuthResponse(searchParamsObj, (errorMessage) =>
     history.push('/settings', { errorMessage })
   )
 

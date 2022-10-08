@@ -1,19 +1,3 @@
-import querystring from 'querystring'
-
-function addQueryParams(
-  url: string | undefined,
-  params: Record<string, string | number>
-) {
-  if (!url) {
-    return
-  }
-  const baseUrl = url && url.split('?')[0]
-  const searchString = url && url.split('?')[1]
-  const existingParams = querystring.parse(searchString)
-  const allParams = { ...existingParams, ...params }
-  return `${baseUrl}?${querystring.stringify(allParams)}`
-}
-
 // This will extract the first found match regardless of what else is in the input.
 const TIME_FORMAT_REGEX = /[0-9][0-9]:[0-9][0-9]:[0-9][0-9]/
 function extractTimeString(input: string) {
@@ -58,7 +42,6 @@ function decode(string: string) {
 }
 
 const utilsService = {
-  addQueryParams,
   extractTimeString,
   startsWithTime,
   makeRandomString,
