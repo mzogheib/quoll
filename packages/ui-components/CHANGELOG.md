@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.8](https://github.com/mzogheib/quoll/compare/@quoll/ui-components@0.2.7...@quoll/ui-components@0.2.8) (2022-10-08)
+
+### Bug Fixes
+
+- **ui-components:** fix import in calendar story ([eb3401d](https://github.com/mzogheib/quoll/commit/eb3401d048ef3b30568517e3cb45cbf5c54a24b1))
+
 ## [0.2.7](https://github.com/mzogheib/quoll/compare/@quoll/ui-components@0.2.6...@quoll/ui-components@0.2.7) (2022-08-27)
 
 **Note:** Version bump only for package @quoll/ui-components
