@@ -1,6 +1,7 @@
 import moment from 'moment'
+
 import api from './api'
-import feeds from './feeds'
+import { FeedName } from './feeds/types'
 
 const EntryConfig = {
   home: { label: 'Home', image: '🏠' },
@@ -20,6 +21,8 @@ const EntryConfig = {
   yoga: { label: 'Yoga', image: '🧘‍♂️' },
 }
 
+export const getEntryImage = (entry: Entry) => EntryConfig[entry.type].image
+
 enum StravaEntryType {
   Bike = 'bike',
   Run = 'run',
@@ -29,11 +32,11 @@ enum StravaEntryType {
 }
 
 interface StravaEntry {
-  feed: 'strava'
+  feed: FeedName.Strava
   id: string
   type: StravaEntryType
-  timeStart: string
-  timeEnd: string
+  timeStart: number
+  timeEnd: number
   title: string
   valueLabel: string
   description: string
@@ -47,11 +50,11 @@ enum ToshlEntryType {
 }
 
 interface ToshlEntry {
-  feed: 'toshl'
+  feed: FeedName.Toshl
   id: string
   type: ToshlEntryType
-  timeStart: string
-  timeEnd: string
+  timeStart: number
+  timeEnd: number
   title: string
   valueLabel: string
   description: string
@@ -65,11 +68,11 @@ enum UberEntryType {
 }
 
 interface UberEntry {
-  feed: 'uber'
+  feed: FeedName.Uber
   id: string
   type: UberEntryType
-  timeStart: string
-  timeEnd: string
+  timeStart: number
+  timeEnd: number
   title: 'Uber'
   valueLabel: string
   description: string
@@ -89,11 +92,11 @@ enum MovesEntryType {
 }
 
 interface MovesEntry {
-  feed: 'moves'
+  feed: FeedName.Moves
   id: string
   type: MovesEntryType
-  timeStart: string
-  timeEnd: string
+  timeStart: number
+  timeEnd: number
   title: 'Uber'
   valueLabel: string
   description: null
@@ -105,25 +108,13 @@ interface MovesEntry {
 export type Entry = StravaEntry | ToshlEntry | UberEntry | MovesEntry
 
 const get = (date: string) =>
-  api
-    .get<Entry[]>({
-      endpoint: 'timeline',
-      params: {
-        from: moment(date).startOf('day').toISOString(),
-        to: moment(date).endOf('day').toISOString(),
-      },
-    })
-    .then((entries) =>
-      entries.map((entry) => {
-        const entryConfig = EntryConfig[entry.type]
-        const feedConfig = feeds.find((feed) => feed.name === entry.feed)
-        return {
-          ...entry,
-          logo: feedConfig && feedConfig.imageConnected,
-          image: (entryConfig && entryConfig.image) || '🤷‍♂️',
-        }
-      })
-    )
+  api.get<Entry[]>({
+    endpoint: 'timeline',
+    params: {
+      from: moment(date).startOf('day').toISOString(),
+      to: moment(date).endOf('day').toISOString(),
+    },
+  })
 
 const timelineService = {
   get,

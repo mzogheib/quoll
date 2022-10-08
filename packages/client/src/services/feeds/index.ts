@@ -59,4 +59,7 @@ const feedsService = [
   },
 ]
 
+export const getFeedLogo = (name: FeedName): string =>
+  feedsService.find((feed) => feed.name === name)?.imageConnected
+
 export default feedsService
