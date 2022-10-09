@@ -11,11 +11,13 @@ export const routesHash = {
   },
   settings: {
     path: '/settings',
+    exact: false,
     title: 'Settings',
     component: Settings,
   },
   oauth: {
     path: '/oauth',
+    exact: false,
     title: 'OAuth',
     component: OAuth,
   },
