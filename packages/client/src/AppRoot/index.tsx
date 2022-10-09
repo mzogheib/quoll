@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import { Fragment } from 'react'
 import { css, createGlobalStyle, ThemeProvider } from 'styled-components'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
