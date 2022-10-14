@@ -1,8 +1,15 @@
 import api from './api'
+import { FeedName } from './feeds/types'
 import storage from './storage'
 
-type User = {
+interface UserFeed {
+  name: FeedName
+  isConnected: boolean
+}
+
+export interface User {
   _id: string
+  feeds: UserFeed[]
 }
 
 const userKey = 'user'
