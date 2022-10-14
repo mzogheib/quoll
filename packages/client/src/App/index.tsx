@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import styled, { css } from 'styled-components'
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import routes from '../routes'
 import Header from '../components/Header'
 import SideBar from '../components/SideBar'
 import WelcomeModal from './WelcomeModal'
-import { loginUser, signupUser } from '../store/user'
+import { loginUser, selectIsAuthenticating, signupUser } from '../store/user'
 import userService from '../services/user'
-import { setFeedConnected } from '../store/feeds'
+import { selectHasFeedConnected } from '../store/feeds'
 
 const Wrapper = styled.div(
   ({ theme: { colors, media } }) => css`
@@ -41,7 +41,9 @@ const App = () => {
   const location = useLocation()
   const dispatch = useDispatch()
 
-  const [isLoading, setLoading] = useState(true)
+  const hasFeedConnected = useSelector(selectHasFeedConnected)
+  const isAuthenticating = useSelector(selectIsAuthenticating)
+
   const [showWelcomeModal, setShowWelcomeModal] = useState(false)
 
   useEffect(() => {
@@ -49,21 +51,17 @@ const App = () => {
     const action = userId ? () => loginUser(userId) : () => signupUser()
 
     dispatch(action())
-      .then((user) => user.feeds)
-      .then((feeds) => {
-        feeds.forEach((feed) =>
-          dispatch(setFeedConnected(feed.name, feed.isConnected))
-        )
-
-        return feeds.some(({ isConnected }) => isConnected)
-      })
-      .then((areFeedsConnected) => {
-        setLoading(false)
-        setShowWelcomeModal(!areFeedsConnected)
-      })
   }, [dispatch])
 
-  const getRouteTitleFromLocation = (location) => {
+  // TODO: don't show the modal if user is already logged in and disconnects
+  // all feeds
+  useEffect(() => {
+    if (!isAuthenticating && !hasFeedConnected) {
+      setShowWelcomeModal(true)
+    }
+  }, [hasFeedConnected, isAuthenticating])
+
+  const getRouteTitleFromLocation = () => {
     const route = routes.find((route) => route.path === location.pathname)
     return (route && route.title) || ''
   }
@@ -88,7 +86,7 @@ const App = () => {
       <Wrapper>
         <SideBar onHelpClick={handleSideBarHelpClick} />
         <Content>
-          <Header>{getRouteTitleFromLocation(location)}</Header>
+          <Header>{getRouteTitleFromLocation()}</Header>
           <Main>
             <Switch>
               {routes.map((route, index) => (
@@ -111,7 +109,7 @@ const App = () => {
     )
   }
 
-  return isLoading ? renderLoading() : renderApp()
+  return isAuthenticating ? renderLoading() : renderApp()
 }
 
 export default App

@@ -1,6 +1,4 @@
-import React from 'react'
 import styled, { css } from 'styled-components'
-import PropTypes from 'prop-types'
 import { ButtonPlain, HorizontalLoader } from '@quoll/ui-components'
 
 const Wrapper = styled.div(
@@ -10,7 +8,7 @@ const Wrapper = styled.div(
   `
 )
 
-const Content = styled.div(
+const Content = styled.div<{ isAuthenticating: boolean }>(
   ({ isAuthenticating }) => css`
     display: flex;
     align-items: center;
@@ -53,7 +51,24 @@ const Link = styled.a.attrs({
   `
 )
 
-const FeedSettings = ({ feed, onConnect, onDisconnect }) => {
+interface Props {
+  feed: {
+    isAuthenticating: boolean
+    isConnected: boolean
+    imageConnected: string
+    imageDisconnected: string
+    name: string
+    title: string
+    link: {
+      url: string
+      label: string
+    }
+  }
+  onConnect: (name: string) => void
+  onDisconnect: (name: string) => void
+}
+
+const FeedSettings = ({ feed, onConnect, onDisconnect }: Props) => {
   const {
     isAuthenticating,
     isConnected,
@@ -89,23 +104,6 @@ const FeedSettings = ({ feed, onConnect, onDisconnect }) => {
       </Content>
     </Wrapper>
   )
-}
-
-FeedSettings.propTypes = {
-  feed: PropTypes.shape({
-    isAuthenticating: PropTypes.bool.isRequired,
-    isConnected: PropTypes.bool.isRequired,
-    imageConnected: PropTypes.string.isRequired,
-    imageDisconnected: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    link: PropTypes.shape({
-      url: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
-    }).isRequired,
-  }).isRequired,
-  onConnect: PropTypes.func.isRequired,
-  onDisconnect: PropTypes.func.isRequired,
 }
 
 export default FeedSettings
