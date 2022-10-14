@@ -3,6 +3,7 @@ import { Action } from 'redux'
 import { AppDispatch } from '..'
 import feedServices from '../../services/feeds'
 import { FeedName } from '../../services/feeds/types'
+import { RootState } from '..'
 
 enum FeedActionType {
   SetConnected = 'SET_FEED_CONNECTED',
@@ -76,6 +77,9 @@ export const disconnectFeed = (name: FeedName) => {
     )
   }
 }
+
+export const selectHasFeedConnected = (state: RootState) =>
+  state.feeds.some(({ isConnected }) => isConnected)
 
 const defaultState = feedServices.map((config) => ({
   ...config,

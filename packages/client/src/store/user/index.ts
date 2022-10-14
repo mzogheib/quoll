@@ -1,8 +1,9 @@
 import { Action } from 'redux'
 
-import { AppDispatch } from '..'
+import { AppDispatch, RootState } from '..'
 
-import userService from '../../services/user'
+import userService, { User } from '../../services/user'
+import { setFeedConnected } from '../feeds'
 
 enum UserActionType {
   SetAuthenticating = 'SET_USER_AUTHENTICATING',
@@ -16,41 +17,52 @@ export const setUserAuthenticating = (): SetUserAuthenticatingAction => ({
   type: UserActionType.SetAuthenticating,
 })
 
-interface SetUserReadyAction extends Action<UserActionType.SetReady> {}
+interface SetUserReadyAction extends Action<UserActionType.SetReady> {
+  user: User
+}
 
-export const setUserReady = (): SetUserReadyAction => ({
+export const setUserReady = (user: User): SetUserReadyAction => ({
   type: UserActionType.SetReady,
+  user,
 })
 
 export const loginUser = (id: string) => (dispatch: AppDispatch) => {
   dispatch(setUserAuthenticating())
   return userService.login(id).then((user) => {
-    dispatch(setUserReady())
-    return user
+    user.feeds.forEach(({ name, isConnected }) =>
+      dispatch(setFeedConnected(name, isConnected))
+    )
+
+    dispatch(setUserReady(user))
   })
 }
 
 export const signupUser = () => (dispatch: AppDispatch) => {
   dispatch(setUserAuthenticating())
   return userService.signup().then((user) => {
-    dispatch(setUserReady())
-    return user
+    dispatch(setUserReady(user))
   })
 }
+
+export const selectIsAuthenticating = (state: RootState) =>
+  state.user.isAuthenticating
 
 const defaultState = { isAuthenticating: true }
 
 type UserAction = SetUserAuthenticatingAction | SetUserReadyAction
 
-const user = (state = defaultState, action: UserAction) => {
+const userReducer = (state = defaultState, action: UserAction) => {
   switch (action.type) {
     case UserActionType.SetAuthenticating:
       return { ...state, isAuthenticating: true }
+
     case UserActionType.SetReady:
-      return { ...state, isAuthenticating: false }
+      const { user } = action
+      return { ...state, isAuthenticating: false, user }
+
     default:
       return state
   }
 }
 
-export default user
+export default userReducer
