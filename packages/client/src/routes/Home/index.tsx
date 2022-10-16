@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import styled, { css } from 'styled-components'
-import PropTypes from 'prop-types'
 import moment from 'moment'
 import { HorizontalLoader } from '@quoll/ui-components'
 import { connect } from 'react-redux'
@@ -11,6 +10,7 @@ import { setFocussedItem } from '../../store/focussed-item'
 import DatePicker from '../../components/DatePicker'
 import Timeline from '../../components/Timeline'
 import Map from '../../components/Map'
+import { AppDispatch, GetState, RootState } from '../../store'
 
 const Wrapper = styled.div(
   ({ theme: { media } }) => css`
@@ -80,6 +80,11 @@ const LoaderWrapper = styled.div`
   right: 0;
 `
 
+type StateProps = ReturnType<typeof mapStateToProps>
+type DispatchProps = ReturnType<typeof mapDispatchToProps>
+
+type Props = StateProps & DispatchProps
+
 const Home = ({
   onMount,
   date,
@@ -90,12 +95,12 @@ const Home = ({
   markerData,
   polylineData,
   focussedItem,
-}) => {
+}: Props) => {
   useEffect(() => {
     onMount()
   }, [onMount])
 
-  const dateIsToday = (date) => moment(date).isSame(moment(), 'day')
+  const dateIsToday = (date: string) => moment(date).isSame(moment(), 'day')
 
   return (
     <Wrapper>
@@ -133,25 +138,13 @@ const Home = ({
   )
 }
 
-Home.propTypes = {
-  date: PropTypes.string.isRequired,
-  timelineEntries: PropTypes.any.isRequired,
-  markerData: PropTypes.any.isRequired,
-  polylineData: PropTypes.any.isRequired,
-  focussedItem: PropTypes.any.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-  onMount: PropTypes.func.isRequired,
-  onDateChange: PropTypes.func.isRequired,
-  onEntryClick: PropTypes.func.isRequired,
-}
-
-const mapStateToProps = ({ date, timeline, focussedItem }) => {
+const mapStateToProps = ({ date, timeline, focussedItem }: RootState) => {
   const markerData = timeline.entries
     .filter((entry) => !entry.polyline && entry.locationStart)
     .map((entry) => ({
       id: entry.id,
       latitude: entry.locationStart.latitude,
-      longitude: entry.locationStart.longitude,
+      longitude: entry.locationEnd.longitude,
       title: entry.title,
       subTitle: moment.unix(entry.timeStart).format('h:mm a'),
       description: entry.description || '',
@@ -160,7 +153,8 @@ const mapStateToProps = ({ date, timeline, focussedItem }) => {
     .filter((entry) => entry.polyline)
     .map((entry) => ({
       id: entry.id,
-      encodedPath: entry.polyline,
+      // TypeScript can't seem to infer that polyline must be defined
+      encodedPath: entry.polyline as string,
       title: entry.title,
       subTitle: moment.unix(entry.timeStart).format('h:mm a'),
       description: entry.description || '',
@@ -177,13 +171,15 @@ const mapStateToProps = ({ date, timeline, focussedItem }) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  onMount: () => dispatch(fetchTimeline()),
-  onDateChange: (date) => {
+const mapDispatchToProps = (dispatch: AppDispatch, getState: GetState) => ({
+  onMount: () => fetchTimeline()(dispatch, getState),
+  onDateChange: (date: string) => {
     dispatch(setDate(date))
-    return dispatch(fetchTimeline()).then(() => dispatch(setFocussedItem(null)))
+    return fetchTimeline()(dispatch, getState).then(() =>
+      dispatch(setFocussedItem())
+    )
   },
-  onEntryClick: (id, latitude, longitude) =>
+  onEntryClick: (id: string, latitude?: number, longitude?: number) =>
     dispatch(setFocussedItem(id, latitude, longitude)),
 })
 
