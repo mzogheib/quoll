@@ -75,6 +75,8 @@ export const disconnectFeed = (name: FeedName) => (dispatch: AppDispatch) => {
   )
 }
 
+export const selectFeeds = (state: RootState) => state.feeds
+
 export const selectHasFeedConnected = (state: RootState) =>
   state.feeds.some(({ isConnected }) => isConnected)
 
