@@ -2,9 +2,20 @@ import toshl from './toshl'
 import strava from './strava'
 import moves from './moves'
 import uber from './uber'
-import { FeedName } from './types'
+import { AuthenticatePayload, FeedName } from './types'
 
-const feedsService = [
+export interface FeedService {
+  name: FeedName
+  title: string
+  link: { url: string; label: string }
+  imageConnected: string
+  imageDisconnected: string
+  getOauthUrl: () => Promise<string>
+  authenticate: (payload: AuthenticatePayload) => Promise<void>
+  disconnect: () => Promise<string | void>
+}
+
+const feedsService: FeedService[] = [
   {
     name: FeedName.Toshl,
     title: 'Toshl',
@@ -60,6 +71,6 @@ const feedsService = [
 ]
 
 export const getFeedLogo = (name: FeedName): string =>
-  feedsService.find((feed) => feed.name === name)?.imageConnected
+  feedsService.find((feed) => feed.name === name)!.imageConnected
 
 export default feedsService
