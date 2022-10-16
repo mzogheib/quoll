@@ -81,7 +81,7 @@ export const selectHasFeedConnected = (state: RootState) =>
   state.feeds.some(({ isConnected }) => isConnected)
 
 // TODO: reduce how much stuff in is Feed and FeedService
-const defaultState: Feed[] = feedServices.map((config) => ({
+const defaultState: Feed[] = Object.values(feedServices).map((config) => ({
   ...config,
   isConnected: false,
   isAuthenticating: false,

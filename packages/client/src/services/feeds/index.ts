@@ -15,8 +15,8 @@ export interface FeedService {
   disconnect: () => Promise<string | void>
 }
 
-const feedsService: FeedService[] = [
-  {
+const feedsService: Record<FeedName, FeedService> = {
+  [FeedName.Toshl]: {
     name: FeedName.Toshl,
     title: 'Toshl',
     link: {
@@ -29,7 +29,7 @@ const feedsService: FeedService[] = [
     authenticate: toshl.authenticate,
     disconnect: toshl.deauthorize,
   },
-  {
+  [FeedName.Strava]: {
     name: FeedName.Strava,
     title: 'Strava',
     link: {
@@ -42,7 +42,7 @@ const feedsService: FeedService[] = [
     authenticate: strava.authenticate,
     disconnect: strava.deauthorize,
   },
-  {
+  [FeedName.Uber]: {
     name: FeedName.Uber,
     title: 'Uber',
     link: {
@@ -55,7 +55,7 @@ const feedsService: FeedService[] = [
     authenticate: uber.authenticate,
     disconnect: uber.deauthorize,
   },
-  {
+  [FeedName.Moves]: {
     name: FeedName.Moves,
     title: 'Moves',
     link: {
@@ -68,13 +68,11 @@ const feedsService: FeedService[] = [
     authenticate: moves.authenticate,
     disconnect: moves.deauthorize,
   },
-]
+}
 
-// TODO: avoid this type assertion, e.g. replace array with an object
-export const getFeedService = (name: FeedName) =>
-  feedsService.find((fs) => fs.name === name) as FeedService
+export const getFeedService = (name: FeedName) => feedsService[name]
 
-export const getFeedLogo = (name: FeedName): string =>
-  feedsService.find((feed) => feed.name === name)!.imageConnected
+export const getFeedLogo = (name: FeedName) =>
+  getFeedService(name).imageConnected
 
 export default feedsService
