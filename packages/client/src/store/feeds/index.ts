@@ -43,8 +43,8 @@ export const getOauthUrl = (name: FeedName) => {
   const feedService = feedServices.find((feed) => feed.name === name)
   return (dispatch: AppDispatch) => {
     dispatch(setFeedAuthenticating(name, true))
-    return feedService
-      ?.getOauthUrl()
+    return feedService!
+      .getOauthUrl()
       .then((url) => url)
       .finally(() => dispatch(setFeedAuthenticating(name, false)))
   }
@@ -54,8 +54,8 @@ export const authenticateFeed = (name: FeedName, code: string) => {
   const feedService = feedServices.find((feed) => feed.name === name)
   return (dispatch: AppDispatch) => {
     dispatch(setFeedAuthenticating(name, true))
-    return feedService
-      ?.authenticate({ code })
+    return feedService!
+      .authenticate({ code })
       .then(() => dispatch(setFeedConnected(name, true)))
       .finally(() => dispatch(setFeedAuthenticating(name, false)))
   }
@@ -66,8 +66,8 @@ export const disconnectFeed = (name: FeedName) => {
   return (dispatch: AppDispatch) => {
     dispatch(setFeedAuthenticating(name, true))
     return (
-      feedService
-        ?.disconnect()
+      feedService!
+        .disconnect()
         // BE may return a message for further, manual instructions
         .then((message) => {
           dispatch(setFeedConnected(name, false))
