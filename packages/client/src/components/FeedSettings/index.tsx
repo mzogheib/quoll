@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 import { ButtonPlain, HorizontalLoader } from '@quoll/ui-components'
+import { FeedName } from '../../services/feeds/types'
 
 const Wrapper = styled.div(
   ({ theme: { colors } }) => css`
@@ -57,15 +58,15 @@ interface Props {
     isConnected: boolean
     imageConnected: string
     imageDisconnected: string
-    name: string
+    name: FeedName
     title: string
     link: {
       url: string
       label: string
     }
   }
-  onConnect: (name: string) => void
-  onDisconnect: (name: string) => void
+  onConnect: (name: FeedName) => void
+  onDisconnect: (name: FeedName) => void
 }
 
 const FeedSettings = ({ feed, onConnect, onDisconnect }: Props) => {
