@@ -1,7 +1,7 @@
 import { Action } from 'redux'
 
 import { AppDispatch } from '..'
-import feedServices, { getFeedService } from '../../services/feeds'
+import feedServices, { FeedService, getFeedService } from '../../services/feeds'
 import { FeedName } from '../../services/feeds/types'
 import { RootState } from '..'
 
@@ -13,6 +13,11 @@ enum FeedActionType {
 interface SetFeedConnectedAction extends Action<FeedActionType.SetConnected> {
   name: FeedName
   value: boolean
+}
+
+export interface Feed extends FeedService {
+  isAuthenticating: boolean
+  isConnected: boolean
 }
 
 export const setFeedConnected = (
@@ -73,7 +78,8 @@ export const disconnectFeed = (name: FeedName) => (dispatch: AppDispatch) => {
 export const selectHasFeedConnected = (state: RootState) =>
   state.feeds.some(({ isConnected }) => isConnected)
 
-const defaultState = feedServices.map((config) => ({
+// TODO: reduce how much stuff in is Feed and FeedService
+const defaultState: Feed[] = feedServices.map((config) => ({
   ...config,
   isConnected: false,
   isAuthenticating: false,
