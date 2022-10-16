@@ -139,7 +139,10 @@ const Home = ({ onMount, onDateChange, onEntryClick }: Props) => {
         />
         <TimelineWrapper>
           <TimelineBody>
-            <Timeline entries={entries} onEntryClick={onEntryClick} />
+            <Timeline
+              entries={entries}
+              onEntryClick={(id) => onEntryClick(id, null, null)}
+            />
           </TimelineBody>
         </TimelineWrapper>
       </Left>
@@ -167,11 +170,14 @@ const mapDispatchToProps = (dispatch: AppDispatch) => ({
   onDateChange: (date: string) => {
     dispatch(setDate(date))
     return fetchTimeline()(dispatch, getState).then(() =>
-      dispatch(setFocussedItem())
+      dispatch(setFocussedItem(null, null, null))
     )
   },
-  onEntryClick: (id: string, latitude?: number, longitude?: number) =>
-    dispatch(setFocussedItem(id, latitude, longitude)),
+  onEntryClick: (
+    id: string,
+    latitude: number | null,
+    longitude: number | null
+  ) => dispatch(setFocussedItem(id, latitude, longitude)),
 })
 
 export default connect(undefined, mapDispatchToProps)(Home)

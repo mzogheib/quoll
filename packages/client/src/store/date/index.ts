@@ -10,7 +10,7 @@ interface SetDateAction extends Action<DateActionType.Set> {
   date: string
 }
 
-export const setDate = (date: string) => ({
+export const setDate = (date: string): SetDateAction => ({
   type: DateActionType.Set,
   date,
 })
