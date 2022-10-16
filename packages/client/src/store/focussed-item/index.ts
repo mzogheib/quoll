@@ -1,19 +1,26 @@
 import { Action } from 'redux'
+import { RootState } from '..'
 
 enum FocussedItemActionType {
   Set = 'SET_FOCUSSED_ITEM',
 }
 
+interface FocussedItem {
+  id: string | null
+  latitude: number | null
+  longitude: number | null
+}
+
 interface SetFocussedItemAction extends Action<FocussedItemActionType.Set> {
-  id: string
-  latitude: number
-  longitude: number
+  id: string | null
+  latitude: number | null
+  longitude: number | null
 }
 
 export const setFocussedItem = (
-  id: string,
-  latitude: number,
-  longitude: number
+  id: string | null,
+  latitude: number | null,
+  longitude: number | null
 ): SetFocussedItemAction => ({
   type: FocussedItemActionType.Set,
   id,
@@ -21,7 +28,9 @@ export const setFocussedItem = (
   longitude,
 })
 
-const defaultState = { id: null, latitude: null, longitude: null }
+export const selectFocussedItem = (state: RootState) => state.focussedItem
+
+const defaultState: FocussedItem = { id: null, latitude: null, longitude: null }
 
 type FocussedItemAction = SetFocussedItemAction
 

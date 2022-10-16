@@ -1,9 +1,12 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import { useHistory, useLocation } from 'react-router-dom'
 
 import { onOAuthResponse } from '../../services/oauth'
+import { SettingsLocationState } from '../types'
 
-const OAuth = ({ location, history }) => {
+const OAuth = () => {
+  const history = useHistory<SettingsLocationState>()
+  const location = useLocation()
+
   const searchString = location.search
   // searchString: ?foo=bar
   const searchParams = new URLSearchParams(searchString)
@@ -16,15 +19,6 @@ const OAuth = ({ location, history }) => {
   )
 
   return <div>Connecting...</div>
-}
-
-OAuth.propTypes = {
-  location: PropTypes.shape({
-    search: PropTypes.string.isRequired,
-  }).isRequired,
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }),
 }
 
 export default OAuth

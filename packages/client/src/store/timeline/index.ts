@@ -1,8 +1,13 @@
 import { Action } from 'redux'
 
-import { AppDispatch, GetState } from '..'
+import { AppDispatch, GetState, RootState } from '..'
 
 import timelineService, { Entry } from '../../services/timeline'
+
+export interface Timeline {
+  isFetching: boolean
+  entries: Entry[]
+}
 
 enum TimelineActionType {
   SetFetching = 'SET_TIMELINE_FETCHING',
@@ -42,7 +47,9 @@ export const fetchTimeline =
       .catch(() => dispatch(setTimelineFetching(false)))
   }
 
-const defaultState = { isFetching: true, entries: [] }
+export const selectTimeline = (state: RootState) => state.timeline
+
+const defaultState: Timeline = { isFetching: true, entries: [] }
 
 type TimelineAction = SetTimelineFetchingAction | SetTimelineEntriesAction
 

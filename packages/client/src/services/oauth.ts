@@ -43,7 +43,7 @@ interface OAuthResponse {
   error?: string
 }
 
-type OnSuccess = (code: string) => string
+type OnSuccess = (code: string) => void
 
 type OnError = (error: string) => void
 

@@ -1,5 +1,6 @@
 import moment from 'moment'
 import { Action } from 'redux'
+import { RootState } from '..'
 
 enum DateActionType {
   Set = 'SET_DATE',
@@ -9,10 +10,12 @@ interface SetDateAction extends Action<DateActionType.Set> {
   date: string
 }
 
-export const setDate = (date: string) => ({
+export const setDate = (date: string): SetDateAction => ({
   type: DateActionType.Set,
   date,
 })
+
+export const selectDate = (state: RootState) => state.date
 
 const defaultState = moment().format('YYYY-MM-DD')
 
