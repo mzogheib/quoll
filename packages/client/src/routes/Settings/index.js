@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
+import {
+  getOauthUrl,
+  authenticateFeed,
+  disconnectFeed,
+} from '../../store/feeds'
 import FeedSettings from '../../components/FeedSettings'
 import { requestAuth } from '../../services/oauth'
 import AlertModal from '../../components/modals/AlertModal'
@@ -133,4 +139,14 @@ Settings.propTypes = {
   onOauthCodeReceived: PropTypes.func.isRequired,
 }
 
-export default Settings
+const mapStateToProps = (state) => ({
+  feeds: state.feeds,
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  onConnect: (name) => getOauthUrl(name)(dispatch),
+  onOauthCodeReceived: (name, code) => authenticateFeed(name, code)(dispatch),
+  onDisconnect: (name) => disconnectFeed(name)(dispatch),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Settings)
