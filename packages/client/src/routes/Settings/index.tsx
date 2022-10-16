@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useLocation } from 'react-router-dom'
 
 import {
@@ -8,11 +8,11 @@ import {
   authenticateFeed,
   disconnectFeed,
   Feed,
+  selectFeeds,
 } from '../../store/feeds'
 import FeedSettings from '../../components/FeedSettings'
 import { requestAuth } from '../../services/oauth'
 import AlertModal from '../../components/modals/AlertModal'
-import { AppDispatch, RootState } from '../../store'
 import { FeedName } from '../../services/feeds/types'
 
 const Wrapper = styled.div`
@@ -52,16 +52,20 @@ const INITIAL_STATE = {
   modalMessage: 'Oops, something went wrong.',
 }
 
-type StateProps = ReturnType<typeof mapStateToProps>
-type DispatchProps = ReturnType<typeof mapDispatchToProps>
+const Settings = () => {
+  const dispatch = useDispatch()
 
-type Props = StateProps & DispatchProps
-
-const Settings = (props: Props) => {
   const history = useHistory()
   const location = useLocation<{ errorMessage: string }>()
 
   const [state, setState] = useState(INITIAL_STATE)
+
+  const feeds = useSelector(selectFeeds)
+
+  const onConnect = (name: FeedName) => getOauthUrl(name)(dispatch)
+  const onOauthCodeReceived = (name: FeedName, code: string) =>
+    authenticateFeed(name, code)(dispatch)
+  const onDisconnect = (name: FeedName) => disconnectFeed(name)(dispatch)
 
   const openModal = (message = INITIAL_STATE.modalMessage) =>
     setState({ showModal: true, modalMessage: message })
@@ -78,9 +82,7 @@ const Settings = (props: Props) => {
 
   const closeModal = () => setState({ ...INITIAL_STATE })
 
-  const connectFeed = (name: FeedName) => {
-    const { onConnect, onOauthCodeReceived } = props
-
+  const handleConnect = (name: FeedName) => {
     const defaultErrorMessage = 'Could not connect feed. Please try again.'
     const openErrorModal = (message = defaultErrorMessage) => openModal(message)
 
@@ -92,9 +94,8 @@ const Settings = (props: Props) => {
       .catch(openErrorModal)
   }
 
-  const disconnectFeed = (name: FeedName) =>
-    props
-      .onDisconnect(name)
+  const handleDisconnect = (name: FeedName) =>
+    onDisconnect(name)
       .then((message) => {
         if (message) {
           openModal(message)
@@ -102,15 +103,14 @@ const Settings = (props: Props) => {
       })
       .catch(() => openModal('Could not disconnect feed. Please try again.'))
 
-  const { feeds } = props
   const { showModal, modalMessage } = state
 
   const renderFeed = (feed: Feed) => (
     <FeedSettingsWrapper key={feed.name}>
       <FeedSettings
         feed={feed}
-        onConnect={connectFeed}
-        onDisconnect={disconnectFeed}
+        onConnect={handleConnect}
+        onDisconnect={handleDisconnect}
       />
     </FeedSettingsWrapper>
   )
@@ -130,15 +130,4 @@ const Settings = (props: Props) => {
   )
 }
 
-const mapStateToProps = (state: RootState) => ({
-  feeds: state.feeds,
-})
-
-const mapDispatchToProps = (dispatch: AppDispatch) => ({
-  onConnect: (name: FeedName) => getOauthUrl(name)(dispatch),
-  onOauthCodeReceived: (name: FeedName, code: string) =>
-    authenticateFeed(name, code)(dispatch),
-  onDisconnect: (name: FeedName) => disconnectFeed(name)(dispatch),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Settings)
+export default Settings
