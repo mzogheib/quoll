@@ -1,9 +1,10 @@
 import { useHistory, useLocation } from 'react-router-dom'
 
 import { onOAuthResponse } from '../../services/oauth'
+import { SettingsLocationState } from '../types'
 
 const OAuth = () => {
-  const history = useHistory()
+  const history = useHistory<SettingsLocationState>()
   const location = useLocation()
 
   const searchString = location.search

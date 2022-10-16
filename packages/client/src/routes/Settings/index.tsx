@@ -14,6 +14,7 @@ import FeedSettings from '../../components/FeedSettings'
 import { requestAuth } from '../../services/oauth'
 import AlertModal from '../../components/modals/AlertModal'
 import { FeedName } from '../../services/feeds/types'
+import { SettingsLocationState } from '../types'
 
 const Wrapper = styled.div`
   display: flex;
@@ -56,7 +57,7 @@ const Settings = () => {
   const dispatch = useDispatch()
 
   const history = useHistory()
-  const location = useLocation<{ errorMessage: string }>()
+  const location = useLocation<SettingsLocationState>()
 
   const [state, setState] = useState(INITIAL_STATE)
 
