@@ -31,6 +31,11 @@ enum StravaEntryType {
   Yoga = 'yoga',
 }
 
+interface EntryLocation {
+  latitude: number
+  longitude: number
+}
+
 interface StravaEntry {
   feed: FeedName.Strava
   id: string
@@ -40,8 +45,8 @@ interface StravaEntry {
   title: string
   valueLabel: string
   description: string
-  locationStart: number
-  locationEnd: number
+  locationStart: EntryLocation
+  locationEnd: EntryLocation
   polyline: string
 }
 
@@ -58,8 +63,8 @@ interface ToshlEntry {
   title: string
   valueLabel: string
   description: string
-  locationStart: number
-  locationEnd: number
+  locationStart: EntryLocation
+  locationEnd: EntryLocation
   polyline: null
 }
 
@@ -76,8 +81,8 @@ interface UberEntry {
   title: 'Uber'
   valueLabel: string
   description: string
-  locationStart: number
-  locationEnd: number
+  locationStart: EntryLocation
+  locationEnd: EntryLocation
   polyline: null
 }
 
@@ -100,8 +105,8 @@ interface MovesEntry {
   title: 'Uber'
   valueLabel: string
   description: null
-  locationStart: number
-  locationEnd: number
+  locationStart: EntryLocation
+  locationEnd: EntryLocation
   polyline: null
 }
 

@@ -4,6 +4,11 @@ import { AppDispatch, GetState } from '..'
 
 import timelineService, { Entry } from '../../services/timeline'
 
+export interface Timeline {
+  isFetching: boolean
+  entries: Entry[]
+}
+
 enum TimelineActionType {
   SetFetching = 'SET_TIMELINE_FETCHING',
   SetEntries = 'SET_TIMELINE_ENTRIES',
@@ -42,7 +47,7 @@ export const fetchTimeline =
       .catch(() => dispatch(setTimelineFetching(false)))
   }
 
-const defaultState = { isFetching: true, entries: [] }
+const defaultState: Timeline = { isFetching: true, entries: [] }
 
 type TimelineAction = SetTimelineFetchingAction | SetTimelineEntriesAction
 

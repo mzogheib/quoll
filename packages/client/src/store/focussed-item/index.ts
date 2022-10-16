@@ -5,15 +5,15 @@ enum FocussedItemActionType {
 }
 
 interface SetFocussedItemAction extends Action<FocussedItemActionType.Set> {
-  id: string
-  latitude: number
-  longitude: number
+  id?: string
+  latitude?: number
+  longitude?: number
 }
 
 export const setFocussedItem = (
-  id: string,
-  latitude: number,
-  longitude: number
+  id?: string,
+  latitude?: number,
+  longitude?: number
 ): SetFocussedItemAction => ({
   type: FocussedItemActionType.Set,
   id,
