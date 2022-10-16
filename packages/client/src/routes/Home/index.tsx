@@ -10,7 +10,9 @@ import { setFocussedItem } from '../../store/focussed-item'
 import DatePicker from '../../components/DatePicker'
 import Timeline from '../../components/Timeline'
 import Map from '../../components/Map'
-import { AppDispatch, GetState, RootState } from '../../store'
+import store, { AppDispatch, RootState } from '../../store'
+
+const { getState } = store
 
 const Wrapper = styled.div(
   ({ theme: { media } }) => css`
@@ -171,7 +173,7 @@ const mapStateToProps = ({ date, timeline, focussedItem }: RootState) => {
   }
 }
 
-const mapDispatchToProps = (dispatch: AppDispatch, getState: GetState) => ({
+const mapDispatchToProps = (dispatch: AppDispatch) => ({
   onMount: () => fetchTimeline()(dispatch, getState),
   onDateChange: (date: string) => {
     dispatch(setDate(date))
