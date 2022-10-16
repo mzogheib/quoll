@@ -32,7 +32,7 @@ const Map = ({ focussedItem, markerData, polylineData, onElementSelect }) => {
     )
 
     return () => {
-      onElementSelect(undefined)
+      onElementSelect(null, null, null)
     }
   }, [onElementSelect])
 
@@ -43,7 +43,7 @@ const Map = ({ focussedItem, markerData, polylineData, onElementSelect }) => {
     }
 
     map.addListener('click', (event) => {
-      if (event.placeId) onElementSelect(undefined)
+      if (event.placeId) onElementSelect(null, null, null)
     })
   }, [map, onElementSelect])
 

@@ -174,7 +174,7 @@ const mapDispatchToProps = (dispatch: AppDispatch) => ({
     )
   },
   onEntryClick: (
-    id: string,
+    id: string | null,
     latitude: number | null,
     longitude: number | null
   ) => dispatch(setFocussedItem(id, latitude, longitude)),
