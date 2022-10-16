@@ -1,4 +1,5 @@
 import { Action } from 'redux'
+import { RootState } from '..'
 
 enum FocussedItemActionType {
   Set = 'SET_FOCUSSED_ITEM',
@@ -20,6 +21,8 @@ export const setFocussedItem = (
   latitude,
   longitude,
 })
+
+export const selectFocussedItem = (state: RootState) => state.focussedItem
 
 const defaultState = { id: null, latitude: null, longitude: null }
 
