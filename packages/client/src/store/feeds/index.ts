@@ -1,7 +1,7 @@
 import { Action } from 'redux'
 
 import { AppDispatch } from '..'
-import feedServices from '../../services/feeds'
+import feedServices, { getFeedService } from '../../services/feeds'
 import { FeedName } from '../../services/feeds/types'
 import { RootState } from '..'
 
@@ -39,43 +39,35 @@ export const setFeedAuthenticating = (
   value,
 })
 
-export const getOauthUrl = (name: FeedName) => {
-  const feedService = feedServices.find((feed) => feed.name === name)
-  return (dispatch: AppDispatch) => {
-    dispatch(setFeedAuthenticating(name, true))
-    return feedService!
-      .getOauthUrl()
-      .then((url) => url)
-      .finally(() => dispatch(setFeedAuthenticating(name, false)))
-  }
+export const getOauthUrl = (name: FeedName) => (dispatch: AppDispatch) => {
+  dispatch(setFeedAuthenticating(name, true))
+  return getFeedService(name)
+    .getOauthUrl()
+    .then((url) => url)
+    .finally(() => dispatch(setFeedAuthenticating(name, false)))
 }
 
-export const authenticateFeed = (name: FeedName, code: string) => {
-  const feedService = feedServices.find((feed) => feed.name === name)
-  return (dispatch: AppDispatch) => {
+export const authenticateFeed =
+  (name: FeedName, code: string) => (dispatch: AppDispatch) => {
     dispatch(setFeedAuthenticating(name, true))
-    return feedService!
+    return getFeedService(name)
       .authenticate({ code })
       .then(() => dispatch(setFeedConnected(name, true)))
       .finally(() => dispatch(setFeedAuthenticating(name, false)))
   }
-}
 
-export const disconnectFeed = (name: FeedName) => {
-  const feedService = feedServices.find((feed) => feed.name === name)
-  return (dispatch: AppDispatch) => {
-    dispatch(setFeedAuthenticating(name, true))
-    return (
-      feedService!
-        .disconnect()
-        // BE may return a message for further, manual instructions
-        .then((message) => {
-          dispatch(setFeedConnected(name, false))
-          return message
-        })
-        .finally(() => dispatch(setFeedAuthenticating(name, false)))
-    )
-  }
+export const disconnectFeed = (name: FeedName) => (dispatch: AppDispatch) => {
+  dispatch(setFeedAuthenticating(name, true))
+  return (
+    getFeedService(name)
+      .disconnect()
+      // BE may return a message for further, manual instructions
+      .then((message) => {
+        dispatch(setFeedConnected(name, false))
+        return message
+      })
+      .finally(() => dispatch(setFeedAuthenticating(name, false)))
+  )
 }
 
 export const selectHasFeedConnected = (state: RootState) =>

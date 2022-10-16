@@ -70,6 +70,10 @@ const feedsService: FeedService[] = [
   },
 ]
 
+// TODO: avoid this type assertion, e.g. replace array with an object
+export const getFeedService = (name: FeedName) =>
+  feedsService.find((fs) => fs.name === name) as FeedService
+
 export const getFeedLogo = (name: FeedName): string =>
   feedsService.find((feed) => feed.name === name)!.imageConnected
 
