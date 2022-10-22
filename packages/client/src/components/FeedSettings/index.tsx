@@ -3,6 +3,7 @@ import { ButtonPlain, HorizontalLoader } from '@quoll/ui-components'
 import { FeedName } from '../../services/feeds/types'
 import { FeedState } from '../../store/feeds'
 import { feedConfig } from '../utils'
+import FeedLogo from '../FeedLogo'
 
 const Wrapper = styled.div(
   ({ theme: { colors } }) => css`
@@ -62,9 +63,7 @@ interface Props {
 
 const FeedSettings = ({ feed, onConnect, onDisconnect }: Props) => {
   const { isAuthenticating, isConnected, name } = feed
-  const { title, link, imageConnected, imageDisconnected } = feedConfig[name]
-
-  const imgSrc = isConnected ? imageConnected : imageDisconnected
+  const { title, link } = feedConfig[name]
 
   const handleButtonClick = () => {
     if (isAuthenticating) {
@@ -78,7 +77,7 @@ const FeedSettings = ({ feed, onConnect, onDisconnect }: Props) => {
       {isAuthenticating && <HorizontalLoader />}
       <Content isAuthenticating={isAuthenticating}>
         <Logo>
-          <img src={imgSrc} alt={`${name} logo`} />
+          <FeedLogo name={name} isGrayscale={!isConnected} />
         </Logo>
         <Info>
           <Title>{title}</Title>
