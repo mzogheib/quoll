@@ -7,7 +7,7 @@ import {
   getOauthUrl,
   authenticateFeed,
   disconnectFeed,
-  Feed,
+  FeedState,
   selectFeeds,
 } from '../../store/feeds'
 import FeedSettings from '../../components/FeedSettings'
@@ -61,7 +61,7 @@ const Settings = () => {
 
   const [state, setState] = useState(INITIAL_STATE)
 
-  const feeds = useSelector(selectFeeds)
+  const feeds = Object.values(useSelector(selectFeeds))
 
   const onConnect = (name: FeedName) => getOauthUrl(name)(dispatch)
   const onOauthCodeReceived = (name: FeedName, code: string) =>
@@ -106,7 +106,7 @@ const Settings = () => {
 
   const { showModal, modalMessage } = state
 
-  const renderFeed = (feed: Feed) => (
+  const renderFeed = (feed: FeedState) => (
     <FeedSettingsWrapper key={feed.name}>
       <FeedSettings
         feed={feed}

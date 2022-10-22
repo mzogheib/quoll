@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components'
 import { ButtonPlain, HorizontalLoader } from '@quoll/ui-components'
 import { FeedName } from '../../services/feeds/types'
+import { FeedState } from '../../store/feeds'
+import FeedLogo from '../FeedLogo'
 
 const Wrapper = styled.div(
   ({ theme: { colors } }) => css`
@@ -52,34 +54,34 @@ const Link = styled.a.attrs({
   `
 )
 
+const feedConfig = {
+  [FeedName.Toshl]: {
+    title: 'Toshl',
+    link: { url: 'https://toshl.com', label: 'toshl.com' },
+  },
+  [FeedName.Strava]: {
+    title: 'Strava',
+    link: { url: 'https://www.strava.com', label: 'www.strava.com' },
+  },
+  [FeedName.Uber]: {
+    title: 'Uber',
+    link: { url: 'https://www.uber.com', label: 'www.uber.com' },
+  },
+  [FeedName.Moves]: {
+    title: 'Moves',
+    link: { url: 'https://www.moves-app.com', label: 'www.moves-app.com' },
+  },
+}
+
 interface Props {
-  feed: {
-    isAuthenticating: boolean
-    isConnected: boolean
-    imageConnected: string
-    imageDisconnected: string
-    name: FeedName
-    title: string
-    link: {
-      url: string
-      label: string
-    }
-  }
+  feed: FeedState
   onConnect: (name: FeedName) => void
   onDisconnect: (name: FeedName) => void
 }
 
 const FeedSettings = ({ feed, onConnect, onDisconnect }: Props) => {
-  const {
-    isAuthenticating,
-    isConnected,
-    imageConnected,
-    imageDisconnected,
-    name,
-    title,
-    link,
-  } = feed
-  const imgSrc = isConnected ? imageConnected : imageDisconnected
+  const { isAuthenticating, isConnected, name } = feed
+  const { title, link } = feedConfig[name]
 
   const handleButtonClick = () => {
     if (isAuthenticating) {
@@ -93,7 +95,7 @@ const FeedSettings = ({ feed, onConnect, onDisconnect }: Props) => {
       {isAuthenticating && <HorizontalLoader />}
       <Content isAuthenticating={isAuthenticating}>
         <Logo>
-          <img src={imgSrc} alt={`${name} logo`} />
+          <FeedLogo name={name} isGrayscale={!isConnected} />
         </Logo>
         <Info>
           <Title>{title}</Title>
