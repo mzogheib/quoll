@@ -148,12 +148,7 @@ const Home = ({ onMount, onDateChange, onEntryClick }: Props) => {
       </Left>
       <MapWrapper>
         <MapBody>
-          <Map
-            markerData={markerData}
-            polylineData={polylineData}
-            focussedItem={focussedItem}
-            onElementSelect={onEntryClick}
-          />
+          <Map />
         </MapBody>
       </MapWrapper>
       {isFetching && (
