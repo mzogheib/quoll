@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components'
 import { ButtonPlain, HorizontalLoader } from '@quoll/ui-components'
 import { FeedName } from '../../services/feeds/types'
+import { FeedState } from '../../store/feeds'
+import { feedConfig } from '../utils'
 
 const Wrapper = styled.div(
   ({ theme: { colors } }) => css`
@@ -53,32 +55,15 @@ const Link = styled.a.attrs({
 )
 
 interface Props {
-  feed: {
-    isAuthenticating: boolean
-    isConnected: boolean
-    imageConnected: string
-    imageDisconnected: string
-    name: FeedName
-    title: string
-    link: {
-      url: string
-      label: string
-    }
-  }
+  feed: FeedState
   onConnect: (name: FeedName) => void
   onDisconnect: (name: FeedName) => void
 }
 
 const FeedSettings = ({ feed, onConnect, onDisconnect }: Props) => {
-  const {
-    isAuthenticating,
-    isConnected,
-    imageConnected,
-    imageDisconnected,
-    name,
-    title,
-    link,
-  } = feed
+  const { isAuthenticating, isConnected, name } = feed
+  const { title, link, imageConnected, imageDisconnected } = feedConfig[name]
+
   const imgSrc = isConnected ? imageConnected : imageDisconnected
 
   const handleButtonClick = () => {

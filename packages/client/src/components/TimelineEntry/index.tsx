@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import moment from 'moment'
 
 import { Entry, getEntryImage } from '../../services/timeline'
-import { getFeedLogo } from '../../services/feeds'
+import { feedConfig } from '../utils'
 
 const Wrapper = styled.div(
   ({ theme: { colors } }) => css`
@@ -59,13 +59,13 @@ interface Props {
 }
 
 const TimelineEntry = ({ entry, onClick }: Props) => {
-  const logo = getFeedLogo(entry.feed)
+  const { imageConnected } = feedConfig[entry.feed]
   const image = getEntryImage(entry)
 
   return (
     <Wrapper onClick={onClick}>
       <Logo>
-        <img src={logo} alt="feed logo" />
+        <img src={imageConnected} alt="feed logo" />
       </Logo>
       <Time>{moment.unix(entry.timeStart).format('h:mm a')}</Time>
       <Image>{image}</Image>

@@ -1,7 +1,7 @@
 import { Action } from 'redux'
 
 import { AppDispatch } from '..'
-import feedServices, { FeedService, getFeedService } from '../../services/feeds'
+import { getFeedService } from '../../services/feeds'
 import { FeedName } from '../../services/feeds/types'
 import { RootState } from '..'
 
@@ -15,7 +15,8 @@ interface SetFeedConnectedAction extends Action<FeedActionType.SetConnected> {
   value: boolean
 }
 
-export interface Feed extends FeedService {
+export interface FeedState {
+  name: FeedName
   isAuthenticating: boolean
   isConnected: boolean
 }
@@ -78,14 +79,20 @@ export const disconnectFeed = (name: FeedName) => (dispatch: AppDispatch) => {
 export const selectFeeds = (state: RootState) => state.feeds
 
 export const selectHasFeedConnected = (state: RootState) =>
-  state.feeds.some(({ isConnected }) => isConnected)
+  Object.values(state.feeds).some(({ isConnected }) => isConnected)
 
-// TODO: reduce how much stuff in is Feed and FeedService
-const defaultState: Feed[] = Object.values(feedServices).map((config) => ({
-  ...config,
-  isConnected: false,
+const makeDefaultFeedState = (name: FeedName) => ({
+  name,
   isAuthenticating: false,
-}))
+  isConnected: false,
+})
+
+const defaultState: Record<FeedName, FeedState> = {
+  [FeedName.Moves]: makeDefaultFeedState(FeedName.Moves),
+  [FeedName.Strava]: makeDefaultFeedState(FeedName.Strava),
+  [FeedName.Uber]: makeDefaultFeedState(FeedName.Uber),
+  [FeedName.Toshl]: makeDefaultFeedState(FeedName.Toshl),
+}
 
 type FeedAction = SetFeedAuthenticatingAction | SetFeedConnectedAction
 
@@ -94,13 +101,9 @@ const feeds = (state = defaultState, action: FeedAction) => {
 
   switch (type) {
     case FeedActionType.SetConnected:
-      return state.map((feed) =>
-        feed.name === name ? { ...feed, isConnected: value } : feed
-      )
+      return { ...state, [name]: { ...state[name], isConnected: value } }
     case FeedActionType.SetAuthenticating:
-      return state.map((feed) =>
-        feed.name === name ? { ...feed, isAuthenticating: value } : feed
-      )
+      return { ...state, [name]: { ...state[name], isAuthenticating: value } }
     default:
       return state
   }
