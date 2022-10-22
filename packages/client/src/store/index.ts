@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux'
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 
 import user from './user'
@@ -15,7 +15,14 @@ const reducer = combineReducers({
   timeline,
 })
 
-const store = createStore(reducer, applyMiddleware(thunkMiddleware))
+// https://github.com/zalmoxisus/redux-devtools-extension#11-basic-store
+const composeEnhancers =
+  (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
+const store = createStore(
+  reducer,
+  composeEnhancers(applyMiddleware(thunkMiddleware))
+)
 
 export type GetState = typeof store.getState
 export type RootState = ReturnType<GetState>
