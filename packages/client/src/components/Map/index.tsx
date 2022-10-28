@@ -6,8 +6,9 @@ import MapComponent, { Props } from './Component'
 const apiKey = process.env.REACT_APP_GOOGLE_MAPS_KEY
 
 const MapNew = (props: Props) => {
-  if (!apiKey)
+  if (!apiKey) {
     return <MapPlaceholder text="Hmm could not load map - missing API key" />
+  }
 
   const render = (status: Status) => {
     switch (status) {
@@ -21,7 +22,7 @@ const MapNew = (props: Props) => {
     }
   }
 
-  return <Wrapper apiKey={apiKey} render={render} />
+  return <Wrapper apiKey={apiKey} libraries={['geometry']} render={render} />
 }
 
 export default MapNew
