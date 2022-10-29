@@ -10,7 +10,7 @@ export const makeBounds = ({
   markersOptions,
   polylinesOptions,
 }: MakeBoundsParams) => {
-  const bounds = new window.google.maps.LatLngBounds()
+  const bounds = new google.maps.LatLngBounds()
 
   if (markersOptions) {
     markersOptions.forEach((markerOptions) => {

@@ -33,10 +33,10 @@ const MapComponent = ({ polylineConfigs, infoWindowOptions }: Props) => {
   // Set the map on first render with a default center
   useEffect(() => {
     if (ref.current && !map) {
-      const melbourne = new window.google.maps.LatLng(-37.8079033, 144.9759344)
+      const melbourne = new google.maps.LatLng(-37.8079033, 144.9759344)
       const options = { center: melbourne, zoom: 14, mapTypeId: 'roadmap' }
 
-      setMap(new window.google.maps.Map(ref.current, options))
+      setMap(new google.maps.Map(ref.current, options))
     }
   }, [ref, map])
 
