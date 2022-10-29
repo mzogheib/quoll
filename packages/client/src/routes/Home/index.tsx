@@ -176,13 +176,19 @@ const Home = ({ onMount, onDateChange }: Props) => {
     useState<google.maps.LatLngLiteral>()
   const focussedEntry = entries.find(({ id }) => id === focussedEntryId)
 
-  const onEntryClick = (id: string, latLng?: google.maps.LatLngLiteral) => {
+  const handleEntryClick = (id: string, latLng?: google.maps.LatLngLiteral) => {
     setFocussedEntryId(id)
     setFocussedEntryLatLng(latLng)
   }
 
+  const handleDateChange = (date: string) => {
+    setFocussedEntryId(undefined)
+    setFocussedEntryLatLng(undefined)
+    onDateChange(date)
+  }
+
   const polylineConfigs = useMemo(() => {
-    return makePolylineConfigs(entries, focussedEntryId, onEntryClick)
+    return makePolylineConfigs(entries, focussedEntryId, handleEntryClick)
   }, [entries, focussedEntryId])
 
   const infoWindowOptions = focussedEntry
@@ -204,11 +210,11 @@ const Home = ({ onMount, onDateChange }: Props) => {
           prevDisabled={isFetching}
           nextDisabled={isFetching || dateIsToday(date)}
           calendarDisabled={isFetching}
-          onDateChange={onDateChange}
+          onDateChange={handleDateChange}
         />
         <TimelineWrapper>
           <TimelineBody>
-            <Timeline entries={entries} onEntryClick={onEntryClick} />
+            <Timeline entries={entries} onEntryClick={handleEntryClick} />
           </TimelineBody>
         </TimelineWrapper>
       </Left>
