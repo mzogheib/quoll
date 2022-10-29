@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react'
 
 interface Props {
   options: google.maps.PolylineOptions
+  map: google.maps.Map
 }
 
-const Polyline = ({ options }: Props) => {
+const Polyline = ({ options, map }: Props) => {
   const [polyline, setPolyline] = useState<google.maps.Polyline>()
 
   useEffect(() => {
@@ -16,8 +17,11 @@ const Polyline = ({ options }: Props) => {
   }, [polyline])
 
   useEffect(() => {
-    if (polyline) polyline.setOptions(options)
-  }, [polyline, options])
+    if (polyline) {
+      polyline.setOptions(options)
+      polyline.setMap(map)
+    }
+  }, [polyline, options, map])
 
   return null
 }

@@ -20,8 +20,9 @@ const MapComponent = ({ polylinesOptions, infoWindowOptions }: Props) => {
   const [map, setMap] = useState<google.maps.Map>()
 
   const renderPolylines = () =>
+    map &&
     polylinesOptions?.map((polylineOptions, i) => (
-      <Polyline key={i} options={{ ...polylineOptions, map }} />
+      <Polyline key={i} options={polylineOptions} map={map} />
     ))
 
   // Set the map on first render with a default center
@@ -46,7 +47,7 @@ const MapComponent = ({ polylinesOptions, infoWindowOptions }: Props) => {
   return (
     <Wrapper ref={ref}>
       {renderPolylines()}
-      {infoWindowOptions && map && (
+      {map && infoWindowOptions && (
         <InfoWindow options={infoWindowOptions} map={map} />
       )}
     </Wrapper>
