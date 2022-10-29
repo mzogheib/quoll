@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
+
+import InfoWindow from '../InfoWindow'
 import Polyline from '../Polyline'
 import { makeBounds } from '../utilsNew'
 
@@ -10,9 +12,10 @@ const Wrapper = styled.div`
 
 export interface Props {
   polylinesOptions?: google.maps.PolylineOptions[]
+  infoWindowOptions?: google.maps.InfoWindowOptions
 }
 
-const MapComponent = ({ polylinesOptions }: Props) => {
+const MapComponent = ({ polylinesOptions, infoWindowOptions }: Props) => {
   const ref = useRef<HTMLDivElement>(null)
   const [map, setMap] = useState<google.maps.Map>()
 
@@ -40,7 +43,14 @@ const MapComponent = ({ polylinesOptions }: Props) => {
     if (!bounds.isEmpty()) map.fitBounds(bounds)
   }, [map, polylinesOptions])
 
-  return <Wrapper ref={ref} children={renderPolylines()} />
+  return (
+    <Wrapper ref={ref}>
+      {renderPolylines()}
+      {infoWindowOptions && map && (
+        <InfoWindow options={infoWindowOptions} map={map} />
+      )}
+    </Wrapper>
+  )
 }
 
 export default MapComponent

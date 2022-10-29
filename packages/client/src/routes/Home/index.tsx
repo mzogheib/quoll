@@ -109,6 +109,41 @@ const makeMarkerOptions = (entries: Entry[]): google.maps.MarkerOptions[] =>
       description: entry.description || '',
     }))
 
+const makeInfoWindowPosition = ({
+  locationStart,
+  polyline: path,
+}: Entry): google.maps.LatLngLiteral | google.maps.LatLng | undefined => {
+  if (locationStart?.latitude && locationStart.longitude) {
+    return {
+      lat: locationStart.latitude,
+      lng: locationStart.longitude,
+    }
+  }
+
+  if (path) {
+    const polyline = new google.maps.Polyline()
+    polyline.setPath(decodePath(path))
+
+    return polyline.getPath().getArray()[0]
+  }
+}
+
+const makeInfoWindowOptions = (entry: Entry): google.maps.InfoWindowOptions => {
+  const { title, timeStart } = entry
+
+  const description = entry.description ?? ''
+  const subTitle = moment.unix(timeStart).format('h:mm a')
+
+  const content =
+    '<div>' +
+    `<h1>${title}</h1>` +
+    `<h2>${subTitle}</h2>` +
+    `<p>${description.replace(/(?:\r\n|\r|\n)/g, '<br>')}</p>` +
+    '</div>'
+
+  return { content, position: makeInfoWindowPosition(entry) }
+}
+
 type DispatchProps = ReturnType<typeof mapDispatchToProps>
 
 type Props = DispatchProps
@@ -123,6 +158,11 @@ const Home = ({ onMount, onDateChange, onEntryClick }: Props) => {
     () => makePolylinesOptions(entries, focussedItem.id ?? undefined),
     [entries, focussedItem.id]
   )
+
+  const focussedEntry = entries.find(({ id }) => id === focussedItem.id)
+  const infoWindowOptions = focussedEntry
+    ? makeInfoWindowOptions(focussedEntry)
+    : undefined
 
   useEffect(() => {
     onMount()
@@ -152,7 +192,10 @@ const Home = ({ onMount, onDateChange, onEntryClick }: Props) => {
       </Left>
       <MapWrapper>
         <MapBody>
-          <Map polylinesOptions={polylineOptions} />
+          <Map
+            polylinesOptions={polylineOptions}
+            infoWindowOptions={infoWindowOptions}
+          />
         </MapBody>
       </MapWrapper>
       {isFetching && (

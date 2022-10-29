@@ -10,7 +10,6 @@ const Polyline = ({ options }: Props) => {
   useEffect(() => {
     if (!polyline) setPolyline(new google.maps.Polyline())
 
-    // remove polyline from map on unmount
     return () => {
       if (polyline) polyline.setMap(null)
     }
