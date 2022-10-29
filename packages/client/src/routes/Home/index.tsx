@@ -11,7 +11,7 @@ import Timeline from '../../components/Timeline'
 import Map from '../../components/Map'
 import store, { AppDispatch } from '../../store'
 import { Entry } from '../../services/timeline'
-import { decodePath } from '../../components/Map/utilsNew'
+import { decodePath } from '../../components/Map/utils'
 import { PolylineConfig } from '../../components/Map/Component'
 
 const { getState } = store

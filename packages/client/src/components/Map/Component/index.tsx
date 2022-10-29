@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import InfoWindow from '../InfoWindow'
 import Polyline from '../Polyline'
-import { makeBounds } from '../utilsNew'
+import { makeBounds } from '../utils'
 
 const Wrapper = styled.div`
   width: 100%;
