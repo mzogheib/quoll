@@ -85,13 +85,15 @@ const LoaderWrapper = styled.div`
 `
 
 const makePolylinesOptions = (
-  entries: Entry[]
+  entries: Entry[],
+  focussedItemId?: string
 ): google.maps.PolylineOptions[] =>
   entries
     .filter((entry) => entry.polyline)
     .map((entry) => ({
       // TypeScript can't seem to infer that polyline must be defined
       path: decodePath(entry.polyline as string),
+      strokeColor: entry.id === focussedItemId ? 'red' : 'black',
     }))
 
 // TODO
@@ -118,8 +120,8 @@ const Home = ({ onMount, onDateChange, onEntryClick }: Props) => {
   const { isFetching, entries } = useSelector(selectTimeline)
 
   const polylineOptions = useMemo(
-    () => makePolylinesOptions(entries),
-    [entries]
+    () => makePolylinesOptions(entries, focussedItem.id ?? undefined),
+    [entries, focussedItem.id]
   )
 
   useEffect(() => {
