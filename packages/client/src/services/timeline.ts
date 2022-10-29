@@ -45,8 +45,8 @@ interface StravaEntry {
   title: string
   valueLabel: string
   description: string
-  locationStart: EntryLocation
-  locationEnd: EntryLocation
+  locationStart?: never
+  locationEnd?: never
   polyline: string
 }
 
