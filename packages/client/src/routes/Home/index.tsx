@@ -2,14 +2,14 @@ import { useEffect, useMemo, useState } from 'react'
 import styled, { css } from 'styled-components'
 import moment from 'moment'
 import { HorizontalLoader } from '@quoll/ui-components'
-import { connect, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { selectDate, setDate } from '../../store/date'
 import { fetchTimeline, selectTimeline } from '../../store/timeline'
 import DatePicker from '../../components/DatePicker'
 import Timeline from '../../components/Timeline'
 import Map from '../../components/Map'
-import store, { AppDispatch } from '../../store'
+import store from '../../store'
 import { makePolylineConfigs, makeInfoWindowOptions } from './mapUtils'
 
 const { getState } = store
@@ -82,11 +82,8 @@ const LoaderWrapper = styled.div`
   right: 0;
 `
 
-type DispatchProps = ReturnType<typeof mapDispatchToProps>
-
-type Props = DispatchProps
-
-const Home = ({ onMount, onDateChange }: Props) => {
+const Home = () => {
+  const dispatch = useDispatch()
   const date = useSelector(selectDate)
   const { isFetching, entries } = useSelector(selectTimeline)
 
@@ -103,7 +100,8 @@ const Home = ({ onMount, onDateChange }: Props) => {
   const handleDateChange = (date: string) => {
     setFocussedEntryId(undefined)
     setFocussedEntryLatLng(undefined)
-    onDateChange(date)
+    dispatch(setDate(date))
+    fetchTimeline()(dispatch, getState)
   }
 
   const polylineConfigs = useMemo(() => {
@@ -114,9 +112,10 @@ const Home = ({ onMount, onDateChange }: Props) => {
     ? makeInfoWindowOptions(focussedEntry, focussedEntryLatLng)
     : undefined
 
+  // TODO this should listen to the date change instead
   useEffect(() => {
-    onMount()
-  }, [onMount])
+    fetchTimeline()(dispatch, getState)
+  }, [dispatch])
 
   const dateIsToday = (date: string) => moment(date).isSame(moment(), 'day')
 
@@ -154,12 +153,4 @@ const Home = ({ onMount, onDateChange }: Props) => {
   )
 }
 
-const mapDispatchToProps = (dispatch: AppDispatch) => ({
-  onMount: () => fetchTimeline()(dispatch, getState),
-  onDateChange: (date: string) => {
-    dispatch(setDate(date))
-    return fetchTimeline()(dispatch, getState)
-  },
-})
-
-export default connect(undefined, mapDispatchToProps)(Home)
+export default Home
