@@ -1,8 +1,8 @@
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import styled, { css } from 'styled-components'
 import moment from 'moment'
 import { HorizontalLoader } from '@quoll/ui-components'
-import { connect, useSelector } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 
 import { selectDate, setDate } from '../../store/date'
 import { fetchTimeline, selectTimeline } from '../../store/timeline'
@@ -13,6 +13,7 @@ import Map from '../../components/Map'
 import store, { AppDispatch } from '../../store'
 import { Entry } from '../../services/timeline'
 import { decodePath } from '../../components/Map/utilsNew'
+import { PolylineConfig } from '../../components/Map/Component'
 
 const { getState } = store
 
@@ -84,17 +85,23 @@ const LoaderWrapper = styled.div`
   right: 0;
 `
 
-const makePolylinesOptions = (
+const makePolylineConfigs = (
   entries: Entry[],
-  focussedItemId?: string
-): google.maps.PolylineOptions[] =>
+  focussedItemId: string | undefined,
+  onClick: (id: string, latLng?: google.maps.LatLngLiteral) => void
+): PolylineConfig[] =>
   entries
     .filter((entry) => entry.polyline)
-    .map((entry) => ({
-      // TypeScript can't seem to infer that polyline must be defined
-      path: decodePath(entry.polyline as string),
-      strokeColor: entry.id === focussedItemId ? 'red' : 'black',
-    }))
+    .map((entry) => {
+      return {
+        options: {
+          // TypeScript can't seem to infer that polyline must be defined
+          path: decodePath(entry.polyline as string),
+          strokeColor: entry.id === focussedItemId ? 'red' : 'black',
+        },
+        onClick: ({ latLng }) => onClick(entry.id, latLng?.toJSON()),
+      }
+    })
 
 // TODO
 const makeMarkerOptions = (entries: Entry[]): google.maps.MarkerOptions[] =>
@@ -128,7 +135,10 @@ const makeInfoWindowPosition = ({
   }
 }
 
-const makeInfoWindowOptions = (entry: Entry): google.maps.InfoWindowOptions => {
+const makeInfoWindowOptions = (
+  entry: Entry,
+  position?: google.maps.LatLngLiteral
+): google.maps.InfoWindowOptions => {
   const { title, timeStart } = entry
 
   const description = entry.description ?? ''
@@ -141,27 +151,33 @@ const makeInfoWindowOptions = (entry: Entry): google.maps.InfoWindowOptions => {
     `<p>${description.replace(/(?:\r\n|\r|\n)/g, '<br>')}</p>` +
     '</div>'
 
-  return { content, position: makeInfoWindowPosition(entry) }
+  return { content, position: position ?? makeInfoWindowPosition(entry) }
 }
 
 type DispatchProps = ReturnType<typeof mapDispatchToProps>
 
 type Props = DispatchProps
 
-const Home = ({ onMount, onDateChange, onEntryClick }: Props) => {
+const Home = ({ onMount, onDateChange }: Props) => {
   const date = useSelector(selectDate)
-  // TODO
-  const focussedItem = useSelector(selectFocussedItem)
   const { isFetching, entries } = useSelector(selectTimeline)
 
-  const polylineOptions = useMemo(
-    () => makePolylinesOptions(entries, focussedItem.id ?? undefined),
-    [entries, focussedItem.id]
-  )
+  const [focussedEntryId, setFocussedEntryId] = useState<string>()
+  const [focussedEntryLatLng, setFocussedEntryLatLng] =
+    useState<google.maps.LatLngLiteral>()
+  const focussedEntry = entries.find(({ id }) => id === focussedEntryId)
 
-  const focussedEntry = entries.find(({ id }) => id === focussedItem.id)
+  const onEntryClick = (id: string, latLng?: google.maps.LatLngLiteral) => {
+    setFocussedEntryId(id)
+    setFocussedEntryLatLng(latLng)
+  }
+
+  const polylineConfigs = useMemo(() => {
+    return makePolylineConfigs(entries, focussedEntryId, onEntryClick)
+  }, [entries, focussedEntryId])
+
   const infoWindowOptions = focussedEntry
-    ? makeInfoWindowOptions(focussedEntry)
+    ? makeInfoWindowOptions(focussedEntry, focussedEntryLatLng)
     : undefined
 
   useEffect(() => {
@@ -183,17 +199,14 @@ const Home = ({ onMount, onDateChange, onEntryClick }: Props) => {
         />
         <TimelineWrapper>
           <TimelineBody>
-            <Timeline
-              entries={entries}
-              onEntryClick={(id) => onEntryClick(id, null, null)}
-            />
+            <Timeline entries={entries} onEntryClick={onEntryClick} />
           </TimelineBody>
         </TimelineWrapper>
       </Left>
       <MapWrapper>
         <MapBody>
           <Map
-            polylinesOptions={polylineOptions}
+            polylineConfigs={polylineConfigs}
             infoWindowOptions={infoWindowOptions}
           />
         </MapBody>
@@ -215,11 +228,6 @@ const mapDispatchToProps = (dispatch: AppDispatch) => ({
       dispatch(setFocussedItem(null, null, null))
     )
   },
-  onEntryClick: (
-    id: string | null,
-    latitude: number | null,
-    longitude: number | null
-  ) => dispatch(setFocussedItem(id, latitude, longitude)),
 })
 
 export default connect(undefined, mapDispatchToProps)(Home)

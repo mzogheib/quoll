@@ -10,19 +10,24 @@ const Wrapper = styled.div`
   height: 100%;
 `
 
+export interface PolylineConfig {
+  options: google.maps.PolylineOptions
+  onClick?: (event: google.maps.MapMouseEvent) => void
+}
+
 export interface Props {
-  polylinesOptions?: google.maps.PolylineOptions[]
+  polylineConfigs?: PolylineConfig[]
   infoWindowOptions?: google.maps.InfoWindowOptions
 }
 
-const MapComponent = ({ polylinesOptions, infoWindowOptions }: Props) => {
+const MapComponent = ({ polylineConfigs, infoWindowOptions }: Props) => {
   const ref = useRef<HTMLDivElement>(null)
   const [map, setMap] = useState<google.maps.Map>()
 
   const renderPolylines = () =>
     map &&
-    polylinesOptions?.map((polylineOptions, i) => (
-      <Polyline key={i} options={polylineOptions} map={map} />
+    polylineConfigs?.map(({ options, onClick }, i) => (
+      <Polyline key={i} options={options} onClick={onClick} map={map} />
     ))
 
   // Set the map on first render with a default center
@@ -39,10 +44,12 @@ const MapComponent = ({ polylinesOptions, infoWindowOptions }: Props) => {
   useEffect(() => {
     if (!map) return
 
+    const polylinesOptions = polylineConfigs?.map(({ options }) => options)
+
     const bounds = makeBounds({ polylinesOptions })
 
     if (!bounds.isEmpty()) map.fitBounds(bounds)
-  }, [map, polylinesOptions])
+  }, [map, polylineConfigs])
 
   return (
     <Wrapper ref={ref}>

@@ -3,9 +3,10 @@ import { useState, useEffect } from 'react'
 interface Props {
   options: google.maps.PolylineOptions
   map: google.maps.Map
+  onClick?: (event: google.maps.MapMouseEvent) => void
 }
 
-const Polyline = ({ options, map }: Props) => {
+const Polyline = ({ options, map, onClick }: Props) => {
   const [polyline, setPolyline] = useState<google.maps.Polyline>()
 
   useEffect(() => {
@@ -19,9 +20,10 @@ const Polyline = ({ options, map }: Props) => {
   useEffect(() => {
     if (polyline) {
       polyline.setOptions(options)
+      if (onClick) polyline.addListener('click', onClick)
       polyline.setMap(map)
     }
-  }, [polyline, options, map])
+  }, [polyline, options, map, onClick])
 
   return null
 }
