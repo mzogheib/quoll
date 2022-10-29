@@ -93,11 +93,13 @@ const makePolylineConfigs = (
   entries
     .filter((entry) => entry.polyline)
     .map((entry) => {
+      const isFocussed = entry.id === focussedItemId
       return {
         options: {
           // TypeScript can't seem to infer that polyline must be defined
           path: decodePath(entry.polyline as string),
-          strokeColor: entry.id === focussedItemId ? 'red' : 'black',
+          strokeColor: isFocussed ? 'red' : 'black',
+          zIndex: isFocussed ? 1000 : 1,
         },
         onClick: ({ latLng }) => onClick(entry.id, latLng?.toJSON()),
       }
