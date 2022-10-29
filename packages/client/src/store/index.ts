@@ -4,14 +4,12 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 
 import user from './user'
 import date from './date'
-import focussedItem from './focussed-item'
 import feeds from './feeds'
 import timeline from './timeline'
 
 const reducer = combineReducers({
   user,
   date,
-  focussedItem,
   feeds,
   timeline,
 })
