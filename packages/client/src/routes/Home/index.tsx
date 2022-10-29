@@ -2,11 +2,10 @@ import { useEffect, useMemo, useState } from 'react'
 import styled, { css } from 'styled-components'
 import moment from 'moment'
 import { HorizontalLoader } from '@quoll/ui-components'
-import { connect, useDispatch, useSelector } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 
 import { selectDate, setDate } from '../../store/date'
 import { fetchTimeline, selectTimeline } from '../../store/timeline'
-import { selectFocussedItem, setFocussedItem } from '../../store/focussed-item'
 import DatePicker from '../../components/DatePicker'
 import Timeline from '../../components/Timeline'
 import Map from '../../components/Map'
@@ -234,9 +233,7 @@ const mapDispatchToProps = (dispatch: AppDispatch) => ({
   onMount: () => fetchTimeline()(dispatch, getState),
   onDateChange: (date: string) => {
     dispatch(setDate(date))
-    return fetchTimeline()(dispatch, getState).then(() =>
-      dispatch(setFocussedItem(null, null, null))
-    )
+    return fetchTimeline()(dispatch, getState)
   },
 })
 
