@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import styled, { css } from 'styled-components'
 import moment from 'moment'
 import { HorizontalLoader } from '@quoll/ui-components'
@@ -84,9 +84,19 @@ const LoaderWrapper = styled.div`
   right: 0;
 `
 
-const makeMapData = (entries: Entry[]) => {
-  // TODO
-  const markerData = entries
+const makePolylinesOptions = (
+  entries: Entry[]
+): google.maps.PolylineOptions[] =>
+  entries
+    .filter((entry) => entry.polyline)
+    .map((entry) => ({
+      // TypeScript can't seem to infer that polyline must be defined
+      path: decodePath(entry.polyline as string),
+    }))
+
+// TODO
+const makeMarkerOptions = (entries: Entry[]): google.maps.MarkerOptions[] =>
+  entries
     .filter((entry) => !entry.polyline && entry.locationStart)
     .map((entry) => ({
       id: entry.id,
@@ -96,16 +106,6 @@ const makeMapData = (entries: Entry[]) => {
       subTitle: moment.unix(entry.timeStart).format('h:mm a'),
       description: entry.description || '',
     }))
-
-  const polylineData: google.maps.PolylineOptions[] = entries
-    .filter((entry) => entry.polyline)
-    .map((entry) => ({
-      // TypeScript can't seem to infer that polyline must be defined
-      path: decodePath(entry.polyline as string),
-    }))
-
-  return { markerData, polylineData }
-}
 
 type DispatchProps = ReturnType<typeof mapDispatchToProps>
 
@@ -117,7 +117,10 @@ const Home = ({ onMount, onDateChange, onEntryClick }: Props) => {
   const focussedItem = useSelector(selectFocussedItem)
   const { isFetching, entries } = useSelector(selectTimeline)
 
-  const { polylineData } = makeMapData(entries)
+  const polylineOptions = useMemo(
+    () => makePolylinesOptions(entries),
+    [entries]
+  )
 
   useEffect(() => {
     onMount()
@@ -147,7 +150,7 @@ const Home = ({ onMount, onDateChange, onEntryClick }: Props) => {
       </Left>
       <MapWrapper>
         <MapBody>
-          <Map polylinesOptions={polylineData} />
+          <Map polylinesOptions={polylineOptions} />
         </MapBody>
       </MapWrapper>
       {isFetching && (
