@@ -101,7 +101,6 @@ const Home = () => {
     setFocussedEntryId(undefined)
     setFocussedEntryLatLng(undefined)
     dispatch(setDate(date))
-    fetchTimeline()(dispatch, getState)
   }
 
   const polylineConfigs = useMemo(() => {
@@ -112,10 +111,10 @@ const Home = () => {
     ? makeInfoWindowOptions(focussedEntry, focussedEntryLatLng)
     : undefined
 
-  // TODO this should listen to the date change instead
+  // This fetches on every date change
   useEffect(() => {
     fetchTimeline()(dispatch, getState)
-  }, [dispatch])
+  }, [date, dispatch])
 
   const dateIsToday = (date: string) => moment(date).isSame(moment(), 'day')
 
