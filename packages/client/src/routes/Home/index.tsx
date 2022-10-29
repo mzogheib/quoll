@@ -85,6 +85,11 @@ const LoaderWrapper = styled.div`
   right: 0;
 `
 
+const mapElementColors = {
+  default: '#eb4434',
+  focussed: '#0072ff',
+}
+
 const makePolylineConfigs = (
   entries: Entry[],
   focussedItemId: string | undefined,
@@ -98,7 +103,10 @@ const makePolylineConfigs = (
         options: {
           // TypeScript can't seem to infer that polyline must be defined
           path: decodePath(entry.polyline as string),
-          strokeColor: isFocussed ? 'red' : 'black',
+          strokeWeight: 5,
+          strokeColor: isFocussed
+            ? mapElementColors.focussed
+            : mapElementColors.default,
           zIndex: isFocussed ? 1000 : 1,
         },
         onClick: ({ latLng }) => onClick(entry.id, latLng?.toJSON()),
