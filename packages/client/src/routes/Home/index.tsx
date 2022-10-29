@@ -12,6 +12,7 @@ import Timeline from '../../components/Timeline'
 import Map from '../../components/Map'
 import store, { AppDispatch } from '../../store'
 import { Entry } from '../../services/timeline'
+import { decodePath } from '../../components/Map/utilsNew'
 
 const { getState } = store
 
@@ -84,26 +85,23 @@ const LoaderWrapper = styled.div`
 `
 
 const makeMapData = (entries: Entry[]) => {
+  // TODO
   const markerData = entries
     .filter((entry) => !entry.polyline && entry.locationStart)
     .map((entry) => ({
       id: entry.id,
-      latitude: entry.locationStart.latitude,
-      longitude: entry.locationEnd.longitude,
+      latitude: entry.locationStart?.latitude,
+      longitude: entry.locationEnd?.longitude,
       title: entry.title,
       subTitle: moment.unix(entry.timeStart).format('h:mm a'),
       description: entry.description || '',
     }))
 
-  const polylineData = entries
+  const polylineData: google.maps.PolylineOptions[] = entries
     .filter((entry) => entry.polyline)
     .map((entry) => ({
-      id: entry.id,
       // TypeScript can't seem to infer that polyline must be defined
-      encodedPath: entry.polyline as string,
-      title: entry.title,
-      subTitle: moment.unix(entry.timeStart).format('h:mm a'),
-      description: entry.description || '',
+      path: decodePath(entry.polyline as string),
     }))
 
   return { markerData, polylineData }
@@ -115,10 +113,11 @@ type Props = DispatchProps
 
 const Home = ({ onMount, onDateChange, onEntryClick }: Props) => {
   const date = useSelector(selectDate)
+  // TODO
   const focussedItem = useSelector(selectFocussedItem)
   const { isFetching, entries } = useSelector(selectTimeline)
 
-  const { markerData, polylineData } = makeMapData(entries)
+  const { polylineData } = makeMapData(entries)
 
   useEffect(() => {
     onMount()
@@ -148,7 +147,7 @@ const Home = ({ onMount, onDateChange, onEntryClick }: Props) => {
       </Left>
       <MapWrapper>
         <MapBody>
-          <Map />
+          <Map polylinesOptions={polylineData} />
         </MapBody>
       </MapWrapper>
       {isFetching && (
