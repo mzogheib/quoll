@@ -32,8 +32,8 @@ enum StravaEntryType {
 }
 
 interface EntryLocation {
-  latitude: number
-  longitude: number
+  latitude?: number
+  longitude?: number
 }
 
 interface StravaEntry {
@@ -44,9 +44,9 @@ interface StravaEntry {
   timeEnd: number
   title: string
   valueLabel: string
-  description: string
-  locationStart?: never
-  locationEnd?: never
+  description: string | null
+  locationStart: EntryLocation
+  locationEnd: EntryLocation
   polyline: string
 }
 
@@ -62,7 +62,7 @@ interface ToshlEntry {
   timeEnd: number
   title: string
   valueLabel: string
-  description: string
+  description: string | null
   locationStart: EntryLocation
   locationEnd: EntryLocation
   polyline: null
@@ -80,7 +80,7 @@ interface UberEntry {
   timeEnd: number
   title: 'Uber'
   valueLabel: string
-  description: string
+  description: string | null
   locationStart: EntryLocation
   locationEnd: EntryLocation
   polyline: null
@@ -104,7 +104,7 @@ interface MovesEntry {
   timeEnd: number
   title: 'Uber'
   valueLabel: string
-  description: null
+  description: string | null
   locationStart: EntryLocation
   locationEnd: EntryLocation
   polyline: null
