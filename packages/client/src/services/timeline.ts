@@ -3,31 +3,21 @@ import moment from 'moment'
 import api from './api'
 import { FeedName } from './feeds/types'
 
-const EntryConfig = {
-  home: { label: 'Home', image: '🏠' },
-  work: { label: 'Work', image: '🏭' },
-  place: { label: 'Place', image: '🏬' },
-  walk: { label: 'Walk', image: '🚶‍♂️' },
-  hike: { label: 'Hike', image: '🥾' },
-  bike: { label: 'Bike', image: '🚲' },
-  run: { label: 'Run', image: '🏃‍♂️' },
-  transport: { label: 'Transport', image: '⏩' },
-  car: { label: 'Car', image: '🚗' },
-  motorcycle: { label: 'Motorcycle', image: '🏍️' },
-  tram: { label: 'Tram', image: '🚊' },
-  train: { label: 'Train', image: '🚆' },
-  bus: { label: 'Bus', image: '🚌' },
-  expense: { label: 'Expense', image: '💸' },
-  yoga: { label: 'Yoga', image: '🧘‍♂️' },
-}
-
-export const getEntryImage = (entry: Entry) => EntryConfig[entry.type].image
-
-enum StravaEntryType {
+enum EntryType {
   Bike = 'bike',
-  Run = 'run',
-  Walk = 'walk',
+  Bus = 'bus',
+  Car = 'car',
+  Expense = 'expense',
   Hike = 'hike',
+  Home = 'home',
+  Motorcycle = 'motorcycle',
+  Place = 'place',
+  Run = 'run',
+  Train = 'train',
+  Tram = 'tram',
+  Transport = 'transport',
+  Walk = 'walk',
+  Work = 'work',
   Yoga = 'yoga',
 }
 
@@ -36,10 +26,10 @@ interface EntryLocation {
   longitude?: number
 }
 
-interface StravaEntry {
-  feed: FeedName.Strava
+export interface Entry {
   id: string
-  type: StravaEntryType
+  feed: FeedName
+  type: EntryType
   timeStart: number
   timeEnd: number
   title: string
@@ -47,70 +37,28 @@ interface StravaEntry {
   description: string | null
   locationStart: EntryLocation
   locationEnd: EntryLocation
-  polyline: string
+  polyline: string | null
 }
 
-enum ToshlEntryType {
-  Expense = 'expense',
+const EntryConfig = {
+  [EntryType.Bike]: { label: 'Bike', image: '🚲' },
+  [EntryType.Bus]: { label: 'Bus', image: '🚌' },
+  [EntryType.Car]: { label: 'Car', image: '🚗' },
+  [EntryType.Expense]: { label: 'Expense', image: '💸' },
+  [EntryType.Hike]: { label: 'Hike', image: '🥾' },
+  [EntryType.Home]: { label: 'Home', image: '🏠' },
+  [EntryType.Motorcycle]: { label: 'Motorcycle', image: '🏍️' },
+  [EntryType.Place]: { label: 'Place', image: '🏬' },
+  [EntryType.Run]: { label: 'Run', image: '🏃‍♂️' },
+  [EntryType.Train]: { label: 'Train', image: '🚆' },
+  [EntryType.Tram]: { label: 'Tram', image: '🚊' },
+  [EntryType.Transport]: { label: 'Transport', image: '⏩' },
+  [EntryType.Walk]: { label: 'Walk', image: '🚶‍♂️' },
+  [EntryType.Work]: { label: 'Work', image: '🏭' },
+  [EntryType.Yoga]: { label: 'Yoga', image: '🧘‍♂️' },
 }
 
-interface ToshlEntry {
-  feed: FeedName.Toshl
-  id: string
-  type: ToshlEntryType
-  timeStart: number
-  timeEnd: number
-  title: string
-  valueLabel: string
-  description: string | null
-  locationStart: EntryLocation
-  locationEnd: EntryLocation
-  polyline: null
-}
-
-enum UberEntryType {
-  Car = 'car',
-}
-
-interface UberEntry {
-  feed: FeedName.Uber
-  id: string
-  type: UberEntryType
-  timeStart: number
-  timeEnd: number
-  title: 'Uber'
-  valueLabel: string
-  description: string | null
-  locationStart: EntryLocation
-  locationEnd: EntryLocation
-  polyline: null
-}
-
-enum MovesEntryType {
-  Car = 'car',
-  Walk = 'walk',
-  Transport = 'transport',
-  Motorcycle = 'motorcycle',
-  Tram = 'tram',
-  Train = 'train',
-  Bus = 'bus',
-}
-
-interface MovesEntry {
-  feed: FeedName.Moves
-  id: string
-  type: MovesEntryType
-  timeStart: number
-  timeEnd: number
-  title: 'Uber'
-  valueLabel: string
-  description: string | null
-  locationStart: EntryLocation
-  locationEnd: EntryLocation
-  polyline: null
-}
-
-export type Entry = StravaEntry | ToshlEntry | UberEntry | MovesEntry
+export const getEntryImage = (entry: Entry) => EntryConfig[entry.type].image
 
 const get = (date: string) =>
   api.get<Entry[]>({
