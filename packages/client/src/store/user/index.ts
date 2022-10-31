@@ -2,7 +2,8 @@ import { Action } from 'redux'
 
 import { AppDispatch, RootState } from '..'
 
-import userService, { User } from '../../services/user'
+import userService from '../../services/user'
+import { User } from '../../services/user/types'
 import { setFeedConnected } from '../feeds'
 
 enum UserActionType {

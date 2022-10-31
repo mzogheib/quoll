@@ -1,16 +1,6 @@
-import api from './api'
-import { FeedName } from './feeds/types'
-import storage from './storage'
-
-interface UserFeed {
-  name: FeedName
-  isConnected: boolean
-}
-
-export interface User {
-  _id: string
-  feeds: UserFeed[]
-}
+import api from '../api'
+import storage from '../storage'
+import { User } from './types'
 
 const userKey = 'user'
 
