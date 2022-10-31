@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components'
 import moment from 'moment'
 
-import { Entry, getEntryImage } from '../../services/timeline'
+import { getEntryImage } from '../../services/timeline'
+import { Entry } from '../../services/timeline/types'
 import FeedLogo from '../FeedLogo'
 
 const Wrapper = styled.div(
