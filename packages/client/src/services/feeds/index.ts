@@ -11,6 +11,7 @@ const authenticate = (feed: FeedName, payload: AuthenticatePayload) =>
 
 const deauthorize = (feed: FeedName) =>
   api.delete<void>({ endpoint, params: { feed } }).then(() => {
+    // TODO: this should come from the BE
     if (feed === FeedName.Moves) {
       return 'Remember to revoke access in the Moves app.'
     }
