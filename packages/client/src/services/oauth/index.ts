@@ -1,5 +1,5 @@
-import utils from './utils'
-import storageService from './storage'
+import utils from '../utils'
+import storageService from '../storage'
 
 // OAuth Flow
 // 1. User clicks 'connect' on the settings page and BE returns a url for that feed
