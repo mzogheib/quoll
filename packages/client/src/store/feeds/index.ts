@@ -1,7 +1,7 @@
 import { Action } from 'redux'
 
 import { AppDispatch } from '..'
-import { getFeedService } from '../../services/feeds'
+import feedsService from '../../services/feeds'
 import { FeedName } from '../../services/feeds/types'
 import { RootState } from '..'
 
@@ -47,8 +47,8 @@ export const setFeedAuthenticating = (
 
 export const getOauthUrl = (name: FeedName) => (dispatch: AppDispatch) => {
   dispatch(setFeedAuthenticating(name, true))
-  return getFeedService(name)
-    .getOauthUrl()
+  return feedsService
+    .getOauthUrl(name)
     .then((url) => url)
     .finally(() => dispatch(setFeedAuthenticating(name, false)))
 }
@@ -56,8 +56,8 @@ export const getOauthUrl = (name: FeedName) => (dispatch: AppDispatch) => {
 export const authenticateFeed =
   (name: FeedName, code: string) => (dispatch: AppDispatch) => {
     dispatch(setFeedAuthenticating(name, true))
-    return getFeedService(name)
-      .authenticate({ code })
+    return feedsService
+      .authenticate(name, { code })
       .then(() => dispatch(setFeedConnected(name, true)))
       .finally(() => dispatch(setFeedAuthenticating(name, false)))
   }
@@ -65,8 +65,8 @@ export const authenticateFeed =
 export const disconnectFeed = (name: FeedName) => (dispatch: AppDispatch) => {
   dispatch(setFeedAuthenticating(name, true))
   return (
-    getFeedService(name)
-      .disconnect()
+    feedsService
+      .deauthorize(name)
       // BE may return a message for further, manual instructions
       .then((message) => {
         dispatch(setFeedConnected(name, false))
