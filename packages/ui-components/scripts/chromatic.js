@@ -1,3 +1,7 @@
 require('dotenv').config()
+const { spawn } = require('child_process')
 
-console.log('chromatic', process.env.CHROMATIC_PROJECT_TOKEN)
+const { CHROMATIC_PROJECT_TOKEN } = process.env
+const opts = { stdio: 'inherit', shell: true }
+
+spawn(`npx chromatic --project-token=${CHROMATIC_PROJECT_TOKEN}`, opts)
