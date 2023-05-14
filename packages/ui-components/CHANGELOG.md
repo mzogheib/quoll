@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.9](https://github.com/mzogheib/quoll/compare/@quoll/ui-components@0.2.8...@quoll/ui-components@0.2.9) (2023-05-14)
+
+**Note:** Version bump only for package @quoll/ui-components
+
 ## [0.2.8](https://github.com/mzogheib/quoll/compare/@quoll/ui-components@0.2.7...@quoll/ui-components@0.2.8) (2022-10-08)
 
 ### Bug Fixes

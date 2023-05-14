@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.9](https://github.com/mzogheib/quoll/compare/@quoll/client@0.4.8...@quoll/client@0.4.9) (2023-05-14)
+
+**Note:** Version bump only for package @quoll/client
+
 ## [0.4.8](https://github.com/mzogheib/quoll/compare/@quoll/client@0.4.7...@quoll/client@0.4.8) (2022-10-31)
 
 **Note:** Version bump only for package @quoll/client

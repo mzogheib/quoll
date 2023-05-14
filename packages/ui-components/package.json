@@ -1,6 +1,6 @@
 {
   "name": "@quoll/ui-components",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "Design System for the client package",
   "main": "dist/index.js",
   "repository": "https://github.com/mzogheib/quoll",
