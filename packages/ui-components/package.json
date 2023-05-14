@@ -23,7 +23,8 @@
     "size": "size-limit",
     "analyze": "size-limit --why",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "chromatic": "node scripts/chromatic.js"
   },
   "dependencies": {
     "polished": "^3.4.1",
@@ -44,6 +45,8 @@
     "@types/react-dom": "^18.0.6",
     "@types/react-modal": "^3.13.1",
     "babel-loader": "^8.2.5",
+    "chromatic": "^6.17.4",
+    "dotenv": "^16.0.3",
     "husky": "^8.0.1",
     "lodash": "^4.17.20",
     "react": "^18.2.0",
