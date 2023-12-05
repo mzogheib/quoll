@@ -11,6 +11,7 @@ const Activities = {
   Walk: { type: 'walk', label: 'Walk' },
   Hike: { type: 'hike', label: 'Hike' },
   Yoga: { type: 'yoga', label: 'Yoga' },
+  EBikeRide: { type: 'e-bike', label: 'E-Bike' },
 }
 
 function adapter(activities) {

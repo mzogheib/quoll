@@ -2,6 +2,7 @@ import { FeedName } from '../feeds/types'
 
 export enum EntryType {
   Bike = 'bike',
+  EBike = 'e-bike',
   Bus = 'bus',
   Car = 'car',
   Expense = 'expense',
