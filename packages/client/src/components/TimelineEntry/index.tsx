@@ -37,13 +37,13 @@ const Time = styled.div`
 `
 
 const Image = styled.div`
+  text-align: center;
+  flex-basis: 70px;
   font-size: 22px;
-  margin: 0 0 0 10px;
 `
 
 const Label = styled.div`
   flex-grow: 1;
-  margin: 0 0 0 10px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
