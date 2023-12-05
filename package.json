@@ -11,8 +11,6 @@
     "ui-components": "node scripts/start-ui-components.js",
     "release": "cross-env HUSKY_BYPASS=true lerna publish --conventional-commits --yes",
     "deploy": "concurrently \"yarn deploy:api\" \"yarn deploy:client\"",
-    "deploy:api": "git push heroku-quoll-api master",
-    "deploy:client": "git push heroku-quoll-client master",
     "clean": "concurrently \"yarn clean-build\" \"yarn clean-node-modules\"",
     "clean-build": "lerna exec -- rm -rf ./build ./dist && rm -rf ./build ./dist",
     "clean-node-modules": "lerna exec -- rm -rf ./node_modules && rm -rf ./node_modules",
@@ -29,12 +27,12 @@
     ]
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.0.3",
-    "@commitlint/config-conventional": "^17.0.3",
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.3",
     "concurrently": "^5.3.0",
     "cross-env": "^7.0.2",
     "husky": "^8.0.0",
-    "lerna": "^5.1.8",
+    "lerna": "^8.0.0",
     "lint-staged": "^10.3.0",
     "prettier": "^2.1.1"
   }

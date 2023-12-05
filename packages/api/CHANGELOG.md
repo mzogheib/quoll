@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/mzogheib/quoll/compare/@quoll/api@0.2.10...@quoll/api@0.3.0) (2023-12-05)
+
+### Features
+
+- support all Strava activity types ([#139](https://github.com/mzogheib/quoll/issues/139)) ([d16f825](https://github.com/mzogheib/quoll/commit/d16f825eeb9707a3cb84e3950cec8fec8d9c99d5))
+
 ## [0.2.10](https://github.com/mzogheib/quoll/compare/@quoll/api@0.2.9...@quoll/api@0.2.10) (2022-07-14)
 
 **Note:** Version bump only for package @quoll/api
