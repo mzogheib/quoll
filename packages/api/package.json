@@ -9,7 +9,7 @@
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "moment": "^2.29.4",
-    "mongoose": "^6.4.4",
+    "mongoose": "^6.12.3",
     "node-moves": "https://github.com/mzogheib/node-moves",
     "node-strava": "https://github.com/mzogheib/node-strava#0.2.0",
     "node-toshl": "https://github.com/mzogheib/node-toshl",
