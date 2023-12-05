@@ -10,7 +10,7 @@
     "type-check": "tsc --noEmit"
   },
   "engines": {
-    "node": "^14.20.0"
+    "node": ">=18"
   },
   "browserslist": {
     "production": [
