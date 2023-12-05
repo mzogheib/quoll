@@ -8,6 +8,7 @@ const EntryConfig = {
   [EntryType.Bus]: { label: 'Bus', image: '🚌' },
   [EntryType.Car]: { label: 'Car', image: '🚗' },
   [EntryType.Expense]: { label: 'Expense', image: '💸' },
+  [EntryType.EBike]: { label: 'E-Bike', image: '🚲⚡️' },
   [EntryType.Hike]: { label: 'Hike', image: '🥾' },
   [EntryType.Home]: { label: 'Home', image: '🏠' },
   [EntryType.Motorcycle]: { label: 'Motorcycle', image: '🏍️' },
@@ -21,7 +22,8 @@ const EntryConfig = {
   [EntryType.Yoga]: { label: 'Yoga', image: '🧘‍♂️' },
 }
 
-export const getEntryImage = (entry: Entry) => EntryConfig[entry.type].image
+export const getEntryImage = (entry: Entry) =>
+  EntryConfig[entry.type] ? EntryConfig[entry.type].image : '🤠'
 
 const get = (date: string) =>
   api.get<Entry[]>({
