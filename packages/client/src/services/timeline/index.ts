@@ -21,7 +21,8 @@ const EntryConfig = {
   [EntryType.Yoga]: { label: 'Yoga', image: '🧘‍♂️' },
 }
 
-export const getEntryImage = (entry: Entry) => EntryConfig[entry.type].image
+export const getEntryImage = (entry: Entry) =>
+  EntryConfig[entry.type] ? EntryConfig[entry.type].image : '🤠'
 
 const get = (date: string) =>
   api.get<Entry[]>({
