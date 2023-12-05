@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/mzogheib/quoll/compare/@quoll/client@0.4.9...@quoll/client@0.5.0) (2023-12-05)
+
+### Features
+
+- support all Strava activity types ([#139](https://github.com/mzogheib/quoll/issues/139)) ([d16f825](https://github.com/mzogheib/quoll/commit/d16f825eeb9707a3cb84e3950cec8fec8d9c99d5))
+
 ## [0.4.9](https://github.com/mzogheib/quoll/compare/@quoll/client@0.4.8...@quoll/client@0.4.9) (2023-05-14)
 
 **Note:** Version bump only for package @quoll/client
