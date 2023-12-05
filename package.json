@@ -5,9 +5,9 @@
     "packages/*"
   ],
   "scripts": {
-    "start": "concurrently \"yarn api\" \"yarn client\"",
+    "start": "concurrently \"yarn api\" \"yarn client-web\"",
     "api": "node scripts/start-api.js",
-    "client": "node scripts/start-client.js",
+    "client-web": "node scripts/start-client-web.js",
     "ui-components": "node scripts/start-ui-components.js",
     "release": "cross-env HUSKY_BYPASS=true lerna publish --conventional-commits --yes",
     "deploy": "concurrently \"yarn deploy:api\" \"yarn deploy:client\"",

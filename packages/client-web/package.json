@@ -1,5 +1,5 @@
 {
-  "name": "@quoll/client",
+  "name": "@quoll/client-web",
   "version": "0.5.1",
   "private": true,
   "scripts": {
