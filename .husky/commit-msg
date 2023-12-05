@@ -1,4 +1,6 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-if [[ $(git rev-parse --abbrev-ref HEAD) = master ]]; then ([[ -n $HUSKY_BYPASS ]] || commitlint -E HUSKY_GIT_PARAMS); fi
+# Lint commits on main only because that branch triggers the release process
+branch="$(git rev-parse --abbrev-ref HEAD)"
+if [[ "$branch" = main ]]; then (npx --no -- commitlint --edit ${1}); fi
