@@ -1,0 +1,4 @@
+# React Native build and vendor files
+ios
+android
+vendor
