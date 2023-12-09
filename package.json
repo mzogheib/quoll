@@ -13,7 +13,8 @@
     "clean": "concurrently \"yarn clean-build\" \"yarn clean-node-modules\"",
     "clean-build": "lerna exec -- rm -rf ./build ./dist && rm -rf ./build ./dist",
     "clean-node-modules": "lerna exec -- rm -rf ./node_modules && rm -rf ./node_modules",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "format": "prettier --write"
   },
   "commitlint": {
     "extends": [
