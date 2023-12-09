@@ -37,16 +37,11 @@ function getHistory(from, to, token) {
   const fromTime = moment(from).unix()
   const toTime = moment(to).endOf('day').unix()
   const initialResults = []
-  return history(
-    offset,
-    limit,
-    token,
-    fromTime,
-    initialResults
-  ).then((results) =>
-    results.filter(
-      (result) => result.start_time >= fromTime && result.start_time <= toTime
-    )
+  return history(offset, limit, token, fromTime, initialResults).then(
+    (results) =>
+      results.filter(
+        (result) => result.start_time >= fromTime && result.start_time <= toTime
+      )
   )
 }
 
