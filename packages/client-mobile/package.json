@@ -9,6 +9,11 @@
     "start": "react-native start",
     "test": "jest"
   },
+  "workspaces": {
+    "nohoist": [
+      "**"
+    ]
+  },
   "dependencies": {
     "react": "18.2.0",
     "react-native": "0.73.0"
