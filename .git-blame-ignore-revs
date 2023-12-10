@@ -1,4 +1,11 @@
-# Specifies commits that should be ignored in git blame
+# Specifies commits that should be ignored in git blame.
+# The commits here are add in sequential order.
+
+# Old bulk formatting to add prettier
+6d69f65af6b340d807211d0366aa5f978978e936
 
 # Bulk formatting for old code
 507472e7046f002b4f71a93d9bc6100b5ea23bd3
+
+# Bulk formatting to add semicolon
+ebd3b99a37121696a9490e04bf60516a751bbd53
