@@ -1,6 +1,6 @@
 {
   "name": "@quoll/ui-components",
-  "version": "0.2.11",
+  "version": "0.2.12",
   "description": "UI components for the web apps",
   "main": "dist/index.js",
   "repository": "https://github.com/mzogheib/quoll",
