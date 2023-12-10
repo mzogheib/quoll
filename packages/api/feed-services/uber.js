@@ -1,5 +1,5 @@
-const moment = require('moment');
-const apiUber = require('../feed-apis').uber;
+const moment = require("moment");
+const apiUber = require("../feed-apis").uber;
 
 module.exports = {
   getOAuthUrl,
@@ -35,7 +35,7 @@ function getHistory(from, to, token) {
   const offset = 0;
   const limit = 50;
   const fromTime = moment(from).unix();
-  const toTime = moment(to).endOf('day').unix();
+  const toTime = moment(to).endOf("day").unix();
   const initialResults = [];
   return history(offset, limit, token, fromTime, initialResults).then(
     (results) =>

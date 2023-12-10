@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useLocation } from "react-router-dom";
 
 import {
   getOauthUrl,
@@ -9,12 +9,12 @@ import {
   disconnectFeed,
   FeedState,
   selectFeeds,
-} from '../../store/feeds';
-import FeedSettings from '../../components/FeedSettings';
-import { requestAuth } from '../../services/oauth';
-import AlertModal from '../../components/modals/AlertModal';
-import { FeedName } from '../../services/feeds/types';
-import { SettingsLocationState } from '../types';
+} from "../../store/feeds";
+import FeedSettings from "../../components/FeedSettings";
+import { requestAuth } from "../../services/oauth";
+import AlertModal from "../../components/modals/AlertModal";
+import { FeedName } from "../../services/feeds/types";
+import { SettingsLocationState } from "../types";
 
 const Wrapper = styled.div`
   display: flex;
@@ -50,7 +50,7 @@ const FeedSettingsWrapper = styled.div`
 
 const INITIAL_STATE = {
   showModal: false,
-  modalMessage: 'Oops, something went wrong.',
+  modalMessage: "Oops, something went wrong.",
 };
 
 const Settings = () => {
@@ -77,14 +77,14 @@ const Settings = () => {
       openModal(locationState.errorMessage);
       // Replace the current location without a state so that this error
       // message doesn't keep getting displayed
-      history.replace('/settings');
+      history.replace("/settings");
     }
   }, [history, location]);
 
   const closeModal = () => setState({ ...INITIAL_STATE });
 
   const handleConnect = (name: FeedName) => {
-    const defaultErrorMessage = 'Could not connect feed. Please try again.';
+    const defaultErrorMessage = "Could not connect feed. Please try again.";
     const openErrorModal = (message = defaultErrorMessage) =>
       openModal(message);
 
@@ -103,7 +103,7 @@ const Settings = () => {
           openModal(message);
         }
       })
-      .catch(() => openModal('Could not disconnect feed. Please try again.'));
+      .catch(() => openModal("Could not disconnect feed. Please try again."));
 
   const { showModal, modalMessage } = state;
 

@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { Button, Modal } from '@quoll/ui-components';
+import styled from "styled-components";
+import { Button, Modal } from "@quoll/ui-components";
 
 const InnerWrapper = styled.div`
   padding: 20px;

@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
-import ReactCalendar from 'react-calendar';
+import styled, { css } from "styled-components";
+import ReactCalendar from "react-calendar";
 
 export const Calendar = styled(ReactCalendar)(
   ({ theme: { font } }) => css`

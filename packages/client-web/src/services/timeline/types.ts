@@ -1,22 +1,22 @@
-import { FeedName } from '../feeds/types';
+import { FeedName } from "../feeds/types";
 
 export enum EntryType {
-  Bike = 'bike',
-  EBike = 'e-bike',
-  Bus = 'bus',
-  Car = 'car',
-  Expense = 'expense',
-  Hike = 'hike',
-  Home = 'home',
-  Motorcycle = 'motorcycle',
-  Place = 'place',
-  Run = 'run',
-  Train = 'train',
-  Tram = 'tram',
-  Transport = 'transport',
-  Walk = 'walk',
-  Work = 'work',
-  Yoga = 'yoga',
+  Bike = "bike",
+  EBike = "e-bike",
+  Bus = "bus",
+  Car = "car",
+  Expense = "expense",
+  Hike = "hike",
+  Home = "home",
+  Motorcycle = "motorcycle",
+  Place = "place",
+  Run = "run",
+  Train = "train",
+  Tram = "tram",
+  Transport = "transport",
+  Walk = "walk",
+  Work = "work",
+  Yoga = "yoga",
 }
 
 interface EntryLocation {

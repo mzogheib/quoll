@@ -1,18 +1,18 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-const routeUsers = require('./users.route');
-const routeFeedAuth = require('./feed-auth.route');
-const routeTimeline = require('./timeline.route');
+const routeUsers = require("./users.route");
+const routeFeedAuth = require("./feed-auth.route");
+const routeTimeline = require("./timeline.route");
 
 module.exports = router;
 
-router.route('/login').post(routeUsers.login);
+router.route("/login").post(routeUsers.login);
 
-router.route('/signup').post(routeUsers.signup);
+router.route("/signup").post(routeUsers.signup);
 
 router
-  .route('/feed-auth')
+  .route("/feed-auth")
   .all(routeUsers.authenticate)
   .all(routeFeedAuth.checkAuth)
   .get(routeFeedAuth.getOAuthUrl)
@@ -20,7 +20,7 @@ router
   .delete(routeFeedAuth.deauthorize);
 
 router
-  .route('/timeline')
+  .route("/timeline")
   .all(routeUsers.authenticate)
   .all(routeFeedAuth.checkAuth)
   .get(routeTimeline.get);

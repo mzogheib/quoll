@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import ReactModal from 'react-modal';
+import React, { useState } from "react";
+import styled from "styled-components";
+import ReactModal from "react-modal";
 
-import { Button } from '../Button';
+import { Button } from "../Button";
 
-import { Modal } from '.';
+import { Modal } from ".";
 
-export default { title: 'Modal' };
+export default { title: "Modal" };
 
-Modal.setAppElement('#root');
+Modal.setAppElement("#root");
 
 const Wrapper = styled.div`
   width: 200px;

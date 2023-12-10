@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 
-import { Calendar } from '.';
+import { Calendar } from ".";
 
-export default { title: 'Calendar' };
+export default { title: "Calendar" };
 
 const Wrapper = styled.div`
   width: 200px;

@@ -1,9 +1,9 @@
-import styled, { css } from 'styled-components';
-import moment from 'moment';
+import styled, { css } from "styled-components";
+import moment from "moment";
 
-import { getEntryImage } from '../../services/timeline';
-import { Entry } from '../../services/timeline/types';
-import FeedLogo from '../FeedLogo';
+import { getEntryImage } from "../../services/timeline";
+import { Entry } from "../../services/timeline/types";
+import FeedLogo from "../FeedLogo";
 
 const Wrapper = styled.div(
   ({ theme: { colors } }) => css`
@@ -67,7 +67,7 @@ const TimelineEntry = ({ entry, onClick }: Props) => {
       <Logo>
         <FeedLogo name={entry.feed} />
       </Logo>
-      <Time>{moment.unix(entry.timeStart).format('h:mm a')}</Time>
+      <Time>{moment.unix(entry.timeStart).format("h:mm a")}</Time>
       <Image>{image}</Image>
       <Label>{entry.title}</Label>
       <Value>{entry.valueLabel}</Value>

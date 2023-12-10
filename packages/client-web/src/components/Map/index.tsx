@@ -1,7 +1,7 @@
-import { Wrapper, Status } from '@googlemaps/react-wrapper';
+import { Wrapper, Status } from "@googlemaps/react-wrapper";
 
-import MapPlaceholder from './Placeholder';
-import MapComponent, { Props } from './Component';
+import MapPlaceholder from "./Placeholder";
+import MapComponent, { Props } from "./Component";
 
 const apiKey = process.env.REACT_APP_GOOGLE_MAPS_KEY;
 
@@ -22,7 +22,7 @@ const Map = (props: Props) => {
     }
   };
 
-  return <Wrapper apiKey={apiKey} libraries={['geometry']} render={render} />;
+  return <Wrapper apiKey={apiKey} libraries={["geometry"]} render={render} />;
 };
 
 export default Map;

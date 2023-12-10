@@ -1,12 +1,12 @@
-import moment from 'moment';
+import moment from "moment";
 
-import { PolylineConfig } from '../../components/Map/Component';
-import { decodePath } from '../../components/Map/utils';
-import { Entry } from '../../services/timeline/types';
+import { PolylineConfig } from "../../components/Map/Component";
+import { decodePath } from "../../components/Map/utils";
+import { Entry } from "../../services/timeline/types";
 
 const mapElementColors = {
-  default: '#eb4434',
-  focussed: '#0072ff',
+  default: "#eb4434",
+  focussed: "#0072ff",
 };
 
 export const makePolylineConfigs = (
@@ -43,8 +43,8 @@ export const makeMarkerOptions = (
       latitude: entry.locationStart?.latitude,
       longitude: entry.locationEnd?.longitude,
       title: entry.title,
-      subTitle: moment.unix(entry.timeStart).format('h:mm a'),
-      description: entry.description || '',
+      subTitle: moment.unix(entry.timeStart).format("h:mm a"),
+      description: entry.description || "",
     }));
 
 const makeInfoWindowPosition = ({
@@ -72,15 +72,15 @@ export const makeInfoWindowOptions = (
 ): google.maps.InfoWindowOptions => {
   const { title, timeStart } = entry;
 
-  const description = entry.description ?? '';
-  const subTitle = moment.unix(timeStart).format('h:mm a');
+  const description = entry.description ?? "";
+  const subTitle = moment.unix(timeStart).format("h:mm a");
 
   const content =
-    '<div>' +
+    "<div>" +
     `<h1>${title}</h1>` +
     `<h2>${subTitle}</h2>` +
-    `<p>${description.replace(/(?:\r\n|\r|\n)/g, '<br>')}</p>` +
-    '</div>';
+    `<p>${description.replace(/(?:\r\n|\r|\n)/g, "<br>")}</p>` +
+    "</div>";
 
   return { content, position: position ?? makeInfoWindowPosition(entry) };
 };

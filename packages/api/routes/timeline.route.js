@@ -1,5 +1,5 @@
-const ctrlUsers = require('../controllers/users.controller');
-const ctrlTimeline = require('../controllers/timeline.controller');
+const ctrlUsers = require("../controllers/users.controller");
+const ctrlTimeline = require("../controllers/timeline.controller");
 
 module.exports = {
   get,

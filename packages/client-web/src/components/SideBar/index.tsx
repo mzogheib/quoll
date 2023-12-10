@@ -1,8 +1,8 @@
-import { Fragment } from 'react';
-import styled, { css } from 'styled-components';
+import { Fragment } from "react";
+import styled, { css } from "styled-components";
 
-import SideBarVertical from './SideBarVertical';
-import SideBarHorizontal from './SideBarHorizontal';
+import SideBarVertical from "./SideBarVertical";
+import SideBarHorizontal from "./SideBarHorizontal";
 
 const WrapperV = styled.div(
   ({ theme: { media } }) => css`

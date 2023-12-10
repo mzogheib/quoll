@@ -1,7 +1,7 @@
-const moment = require('moment');
+const moment = require("moment");
 
-const apiToshl = require('../feed-apis').toshl;
-const ToshlUser = require('../models/toshlUser.model');
+const apiToshl = require("../feed-apis").toshl;
+const ToshlUser = require("../models/toshlUser.model");
 
 module.exports = {
   getOAuthUrl,
@@ -77,8 +77,8 @@ function getTags(accessToken) {
 function getEntries(from, to, token) {
   // Toshl dates are in the user's timezone so convert the ISO string
   // to local (default moment output for an ISO string input) and format
-  const fromDate = moment(from).format('YYYY-MM-DD');
-  const toDate = moment(to).format('YYYY-MM-DD');
+  const fromDate = moment(from).format("YYYY-MM-DD");
+  const toDate = moment(to).format("YYYY-MM-DD");
   let decoratedEntries;
   return apiToshl.entries
     .list({ from: fromDate, to: toDate, access_token: token })
@@ -89,7 +89,7 @@ function getEntries(from, to, token) {
     .then((tags) => {
       decoratedEntries.forEach((decoratedEntry) => {
         decoratedEntry.tags = decoratedEntry.tags.map((tagId) => {
-          return { id: tagId, name: tags[tagId] || 'No tag' };
+          return { id: tagId, name: tags[tagId] || "No tag" };
         });
       });
       return decoratedEntries;

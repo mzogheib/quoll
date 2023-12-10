@@ -1,16 +1,16 @@
-import { useEffect, useMemo, useState } from 'react';
-import styled, { css } from 'styled-components';
-import moment from 'moment';
-import { HorizontalLoader } from '@quoll/ui-components';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useMemo, useState } from "react";
+import styled, { css } from "styled-components";
+import moment from "moment";
+import { HorizontalLoader } from "@quoll/ui-components";
+import { useDispatch, useSelector } from "react-redux";
 
-import { selectDate, setDate } from '../../store/date';
-import { fetchTimeline, selectTimeline } from '../../store/timeline';
-import DatePicker from '../../components/DatePicker';
-import Timeline from '../../components/Timeline';
-import Map from '../../components/Map';
-import store from '../../store';
-import { makePolylineConfigs, makeInfoWindowOptions } from './mapUtils';
+import { selectDate, setDate } from "../../store/date";
+import { fetchTimeline, selectTimeline } from "../../store/timeline";
+import DatePicker from "../../components/DatePicker";
+import Timeline from "../../components/Timeline";
+import Map from "../../components/Map";
+import store from "../../store";
+import { makePolylineConfigs, makeInfoWindowOptions } from "./mapUtils";
 
 const { getState } = store;
 
@@ -116,14 +116,14 @@ const Home = () => {
     fetchTimeline()(dispatch, getState);
   }, [date, dispatch]);
 
-  const dateIsToday = (date: string) => moment(date).isSame(moment(), 'day');
+  const dateIsToday = (date: string) => moment(date).isSame(moment(), "day");
 
   return (
     <Wrapper>
       <Left>
         <DatePicker
           date={date}
-          maxDate={moment().format('YYYY-MM-DD')}
+          maxDate={moment().format("YYYY-MM-DD")}
           prevDisabled={isFetching}
           nextDisabled={isFetching || dateIsToday(date)}
           calendarDisabled={isFetching}

@@ -1,4 +1,4 @@
-const prefix = 'quoll';
+const prefix = "quoll";
 
 const makeKey = (key: string) => `${prefix}-${key}`;
 

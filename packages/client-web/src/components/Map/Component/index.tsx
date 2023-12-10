@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
+import { useEffect, useRef, useState } from "react";
+import styled from "styled-components";
 
-import InfoWindow from '../InfoWindow';
-import Polyline from '../Polyline';
-import { makeBounds } from '../utils';
+import InfoWindow from "../InfoWindow";
+import Polyline from "../Polyline";
+import { makeBounds } from "../utils";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -34,7 +34,7 @@ const MapComponent = ({ polylineConfigs, infoWindowOptions }: Props) => {
   useEffect(() => {
     if (ref.current && !map) {
       const melbourne = new google.maps.LatLng(-37.8079033, 144.9759344);
-      const options = { center: melbourne, zoom: 14, mapTypeId: 'roadmap' };
+      const options = { center: melbourne, zoom: 14, mapTypeId: "roadmap" };
 
       setMap(new google.maps.Map(ref.current, options));
     }

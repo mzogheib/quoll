@@ -1,9 +1,9 @@
-import moment from 'moment';
-import { Action } from 'redux';
-import { RootState } from '..';
+import moment from "moment";
+import { Action } from "redux";
+import { RootState } from "..";
 
 enum DateActionType {
-  Set = 'SET_DATE',
+  Set = "SET_DATE",
 }
 
 interface SetDateAction extends Action<DateActionType.Set> {
@@ -17,7 +17,7 @@ export const setDate = (date: string): SetDateAction => ({
 
 export const selectDate = (state: RootState) => state.date;
 
-const defaultState = moment().format('YYYY-MM-DD');
+const defaultState = moment().format("YYYY-MM-DD");
 
 type DateAction = SetDateAction;
 

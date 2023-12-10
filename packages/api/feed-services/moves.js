@@ -1,4 +1,4 @@
-const apiMoves = require('../feed-apis').moves;
+const apiMoves = require("../feed-apis").moves;
 
 module.exports = {
   getOAuthUrl,

@@ -1,10 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-import { sortBy } from 'lodash';
+import React from "react";
+import styled from "styled-components";
+import { sortBy } from "lodash";
 
-import { Icon, iconNames } from '.';
+import { Icon, iconNames } from ".";
 
-export default { title: 'Icon' };
+export default { title: "Icon" };
 
 const Table = styled.table`
   th,

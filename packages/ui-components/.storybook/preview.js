@@ -1,5 +1,5 @@
-import { ThemeProvider } from 'styled-components';
-import { themes } from '../src';
+import { ThemeProvider } from "styled-components";
+import { themes } from "../src";
 
 export const decorators = [
   (Story) => (
@@ -12,5 +12,5 @@ export const decorators = [
 // https://storybook.js.org/docs/react/writing-stories/parameters#global-parameters
 export const parameters = {
   // https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args
-  actions: { argTypesRegex: '^on.*' },
+  actions: { argTypesRegex: "^on.*" },
 };

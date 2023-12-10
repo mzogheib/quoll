@@ -1,4 +1,4 @@
-const User = require('../models/user.model');
+const User = require("../models/user.model");
 
 module.exports = {
   createUser,
@@ -9,10 +9,10 @@ module.exports = {
 };
 
 const DefaultFeeds = [
-  { name: 'strava', auth: null },
-  { name: 'toshl', auth: null },
-  { name: 'moves', auth: null },
-  { name: 'uber', auth: null },
+  { name: "strava", auth: null },
+  { name: "toshl", auth: null },
+  { name: "moves", auth: null },
+  { name: "uber", auth: null },
 ];
 
 function createUser() {

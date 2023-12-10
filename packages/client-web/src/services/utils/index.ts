@@ -4,7 +4,7 @@ function extractTimeString(input: string) {
   const match = input.match(TIME_FORMAT_REGEX);
 
   if (match && match.length) {
-    const timeElements = match[0].split(':');
+    const timeElements = match[0].split(":");
     const hour = parseInt(timeElements[0], 10);
     const minute = parseInt(timeElements[1], 10);
     const second = parseInt(timeElements[2], 10);

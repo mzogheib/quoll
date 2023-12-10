@@ -1,6 +1,6 @@
-const feedServices = require('../feed-services');
-const ctrlUsers = require('../controllers/users.controller');
-const moment = require('moment');
+const feedServices = require("../feed-services");
+const ctrlUsers = require("../controllers/users.controller");
+const moment = require("moment");
 
 module.exports = {
   getOAuthUrl,
@@ -14,7 +14,7 @@ function getOAuthUrl(req, res) {
   const respond = ({ status, message }) => res.status(status).json(message);
 
   if (!feed) {
-    respond({ status: 400, message: 'No feed provided.' });
+    respond({ status: 400, message: "No feed provided." });
   } else {
     const service = feedServices[feed];
     const url = service && service.getOAuthUrl();
@@ -37,9 +37,9 @@ function authenticate(req, res) {
     respond({ status: error.status || 500, message: error.message });
 
   if (!feed) {
-    respond({ status: 400, message: 'No feed provided.' });
+    respond({ status: 400, message: "No feed provided." });
   } else if (!code) {
-    respond({ status: 400, message: 'No authorization code provided.' });
+    respond({ status: 400, message: "No authorization code provided." });
   } else {
     const service = feedServices[feed];
     const authenticate = service && service.authenticate;
@@ -105,7 +105,7 @@ function deauthorize(req, res) {
     respond({ status: error.status || 500, message: error.message });
 
   if (!feed) {
-    respond({ status: 400, message: 'No feed provided.' });
+    respond({ status: 400, message: "No feed provided." });
   } else {
     const service = feedServices[feed];
     const deauthorize = service && service.deauthorize;

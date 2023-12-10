@@ -1,5 +1,5 @@
-const feedServices = require('../feed-services');
-const feedAdapters = require('../feed-adapters');
+const feedServices = require("../feed-services");
+const feedAdapters = require("../feed-adapters");
 
 module.exports = {
   get,

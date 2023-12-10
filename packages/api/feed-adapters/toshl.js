@@ -1,16 +1,16 @@
-const moment = require('moment');
-const { v4: uuidv4 } = require('uuid');
+const moment = require("moment");
+const { v4: uuidv4 } = require("uuid");
 
 module.exports = {
   adapter,
 };
 
-const DefaultTime = '12:00:00';
+const DefaultTime = "12:00:00";
 
 function adapter(entries) {
   return entries.map((entry) => {
-    const type = entry.amount < 0 ? 'expense' : 'income';
-    const tags = entry.tags.map((tag) => tag.name).join(', ');
+    const type = entry.amount < 0 ? "expense" : "income";
+    const tags = entry.tags.map((tag) => tag.name).join(", ");
     const time = extractTimeString(entry.desc) || DefaultTime;
     const timeStart = moment(`${entry.date} ${time}`).unix();
     const timeEnd = timeStart;
@@ -22,11 +22,11 @@ function adapter(entries) {
       : null;
     const locationEnd = locationStart;
     const description = startsWithTime(entry.desc)
-      ? entry.desc.split('\n').slice(2).join('\n')
+      ? entry.desc.split("\n").slice(2).join("\n")
       : entry.desc;
     const amount = formatAmount(entry.amount, entry.currency.code);
     return {
-      feed: 'toshl',
+      feed: "toshl",
       id: uuidv4(),
       type,
       timeStart,
@@ -43,8 +43,8 @@ function adapter(entries) {
 
 // TODO: Dynamically calculate the user's locale instead of hardcoding en-AU
 const formatAmount = (amount, currencyCode) => {
-  return Math.abs(amount).toLocaleString('en-AU', {
-    style: 'currency',
+  return Math.abs(amount).toLocaleString("en-AU", {
+    style: "currency",
     currency: currencyCode,
   });
 };
@@ -55,7 +55,7 @@ function extractTimeString(input) {
   const match = input.match(TIME_FORMAT_REGEX);
   var isValid;
   if (match && match.length) {
-    const timeElements = match[0].split(':');
+    const timeElements = match[0].split(":");
     const hour = parseInt(timeElements[0], 10);
     const minute = parseInt(timeElements[1], 10);
     const second = parseInt(timeElements[2], 10);

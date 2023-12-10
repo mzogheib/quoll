@@ -1,25 +1,25 @@
-const moment = require('moment');
-const { v4: uuidv4 } = require('uuid');
-const polyline = require('@mapbox/polyline');
+const moment = require("moment");
+const { v4: uuidv4 } = require("uuid");
+const polyline = require("@mapbox/polyline");
 
 module.exports = {
   adapter,
 };
 
 const Activities = {
-  walking: { type: 'walk', label: 'Walk' },
-  transport: { type: 'transport', label: 'Transport' },
-  car: { type: 'car', label: 'Car' },
-  motorcycle: { type: 'motorcycle', label: 'Motorcycle' },
-  tram: { type: 'tram', label: 'Tram' },
-  train: { type: 'train', label: 'Train' },
-  bus: { type: 'bus', label: 'Bus' },
+  walking: { type: "walk", label: "Walk" },
+  transport: { type: "transport", label: "Transport" },
+  car: { type: "car", label: "Car" },
+  motorcycle: { type: "motorcycle", label: "Motorcycle" },
+  tram: { type: "tram", label: "Tram" },
+  train: { type: "train", label: "Train" },
+  bus: { type: "bus", label: "Bus" },
 };
 
 function adapter(segments) {
   return segments.map((segment) => {
     switch (segment.type) {
-      case 'move':
+      case "move":
         const activities = segment.activities.filter(
           (activity) => Activities[activity.activity]
         );
@@ -48,7 +48,7 @@ function adapter(segments) {
             longitude: endPoint.lon,
           };
           return {
-            feed: 'moves',
+            feed: "moves",
             id: uuidv4(),
             type,
             timeStart,
@@ -61,10 +61,10 @@ function adapter(segments) {
             polyline: encodedPath,
           };
         });
-      case 'place':
+      case "place":
         const place = segment.place;
-        const placeTypes = ['home', 'work'];
-        const title = `${place.name || 'Place'}`;
+        const placeTypes = ["home", "work"];
+        const title = `${place.name || "Place"}`;
         const timeStart = moment(segment.startTime).unix();
         const timeEnd = moment(segment.endTime).unix();
         const duration = formatDuration(
@@ -77,9 +77,9 @@ function adapter(segments) {
         const locationEnd = locationStart;
         return [
           {
-            feed: 'moves',
+            feed: "moves",
             id: uuidv4(),
-            type: placeTypes.includes(place.type) ? place.type : 'place',
+            type: placeTypes.includes(place.type) ? place.type : "place",
             timeStart,
             timeEnd,
             title,

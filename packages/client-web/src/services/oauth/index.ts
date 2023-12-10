@@ -1,5 +1,5 @@
-import utils from '../utils';
-import storageService from '../storage';
+import utils from "../utils";
+import storageService from "../storage";
 
 // OAuth Flow
 // 1. User clicks 'connect' on the settings page and BE returns a url for that feed
@@ -15,7 +15,7 @@ import storageService from '../storage';
 
 const makeToken = () => {
   const token = utils.makeRandomString(10);
-  storageService.set('oauth-state-token', token);
+  storageService.set("oauth-state-token", token);
   return token;
 };
 
@@ -25,15 +25,15 @@ const getTokenFromState = (state: string) => {
 };
 
 const isValidToken = (token: string) => {
-  const storedToken = storageService.get('oauth-state-token');
-  storageService.delete('oauth-state-token');
+  const storedToken = storageService.get("oauth-state-token");
+  storageService.delete("oauth-state-token");
   return storedToken && token && storedToken === token;
 };
 
 const makeAuthUrl = (url: string) => {
   const state = utils.encode({ token: makeToken() });
   const newUrl = new URL(url);
-  newUrl.searchParams.append('state', state);
+  newUrl.searchParams.append("state", state);
   return newUrl.toString();
 };
 
@@ -65,7 +65,7 @@ export const requestAuth = (
 
   // Register the callback that the OPENED window will call
   window.quollOnOAuthResponse = (response) => {
-    if (!(response && response.state)) return onError('Unknown response.');
+    if (!(response && response.state)) return onError("Unknown response.");
 
     const { code, state, error } = response;
     let token;
@@ -73,12 +73,12 @@ export const requestAuth = (
     try {
       token = getTokenFromState(state);
     } catch {
-      storageService.delete('oauth-state-token');
-      return onError('Could not authenticate feed. Try again.');
+      storageService.delete("oauth-state-token");
+      return onError("Could not authenticate feed. Try again.");
     }
 
-    if (!code || !isValidToken(token) || error === 'access_denied')
-      return onError('Access denied.');
+    if (!code || !isValidToken(token) || error === "access_denied")
+      return onError("Access denied.");
 
     onSuccess(code);
   };
@@ -88,14 +88,14 @@ export const requestAuth = (
 export const onOAuthResponse = (response: OAuthResponse, onError: OnError) => {
   // Perhaps the opener was closed for some reason
   if (!window.opener) {
-    storageService.delete('oauth-state-token');
-    onError('Could not authenticate feed. Try again.');
+    storageService.delete("oauth-state-token");
+    onError("Could not authenticate feed. Try again.");
     return;
   }
 
   // This is an edge case. Fail silently until there's a need for a better solution
   if (!window.opener.quollOnOAuthResponse) {
-    storageService.delete('oauth-state-token');
+    storageService.delete("oauth-state-token");
     window.close();
     return;
   }

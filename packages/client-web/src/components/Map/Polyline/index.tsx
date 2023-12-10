@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 interface Props {
   options: google.maps.PolylineOptions;
@@ -20,7 +20,7 @@ const Polyline = ({ options, map, onClick }: Props) => {
   useEffect(() => {
     if (polyline) {
       polyline.setOptions(options);
-      if (onClick) polyline.addListener('click', onClick);
+      if (onClick) polyline.addListener("click", onClick);
       polyline.setMap(map);
     }
   }, [polyline, options, map, onClick]);

@@ -1,9 +1,9 @@
-import React from 'react';
-import styled, { StyledComponent } from 'styled-components';
+import React from "react";
+import styled, { StyledComponent } from "styled-components";
 
-import { Button, ButtonPlain, ButtonPrimary } from '.';
+import { Button, ButtonPlain, ButtonPrimary } from ".";
 
-export default { title: 'Button' };
+export default { title: "Button" };
 
 const Row = styled.div`
   display: flex;
@@ -26,7 +26,7 @@ const buttonVariations = [Button, ButtonPrimary, ButtonPlain];
 const buttonDisabledProp = [false, true];
 
 type RenderButtonParams = {
-  variation: StyledComponent<'button', any>;
+  variation: StyledComponent<"button", any>;
   disabled: boolean;
 };
 const renderButton = ({ variation, disabled }: RenderButtonParams) => {
@@ -48,7 +48,7 @@ export const Default = () => (
   <Row>
     {buttonDisabledProp.map((disabled) => (
       <Column key={`${disabled}`}>
-        <div>{disabled ? 'Disabled' : 'Enabled'}</div>
+        <div>{disabled ? "Disabled" : "Enabled"}</div>
         {buttonVariations.map((variation) =>
           renderButton({ variation, disabled })
         )}

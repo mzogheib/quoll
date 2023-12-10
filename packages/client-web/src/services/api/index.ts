@@ -1,7 +1,7 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosRequestConfig } from "axios";
 
 // TODO: come up with a better way than this. Redux or a cookie.
-let authHeader: AxiosRequestConfig['headers'];
+let authHeader: AxiosRequestConfig["headers"];
 
 const authenticate = (userId: string) => {
   authHeader = { Authorization: `Basic ${userId}:` };
@@ -9,8 +9,8 @@ const authenticate = (userId: string) => {
 
 interface RequestParams {
   endpoint: string;
-  params?: AxiosRequestConfig['params'];
-  payload?: AxiosRequestConfig['data'];
+  params?: AxiosRequestConfig["params"];
+  payload?: AxiosRequestConfig["data"];
 }
 
 const makeUrl = ({ endpoint, params }: RequestParams) => {

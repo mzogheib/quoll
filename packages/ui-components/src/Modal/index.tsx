@@ -1,6 +1,6 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
-import ReactModal from 'react-modal';
+import React from "react";
+import styled, { css } from "styled-components";
+import ReactModal from "react-modal";
 
 // Inspired by https://github.com/reactjs/react-modal/issues/603
 

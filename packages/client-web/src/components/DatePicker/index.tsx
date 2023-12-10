@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import styled, { css } from 'styled-components';
-import moment from 'moment';
-import { Calendar, IconButton } from '@quoll/ui-components';
+import { useState } from "react";
+import styled, { css } from "styled-components";
+import moment from "moment";
+import { Calendar, IconButton } from "@quoll/ui-components";
 
 const Wrapper = styled.div`
   display: flex;
@@ -13,8 +13,8 @@ const DateLabel = styled.div<{ disabled: boolean }>(
   ({ theme: { colors }, disabled }) => css`
     flex-grow: 1;
     text-align: center;
-    cursor: ${disabled ? 'unset' : 'pointer'};
-    color: ${disabled ? colors.grey : 'inherit'};
+    cursor: ${disabled ? "unset" : "pointer"};
+    color: ${disabled ? colors.grey : "inherit"};
   `
 );
 
@@ -60,19 +60,19 @@ const DatePicker = (props: Props) => {
   const [showCalendar, setShowCalendar] = useState(false);
 
   const previous = () => {
-    const yesterday = moment(date).subtract(1, 'day');
+    const yesterday = moment(date).subtract(1, "day");
     handleDateChange(yesterday.toDate());
   };
 
   const next = () => {
-    const tomorrow = moment(date).add(1, 'day');
+    const tomorrow = moment(date).add(1, "day");
     handleDateChange(tomorrow.toDate());
   };
 
   const handleDateChange = (newDate: Date | Date[]) => {
     if (Array.isArray(newDate)) return;
 
-    onDateChange(moment(newDate).format('YYYY-MM-DD'));
+    onDateChange(moment(newDate).format("YYYY-MM-DD"));
     setShowCalendar(false);
   };
 

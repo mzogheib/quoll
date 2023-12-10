@@ -1,16 +1,16 @@
-const moment = require('moment');
-const { v4: uuidv4 } = require('uuid');
+const moment = require("moment");
+const { v4: uuidv4 } = require("uuid");
 
 module.exports = {
   adapter,
 };
 const Activities = {
-  car: { type: 'car', label: 'Car' },
+  car: { type: "car", label: "Car" },
 };
 
 function adapter(entries) {
   return entries
-    .filter((entry) => entry.status === 'completed')
+    .filter((entry) => entry.status === "completed")
     .map((entry) => {
       const type = Activities.car.type;
       const timeStart = entry.start_time;
@@ -21,12 +21,12 @@ function adapter(entries) {
       const description = `Trip in ${entry.start_city.display_name}`;
       const amount = formatDuration(timeEnd - timeStart);
       return {
-        feed: 'uber',
+        feed: "uber",
         id: uuidv4(),
         type,
         timeStart,
         timeEnd,
-        title: 'Uber',
+        title: "Uber",
         valueLabel: amount,
         description,
         locationStart,

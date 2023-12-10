@@ -1,24 +1,24 @@
-import Home from './Home';
-import Settings from './Settings';
-import OAuth from './OAuth';
+import Home from "./Home";
+import Settings from "./Settings";
+import OAuth from "./OAuth";
 
 export const routesHash = {
   home: {
-    path: '/',
+    path: "/",
     exact: true,
-    title: 'Home',
+    title: "Home",
     component: Home,
   },
   settings: {
-    path: '/settings',
+    path: "/settings",
     exact: false,
-    title: 'Settings',
+    title: "Settings",
     component: Settings,
   },
   oauth: {
-    path: '/oauth',
+    path: "/oauth",
     exact: false,
-    title: 'OAuth',
+    title: "OAuth",
     component: OAuth,
   },
 };

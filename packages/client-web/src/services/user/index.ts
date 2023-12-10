@@ -1,8 +1,8 @@
-import api from '../api';
-import storage from '../storage';
-import { User } from './types';
+import api from "../api";
+import storage from "../storage";
+import { User } from "./types";
 
-const userKey = 'user';
+const userKey = "user";
 
 const getCurrentUser = () => storage.get(userKey);
 
@@ -12,13 +12,13 @@ const setCurrentUser = (userId: string) => {
 };
 
 const login = (userId: string) =>
-  api.post<User>({ endpoint: 'login', payload: { userId } }).then((user) => {
+  api.post<User>({ endpoint: "login", payload: { userId } }).then((user) => {
     setCurrentUser(user._id);
     return user;
   });
 
 const signup = () =>
-  api.post<User>({ endpoint: 'signup' }).then((user) => {
+  api.post<User>({ endpoint: "signup" }).then((user) => {
     setCurrentUser(user._id);
     return user;
   });

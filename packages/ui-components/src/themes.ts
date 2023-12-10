@@ -1,17 +1,17 @@
-import { css } from 'styled-components';
+import { css } from "styled-components";
 
 // Color names from https://www.color-blindness.com/color-name-hue/
 const colorPalette = {
-  black: '#000000',
-  gainsboro: '#DCDCDC',
-  grey: '#7F7F7F',
-  matterhorn: '#4F4F4F',
-  mediumAquamarine: '#6FCF97',
-  mineShaft: '#333333',
-  royalBlue: '#2F80ED',
-  transparent: 'transparent',
-  white: '#FFFFFF',
-  whiteSmoke: '#F2F2F2',
+  black: "#000000",
+  gainsboro: "#DCDCDC",
+  grey: "#7F7F7F",
+  matterhorn: "#4F4F4F",
+  mediumAquamarine: "#6FCF97",
+  mineShaft: "#333333",
+  royalBlue: "#2F80ED",
+  transparent: "transparent",
+  white: "#FFFFFF",
+  whiteSmoke: "#F2F2F2",
 };
 
 const breakpoints = {
@@ -48,7 +48,7 @@ export const themes = {
   default: {
     colors: colorPalette,
     font: {
-      family: 'Roboto, sans-serif',
+      family: "Roboto, sans-serif",
       color: colorPalette.mineShaft,
     },
     media: {

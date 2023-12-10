@@ -1,7 +1,7 @@
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from "react-router-dom";
 
-import { onOAuthResponse } from '../../services/oauth';
-import { SettingsLocationState } from '../types';
+import { onOAuthResponse } from "../../services/oauth";
+import { SettingsLocationState } from "../types";
 
 const OAuth = () => {
   const history = useHistory<SettingsLocationState>();
@@ -15,7 +15,7 @@ const OAuth = () => {
   // Pass through any error messages to the settings page, which is where
   // the user would have started to get here
   onOAuthResponse(searchParamsObj, (errorMessage) =>
-    history.push('/settings', { errorMessage })
+    history.push("/settings", { errorMessage })
   );
 
   return <div>Connecting...</div>;

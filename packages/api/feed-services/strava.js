@@ -1,5 +1,5 @@
-const moment = require('moment');
-const apiStrava = require('../feed-apis').strava;
+const moment = require("moment");
+const apiStrava = require("../feed-apis").strava;
 
 module.exports = {
   getOAuthUrl,

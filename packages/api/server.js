@@ -1,10 +1,10 @@
-require('dotenv').config();
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
+require("dotenv").config();
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
 const app = express();
-const bodyParser = require('body-parser');
-const routes = require('./routes');
+const bodyParser = require("body-parser");
+const routes = require("./routes");
 
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING, {
   useNewUrlParser: true,
@@ -12,10 +12,10 @@ mongoose.connect(process.env.MONGODB_CONNECTION_STRING, {
 });
 
 const db = mongoose.connection;
-if (!db) console.log('Error connecting db');
-else console.log('Db connected successfully');
+if (!db) console.log("Error connecting db");
+else console.log("Db connected successfully");
 
-app.set('port', process.env.PORT || 3001);
+app.set("port", process.env.PORT || 3001);
 
 app.use(
   bodyParser.urlencoded({
@@ -26,12 +26,12 @@ app.use(bodyParser.json());
 
 app.use(cors({ origin: process.env.CORS_ALLOWED_ORIGIN }));
 
-app.use('/api', routes);
+app.use("/api", routes);
 
 // Listen for requests on this port
-const server = app.listen(app.get('port'), () => {
+const server = app.listen(app.get("port"), () => {
   const port = server.address().port;
-  console.log('Listening on port ' + port);
+  console.log("Listening on port " + port);
 });
 
 // TODO understand wtf is going on with nodemon and express.
@@ -42,26 +42,26 @@ const server = app.listen(app.get('port'), () => {
 // This function is called when you want the server to die gracefully
 // i.e. wait for existing connections
 const gracefulShutdown = () => {
-  console.log('Received kill signal, shutting down gracefully.');
+  console.log("Received kill signal, shutting down gracefully.");
   server.close(() => {
-    console.log('Closed out connections.');
+    console.log("Closed out connections.");
     process.exit(0);
   });
 
   // if after
   setTimeout(() => {
     console.error(
-      'Could not close connections in time, forcefully shutting down.'
+      "Could not close connections in time, forcefully shutting down."
     );
     process.exit(0);
   }, 10 * 1000);
 };
 
 // listen for TERM signal .e.g. kill
-process.on('SIGTERM', gracefulShutdown);
+process.on("SIGTERM", gracefulShutdown);
 
 // listen for INT signal e.g. Ctrl-C
-process.on('SIGINT', gracefulShutdown);
+process.on("SIGINT", gracefulShutdown);
 
 // e.g. used by nodemon, type rs while nodemon is running
-process.once('SIGUSR2', gracefulShutdown);
+process.once("SIGUSR2", gracefulShutdown);

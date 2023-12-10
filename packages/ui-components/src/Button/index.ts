@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
-import { lighten, darken } from 'polished';
+import styled, { css } from "styled-components";
+import { lighten, darken } from "polished";
 
 type MakeStyleParams = {
   fontFamily: string;
@@ -24,15 +24,15 @@ const makeStyle = ({
   font-size: 14px;
   font-weight: ${bold ? 500 : null};
 
-  height: ${noHitbox ? 'unset' : '36px'};
-  min-width: ${noHitbox ? 'unset' : '120px'};
-  padding: ${noHitbox ? 0 : '0 15px'};
+  height: ${noHitbox ? "unset" : "36px"};
+  min-width: ${noHitbox ? "unset" : "120px"};
+  padding: ${noHitbox ? 0 : "0 15px"};
 
   background-color: ${disabled
     ? lighten(0.1, backgroundColor)
     : backgroundColor};
   color: ${disabled ? lighten(0.4, fontColor) : fontColor};
-  cursor: ${disabled ? 'unset' : 'pointer'};
+  cursor: ${disabled ? "unset" : "pointer"};
 
   &:hover {
     background-color: ${!disabled && darken(0.05, backgroundColor)};

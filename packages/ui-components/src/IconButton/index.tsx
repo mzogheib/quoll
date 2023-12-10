@@ -1,7 +1,7 @@
-import React, { ComponentProps } from 'react';
-import styled, { css } from 'styled-components';
+import React, { ComponentProps } from "react";
+import styled, { css } from "styled-components";
 
-import { Icon } from '../Icon';
+import { Icon } from "../Icon";
 
 const Wrapper = styled.button(
   ({ theme: { colors }, disabled }) => css`
@@ -9,8 +9,8 @@ const Wrapper = styled.button(
     border: none;
     background: transparent;
     padding: 0;
-    color: ${disabled ? colors.grey : 'unset'};
-    cursor: ${disabled ? 'unset' : 'pointer'};
+    color: ${disabled ? colors.grey : "unset"};
+    cursor: ${disabled ? "unset" : "pointer"};
   `
 );
 

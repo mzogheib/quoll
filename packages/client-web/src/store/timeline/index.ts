@@ -1,9 +1,9 @@
-import { Action } from 'redux';
+import { Action } from "redux";
 
-import { AppDispatch, GetState, RootState } from '..';
+import { AppDispatch, GetState, RootState } from "..";
 
-import timelineService from '../../services/timeline';
-import { Entry } from '../../services/timeline/types';
+import timelineService from "../../services/timeline";
+import { Entry } from "../../services/timeline/types";
 
 export interface Timeline {
   isFetching: boolean;
@@ -11,8 +11,8 @@ export interface Timeline {
 }
 
 enum TimelineActionType {
-  SetFetching = 'SET_TIMELINE_FETCHING',
-  SetEntries = 'SET_TIMELINE_ENTRIES',
+  SetFetching = "SET_TIMELINE_FETCHING",
+  SetEntries = "SET_TIMELINE_ENTRIES",
 }
 
 interface SetTimelineFetchingAction

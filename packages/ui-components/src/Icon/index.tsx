@@ -1,5 +1,5 @@
-import React from 'react';
-import { IconBaseProps } from 'react-icons/lib';
+import React from "react";
+import { IconBaseProps } from "react-icons/lib";
 import {
   MdClose as Close,
   MdHelp as Help,
@@ -7,7 +7,7 @@ import {
   MdNavigateNext as Next,
   MdNavigateBefore as Previous,
   MdSettings as Settings,
-} from 'react-icons/md';
+} from "react-icons/md";
 
 const icons = {
   Close,

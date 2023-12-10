@@ -1,13 +1,13 @@
-import { Action } from 'redux';
+import { Action } from "redux";
 
-import { AppDispatch } from '..';
-import feedsService from '../../services/feeds';
-import { FeedName } from '../../services/feeds/types';
-import { RootState } from '..';
+import { AppDispatch } from "..";
+import feedsService from "../../services/feeds";
+import { FeedName } from "../../services/feeds/types";
+import { RootState } from "..";
 
 enum FeedActionType {
-  SetConnected = 'SET_FEED_CONNECTED',
-  SetAuthenticating = 'SET_FEED_AUTHENTICATING',
+  SetConnected = "SET_FEED_CONNECTED",
+  SetAuthenticating = "SET_FEED_AUTHENTICATING",
 }
 
 interface SetFeedConnectedAction extends Action<FeedActionType.SetConnected> {

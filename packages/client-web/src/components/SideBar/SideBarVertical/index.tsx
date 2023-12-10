@@ -1,9 +1,9 @@
-import styled, { css } from 'styled-components';
-import { NavLink } from 'react-router-dom';
-import { Icon, IconButton } from '@quoll/ui-components';
+import styled, { css } from "styled-components";
+import { NavLink } from "react-router-dom";
+import { Icon, IconButton } from "@quoll/ui-components";
 
-import { IconWrapper } from '../common';
-import { routesHash } from '../../../routes';
+import { IconWrapper } from "../common";
+import { routesHash } from "../../../routes";
 
 const Wrapper = styled.div(
   ({ theme: { colors } }) => css`

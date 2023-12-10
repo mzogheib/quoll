@@ -1,8 +1,8 @@
-import styled, { css } from 'styled-components';
-import { ButtonPlain, HorizontalLoader } from '@quoll/ui-components';
-import { FeedName } from '../../services/feeds/types';
-import { FeedState } from '../../store/feeds';
-import FeedLogo from '../FeedLogo';
+import styled, { css } from "styled-components";
+import { ButtonPlain, HorizontalLoader } from "@quoll/ui-components";
+import { FeedName } from "../../services/feeds/types";
+import { FeedState } from "../../store/feeds";
+import FeedLogo from "../FeedLogo";
 
 const Wrapper = styled.div(
   ({ theme: { colors } }) => css`
@@ -16,8 +16,8 @@ const Content = styled.div<{ isAuthenticating: boolean }>(
     display: flex;
     align-items: center;
     padding: ${isAuthenticating
-      ? '16px 30px 20px 20px'
-      : '20px 30px 20px 20px'};
+      ? "16px 30px 20px 20px"
+      : "20px 30px 20px 20px"};
   `
 );
 
@@ -43,8 +43,8 @@ const Title = styled.div`
 `;
 
 const Link = styled.a.attrs({
-  target: '_blank',
-  rel: 'noopener noreferrer',
+  target: "_blank",
+  rel: "noopener noreferrer",
 })(
   ({ theme: { colors } }) => css`
     align-self: flex-start;
@@ -56,20 +56,20 @@ const Link = styled.a.attrs({
 
 const feedConfig = {
   [FeedName.Toshl]: {
-    title: 'Toshl',
-    link: { url: 'https://toshl.com', label: 'toshl.com' },
+    title: "Toshl",
+    link: { url: "https://toshl.com", label: "toshl.com" },
   },
   [FeedName.Strava]: {
-    title: 'Strava',
-    link: { url: 'https://www.strava.com', label: 'www.strava.com' },
+    title: "Strava",
+    link: { url: "https://www.strava.com", label: "www.strava.com" },
   },
   [FeedName.Uber]: {
-    title: 'Uber',
-    link: { url: 'https://www.uber.com', label: 'www.uber.com' },
+    title: "Uber",
+    link: { url: "https://www.uber.com", label: "www.uber.com" },
   },
   [FeedName.Moves]: {
-    title: 'Moves',
-    link: { url: 'https://www.moves-app.com', label: 'www.moves-app.com' },
+    title: "Moves",
+    link: { url: "https://www.moves-app.com", label: "www.moves-app.com" },
   },
 };
 
@@ -102,7 +102,7 @@ const FeedSettings = ({ feed, onConnect, onDisconnect }: Props) => {
           <Link href={link.url}>{link.label}</Link>
         </Info>
         <ButtonPlain onClick={handleButtonClick} disabled={isAuthenticating}>
-          {isConnected ? 'Disconnect' : 'Connect'}
+          {isConnected ? "Disconnect" : "Connect"}
         </ButtonPlain>
       </Content>
     </Wrapper>

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
   feeds: {
@@ -7,4 +7,4 @@ const schema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('User', schema, 'users');
+module.exports = mongoose.model("User", schema, "users");

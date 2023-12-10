@@ -1,8 +1,8 @@
 export enum FeedName {
-  Strava = 'strava',
-  Toshl = 'toshl',
-  Uber = 'uber',
-  Moves = 'moves',
+  Strava = "strava",
+  Toshl = "toshl",
+  Uber = "uber",
+  Moves = "moves",
 }
 
 export interface AuthenticatePayload {
