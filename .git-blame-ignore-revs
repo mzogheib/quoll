@@ -1,0 +1,4 @@
+# Specifies commits that should be ignored in git blame
+
+# Bulk formatting for old code
+507472e7046f002b4f71a93d9bc6100b5ea23bd3
