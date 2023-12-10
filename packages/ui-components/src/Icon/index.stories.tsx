@@ -1,10 +1,10 @@
-import React from 'react'
-import styled from 'styled-components'
-import { sortBy } from 'lodash'
+import React from 'react';
+import styled from 'styled-components';
+import { sortBy } from 'lodash';
 
-import { Icon, iconNames } from '.'
+import { Icon, iconNames } from '.';
 
-export default { title: 'Icon' }
+export default { title: 'Icon' };
 
 const Table = styled.table`
   th,
@@ -12,7 +12,7 @@ const Table = styled.table`
     min-width: 150px;
     text-align: center;
   }
-`
+`;
 
 export const Default = () => (
   <Table>
@@ -33,8 +33,8 @@ export const Default = () => (
               <code>{`<Icon icon="${iconName}" />`}</code>
             </td>
           </tr>
-        )
+        );
       })}
     </tbody>
   </Table>
-)
+);

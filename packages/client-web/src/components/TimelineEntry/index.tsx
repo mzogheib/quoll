@@ -1,9 +1,9 @@
-import styled, { css } from 'styled-components'
-import moment from 'moment'
+import styled, { css } from 'styled-components';
+import moment from 'moment';
 
-import { getEntryImage } from '../../services/timeline'
-import { Entry } from '../../services/timeline/types'
-import FeedLogo from '../FeedLogo'
+import { getEntryImage } from '../../services/timeline';
+import { Entry } from '../../services/timeline/types';
+import FeedLogo from '../FeedLogo';
 
 const Wrapper = styled.div(
   ({ theme: { colors } }) => css`
@@ -16,7 +16,7 @@ const Wrapper = styled.div(
       background-color: ${colors.gainsboro};
     }
   `
-)
+);
 
 const Logo = styled.div`
   width: 25px;
@@ -28,39 +28,39 @@ const Logo = styled.div`
   img {
     width: 100%;
   }
-`
+`;
 
 const Time = styled.div`
   flex-basis: 75px;
   text-align: right;
   flex-shrink: 0;
-`
+`;
 
 const Image = styled.div`
   text-align: center;
   flex-basis: 70px;
   font-size: 22px;
-`
+`;
 
 const Label = styled.div`
   flex-grow: 1;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-`
+`;
 
 const Value = styled.div`
   margin: 0 0 0 5px;
   flex-shrink: 0;
-`
+`;
 
 interface Props {
-  entry: Entry
-  onClick: () => void
+  entry: Entry;
+  onClick: () => void;
 }
 
 const TimelineEntry = ({ entry, onClick }: Props) => {
-  const image = getEntryImage(entry)
+  const image = getEntryImage(entry);
 
   return (
     <Wrapper onClick={onClick}>
@@ -72,7 +72,7 @@ const TimelineEntry = ({ entry, onClick }: Props) => {
       <Label>{entry.title}</Label>
       <Value>{entry.valueLabel}</Value>
     </Wrapper>
-  )
-}
+  );
+};
 
-export default TimelineEntry
+export default TimelineEntry;

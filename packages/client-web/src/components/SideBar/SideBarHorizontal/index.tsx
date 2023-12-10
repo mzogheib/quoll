@@ -1,9 +1,9 @@
-import styled, { css } from 'styled-components'
-import { NavLink } from 'react-router-dom'
-import { Icon, IconButton } from '@quoll/ui-components'
+import styled, { css } from 'styled-components';
+import { NavLink } from 'react-router-dom';
+import { Icon, IconButton } from '@quoll/ui-components';
 
-import { IconWrapper } from '../common'
-import { routesHash } from '../../../routes'
+import { IconWrapper } from '../common';
+import { routesHash } from '../../../routes';
 
 const Wrapper = styled.div(
   ({ theme: { colors } }) => css`
@@ -12,7 +12,7 @@ const Wrapper = styled.div(
     justify-content: space-around;
     min-height: 55px;
   `
-)
+);
 
 const itemStyle = css`
   min-width: 70px;
@@ -20,7 +20,7 @@ const itemStyle = css`
   align-items: center;
   justify-content: center;
   text-decoration: none;
-`
+`;
 
 const StyledNavLink = styled(NavLink)(
   ({ theme: { colors } }) => css`
@@ -31,12 +31,12 @@ const StyledNavLink = styled(NavLink)(
       border-top: 5px solid ${colors.mediumAquamarine};
     }
   `
-)
+);
 
-const Help = styled.div(() => itemStyle)
+const Help = styled.div(() => itemStyle);
 
 interface Props {
-  onHelpClick: () => void
+  onHelpClick: () => void;
 }
 
 const SideBarHorizontal = ({ onHelpClick }: Props) => (
@@ -57,6 +57,6 @@ const SideBarHorizontal = ({ onHelpClick }: Props) => (
       </IconWrapper>
     </StyledNavLink>
   </Wrapper>
-)
+);
 
-export default SideBarHorizontal
+export default SideBarHorizontal;

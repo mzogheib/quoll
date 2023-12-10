@@ -1,11 +1,11 @@
-import React from 'react'
-import styled from 'styled-components'
-import { sortBy } from 'lodash'
+import React from 'react';
+import styled from 'styled-components';
+import { sortBy } from 'lodash';
 
-import { IconButton } from '.'
-import { iconNames } from '../Icon'
+import { IconButton } from '.';
+import { iconNames } from '../Icon';
 
-export default { title: 'IconButton' }
+export default { title: 'IconButton' };
 
 const Table = styled.table`
   th,
@@ -13,10 +13,10 @@ const Table = styled.table`
     min-width: 150px;
     text-align: center;
   }
-`
+`;
 
 const handleClick = (buttonVariation: string) =>
-  alert(`Clicked on ${buttonVariation} IconButton!`)
+  alert(`Clicked on ${buttonVariation} IconButton!`);
 
 export const Default = () => (
   <Table>
@@ -40,8 +40,8 @@ export const Default = () => (
               <code>{`<IconButton icon="${iconName}" onClick={handleClick} />`}</code>
             </td>
           </tr>
-        )
+        );
       })}
     </tbody>
   </Table>
-)
+);

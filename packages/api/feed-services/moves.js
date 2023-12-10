@@ -1,4 +1,4 @@
-const apiMoves = require('../feed-apis').moves
+const apiMoves = require('../feed-apis').moves;
 
 module.exports = {
   getOAuthUrl,
@@ -6,32 +6,32 @@ module.exports = {
   deauthorize,
   refreshAuth,
   getSegments,
-}
+};
 
 function getOAuthUrl() {
-  return apiMoves.oauth.url()
+  return apiMoves.oauth.url();
 }
 
 function authenticate(code) {
   return apiMoves.oauth.token({ code }).then((data) => {
-    const expiry_time = calculateExpiryTime(data.expires_in)
-    return { expiry_time, ...data }
-  })
+    const expiry_time = calculateExpiryTime(data.expires_in);
+    return { expiry_time, ...data };
+  });
 }
 
 function deauthorize() {
-  return Promise.resolve()
+  return Promise.resolve();
 }
 
 function refreshAuth({ refresh_token }) {
   return apiMoves.oauth.refresh({ refresh_token }).then((data) => {
-    const expiry_time = calculateExpiryTime(data.expires_in)
-    return { expiry_time, ...data }
-  })
+    const expiry_time = calculateExpiryTime(data.expires_in);
+    return { expiry_time, ...data };
+  });
 }
 
 function getSegments(from, to, token) {
-  const trackPoints = true
+  const trackPoints = true;
   return (
     apiMoves.user.storyline.daily
       .get({ from, to, trackPoints, access_token: token })
@@ -42,10 +42,10 @@ function getSegments(from, to, token) {
           []
         )
       )
-  )
+  );
 }
 
 function calculateExpiryTime(expiresIn) {
   // Substract a small amount to account for lag
-  return Math.floor(Date.now() / 1000 + (expiresIn || 3600) - 300)
+  return Math.floor(Date.now() / 1000 + (expiresIn || 3600) - 300);
 }

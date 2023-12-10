@@ -1,7 +1,7 @@
-import React, { ComponentProps } from 'react'
-import styled, { css } from 'styled-components'
+import React, { ComponentProps } from 'react';
+import styled, { css } from 'styled-components';
 
-import { Icon } from '../Icon'
+import { Icon } from '../Icon';
 
 const Wrapper = styled.button(
   ({ theme: { colors }, disabled }) => css`
@@ -12,15 +12,15 @@ const Wrapper = styled.button(
     color: ${disabled ? colors.grey : 'unset'};
     cursor: ${disabled ? 'unset' : 'pointer'};
   `
-)
+);
 
-type IconProps = ComponentProps<typeof Icon>
-type WrapperProps = ComponentProps<typeof Wrapper>
+type IconProps = ComponentProps<typeof Icon>;
+type WrapperProps = ComponentProps<typeof Wrapper>;
 
-type Props = IconProps & WrapperProps
+type Props = IconProps & WrapperProps;
 
 export const IconButton = ({ icon, size, ...buttonProps }: Props) => (
   <Wrapper {...buttonProps}>
     <Icon icon={icon} size={size} />
   </Wrapper>
-)
+);

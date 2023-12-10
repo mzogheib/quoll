@@ -1,9 +1,9 @@
-import { themes } from '@quoll/ui-components'
+import { themes } from '@quoll/ui-components';
 
 // This adds the theme types to styled-components' DefaultTheme
 // https://www.newline.co/@kchan/annotating-react-styled-components-with-typescript--e8076d1d
 
-type QuollTheme = typeof themes.default
+type QuollTheme = typeof themes.default;
 
 declare module 'styled-components' {
   export interface DefaultTheme extends QuollTheme {}

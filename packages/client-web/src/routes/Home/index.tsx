@@ -1,18 +1,18 @@
-import { useEffect, useMemo, useState } from 'react'
-import styled, { css } from 'styled-components'
-import moment from 'moment'
-import { HorizontalLoader } from '@quoll/ui-components'
-import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useMemo, useState } from 'react';
+import styled, { css } from 'styled-components';
+import moment from 'moment';
+import { HorizontalLoader } from '@quoll/ui-components';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { selectDate, setDate } from '../../store/date'
-import { fetchTimeline, selectTimeline } from '../../store/timeline'
-import DatePicker from '../../components/DatePicker'
-import Timeline from '../../components/Timeline'
-import Map from '../../components/Map'
-import store from '../../store'
-import { makePolylineConfigs, makeInfoWindowOptions } from './mapUtils'
+import { selectDate, setDate } from '../../store/date';
+import { fetchTimeline, selectTimeline } from '../../store/timeline';
+import DatePicker from '../../components/DatePicker';
+import Timeline from '../../components/Timeline';
+import Map from '../../components/Map';
+import store from '../../store';
+import { makePolylineConfigs, makeInfoWindowOptions } from './mapUtils';
 
-const { getState } = store
+const { getState } = store;
 
 const Wrapper = styled.div(
   ({ theme: { media } }) => css`
@@ -24,7 +24,7 @@ const Wrapper = styled.div(
       flex-direction: column-reverse;
     `};
   `
-)
+);
 
 const Left = styled.div(
   ({ theme: { media } }) => css`
@@ -41,12 +41,12 @@ const Left = styled.div(
       flex: 2;
     `};
   `
-)
+);
 
 const TimelineWrapper = styled.div`
   position: relative;
   flex: 1;
-`
+`;
 
 const TimelineBody = styled.div`
   overflow-y: scroll;
@@ -55,7 +55,7 @@ const TimelineBody = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-`
+`;
 
 const MapWrapper = styled.div(
   ({ theme: { media } }) => css`
@@ -66,57 +66,57 @@ const MapWrapper = styled.div(
       flex: 5;
     `};
   `
-)
+);
 const MapBody = styled.div`
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-`
+`;
 
 const LoaderWrapper = styled.div`
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-`
+`;
 
 const Home = () => {
-  const dispatch = useDispatch()
-  const date = useSelector(selectDate)
-  const { isFetching, entries } = useSelector(selectTimeline)
+  const dispatch = useDispatch();
+  const date = useSelector(selectDate);
+  const { isFetching, entries } = useSelector(selectTimeline);
 
-  const [focussedEntryId, setFocussedEntryId] = useState<string>()
+  const [focussedEntryId, setFocussedEntryId] = useState<string>();
   const [focussedEntryLatLng, setFocussedEntryLatLng] =
-    useState<google.maps.LatLngLiteral>()
-  const focussedEntry = entries.find(({ id }) => id === focussedEntryId)
+    useState<google.maps.LatLngLiteral>();
+  const focussedEntry = entries.find(({ id }) => id === focussedEntryId);
 
   const handleEntryClick = (id: string, latLng?: google.maps.LatLngLiteral) => {
-    setFocussedEntryId(id)
-    setFocussedEntryLatLng(latLng)
-  }
+    setFocussedEntryId(id);
+    setFocussedEntryLatLng(latLng);
+  };
 
   const handleDateChange = (date: string) => {
-    setFocussedEntryId(undefined)
-    setFocussedEntryLatLng(undefined)
-    dispatch(setDate(date))
-  }
+    setFocussedEntryId(undefined);
+    setFocussedEntryLatLng(undefined);
+    dispatch(setDate(date));
+  };
 
   const polylineConfigs = useMemo(() => {
-    return makePolylineConfigs(entries, focussedEntryId, handleEntryClick)
-  }, [entries, focussedEntryId])
+    return makePolylineConfigs(entries, focussedEntryId, handleEntryClick);
+  }, [entries, focussedEntryId]);
 
   const infoWindowOptions = focussedEntry
     ? makeInfoWindowOptions(focussedEntry, focussedEntryLatLng)
-    : undefined
+    : undefined;
 
   // This fetches on every date change
   useEffect(() => {
-    fetchTimeline()(dispatch, getState)
-  }, [date, dispatch])
+    fetchTimeline()(dispatch, getState);
+  }, [date, dispatch]);
 
-  const dateIsToday = (date: string) => moment(date).isSame(moment(), 'day')
+  const dateIsToday = (date: string) => moment(date).isSame(moment(), 'day');
 
   return (
     <Wrapper>
@@ -149,7 +149,7 @@ const Home = () => {
         </LoaderWrapper>
       )}
     </Wrapper>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

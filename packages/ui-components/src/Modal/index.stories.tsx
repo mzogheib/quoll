@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
-import ReactModal from 'react-modal'
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import ReactModal from 'react-modal';
 
-import { Button } from '../Button'
+import { Button } from '../Button';
 
-import { Modal } from '.'
+import { Modal } from '.';
 
-export default { title: 'Modal' }
+export default { title: 'Modal' };
 
-Modal.setAppElement('#root')
+Modal.setAppElement('#root');
 
 const Wrapper = styled.div`
   width: 200px;
@@ -16,7 +16,7 @@ const Wrapper = styled.div`
   > ${Button} {
     margin: 10px 0;
   }
-`
+`;
 
 const DefaultModal = ({
   isOpen,
@@ -28,11 +28,11 @@ const DefaultModal = ({
     outside the modal or clicking on the button below.
     <Button onClick={onRequestClose}>Close modal</Button>
   </Modal>
-)
+);
 
 const NarrowModalWrapper = styled(Modal)`
   max-width: 200px;
-`
+`;
 
 const NarrowModal = ({
   isOpen,
@@ -48,11 +48,11 @@ const NarrowModal = ({
     clicking outside the modal or clicking on the button below.
     <Button onClick={onRequestClose}>Close modal</Button>
   </NarrowModalWrapper>
-)
+);
 
 export const Default = () => {
-  const [isDefaultModalOpen, setDefaultModalOpen] = useState(false)
-  const [isNarrowModalOpen, setNarrowModalOpen] = useState(false)
+  const [isDefaultModalOpen, setDefaultModalOpen] = useState(false);
+  const [isNarrowModalOpen, setNarrowModalOpen] = useState(false);
   return (
     <Wrapper>
       <Button onClick={() => setDefaultModalOpen(true)}>
@@ -70,5 +70,5 @@ export const Default = () => {
         onRequestClose={() => setNarrowModalOpen(false)}
       />
     </Wrapper>
-  )
-}
+  );
+};

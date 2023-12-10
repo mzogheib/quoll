@@ -1,10 +1,10 @@
-import { Action } from 'redux'
+import { Action } from 'redux';
 
-import { AppDispatch, RootState } from '..'
+import { AppDispatch, RootState } from '..';
 
-import userService from '../../services/user'
-import { User } from '../../services/user/types'
-import { setFeedConnected } from '../feeds'
+import userService from '../../services/user';
+import { User } from '../../services/user/types';
+import { setFeedConnected } from '../feeds';
 
 enum UserActionType {
   SetAuthenticating = 'SET_USER_AUTHENTICATING',
@@ -16,54 +16,54 @@ interface SetUserAuthenticatingAction
 
 export const setUserAuthenticating = (): SetUserAuthenticatingAction => ({
   type: UserActionType.SetAuthenticating,
-})
+});
 
 interface SetUserReadyAction extends Action<UserActionType.SetReady> {
-  user: User
+  user: User;
 }
 
 export const setUserReady = (user: User): SetUserReadyAction => ({
   type: UserActionType.SetReady,
   user,
-})
+});
 
 export const loginUser = (id: string) => (dispatch: AppDispatch) => {
-  dispatch(setUserAuthenticating())
+  dispatch(setUserAuthenticating());
   return userService.login(id).then((user) => {
     user.feeds.forEach(({ name, isConnected }) =>
       dispatch(setFeedConnected(name, isConnected))
-    )
+    );
 
-    dispatch(setUserReady(user))
-  })
-}
+    dispatch(setUserReady(user));
+  });
+};
 
 export const signupUser = () => (dispatch: AppDispatch) => {
-  dispatch(setUserAuthenticating())
+  dispatch(setUserAuthenticating());
   return userService.signup().then((user) => {
-    dispatch(setUserReady(user))
-  })
-}
+    dispatch(setUserReady(user));
+  });
+};
 
 export const selectIsAuthenticating = (state: RootState) =>
-  state.user.isAuthenticating
+  state.user.isAuthenticating;
 
-const defaultState = { isAuthenticating: true }
+const defaultState = { isAuthenticating: true };
 
-type UserAction = SetUserAuthenticatingAction | SetUserReadyAction
+type UserAction = SetUserAuthenticatingAction | SetUserReadyAction;
 
 const userReducer = (state = defaultState, action: UserAction) => {
   switch (action.type) {
     case UserActionType.SetAuthenticating:
-      return { ...state, isAuthenticating: true }
+      return { ...state, isAuthenticating: true };
 
     case UserActionType.SetReady:
-      const { user } = action
-      return { ...state, isAuthenticating: false, user }
+      const { user } = action;
+      return { ...state, isAuthenticating: false, user };
 
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default userReducer
+export default userReducer;

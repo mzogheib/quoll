@@ -1,4 +1,4 @@
-import { FeedName } from '../../services/feeds/types'
+import { FeedName } from '../../services/feeds/types';
 
 const logoMap = {
   [FeedName.Toshl]: {
@@ -17,20 +17,20 @@ const logoMap = {
     colorSrc: require('./images/moves-206x206.png'),
     grayscaleSrc: require('./images/moves-gray-206x206.png'),
   },
-}
+};
 
 interface Props {
-  name: FeedName
-  isGrayscale?: boolean
+  name: FeedName;
+  isGrayscale?: boolean;
 }
 
 const FeedLogo = ({ name, isGrayscale }: Props) => {
-  const { colorSrc, grayscaleSrc } = logoMap[name]
+  const { colorSrc, grayscaleSrc } = logoMap[name];
 
-  const src = isGrayscale ? grayscaleSrc : colorSrc
-  const alt = `${name} logo`
+  const src = isGrayscale ? grayscaleSrc : colorSrc;
+  const alt = `${name} logo`;
 
-  return <img src={src} alt={alt} />
-}
+  return <img src={src} alt={alt} />;
+};
 
-export default FeedLogo
+export default FeedLogo;

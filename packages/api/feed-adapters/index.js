@@ -3,4 +3,4 @@ module.exports = {
   strava: require('./strava'),
   toshl: require('./toshl'),
   uber: require('./uber'),
-}
+};

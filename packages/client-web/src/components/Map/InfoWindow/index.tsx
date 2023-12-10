@@ -1,29 +1,29 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 
 interface Props {
-  options: google.maps.InfoWindowOptions
-  map: google.maps.Map
+  options: google.maps.InfoWindowOptions;
+  map: google.maps.Map;
 }
 
 const InfoWindow = ({ options, map }: Props) => {
-  const [infoWindow, setInfoWindow] = useState<google.maps.InfoWindow>()
+  const [infoWindow, setInfoWindow] = useState<google.maps.InfoWindow>();
 
   useEffect(() => {
-    if (!infoWindow) setInfoWindow(new google.maps.InfoWindow())
+    if (!infoWindow) setInfoWindow(new google.maps.InfoWindow());
 
     return () => {
-      if (infoWindow) infoWindow.close()
-    }
-  }, [infoWindow])
+      if (infoWindow) infoWindow.close();
+    };
+  }, [infoWindow]);
 
   useEffect(() => {
     if (infoWindow) {
-      infoWindow.setOptions(options)
-      infoWindow.open(map)
+      infoWindow.setOptions(options);
+      infoWindow.open(map);
     }
-  }, [infoWindow, map, options])
+  }, [infoWindow, map, options]);
 
-  return null
-}
+  return null;
+};
 
-export default InfoWindow
+export default InfoWindow;

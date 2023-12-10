@@ -1,14 +1,14 @@
-import { Fragment } from 'react'
-import { css, createGlobalStyle, ThemeProvider } from 'styled-components'
-import { Provider } from 'react-redux'
-import { BrowserRouter } from 'react-router-dom'
-import { Modal, themes } from '@quoll/ui-components'
-import 'typeface-pacifico'
+import { Fragment } from 'react';
+import { css, createGlobalStyle, ThemeProvider } from 'styled-components';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import { Modal, themes } from '@quoll/ui-components';
+import 'typeface-pacifico';
 
-import App from '../App'
-import store from '../store'
+import App from '../App';
+import store from '../store';
 
-Modal.setAppElement('#root')
+Modal.setAppElement('#root');
 
 const GlobalStyle = createGlobalStyle(
   ({ theme: { font } }) => css`
@@ -27,7 +27,7 @@ const GlobalStyle = createGlobalStyle(
       box-sizing: border-box;
     }
   `
-)
+);
 
 const AppRoot = () => (
   <Provider store={store}>
@@ -40,6 +40,6 @@ const AppRoot = () => (
       </ThemeProvider>
     </BrowserRouter>
   </Provider>
-)
+);
 
-export default AppRoot
+export default AppRoot;

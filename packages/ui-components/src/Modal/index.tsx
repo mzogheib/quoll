@@ -1,6 +1,6 @@
-import React from 'react'
-import styled, { css } from 'styled-components'
-import ReactModal from 'react-modal'
+import React from 'react';
+import styled, { css } from 'styled-components';
+import ReactModal from 'react-modal';
 
 // Inspired by https://github.com/reactjs/react-modal/issues/603
 
@@ -11,9 +11,9 @@ const ReactModalAdapter = ({ className, ...props }: ReactModal.Props) => (
     bodyOpenClassName={`${className}__body-open`}
     {...props}
   />
-)
+);
 
-ReactModalAdapter.setAppElement = (id: string) => ReactModal.setAppElement(id)
+ReactModalAdapter.setAppElement = (id: string) => ReactModal.setAppElement(id);
 
 export const Modal = styled(ReactModalAdapter)(
   ({ theme: { colors } }) => css`
@@ -46,4 +46,4 @@ export const Modal = styled(ReactModalAdapter)(
       height: 100%;
     }
   `
-)
+);

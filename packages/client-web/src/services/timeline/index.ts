@@ -1,7 +1,7 @@
-import moment from 'moment'
+import moment from 'moment';
 
-import api from '../api'
-import { Entry, EntryType } from './types'
+import api from '../api';
+import { Entry, EntryType } from './types';
 
 const EntryConfig = {
   [EntryType.Bike]: { label: 'Bike', image: '🚲' },
@@ -20,10 +20,10 @@ const EntryConfig = {
   [EntryType.Walk]: { label: 'Walk', image: '🚶‍♂️' },
   [EntryType.Work]: { label: 'Work', image: '🏭' },
   [EntryType.Yoga]: { label: 'Yoga', image: '🧘‍♂️' },
-}
+};
 
 export const getEntryImage = (entry: Entry) =>
-  EntryConfig[entry.type] ? EntryConfig[entry.type].image : '🤠'
+  EntryConfig[entry.type] ? EntryConfig[entry.type].image : '🤠';
 
 const get = (date: string) =>
   api.get<Entry[]>({
@@ -32,10 +32,10 @@ const get = (date: string) =>
       from: moment(date).startOf('day').toISOString(),
       to: moment(date).endOf('day').toISOString(),
     },
-  })
+  });
 
 const timelineService = {
   get,
-}
+};
 
-export default timelineService
+export default timelineService;

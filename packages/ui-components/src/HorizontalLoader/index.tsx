@@ -1,10 +1,10 @@
-import React from 'react'
-import styled, { css } from 'styled-components'
+import React from 'react';
+import styled, { css } from 'styled-components';
 
 const Wrapper = styled.div`
   position: relative;
   height: 4px;
-`
+`;
 
 const Pill = styled.div(
   ({ theme: { colors } }) => css`
@@ -25,10 +25,10 @@ const Pill = styled.div(
       }
     }
   `
-)
+);
 
 export const HorizontalLoader = () => (
   <Wrapper>
     <Pill />
   </Wrapper>
-)
+);

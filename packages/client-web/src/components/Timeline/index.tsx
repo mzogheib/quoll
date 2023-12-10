@@ -1,16 +1,16 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
-import TimelineEntry from '../TimelineEntry'
-import { Entry } from '../../services/timeline/types'
+import TimelineEntry from '../TimelineEntry';
+import { Entry } from '../../services/timeline/types';
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-`
+`;
 
 interface Props {
-  entries: Entry[]
-  onEntryClick: (id: string) => void
+  entries: Entry[];
+  onEntryClick: (id: string) => void;
 }
 
 const Timeline = ({ entries, onEntryClick }: Props) => (
@@ -25,6 +25,6 @@ const Timeline = ({ entries, onEntryClick }: Props) => (
         />
       ))}
   </Wrapper>
-)
+);
 
-export default Timeline
+export default Timeline;

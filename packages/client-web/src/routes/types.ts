@@ -1,3 +1,3 @@
 export interface SettingsLocationState {
-  errorMessage?: string
+  errorMessage?: string;
 }

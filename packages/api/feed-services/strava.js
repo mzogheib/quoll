@@ -1,5 +1,5 @@
-const moment = require('moment')
-const apiStrava = require('../feed-apis').strava
+const moment = require('moment');
+const apiStrava = require('../feed-apis').strava;
 
 module.exports = {
   getOAuthUrl,
@@ -7,10 +7,10 @@ module.exports = {
   deauthorize,
   refreshAuth,
   getAthleteActivities,
-}
+};
 
 function getOAuthUrl() {
-  return apiStrava.oauth.url()
+  return apiStrava.oauth.url();
 }
 
 const transformAuthResponse = ({
@@ -21,24 +21,24 @@ const transformAuthResponse = ({
   expiry_time: calculateExpiryTime(expires_in),
   access_token,
   refresh_token,
-})
+});
 
 function authenticate(code) {
-  return apiStrava.oauth.token({ code }).then(transformAuthResponse)
+  return apiStrava.oauth.token({ code }).then(transformAuthResponse);
 }
 
 function refreshAuth({ refresh_token }) {
-  return apiStrava.oauth.refresh({ refresh_token }).then(transformAuthResponse)
+  return apiStrava.oauth.refresh({ refresh_token }).then(transformAuthResponse);
 }
 
 function deauthorize({ access_token }) {
-  return apiStrava.oauth.deauthorize({ access_token })
+  return apiStrava.oauth.deauthorize({ access_token });
 }
 
 function getAthleteActivities(from, to, token) {
-  const after = moment(from).unix() - 1
-  const before = moment(to).unix() + 1
-  const perPage = 20
+  const after = moment(from).unix() - 1;
+  const before = moment(to).unix() + 1;
+  const perPage = 20;
 
   return apiStrava.athlete.activities
     .list({ after, before, per_page: perPage, access_token: token })
@@ -47,14 +47,14 @@ function getAthleteActivities(from, to, token) {
         return apiStrava.activities.get({
           id: activity.id,
           access_token: token,
-        })
-      })
+        });
+      });
 
-      return Promise.all(promises)
-    })
+      return Promise.all(promises);
+    });
 }
 
 function calculateExpiryTime(expiresIn) {
   // Substract a small amount to account for lag
-  return Math.floor(Date.now() / 1000 + (expiresIn || 3600) - 300)
+  return Math.floor(Date.now() / 1000 + (expiresIn || 3600) - 300);
 }

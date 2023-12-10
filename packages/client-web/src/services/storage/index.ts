@@ -1,22 +1,22 @@
-const prefix = 'quoll'
+const prefix = 'quoll';
 
-const makeKey = (key: string) => `${prefix}-${key}`
+const makeKey = (key: string) => `${prefix}-${key}`;
 
 const get = (key: string) => {
-  const data = localStorage.getItem(makeKey(key))
+  const data = localStorage.getItem(makeKey(key));
 
-  if (data) return JSON.parse(data)
-}
+  if (data) return JSON.parse(data);
+};
 
 const set = (key: string, data: string) =>
-  localStorage.setItem(makeKey(key), JSON.stringify(data))
+  localStorage.setItem(makeKey(key), JSON.stringify(data));
 
-const remove = (key: string) => localStorage.removeItem(makeKey(key))
+const remove = (key: string) => localStorage.removeItem(makeKey(key));
 
 const storageService = {
   get,
   set,
   delete: remove,
-}
+};
 
-export default storageService
+export default storageService;

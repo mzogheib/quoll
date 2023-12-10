@@ -1,37 +1,37 @@
-import React from 'react'
-import styled, { StyledComponent } from 'styled-components'
+import React from 'react';
+import styled, { StyledComponent } from 'styled-components';
 
-import { Button, ButtonPlain, ButtonPrimary } from '.'
+import { Button, ButtonPlain, ButtonPrimary } from '.';
 
-export default { title: 'Button' }
+export default { title: 'Button' };
 
 const Row = styled.div`
   display: flex;
-`
+`;
 
 const Column = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
+`;
 
 const ButtonWrapper = styled.div`
   padding: 20px;
-`
+`;
 
 const handleClick = (buttonVariation?: string) =>
-  alert(`Clicked on ${buttonVariation}!`)
+  alert(`Clicked on ${buttonVariation}!`);
 
-const buttonVariations = [Button, ButtonPrimary, ButtonPlain]
-const buttonDisabledProp = [false, true]
+const buttonVariations = [Button, ButtonPrimary, ButtonPlain];
+const buttonDisabledProp = [false, true];
 
 type RenderButtonParams = {
-  variation: StyledComponent<'button', any>
-  disabled: boolean
-}
+  variation: StyledComponent<'button', any>;
+  disabled: boolean;
+};
 const renderButton = ({ variation, disabled }: RenderButtonParams) => {
-  const ButtonComponent = variation
-  const variationLabel = ButtonComponent.displayName
+  const ButtonComponent = variation;
+  const variationLabel = ButtonComponent.displayName;
   return (
     <ButtonWrapper key={`${variationLabel}-${disabled}`}>
       <ButtonComponent
@@ -41,8 +41,8 @@ const renderButton = ({ variation, disabled }: RenderButtonParams) => {
         {variationLabel}
       </ButtonComponent>
     </ButtonWrapper>
-  )
-}
+  );
+};
 
 export const Default = () => (
   <Row>
@@ -55,4 +55,4 @@ export const Default = () => (
       </Column>
     ))}
   </Row>
-)
+);

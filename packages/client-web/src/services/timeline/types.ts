@@ -1,4 +1,4 @@
-import { FeedName } from '../feeds/types'
+import { FeedName } from '../feeds/types';
 
 export enum EntryType {
   Bike = 'bike',
@@ -20,20 +20,20 @@ export enum EntryType {
 }
 
 interface EntryLocation {
-  latitude?: number
-  longitude?: number
+  latitude?: number;
+  longitude?: number;
 }
 
 export interface Entry {
-  id: string
-  feed: FeedName
-  type: EntryType
-  timeStart: number
-  timeEnd: number
-  title: string
-  valueLabel: string
-  description: string | null
-  locationStart: EntryLocation
-  locationEnd: EntryLocation
-  polyline: string | null
+  id: string;
+  feed: FeedName;
+  type: EntryType;
+  timeStart: number;
+  timeEnd: number;
+  title: string;
+  valueLabel: string;
+  description: string | null;
+  locationStart: EntryLocation;
+  locationEnd: EntryLocation;
+  polyline: string | null;
 }

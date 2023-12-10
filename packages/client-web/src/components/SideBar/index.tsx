@@ -1,8 +1,8 @@
-import { Fragment } from 'react'
-import styled, { css } from 'styled-components'
+import { Fragment } from 'react';
+import styled, { css } from 'styled-components';
 
-import SideBarVertical from './SideBarVertical'
-import SideBarHorizontal from './SideBarHorizontal'
+import SideBarVertical from './SideBarVertical';
+import SideBarHorizontal from './SideBarHorizontal';
 
 const WrapperV = styled.div(
   ({ theme: { media } }) => css`
@@ -10,7 +10,7 @@ const WrapperV = styled.div(
       display: none;
     `};
   `
-)
+);
 
 const WrapperH = styled.div(
   ({ theme: { media } }) => css`
@@ -18,10 +18,10 @@ const WrapperH = styled.div(
       display: none;
     `};
   `
-)
+);
 
 interface Props {
-  onHelpClick: () => void
+  onHelpClick: () => void;
 }
 
 const SideBar = ({ onHelpClick }: Props) => (
@@ -33,6 +33,6 @@ const SideBar = ({ onHelpClick }: Props) => (
       <SideBarHorizontal onHelpClick={onHelpClick} />
     </WrapperH>
   </Fragment>
-)
+);
 
-export default SideBar
+export default SideBar;

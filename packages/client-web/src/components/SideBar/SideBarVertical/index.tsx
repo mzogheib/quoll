@@ -1,9 +1,9 @@
-import styled, { css } from 'styled-components'
-import { NavLink } from 'react-router-dom'
-import { Icon, IconButton } from '@quoll/ui-components'
+import styled, { css } from 'styled-components';
+import { NavLink } from 'react-router-dom';
+import { Icon, IconButton } from '@quoll/ui-components';
 
-import { IconWrapper } from '../common'
-import { routesHash } from '../../../routes'
+import { IconWrapper } from '../common';
+import { routesHash } from '../../../routes';
 
 const Wrapper = styled.div(
   ({ theme: { colors } }) => css`
@@ -13,7 +13,7 @@ const Wrapper = styled.div(
     display: flex;
     flex-direction: column;
   `
-)
+);
 
 const Title = styled.div(
   ({ theme: { colors, font } }) => css`
@@ -26,17 +26,17 @@ const Title = styled.div(
     font-size: 26px;
     margin: 0 0 20px;
   `
-)
+);
 
 const NavGroup = styled.div`
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-`
+`;
 
 const NavPrimary = styled.nav`
   flex-grow: 1;
-`
+`;
 
 const itemStyle = css`
   min-height: 50px;
@@ -46,7 +46,7 @@ const itemStyle = css`
   text-decoration: none;
   margin: 20px 0;
   padding: 5px;
-`
+`;
 
 const StyledNavLink = styled(NavLink)(
   ({ theme: { colors } }) => css`
@@ -57,12 +57,12 @@ const StyledNavLink = styled(NavLink)(
       border-right: 5px solid ${colors.mediumAquamarine};
     }
   `
-)
+);
 
-const Help = styled.div(() => itemStyle)
+const Help = styled.div(() => itemStyle);
 
 interface Props {
-  onHelpClick: () => void
+  onHelpClick: () => void;
 }
 
 const SideBarVertical = ({ onHelpClick }: Props) => (
@@ -90,6 +90,6 @@ const SideBarVertical = ({ onHelpClick }: Props) => (
       </IconWrapper>
     </Help>
   </Wrapper>
-)
+);
 
-export default SideBarVertical
+export default SideBarVertical;

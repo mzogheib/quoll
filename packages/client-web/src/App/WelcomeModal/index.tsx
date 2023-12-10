@@ -1,12 +1,12 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 
-import { ButtonPrimary, IconButton, Modal } from '@quoll/ui-components'
+import { ButtonPrimary, IconButton, Modal } from '@quoll/ui-components';
 
 const Header = styled.div`
   display: flex;
   justify-content: flex-end;
   padding: 10px;
-`
+`;
 
 const Title = styled.div(
   ({ theme: { font } }) => css`
@@ -14,25 +14,25 @@ const Title = styled.div(
     font-family: ${`Pacifico, ${font.family}`};
     font-size: 48px;
   `
-)
+);
 
 const Message = styled.div`
   height: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 
 const Actions = styled.div`
   display: flex;
   justify-content: center;
   padding: 30px 0 30px;
-`
+`;
 
 interface Props {
-  isOpen: boolean
-  onCancel: () => void
-  onConnect: () => void
+  isOpen: boolean;
+  onCancel: () => void;
+  onConnect: () => void;
 }
 
 const WelcomeModal = ({ isOpen, onCancel, onConnect }: Props) => (
@@ -46,6 +46,6 @@ const WelcomeModal = ({ isOpen, onCancel, onConnect }: Props) => (
       <ButtonPrimary onClick={onConnect}>Connect Feeds</ButtonPrimary>
     </Actions>
   </Modal>
-)
+);
 
-export default WelcomeModal
+export default WelcomeModal;

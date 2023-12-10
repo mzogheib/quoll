@@ -2,5 +2,4 @@
 // properties that are not covered by .editorconfig
 module.exports = {
   trailingComma: 'es5',
-  semi: false,
-}
+};

@@ -1,15 +1,15 @@
-import styled, { css } from 'styled-components'
-import { ButtonPlain, HorizontalLoader } from '@quoll/ui-components'
-import { FeedName } from '../../services/feeds/types'
-import { FeedState } from '../../store/feeds'
-import FeedLogo from '../FeedLogo'
+import styled, { css } from 'styled-components';
+import { ButtonPlain, HorizontalLoader } from '@quoll/ui-components';
+import { FeedName } from '../../services/feeds/types';
+import { FeedState } from '../../store/feeds';
+import FeedLogo from '../FeedLogo';
 
 const Wrapper = styled.div(
   ({ theme: { colors } }) => css`
     background-color: ${colors.white};
     border-radius: 8px;
   `
-)
+);
 
 const Content = styled.div<{ isAuthenticating: boolean }>(
   ({ isAuthenticating }) => css`
@@ -19,7 +19,7 @@ const Content = styled.div<{ isAuthenticating: boolean }>(
       ? '16px 30px 20px 20px'
       : '20px 30px 20px 20px'};
   `
-)
+);
 
 const Logo = styled.div`
   width: 60px;
@@ -30,17 +30,17 @@ const Logo = styled.div`
   img {
     width: 100%;
   }
-`
+`;
 
 const Info = styled.div`
   flex-grow: 1;
   margin: 0 0 0 10px;
-`
+`;
 
 const Title = styled.div`
   font-size: 18px;
   font-weight: bold;
-`
+`;
 
 const Link = styled.a.attrs({
   target: '_blank',
@@ -52,7 +52,7 @@ const Link = styled.a.attrs({
     font-size: 14px;
     color: ${colors.royalBlue};
   `
-)
+);
 
 const feedConfig = {
   [FeedName.Toshl]: {
@@ -71,24 +71,24 @@ const feedConfig = {
     title: 'Moves',
     link: { url: 'https://www.moves-app.com', label: 'www.moves-app.com' },
   },
-}
+};
 
 interface Props {
-  feed: FeedState
-  onConnect: (name: FeedName) => void
-  onDisconnect: (name: FeedName) => void
+  feed: FeedState;
+  onConnect: (name: FeedName) => void;
+  onDisconnect: (name: FeedName) => void;
 }
 
 const FeedSettings = ({ feed, onConnect, onDisconnect }: Props) => {
-  const { isAuthenticating, isConnected, name } = feed
-  const { title, link } = feedConfig[name]
+  const { isAuthenticating, isConnected, name } = feed;
+  const { title, link } = feedConfig[name];
 
   const handleButtonClick = () => {
     if (isAuthenticating) {
-      return
+      return;
     }
-    return isConnected ? onDisconnect(name) : onConnect(name)
-  }
+    return isConnected ? onDisconnect(name) : onConnect(name);
+  };
 
   return (
     <Wrapper>
@@ -106,7 +106,7 @@ const FeedSettings = ({ feed, onConnect, onDisconnect }: Props) => {
         </ButtonPlain>
       </Content>
     </Wrapper>
-  )
-}
+  );
+};
 
-export default FeedSettings
+export default FeedSettings;

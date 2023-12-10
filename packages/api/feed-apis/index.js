@@ -32,16 +32,16 @@ const apis = [
       client_secret: process.env.UBER_CLIENT_SECRET,
     },
   },
-]
+];
 
 module.exports = apis.reduce((exp, api) => {
-  const lib = require(api.packageName)
+  const lib = require(api.packageName);
   const auth = {
     redirect_uri: process.env.CLIENT_OAUTH_URL,
     ...api.auth,
-  }
+  };
   return {
     [api.name]: new lib(auth),
     ...exp,
-  }
-}, {})
+  };
+}, {});

@@ -6,5 +6,5 @@ export enum FeedName {
 }
 
 export interface AuthenticatePayload {
-  code: string
+  code: string;
 }

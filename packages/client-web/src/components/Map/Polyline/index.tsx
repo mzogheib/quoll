@@ -1,31 +1,31 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 
 interface Props {
-  options: google.maps.PolylineOptions
-  map: google.maps.Map
-  onClick?: (event: google.maps.MapMouseEvent) => void
+  options: google.maps.PolylineOptions;
+  map: google.maps.Map;
+  onClick?: (event: google.maps.MapMouseEvent) => void;
 }
 
 const Polyline = ({ options, map, onClick }: Props) => {
-  const [polyline, setPolyline] = useState<google.maps.Polyline>()
+  const [polyline, setPolyline] = useState<google.maps.Polyline>();
 
   useEffect(() => {
-    if (!polyline) setPolyline(new google.maps.Polyline())
+    if (!polyline) setPolyline(new google.maps.Polyline());
 
     return () => {
-      if (polyline) polyline.setMap(null)
-    }
-  }, [polyline])
+      if (polyline) polyline.setMap(null);
+    };
+  }, [polyline]);
 
   useEffect(() => {
     if (polyline) {
-      polyline.setOptions(options)
-      if (onClick) polyline.addListener('click', onClick)
-      polyline.setMap(map)
+      polyline.setOptions(options);
+      if (onClick) polyline.addListener('click', onClick);
+      polyline.setMap(map);
     }
-  }, [polyline, options, map, onClick])
+  }, [polyline, options, map, onClick]);
 
-  return null
-}
+  return null;
+};
 
-export default Polyline
+export default Polyline;

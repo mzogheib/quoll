@@ -1,13 +1,13 @@
-import { useState } from 'react'
-import styled, { css } from 'styled-components'
-import moment from 'moment'
-import { Calendar, IconButton } from '@quoll/ui-components'
+import { useState } from 'react';
+import styled, { css } from 'styled-components';
+import moment from 'moment';
+import { Calendar, IconButton } from '@quoll/ui-components';
 
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-`
+`;
 
 const DateLabel = styled.div<{ disabled: boolean }>(
   ({ theme: { colors }, disabled }) => css`
@@ -16,7 +16,7 @@ const DateLabel = styled.div<{ disabled: boolean }>(
     cursor: ${disabled ? 'unset' : 'pointer'};
     color: ${disabled ? colors.grey : 'inherit'};
   `
-)
+);
 
 const CalendarWrapper = styled.div(
   ({ theme: { media } }) => css`
@@ -32,19 +32,19 @@ const CalendarWrapper = styled.div(
       top: -300px;
     `};
   `
-)
+);
 
 const StyledCalendar = styled(Calendar)`
   box-shadow: 2px 2px 12px;
-`
+`;
 
 interface Props {
-  date: string
-  maxDate: string
-  calendarDisabled: boolean
-  prevDisabled: boolean
-  nextDisabled: boolean
-  onDateChange: (date: string) => void
+  date: string;
+  maxDate: string;
+  calendarDisabled: boolean;
+  prevDisabled: boolean;
+  nextDisabled: boolean;
+  onDateChange: (date: string) => void;
 }
 
 const DatePicker = (props: Props) => {
@@ -55,32 +55,32 @@ const DatePicker = (props: Props) => {
     prevDisabled,
     nextDisabled,
     onDateChange,
-  } = props
+  } = props;
 
-  const [showCalendar, setShowCalendar] = useState(false)
+  const [showCalendar, setShowCalendar] = useState(false);
 
   const previous = () => {
-    const yesterday = moment(date).subtract(1, 'day')
-    handleDateChange(yesterday.toDate())
-  }
+    const yesterday = moment(date).subtract(1, 'day');
+    handleDateChange(yesterday.toDate());
+  };
 
   const next = () => {
-    const tomorrow = moment(date).add(1, 'day')
-    handleDateChange(tomorrow.toDate())
-  }
+    const tomorrow = moment(date).add(1, 'day');
+    handleDateChange(tomorrow.toDate());
+  };
 
   const handleDateChange = (newDate: Date | Date[]) => {
-    if (Array.isArray(newDate)) return
+    if (Array.isArray(newDate)) return;
 
-    onDateChange(moment(newDate).format('YYYY-MM-DD'))
-    setShowCalendar(false)
-  }
+    onDateChange(moment(newDate).format('YYYY-MM-DD'));
+    setShowCalendar(false);
+  };
 
   const handleDateClick = () => {
     if (!calendarDisabled) {
-      setShowCalendar(!showCalendar)
+      setShowCalendar(!showCalendar);
     }
-  }
+  };
 
   return (
     <Wrapper>
@@ -99,7 +99,7 @@ const DatePicker = (props: Props) => {
         </CalendarWrapper>
       )}
     </Wrapper>
-  )
-}
+  );
+};
 
-export default DatePicker
+export default DatePicker;

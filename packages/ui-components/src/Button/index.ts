@@ -1,14 +1,14 @@
-import styled, { css } from 'styled-components'
-import { lighten, darken } from 'polished'
+import styled, { css } from 'styled-components';
+import { lighten, darken } from 'polished';
 
 type MakeStyleParams = {
-  fontFamily: string
-  fontColor: string
-  backgroundColor: string
-  bold?: boolean
-  disabled?: boolean
-  noHitbox?: boolean
-}
+  fontFamily: string;
+  fontColor: string;
+  backgroundColor: string;
+  bold?: boolean;
+  disabled?: boolean;
+  noHitbox?: boolean;
+};
 const makeStyle = ({
   fontFamily,
   fontColor,
@@ -37,7 +37,7 @@ const makeStyle = ({
   &:hover {
     background-color: ${!disabled && darken(0.05, backgroundColor)};
   }
-`
+`;
 
 export const Button = styled.button(({ theme: { colors, font }, disabled }) =>
   makeStyle({
@@ -46,7 +46,7 @@ export const Button = styled.button(({ theme: { colors, font }, disabled }) =>
     backgroundColor: colors.whiteSmoke,
     disabled,
   })
-)
+);
 
 export const ButtonPrimary = styled.button(
   ({ theme: { colors, font }, disabled }) =>
@@ -56,7 +56,7 @@ export const ButtonPrimary = styled.button(
       backgroundColor: colors.mediumAquamarine,
       disabled,
     })
-)
+);
 
 export const ButtonPlain = styled.button(
   ({ theme: { colors, font }, disabled }) =>
@@ -68,4 +68,4 @@ export const ButtonPlain = styled.button(
       disabled,
       noHitbox: true,
     })
-)
+);

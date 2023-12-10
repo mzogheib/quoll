@@ -1,13 +1,13 @@
-import { Action } from 'redux'
+import { Action } from 'redux';
 
-import { AppDispatch, GetState, RootState } from '..'
+import { AppDispatch, GetState, RootState } from '..';
 
-import timelineService from '../../services/timeline'
-import { Entry } from '../../services/timeline/types'
+import timelineService from '../../services/timeline';
+import { Entry } from '../../services/timeline/types';
 
 export interface Timeline {
-  isFetching: boolean
-  entries: Entry[]
+  isFetching: boolean;
+  entries: Entry[];
 }
 
 enum TimelineActionType {
@@ -17,7 +17,7 @@ enum TimelineActionType {
 
 interface SetTimelineFetchingAction
   extends Action<TimelineActionType.SetFetching> {
-  value: boolean
+  value: boolean;
 }
 
 export const setTimelineFetching = (
@@ -25,44 +25,44 @@ export const setTimelineFetching = (
 ): SetTimelineFetchingAction => ({
   type: TimelineActionType.SetFetching,
   value,
-})
+});
 
 interface SetTimelineEntriesAction
   extends Action<TimelineActionType.SetEntries> {
-  entries: Entry[]
+  entries: Entry[];
 }
 
 export const setEntries = (entries: Entry[]): SetTimelineEntriesAction => ({
   type: TimelineActionType.SetEntries,
   entries,
-})
+});
 
 export const fetchTimeline =
   () => (dispatch: AppDispatch, getState: GetState) => {
-    const { date } = getState()
+    const { date } = getState();
 
-    dispatch(setTimelineFetching(true))
+    dispatch(setTimelineFetching(true));
     return timelineService
       .get(date)
       .then((entries) => dispatch(setEntries(entries)))
-      .catch(() => dispatch(setTimelineFetching(false)))
-  }
+      .catch(() => dispatch(setTimelineFetching(false)));
+  };
 
-export const selectTimeline = (state: RootState) => state.timeline
+export const selectTimeline = (state: RootState) => state.timeline;
 
-const defaultState: Timeline = { isFetching: true, entries: [] }
+const defaultState: Timeline = { isFetching: true, entries: [] };
 
-type TimelineAction = SetTimelineFetchingAction | SetTimelineEntriesAction
+type TimelineAction = SetTimelineFetchingAction | SetTimelineEntriesAction;
 
 const timeline = (state = defaultState, action: TimelineAction) => {
   switch (action.type) {
     case TimelineActionType.SetFetching:
-      return { ...state, isFetching: action.value }
+      return { ...state, isFetching: action.value };
     case TimelineActionType.SetEntries:
-      return { entries: action.entries, isFetching: false }
+      return { entries: action.entries, isFetching: false };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default timeline
+export default timeline;

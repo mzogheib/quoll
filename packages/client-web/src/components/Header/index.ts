@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 
 const Header = styled.div(
   ({ theme: { colors } }) => css`
@@ -11,6 +11,6 @@ const Header = styled.div(
     font-size: 20px;
     font-weight: 500;
   `
-)
+);
 
-export default Header
+export default Header;
