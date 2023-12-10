@@ -12,7 +12,7 @@ const Wrapper = styled.div(
     height: 100%;
     display: flex;
     flex-direction: column;
-  `
+  `,
 );
 
 const Title = styled.div(
@@ -25,7 +25,7 @@ const Title = styled.div(
     font-family: ${`Pacifico, ${font.family}`};
     font-size: 26px;
     margin: 0 0 20px;
-  `
+  `,
 );
 
 const NavGroup = styled.div`
@@ -56,7 +56,7 @@ const StyledNavLink = styled(NavLink)(
       padding: 5px 0 5px 5px;
       border-right: 5px solid ${colors.mediumAquamarine};
     }
-  `
+  `,
 );
 
 const Help = styled.div(() => itemStyle);

@@ -11,12 +11,12 @@ function get(from, to, user) {
     .map((feed) =>
       feedServices[feed.name]
         .getData(from, to, feed.auth.access_token)
-        .then(feedAdapters[feed.name].adapter)
+        .then(feedAdapters[feed.name].adapter),
     );
 
   return Promise.all(promises).then((arraysOfFeedItems) =>
     arraysOfFeedItems
       .reduce((prev, next) => prev.concat([].concat(...next)), []) // Flatten
-      .sort((a, b) => a.timeStart - b.timeStart)
+      .sort((a, b) => a.timeStart - b.timeStart),
   );
 }

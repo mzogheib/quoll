@@ -13,7 +13,7 @@ const Title = styled.div(
     text-align: center;
     font-family: ${`Pacifico, ${font.family}`};
     font-size: 48px;
-  `
+  `,
 );
 
 const Message = styled.div`

@@ -11,7 +11,7 @@ const Wrapper = styled.button(
     padding: 0;
     color: ${disabled ? colors.grey : "unset"};
     cursor: ${disabled ? "unset" : "pointer"};
-  `
+  `,
 );
 
 type IconProps = ComponentProps<typeof Icon>;

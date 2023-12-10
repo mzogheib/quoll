@@ -15,7 +15,7 @@ const Wrapper = styled.div(
       cursor: pointer;
       background-color: ${colors.gainsboro};
     }
-  `
+  `,
 );
 
 const Logo = styled.div`

@@ -80,13 +80,13 @@ function checkAuth(req, res, next) {
             onError({
               status: 404,
               message: `Unkown feed: ${feed.name}`,
-            })
+            }),
           );
         }
 
         return refreshAuth(feed.auth)
           .then((refreshedAuth) =>
-            ctrlUsers.setFeedAuth(userId, feed.name, refreshedAuth)
+            ctrlUsers.setFeedAuth(userId, feed.name, refreshedAuth),
           )
           .catch(onError);
       });

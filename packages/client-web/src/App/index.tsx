@@ -20,7 +20,7 @@ const Wrapper = styled.div(
     ${media.breakpointDown(media.md)`
       flex-direction: column-reverse;
     `};
-  `
+  `,
 );
 
 const Content = styled.div`

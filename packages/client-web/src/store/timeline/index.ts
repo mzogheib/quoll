@@ -21,7 +21,7 @@ interface SetTimelineFetchingAction
 }
 
 export const setTimelineFetching = (
-  value: boolean
+  value: boolean,
 ): SetTimelineFetchingAction => ({
   type: TimelineActionType.SetFetching,
   value,

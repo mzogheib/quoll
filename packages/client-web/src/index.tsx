@@ -11,7 +11,7 @@ if (container) {
   root.render(
     <React.StrictMode>
       <AppRoot />
-    </React.StrictMode>
+    </React.StrictMode>,
   );
 }
 

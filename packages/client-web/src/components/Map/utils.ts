@@ -23,7 +23,7 @@ export const makeBounds = ({
   if (polylinesOptions) {
     polylinesOptions.forEach(
       (polylineOptions) =>
-        polylineOptions.path?.forEach((position) => bounds.extend(position))
+        polylineOptions.path?.forEach((position) => bounds.extend(position)),
     );
   }
 

@@ -21,7 +21,7 @@ function adapter(segments) {
     switch (segment.type) {
       case "move":
         const activities = segment.activities.filter(
-          (activity) => Activities[activity.activity]
+          (activity) => Activities[activity.activity],
         );
         return activities.map((activity) => {
           const type = Activities[activity.activity].type;
@@ -32,7 +32,7 @@ function adapter(segments) {
           const encodedPath =
             activity.trackPoints.length &&
             polyline.encode(
-              activity.trackPoints.map((point) => [point.lat, point.lon])
+              activity.trackPoints.map((point) => [point.lat, point.lon]),
             );
           const startPoint =
             activity.trackPoints.length && activity.trackPoints[0];
@@ -68,7 +68,7 @@ function adapter(segments) {
         const timeStart = moment(segment.startTime).unix();
         const timeEnd = moment(segment.endTime).unix();
         const duration = formatDuration(
-          moment(segment.endTime).diff(moment(segment.startTime))
+          moment(segment.endTime).diff(moment(segment.startTime)),
         );
         const locationStart = {
           latitude: place.location.lat,

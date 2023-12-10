@@ -9,7 +9,7 @@ const WrapperV = styled.div(
     ${media.breakpointDown(media.md)`
       display: none;
     `};
-  `
+  `,
 );
 
 const WrapperH = styled.div(
@@ -17,7 +17,7 @@ const WrapperH = styled.div(
     ${media.breakpointUp(media.md)`
       display: none;
     `};
-  `
+  `,
 );
 
 interface Props {

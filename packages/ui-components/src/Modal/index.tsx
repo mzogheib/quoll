@@ -45,5 +45,5 @@ export const Modal = styled(ReactModalAdapter)(
       width: 100%;
       height: 100%;
     }
-  `
+  `,
 );

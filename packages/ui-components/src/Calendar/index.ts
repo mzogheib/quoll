@@ -11,5 +11,5 @@ export const Calendar = styled(ReactCalendar)(
         font-family: ${font.family};
       }
     }
-  `
+  `,
 );

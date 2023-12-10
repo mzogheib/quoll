@@ -20,7 +20,7 @@ app.set("port", process.env.PORT || 3001);
 app.use(
   bodyParser.urlencoded({
     extended: false,
-  })
+  }),
 );
 app.use(bodyParser.json());
 
@@ -51,7 +51,7 @@ const gracefulShutdown = () => {
   // if after
   setTimeout(() => {
     console.error(
-      "Could not close connections in time, forcefully shutting down."
+      "Could not close connections in time, forcefully shutting down.",
     );
     process.exit(0);
   }, 10 * 1000);

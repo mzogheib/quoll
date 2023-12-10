@@ -12,7 +12,7 @@ const mapElementColors = {
 export const makePolylineConfigs = (
   entries: Entry[],
   focussedItemId: string | undefined,
-  onClick: (id: string, latLng?: google.maps.LatLngLiteral) => void
+  onClick: (id: string, latLng?: google.maps.LatLngLiteral) => void,
 ): PolylineConfig[] =>
   entries
     .filter((entry) => entry.polyline)
@@ -34,7 +34,7 @@ export const makePolylineConfigs = (
 
 // TODO
 export const makeMarkerOptions = (
-  entries: Entry[]
+  entries: Entry[],
 ): google.maps.MarkerOptions[] =>
   entries
     .filter((entry) => !entry.polyline && entry.locationStart)
@@ -68,7 +68,7 @@ const makeInfoWindowPosition = ({
 
 export const makeInfoWindowOptions = (
   entry: Entry,
-  position?: google.maps.LatLngLiteral
+  position?: google.maps.LatLngLiteral,
 ): google.maps.InfoWindowOptions => {
   const { title, timeStart } = entry;
 

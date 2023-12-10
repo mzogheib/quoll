@@ -61,13 +61,13 @@ function getTags(accessToken) {
                 [tag.id]: tag.name,
                 ...prev,
               }),
-              {}
+              {},
             ),
           },
           (error, toshlUser) => {
             if (error) return reject(error);
             return resolve(toshlUser.tags);
-          }
+          },
         );
       });
     });

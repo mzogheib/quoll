@@ -45,7 +45,7 @@ export const Button = styled.button(({ theme: { colors, font }, disabled }) =>
     fontColor: font.color,
     backgroundColor: colors.whiteSmoke,
     disabled,
-  })
+  }),
 );
 
 export const ButtonPrimary = styled.button(
@@ -55,7 +55,7 @@ export const ButtonPrimary = styled.button(
       fontColor: font.color,
       backgroundColor: colors.mediumAquamarine,
       disabled,
-    })
+    }),
 );
 
 export const ButtonPlain = styled.button(
@@ -67,5 +67,5 @@ export const ButtonPlain = styled.button(
       bold: true,
       disabled,
       noHitbox: true,
-    })
+    }),
 );

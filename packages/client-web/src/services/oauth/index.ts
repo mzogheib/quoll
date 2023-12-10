@@ -59,7 +59,7 @@ declare global {
 export const requestAuth = (
   url: string,
   onSuccess: OnSuccess,
-  onError: OnError
+  onError: OnError,
 ) => {
   window.open(makeAuthUrl(url));
 

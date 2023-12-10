@@ -24,7 +24,7 @@ const Pill = styled.div(
         transform: translateX(-100%);
       }
     }
-  `
+  `,
 );
 
 export const HorizontalLoader = () => (

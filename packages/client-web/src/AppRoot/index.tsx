@@ -26,7 +26,7 @@ const GlobalStyle = createGlobalStyle(
     * {
       box-sizing: border-box;
     }
-  `
+  `,
 );
 
 const AppRoot = () => (

@@ -11,7 +11,7 @@ const Wrapper = styled.div(
     display: flex;
     justify-content: space-around;
     min-height: 55px;
-  `
+  `,
 );
 
 const itemStyle = css`
@@ -30,7 +30,7 @@ const StyledNavLink = styled(NavLink)(
       padding: 0 0 5px;
       border-top: 5px solid ${colors.mediumAquamarine};
     }
-  `
+  `,
 );
 
 const Help = styled.div(() => itemStyle);

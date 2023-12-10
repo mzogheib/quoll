@@ -15,7 +15,7 @@ const OAuth = () => {
   // Pass through any error messages to the settings page, which is where
   // the user would have started to get here
   onOAuthResponse(searchParamsObj, (errorMessage) =>
-    history.push("/settings", { errorMessage })
+    history.push("/settings", { errorMessage }),
   );
 
   return <div>Connecting...</div>;

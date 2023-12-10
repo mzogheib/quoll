@@ -23,7 +23,7 @@ const Wrapper = styled.div(
     ${media.breakpointDown(media.md)`
       flex-direction: column-reverse;
     `};
-  `
+  `,
 );
 
 const Left = styled.div(
@@ -40,7 +40,7 @@ const Left = styled.div(
       height: unset;
       flex: 2;
     `};
-  `
+  `,
 );
 
 const TimelineWrapper = styled.div`
@@ -65,7 +65,7 @@ const MapWrapper = styled.div(
     ${media.breakpointDown(media.md)`
       flex: 5;
     `};
-  `
+  `,
 );
 const MapBody = styled.div`
   position: absolute;

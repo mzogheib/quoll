@@ -10,7 +10,7 @@ const Header = styled.div(
     color: ${colors.mediumAquamarine};
     font-size: 20px;
     font-weight: 500;
-  `
+  `,
 );
 
 export default Header;

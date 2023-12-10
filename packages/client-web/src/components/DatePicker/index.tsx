@@ -15,7 +15,7 @@ const DateLabel = styled.div<{ disabled: boolean }>(
     text-align: center;
     cursor: ${disabled ? "unset" : "pointer"};
     color: ${disabled ? colors.grey : "inherit"};
-  `
+  `,
 );
 
 const CalendarWrapper = styled.div(
@@ -31,7 +31,7 @@ const CalendarWrapper = styled.div(
     ${media.breakpointDown(media.md)`
       top: -300px;
     `};
-  `
+  `,
 );
 
 const StyledCalendar = styled(Calendar)`

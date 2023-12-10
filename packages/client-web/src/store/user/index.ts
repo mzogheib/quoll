@@ -31,7 +31,7 @@ export const loginUser = (id: string) => (dispatch: AppDispatch) => {
   dispatch(setUserAuthenticating());
   return userService.login(id).then((user) => {
     user.feeds.forEach(({ name, isConnected }) =>
-      dispatch(setFeedConnected(name, isConnected))
+      dispatch(setFeedConnected(name, isConnected)),
     );
 
     dispatch(setUserReady(user));

@@ -23,7 +23,7 @@ export interface FeedState {
 
 export const setFeedConnected = (
   name: FeedName,
-  value: boolean
+  value: boolean,
 ): SetFeedConnectedAction => ({
   type: FeedActionType.SetConnected,
   name,
@@ -38,7 +38,7 @@ interface SetFeedAuthenticatingAction
 
 export const setFeedAuthenticating = (
   name: FeedName,
-  value: boolean
+  value: boolean,
 ): SetFeedAuthenticatingAction => ({
   type: FeedActionType.SetAuthenticating,
   name,

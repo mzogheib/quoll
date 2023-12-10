@@ -39,8 +39,8 @@ function getSegments(from, to, token) {
       .then((storyline) =>
         storyline.reduce(
           (prev, next) => prev.concat([].concat(...next.segments)),
-          []
-        )
+          [],
+        ),
       )
   );
 }

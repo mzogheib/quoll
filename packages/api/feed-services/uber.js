@@ -40,8 +40,9 @@ function getHistory(from, to, token) {
   return history(offset, limit, token, fromTime, initialResults).then(
     (results) =>
       results.filter(
-        (result) => result.start_time >= fromTime && result.start_time <= toTime
-      )
+        (result) =>
+          result.start_time >= fromTime && result.start_time <= toTime,
+      ),
   );
 }
 
@@ -52,7 +53,7 @@ function history(offset, limit, token, fromTime, results) {
       // Get the minTime from response.history
       const minTime = response.history.reduce(
         (min, ride) => (ride.start_time < min ? ride.start_time : min),
-        response.history[0].start_time
+        response.history[0].start_time,
       );
       const exhausted = response.count - response.limit - response.offset <= 0;
       if (fromTime > minTime || exhausted) {
@@ -65,7 +66,7 @@ function history(offset, limit, token, fromTime, results) {
           limit,
           token,
           fromTime,
-          results.concat(response.history)
+          results.concat(response.history),
         );
       }
     });

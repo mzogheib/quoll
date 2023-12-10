@@ -8,7 +8,7 @@ const Wrapper = styled.div(
   ({ theme: { colors } }) => css`
     background-color: ${colors.white};
     border-radius: 8px;
-  `
+  `,
 );
 
 const Content = styled.div<{ isAuthenticating: boolean }>(
@@ -18,7 +18,7 @@ const Content = styled.div<{ isAuthenticating: boolean }>(
     padding: ${isAuthenticating
       ? "16px 30px 20px 20px"
       : "20px 30px 20px 20px"};
-  `
+  `,
 );
 
 const Logo = styled.div`
@@ -51,7 +51,7 @@ const Link = styled.a.attrs({
     text-decoration: none;
     font-size: 14px;
     color: ${colors.royalBlue};
-  `
+  `,
 );
 
 const feedConfig = {

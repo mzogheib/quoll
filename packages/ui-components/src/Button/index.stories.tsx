@@ -50,7 +50,7 @@ export const Default = () => (
       <Column key={`${disabled}`}>
         <div>{disabled ? "Disabled" : "Enabled"}</div>
         {buttonVariations.map((variation) =>
-          renderButton({ variation, disabled })
+          renderButton({ variation, disabled }),
         )}
       </Column>
     ))}

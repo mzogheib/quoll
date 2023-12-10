@@ -6,5 +6,5 @@ const opts = { stdio: "inherit", shell: true };
 
 spawn(
   `npx chromatic --project-token=${CHROMATIC_PROJECT_TOKEN} --auto-accept-changes`,
-  opts
+  opts,
 );
