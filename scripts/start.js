@@ -1,14 +1,31 @@
 const child_process = require("child_process");
 
-module.exports = {
-  start: (pkg) => {
-    const args = ["start"];
-    const opts = {
-      stdio: "inherit",
-      cwd: `packages/${pkg}`,
-      shell: true,
-    };
+const PACKAGES = ["api", "client-mobile", "client-web", "ui-components"];
 
-    child_process.spawn("yarn", args, opts);
-  },
+console.log(process.argv);
+
+if (process.argv.length <= 2) {
+  console.error(
+    "Error: Must specify the package to run, e.g. 'node start.js api'.",
+  );
+  process.exit(1);
+}
+
+const pkg = process.argv[2];
+
+if (!PACKAGES.includes(pkg)) {
+  console.error(
+    `Error: Unknown package '${pkg}'. Known packages are [${PACKAGES.join(
+      ", ",
+    )}].`,
+  );
+  process.exit(1);
+}
+
+const opts = {
+  stdio: "inherit",
+  cwd: `packages/${pkg}`,
+  shell: true,
 };
+
+child_process.spawn("yarn", ["start"], opts);

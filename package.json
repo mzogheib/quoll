@@ -5,10 +5,7 @@
     "packages/*"
   ],
   "scripts": {
-    "api": "node scripts/start-api.js",
-    "client-web": "node scripts/start-client-web.js",
-    "client-mobile": "node scripts/start-client-mobile.js",
-    "ui-components": "node scripts/start-ui-components.js",
+    "start": "node scripts/start.js",
     "release": "cross-env HUSKY_BYPASS=true lerna publish --conventional-commits --yes",
     "clean-build": "lerna exec -- rm -rf ./build ./dist && rm -rf ./build ./dist",
     "clean-node-modules": "lerna exec -- rm -rf ./node_modules && rm -rf ./node_modules",
