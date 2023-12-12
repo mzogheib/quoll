@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.2.0...@quoll/client-mobile@0.3.0) (2023-12-12)
+
+### Features
+
+- **client-mobile:** strip back UI ([c99fa7c](https://github.com/mzogheib/quoll/commit/c99fa7c4ee0c8ec2ae7241d302f0eabfe13aca22))
+
 # 0.2.0 (2023-12-10)
 
 ### Features
