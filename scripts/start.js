@@ -2,8 +2,6 @@ const child_process = require("child_process");
 
 const PACKAGES = ["api", "client-mobile", "client-web", "ui-components"];
 
-console.log(process.argv);
-
 if (process.argv.length <= 2) {
   console.error(
     "Error: Must specify the package to run, e.g. 'node start.js api'.",
