@@ -87,6 +87,7 @@ const Home = () => {
   const date = useSelector(selectDate);
   const { isFetching, entries } = useSelector(selectTimeline);
 
+  const [isMapReady, setIsMapReady] = useState(false);
   const [focussedEntryId, setFocussedEntryId] = useState<string>();
   const [focussedEntryLatLng, setFocussedEntryLatLng] =
     useState<google.maps.LatLngLiteral>();
@@ -104,12 +105,18 @@ const Home = () => {
   };
 
   const polylineConfigs = useMemo(() => {
-    return makePolylineConfigs(entries, focussedEntryId, handleEntryClick);
-  }, [entries, focussedEntryId]);
+    if (!isMapReady) return [];
 
-  const infoWindowOptions = focussedEntry
-    ? makeInfoWindowOptions(focussedEntry, focussedEntryLatLng)
-    : undefined;
+    return makePolylineConfigs(entries, focussedEntryId, handleEntryClick);
+  }, [entries, focussedEntryId, isMapReady]);
+
+  const infoWindowOptions = useMemo(() => {
+    if (!isMapReady) return;
+
+    return focussedEntry
+      ? makeInfoWindowOptions(focussedEntry, focussedEntryLatLng)
+      : undefined;
+  }, [focussedEntry, focussedEntryLatLng, isMapReady]);
 
   // This fetches on every date change
   useEffect(() => {
@@ -140,6 +147,7 @@ const Home = () => {
           <Map
             polylineConfigs={polylineConfigs}
             infoWindowOptions={infoWindowOptions}
+            onMapLoaded={() => setIsMapReady(true)}
           />
         </MapBody>
       </MapWrapper>
