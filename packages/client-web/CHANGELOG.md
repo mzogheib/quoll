@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.5](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.5.4...@quoll/client-web@0.5.5) (2023-12-16)
+
+### Bug Fixes
+
+- **client-web:** create map props only when the google map api is ready ([f73cce5](https://github.com/mzogheib/quoll/commit/f73cce5d3c72435ef46404440e5daca0a8a8f66a))
+
 ## [0.5.4](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.5.3...@quoll/client-web@0.5.4) (2023-12-12)
 
 **Note:** Version bump only for package @quoll/client-web
