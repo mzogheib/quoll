@@ -4,16 +4,35 @@ import { createRoot } from "react-dom/client";
 import AppRoot from "./AppRoot";
 import reportWebVitals from "./reportWebVitals";
 
-const container = document.getElementById("root");
+async function initMocks() {
+  if (process.env.NODE_ENV !== "development") {
+    return;
+  }
 
-if (container) {
-  const root = createRoot(container);
-  root.render(
-    <React.StrictMode>
-      <AppRoot />
-    </React.StrictMode>,
-  );
+  const { worker } = await import("./__mocks__");
+
+  return worker.start();
 }
+
+const renderRoot = () => {
+  const container = document.getElementById("root");
+
+  if (container) {
+    const root = createRoot(container);
+    root.render(
+      <React.StrictMode>
+        <AppRoot />
+      </React.StrictMode>
+    );
+  }
+};
+
+const initApp = async () => {
+  await initMocks();
+  renderRoot();
+};
+
+initApp().then(() => {});
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
