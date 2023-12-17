@@ -1,0 +1,21 @@
+{
+  "_id": "123-abc",
+  "feeds": [
+    {
+      "name": "moves",
+      "isConnected": false
+    },
+    {
+      "name": "strava",
+      "isConnected": false
+    },
+    {
+      "name": "toshl",
+      "isConnected": false
+    },
+    {
+      "name": "uber",
+      "isConnected": false
+    }
+  ]
+}
