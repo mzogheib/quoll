@@ -3,16 +3,7 @@ import { createRoot } from "react-dom/client";
 
 import AppRoot from "./AppRoot";
 import reportWebVitals from "./reportWebVitals";
-
-async function initMocks() {
-  if (process.env.NODE_ENV !== "development") {
-    return;
-  }
-
-  const { worker } = await import("./__mocks__");
-
-  return worker.start();
-}
+import { initMocks } from "./__mocks__";
 
 const renderRoot = () => {
   const container = document.getElementById("root");
