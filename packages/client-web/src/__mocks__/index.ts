@@ -8,5 +8,5 @@ export const initMocks = async () => {
 
   const worker = setupWorker(...handlers);
 
-  return worker.start();
+  return await worker.start();
 };
