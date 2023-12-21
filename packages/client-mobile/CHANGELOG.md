@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.3.0...@quoll/client-mobile@0.4.0) (2023-12-21)
+
+### Features
+
+- **client-mobile:** add placeholder screens ([#150](https://github.com/mzogheib/quoll/issues/150)) ([a52ac69](https://github.com/mzogheib/quoll/commit/a52ac6944d1214615e57d87757b1c369f58c3851))
+
 # [0.3.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.2.0...@quoll/client-mobile@0.3.0) (2023-12-12)
 
 ### Features
