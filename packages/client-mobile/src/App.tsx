@@ -1,11 +1,17 @@
 import React from "react";
-import { SafeAreaView, Text } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { Stack } from "./screens";
+import HomeScreen from "./screens/Home";
+import SettingsScreen from "./screens/Settings";
 
 function App() {
   return (
-    <SafeAreaView>
-      <Text>Quoll mobile</Text>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Settings" component={SettingsScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
