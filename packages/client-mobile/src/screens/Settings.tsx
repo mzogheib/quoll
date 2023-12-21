@@ -1,12 +1,11 @@
 import React from "react";
-import { Button } from "react-native";
-import { ScreenProps } from "./types";
+import { Text, View } from "react-native";
 
-type Props = ScreenProps<"Settings">;
-
-const SettingsScreen = ({ navigation }: Props) => {
+const SettingsScreen = () => {
   return (
-    <Button title="Go to Home" onPress={() => navigation.navigate("Home")} />
+    <View>
+      <Text>Settings</Text>
+    </View>
   );
 };
 
