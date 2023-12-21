@@ -1,16 +1,17 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { Stack } from "./screens";
+
+import { Tab } from "./screens";
 import HomeScreen from "./screens/Home";
 import SettingsScreen from "./screens/Settings";
 
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Settings" component={SettingsScreen} />
-      </Stack.Navigator>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Settings" component={SettingsScreen} />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
