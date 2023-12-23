@@ -4,19 +4,21 @@ import { NavigationContainer } from "@react-navigation/native";
 
 import styles from "./styles";
 
-import { Tab } from "../screens";
+import { Navigator, Screen } from "../screens";
 import HomeScreen from "../screens/Home";
 import SettingsScreen from "../screens/Settings";
+import NavBar from "./NavBar";
 
 function App() {
   return (
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.content}>
         <NavigationContainer>
-          <Tab.Navigator screenOptions={{ headerShown: false }}>
-            <Tab.Screen name="Home" component={HomeScreen} />
-            <Tab.Screen name="Settings" component={SettingsScreen} />
-          </Tab.Navigator>
+          <Navigator>
+            <Screen name="Home" component={HomeScreen} />
+            <Screen name="Settings" component={SettingsScreen} />
+          </Navigator>
+          <NavBar />
         </NavigationContainer>
       </View>
     </SafeAreaView>
