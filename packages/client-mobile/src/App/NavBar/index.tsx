@@ -3,15 +3,17 @@ import { View, Button } from "react-native";
 
 import styles from "./styles";
 
-import { useNavigate } from "../../screens";
+import { useNavigate } from "../../screens/Screens";
+import { screens } from "../../screens/Screens";
 
 const NavBar = () => {
   const navigate = useNavigate();
 
   return (
     <View style={styles.wrapper}>
-      <Button onPress={() => navigate("Home")} title="Home" />
-      <Button onPress={() => navigate("Settings")} title="Settings" />
+      {screens.map(({ name, title }) => (
+        <Button key={name} onPress={() => navigate(name)} title={title} />
+      ))}
     </View>
   );
 };
