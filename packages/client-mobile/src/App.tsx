@@ -8,7 +8,7 @@ import SettingsScreen from "./screens/Settings";
 function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
+      <Tab.Navigator screenOptions={{ headerShown: false }}>
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Settings" component={SettingsScreen} />
       </Tab.Navigator>
