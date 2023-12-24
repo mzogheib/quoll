@@ -1,5 +1,4 @@
 import React from "react";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import styles from "./styles";
@@ -7,12 +6,6 @@ import styles from "./styles";
 import HomeScreen from "../Home";
 import SettingsScreen from "../Settings";
 import { ScreenParamsMap } from "../types";
-
-/**
- * @returns function to navigate to a specified screen.
- */
-export const useNavigate = () =>
-  useNavigation<NavigationProp<ScreenParamsMap>>().navigate;
 
 const TabNavigator = createBottomTabNavigator<ScreenParamsMap>();
 

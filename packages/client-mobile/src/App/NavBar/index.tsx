@@ -3,7 +3,7 @@ import { View, Button } from "react-native";
 
 import styles from "./styles";
 
-import { useNavigate } from "../../screens/Screens";
+import { useNavigate } from "../../screens/navigation";
 import { screenConfigMap } from "../../screens/config";
 
 const NavBar = () => {
