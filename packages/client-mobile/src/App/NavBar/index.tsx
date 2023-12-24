@@ -5,12 +5,17 @@ import styles from "./styles";
 
 import { useNavigate } from "../../screens/navigation";
 import { screenConfigMap } from "../../screens/config";
+import { useDimensions } from "../../dimensions";
 
 const NavBar = () => {
   const navigate = useNavigate();
 
+  const { isNarrow } = useDimensions();
+
+  const wrapperStyles = isNarrow ? styles.wrapperH : styles.wrapperV;
+
   return (
-    <View style={styles.wrapper}>
+    <View style={wrapperStyles}>
       <Button
         onPress={() => navigate("home")}
         title={screenConfigMap.home.title}

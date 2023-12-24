@@ -1,9 +1,12 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  wrapper: {
+  wrapperH: {
     flexDirection: "row",
     justifyContent: "space-around",
+  },
+  wrapperV: {
+    flexDirection: "column",
   },
 });
 
