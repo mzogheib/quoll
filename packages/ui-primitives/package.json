@@ -1,6 +1,6 @@
 {
   "name": "@quoll/ui-primitives",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "UI components for the web apps",
   "repository": "https://github.com/mzogheib/quoll",
   "author": "mzogheib",
@@ -11,7 +11,6 @@
     "build": "tsc",
     "type-check": "tsc --noEmit"
   },
-  "dependencies": {},
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.3",
     "typescript": "^5.3.3"

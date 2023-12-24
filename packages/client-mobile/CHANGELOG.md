@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.5.0...@quoll/client-mobile@0.6.0) (2023-12-24)
+
+### Features
+
+- **client-mobile:** add layout for wide screens ([#151](https://github.com/mzogheib/quoll/issues/151)) ([69e4e86](https://github.com/mzogheib/quoll/commit/69e4e869b100d54f136297a1d996527718a3061a))
+
 # [0.5.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.4.0...@quoll/client-mobile@0.5.0) (2023-12-24)
 
 ### Features
