@@ -1,0 +1,27 @@
+# Logs and debugging
+logs/
+*.log
+npm-debug.log*
+
+# Compiled output
+/dist/
+/out/
+
+# Dependency directories
+/node_modules/
+
+# Build files
+/.npmrc
+/.yarnrc
+/.yarn/*
+yarn-error.log
+
+# Test coverage output
+/coverage/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
