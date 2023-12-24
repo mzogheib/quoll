@@ -6,16 +6,23 @@ import styles from "./styles";
 
 import NavBar from "./NavBar";
 import Screens from "../screens/Screens";
+import { useIsNarrow } from "../dimensions";
 
 function App() {
+  const isNarrow = useIsNarrow();
+
+  const wrapperStyles = isNarrow
+    ? styles.navContentNarrow
+    : styles.navContentWide;
+
   return (
     <SafeAreaView style={styles.wrapper}>
-      <View style={styles.content}>
-        <NavigationContainer>
+      <NavigationContainer>
+        <View style={wrapperStyles}>
           <Screens />
           <NavBar />
-        </NavigationContainer>
-      </View>
+        </View>
+      </NavigationContainer>
     </SafeAreaView>
   );
 }
