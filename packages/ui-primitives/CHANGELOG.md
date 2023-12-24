@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/mzogheib/quoll/compare/@quoll/ui-primitives@0.1.1...@quoll/ui-primitives@0.2.0) (2023-12-24)
+
+### Features
+
+- **ui-primitives:** update readme ([b840d18](https://github.com/mzogheib/quoll/commit/b840d184ea1b313a629b9aceba13a4626edaa854))
+
 ## [0.1.1](https://github.com/mzogheib/quoll/compare/@quoll/ui-primitives@0.1.0...@quoll/ui-primitives@0.1.1) (2023-12-24)
 
 **Note:** Version bump only for package @quoll/ui-primitives
