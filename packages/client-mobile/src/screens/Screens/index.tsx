@@ -6,27 +6,7 @@ import styles from "./styles";
 
 import HomeScreen from "../Home";
 import SettingsScreen from "../Settings";
-
-type ScreenParamsMap = {
-  home: undefined;
-  settings: undefined;
-};
-
-type ScreenName = keyof ScreenParamsMap;
-
-type ScreenConfig = {
-  name: ScreenName;
-  title: string;
-  Component: () => React.JSX.Element;
-};
-
-/**
- * The array of config for all screens.
- */
-export const screens: ScreenConfig[] = [
-  { name: "home", title: "Home", Component: HomeScreen },
-  { name: "settings", title: "Settings", Component: SettingsScreen },
-];
+import { ScreenParamsMap } from "../types";
 
 /**
  * @returns function to navigate to a specified screen.
@@ -43,9 +23,8 @@ const Screens = () => (
   <TabNavigator.Navigator
     screenOptions={{ headerShown: false, tabBarStyle: styles.tabBar }}
   >
-    {screens.map(({ name, Component }) => (
-      <TabNavigator.Screen key="name" name={name} component={Component} />
-    ))}
+    <TabNavigator.Screen name="home" component={HomeScreen} />
+    <TabNavigator.Screen name="settings" component={SettingsScreen} />
   </TabNavigator.Navigator>
 );
 
