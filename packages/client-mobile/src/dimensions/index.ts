@@ -1,5 +1,6 @@
 import { useWindowDimensions } from "react-native";
 
+// TODO get these from ui-components or a new shared package
 const breakpoints = {
   xs: 0,
   sm: 544,
