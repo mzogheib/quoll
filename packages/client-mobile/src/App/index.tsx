@@ -6,10 +6,10 @@ import styles from "./styles";
 
 import NavBar from "./NavBar";
 import Screens from "../screens/Screens";
-import { useDimensions } from "../dimensions";
+import { useIsNarrow } from "../dimensions";
 
 function App() {
-  const { isNarrow } = useDimensions();
+  const isNarrow = useIsNarrow();
 
   const wrapperStyles = isNarrow
     ? styles.navContentNarrow

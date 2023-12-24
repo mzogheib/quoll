@@ -5,12 +5,12 @@ import styles from "./styles";
 
 import { useNavigate } from "../../screens/navigation";
 import { screenConfigMap } from "../../screens/config";
-import { useDimensions } from "../../dimensions";
+import { useIsNarrow } from "../../dimensions";
 
 const NavBar = () => {
   const navigate = useNavigate();
 
-  const { isNarrow } = useDimensions();
+  const isNarrow = useIsNarrow();
 
   const wrapperStyles = isNarrow ? styles.wrapperH : styles.wrapperV;
 
