@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.6.1...@quoll/client-mobile@0.7.0) (2023-12-25)
+
+### Bug Fixes
+
+- **client-mobile:** re add logo in wide view ([73a56a0](https://github.com/mzogheib/quoll/commit/73a56a0cea6875887b5152ae0b9d4c42df8d9a7b))
+
+### Features
+
+- **client-mobile:** add a help button placeholder ([be36782](https://github.com/mzogheib/quoll/commit/be367824d0ded96e494405d4d595f4d89ad9619b))
+- **client-mobile:** add header to screens ([#154](https://github.com/mzogheib/quoll/issues/154)) ([8681b0d](https://github.com/mzogheib/quoll/commit/8681b0dd3a9c7bb42cf82e76af8a4b475f22a56b))
+- **client-mobile:** add Quoll logo to NavBar ([2bec0d2](https://github.com/mzogheib/quoll/commit/2bec0d2eb3dc455e2839954610ee73ce5c98376f))
+- **client-mobile:** implement the welcome modal ([02d3ef9](https://github.com/mzogheib/quoll/commit/02d3ef9fa2afd7d6ac7df345463b0b582b8e1727))
+
 ## [0.6.1](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.6.0...@quoll/client-mobile@0.6.1) (2023-12-25)
 
 **Note:** Version bump only for package @quoll/client-mobile
