@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
   },
   wrapperV: {
     flexDirection: "column",
+    justifyContent: "space-between",
   },
 });
 

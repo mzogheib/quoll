@@ -1,10 +1,11 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Button } from "react-native";
 
 import styles from "./styles";
 
 import { useIsNarrow } from "../../dimensions";
 import GoToScreenButton from "./GoToScreenButton";
+import HelpButton from "./HelpButton";
 
 const NavBar = () => {
   const isNarrow = useIsNarrow();
@@ -12,6 +13,7 @@ const NavBar = () => {
   if (isNarrow) {
     return (
       <View style={styles.wrapperH}>
+        <HelpButton />
         <GoToScreenButton name="home" />
         <GoToScreenButton name="settings" />
       </View>
@@ -21,7 +23,10 @@ const NavBar = () => {
   return (
     <View style={styles.wrapperV}>
       <GoToScreenButton name="home" />
-      <GoToScreenButton name="settings" />
+      <View>
+        <GoToScreenButton name="settings" />
+        <HelpButton />
+      </View>
     </View>
   );
 };
