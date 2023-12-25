@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Button } from "react-native";
+import { View, Button, Text } from "react-native";
 
 import styles from "./styles";
 
@@ -16,6 +16,7 @@ const NavBar = () => {
 
   return (
     <View style={wrapperStyles}>
+      {!isNarrow && <Text>Quoll</Text>}
       <Button
         onPress={() => navigate("home")}
         title={screenConfigMap.home.title}
