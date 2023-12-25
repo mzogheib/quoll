@@ -22,7 +22,10 @@ const NavBar = () => {
 
   return (
     <View style={styles.wrapperV}>
-      <GoToScreenButton name="home" />
+      <View>
+        <Text>Quoll</Text>
+        <GoToScreenButton name="home" />
+      </View>
       <View>
         <GoToScreenButton name="settings" />
         <HelpButton />
