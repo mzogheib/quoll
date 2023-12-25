@@ -1,12 +1,14 @@
 import React from "react";
 import { Text, View } from "react-native";
+
 import { ScreenProps } from "./types";
+import ScreenTemplate from "./ScreenTemplate";
 
 const SettingsScreen = (_: ScreenProps<"settings">) => {
   return (
-    <View>
-      <Text>Settings</Text>
-    </View>
+    <ScreenTemplate>
+      <Text>Settings Screen</Text>
+    </ScreenTemplate>
   );
 };
 

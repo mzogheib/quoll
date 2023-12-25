@@ -1,12 +1,14 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Text } from "react-native";
+
 import { ScreenProps } from "./types";
+import ScreenTemplate from "./ScreenTemplate";
 
 const HomeScreen = (_: ScreenProps<"home">) => {
   return (
-    <View>
-      <Text>Home</Text>
-    </View>
+    <ScreenTemplate>
+      <Text>Home Screen</Text>
+    </ScreenTemplate>
   );
 };
 
