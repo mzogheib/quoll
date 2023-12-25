@@ -6,11 +6,11 @@ const styles = StyleSheet.create({
   },
   navContentNarrow: {
     flex: 1,
-    flexDirection: "column",
+    flexDirection: "column-reverse",
   },
   navContentWide: {
     flex: 1,
-    flexDirection: "row-reverse",
+    flexDirection: "row",
   },
 });
 

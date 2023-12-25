@@ -19,8 +19,8 @@ function App() {
     <SafeAreaView style={styles.wrapper}>
       <NavigationContainer>
         <View style={wrapperStyles}>
-          <Screens />
           <NavBar />
+          <Screens />
         </View>
       </NavigationContainer>
     </SafeAreaView>
