@@ -1,30 +1,27 @@
 import React from "react";
-import { View, Button, Text } from "react-native";
+import { View, Text } from "react-native";
 
 import styles from "./styles";
 
-import { useNavigate } from "../../screens/navigation";
-import { screenConfigMap } from "../../screens/config";
 import { useIsNarrow } from "../../dimensions";
+import GoToScreenButton from "./GoToScreenButton";
 
 const NavBar = () => {
-  const navigate = useNavigate();
-
   const isNarrow = useIsNarrow();
 
-  const wrapperStyles = isNarrow ? styles.wrapperH : styles.wrapperV;
+  if (isNarrow) {
+    return (
+      <View style={styles.wrapperH}>
+        <GoToScreenButton name="home" />
+        <GoToScreenButton name="settings" />
+      </View>
+    );
+  }
 
   return (
-    <View style={wrapperStyles}>
-      {!isNarrow && <Text>Quoll</Text>}
-      <Button
-        onPress={() => navigate("home")}
-        title={screenConfigMap.home.title}
-      />
-      <Button
-        onPress={() => navigate("settings")}
-        title={screenConfigMap.settings.title}
-      />
+    <View style={styles.wrapperV}>
+      <GoToScreenButton name="home" />
+      <GoToScreenButton name="settings" />
     </View>
   );
 };
