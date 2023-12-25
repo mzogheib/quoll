@@ -10,11 +10,6 @@
     "start": "react-native start",
     "test": "jest"
   },
-  "workspaces": {
-    "nohoist": [
-      "**"
-    ]
-  },
   "dependencies": {
     "@quoll/ui-primitives": "^0.3.0",
     "@react-navigation/bottom-tabs": "^6.5.11",
