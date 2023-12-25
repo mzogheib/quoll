@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Button } from "react-native";
+import { View, Text } from "react-native";
 
 import styles from "./styles";
 
@@ -7,13 +7,17 @@ import { useIsNarrow } from "../../dimensions";
 import GoToScreenButton from "./GoToScreenButton";
 import HelpButton from "./HelpButton";
 
-const NavBar = () => {
+type Props = {
+  onHelpClick: () => void;
+};
+
+const NavBar = ({ onHelpClick }: Props) => {
   const isNarrow = useIsNarrow();
 
   if (isNarrow) {
     return (
       <View style={styles.wrapperH}>
-        <HelpButton />
+        <HelpButton onPress={onHelpClick} />
         <GoToScreenButton name="home" />
         <GoToScreenButton name="settings" />
       </View>
@@ -28,7 +32,7 @@ const NavBar = () => {
       </View>
       <View>
         <GoToScreenButton name="settings" />
-        <HelpButton />
+        <HelpButton onPress={onHelpClick} />
       </View>
     </View>
   );
