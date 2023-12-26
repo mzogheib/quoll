@@ -1,7 +1,7 @@
 {
   "name": "@quoll/ui-primitives",
   "version": "0.3.1",
-  "description": "UI components for the web apps",
+  "description": "UI primitives for client side apps & packages",
   "repository": "https://github.com/mzogheib/quoll",
   "author": "mzogheib",
   "license": "MIT",
