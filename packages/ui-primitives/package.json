@@ -10,7 +10,8 @@
   "scripts": {
     "start": "tsc --watch",
     "build": "tsc",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "prepublishOnly": "yarn build"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.3",
