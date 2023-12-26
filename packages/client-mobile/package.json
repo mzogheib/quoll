@@ -1,6 +1,6 @@
 {
   "name": "@quoll/client-mobile",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -11,7 +11,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@quoll/ui-primitives": "^0.3.2",
+    "@quoll/ui-primitives": "^0.3.3",
     "@react-navigation/bottom-tabs": "^6.5.11",
     "@react-navigation/native": "^6.1.9",
     "react": "18.2.0",
