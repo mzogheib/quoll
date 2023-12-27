@@ -11,7 +11,7 @@ type Props = {
   onDateChange: (date: Date) => void;
 };
 
-export function DateBar({ isDisabled, onDateChange }: Props) {
+export const DateBar = ({ isDisabled, onDateChange }: Props) => {
   const now = new Date();
 
   const [date, setDate] = useState(now);
@@ -74,4 +74,4 @@ export function DateBar({ isDisabled, onDateChange }: Props) {
       </View>
     </View>
   );
-}
+};
