@@ -6743,6 +6743,11 @@
     "@types/qs" "*"
     "@types/serve-static" "*"
 
+"@types/geojson@^7946.0.10":
+  version "7946.0.13"
+  resolved "https://registry.yarnpkg.com/@types/geojson/-/geojson-7946.0.13.tgz#e6e77ea9ecf36564980a861e24e62a095988775e"
+  integrity sha512-bmrNrgKMOhM3WsafmbGmC+6dsF2Z308vLFsQ3a/bT8X8Sv5clVYpPars/UPq+sAaJP+5OoLAYgwbkS5QEJdLUQ==
+
 "@types/glob@*", "@types/glob@^7.1.1":
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/@types/glob/-/glob-7.2.0.tgz#bc1b5bf3aa92f25bd5dd39f35c57361bdce5b2eb"
@@ -21651,6 +21656,13 @@ react-modal@^3.10.1:
     prop-types "^15.7.2"
     react-lifecycles-compat "^3.0.0"
     warning "^4.0.3"
+
+react-native-maps@^1.8.4:
+  version "1.8.4"
+  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-1.8.4.tgz#41f91b597101ec58729c6cbb46dc347f52af68d5"
+  integrity sha512-PL7XX4dddTZB7PHDY0qslsJls5X2uRL2FSfUmiH4CFXIJ2l8QTaeWM6BLwnBswNUL6p4lQQeXuiATAhaRLHT6g==
+  dependencies:
+    "@types/geojson" "^7946.0.10"
 
 react-native-safe-area-context@^4.8.2:
   version "4.8.2"

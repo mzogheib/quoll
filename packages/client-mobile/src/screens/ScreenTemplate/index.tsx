@@ -2,8 +2,10 @@ import React, { ReactNode } from "react";
 import { Text, View } from "react-native";
 import { useRoute } from "@react-navigation/native";
 
-import { screenConfigMap } from "./config";
-import { ScreenName } from "./types";
+import styles from "./styles";
+
+import { screenConfigMap } from "../config";
+import { ScreenName } from "../types";
 
 type Props = {
   children: ReactNode;
@@ -15,7 +17,7 @@ const ScreenTemplate = ({ children }: Props) => {
   const currentScreen = screenConfigMap[route.name as ScreenName];
 
   return (
-    <View>
+    <View style={styles.wrapper}>
       <View>
         <Text>{currentScreen.title}</Text>
       </View>
