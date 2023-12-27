@@ -9,7 +9,12 @@ interface Props {
 }
 
 const WelcomeModal = ({ isOpen, onCancel, onConnect }: Props) => (
-  <Modal transparent={true} visible={isOpen} onRequestClose={onCancel}>
+  <Modal
+    transparent={true}
+    visible={isOpen}
+    onRequestClose={onCancel}
+    supportedOrientations={["portrait", "landscape"]}
+  >
     <View style={styles.wrapper}>
       <View style={styles.content}>
         <Text>Quoll</Text>
