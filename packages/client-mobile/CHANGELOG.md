@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.7.3...@quoll/client-mobile@0.8.0) (2023-12-27)
+
+### Bug Fixes
+
+- **client-mobile:** support modal in landscape ([e562a6e](https://github.com/mzogheib/quoll/commit/e562a6e84733d19e97b489625213e61380f61330))
+
+### Features
+
+- **client-mobile:** add map to home screen ([#157](https://github.com/mzogheib/quoll/issues/157)) ([fa1c12e](https://github.com/mzogheib/quoll/commit/fa1c12e9b30fba6d85e46280d493931db8ee16cd))
+
 ## [0.7.3](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.7.2...@quoll/client-mobile@0.7.3) (2023-12-27)
 
 **Note:** Version bump only for package @quoll/client-mobile
