@@ -11,7 +11,6 @@ const config = {};
 
 function getConfig(appDir) {
   return {
-    projectRoot: path.resolve(appDir),
     watchFolders: [
       path.resolve(appDir, "../../node_modules"),
       path.resolve(appDir, "../../node_modules/@quoll/ui-primitives"),
