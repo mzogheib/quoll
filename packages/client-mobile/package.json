@@ -10,8 +10,12 @@
     "start": "react-native start",
     "test": "jest"
   },
+  "workspaces": {
+    "nohoist": [
+      "**"
+    ]
+  },
   "dependencies": {
-    "@quoll/ui-primitives": "^0.3.3",
     "@react-navigation/bottom-tabs": "^6.5.11",
     "@react-navigation/native": "^6.1.9",
     "react": "18.2.0",
