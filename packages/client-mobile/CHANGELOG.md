@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.8.0...@quoll/client-mobile@0.9.0) (2023-12-27)
+
+### Features
+
+- **client-mobile:** add date picker ([#158](https://github.com/mzogheib/quoll/issues/158)) ([b530a02](https://github.com/mzogheib/quoll/commit/b530a02f8f82fe690dfb7dbd5f9074b18152e6b2))
+
 # [0.8.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.7.3...@quoll/client-mobile@0.8.0) (2023-12-27)
 
 ### Bug Fixes
