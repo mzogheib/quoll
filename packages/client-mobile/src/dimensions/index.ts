@@ -1,5 +1,13 @@
-import { breakpoints } from "@quoll/ui-primitives";
 import { useWindowDimensions } from "react-native";
+
+// TODO get these from ui-components or a new shared package
+const breakpoints = {
+  xs: 0,
+  sm: 544,
+  md: 768,
+  lg: 992,
+  xl: 1281,
+};
 
 /**
  * Returns whether the screen is narrow or not.
