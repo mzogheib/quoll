@@ -1,20 +1,32 @@
 import { StyleSheet } from "react-native";
+import { useResponsiveStyles } from "../../dimensions";
 
-const styles = StyleSheet.create({
-  wrapperNarrow: {
+const stylesDefault = StyleSheet.create({
+  wrapper: {
     flex: 1,
   },
-  wrapperWide: {
+  map: {
+    flex: 1,
+  },
+  sideBar: {},
+});
+
+const stylesWide = StyleSheet.create({
+  wrapper: {
     flexDirection: "row-reverse",
     flex: 1,
   },
   map: {
     flex: 1,
   },
-  sideBarNarrow: {},
-  sideBarWide: {
+  sideBar: {
     maxWidth: 300,
   },
 });
 
-export default styles;
+export const useStyles = () =>
+  useResponsiveStyles({
+    xs: stylesDefault,
+    sm: stylesDefault,
+    md: stylesWide,
+  });

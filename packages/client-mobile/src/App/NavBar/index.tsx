@@ -3,7 +3,7 @@ import { View, Text } from "react-native";
 
 import styles from "./styles";
 
-import { useIsNarrow } from "../../dimensions";
+import { useScreenWidth } from "../../dimensions";
 import GoToScreenButton from "./GoToScreenButton";
 import HelpButton from "./HelpButton";
 
@@ -12,28 +12,28 @@ type Props = {
 };
 
 const NavBar = ({ onHelpClick }: Props) => {
-  const isNarrow = useIsNarrow();
+  const screenWidth = useScreenWidth();
 
-  if (isNarrow) {
+  if (["md", "lg", "xl"].includes(screenWidth)) {
     return (
-      <View style={styles.wrapperH}>
-        <HelpButton onPress={onHelpClick} />
-        <GoToScreenButton name="home" />
-        <GoToScreenButton name="settings" />
+      <View style={styles.wrapperV}>
+        <View>
+          <Text>Quoll</Text>
+          <GoToScreenButton name="home" />
+        </View>
+        <View>
+          <GoToScreenButton name="settings" />
+          <HelpButton onPress={onHelpClick} />
+        </View>
       </View>
     );
   }
 
   return (
-    <View style={styles.wrapperV}>
-      <View>
-        <Text>Quoll</Text>
-        <GoToScreenButton name="home" />
-      </View>
-      <View>
-        <GoToScreenButton name="settings" />
-        <HelpButton onPress={onHelpClick} />
-      </View>
+    <View style={styles.wrapperH}>
+      <HelpButton onPress={onHelpClick} />
+      <GoToScreenButton name="home" />
+      <GoToScreenButton name="settings" />
     </View>
   );
 };
