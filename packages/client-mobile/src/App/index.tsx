@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { SafeAreaView, View } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
+import { View } from "react-native";
 
 import { useStyles } from "./styles";
 
@@ -22,19 +21,17 @@ function App() {
   const styles = useStyles();
 
   return (
-    <SafeAreaView style={styles.wrapper}>
-      <NavigationContainer>
-        <View style={styles.navContent}>
-          <NavBar onHelpClick={openWelcomeModal} />
-          <Screens />
-        </View>
-      </NavigationContainer>
+    <>
+      <View style={styles.navContent}>
+        <NavBar onHelpClick={openWelcomeModal} />
+        <Screens />
+      </View>
       <WelcomeModal
         isOpen={isWelcomeModalOpen}
         onCancel={closeWelcomeModal}
         onConnect={handleConnect}
       />
-    </SafeAreaView>
+    </>
   );
 }
 
