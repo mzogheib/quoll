@@ -1,28 +1,23 @@
 import React from "react";
 import { View } from "react-native";
 
-import styles from "./styles";
+import { useStyles } from "./styles";
 
 import { ScreenProps } from "../types";
 import ScreenTemplate from "../ScreenTemplate";
 import { Map } from "../../Map";
 import { DateBar } from "../../date-bar";
-import { useIsNarrow } from "../../dimensions";
 
 const HomeScreen = (_: ScreenProps<"home">) => {
-  const isNarrow = useIsNarrow();
-
-  const wrapperStyles = isNarrow ? styles.wrapperNarrow : styles.wrapperWide;
-  const mapStyles = styles.map;
-  const sideBarStyles = isNarrow ? styles.sideBarNarrow : styles.sideBarWide;
+  const styles = useStyles();
 
   return (
     <ScreenTemplate>
-      <View style={wrapperStyles}>
-        <View style={mapStyles}>
+      <View style={styles.wrapper}>
+        <View style={styles.map}>
           <Map />
         </View>
-        <View style={sideBarStyles}>
+        <View style={styles.sideBar}>
           <DateBar onDateChange={() => {}} />
         </View>
       </View>

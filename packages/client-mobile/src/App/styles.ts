@@ -1,17 +1,27 @@
 import { StyleSheet } from "react-native";
+import { useResponsiveStyles } from "../dimensions";
 
-const styles = StyleSheet.create({
+const stylesDefault = StyleSheet.create({
   wrapper: {
     flex: 1,
   },
-  navContentNarrow: {
+  navContent: {
     flex: 1,
     flexDirection: "column-reverse",
   },
-  navContentWide: {
+});
+
+const stylesWide = StyleSheet.create({
+  ...stylesDefault,
+  navContent: {
     flex: 1,
     flexDirection: "row",
   },
 });
 
-export default styles;
+export const useStyles = () =>
+  useResponsiveStyles({
+    xs: stylesDefault,
+    sm: stylesDefault,
+    md: stylesWide,
+  });

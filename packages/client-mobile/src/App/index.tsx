@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { SafeAreaView, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 
-import styles from "./styles";
+import { useStyles } from "./styles";
 
 import NavBar from "./NavBar";
 import Screens from "../screens/Screens";
-import { useIsNarrow } from "../dimensions";
 import WelcomeModal from "../WelcomeModal";
 
 function App() {
@@ -20,16 +19,12 @@ function App() {
     closeWelcomeModal();
   };
 
-  const isNarrow = useIsNarrow();
-
-  const wrapperStyles = isNarrow
-    ? styles.navContentNarrow
-    : styles.navContentWide;
+  const styles = useStyles();
 
   return (
     <SafeAreaView style={styles.wrapper}>
       <NavigationContainer>
-        <View style={wrapperStyles}>
+        <View style={styles.navContent}>
           <NavBar onHelpClick={openWelcomeModal} />
           <Screens />
         </View>
