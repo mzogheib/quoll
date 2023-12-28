@@ -1,40 +1,40 @@
 import React, { useState } from "react";
-import { SafeAreaView, View } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
+import { View } from "react-native";
 
 import { useStyles } from "./styles";
 
 import NavBar from "./NavBar";
 import Screens from "../screens/Screens";
 import WelcomeModal from "../WelcomeModal";
+import { useNavigate } from "../screens/navigation";
 
 function App() {
+  const navigate = useNavigate();
+
   const [isWelcomeModalOpen, setIsWelcomeModalOpen] = useState(false);
 
   const openWelcomeModal = () => setIsWelcomeModalOpen(true);
   const closeWelcomeModal = () => setIsWelcomeModalOpen(false);
 
   const handleConnect = () => {
-    console.log("connect");
     closeWelcomeModal();
+    navigate("settings");
   };
 
   const styles = useStyles();
 
   return (
-    <SafeAreaView style={styles.wrapper}>
-      <NavigationContainer>
-        <View style={styles.navContent}>
-          <NavBar onHelpClick={openWelcomeModal} />
-          <Screens />
-        </View>
-      </NavigationContainer>
+    <>
+      <View style={styles.navContent}>
+        <NavBar onHelpClick={openWelcomeModal} />
+        <Screens />
+      </View>
       <WelcomeModal
         isOpen={isWelcomeModalOpen}
         onCancel={closeWelcomeModal}
         onConnect={handleConnect}
       />
-    </SafeAreaView>
+    </>
   );
 }
 
