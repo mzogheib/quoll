@@ -6,16 +6,19 @@ import { useStyles } from "./styles";
 import NavBar from "./NavBar";
 import Screens from "../screens/Screens";
 import WelcomeModal from "../WelcomeModal";
+import { useNavigate } from "../screens/navigation";
 
 function App() {
+  const navigate = useNavigate();
+
   const [isWelcomeModalOpen, setIsWelcomeModalOpen] = useState(false);
 
   const openWelcomeModal = () => setIsWelcomeModalOpen(true);
   const closeWelcomeModal = () => setIsWelcomeModalOpen(false);
 
   const handleConnect = () => {
-    console.log("connect");
     closeWelcomeModal();
+    navigate("settings");
   };
 
   const styles = useStyles();
