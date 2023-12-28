@@ -41,8 +41,17 @@ export const useScreenWidth = (): ScreenWidthLabel => {
 type Style = ViewStyle | TextStyle | ImageStyle;
 
 /**
- * The styles object created by `StyleSheet.create`. We use a generic `Name` to
- * enforce the same key names when using `useResponsiveStyles`.
+ * The styles object created by `StyleSheet.create`. The generic `Name`
+ * represents the key name, e.g. `wrapper` in this object
+ *
+ * ```typescript
+ * wrapper: {
+ *   flex: 1,
+ * }
+ * ```
+ *
+ * Using a generic like this enforces the same key names be used in the param
+ * for `useResponsiveStyles`.
  */
 type Styles<Name extends string> = Record<Name, Style>;
 
@@ -91,6 +100,9 @@ type StylesMap<Name extends string> =
  *
  * Both `xs` and `sm` are required. If there are no distinct styles for `sm` or
  * above then this hook is not required. Just define static styles.
+ *
+ * If styles are not defined for the current screen width then the styles for
+ * the first matching width below is used.
  */
 export const useResponsiveStyles = <Name extends string>(
   stylesMap: StylesMap<Name>
