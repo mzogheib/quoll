@@ -19,3 +19,6 @@ d6904644dade189b9560620757be71d9e24afaaf
 # Bulk formatting to upgrade prettier to v3
 c7ce33546c40d43259c8b079cf10f0fbf989e635
 b610a38f2790c3598c3e1ccc18de7c00b5e3a2c9
+
+# Bulk formatting after fixing conflicting prettier setup
+0d571baef34befd9547dcdba3462a0995f49933f
