@@ -3,7 +3,7 @@ import Geolocation, {
   GeolocationError,
 } from "@react-native-community/geolocation";
 import { Coords } from "./types";
-import { PermissionsAndroid } from "react-native";
+import { Platform, PermissionsAndroid } from "react-native";
 
 const locationNotPermittedError = {
   ACTIVITY_NULL: 4,
@@ -15,6 +15,8 @@ const locationNotPermittedError = {
 };
 
 const requestPermission = async () => {
+  if (Platform.OS !== "android") return true;
+
   try {
     const granted = await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
