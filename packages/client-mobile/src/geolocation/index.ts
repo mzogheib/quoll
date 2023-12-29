@@ -15,7 +15,7 @@ export const useGeolocation = (initialCoords: Coords) => {
       },
       (error_) => {
         setError(error_);
-      }
+      },
     );
   }, []);
 
