@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.9.0...@quoll/client-mobile@0.10.0) (2023-12-29)
+
+### Features
+
+- **client-mobile:** go to settings from welcome modal ([#160](https://github.com/mzogheib/quoll/issues/160)) ([0bd9b65](https://github.com/mzogheib/quoll/commit/0bd9b65e10a81149d95d9e71b80010fb8bda66f2))
+- **client-mobile:** open map at user geolocation ([#161](https://github.com/mzogheib/quoll/issues/161)) ([069c546](https://github.com/mzogheib/quoll/commit/069c546edd3bf25d8c461b1a94fda83598423c8f))
+
 # [0.9.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.8.0...@quoll/client-mobile@0.9.0) (2023-12-27)
 
 ### Features
