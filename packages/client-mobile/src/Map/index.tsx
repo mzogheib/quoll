@@ -22,15 +22,14 @@ export const Map = () => {
   };
 
   useEffect(() => {
-    if (error) {
-      const didDeny = error.code === error.PERMISSION_DENIED;
+    if (error === undefined) return;
 
-      const message = didDeny
+    const message =
+      error === "PERMISSION_DENIED"
         ? "For the best experience, please allow access to your location."
         : "Could not get current location.";
 
-      Alert.alert(message);
-    }
+    Alert.alert(message);
   }, [error]);
 
   return <MapView style={styles.wrapper} region={region} showsUserLocation />;

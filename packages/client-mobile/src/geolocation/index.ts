@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
-import Geolocation, {
-  GeolocationError,
-} from "@react-native-community/geolocation";
+import Geolocation from "@react-native-community/geolocation";
 import { Coords } from "./types";
 import { Platform, PermissionsAndroid } from "react-native";
 
-const locationNotPermittedError = {
-  ACTIVITY_NULL: 4,
-  PERMISSION_DENIED: 1,
-  POSITION_UNAVAILABLE: 2,
-  TIMEOUT: 3,
-  code: 1,
-  message: "Location permission was not granted.",
+type GeolocationError =
+  | "PERMISSION_DENIED"
+  | "POSITION_UNAVAILABLE"
+  | "TIMEOUT"
+  | "ACTIVITY_NULL";
+
+const errors: Record<number, GeolocationError> = {
+  1: "PERMISSION_DENIED",
+  2: "POSITION_UNAVAILABLE",
+  3: "TIMEOUT",
+  4: "ACTIVITY_NULL",
 };
 
 const requestPermission = async () => {
@@ -44,7 +46,7 @@ export const useGeolocation = (initialCoords: Coords) => {
       const permissionGranted = await requestPermission();
 
       if (!permissionGranted) {
-        setError(locationNotPermittedError);
+        setError("PERMISSION_DENIED");
         return;
       }
 
@@ -52,8 +54,9 @@ export const useGeolocation = (initialCoords: Coords) => {
         (info) => {
           setCoords(info.coords);
         },
-        (error_) => {
-          setError(error_);
+        ({ code }) => {
+          const err = errors[code] ?? "PERMISSION_DENIED";
+          setError(err);
         },
       );
     };
