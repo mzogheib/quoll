@@ -1,20 +1,37 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import MapView from "react-native-maps";
+
 import styles from "./styles";
+import { Alert } from "react-native";
+import { useGeolocation } from "../geolocation";
 
 // Melbourne, Victoria
-const initialCoords = {
+const defaultCoords = {
   latitude: -37.8136,
   longitude: 144.9631,
 };
 
 export const Map = () => {
+  const { coords, error } = useGeolocation(defaultCoords);
+
   const region = {
-    latitude: initialCoords.latitude,
-    longitude: initialCoords.longitude,
+    latitude: coords.latitude,
+    longitude: coords.longitude,
     latitudeDelta: 0.1,
     longitudeDelta: 0.1,
   };
 
-  return <MapView style={styles.wrapper} initialRegion={region} />;
+  useEffect(() => {
+    if (error) {
+      const didDeny = error.code === error.PERMISSION_DENIED;
+
+      const message = didDeny
+        ? "For the best experience, please allow access to your location."
+        : "Could not get current location.";
+
+      Alert.alert(message);
+    }
+  }, [error]);
+
+  return <MapView style={styles.wrapper} region={region} showsUserLocation />;
 };
