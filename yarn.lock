@@ -4582,13 +4582,6 @@
     prompts "^2.4.2"
     semver "^7.5.2"
 
-"@react-native-community/datetimepicker@^7.6.2":
-  version "7.6.2"
-  resolved "https://registry.yarnpkg.com/@react-native-community/datetimepicker/-/datetimepicker-7.6.2.tgz#9bba92dc8088b54331f89bbf89134836f0d4c067"
-  integrity sha512-ogZnvCmNG/lGHhEQypqz/mPymiIWD5jv6uKczg/l/aWgiKs1RDPQH1abh+R0I26aKoXmgamJJPuXKeC5eRWtZg==
-  dependencies:
-    invariant "^2.2.4"
-
 "@react-native-community/geolocation@^3.1.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@react-native-community/geolocation/-/geolocation-3.1.0.tgz#573881e9536d55cc2af74762183fa7ba575b2553"
@@ -21543,6 +21536,11 @@ react-modal@^3.10.1:
     prop-types "^15.7.2"
     react-lifecycles-compat "^3.0.0"
     warning "^4.0.3"
+
+react-native-date-picker@^4.3.5:
+  version "4.3.5"
+  resolved "https://registry.yarnpkg.com/react-native-date-picker/-/react-native-date-picker-4.3.5.tgz#81797f874a34a75ce2ff57d2bb1519ee2ac062dd"
+  integrity sha512-jKOGCM2AUkRJb+tXYiwFHLfbB1Jh7OWXH4TxhLsuh7DWMXpWgUN3cGlFr3vl7G4wy45raAyPqmsZNSqmMr/98g==
 
 react-native-maps@^1.8.4:
   version "1.8.4"
