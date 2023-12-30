@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.1](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.11.0...@quoll/client-mobile@0.11.1) (2023-12-30)
+
+### Bug Fixes
+
+- **client-mobile:** change date picker to fix stuck modal in Android ([#164](https://github.com/mzogheib/quoll/issues/164)) ([73538da](https://github.com/mzogheib/quoll/commit/73538daa0cc9818bfb73fa3370e5a8e9f93a18b0))
+
 # [0.11.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.10.0...@quoll/client-mobile@0.11.0) (2023-12-30)
 
 ### Features
