@@ -27,6 +27,7 @@ export const DatePicker = ({ initialValue, onCancel, onDone }: Props) => {
       </View>
       <View style={styles.datePicker}>
         <RNDatePicker
+          textColor="black"
           date={value}
           mode="date"
           androidVariant="nativeAndroid"
