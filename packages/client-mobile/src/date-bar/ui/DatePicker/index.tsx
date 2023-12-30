@@ -1,6 +1,4 @@
-import DateTimePicker, {
-  DateTimePickerEvent,
-} from "@react-native-community/datetimepicker";
+import RNDatePicker from "react-native-date-picker";
 import { useState } from "react";
 import { Button, View } from "react-native";
 
@@ -17,12 +15,7 @@ export const DatePicker = ({ initialValue, onCancel, onDone }: Props) => {
 
   const [value, setValue] = useState(initialValue);
 
-  const handleChange = async (_: DateTimePickerEvent, newValue?: Date) => {
-    if (!newValue) {
-      onCancel();
-      return;
-    }
-
+  const handleChange = async (newValue: Date) => {
     setValue(newValue);
   };
 
@@ -32,12 +25,15 @@ export const DatePicker = ({ initialValue, onCancel, onDone }: Props) => {
         <Button title="Cancel" onPress={onCancel} />
         <Button title="Done" onPress={() => onDone(value)} />
       </View>
-      <DateTimePicker
-        value={value}
-        onChange={handleChange}
-        maximumDate={today}
-        display="spinner"
-      />
+      <View style={styles.datePicker}>
+        <RNDatePicker
+          date={value}
+          mode="date"
+          androidVariant="nativeAndroid"
+          onDateChange={handleChange}
+          maximumDate={today}
+        />
+      </View>
     </View>
   );
 };

@@ -5,6 +5,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
+  datePicker: {
+    alignItems: "center",
+    width: "100%",
+  },
 });
 
 export default styles;
