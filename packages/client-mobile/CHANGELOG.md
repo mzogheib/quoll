@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.11.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.10.0...@quoll/client-mobile@0.11.0) (2023-12-30)
+
+### Features
+
+- **client-mobile:** add Google Maps for Android ([#162](https://github.com/mzogheib/quoll/issues/162)) ([d97bf99](https://github.com/mzogheib/quoll/commit/d97bf99dfeb798fd4d6fe8978daa3d160f90ee37))
+- **client-mobile:** show user location for Android ([#163](https://github.com/mzogheib/quoll/issues/163)) ([8d0af9a](https://github.com/mzogheib/quoll/commit/8d0af9adf750e2b87d4355b7c21c1a6934e36393))
+
 # [0.10.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.9.0...@quoll/client-mobile@0.10.0) (2023-12-29)
 
 ### Features
