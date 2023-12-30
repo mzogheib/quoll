@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { View, Button } from "react-native";
+import DatePicker from "react-native-date-picker";
 
 import styles from "./styles";
 
 import { getEndOfDay, getOffsetDate } from "../../logic";
-import { DatePicker } from "../DatePicker";
 
 type Props = {
   isDisabled?: boolean;
@@ -47,13 +47,16 @@ export const DateBar = ({ isDisabled, onDateChange }: Props) => {
 
   return (
     <View>
-      {isDPVisible && (
-        <DatePicker
-          initialValue={date}
-          onDone={handleDateChange}
-          onCancel={hideDatePicker}
-        />
-      )}
+      <DatePicker
+        modal
+        open={isDPVisible}
+        onCancel={hideDatePicker}
+        onConfirm={handleDateChange}
+        date={date}
+        mode="date"
+        androidVariant="nativeAndroid"
+        maximumDate={now}
+      />
 
       <View style={styles.actions}>
         <Button
