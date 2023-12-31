@@ -4,17 +4,9 @@ import {
   ViewStyle,
   useWindowDimensions,
 } from "react-native";
+import { breakpoints } from "../ui-primitives";
 
 type ScreenWidthLabel = "xs" | "sm" | "md" | "lg" | "xl";
-
-// TODO get these from ui-components or a new shared package
-const breakpoints: Record<ScreenWidthLabel, number> = {
-  xs: 0,
-  sm: 544,
-  md: 768,
-  lg: 992,
-  xl: 1281,
-};
 
 /**
  * Watches the screen width and returns the label it most closely matches.
@@ -105,7 +97,7 @@ type StylesMap<Name extends string> =
  * the first matching width below is used.
  */
 export const useResponsiveStyles = <Name extends string>(
-  stylesMap: StylesMap<Name>,
+  stylesMap: StylesMap<Name>
 ) => {
   const screenWidth = useScreenWidth();
 
