@@ -5,6 +5,7 @@ import DatePicker from "react-native-date-picker";
 import styles from "./styles";
 
 import { getEndOfDay, getOffsetDate } from "../../logic";
+import TouchableIcon from "../../../TouchableIcon";
 
 type Props = {
   isDisabled?: boolean;
@@ -59,20 +60,20 @@ export const DateBar = ({ isDisabled, onDateChange }: Props) => {
       />
 
       <View style={styles.actions}>
-        <Button
-          title="Prev"
+        <TouchableIcon
           onPress={handlePrev}
           disabled={areButtonsDisabled}
+          name="navigate-before"
         />
         <Button
           title={formattedDate}
           onPress={showDatePicker}
           disabled={areButtonsDisabled}
         />
-        <Button
-          title="Next"
+        <TouchableIcon
           onPress={handleNext}
           disabled={areButtonsDisabled || isToday}
+          name="navigate-next"
         />
       </View>
     </View>

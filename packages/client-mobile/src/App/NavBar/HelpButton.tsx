@@ -1,12 +1,13 @@
 import React from "react";
-import { Button } from "react-native";
+
+import TouchableIcon from "../../TouchableIcon";
 
 type Props = {
   onPress: () => void;
 };
 
 const HelpButton = ({ onPress }: Props) => {
-  return <Button onPress={onPress} title="Help" />;
+  return <TouchableIcon onPress={onPress} name="help" />;
 };
 
 export default HelpButton;
