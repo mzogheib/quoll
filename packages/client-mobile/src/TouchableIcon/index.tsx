@@ -11,10 +11,16 @@ type IconProps = ComponentProps<typeof Icon>;
 
 type Props = OwnProps & IconProps;
 
-const TouchableIcon = ({ onPress, disabled, name, size = 30 }: Props) => {
+const TouchableIcon = ({
+  onPress,
+  disabled,
+  name,
+  size = 30,
+  ...iconProps
+}: Props) => {
   return (
     <TouchableHighlight onPress={onPress} disabled={disabled}>
-      <Icon name={name} size={size} />
+      <Icon name={name} size={size} {...iconProps} />
     </TouchableHighlight>
   );
 };
