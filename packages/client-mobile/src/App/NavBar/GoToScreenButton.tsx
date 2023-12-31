@@ -1,5 +1,6 @@
 import React from "react";
-import { Button } from "react-native";
+import { TouchableHighlight } from "react-native";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 import { useNavigate } from "../../screens/navigation";
 import { screenConfigMap } from "../../screens/config";
@@ -13,10 +14,9 @@ const GoToScreenButton = ({ name }: Props) => {
   const navigate = useNavigate();
 
   return (
-    <Button
-      onPress={() => navigate(name)}
-      title={screenConfigMap[name].title}
-    />
+    <TouchableHighlight onPress={() => navigate(name)}>
+      <Icon name={screenConfigMap[name].icon} size={30} />
+    </TouchableHighlight>
   );
 };
 
