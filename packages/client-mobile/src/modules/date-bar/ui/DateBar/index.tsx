@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { View, Button, TouchableHighlight, Text } from "react-native";
+import { View, TouchableHighlight, Text } from "react-native";
 import DatePicker from "react-native-date-picker";
+import TouchableIcon from "@components/TouchableIcon";
 
 import styles from "./styles";
 
 import { getEndOfDay, getOffsetDate } from "../../logic";
-import TouchableIcon from "../../../TouchableIcon";
 
 type Props = {
   isDisabled?: boolean;

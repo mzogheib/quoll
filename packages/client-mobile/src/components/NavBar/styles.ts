@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { colorPalette } from "../../ui-primitives";
+import { colorPalette } from "@ui-primitives";
 
 const styles = StyleSheet.create({
   // Horizontal layout

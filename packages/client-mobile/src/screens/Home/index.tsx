@@ -1,12 +1,12 @@
 import React from "react";
 import { View } from "react-native";
+import { Map } from "@modules/map/ui/Map";
+import { DateBar } from "@modules/date-bar/ui/DateBar";
 
 import { useStyles } from "./styles";
 
 import { ScreenProps } from "../types";
 import ScreenTemplate from "../ScreenTemplate";
-import { Map } from "../../Map";
-import { DateBar } from "../../date-bar";
 
 const HomeScreen = (_: ScreenProps<"home">) => {
   const styles = useStyles();

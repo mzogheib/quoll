@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { View } from "react-native";
+import NavBar from "@components/NavBar";
+import WelcomeModal from "@components/WelcomeModal";
+import Screens from "@screens/Screens";
+import { useNavigate } from "@screens/navigation";
 
 import { useStyles } from "./styles";
-
-import NavBar from "./NavBar";
-import Screens from "../screens/Screens";
-import WelcomeModal from "../WelcomeModal";
-import { useNavigate } from "../screens/navigation";
 
 function App() {
   const navigate = useNavigate();
