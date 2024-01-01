@@ -5,7 +5,7 @@ import DatePicker from "react-native-date-picker";
 import styles from "./styles";
 
 import { getEndOfDay, getOffsetDate } from "../../logic";
-import TouchableIcon from "../../../TouchableIcon";
+import TouchableIcon from "../../../../components/TouchableIcon";
 
 type Props = {
   isDisabled?: boolean;

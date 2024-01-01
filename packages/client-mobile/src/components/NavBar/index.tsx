@@ -3,7 +3,7 @@ import { View, Text } from "react-native";
 
 import styles from "./styles";
 
-import { useScreenWidth } from "../../dimensions";
+import { useScreenWidth } from "../../modules/dimensions";
 import GoToScreenButton from "./GoToScreenButton";
 import HelpButton from "./HelpButton";
 

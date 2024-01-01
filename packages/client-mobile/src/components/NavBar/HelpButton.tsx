@@ -1,6 +1,6 @@
 import React from "react";
 
-import TouchableIcon from "../../TouchableIcon";
+import TouchableIcon from "../TouchableIcon";
 import { colorPalette } from "../../ui-primitives";
 
 type Props = {

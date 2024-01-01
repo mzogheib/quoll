@@ -3,7 +3,7 @@ import React from "react";
 import { useNavigate } from "../../screens/navigation";
 import { screenConfigMap } from "../../screens/config";
 import { ScreenName } from "../../screens/types";
-import TouchableIcon from "../../TouchableIcon";
+import TouchableIcon from "../TouchableIcon";
 import { colorPalette } from "../../ui-primitives";
 
 type Props = {

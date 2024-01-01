@@ -3,9 +3,9 @@ import { View } from "react-native";
 
 import { useStyles } from "./styles";
 
-import NavBar from "./NavBar";
+import NavBar from "../components/NavBar";
 import Screens from "../screens/Screens";
-import WelcomeModal from "../WelcomeModal";
+import WelcomeModal from "../components/WelcomeModal";
 import { useNavigate } from "../screens/navigation";
 
 function App() {

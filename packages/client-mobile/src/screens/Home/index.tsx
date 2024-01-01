@@ -5,8 +5,8 @@ import { useStyles } from "./styles";
 
 import { ScreenProps } from "../types";
 import ScreenTemplate from "../ScreenTemplate";
-import { Map } from "../../Map";
-import { DateBar } from "../../date-bar";
+import { Map } from "../../components/Map";
+import { DateBar } from "../../modules/date-bar";
 
 const HomeScreen = (_: ScreenProps<"home">) => {
   const styles = useStyles();

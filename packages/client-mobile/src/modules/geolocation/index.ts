@@ -28,7 +28,7 @@ const requestPermission = async () => {
         buttonNeutral: "Ask Me Later",
         buttonNegative: "Cancel",
         buttonPositive: "Allow",
-      },
+      }
     );
 
     return granted === PermissionsAndroid.RESULTS.GRANTED;
@@ -57,7 +57,7 @@ export const useGeolocation = (initialCoords: Coords) => {
         ({ code }) => {
           const err = errors[code] ?? "PERMISSION_DENIED";
           setError(err);
-        },
+        }
       );
     };
 
