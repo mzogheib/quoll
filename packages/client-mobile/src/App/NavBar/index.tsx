@@ -18,12 +18,18 @@ const NavBar = ({ onHelpClick }: Props) => {
     return (
       <View style={styles.wrapperV}>
         <View>
-          <Text>Quoll</Text>
-          <GoToScreenButton name="home" />
+          <Text style={styles.logo}>Quoll</Text>
+          <View style={styles.itemV}>
+            <GoToScreenButton name="home" />
+          </View>
         </View>
         <View>
-          <GoToScreenButton name="settings" />
-          <HelpButton onPress={onHelpClick} />
+          <View style={styles.itemV}>
+            <GoToScreenButton name="settings" />
+          </View>
+          <View style={styles.itemV}>
+            <HelpButton onPress={onHelpClick} />
+          </View>
         </View>
       </View>
     );
@@ -31,9 +37,15 @@ const NavBar = ({ onHelpClick }: Props) => {
 
   return (
     <View style={styles.wrapperH}>
-      <HelpButton onPress={onHelpClick} />
-      <GoToScreenButton name="home" />
-      <GoToScreenButton name="settings" />
+      <View style={styles.itemH}>
+        <HelpButton onPress={onHelpClick} />
+      </View>
+      <View style={styles.itemH}>
+        <GoToScreenButton name="home" />
+      </View>
+      <View style={styles.itemH}>
+        <GoToScreenButton name="settings" />
+      </View>
     </View>
   );
 };
