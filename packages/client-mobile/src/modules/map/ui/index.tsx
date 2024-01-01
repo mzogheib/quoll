@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import MapView from "react-native-maps";
+import { Alert } from "react-native";
+import { useGeolocation } from "@modules/geolocation/logic";
 
 import styles from "./styles";
-import { Alert } from "react-native";
-import { useGeolocation } from "../../geolocation/logic";
 
 // Melbourne, Victoria
 const defaultCoords = {

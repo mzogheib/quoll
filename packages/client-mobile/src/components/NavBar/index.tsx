@@ -1,9 +1,9 @@
 import React from "react";
 import { View, Text } from "react-native";
+import { useScreenWidth } from "@modules/dimensions/logic";
 
 import styles from "./styles";
 
-import { useScreenWidth } from "../../modules/dimensions/logic";
 import GoToScreenButton from "./GoToScreenButton";
 import HelpButton from "./HelpButton";
 

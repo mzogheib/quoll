@@ -1,7 +1,6 @@
 import React from "react";
-
-import TouchableIcon from "../TouchableIcon";
-import { colorPalette } from "../../ui-primitives";
+import { colorPalette } from "@ui-primitives";
+import TouchableIcon from "@components/TouchableIcon";
 
 type Props = {
   onPress: () => void;
