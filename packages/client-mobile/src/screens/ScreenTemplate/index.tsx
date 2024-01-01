@@ -18,8 +18,8 @@ const ScreenTemplate = ({ children }: Props) => {
 
   return (
     <View style={styles.wrapper}>
-      <View>
-        <Text>{currentScreen.title}</Text>
+      <View style={styles.header}>
+        <Text style={styles.title}>{currentScreen.title}</Text>
       </View>
       {children}
     </View>
