@@ -5,7 +5,7 @@ import { useStyles } from "./styles";
 
 import { ScreenProps } from "../types";
 import ScreenTemplate from "../ScreenTemplate";
-import { Map } from "../../components/Map";
+import { Map } from "../../modules/map/ui";
 import { DateBar } from "../../modules/date-bar";
 
 const HomeScreen = (_: ScreenProps<"home">) => {

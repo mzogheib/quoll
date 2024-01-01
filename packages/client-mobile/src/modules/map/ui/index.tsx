@@ -3,7 +3,7 @@ import MapView from "react-native-maps";
 
 import styles from "./styles";
 import { Alert } from "react-native";
-import { useGeolocation } from "../../modules/geolocation";
+import { useGeolocation } from "../../geolocation";
 
 // Melbourne, Victoria
 const defaultCoords = {
