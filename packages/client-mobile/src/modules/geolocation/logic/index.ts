@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Geolocation from "@react-native-community/geolocation";
-import { Coords } from "./types";
+import { Coords } from "../types";
 import { Platform, PermissionsAndroid } from "react-native";
 
 type GeolocationError =
