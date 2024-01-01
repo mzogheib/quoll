@@ -18,6 +18,7 @@ const GoToScreenButton = ({ name }: Props) => {
       onPress={() => navigate(name)}
       name={screenConfigMap[name].icon}
       color={colorPalette.mediumAquamarine}
+      size={40}
     />
   );
 };

@@ -13,6 +13,7 @@ const HelpButton = ({ onPress }: Props) => {
       onPress={onPress}
       name="help"
       color={colorPalette.mediumAquamarine}
+      size={40}
     />
   );
 };
