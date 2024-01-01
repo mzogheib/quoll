@@ -1,7 +1,7 @@
 import React from "react";
 import { View } from "react-native";
-import { Map } from "@modules/map/ui";
-import { DateBar } from "@modules/date-bar";
+import { Map } from "@modules/map/ui/Map";
+import { DateBar } from "@modules/date-bar/ui/DateBar";
 
 import { useStyles } from "./styles";
 
