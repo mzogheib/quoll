@@ -5923,6 +5923,7 @@ __metadata:
     "@babel/core": "npm:^7.20.0"
     "@babel/preset-env": "npm:^7.20.0"
     "@babel/runtime": "npm:^7.20.0"
+    "@quoll/ui-primitives": "workspace:^"
     "@react-native-community/geolocation": "npm:^3.1.0"
     "@react-native/babel-preset": "npm:^0.73.18"
     "@react-native/eslint-config": "npm:^0.74.0"
@@ -6023,7 +6024,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@quoll/ui-primitives@npm:^0.3.3, @quoll/ui-primitives@workspace:packages/ui-primitives":
+"@quoll/ui-primitives@npm:^0.3.3, @quoll/ui-primitives@workspace:^, @quoll/ui-primitives@workspace:packages/ui-primitives":
   version: 0.0.0-use.local
   resolution: "@quoll/ui-primitives@workspace:packages/ui-primitives"
   dependencies:
