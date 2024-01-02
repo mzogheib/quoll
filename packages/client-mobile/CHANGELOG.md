@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.12.2](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.12.1...@quoll/client-mobile@0.12.2) (2024-01-02)
+
+**Note:** Version bump only for package @quoll/client-mobile
+
 ## [0.12.1](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.12.0...@quoll/client-mobile@0.12.1) (2024-01-02)
 
 ### Bug Fixes
