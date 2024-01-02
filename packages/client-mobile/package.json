@@ -11,6 +11,9 @@
     "start": "react-native start",
     "test": "jest"
   },
+  "installConfig": {
+    "hoistingLimits": "workspaces"
+  },
   "dependencies": {
     "@react-native-community/geolocation": "^3.1.0",
     "@react-navigation/bottom-tabs": "^6.5.11",
