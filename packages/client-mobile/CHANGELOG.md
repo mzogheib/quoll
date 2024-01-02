@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.12.1](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.12.0...@quoll/client-mobile@0.12.1) (2024-01-02)
+
+### Bug Fixes
+
+- **client-mobile:** add babel config for path aliases ([#168](https://github.com/mzogheib/quoll/issues/168)) ([a2df741](https://github.com/mzogheib/quoll/commit/a2df741e6fa8b7d6233da417e560ad6096fc8606))
+
 # [0.12.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.11.1...@quoll/client-mobile@0.12.0) (2024-01-01)
 
 ### Features
