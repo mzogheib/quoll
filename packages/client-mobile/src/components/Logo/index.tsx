@@ -8,7 +8,10 @@ import { Props } from "./types";
 const Logo = (props: Props) => {
   const styles = useStyles(props);
 
-  return <Text style={styles.wrapper}>Quoll</Text>;
+  // Add space either side because when this component is centered within a
+  // flex container (alignItems: "center") the ends get clipped.
+  // TODO: work out why
+  return <Text style={styles.wrapper}>&nbsp;Quoll&nbsp;</Text>;
 };
 
 export default Logo;
