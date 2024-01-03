@@ -1,5 +1,7 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
+import { colorPalette } from "@quoll/ui-primitives";
+import Logo from "@components/Logo";
 import { useScreenWidth } from "@modules/dimensions/logic";
 
 import styles from "./styles";
@@ -18,7 +20,10 @@ const NavBar = ({ onHelpClick }: Props) => {
     return (
       <View style={styles.wrapperV}>
         <View>
-          <Text style={styles.logo}>Quoll</Text>
+          <View style={styles.logo}>
+            <Logo size={26} color={colorPalette.mediumAquamarine} />
+          </View>
+
           <View style={styles.itemV}>
             <GoToScreenButton name="home" focusHighlightAxis="horizontal" />
           </View>

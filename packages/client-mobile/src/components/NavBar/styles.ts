@@ -26,11 +26,7 @@ const styles = StyleSheet.create({
     height: 50,
   },
   logo: {
-    color: colorPalette.mediumAquamarine,
-    textAlign: "center",
-    fontSize: 26,
-    marginBottom: 20,
-    fontFamily: "Pacifico-Regular",
+    alignItems: "center",
   },
 });
 
