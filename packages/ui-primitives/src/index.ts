@@ -18,6 +18,8 @@ export const colorPalette = {
   whiteSmoke: "#F2F2F2",
 };
 
+export type ColorName = keyof typeof colorPalette;
+
 /**
  * The breakpoints for various screen sizes.
  */
