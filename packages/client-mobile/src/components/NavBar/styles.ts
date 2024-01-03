@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 26,
     marginBottom: 20,
+    fontFamily: "Pacifico-Regular",
   },
 });
 

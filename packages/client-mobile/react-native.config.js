@@ -4,6 +4,7 @@ module.exports = {
       automaticPodsInstallation: true,
     },
   },
+  assets: ["./assets/fonts/"],
   dependencies: {
     "react-native-vector-icons": {
       platforms: {
