@@ -1,25 +1,27 @@
 import React, { ReactNode } from "react";
-import {
-  NavigationState,
-  NavigationContainer as RNNavigationContainer,
-} from "@react-navigation/native";
+import { NavigationContainer as RNNavigationContainer } from "@react-navigation/native";
+import { useNavigationStore } from "@screens/navigation";
+import { ScreenName } from "@screens/types";
 
 type Props = {
   children: ReactNode;
 };
 
 const NavigationContainer = ({ children }: Props) => {
-  const handleStateChange = (state: NavigationState | undefined) => {
-    if (!state) return;
-
-    const { index, routeNames } = state;
-    const currentRouteName = routeNames[index];
-
-    console.log("currentRouteName", currentRouteName);
-  };
+  const { setCurrentRouteName } = useNavigationStore();
 
   return (
-    <RNNavigationContainer onStateChange={handleStateChange}>
+    <RNNavigationContainer
+      onStateChange={(state) => {
+        if (!state) return;
+
+        const { index, routeNames } = state;
+        const currentRouteName = routeNames[index];
+
+        // TODO avoid the type cast
+        setCurrentRouteName(currentRouteName as ScreenName);
+      }}
+    >
       {children}
     </RNNavigationContainer>
   );
