@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/mzogheib/quoll/compare/@quoll/ui-primitives@0.3.3...@quoll/ui-primitives@0.4.0) (2024-01-03)
+
+### Features
+
+- **ui-primitives:** create a ColorName type ([2168df9](https://github.com/mzogheib/quoll/commit/2168df92b57a5d3a6c3934078915a188fa34e336))
+
 ## [0.3.3](https://github.com/mzogheib/quoll/compare/@quoll/ui-primitives@0.3.2...@quoll/ui-primitives@0.3.3) (2023-12-26)
 
 **Note:** Version bump only for package @quoll/ui-primitives
