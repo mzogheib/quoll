@@ -1,6 +1,12 @@
 const child_process = require("child_process");
 
-const PACKAGES = ["api", "client-mobile", "client-web", "ui-components"];
+const PACKAGES = [
+  "api",
+  "client-mobile",
+  "client-web",
+  "ui-components",
+  "ui-primitives",
+];
 
 if (process.argv.length <= 2) {
   console.error(
