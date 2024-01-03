@@ -9,6 +9,7 @@ type Props = {
 const HelpButton = ({ onPress }: Props) => {
   return (
     <TouchableIcon
+      hitBox="max"
       onPress={onPress}
       name="help"
       color={colorPalette.mediumAquamarine}

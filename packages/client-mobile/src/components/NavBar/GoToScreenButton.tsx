@@ -14,6 +14,7 @@ const GoToScreenButton = ({ name }: Props) => {
 
   return (
     <TouchableIcon
+      hitBox="max"
       onPress={() => navigate(name)}
       name={screenConfigMap[name].icon}
       color={colorPalette.mediumAquamarine}
