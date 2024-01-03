@@ -1,6 +1,6 @@
 import React from "react";
 import { SafeAreaView } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
+import NavigationContainer from "@screens/NavigationContainer";
 
 import styles from "./styles";
 

@@ -7,10 +7,10 @@ const styles = StyleSheet.create({
     backgroundColor: colorPalette.mineShaft,
     flexDirection: "row",
     justifyContent: "space-around",
+    height: 50,
   },
   itemH: {
-    minHeight: 50,
-    justifyContent: "center",
+    width: 60,
   },
 
   // Vertical layout
@@ -18,12 +18,12 @@ const styles = StyleSheet.create({
     backgroundColor: colorPalette.mineShaft,
     flexDirection: "column",
     justifyContent: "space-between",
-    minWidth: 100,
+    width: 100,
+    paddingVertical: 10,
   },
   itemV: {
     marginTop: 20,
-    minHeight: 50,
-    alignItems: "center",
+    height: 50,
   },
   logo: {
     color: colorPalette.mediumAquamarine,
