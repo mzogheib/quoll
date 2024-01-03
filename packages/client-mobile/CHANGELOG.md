@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.13.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.12.3...@quoll/client-mobile@0.13.0) (2024-01-03)
+
+### Features
+
+- **client-mobile:** add font to logo ([#174](https://github.com/mzogheib/quoll/issues/174)) ([a1b8a2e](https://github.com/mzogheib/quoll/commit/a1b8a2eb1a98654e0541e205d9d39c8e25e99412))
+- **client-mobile:** highlight focussed screen button ([#173](https://github.com/mzogheib/quoll/issues/173)) ([17f37dd](https://github.com/mzogheib/quoll/commit/17f37dde6f8aa6889575861be96b8b18d6d65661))
+
 ## [0.12.3](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.12.2...@quoll/client-mobile@0.12.3) (2024-01-03)
 
 **Note:** Version bump only for package @quoll/client-mobile
