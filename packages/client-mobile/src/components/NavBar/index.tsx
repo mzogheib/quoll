@@ -1,6 +1,5 @@
 import React from "react";
 import { View } from "react-native";
-import { colorPalette } from "@quoll/ui-primitives";
 import Logo from "@components/Logo";
 import { useScreenWidth } from "@modules/dimensions/logic";
 
@@ -21,7 +20,7 @@ const NavBar = ({ onHelpClick }: Props) => {
       <View style={styles.wrapperV}>
         <View>
           <View style={styles.logo}>
-            <Logo size={26} color={colorPalette.mediumAquamarine} />
+            <Logo size={26} color="mediumAquamarine" />
           </View>
 
           <View style={styles.itemV}>
