@@ -1,5 +1,5 @@
 import React from "react";
-import { colorPalette } from "@ui-primitives";
+import { colorPalette } from "@quoll/ui-primitives";
 import TouchableIcon from "@components/TouchableIcon";
 import { useNavigate } from "@screens/navigation";
 import { screenConfigMap } from "@screens/config";

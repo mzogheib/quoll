@@ -8,7 +8,6 @@ module.exports = {
           "@components": "./src/components",
           "@modules": "./src/modules",
           "@screens": "./src/screens",
-          "@ui-primitives": "./src/ui-primitives",
         },
       },
     ],

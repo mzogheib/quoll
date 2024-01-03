@@ -4,7 +4,7 @@ import {
   ViewStyle,
   useWindowDimensions,
 } from "react-native";
-import { breakpoints } from "@ui-primitives";
+import { breakpoints } from "@quoll/ui-primitives";
 
 type ScreenWidthLabel = "xs" | "sm" | "md" | "lg" | "xl";
 
