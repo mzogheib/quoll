@@ -20,15 +20,12 @@ const NavBar = ({ onHelpClick }: Props) => {
         <View>
           <Text style={styles.logo}>Quoll</Text>
           <View style={styles.itemV}>
-            <GoToScreenButton name="home" focusHighlightPosition="inline-end" />
+            <GoToScreenButton name="home" focusHighlightAxis="horizontal" />
           </View>
         </View>
         <View>
           <View style={styles.itemV}>
-            <GoToScreenButton
-              name="settings"
-              focusHighlightPosition="inline-end"
-            />
+            <GoToScreenButton name="settings" focusHighlightAxis="horizontal" />
           </View>
           <View style={styles.itemV}>
             <HelpButton onPress={onHelpClick} />

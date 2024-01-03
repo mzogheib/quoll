@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { colorPalette } from "@quoll/ui-primitives";
 import TouchableIcon from "@components/TouchableIcon";
 import { useNavigate, useNavigationStore } from "@screens/navigation";
@@ -10,17 +10,13 @@ import styles from "./styles";
 
 type Props = {
   name: ScreenName;
-  focusHighlightPosition?: "block-start" | "inline-end";
+  focusHighlightAxis?: "vertical" | "horizontal";
 };
 
-const GoToScreenButton = ({
-  name,
-  focusHighlightPosition = "block-start",
-}: Props) => {
+const GoToScreenButton = ({ name, focusHighlightAxis = "vertical" }: Props) => {
   const navigate = useNavigate();
   const { currentRouteName } = useNavigationStore();
 
-  const isBlockStart = focusHighlightPosition === "block-start";
   const isFocussed = name === currentRouteName;
 
   const icon = (
@@ -35,9 +31,10 @@ const GoToScreenButton = ({
   );
 
   if (isFocussed) {
-    const wrapperStyle = isBlockStart
-      ? styles.wrapperBlockStartFocussed
-      : styles.wrapperInlineEndFocussed;
+    const wrapperStyle =
+      focusHighlightAxis === "vertical"
+        ? styles.wrapperVFocussed
+        : styles.wrapperHFocussed;
 
     return <View style={wrapperStyle}>{icon}</View>;
   }

@@ -4,16 +4,16 @@ import { colorPalette } from "@quoll/ui-primitives";
 const focusHighlightThickness = 5;
 
 const styles = StyleSheet.create({
-  wrapperBlockStartFocussed: {
+  wrapperVFocussed: {
     paddingBottom: focusHighlightThickness,
     borderTopWidth: focusHighlightThickness,
     borderTopColor: colorPalette.mediumAquamarine,
   },
 
-  wrapperInlineEndFocussed: {
-    marginLeft: focusHighlightThickness,
-    borderRightWidth: focusHighlightThickness,
-    borderRightColor: colorPalette.mediumAquamarine,
+  wrapperHFocussed: {
+    marginStart: focusHighlightThickness,
+    borderEndWidth: focusHighlightThickness,
+    borderEndColor: colorPalette.mediumAquamarine,
   },
 });
 
