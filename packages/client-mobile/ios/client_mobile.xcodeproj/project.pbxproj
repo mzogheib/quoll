@@ -46,7 +46,7 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = client_mobile/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-client_mobile-client_mobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-client_mobile-client_mobileTests.release.xcconfig"; path = "Target Support Files/Pods-client_mobile-client_mobileTests/Pods-client_mobile-client_mobileTests.release.xcconfig"; sourceTree = "<group>"; };
 		8DBFCBAD2B413CA200053547 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
-		ACDAEC98238241859E953316 /* Pacifico-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Pacifico-Regular.ttf"; path = "../assets/fonts/Pacifico-Regular.ttf"; sourceTree = "<group>"; };
+		ACDAEC98238241859E953316 /* Pacifico-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pacifico-Regular.ttf"; path = "../assets/fonts/Pacifico-Regular.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -113,10 +113,10 @@
 		3CC87A2C1F89434CBEC8D5A2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8DBFCBAD2B413CA200053547 /* MaterialIcons.ttf */,
 				ACDAEC98238241859E953316 /* Pacifico-Regular.ttf */,
 			);
 			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -129,7 +129,6 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				8DBFCBAD2B413CA200053547 /* MaterialIcons.ttf */,
 				13B07FAE1A68108700A75B9A /* client_mobile */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* client_mobileTests */,
