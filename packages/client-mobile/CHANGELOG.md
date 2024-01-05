@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.15.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.14.0...@quoll/client-mobile@0.15.0) (2024-01-05)
+
+### Features
+
+- **client-mobile:** add app icons ([#180](https://github.com/mzogheib/quoll/issues/180)) ([efa8df8](https://github.com/mzogheib/quoll/commit/efa8df84aea76bea74fa7c6779b985215e075083))
+
 # [0.14.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.13.1...@quoll/client-mobile@0.14.0) (2024-01-03)
 
 ### Features
