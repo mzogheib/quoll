@@ -16,20 +16,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="logo_500x250" translatesAutoresizingMaskIntoConstraints="NO" id="GlO-EX-UrF">
-                                <rect key="frame" x="0.0" y="243" width="414" height="250"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="logo_transparent_1600x800" translatesAutoresizingMaskIntoConstraints="NO" id="Cwv-zt-DYp">
+                                <rect key="frame" x="57" y="293" width="300" height="150"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="250" id="7hR-B6-g0P"/>
+                                    <constraint firstAttribute="width" secondItem="Cwv-zt-DYp" secondAttribute="height" multiplier="2:1" id="08r-JP-C9p"/>
+                                    <constraint firstAttribute="width" constant="300" id="BYk-bM-Z3T"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
-                        <color key="backgroundColor" red="0.30980392156862746" green="0.30980392156862746" blue="0.30980392156862746" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="GlO-EX-UrF" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="fqu-22-oW0"/>
-                            <constraint firstItem="GlO-EX-UrF" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="lsh-oQ-nZU"/>
-                            <constraint firstItem="GlO-EX-UrF" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="yUJ-tl-eAE"/>
-                            <constraint firstAttribute="trailing" secondItem="GlO-EX-UrF" secondAttribute="trailing" id="zBH-n3-svW"/>
+                            <constraint firstItem="Cwv-zt-DYp" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="5le-at-6Gn"/>
+                            <constraint firstItem="Cwv-zt-DYp" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="vx4-Sp-q8x"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -39,6 +38,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="logo_500x250" width="500" height="250"/>
+        <image name="logo_transparent_1600x800" width="1600" height="800"/>
     </resources>
 </document>
