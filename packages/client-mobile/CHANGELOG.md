@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.16.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.15.0...@quoll/client-mobile@0.16.0) (2024-01-06)
+
+### Features
+
+- **client-mobile:** add iOS splash screen ([#182](https://github.com/mzogheib/quoll/issues/182)) ([da331ad](https://github.com/mzogheib/quoll/commit/da331adcea6b3b650db85fcac380a27fe06a5559))
+
 # [0.15.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.14.0...@quoll/client-mobile@0.15.0) (2024-01-05)
 
 ### Features
