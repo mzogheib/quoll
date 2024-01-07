@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.18.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.17.0...@quoll/client-mobile@0.18.0) (2024-01-07)
+
+### Features
+
+- **client-mobile:** change display name to Quoll ([9bbbd5e](https://github.com/mzogheib/quoll/commit/9bbbd5e72cd61871228c0c5c25cbbcda1cda54b2))
+
 # [0.17.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.16.0...@quoll/client-mobile@0.17.0) (2024-01-07)
 
 ### Features
