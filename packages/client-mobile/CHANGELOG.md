@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.17.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.16.0...@quoll/client-mobile@0.17.0) (2024-01-07)
+
+### Features
+
+- **client-mobile:** fix colours on logo and icon ([#183](https://github.com/mzogheib/quoll/issues/183)) ([61eb686](https://github.com/mzogheib/quoll/commit/61eb6867b9068c9bc98a7d4ead884351c8306387))
+- **client-mobile:** update Android splash screen ([#184](https://github.com/mzogheib/quoll/issues/184)) ([07cdc56](https://github.com/mzogheib/quoll/commit/07cdc56d6ba7206ab19c66a7bb0143d3198ddeed))
+
 # [0.16.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.15.0...@quoll/client-mobile@0.16.0) (2024-01-06)
 
 ### Features
