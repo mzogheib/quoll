@@ -1,0 +1,4 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+  <!-- Set the background color or image for the splash screen -->
+  <item android:drawable="@color/mineShaft" />
+</layer-list>
