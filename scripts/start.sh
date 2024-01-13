@@ -1,6 +1,7 @@
 #!/bin/bash
 
-options=("🗃️  api" "📱 client-mobile" "🌐 client-web" "🧩 ui-components" "🎨 ui-primitives")
+emojis=("🗃️ " "📱" "🌐" "🧩" "🎨")
+options=("api" "client-mobile" "client-web" "ui-components" "ui-primitives")
 selected_option=0
 
 while true; do
@@ -8,9 +9,9 @@ while true; do
     echo "Select a script to run:"
     for ((i=0; i<${#options[@]}; i++)); do
         if [ "$i" -eq "$selected_option" ]; then
-            echo "* ${options[i]}"
+            echo "* ${emojis[i]} ${options[i]}"
         else
-            echo "  ${options[i]}"
+            echo "  ${emojis[i]} ${options[i]}"
         fi
     done
 
