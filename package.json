@@ -5,7 +5,7 @@
     "packages/*"
   ],
   "scripts": {
-    "start": "node scripts/start.js",
+    "start": "./scripts/start.sh",
     "release": "cross-env HUSKY_BYPASS=true lerna publish --conventional-commits --yes",
     "clean-build": "lerna exec -- rm -rf ./build ./dist && rm -rf ./build ./dist",
     "clean-node-modules": "lerna exec -- rm -rf ./node_modules && rm -rf ./node_modules",
