@@ -10,7 +10,7 @@ const PACKAGES = [
 
 if (process.argv.length <= 2) {
   console.error(
-    "Error: Must specify the package to run, e.g. 'yarn start api'.",
+    `Error: Must specify the package to run, e.g. 'yarn start ${PACKAGES[0]}'.`,
   );
   process.exit(1);
 }
