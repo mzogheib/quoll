@@ -7,11 +7,15 @@ selected_option=0
 while true; do
     clear
     echo "Select a script to run:"
+
     for ((i=0; i<${#options[@]}; i++)); do
+        option=${options[i]}
+        emoji=${emojis[i]}
+
         if [ "$i" -eq "$selected_option" ]; then
-            echo "* ${emojis[i]} ${options[i]}"
+            echo "* $emoji $option"
         else
-            echo "  ${emojis[i]} ${options[i]}"
+            echo "  $emoji $option"
         fi
     done
 
