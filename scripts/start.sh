@@ -37,21 +37,23 @@ while true; do
     esac
 done
 
-case "${options[selected_option]}" in
+selected_option_label="${options[selected_option]}"
+
+case $selected_option_label in
     "api")
-        echo "Executing script for api"
+        echo "Executing script for "${selected_option_label}""
         # Add your api script here
         ;;
     "client-mobile")
-        echo "Executing script for client-mobile"
+        echo "Executing script for "${selected_option_label}""
         # Add your client-mobile script here
         ;;
     "client-web")
-        echo "Executing script for client-web"
+        echo "Executing script for "${selected_option_label}""
         # Add your client-web script here
         ;;
     "ui-components")
-        echo "Executing script for ui-components"
+        echo "Executing script for "${selected_option_label}""
         # Add your ui-components script here
         ;;
 esac
