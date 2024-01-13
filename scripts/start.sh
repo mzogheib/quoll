@@ -44,6 +44,8 @@ done
 
 selected_option_label="${options[selected_option]}"
 
+clear
+
 echo "Running "${selected_option_label}"..."
 
 node scripts/start.js "${selected_option_label}"
