@@ -40,10 +40,10 @@ cd quoll && yarn
 
 4. Add environment variables for 3rd party API credentials. Refer to to `packages/api/feed-apis/` for usage.
 
-5. Start the dev server for each package in its own terminal.
+5. From the root directory run the following and select which package to run. To run another package, open a new terminal and repeat.
 
 ```
-yarn start <package-name>
+yarn start
 ```
 
 ## TODO & Issue Tracking
