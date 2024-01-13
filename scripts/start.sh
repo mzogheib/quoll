@@ -14,6 +14,9 @@ while true; do
         fi
     done
 
+    echo ""
+    echo "(type q to quit)"
+
     read -rsn1 key
 
     case "$key" in
