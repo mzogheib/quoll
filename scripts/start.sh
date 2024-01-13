@@ -1,6 +1,6 @@
 #!/bin/bash
 
-options=("🗃️  api" "📱 client-mobile" "🌐 client-web" "🧩 ui-components", "🎨 ui-primitives")
+options=("🗃️  api" "📱 client-mobile" "🌐 client-web" "🧩 ui-components" "🎨 ui-primitives")
 selected_option=0
 
 while true; do
