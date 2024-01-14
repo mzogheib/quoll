@@ -5944,6 +5944,7 @@ __metadata:
     react-native: "npm:0.73.0"
     react-native-date-picker: "npm:^4.3.5"
     react-native-maps: "npm:^1.8.4"
+    react-native-mmkv-storage: "npm:^0.9.1"
     react-native-safe-area-context: "npm:^4.8.2"
     react-native-screens: "npm:^3.29.0"
     react-native-vector-icons: "npm:^10.0.3"
@@ -28787,6 +28788,17 @@ __metadata:
     react-native-web:
       optional: true
   checksum: db1ae141da2c4295a40417262b9bd32fc9feeb4d5d449642cd8d28e23fd173cb6f0306179e4345e259b1d55e2b5def6ac8af79f7cdd972e3b175ef15c2a879e8
+  languageName: node
+  linkType: hard
+
+"react-native-mmkv-storage@npm:^0.9.1":
+  version: 0.9.1
+  resolution: "react-native-mmkv-storage@npm:0.9.1"
+  peerDependencies:
+    react-native: "*"
+  bin:
+    mmkv-link: autolink/postlink/run.js
+  checksum: fe90039178c6be0935e5d205954e0b7e14dcbea67d22fbd486ecd59d6a6f5742f6d9dfbf23caef680743e2218cc4f8db987d92673d160719907418ccb065c394
   languageName: node
   linkType: hard
 
