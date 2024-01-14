@@ -58,7 +58,7 @@ export const useMedia = () => {
     if (!isConnected) return;
 
     checkPermissionAndConnect();
-  }, []);
+  }, [checkPermissionAndConnect]);
 
   const connect = async () => {
     const isPermitted = await checkPermissionAndConnect();
