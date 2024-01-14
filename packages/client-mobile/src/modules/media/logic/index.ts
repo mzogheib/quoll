@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Platform, PermissionsAndroid } from "react-native";
 import { CameraRoll } from "@react-native-camera-roll/camera-roll";
 import { promptAllowAccess } from "@modules/alert/logic";
@@ -50,6 +50,14 @@ export const useMedia = () => {
     setIsConnecting(false);
 
     return isPermitted;
+  }, []);
+
+  // User may have connected photos but then, via the app settings in the OS,
+  // denied permissions to photos. This will disconnect photos if that's the case.
+  useEffect(() => {
+    if (!isConnected) return;
+
+    checkPermissionAndConnect();
   }, []);
 
   const connect = async () => {
