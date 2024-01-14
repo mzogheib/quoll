@@ -19,7 +19,12 @@ const SettingsScreen = (_: ScreenProps<"settings">) => {
         <View style={styles.content}>
           <Text style={styles.title}>Feeds</Text>
           <View style={styles.feedSettingsWrapper}>
-            <FeedSettings title="Photos" onConnect={media.requestPermission} />
+            <FeedSettings
+              title="Photos"
+              isConnected={media.isPermitted}
+              onConnect={media.requestPermission}
+              onDisconnect={media.revokePermission}
+            />
           </View>
         </View>
       </View>

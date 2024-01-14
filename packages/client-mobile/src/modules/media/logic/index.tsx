@@ -7,8 +7,13 @@ export const useMedia = () => {
     setIsPermitted(true);
   };
 
+  const revokePermission = () => {
+    setIsPermitted(false);
+  };
+
   return {
     requestPermission,
+    revokePermission,
     isPermitted,
   };
 };

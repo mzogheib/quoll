@@ -7,10 +7,20 @@ import styles from "./styles";
 type Props = {
   title: string;
   url?: string;
+  isConnected: boolean;
   onConnect: () => void;
+  onDisconnect: () => void;
 };
 
-const FeedSettings = ({ title, url, onConnect }: Props) => {
+const FeedSettings = ({
+  title,
+  isConnected,
+  onConnect,
+  onDisconnect,
+}: Props) => {
+  const buttonLabel = isConnected ? "Disconnect" : "Connect";
+  const onClick = isConnected ? onDisconnect : onConnect;
+
   return (
     <View style={styles.wrapper}>
       <View style={styles.content}>
@@ -21,7 +31,7 @@ const FeedSettings = ({ title, url, onConnect }: Props) => {
           <Text style={styles.title}>{title}</Text>
         </View>
         <View style={styles.button}>
-          <Button title="Connect" onPress={onConnect} />
+          <Button title={buttonLabel} onPress={onClick} />
         </View>
       </View>
     </View>
