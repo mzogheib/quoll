@@ -21,6 +21,7 @@ export const useMedia = () => {
     return isPermitted;
   }, []);
 
+  // Check if permission has previously been granted.
   useEffect(() => {
     checkPermissionAndConnect();
   }, [checkPermissionAndConnect]);
