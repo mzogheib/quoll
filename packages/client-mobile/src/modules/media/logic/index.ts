@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { CameraRoll } from "@react-native-camera-roll/camera-roll";
 import { promptAllowAccess } from "@modules/alert/logic";
 
@@ -14,9 +14,19 @@ const checkIsPermitted = async () => {
 export const useMedia = () => {
   const [isConnected, setIsConnected] = useState(false);
 
-  const connect = async () => {
+  const checkPermissionAndConnect = useCallback(async () => {
     const isPermitted = await checkIsPermitted();
     setIsConnected(isPermitted);
+
+    return isPermitted;
+  }, []);
+
+  useEffect(() => {
+    checkPermissionAndConnect();
+  }, [checkPermissionAndConnect]);
+
+  const connect = async () => {
+    const isPermitted = await checkPermissionAndConnect();
 
     if (!isPermitted) {
       promptAllowAccess("Please allow access to your photos and videos.");
