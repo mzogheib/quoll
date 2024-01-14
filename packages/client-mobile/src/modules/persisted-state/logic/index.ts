@@ -3,7 +3,7 @@ import { MMKVLoader, useMMKVStorage } from "react-native-mmkv-storage";
 const MMKV = new MMKVLoader().initialize();
 
 /**
- * Returns a stateful value and a function to update it. Perists the value
+ * Returns a stateful value and a function to update it. Persists the value
  * between app launches.
  *
  * @param key a unique key for the persisted value
