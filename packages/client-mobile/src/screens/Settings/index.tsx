@@ -10,10 +10,28 @@ import ScreenTemplate from "../ScreenTemplate";
 import FeedSettings from "@components/FeedSettings";
 import { useMedia } from "@modules/media/logic";
 
+const photosFeedSettings = {
+  title: "Photos",
+  url: undefined,
+  imageConnected: (
+    <Icon name="image" size={60} color={colorPalette.mediumAquamarine} />
+  ),
+  imageDisconnected: (
+    <Icon name="image" size={60} color={colorPalette.matterhorn} />
+  ),
+};
+
 const SettingsScreen = (_: ScreenProps<"settings">) => {
   const media = useMedia();
 
-  console.log(media.isPermitted);
+  const feeds = [
+    {
+      ...photosFeedSettings,
+      isConnected: media.isPermitted,
+      onConnect: media.requestPermission,
+      onDisconnect: media.revokePermission,
+    },
+  ];
 
   return (
     <ScreenTemplate>
@@ -21,22 +39,9 @@ const SettingsScreen = (_: ScreenProps<"settings">) => {
         <View style={styles.content}>
           <Text style={styles.title}>Feeds</Text>
           <View style={styles.feedSettingsWrapper}>
-            <FeedSettings
-              title="Photos"
-              isConnected={media.isPermitted}
-              imageConnected={
-                <Icon
-                  name="image"
-                  size={60}
-                  color={colorPalette.mediumAquamarine}
-                />
-              }
-              imageDisconnected={
-                <Icon name="image" size={60} color={colorPalette.matterhorn} />
-              }
-              onConnect={media.requestPermission}
-              onDisconnect={media.revokePermission}
-            />
+            {feeds.map((props) => (
+              <FeedSettings key={props.title} {...props} />
+            ))}
           </View>
         </View>
       </View>
