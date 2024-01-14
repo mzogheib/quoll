@@ -2,33 +2,33 @@ import { useEffect, useState } from "react";
 import { CameraRoll } from "@react-native-camera-roll/camera-roll";
 
 export const useMedia = () => {
-  const [isPermitted, setIsPermitted] = useState(false);
+  const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
-    const checkIsPermitted = async () => {
+    const checkIsConnected = async () => {
       try {
         const result = await CameraRoll.getPhotos({ first: 1 });
 
-        setIsPermitted(!!result);
+        setIsConnected(!!result);
       } catch {
         // ...
       }
     };
 
-    checkIsPermitted();
+    checkIsConnected();
   }, []);
 
-  const requestPermission = () => {
-    setIsPermitted(true);
+  const connect = () => {
+    setIsConnected(true);
   };
 
-  const revokePermission = () => {
-    setIsPermitted(false);
+  const disconnect = () => {
+    setIsConnected(false);
   };
 
   return {
-    requestPermission,
-    revokePermission,
-    isPermitted,
+    connect,
+    disconnect,
+    isConnected,
   };
 };

@@ -27,9 +27,9 @@ const SettingsScreen = (_: ScreenProps<"settings">) => {
   const feeds = [
     {
       ...photosFeedSettings,
-      isConnected: media.isPermitted,
-      onConnect: media.requestPermission,
-      onDisconnect: media.revokePermission,
+      isConnected: media.isConnected,
+      onConnect: media.connect,
+      onDisconnect: media.disconnect,
     },
   ];
 
