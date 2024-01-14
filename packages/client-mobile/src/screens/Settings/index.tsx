@@ -1,5 +1,7 @@
 import React from "react";
 import { Text, View } from "react-native";
+import Icon from "react-native-vector-icons/MaterialIcons";
+import { colorPalette } from "@quoll/ui-primitives";
 
 import styles from "./styles";
 
@@ -22,6 +24,16 @@ const SettingsScreen = (_: ScreenProps<"settings">) => {
             <FeedSettings
               title="Photos"
               isConnected={media.isPermitted}
+              imageConnected={
+                <Icon
+                  name="image"
+                  size={60}
+                  color={colorPalette.mediumAquamarine}
+                />
+              }
+              imageDisconnected={
+                <Icon name="image" size={60} color={colorPalette.matterhorn} />
+              }
               onConnect={media.requestPermission}
               onDisconnect={media.revokePermission}
             />
