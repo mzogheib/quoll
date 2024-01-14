@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { Platform, PermissionsAndroid } from "react-native";
 import { CameraRoll } from "@react-native-camera-roll/camera-roll";
 import { promptAllowAccess } from "@modules/alert/logic";
