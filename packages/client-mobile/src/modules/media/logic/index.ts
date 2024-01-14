@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Platform, PermissionsAndroid } from "react-native";
 import { CameraRoll } from "@react-native-camera-roll/camera-roll";
 import { promptAllowAccess } from "@modules/alert/logic";
-import { useStorage } from "@modules/storage/logic";
+import { usePersistedState } from "@modules/persisted-state/logic";
 
 const checkIsPermittedIOS = async () =>
   !!(await CameraRoll.getPhotos({ first: 1 }));
@@ -40,7 +40,7 @@ const checkIsPermitted = async () => {
 };
 
 export const useMedia = () => {
-  const { value: isConnected, setValue: setIsConnected } = useStorage(
+  const { value: isConnected, setValue: setIsConnected } = usePersistedState(
     "isConnected",
     false,
   );
