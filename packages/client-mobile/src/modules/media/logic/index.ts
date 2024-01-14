@@ -40,10 +40,7 @@ const checkIsPermitted = async () => {
 };
 
 export const useMedia = () => {
-  const { value: isConnected, setValue: setIsConnected } = usePersistedState(
-    "isConnected",
-    false,
-  );
+  const [isConnected, setIsConnected] = usePersistedState("isConnected", false);
   const [isConnecting, setIsConnecting] = useState(false);
 
   const checkPermissionAndConnect = useCallback(async () => {
