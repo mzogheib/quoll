@@ -28,6 +28,7 @@ const SettingsScreen = (_: ScreenProps<"settings">) => {
     {
       ...photosFeedSettings,
       isConnected: media.isConnected,
+      isConnecting: media.isConnecting,
       onConnect: media.connect,
       onDisconnect: media.disconnect,
     },

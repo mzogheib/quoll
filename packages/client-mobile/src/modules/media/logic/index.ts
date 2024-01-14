@@ -13,10 +13,13 @@ const checkIsPermitted = async () => {
 
 export const useMedia = () => {
   const [isConnected, setIsConnected] = useState(false);
+  const [isConnecting, setIsConnecting] = useState(false);
 
   const checkPermissionAndConnect = useCallback(async () => {
+    setIsConnecting(true);
     const isPermitted = await checkIsPermitted();
     setIsConnected(isPermitted);
+    setIsConnecting(false);
 
     return isPermitted;
   }, []);
@@ -42,5 +45,6 @@ export const useMedia = () => {
     connect,
     disconnect,
     isConnected,
+    isConnecting,
   };
 };

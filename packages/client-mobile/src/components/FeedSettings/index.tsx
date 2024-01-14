@@ -7,6 +7,7 @@ type Props = {
   title: string;
   url?: string;
   isConnected: boolean;
+  isConnecting: boolean;
   imageConnected: ReactNode;
   imageDisconnected: ReactNode;
   onConnect: () => void;
@@ -16,6 +17,7 @@ type Props = {
 const FeedSettings = ({
   title,
   isConnected,
+  isConnecting,
   imageConnected,
   imageDisconnected,
   onConnect,
@@ -33,7 +35,11 @@ const FeedSettings = ({
           <Text style={styles.title}>{title}</Text>
         </View>
         <View style={styles.button}>
-          <Button title={buttonLabel} onPress={onClick} />
+          <Button
+            title={buttonLabel}
+            disabled={isConnecting}
+            onPress={onClick}
+          />
         </View>
       </View>
     </View>
