@@ -3,10 +3,13 @@ import { Platform, PermissionsAndroid } from "react-native";
 import { CameraRoll } from "@react-native-camera-roll/camera-roll";
 import { promptAllowAccess } from "@modules/alert/logic";
 
-const platformVersion = Number(Platform.Version);
+const checkIsPermittedIOS = async () =>
+  !!(await CameraRoll.getPhotos({ first: 1 }));
+
+const platformVersionAndroid = Number(Platform.Version);
 
 const checkIsPermittedAndroid = async () => {
-  if (platformVersion >= 33) {
+  if (platformVersionAndroid >= 33) {
     return Promise.all([
       PermissionsAndroid.check(
         PermissionsAndroid.PERMISSIONS.READ_MEDIA_IMAGES,
@@ -26,11 +29,9 @@ const checkIsPermittedAndroid = async () => {
 const checkIsPermitted = async () => {
   try {
     if (Platform.OS === "ios") {
-      const result = await CameraRoll.getPhotos({ first: 1 });
-      return !!result;
+      return await checkIsPermittedIOS();
     } else {
-      const result = await checkIsPermittedAndroid();
-      return !!result;
+      return await checkIsPermittedAndroid();
     }
   } catch {
     return false;
