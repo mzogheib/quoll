@@ -6,6 +6,7 @@ import styles from "./styles";
 import { ScreenProps } from "../types";
 import ScreenTemplate from "../ScreenTemplate";
 import FeedSettings from "@components/FeedSettings";
+import { connectToMedia } from "@modules/media/logic";
 
 const SettingsScreen = (_: ScreenProps<"settings">) => {
   return (
@@ -14,7 +15,7 @@ const SettingsScreen = (_: ScreenProps<"settings">) => {
         <View style={styles.content}>
           <Text style={styles.title}>Feeds</Text>
           <View style={styles.feedSettingsWrapper}>
-            <FeedSettings title="Photos" onConnect={() => {}} />
+            <FeedSettings title="Photos" onConnect={connectToMedia} />
           </View>
         </View>
       </View>
