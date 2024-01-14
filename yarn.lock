@@ -5924,6 +5924,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.20.0"
     "@babel/runtime": "npm:^7.20.0"
     "@quoll/ui-primitives": "npm:^0.4.0"
+    "@react-native-camera-roll/camera-roll": "npm:^7.3.0"
     "@react-native-community/geolocation": "npm:^3.1.0"
     "@react-native/babel-preset": "npm:^0.73.18"
     "@react-native/eslint-config": "npm:^0.74.0"
@@ -6046,6 +6047,15 @@ __metadata:
     react: 15.x || 16.x || 16.4.0-alpha.0911da3
     react-dom: 15.x || 16.x || 16.4.0-alpha.0911da3
   checksum: 083fcb658ae5cd0de2b7ebe56bbb8c1b4aa6ec035038d41916afcdd2f31ffd7ccdd6848f7ee8e53d562c31fc4c1b1953fd7007eb9d57daf65779f344ca5a5373
+  languageName: node
+  linkType: hard
+
+"@react-native-camera-roll/camera-roll@npm:^7.3.0":
+  version: 7.3.0
+  resolution: "@react-native-camera-roll/camera-roll@npm:7.3.0"
+  peerDependencies:
+    react-native: ">=0.59"
+  checksum: 8bb2bb37ad2b95b8384143abe5eb4b09acd99b385d9a21bdb659ce5f43cf9b99ee198e8f9587306df3409ec9d7ce3afebd41e0a108cb1112222f810a5c88e653
   languageName: node
   linkType: hard
 
