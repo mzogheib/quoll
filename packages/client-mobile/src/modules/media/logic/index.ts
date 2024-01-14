@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Platform, PermissionsAndroid } from "react-native";
 import { CameraRoll } from "@react-native-camera-roll/camera-roll";
 import { promptAllowAccess } from "@modules/alert/logic";
+import { usePersistedState } from "@modules/persisted-state/logic";
 
 const checkIsPermittedIOS = async () =>
   !!(await CameraRoll.getPhotos({ first: 1 }));
@@ -39,7 +40,7 @@ const checkIsPermitted = async () => {
 };
 
 export const useMedia = () => {
-  const [isConnected, setIsConnected] = useState(false);
+  const [isConnected, setIsConnected] = usePersistedState("isConnected", false);
   const [isConnecting, setIsConnecting] = useState(false);
 
   const checkPermissionAndConnect = useCallback(async () => {
@@ -51,8 +52,11 @@ export const useMedia = () => {
     return isPermitted;
   }, []);
 
-  // Check if permission has previously been granted.
+  // User may have connected photos but then, via the app settings in the OS,
+  // denied permissions to photos. This will disconnect photos if that's the case.
   useEffect(() => {
+    if (!isConnected) return;
+
     checkPermissionAndConnect();
   }, [checkPermissionAndConnect]);
 
