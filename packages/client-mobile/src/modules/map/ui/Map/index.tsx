@@ -4,6 +4,7 @@ import { Alert } from "react-native";
 import { useGeolocation } from "@modules/geolocation/logic";
 
 import styles from "./styles";
+import { promptAllowAccess } from "@modules/alert/logic";
 
 // Melbourne, Victoria
 const defaultCoords = {
@@ -24,12 +25,12 @@ export const Map = () => {
   useEffect(() => {
     if (error === undefined) return;
 
-    const message =
-      error === "PERMISSION_DENIED"
-        ? "For the best experience, please allow access to your location."
-        : "Could not get current location.";
+    if (error === "PERMISSION_DENIED") {
+      promptAllowAccess("Please allow access to your location.");
+      return;
+    }
 
-    Alert.alert(message);
+    Alert.alert("Could not get current location.");
   }, [error]);
 
   return <MapView style={styles.wrapper} region={region} showsUserLocation />;
