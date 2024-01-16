@@ -30,7 +30,7 @@ const FeedSettings = ({
   return (
     <View style={styles.wrapper}>
       <View style={styles.content}>
-        <View>{image}</View>
+        <View style={styles.image}>{image}</View>
         <View>
           <Text style={styles.title}>{title}</Text>
         </View>

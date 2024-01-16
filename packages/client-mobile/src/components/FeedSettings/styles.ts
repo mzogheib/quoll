@@ -11,6 +11,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 20,
   },
+  image: {
+    width: 50,
+  },
   title: {
     fontSize: 18,
     fontWeight: "bold",

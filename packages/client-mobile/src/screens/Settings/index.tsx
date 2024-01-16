@@ -14,10 +14,21 @@ const photosFeedSettings = {
   title: "Photos",
   url: undefined,
   imageConnected: (
-    <Icon name="image" size={60} color={colorPalette.mediumAquamarine} />
+    <Icon name="image" size={35} color={colorPalette.mediumAquamarine} />
   ),
   imageDisconnected: (
-    <Icon name="image" size={60} color={colorPalette.matterhorn} />
+    <Icon name="image" size={35} color={colorPalette.matterhorn} />
+  ),
+};
+
+const locationSettings = {
+  title: "Current location",
+  url: undefined,
+  imageConnected: (
+    <Icon name="my-location" size={35} color={colorPalette.mediumAquamarine} />
+  ),
+  imageDisconnected: (
+    <Icon name="my-location" size={35} color={colorPalette.matterhorn} />
   ),
 };
 
@@ -43,6 +54,16 @@ const SettingsScreen = (_: ScreenProps<"settings">) => {
             {feeds.map((props) => (
               <FeedSettings key={props.title} {...props} />
             ))}
+          </View>
+          <Text style={styles.title}>Map</Text>
+          <View style={styles.feedSettingsWrapper}>
+            <FeedSettings
+              {...locationSettings}
+              isConnected={false}
+              isConnecting={false}
+              onConnect={() => {}}
+              onDisconnect={() => {}}
+            />
           </View>
         </View>
       </View>

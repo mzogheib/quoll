@@ -4,7 +4,6 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     alignItems: "center",
-    paddingVertical: 40,
     paddingHorizontal: 20,
   },
   content: {
@@ -12,11 +11,12 @@ const styles = StyleSheet.create({
     maxWidth: 600,
   },
   title: {
+    marginTop: 40,
     fontSize: 28,
     fontWeight: "500",
   },
   feedSettingsWrapper: {
-    marginTop: 40,
+    marginTop: 20,
   },
 });
 
