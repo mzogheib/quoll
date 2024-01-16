@@ -24,6 +24,8 @@ const photosFeedSettings = {
 const locationSettings = {
   title: "Current location",
   url: undefined,
+  connectLabel: "Enable",
+  disconnectLabel: "Disable",
   imageConnected: (
     <Icon name="my-location" size={35} color={colorPalette.mediumAquamarine} />
   ),
