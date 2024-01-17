@@ -34,5 +34,11 @@ export const Map = () => {
     }
   }, [isConnected, getPosition]);
 
-  return <MapView style={styles.wrapper} region={region} showsUserLocation />;
+  return (
+    <MapView
+      style={styles.wrapper}
+      region={region}
+      showsUserLocation={isConnected}
+    />
+  );
 };
