@@ -4,10 +4,11 @@ import { useGeolocation } from "@modules/geolocation/logic";
 
 import styles from "./styles";
 
-// Melbourne, Victoria
+// TODO: cycle through different world locations
+// Centre of Australia
 const defaultCoords = {
-  latitude: -37.8136,
-  longitude: 144.9631,
+  latitude: -25.898716,
+  longitude: 133.843298,
 };
 
 export const Map = () => {
@@ -24,8 +25,8 @@ export const Map = () => {
       : {
           latitude: defaultCoords.latitude,
           longitude: defaultCoords.longitude,
-          latitudeDelta: 0.1,
-          longitudeDelta: 0.1,
+          latitudeDelta: 50,
+          longitudeDelta: 50,
         };
 
   useEffect(() => {
