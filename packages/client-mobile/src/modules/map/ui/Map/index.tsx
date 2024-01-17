@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
 import MapView from "react-native-maps";
-import { Alert } from "react-native";
 import { useGeolocation } from "@modules/geolocation/logic";
 
 import styles from "./styles";
-import { promptAllowAccess } from "@modules/alert/logic";
 
 // Melbourne, Victoria
 const defaultCoords = {
@@ -13,25 +11,28 @@ const defaultCoords = {
 };
 
 export const Map = () => {
-  const { coords, error } = useGeolocation(defaultCoords);
+  const { coords, isConnected, getPosition } = useGeolocation();
 
-  const region = {
-    latitude: coords.latitude,
-    longitude: coords.longitude,
-    latitudeDelta: 0.1,
-    longitudeDelta: 0.1,
-  };
+  const region =
+    isConnected && coords
+      ? {
+          latitude: coords.latitude,
+          longitude: coords.longitude,
+          latitudeDelta: 0.1,
+          longitudeDelta: 0.1,
+        }
+      : {
+          latitude: defaultCoords.latitude,
+          longitude: defaultCoords.longitude,
+          latitudeDelta: 0.1,
+          longitudeDelta: 0.1,
+        };
 
   useEffect(() => {
-    if (error === undefined) return;
-
-    if (error === "PERMISSION_DENIED") {
-      promptAllowAccess("Please allow access to your location.");
-      return;
+    if (isConnected) {
+      getPosition();
     }
-
-    Alert.alert("Could not get current location.");
-  }, [error]);
+  }, [isConnected, getPosition]);
 
   return <MapView style={styles.wrapper} region={region} showsUserLocation />;
 };

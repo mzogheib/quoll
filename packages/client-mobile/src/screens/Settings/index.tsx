@@ -9,6 +9,7 @@ import { ScreenProps } from "../types";
 import ScreenTemplate from "../ScreenTemplate";
 import FeedSettings from "@components/FeedSettings";
 import { useMedia } from "@modules/media/logic";
+import { useGeolocation } from "@modules/geolocation/logic";
 
 const photosFeedSettings = {
   title: "Photos",
@@ -36,6 +37,7 @@ const locationSettings = {
 
 const SettingsScreen = (_: ScreenProps<"settings">) => {
   const media = useMedia();
+  const geolocation = useGeolocation();
 
   const feeds = [
     {
@@ -61,10 +63,10 @@ const SettingsScreen = (_: ScreenProps<"settings">) => {
           <View style={styles.feedSettingsWrapper}>
             <FeedSettings
               {...locationSettings}
-              isConnected={false}
-              isConnecting={false}
-              onConnect={() => {}}
-              onDisconnect={() => {}}
+              isConnected={geolocation.isConnected}
+              isConnecting={geolocation.isConnecting}
+              onConnect={geolocation.connect}
+              onDisconnect={geolocation.disconnect}
             />
           </View>
         </View>
