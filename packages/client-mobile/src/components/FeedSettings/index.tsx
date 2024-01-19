@@ -6,6 +6,8 @@ import { ReactNode } from "react";
 type Props = {
   title: string;
   url?: string;
+  connectLabel?: string;
+  disconnectLabel?: string;
   isConnected: boolean;
   isConnecting: boolean;
   imageConnected: ReactNode;
@@ -16,6 +18,8 @@ type Props = {
 
 const FeedSettings = ({
   title,
+  connectLabel = "Connect",
+  disconnectLabel = "Disconnect",
   isConnected,
   isConnecting,
   imageConnected,
@@ -23,14 +27,14 @@ const FeedSettings = ({
   onConnect,
   onDisconnect,
 }: Props) => {
-  const buttonLabel = isConnected ? "Disconnect" : "Connect";
+  const buttonLabel = isConnected ? disconnectLabel : connectLabel;
   const onClick = isConnected ? onDisconnect : onConnect;
   const image = isConnected ? imageConnected : imageDisconnected;
 
   return (
     <View style={styles.wrapper}>
       <View style={styles.content}>
-        <View>{image}</View>
+        <View style={styles.image}>{image}</View>
         <View>
           <Text style={styles.title}>{title}</Text>
         </View>

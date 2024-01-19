@@ -1,36 +1,45 @@
 import React, { useEffect } from "react";
 import MapView from "react-native-maps";
-import { Alert } from "react-native";
 import { useGeolocation } from "@modules/geolocation/logic";
 
 import styles from "./styles";
 
-// Melbourne, Victoria
+// TODO: cycle through different world locations
+// Centre of Australia
 const defaultCoords = {
-  latitude: -37.8136,
-  longitude: 144.9631,
+  latitude: -25.898716,
+  longitude: 133.843298,
 };
 
 export const Map = () => {
-  const { coords, error } = useGeolocation(defaultCoords);
+  const { coords, isConnected, getPosition } = useGeolocation();
 
-  const region = {
-    latitude: coords.latitude,
-    longitude: coords.longitude,
-    latitudeDelta: 0.1,
-    longitudeDelta: 0.1,
-  };
+  const region =
+    isConnected && coords
+      ? {
+          latitude: coords.latitude,
+          longitude: coords.longitude,
+          latitudeDelta: 0.1,
+          longitudeDelta: 0.1,
+        }
+      : {
+          latitude: defaultCoords.latitude,
+          longitude: defaultCoords.longitude,
+          latitudeDelta: 50,
+          longitudeDelta: 50,
+        };
 
   useEffect(() => {
-    if (error === undefined) return;
+    if (isConnected) {
+      getPosition();
+    }
+  }, [isConnected, getPosition]);
 
-    const message =
-      error === "PERMISSION_DENIED"
-        ? "For the best experience, please allow access to your location."
-        : "Could not get current location.";
-
-    Alert.alert(message);
-  }, [error]);
-
-  return <MapView style={styles.wrapper} region={region} showsUserLocation />;
+  return (
+    <MapView
+      style={styles.wrapper}
+      region={region}
+      showsUserLocation={isConnected}
+    />
+  );
 };
