@@ -132,13 +132,11 @@ export const useGeolocation = () => {
 
     if (isPermitted) {
       setIsConnected(true);
-      await getPosition();
     } else {
       const didPermit = await requestPermission();
 
       if (didPermit) {
         setIsConnected(true);
-        await getPosition();
       } else {
         promptAllowAccess("Quoll works best with your location.");
       }
