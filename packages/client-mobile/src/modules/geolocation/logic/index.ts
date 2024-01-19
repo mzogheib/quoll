@@ -56,8 +56,6 @@ const requestPermissionAndroid = async () => {
       {
         title: "Allow access",
         message: "Quoll works best with your location.",
-        buttonNeutral: "Ask Me Later",
-        buttonNegative: "Cancel",
         buttonPositive: "Allow",
       },
     );
@@ -129,6 +127,7 @@ export const useGeolocation = () => {
   }, []);
 
   const connect = async () => {
+    setIsConnecting(true);
     const isPermitted = await checkIsPermitted();
 
     if (isPermitted) {
@@ -144,6 +143,7 @@ export const useGeolocation = () => {
         promptAllowAccess("Quoll works best with your location.");
       }
     }
+    setIsConnecting(false);
   };
 
   const disconnect = () => {
