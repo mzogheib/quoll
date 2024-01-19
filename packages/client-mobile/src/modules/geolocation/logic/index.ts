@@ -29,11 +29,33 @@ const checkIsPermittedIOS = async () => {
 
 const checkIsPermittedAndroid = async () => {
   try {
+    return await PermissionsAndroid.check(
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+    );
+  } catch {
+    return false;
+  }
+};
+
+const checkIsPermitted = async () => {
+  try {
+    if (Platform.OS === "ios") {
+      return await checkIsPermittedIOS();
+    } else {
+      return await checkIsPermittedAndroid();
+    }
+  } catch {
+    return false;
+  }
+};
+
+const requestPermissionAndroid = async () => {
+  try {
     const granted = await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
       {
-        title: "Location access",
-        message: "Allow access to your location for the best experience.",
+        title: "Allow access",
+        message: "Quoll works best with your location.",
         buttonNeutral: "Ask Me Later",
         buttonNegative: "Cancel",
         buttonPositive: "Allow",
@@ -46,12 +68,14 @@ const checkIsPermittedAndroid = async () => {
   }
 };
 
-const checkIsPermitted = async () => {
+const requestPermissionIOS = async () => false;
+
+const requestPermission = async () => {
   try {
     if (Platform.OS === "ios") {
-      return await checkIsPermittedIOS();
+      return await requestPermissionIOS();
     } else {
-      return await checkIsPermittedAndroid();
+      return await requestPermissionAndroid();
     }
   } catch {
     return false;
@@ -95,7 +119,7 @@ export const useGeolocation = () => {
         const err = errors[code] ?? "PERMISSION_DENIED";
 
         if (err === "PERMISSION_DENIED") {
-          promptAllowAccess("Please allow access to your location.");
+          promptAllowAccess("Quoll works best with your location.");
         } else {
           Alert.alert("Could not get current location.");
         }
@@ -104,12 +128,20 @@ export const useGeolocation = () => {
   }, []);
 
   const connect = async () => {
-    const isPermitted = await checkPermissionAndConnect();
+    const isPermitted = await checkIsPermitted();
 
     if (isPermitted) {
+      setIsConnected(true);
       await getPosition();
     } else {
-      promptAllowAccess("Please allow access to your location.");
+      const didPermit = await requestPermission();
+
+      if (didPermit) {
+        setIsConnected(true);
+        await getPosition();
+      } else {
+        promptAllowAccess("Quoll works best with your location.");
+      }
     }
   };
 
