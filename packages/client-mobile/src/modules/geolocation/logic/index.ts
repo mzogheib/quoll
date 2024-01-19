@@ -56,8 +56,6 @@ const requestPermissionAndroid = async () => {
       {
         title: "Allow access",
         message: "Quoll works best with your location.",
-        buttonNeutral: "Ask Me Later",
-        buttonNegative: "Cancel",
         buttonPositive: "Allow",
       },
     );
@@ -92,12 +90,13 @@ export const useGeolocation = () => {
     "isGeolocationConnected",
     false,
   );
+  const [isCheckingPermission, setIsCheckingPermission] = useState(true);
 
-  const checkPermissionAndConnect = useCallback(async () => {
-    setIsConnecting(true);
+  const syncPermission = useCallback(async () => {
+    setIsCheckingPermission(true);
     const isPermitted = await checkIsPermitted();
     setIsConnected(isPermitted);
-    setIsConnecting(false);
+    setIsCheckingPermission(false);
 
     return isPermitted;
   }, []);
@@ -107,8 +106,8 @@ export const useGeolocation = () => {
   useEffect(() => {
     if (!isConnected) return;
 
-    checkPermissionAndConnect();
-  }, [checkPermissionAndConnect]);
+    syncPermission();
+  }, [syncPermission]);
 
   const getPosition = useCallback(async () => {
     Geolocation.getCurrentPosition(
@@ -128,6 +127,7 @@ export const useGeolocation = () => {
   }, []);
 
   const connect = async () => {
+    setIsConnecting(true);
     const isPermitted = await checkIsPermitted();
 
     if (isPermitted) {
@@ -143,6 +143,7 @@ export const useGeolocation = () => {
         promptAllowAccess("Quoll works best with your location.");
       }
     }
+    setIsConnecting(false);
   };
 
   const disconnect = () => {
@@ -154,6 +155,7 @@ export const useGeolocation = () => {
     coords,
     isConnecting,
     isConnected,
+    isCheckingPermission,
     connect,
     disconnect,
     getPosition,
