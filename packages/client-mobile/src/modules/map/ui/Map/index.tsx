@@ -12,7 +12,8 @@ const defaultCoords = {
 };
 
 export const Map = () => {
-  const { coords, isConnected, getPosition } = useGeolocation();
+  const { coords, isConnected, isCheckingPermission, getPosition } =
+    useGeolocation();
 
   const region =
     isConnected && coords
@@ -30,10 +31,10 @@ export const Map = () => {
         };
 
   useEffect(() => {
-    if (isConnected) {
-      getPosition();
-    }
-  }, [isConnected, getPosition]);
+    if (isCheckingPermission) return;
+
+    if (isConnected) getPosition();
+  }, [isCheckingPermission, isConnected, getPosition]);
 
   return (
     <MapView
