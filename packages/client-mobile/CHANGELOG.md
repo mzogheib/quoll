@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.19.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.18.0...@quoll/client-mobile@0.19.0) (2024-01-19)
+
+### Features
+
+- **client-mobile:** add settings for location access ([#191](https://github.com/mzogheib/quoll/issues/191)) ([bf4772e](https://github.com/mzogheib/quoll/commit/bf4772e6f5d4efd0f55a98d7b70e6caf03be0d67))
+- **client-mobile:** add settings screen ([#186](https://github.com/mzogheib/quoll/issues/186)) ([5b67d51](https://github.com/mzogheib/quoll/commit/5b67d51916d176f322874c6006cab7b446e58d6b))
+- **client-mobile:** connect photos ([#189](https://github.com/mzogheib/quoll/issues/189)) ([02b0909](https://github.com/mzogheib/quoll/commit/02b0909e85ccc007d1cd1e0a8ffdcffa2240349d))
+- **client-mobile:** improve permissions ux ([#193](https://github.com/mzogheib/quoll/issues/193)) ([9c3c1cb](https://github.com/mzogheib/quoll/commit/9c3c1cb0c063a2d993aff0e620061ab9fb0424f5))
+- **client-mobile:** persist permissions choice ([#190](https://github.com/mzogheib/quoll/issues/190)) ([e3bb44c](https://github.com/mzogheib/quoll/commit/e3bb44c7806dc55961791dca072de9c45595292f))
+
 # [0.18.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.17.0...@quoll/client-mobile@0.18.0) (2024-01-07)
 
 ### Features
