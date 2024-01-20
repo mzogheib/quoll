@@ -1,8 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
 import { Platform, PermissionsAndroid } from "react-native";
-import { CameraRoll } from "@react-native-camera-roll/camera-roll";
+import {
+  CameraRoll,
+  PhotoIdentifier,
+} from "@react-native-camera-roll/camera-roll";
 import { promptAllowAccess } from "@modules/alert/logic";
 import { usePersistedState } from "@modules/persisted-state/logic";
+
+type MediaItem = PhotoIdentifier["node"];
 
 const platformVersionAndroid = Number(Platform.Version);
 
@@ -75,6 +80,8 @@ export const useMedia = () => {
   const [isConnected, setIsConnected] = usePersistedState("isConnected", false);
   const [isConnecting, setIsConnecting] = useState(false);
   const [isCheckingPermission, setIsCheckingPermission] = useState(true);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [value, setValue] = useState<MediaItem[]>([]);
 
   const syncPermission = useCallback(async () => {
     setIsCheckingPermission(true);
@@ -115,9 +122,22 @@ export const useMedia = () => {
     setIsConnected(false);
   };
 
+  const refresh = useCallback(async () => {
+    setIsRefreshing(true);
+    const response = await CameraRoll.getPhotos({ first: 10 });
+    const newValue = response.edges.map(
+      (photoIdentifier) => photoIdentifier.node,
+    );
+    setValue(newValue);
+    setIsRefreshing(false);
+  }, []);
+
   return {
+    value,
     connect,
     disconnect,
+    refresh,
+    isRefreshing,
     isConnected,
     isConnecting,
     isCheckingPermission,
