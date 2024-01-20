@@ -127,8 +127,8 @@ export const useMedia = () => {
       setIsRefreshing(true);
       const response = await CameraRoll.getPhotos({
         first: 100,
-        fromTime: params.createdAfter.getMilliseconds(),
-        toTime: params.createdBefore.getMilliseconds(),
+        fromTime: params.createdAfter.getTime(),
+        toTime: params.createdBefore.getTime(),
       });
       const newValue = response.edges.map(
         (photoIdentifier) => photoIdentifier.node,
