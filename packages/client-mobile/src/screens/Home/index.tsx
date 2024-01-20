@@ -8,16 +8,29 @@ import { useStyles } from "./styles";
 import { ScreenProps } from "../types";
 import ScreenTemplate from "../ScreenTemplate";
 import { useMedia } from "@modules/media/logic";
+import { makeDateFilter } from "@modules/date-bar/logic";
 
 const HomeScreen = (_: ScreenProps<"home">) => {
   const styles = useStyles();
   const { value, isConnected, isCheckingPermission, refresh } = useMedia();
 
   useEffect(() => {
+    const refreshToday = async () => {
+      const today = new Date();
+
+      const dateFilter = makeDateFilter(today);
+      await refresh(dateFilter);
+    };
+
     if (isCheckingPermission) return;
 
-    if (isConnected) refresh();
-  }, [isConnected, refresh]);
+    if (isConnected) refreshToday();
+  }, [isConnected, isCheckingPermission, refresh]);
+
+  const handleDateChange = async (newDate: Date) => {
+    const dateFilter = makeDateFilter(newDate);
+    await refresh(dateFilter);
+  };
 
   const mediaWithLocations = value.filter(
     (item) => item.location?.latitude && item.location.longitude,
@@ -42,7 +55,7 @@ const HomeScreen = (_: ScreenProps<"home">) => {
           <Map markers={markers} />
         </View>
         <View style={styles.sideBar}>
-          <DateBar onDateChange={() => {}} />
+          <DateBar onDateChange={handleDateChange} />
         </View>
       </View>
     </ScreenTemplate>

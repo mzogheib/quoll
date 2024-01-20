@@ -122,15 +122,22 @@ export const useMedia = () => {
     setIsConnected(false);
   };
 
-  const refresh = useCallback(async () => {
-    setIsRefreshing(true);
-    const response = await CameraRoll.getPhotos({ first: 10 });
-    const newValue = response.edges.map(
-      (photoIdentifier) => photoIdentifier.node,
-    );
-    setValue(newValue);
-    setIsRefreshing(false);
-  }, []);
+  const refresh = useCallback(
+    async (params: { createdAfter: Date; createdBefore: Date }) => {
+      setIsRefreshing(true);
+      const response = await CameraRoll.getPhotos({
+        first: 100,
+        fromTime: params.createdAfter.getMilliseconds(),
+        toTime: params.createdBefore.getMilliseconds(),
+      });
+      const newValue = response.edges.map(
+        (photoIdentifier) => photoIdentifier.node,
+      );
+      setValue(newValue);
+      setIsRefreshing(false);
+    },
+    [],
+  );
 
   return {
     value,
