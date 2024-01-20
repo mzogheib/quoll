@@ -4,27 +4,27 @@ import { CameraRoll } from "@react-native-camera-roll/camera-roll";
 import { promptAllowAccess } from "@modules/alert/logic";
 import { usePersistedState } from "@modules/persisted-state/logic";
 
+const platformVersionAndroid = Number(Platform.Version);
+
+const permissions =
+  platformVersionAndroid >= 33
+    ? [
+        PermissionsAndroid.PERMISSIONS.READ_MEDIA_IMAGES,
+        PermissionsAndroid.PERMISSIONS.READ_MEDIA_VIDEO,
+      ]
+    : [PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE];
+
 const checkIsPermittedIOS = async () =>
   !!(await CameraRoll.getPhotos({ first: 1 }));
 
-const platformVersionAndroid = Number(Platform.Version);
-
 const checkIsPermittedAndroid = async () => {
-  if (platformVersionAndroid >= 33) {
-    return Promise.all([
-      PermissionsAndroid.check(
-        PermissionsAndroid.PERMISSIONS.READ_MEDIA_IMAGES,
-      ),
-      PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.READ_MEDIA_VIDEO),
-    ]).then(
-      ([hasReadMediaImagesPermission, hasReadMediaVideoPermission]) =>
-        hasReadMediaImagesPermission && hasReadMediaVideoPermission,
-    );
-  } else {
-    return PermissionsAndroid.check(
-      PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-    );
-  }
+  const promises = permissions.map((permission) =>
+    PermissionsAndroid.check(permission),
+  );
+
+  return Promise.all(promises).then((...results) =>
+    results.every(([result]) => result === true),
+  );
 };
 
 const checkIsPermitted = async () => {
@@ -39,33 +39,76 @@ const checkIsPermitted = async () => {
   }
 };
 
+const requestPermissionAndroid = async () => {
+  try {
+    const result = await PermissionsAndroid.requestMultiple(permissions);
+
+    if (platformVersionAndroid >= 33) {
+      const mediaImagesResult = result["android.permission.READ_MEDIA_IMAGES"];
+      const mediaVideoResult = result["android.permission.READ_MEDIA_VIDEO"];
+      return [mediaImagesResult, mediaVideoResult].every(
+        (result) => result === "granted",
+      );
+    } else {
+      return result["android.permission.READ_EXTERNAL_STORAGE"] === "granted";
+    }
+  } catch {
+    return false;
+  }
+};
+
+const requestPermissionIOS = async () => false;
+
+const requestPermission = async () => {
+  try {
+    if (Platform.OS === "ios") {
+      return await requestPermissionIOS();
+    } else {
+      return await requestPermissionAndroid();
+    }
+  } catch {
+    return false;
+  }
+};
+
 export const useMedia = () => {
   const [isConnected, setIsConnected] = usePersistedState("isConnected", false);
   const [isConnecting, setIsConnecting] = useState(false);
+  const [isCheckingPermission, setIsCheckingPermission] = useState(true);
 
-  const checkPermissionAndConnect = useCallback(async () => {
-    setIsConnecting(true);
+  const syncPermission = useCallback(async () => {
+    setIsCheckingPermission(true);
     const isPermitted = await checkIsPermitted();
     setIsConnected(isPermitted);
-    setIsConnecting(false);
+    setIsCheckingPermission(false);
 
     return isPermitted;
   }, []);
 
-  // User may have connected photos but then, via the app settings in the OS,
-  // denied permissions to photos. This will disconnect photos if that's the case.
+  // User may have connected previously but then, via the app settings in the
+  // OS, denied permissions. We should sync that setting here too.
   useEffect(() => {
     if (!isConnected) return;
 
-    checkPermissionAndConnect();
-  }, [checkPermissionAndConnect]);
+    syncPermission();
+  }, [syncPermission]);
 
   const connect = async () => {
-    const isPermitted = await checkPermissionAndConnect();
+    setIsConnecting(true);
+    const isPermitted = await checkIsPermitted();
 
-    if (!isPermitted) {
-      promptAllowAccess("Please allow access to your photos and videos.");
+    if (isPermitted) {
+      setIsConnected(true);
+    } else {
+      const didPermit = await requestPermission();
+
+      if (didPermit) {
+        setIsConnected(true);
+      } else {
+        promptAllowAccess("Quoll works best with your photos and videos.");
+      }
     }
+    setIsConnecting(false);
   };
 
   const disconnect = () => {
@@ -77,5 +120,6 @@ export const useMedia = () => {
     disconnect,
     isConnected,
     isConnecting,
+    isCheckingPermission,
   };
 };
