@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ImageURISource } from "react-native";
 import MapView, { MapMarkerProps } from "react-native-maps";
 import { useGeolocation } from "@modules/geolocation/logic";
@@ -6,6 +6,7 @@ import { useGeolocation } from "@modules/geolocation/logic";
 import styles from "./styles";
 
 import ImageMarker from "./ImageMarker";
+import { makeRegion } from "@modules/map/logic";
 
 export type MarkerProps = {
   coordinate: MapMarkerProps["coordinate"];
@@ -24,10 +25,23 @@ type Props = {
 };
 
 export const Map = ({ markers }: Props) => {
+  const [atUserRegion, setAtUserRegion] = useState(false);
+
+  const mapRef = useRef<MapView | null>(null);
+
   const { coords, isConnected, isCheckingPermission, getPosition } =
     useGeolocation();
 
-  const region =
+  const markersIdentifier = markers.map((marker) => marker.image.uri).join("");
+
+  // Reset when markers change
+  useEffect(() => {
+    setAtUserRegion(false);
+  }, [markersIdentifier]);
+
+  const markersRegion = makeRegion(markers.map((marker) => marker.coordinate));
+
+  const userRegion =
     isConnected && coords
       ? {
           latitude: coords.latitude,
@@ -41,6 +55,8 @@ export const Map = ({ markers }: Props) => {
           latitudeDelta: 50,
           longitudeDelta: 50,
         };
+
+  const region = markersRegion ?? userRegion;
 
   useEffect(() => {
     if (isCheckingPermission) return;
