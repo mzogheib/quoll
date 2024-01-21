@@ -81,7 +81,7 @@ export const useMedia = () => {
   const [isConnecting, setIsConnecting] = useState(false);
   const [isCheckingPermission, setIsCheckingPermission] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const [value, setValue] = useState<MediaItem[]>([]);
+  const [value, setValue] = usePersistedState<MediaItem[]>("mediaValue", []);
 
   const syncPermission = useCallback(async () => {
     setIsCheckingPermission(true);
@@ -119,6 +119,7 @@ export const useMedia = () => {
   };
 
   const disconnect = () => {
+    setValue([]);
     setIsConnected(false);
   };
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import { Map, MarkerProps } from "@modules/map/ui/Map";
 import { DateBar } from "@modules/date-bar/ui/DateBar";
@@ -13,24 +13,18 @@ import { makeDateFilter } from "@modules/date-bar/logic";
 const HomeScreen = (_: ScreenProps<"home">) => {
   const styles = useStyles();
   const { value, isConnected, isCheckingPermission, refresh } = useMedia();
+  const [date, setDate] = useState<Date>(new Date());
 
   useEffect(() => {
-    const refreshToday = async () => {
-      const today = new Date();
-
-      const dateFilter = makeDateFilter(today);
+    const _refresh = async () => {
+      const dateFilter = makeDateFilter(date);
       await refresh(dateFilter);
     };
 
     if (isCheckingPermission) return;
 
-    if (isConnected) refreshToday();
-  }, [isConnected, isCheckingPermission, refresh]);
-
-  const handleDateChange = async (newDate: Date) => {
-    const dateFilter = makeDateFilter(newDate);
-    await refresh(dateFilter);
-  };
+    if (isConnected) _refresh();
+  }, [date, isConnected, isCheckingPermission, refresh]);
 
   const mediaWithLocations = value.filter(
     (item) => item.location?.latitude && item.location.longitude,
@@ -55,7 +49,7 @@ const HomeScreen = (_: ScreenProps<"home">) => {
           <Map markers={markers} />
         </View>
         <View style={styles.sideBar}>
-          <DateBar onDateChange={handleDateChange} />
+          <DateBar onDateChange={setDate} />
         </View>
       </View>
     </ScreenTemplate>
