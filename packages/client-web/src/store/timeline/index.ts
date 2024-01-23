@@ -2,8 +2,8 @@ import { Action } from "redux";
 
 import { AppDispatch, GetState, RootState } from "..";
 
-import timelineService from "../../services/timeline";
-import { Entry } from "../../services/timeline/types";
+import timelineService from "../../modules/timeline/service";
+import { Entry } from "../../modules/timeline/types";
 
 export interface Timeline {
   isFetching: boolean;

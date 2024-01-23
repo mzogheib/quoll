@@ -1,4 +1,4 @@
-import { FeedName } from "../feeds/types";
+import { FeedName } from "../../services/feeds/types";
 
 export enum EntryType {
   Bike = "bike",
