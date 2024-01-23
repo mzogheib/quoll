@@ -37,11 +37,11 @@ export const setEntries = (entries: Entry[]): SetTimelineEntriesAction => ({
   entries,
 });
 
-export const fetchTimeline = (dispatch: AppDispatch) => (date: string) => {
-  return timelineService
-    .get(date)
-    .then((entries) => dispatch(setEntries(entries)));
-};
+export const fetchTimeline =
+  (dispatch: AppDispatch) => async (date: string) => {
+    const entries = await timelineService.get(date);
+    dispatch(setEntries(entries));
+  };
 
 export const selectTimeline = (state: RootState) => state.timeline;
 
