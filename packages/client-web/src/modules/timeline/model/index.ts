@@ -1,14 +1,21 @@
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchTimeline, selectTimeline } from "./store";
+import { fetchTimeline, selectTimeline, setTimelineFetching } from "./store";
 
 export const useTimelineModel = () => {
   const dispatch = useDispatch();
   const { isFetching, entries } = useSelector(selectTimeline);
 
   const _fetchTimeline = useCallback(
-    (date: string) => fetchTimeline(date)(dispatch),
+    async (date: string) => {
+      dispatch(setTimelineFetching(true));
+      try {
+        await fetchTimeline(date)(dispatch);
+      } finally {
+        dispatch(setTimelineFetching(false));
+      }
+    },
     [dispatch],
   );
 
