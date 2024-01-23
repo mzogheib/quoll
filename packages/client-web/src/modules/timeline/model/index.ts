@@ -1,11 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
-import store from "../../../store";
-import { fetchTimeline, selectTimeline } from "../model/store";
 import { useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import store from "../../../store";
+import { fetchTimeline, selectTimeline } from "./store";
 
 const { getState } = store;
 
-export const useTimelineViewModel = () => {
+export const useTimelineModel = () => {
   const dispatch = useDispatch();
   const { isFetching, entries } = useSelector(selectTimeline);
 
