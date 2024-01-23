@@ -37,7 +37,7 @@ export const setEntries = (entries: Entry[]): SetTimelineEntriesAction => ({
   entries,
 });
 
-export const fetchTimeline = (date: string) => (dispatch: AppDispatch) => {
+export const fetchTimeline = (dispatch: AppDispatch) => (date: string) => {
   return timelineService
     .get(date)
     .then((entries) => dispatch(setEntries(entries)));

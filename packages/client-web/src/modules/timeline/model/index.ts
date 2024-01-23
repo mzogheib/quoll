@@ -11,7 +11,7 @@ export const useTimelineModel = () => {
     async (date: string) => {
       dispatch(setTimelineFetching(true));
       try {
-        await fetchTimeline(date)(dispatch);
+        await fetchTimeline(dispatch)(date);
       } finally {
         dispatch(setTimelineFetching(false));
       }
