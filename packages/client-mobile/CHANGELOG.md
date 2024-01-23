@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.20.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.19.0...@quoll/client-mobile@0.20.0) (2024-01-23)
+
+### Features
+
+- **clien-mobile:** request permission for media on android ([3d7bd30](https://github.com/mzogheib/quoll/commit/3d7bd30d26062971f075df601b9ceb87d9e79031))
+- **client-mobile:** add photos feed ([#194](https://github.com/mzogheib/quoll/issues/194)) ([6524f09](https://github.com/mzogheib/quoll/commit/6524f09059a678a3bb8d1153d18b3417a260da22))
+- **client-mobile:** don't get position on connect ([72ad973](https://github.com/mzogheib/quoll/commit/72ad97322a2f8f3482af42eb44e7b6301f313dfe))
+
 # [0.19.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.18.0...@quoll/client-mobile@0.19.0) (2024-01-19)
 
 ### Features
