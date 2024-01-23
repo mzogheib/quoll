@@ -1,6 +1,6 @@
 import { Action } from "redux";
 
-import { AppDispatch, GetState, RootState } from "../../../store";
+import { AppDispatch, GetState, RootState } from "../../../store/types";
 
 import timelineService from "../service";
 import { Entry } from "../types";

@@ -1,6 +1,6 @@
 import { Action } from "redux";
 
-import { AppDispatch, RootState } from "..";
+import { AppDispatch, RootState } from "../types";
 
 import userService from "../../services/user";
 import { User } from "../../services/user/types";
