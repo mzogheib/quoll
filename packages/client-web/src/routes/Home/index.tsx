@@ -5,7 +5,7 @@ import { HorizontalLoader } from "@quoll/ui-components";
 import { useDispatch, useSelector } from "react-redux";
 
 import { selectDate, setDate } from "../../store/date";
-import { fetchTimeline, selectTimeline } from "../../store/timeline";
+import { fetchTimeline, selectTimeline } from "../../modules/timeline/model";
 import DatePicker from "../../components/DatePicker";
 import Timeline from "../../modules/timeline/views/Timeline";
 import Map from "../../components/Map";

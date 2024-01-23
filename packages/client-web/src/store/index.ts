@@ -5,7 +5,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import user from "./user";
 import date from "./date";
 import feeds from "./feeds";
-import timeline from "./timeline";
+import timeline from "../modules/timeline/model";
 
 const reducer = combineReducers({
   user,
