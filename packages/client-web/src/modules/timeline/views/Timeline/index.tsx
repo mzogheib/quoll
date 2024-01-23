@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import TimelineEntry from "../TimelineEntry";
-import { Entry } from "../../services/timeline/types";
+import { Entry } from "../../../../services/timeline/types";
 
 const Wrapper = styled.div`
   display: flex;

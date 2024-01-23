@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectDate, setDate } from "../../store/date";
 import { fetchTimeline, selectTimeline } from "../../store/timeline";
 import DatePicker from "../../components/DatePicker";
-import Timeline from "../../components/Timeline";
+import Timeline from "../../modules/timeline/views/Timeline";
 import Map from "../../components/Map";
 import store from "../../store";
 import { makePolylineConfigs, makeInfoWindowOptions } from "./mapUtils";
