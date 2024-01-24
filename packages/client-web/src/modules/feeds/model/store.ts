@@ -1,7 +1,6 @@
 import { Action } from "redux";
 
-import { AppDispatch, RootState } from "../../../store/types";
-import feedsService from "../../../services/feeds";
+import { RootState } from "../../../store/types";
 import { FeedName } from "../../../services/feeds/types";
 
 enum FeedActionType {
@@ -43,37 +42,6 @@ export const setFeedAuthenticating = (
   name,
   value,
 });
-
-export const getOauthUrl = (name: FeedName) => (dispatch: AppDispatch) => {
-  dispatch(setFeedAuthenticating(name, true));
-  return feedsService
-    .getOauthUrl(name)
-    .then((url) => url)
-    .finally(() => dispatch(setFeedAuthenticating(name, false)));
-};
-
-export const authenticateFeed =
-  (name: FeedName, code: string) => (dispatch: AppDispatch) => {
-    dispatch(setFeedAuthenticating(name, true));
-    return feedsService
-      .authenticate(name, { code })
-      .then(() => dispatch(setFeedConnected(name, true)))
-      .finally(() => dispatch(setFeedAuthenticating(name, false)));
-  };
-
-export const disconnectFeed = (name: FeedName) => (dispatch: AppDispatch) => {
-  dispatch(setFeedAuthenticating(name, true));
-  return (
-    feedsService
-      .deauthorize(name)
-      // BE may return a message for further, manual instructions
-      .then((message) => {
-        dispatch(setFeedConnected(name, false));
-        return message;
-      })
-      .finally(() => dispatch(setFeedAuthenticating(name, false)))
-  );
-};
 
 export const selectFeeds = (state: RootState) => state.feeds;
 
