@@ -1,19 +1,16 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import { Route, Switch, useHistory, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import routes from "../routes";
 import Header from "../components/Header";
 import SideBar from "../components/SideBar";
 import WelcomeModal from "./WelcomeModal";
-import {
-  loginUser,
-  selectIsAuthenticating,
-  signupUser,
-} from "../modules/user/model/store";
+import { selectIsAuthenticating } from "../modules/user/model/store";
 import userService from "../services/user";
 import { selectHasFeedConnected } from "../modules/feeds/model/store";
+import { useUserModel } from "../modules/user/model";
 
 const Wrapper = styled.div(
   ({ theme: { colors, media } }) => css`
@@ -43,19 +40,20 @@ const Main = styled.main`
 const App = () => {
   const history = useHistory();
   const location = useLocation();
-  const dispatch = useDispatch();
 
   const hasFeedConnected = useSelector(selectHasFeedConnected);
   const isAuthenticating = useSelector(selectIsAuthenticating);
+
+  const { login, signup } = useUserModel();
 
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
 
   useEffect(() => {
     const userId = userService.getCurrentUser();
-    const action = userId ? () => loginUser(userId) : () => signupUser();
 
-    dispatch(action());
-  }, [dispatch]);
+    if (userId) login(userId);
+    else signup();
+  }, [login, signup]);
 
   // TODO: don't show the modal if user is already logged in and disconnects
   // all feeds
