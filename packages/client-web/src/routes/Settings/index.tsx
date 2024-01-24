@@ -1,20 +1,14 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 
-import {
-  getOauthUrl,
-  authenticateFeed,
-  disconnectFeed,
-  FeedState,
-  selectFeeds,
-} from "../../modules/feeds/model/store";
+import { FeedState } from "../../modules/feeds/model/store";
 import FeedSettings from "../../components/FeedSettings";
 import { requestAuth } from "../../services/oauth";
 import AlertModal from "../../components/modals/AlertModal";
 import { FeedName } from "../../services/feeds/types";
 import { SettingsLocationState } from "../types";
+import { useFeedsViewModel } from "../../modules/feeds/view-model";
 
 const Wrapper = styled.div`
   display: flex;
@@ -54,19 +48,13 @@ const INITIAL_STATE = {
 };
 
 const Settings = () => {
-  const dispatch = useDispatch();
-
   const history = useHistory();
   const location = useLocation<SettingsLocationState>();
 
   const [state, setState] = useState(INITIAL_STATE);
 
-  const feeds = Object.values(useSelector(selectFeeds));
-
-  const onConnect = (name: FeedName) => getOauthUrl(name)(dispatch);
-  const onOauthCodeReceived = (name: FeedName, code: string) =>
-    authenticateFeed(name, code)(dispatch);
-  const onDisconnect = (name: FeedName) => disconnectFeed(name)(dispatch);
+  const { feeds, onConnect, onDisconnect, onOauthCodeReceived } =
+    useFeedsViewModel();
 
   const openModal = (message = INITIAL_STATE.modalMessage) =>
     setState({ showModal: true, modalMessage: message });
