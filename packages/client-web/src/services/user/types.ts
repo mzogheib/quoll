@@ -1,4 +1,4 @@
-import { FeedName } from "../feeds/types";
+import { FeedName } from "../../modules/feeds/types";
 
 interface UserFeed {
   name: FeedName;

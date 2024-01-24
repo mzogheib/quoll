@@ -1,13 +1,13 @@
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { FeedName } from "../../../services/feeds/types";
+import { FeedName } from "../types";
 import {
   selectFeeds,
   setFeedAuthenticating,
   setFeedConnected,
 } from "../model/store";
-import feedsService from "../../../services/feeds";
+import feedsService from "../service";
 
 export const useFeedsModel = () => {
   const dispatch = useDispatch();

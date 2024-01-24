@@ -1,5 +1,5 @@
-import { AuthenticatePayload, FeedName } from "./types";
-import api from "../api";
+import { AuthenticatePayload, FeedName } from "../types";
+import api from "../../../services/api";
 
 const endpoint = "feed-auth";
 

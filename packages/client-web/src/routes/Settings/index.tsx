@@ -5,7 +5,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import FeedSettings from "../../components/FeedSettings";
 import { requestAuth } from "../../services/oauth";
 import AlertModal from "../../components/modals/AlertModal";
-import { FeedName } from "../../services/feeds/types";
+import { FeedName } from "../../modules/feeds/types";
 import { SettingsLocationState } from "../types";
 import { useFeedsViewModel } from "../../modules/feeds/view-model";
 

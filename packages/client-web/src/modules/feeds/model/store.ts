@@ -1,7 +1,7 @@
 import { Action } from "redux";
 
 import { RootState } from "../../../store/types";
-import { FeedName } from "../../../services/feeds/types";
+import { FeedName } from "../types";
 
 enum FeedActionType {
   SetConnected = "SET_FEED_CONNECTED",
