@@ -7,7 +7,11 @@ import routes from "../routes";
 import Header from "../components/Header";
 import SideBar from "../components/SideBar";
 import WelcomeModal from "./WelcomeModal";
-import { loginUser, selectIsAuthenticating, signupUser } from "../store/user";
+import {
+  loginUser,
+  selectIsAuthenticating,
+  signupUser,
+} from "../modules/user/model/store";
 import userService from "../services/user";
 import { selectHasFeedConnected } from "../modules/feeds/model/store";
 

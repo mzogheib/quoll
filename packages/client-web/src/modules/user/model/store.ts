@@ -1,10 +1,10 @@
 import { Action } from "redux";
 
-import { AppDispatch, RootState } from "../types";
+import { AppDispatch, RootState } from "../../../store/types";
 
-import userService from "../../services/user";
-import { User } from "../../services/user/types";
-import { setFeedConnected } from "../../modules/feeds/model/store";
+import userService from "../../../services/user";
+import { User } from "../../../services/user/types";
+import { setFeedConnected } from "../../feeds/model/store";
 
 enum UserActionType {
   SetAuthenticating = "SET_USER_AUTHENTICATING",
