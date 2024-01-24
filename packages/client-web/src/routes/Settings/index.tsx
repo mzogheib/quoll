@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useHistory, useLocation } from "react-router-dom";
 
-import { FeedState } from "../../modules/feeds/model/store";
 import FeedSettings from "../../components/FeedSettings";
 import { requestAuth } from "../../services/oauth";
 import AlertModal from "../../components/modals/AlertModal";
@@ -94,21 +93,21 @@ const Settings = () => {
 
   const { showModal, modalMessage } = state;
 
-  const renderFeed = (feed: FeedState) => (
-    <FeedSettingsWrapper key={feed.name}>
-      <FeedSettings
-        feed={feed}
-        onConnect={handleConnect}
-        onDisconnect={handleDisconnect}
-      />
-    </FeedSettingsWrapper>
-  );
-
   return (
     <Wrapper>
       <Feeds>
         <FeedsTitle>Feeds</FeedsTitle>
-        <FeedsList>{feeds.map(renderFeed)}</FeedsList>
+        <FeedsList>
+          {feeds.map((feed) => (
+            <FeedSettingsWrapper key={feed.name}>
+              <FeedSettings
+                feed={feed}
+                onConnect={handleConnect}
+                onDisconnect={handleDisconnect}
+              />
+            </FeedSettingsWrapper>
+          ))}
+        </FeedsList>
       </Feeds>
       <AlertModal
         isOpen={showModal}
