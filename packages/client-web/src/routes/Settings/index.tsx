@@ -9,7 +9,7 @@ import {
   disconnectFeed,
   FeedState,
   selectFeeds,
-} from "../../store/feeds";
+} from "../../modules/feeds/model/store";
 import FeedSettings from "../../components/FeedSettings";
 import { requestAuth } from "../../services/oauth";
 import AlertModal from "../../components/modals/AlertModal";

@@ -4,7 +4,7 @@ import { AppDispatch, RootState } from "../types";
 
 import userService from "../../services/user";
 import { User } from "../../services/user/types";
-import { setFeedConnected } from "../feeds";
+import { setFeedConnected } from "../../modules/feeds/model/store";
 
 enum UserActionType {
   SetAuthenticating = "SET_USER_AUTHENTICATING",

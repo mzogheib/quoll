@@ -9,7 +9,7 @@ import SideBar from "../components/SideBar";
 import WelcomeModal from "./WelcomeModal";
 import { loginUser, selectIsAuthenticating, signupUser } from "../store/user";
 import userService from "../services/user";
-import { selectHasFeedConnected } from "../store/feeds";
+import { selectHasFeedConnected } from "../modules/feeds/model/store";
 
 const Wrapper = styled.div(
   ({ theme: { colors, media } }) => css`
