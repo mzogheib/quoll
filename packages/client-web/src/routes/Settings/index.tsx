@@ -53,8 +53,7 @@ const Settings = () => {
 
   const [state, setState] = useState(INITIAL_STATE);
 
-  const { feeds, onConnect, onDisconnect, onOauthCodeReceived } =
-    useFeedsViewModel();
+  const { feeds, connect, disconnect, authenticate } = useFeedsViewModel();
 
   const openModal = (message = INITIAL_STATE.modalMessage) =>
     setState({ showModal: true, modalMessage: message });
@@ -77,15 +76,15 @@ const Settings = () => {
       openModal(message);
 
     const onRequestAuthSuccess = (code: string) =>
-      onOauthCodeReceived(name, code).catch(openErrorModal);
+      authenticate(name, code).catch(openErrorModal);
 
-    onConnect(name)
+    connect(name)
       .then((url) => requestAuth(url, onRequestAuthSuccess, openErrorModal))
       .catch(openErrorModal);
   };
 
   const handleDisconnect = (name: FeedName) =>
-    onDisconnect(name)
+    disconnect(name)
       .then((message) => {
         if (message) {
           openModal(message);

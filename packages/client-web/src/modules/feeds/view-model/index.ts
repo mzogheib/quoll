@@ -12,17 +12,17 @@ import {
 export const useFeedsViewModel = () => {
   const dispatch = useDispatch();
 
-  const onConnect = useCallback(
+  const connect = useCallback(
     (name: FeedName) => getOauthUrl(name)(dispatch),
     [dispatch],
   );
 
-  const onDisconnect = useCallback(
+  const disconnect = useCallback(
     (name: FeedName) => disconnectFeed(name)(dispatch),
     [dispatch],
   );
 
-  const onOauthCodeReceived = useCallback(
+  const authenticate = useCallback(
     (name: FeedName, code: string) => authenticateFeed(name, code)(dispatch),
     [dispatch],
   );
@@ -31,8 +31,8 @@ export const useFeedsViewModel = () => {
 
   return {
     feeds,
-    onConnect,
-    onDisconnect,
-    onOauthCodeReceived,
+    connect,
+    disconnect,
+    authenticate,
   };
 };
