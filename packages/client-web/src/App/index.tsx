@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import { Route, Switch, useHistory, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 import userService from "@modules/user/service";
-import { selectHasFeedConnected } from "@modules/feeds/model/store";
 import { useUserViewModel } from "@modules/user/view-model";
+import { useFeedsViewModel } from "@modules/feeds/view-model";
 import Header from "@components/Header";
 import SideBar from "@components/SideBar";
 import routes from "../routes";
@@ -40,9 +39,8 @@ const App = () => {
   const history = useHistory();
   const location = useLocation();
 
-  const hasFeedConnected = useSelector(selectHasFeedConnected);
-
   const { isAuthenticating, login, signup } = useUserViewModel();
+  const { isOneConnected: isOneFeedConnected } = useFeedsViewModel();
 
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
 
@@ -56,10 +54,10 @@ const App = () => {
   // TODO: don't show the modal if user is already logged in and disconnects
   // all feeds
   useEffect(() => {
-    if (!isAuthenticating && !hasFeedConnected) {
+    if (!isAuthenticating && !isOneFeedConnected) {
       setShowWelcomeModal(true);
     }
-  }, [hasFeedConnected, isAuthenticating]);
+  }, [isOneFeedConnected, isAuthenticating]);
 
   const getRouteTitleFromLocation = () => {
     const route = routes.find((route) => route.path === location.pathname);

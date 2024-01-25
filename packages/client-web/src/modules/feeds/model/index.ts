@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FeedName } from "../types";
 import {
   selectFeeds,
+  selectHasFeedConnected,
   setFeedAuthenticating,
   setFeedConnected,
 } from "../model/store";
@@ -13,6 +14,8 @@ export const useFeedsModel = () => {
   const dispatch = useDispatch();
 
   const _feeds = useSelector(selectFeeds);
+
+  const isOneConnected = useSelector(selectHasFeedConnected);
 
   const setConnected = useCallback(
     (name: FeedName, value: boolean) => {
@@ -59,6 +62,7 @@ export const useFeedsModel = () => {
 
   return {
     feeds,
+    isOneConnected,
     connect,
     disconnect,
     authenticate,
