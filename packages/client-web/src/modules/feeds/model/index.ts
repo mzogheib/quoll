@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { FeedName } from "../types";
@@ -11,6 +11,15 @@ import feedsService from "../service";
 
 export const useFeedsModel = () => {
   const dispatch = useDispatch();
+
+  const _feeds = useSelector(selectFeeds);
+
+  const setConnected = useCallback(
+    (name: FeedName, value: boolean) => {
+      dispatch(setFeedConnected(name, value));
+    },
+    [dispatch],
+  );
 
   const connect = useCallback(
     async (name: FeedName) => {
@@ -28,25 +37,25 @@ export const useFeedsModel = () => {
       dispatch(setFeedAuthenticating(name, true));
       // BE may return a message for further, manual instructions
       const message = await feedsService.deauthorize(name);
-      dispatch(setFeedConnected(name, false));
+      setConnected(name, false);
       dispatch(setFeedAuthenticating(name, false));
 
       return message;
     },
-    [dispatch],
+    [dispatch, setConnected],
   );
 
   const authenticate = useCallback(
     async (name: FeedName, code: string) => {
       dispatch(setFeedAuthenticating(name, true));
       await feedsService.authenticate(name, { code });
-      dispatch(setFeedConnected(name, true));
+      setConnected(name, true);
       dispatch(setFeedAuthenticating(name, false));
     },
-    [dispatch],
+    [dispatch, setConnected],
   );
 
-  const feeds = Object.values(useSelector(selectFeeds));
+  const feeds = useMemo(() => Object.values(_feeds), [_feeds]);
 
   return {
     feeds,
