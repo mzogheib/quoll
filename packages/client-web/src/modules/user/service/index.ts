@@ -1,6 +1,6 @@
-import api from "../api";
-import storage from "../storage";
-import { User } from "./types";
+import api from "../../../services/api";
+import storage from "../../../services/storage";
+import { User } from "../types";
 
 const userKey = "user";
 

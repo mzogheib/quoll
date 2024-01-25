@@ -8,7 +8,7 @@ import Header from "../components/Header";
 import SideBar from "../components/SideBar";
 import WelcomeModal from "./WelcomeModal";
 import { selectIsAuthenticating } from "../modules/user/model/store";
-import userService from "../services/user";
+import userService from "../modules/user/service";
 import { selectHasFeedConnected } from "../modules/feeds/model/store";
 import { useUserViewModel } from "../modules/user/view-model";
 

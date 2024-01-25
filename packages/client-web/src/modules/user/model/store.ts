@@ -2,7 +2,7 @@ import { Action } from "redux";
 
 import { RootState } from "../../../store/types";
 
-import { User } from "../../../services/user/types";
+import { User } from "../types";
 
 enum UserActionType {
   SetAuthenticating = "SET_USER_AUTHENTICATING",

@@ -6,7 +6,7 @@ import {
   setUserAuthenticating,
   setUserReady,
 } from "../model/store";
-import userService from "../../../services/user";
+import userService from "../service";
 
 export const useUserModel = () => {
   const dispatch = useDispatch();
