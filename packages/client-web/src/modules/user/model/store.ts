@@ -28,11 +28,21 @@ export const setUserReady = (user: User): SetUserReadyAction => ({
 export const selectIsAuthenticating = (state: RootState) =>
   state.user.isAuthenticating;
 
-const defaultState = { isAuthenticating: true };
+export const selectUser = (state: RootState) => state.user.user;
 
 type UserAction = SetUserAuthenticatingAction | SetUserReadyAction;
 
-const userReducer = (state = defaultState, action: UserAction) => {
+type UserState = {
+  isAuthenticating: boolean;
+  user: User | undefined;
+};
+
+const defaultState: UserState = { isAuthenticating: true, user: undefined };
+
+const userReducer = (
+  state: UserState = defaultState,
+  action: UserAction,
+): UserState => {
   switch (action.type) {
     case UserActionType.SetAuthenticating:
       return { ...state, isAuthenticating: true };
