@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useHistory, useLocation } from "react-router-dom";
 
+import { FeedName } from "@modules/feeds/types";
+import { useFeedsViewModel } from "@modules/feeds/view-model";
 import FeedSettings from "../../components/FeedSettings";
 import { requestAuth } from "../../services/oauth";
 import AlertModal from "../../components/modals/AlertModal";
-import { FeedName } from "../../modules/feeds/types";
 import { SettingsLocationState } from "../types";
-import { useFeedsViewModel } from "../../modules/feeds/view-model";
 
 const Wrapper = styled.div`
   display: flex;

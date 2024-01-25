@@ -3,10 +3,10 @@ import styled, { css } from "styled-components";
 import moment from "moment";
 import { HorizontalLoader } from "@quoll/ui-components";
 
-import { useTimelineViewModel } from "../../modules/timeline/view-model";
-import { useDateViewModelModel } from "../../modules/date/view-model";
-import DatePicker from "../../modules/date/views/DatePicker";
-import Timeline from "../../modules/timeline/views/Timeline";
+import { useTimelineViewModel } from "@modules/timeline/view-model";
+import { useDateViewModelModel } from "@modules/date/view-model";
+import DatePicker from "@modules/date/views/DatePicker";
+import Timeline from "@modules/timeline/views/Timeline";
 import Map from "../../components/Map";
 import { makePolylineConfigs, makeInfoWindowOptions } from "./mapUtils";
 
