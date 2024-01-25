@@ -10,7 +10,7 @@ import WelcomeModal from "./WelcomeModal";
 import { selectIsAuthenticating } from "../modules/user/model/store";
 import userService from "../services/user";
 import { selectHasFeedConnected } from "../modules/feeds/model/store";
-import { useUserModel } from "../modules/user/model";
+import { useUserViewModel } from "../modules/user/view-model";
 
 const Wrapper = styled.div(
   ({ theme: { colors, media } }) => css`
@@ -44,7 +44,7 @@ const App = () => {
   const hasFeedConnected = useSelector(selectHasFeedConnected);
   const isAuthenticating = useSelector(selectIsAuthenticating);
 
-  const { login, signup } = useUserModel();
+  const { login, signup } = useUserViewModel();
 
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
 
