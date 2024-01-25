@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components";
-
 import { ButtonPrimary, IconButton, Modal } from "@quoll/ui-components";
 
 const Header = styled.div`

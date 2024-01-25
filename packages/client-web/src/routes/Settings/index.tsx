@@ -4,9 +4,9 @@ import { useHistory, useLocation } from "react-router-dom";
 
 import { FeedName } from "@modules/feeds/types";
 import { useFeedsViewModel } from "@modules/feeds/view-model";
-import FeedSettings from "../../components/FeedSettings";
+import FeedSettings from "@components/FeedSettings";
+import AlertModal from "@components/modals/AlertModal";
 import { requestAuth } from "../../services/oauth";
-import AlertModal from "../../components/modals/AlertModal";
 import { SettingsLocationState } from "../types";
 
 const Wrapper = styled.div`

@@ -3,7 +3,7 @@ import { ButtonPlain, HorizontalLoader } from "@quoll/ui-components";
 
 import { FeedName } from "@modules/feeds/types";
 import { FeedState } from "@modules/feeds/model/store";
-import FeedLogo from "../FeedLogo";
+import FeedLogo from "@components/FeedLogo";
 
 const Wrapper = styled.div(
   ({ theme: { colors } }) => css`
