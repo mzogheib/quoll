@@ -2,6 +2,7 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
+  selectIsAuthenticating,
   selectUser,
   setUserAuthenticating,
   setUserReady,
@@ -12,6 +13,8 @@ export const useUserModel = () => {
   const dispatch = useDispatch();
 
   const user = useSelector(selectUser);
+
+  const isAuthenticating = useSelector(selectIsAuthenticating);
 
   const login = useCallback(
     async (userId: string) => {
@@ -34,6 +37,7 @@ export const useUserModel = () => {
 
   return {
     user,
+    isAuthenticating,
     login,
     signup,
   };

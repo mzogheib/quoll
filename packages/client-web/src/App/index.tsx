@@ -3,7 +3,6 @@ import styled, { css } from "styled-components";
 import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import { selectIsAuthenticating } from "@modules/user/model/store";
 import userService from "@modules/user/service";
 import { selectHasFeedConnected } from "@modules/feeds/model/store";
 import { useUserViewModel } from "@modules/user/view-model";
@@ -42,9 +41,8 @@ const App = () => {
   const location = useLocation();
 
   const hasFeedConnected = useSelector(selectHasFeedConnected);
-  const isAuthenticating = useSelector(selectIsAuthenticating);
 
-  const { login, signup } = useUserViewModel();
+  const { isAuthenticating, login, signup } = useUserViewModel();
 
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
 
