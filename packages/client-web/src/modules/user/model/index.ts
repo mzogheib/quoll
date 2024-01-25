@@ -1,26 +1,27 @@
 import { useCallback } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { setUserAuthenticating, setUserReady } from "../model/store";
+import {
+  selectUser,
+  setUserAuthenticating,
+  setUserReady,
+} from "../model/store";
 import userService from "../../../services/user";
-import { setFeedConnected } from "../../feeds/model/store";
-
-// TODO remove dependence on feeds model. Setting connected feeds should
-// be done at a higher level
 
 export const useUserModel = () => {
   const dispatch = useDispatch();
+
+  const user = useSelector(selectUser);
 
   const login = useCallback(
     async (userId: string) => {
       dispatch(setUserAuthenticating());
 
       const user = await userService.login(userId);
-      user.feeds.forEach(({ name, isConnected }) =>
-        dispatch(setFeedConnected(name, isConnected)),
-      );
 
       dispatch(setUserReady(user));
+
+      return user;
     },
     [dispatch],
   );
@@ -32,6 +33,7 @@ export const useUserModel = () => {
   }, [dispatch]);
 
   return {
+    user,
     login,
     signup,
   };

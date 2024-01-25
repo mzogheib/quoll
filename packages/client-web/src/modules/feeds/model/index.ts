@@ -62,5 +62,6 @@ export const useFeedsModel = () => {
     connect,
     disconnect,
     authenticate,
+    setConnected,
   };
 };
