@@ -1,4 +1,4 @@
-import { FeedName } from "@modules/feeds/types";
+import { FeedName } from "modules/feeds/types";
 
 const logoMap = {
   [FeedName.Toshl]: {

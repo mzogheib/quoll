@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 
-import userService from "@modules/user/service";
-import { useUserViewModel } from "@modules/user/view-model";
-import { useFeedsViewModel } from "@modules/feeds/view-model";
-import Header from "@components/Header";
-import SideBar from "@components/SideBar";
+import userService from "modules/user/service";
+import { useUserViewModel } from "modules/user/view-model";
+import { useFeedsViewModel } from "modules/feeds/view-model";
+import Header from "components/Header";
+import SideBar from "components/SideBar";
 import routes from "../routes";
 import WelcomeModal from "./WelcomeModal";
 

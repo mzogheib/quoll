@@ -7,7 +7,7 @@ module.exports = {
         patterns: [
           {
             group: ["*/*/modules/*/*"],
-            message: "Import from @modules/ instead.",
+            message: "Import from modules/ instead.",
           },
         ],
       },
