@@ -4,13 +4,21 @@ import { Action } from "redux";
 
 import { RootState } from "store";
 
+/**
+ * Makes a store and returns the reducer and hook to use it.
+ *
+ * Store are simple. They have a state with properties that can be set and
+ * retrieved. There is no async logic in stores - that's done in the consumers.
+ *
+ * @param storeName - must be unique
+ * @param initialState
+ * @returns the store reducer and hook
+ */
 export const makeStore = <State extends object>(
   storeName: string,
   initialState: State,
 ) => {
   type StatePropertyName = keyof State;
-
-  // Setter
 
   const makeActionType = (name: StatePropertyName) => {
     return `${storeName}__set__${String(name)}`;
@@ -21,6 +29,13 @@ export const makeStore = <State extends object>(
     payload: { name: StatePropertyName; value: State[StatePropertyName] };
   }
 
+  /**
+   * There is only one action, which is to set a store property.
+   *
+   * @param name
+   * @param value
+   * @returns an action to set a property
+   */
   const makeSetPropertyAction = <Name extends StatePropertyName>(
     name: Name,
     value: State[Name],
@@ -43,11 +58,9 @@ export const makeStore = <State extends object>(
     return setProperty;
   };
 
-  // Selector
   // TODO this might trigger a rerender for changes in property even if a
   // consumer is only referring to one. But it might be ok since there are
   // only a few properties per store.
-
   const useSelectProperties = (): State => {
     const value = useSelector((rootState: RootState) => {
       const _storeName = storeName as keyof RootState;
@@ -57,8 +70,6 @@ export const makeStore = <State extends object>(
 
     return value as State;
   };
-
-  // Reducer
 
   const reducer = (
     state: State = initialState,
@@ -81,8 +92,6 @@ export const makeStore = <State extends object>(
     }
   };
 
-  // Hook
-
   const useStore = () => {
     const setProperty = useSetProperty();
     const properties = useSelectProperties();
@@ -95,6 +104,9 @@ export const makeStore = <State extends object>(
 
   return {
     reducer,
+    /**
+     * A hook to set store properties and to get the current state.
+     */
     useStore,
   };
 };
