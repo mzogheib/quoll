@@ -1,5 +1,6 @@
 import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 import user from "modules/user/model/store";
 import date from "modules/date/model/store";
@@ -14,7 +15,7 @@ const reducer = combineReducers({
   timeline,
 });
 
-const store = createStore(reducer);
+const store = createStore(reducer, composeWithDevTools());
 
 type GetState = typeof store.getState;
 export type RootState = ReturnType<GetState>;
