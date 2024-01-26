@@ -4,11 +4,6 @@ import { RootState } from "../../../store";
 
 import { Entry } from "../types";
 
-export interface Timeline {
-  isFetching: boolean;
-  entries: Entry[];
-}
-
 enum TimelineActionType {
   SetFetching = "SET_TIMELINE_FETCHING",
   SetEntries = "SET_TIMELINE_ENTRIES",
@@ -38,11 +33,19 @@ export const setEntries = (entries: Entry[]): SetTimelineEntriesAction => ({
 
 export const selectTimeline = (state: RootState) => state.timeline;
 
-const defaultState: Timeline = { isFetching: true, entries: [] };
-
 type TimelineAction = SetTimelineFetchingAction | SetTimelineEntriesAction;
 
-const timeline = (state = defaultState, action: TimelineAction) => {
+type TimelineState = {
+  isFetching: boolean;
+  entries: Entry[];
+};
+
+const defaultState: TimelineState = { isFetching: true, entries: [] };
+
+const timeline = (
+  state: TimelineState = defaultState,
+  action: TimelineAction,
+): TimelineState => {
   switch (action.type) {
     case TimelineActionType.SetFetching:
       return { ...state, isFetching: action.value };

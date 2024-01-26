@@ -13,12 +13,6 @@ interface SetFeedConnectedAction extends Action<FeedActionType.SetConnected> {
   value: boolean;
 }
 
-export interface FeedState {
-  name: FeedName;
-  isAuthenticating: boolean;
-  isConnected: boolean;
-}
-
 export const setFeedConnected = (
   name: FeedName,
   value: boolean,
@@ -54,16 +48,27 @@ const makeDefaultFeedState = (name: FeedName) => ({
   isConnected: false,
 });
 
-const defaultState: Record<FeedName, FeedState> = {
+type FeedAction = SetFeedAuthenticatingAction | SetFeedConnectedAction;
+
+export type FeedState = {
+  name: FeedName;
+  isAuthenticating: boolean;
+  isConnected: boolean;
+};
+
+type FeedsState = Record<FeedName, FeedState>;
+
+const defaultState: FeedsState = {
   [FeedName.Moves]: makeDefaultFeedState(FeedName.Moves),
   [FeedName.Strava]: makeDefaultFeedState(FeedName.Strava),
   [FeedName.Uber]: makeDefaultFeedState(FeedName.Uber),
   [FeedName.Toshl]: makeDefaultFeedState(FeedName.Toshl),
 };
 
-type FeedAction = SetFeedAuthenticatingAction | SetFeedConnectedAction;
-
-const feeds = (state = defaultState, action: FeedAction) => {
+const feeds = (
+  state: FeedsState = defaultState,
+  action: FeedAction,
+): FeedsState => {
   const { type, name, value } = action;
 
   switch (type) {
