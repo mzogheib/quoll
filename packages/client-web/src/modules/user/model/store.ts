@@ -1,56 +1,56 @@
 import { useCallback } from "react";
-import { Action } from "redux";
 import { useDispatch, useSelector } from "react-redux";
 
 import { RootState } from "../../../store";
 import { User } from "../types";
-
-enum UserActionType {
-  SetAuthenticating = "SET_USER_AUTHENTICATING",
-  SetReady = "SET_USER_READY",
-}
-
-interface SetUserAuthenticatingAction
-  extends Action<UserActionType.SetAuthenticating> {}
-
-export const setUserAuthenticating = (): SetUserAuthenticatingAction => ({
-  type: UserActionType.SetAuthenticating,
-});
-
-interface SetUserReadyAction extends Action<UserActionType.SetReady> {
-  user: User;
-}
-
-export const setUserReady = (user: User): SetUserReadyAction => ({
-  type: UserActionType.SetReady,
-  user,
-});
 
 export const selectIsAuthenticating = (state: RootState) =>
   state.user.isAuthenticating;
 
 export const selectUser = (state: RootState) => state.user.user;
 
-type UserAction = SetUserAuthenticatingAction | SetUserReadyAction;
-
 type UserState = {
   isAuthenticating: boolean;
   user: User | undefined;
 };
 
+type UserStatePropertyName = keyof UserState;
+
+const makeActionType = (name: UserStatePropertyName) => `user__${name}`;
+
+const makeSetPropertyAction = <Name extends UserStatePropertyName>(
+  name: Name,
+  value: UserState[Name],
+) => ({
+  type: makeActionType(name),
+  value: value,
+});
+
+type SetPropertyAction = ReturnType<typeof makeSetPropertyAction>;
+
+const getActionValue = <Name extends UserStatePropertyName>(
+  _: Name,
+  action: SetPropertyAction,
+) => action.value as UserState[Name];
+
 const defaultState: UserState = { isAuthenticating: true, user: undefined };
 
 const userReducer = (
   state: UserState = defaultState,
-  action: UserAction,
+  action: SetPropertyAction,
 ): UserState => {
   switch (action.type) {
-    case UserActionType.SetAuthenticating:
-      return { ...state, isAuthenticating: true };
+    case makeActionType("isAuthenticating"):
+      return {
+        ...state,
+        isAuthenticating: getActionValue("isAuthenticating", action),
+      };
 
-    case UserActionType.SetReady:
-      const { user } = action;
-      return { ...state, isAuthenticating: false, user };
+    case makeActionType("user"):
+      return {
+        ...state,
+        user: getActionValue("user", action),
+      };
 
     default:
       return state;
@@ -63,16 +63,11 @@ export const useUserStore = () => {
   const dispatch = useDispatch();
 
   const user = useSelector(selectUser);
-
   const isAuthenticating = useSelector(selectIsAuthenticating);
 
-  const _setUserAuthenticating = useCallback(() => {
-    dispatch(setUserAuthenticating());
-  }, [dispatch]);
-
-  const _setUserReady = useCallback(
-    (user: User) => {
-      dispatch(setUserReady(user));
+  const setProperty = useCallback(
+    <K extends keyof UserState>(name: K, value: UserState[K]) => {
+      dispatch(makeSetPropertyAction(name, value));
     },
     [dispatch],
   );
@@ -80,7 +75,6 @@ export const useUserStore = () => {
   return {
     user,
     isAuthenticating,
-    setUserAuthenticating: _setUserAuthenticating,
-    setUserReady: _setUserReady,
+    setProperty,
   };
 };

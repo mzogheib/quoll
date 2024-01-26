@@ -4,27 +4,26 @@ import { useUserStore } from "./store";
 import userService from "../service";
 
 export const useUserModel = () => {
-  const { user, isAuthenticating, setUserAuthenticating, setUserReady } =
-    useUserStore();
+  const { user, isAuthenticating, setProperty } = useUserStore();
 
   const login = useCallback(
     async (userId: string) => {
-      setUserAuthenticating();
-
+      setProperty("isAuthenticating", true);
       const user = await userService.login(userId);
-
-      setUserReady(user);
+      setProperty("user", user);
+      setProperty("isAuthenticating", false);
 
       return user;
     },
-    [setUserAuthenticating, setUserReady],
+    [setProperty],
   );
 
   const signup = useCallback(async () => {
-    setUserAuthenticating();
+    setProperty("isAuthenticating", true);
     const user = await userService.signup();
-    setUserReady(user);
-  }, [setUserAuthenticating, setUserReady]);
+    setProperty("user", user);
+    setProperty("isAuthenticating", false);
+  }, [setProperty]);
 
   return {
     user,
