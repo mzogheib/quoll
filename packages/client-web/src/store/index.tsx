@@ -16,7 +16,7 @@ const reducer = combineReducers({
 
 const store = createStore(reducer);
 
-export type GetState = typeof store.getState;
+type GetState = typeof store.getState;
 export type RootState = ReturnType<GetState>;
 export type AppDispatch = typeof store.dispatch;
 
