@@ -1,6 +1,6 @@
 import { Action } from "redux";
 
-import { RootState } from "../../../store/types";
+import { RootState } from "../../../store";
 
 import { Entry } from "../types";
 
