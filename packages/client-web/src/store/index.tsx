@@ -18,7 +18,6 @@ const store = createStore(reducer);
 
 type GetState = typeof store.getState;
 export type RootState = ReturnType<GetState>;
-export type AppDispatch = typeof store.dispatch;
 
 export const StoreProvider = ({ children }: { children: ReactNode }) => (
   <Provider store={store}>{children}</Provider>
