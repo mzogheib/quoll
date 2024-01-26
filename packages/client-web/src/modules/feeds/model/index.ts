@@ -7,13 +7,14 @@ import {
   selectHasFeedConnected,
   setFeedAuthenticating,
   setFeedConnected,
-} from "../model/store";
+} from "./store";
 import feedsService from "../service";
 
 export const useFeedsModel = () => {
   const dispatch = useDispatch();
 
   const _feeds = useSelector(selectFeeds);
+  const feeds = useMemo(() => Object.values(_feeds), [_feeds]);
 
   const isOneConnected = useSelector(selectHasFeedConnected);
 
@@ -57,8 +58,6 @@ export const useFeedsModel = () => {
     },
     [dispatch, setConnected],
   );
-
-  const feeds = useMemo(() => Object.values(_feeds), [_feeds]);
 
   return {
     feeds,
