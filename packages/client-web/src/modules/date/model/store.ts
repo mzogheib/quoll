@@ -17,14 +17,26 @@ export const setDate = (date: string): SetDateAction => ({
 
 export const selectDate = (state: RootState) => state.date;
 
-const defaultState = moment().format("YYYY-MM-DD");
-
 type DateAction = SetDateAction;
 
-const date = (state = defaultState, action: DateAction) => {
+type DateState = {
+  value: string;
+};
+
+const defaultState: DateState = {
+  value: moment().format("YYYY-MM-DD"),
+};
+
+const date = (
+  state: DateState = defaultState,
+  action: DateAction,
+): DateState => {
   switch (action.type) {
     case DateActionType.Set:
-      return action.date;
+      return {
+        ...state,
+        value: action.date,
+      };
     default:
       return state;
   }

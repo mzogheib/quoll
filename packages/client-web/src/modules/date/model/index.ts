@@ -13,7 +13,7 @@ export const useDateModel = () => {
   );
 
   return {
-    date,
+    date: date.value,
     setDate: _setDate,
   };
 };
