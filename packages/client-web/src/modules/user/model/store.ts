@@ -4,17 +4,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import { User } from "../types";
 
-export const selectIsAuthenticating = (state: RootState) =>
-  state.user.isAuthenticating;
-
-export const selectUser = (state: RootState) => state.user.user;
-
 type UserState = {
   isAuthenticating: boolean;
   user: User | undefined;
 };
 
 type UserStatePropertyName = keyof UserState;
+
+const selectProperty =
+  <Name extends UserStatePropertyName>(name: Name) =>
+  (state: RootState) =>
+    state.user[name];
 
 const makeActionType = (name: UserStatePropertyName) => `user__${name}`;
 
@@ -62,8 +62,8 @@ export default userReducer;
 export const useUserStore = () => {
   const dispatch = useDispatch();
 
-  const user = useSelector(selectUser);
-  const isAuthenticating = useSelector(selectIsAuthenticating);
+  const user = useSelector(selectProperty("user"));
+  const isAuthenticating = useSelector(selectProperty("isAuthenticating"));
 
   const setProperty = useCallback(
     <K extends keyof UserState>(name: K, value: UserState[K]) => {
