@@ -11,21 +11,8 @@ const defaultState: UserState = {
   user: undefined,
 };
 
-const { reducer, useSelectProperty, useSetProperty } = makeStore<UserState>(
-  "user",
-  defaultState,
-);
+const { reducer, useStore } = makeStore<UserState>("user", defaultState);
 
 export default reducer;
 
-export const useUserStore = () => {
-  const setProperty = useSetProperty();
-  const user = useSelectProperty("user");
-  const isAuthenticating = useSelectProperty("isAuthenticating");
-
-  return {
-    user,
-    isAuthenticating,
-    setProperty,
-  };
-};
+export const useUserStore = useStore;

@@ -44,21 +44,18 @@ export const makeStore = <State extends object>(
   };
 
   // Selector
+  // TODO this might trigger a rerender for changes in property even if a
+  // consumer is only referring to one. But it might be ok since there are
+  // only a few properties per store.
 
-  const selectProperty =
-    <Name extends StatePropertyName>(name: Name) =>
-    (rootState: RootState): State[Name] => {
+  const useSelectProperties = (): State => {
+    const value = useSelector((rootState: RootState) => {
       const _storeName = storeName as keyof RootState;
-      const storeState = rootState[_storeName] as State;
-      return storeState[name];
-    };
 
-  const useSelectProperty = <Name extends StatePropertyName>(
-    name: Name,
-  ): State[Name] => {
-    const value = useSelector(selectProperty(name));
+      return rootState[_storeName];
+    });
 
-    return value;
+    return value as State;
   };
 
   // Reducer
@@ -84,9 +81,20 @@ export const makeStore = <State extends object>(
     }
   };
 
+  // Hook
+
+  const useStore = () => {
+    const setProperty = useSetProperty();
+    const properties = useSelectProperties();
+
+    return {
+      setProperty,
+      ...properties,
+    };
+  };
+
   return {
-    useSetProperty,
-    useSelectProperty,
     reducer,
+    useStore,
   };
 };
