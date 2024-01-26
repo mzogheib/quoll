@@ -56,7 +56,7 @@ export type FeedState = {
   isConnected: boolean;
 };
 
-type FeedsState = Record<FeedName, FeedState>;
+export type FeedsState = Record<FeedName, FeedState>;
 
 const defaultState: FeedsState = {
   [FeedName.Moves]: makeDefaultFeedState(FeedName.Moves),

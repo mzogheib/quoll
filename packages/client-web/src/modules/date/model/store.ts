@@ -19,7 +19,7 @@ export const selectDate = (state: RootState) => state.date;
 
 type DateAction = SetDateAction;
 
-type DateState = {
+export type DateState = {
   value: string;
 };
 

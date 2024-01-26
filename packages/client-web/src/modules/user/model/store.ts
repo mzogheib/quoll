@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import { User } from "../types";
 
-type UserState = {
+export type UserState = {
   isAuthenticating: boolean;
   user: User | undefined;
 };

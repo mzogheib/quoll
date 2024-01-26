@@ -35,7 +35,7 @@ export const selectTimeline = (state: RootState) => state.timeline;
 
 type TimelineAction = SetTimelineFetchingAction | SetTimelineEntriesAction;
 
-type TimelineState = {
+export type TimelineState = {
   isFetching: boolean;
   entries: Entry[];
 };
