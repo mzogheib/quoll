@@ -6,8 +6,8 @@ module.exports = {
       {
         patterns: [
           {
-            group: ["*/*/modules/*/*"],
-            message: "Import from modules/ instead.",
+            group: ["*/modules/*/*", "*/*/modules/*/*"],
+            message: 'Import from "modules/" instead.',
           },
         ],
       },
