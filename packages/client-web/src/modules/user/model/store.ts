@@ -1,6 +1,3 @@
-import { useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
 import { User } from "../types";
 import { makeStore } from "store/factory";
 
@@ -14,7 +11,7 @@ const defaultState: UserState = {
   user: undefined,
 };
 
-const { reducer, selectProperty, makeSetPropertyAction } = makeStore<UserState>(
+const { reducer, useSelectProperty, useSetProperty } = makeStore<UserState>(
   "user",
   defaultState,
 );
@@ -22,21 +19,9 @@ const { reducer, selectProperty, makeSetPropertyAction } = makeStore<UserState>(
 export default reducer;
 
 export const useUserStore = () => {
-  const dispatch = useDispatch();
-
-  const user = useSelector(selectProperty("user"));
-  const isAuthenticating = useSelector(selectProperty("isAuthenticating"));
-
-  const setProperty = useCallback(
-    <PropertyName extends keyof UserState>(
-      name: PropertyName,
-      value: UserState[PropertyName],
-    ) => {
-      const action = makeSetPropertyAction(name, value);
-      dispatch(action);
-    },
-    [dispatch],
-  );
+  const setProperty = useSetProperty();
+  const user = useSelectProperty("user");
+  const isAuthenticating = useSelectProperty("isAuthenticating");
 
   return {
     user,

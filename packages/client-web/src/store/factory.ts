@@ -1,4 +1,7 @@
+import { useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Action } from "redux";
+
 import { RootState } from "store";
 
 export const makeStore = <State extends object>(
@@ -23,6 +26,20 @@ export const makeStore = <State extends object>(
     type: makeActionType(name),
     payload: { name, value },
   });
+
+  const useSetProperty = () => {
+    const dispatch = useDispatch();
+
+    const setProperty = useCallback(
+      (name: StatePropertyName, value: State[StatePropertyName]) => {
+        const action = makeSetPropertyAction(name, value);
+        dispatch(action);
+      },
+      [dispatch],
+    );
+
+    return setProperty;
+  };
 
   const reducer = (
     state: State = initialState,
@@ -53,9 +70,17 @@ export const makeStore = <State extends object>(
       return storeState[name];
     };
 
+  const useSelectProperty = <Name extends StatePropertyName>(
+    name: Name,
+  ): State[Name] => {
+    const value = useSelector(selectProperty(name));
+
+    return value;
+  };
+
   return {
     reducer,
-    makeSetPropertyAction,
-    selectProperty,
+    useSelectProperty,
+    useSetProperty,
   };
 };
