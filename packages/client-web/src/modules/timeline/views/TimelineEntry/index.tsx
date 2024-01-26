@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import moment from "moment";
 
-import FeedLogo from "@components/FeedLogo";
+import FeedLogo from "components/FeedLogo";
 import { getEntryImage } from "../../service";
 import { Entry } from "../../types";
 
