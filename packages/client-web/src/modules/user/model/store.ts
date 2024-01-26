@@ -1,10 +1,8 @@
 import { Action } from "redux";
 
-import { AppDispatch, RootState } from "..";
+import { RootState } from "../../../store/types";
 
-import userService from "../../services/user";
-import { User } from "../../services/user/types";
-import { setFeedConnected } from "../feeds";
+import { User } from "../types";
 
 enum UserActionType {
   SetAuthenticating = "SET_USER_AUTHENTICATING",
@@ -27,32 +25,24 @@ export const setUserReady = (user: User): SetUserReadyAction => ({
   user,
 });
 
-export const loginUser = (id: string) => (dispatch: AppDispatch) => {
-  dispatch(setUserAuthenticating());
-  return userService.login(id).then((user) => {
-    user.feeds.forEach(({ name, isConnected }) =>
-      dispatch(setFeedConnected(name, isConnected)),
-    );
-
-    dispatch(setUserReady(user));
-  });
-};
-
-export const signupUser = () => (dispatch: AppDispatch) => {
-  dispatch(setUserAuthenticating());
-  return userService.signup().then((user) => {
-    dispatch(setUserReady(user));
-  });
-};
-
 export const selectIsAuthenticating = (state: RootState) =>
   state.user.isAuthenticating;
 
-const defaultState = { isAuthenticating: true };
+export const selectUser = (state: RootState) => state.user.user;
 
 type UserAction = SetUserAuthenticatingAction | SetUserReadyAction;
 
-const userReducer = (state = defaultState, action: UserAction) => {
+type UserState = {
+  isAuthenticating: boolean;
+  user: User | undefined;
+};
+
+const defaultState: UserState = { isAuthenticating: true, user: undefined };
+
+const userReducer = (
+  state: UserState = defaultState,
+  action: UserAction,
+): UserState => {
   switch (action.type) {
     case UserActionType.SetAuthenticating:
       return { ...state, isAuthenticating: true };

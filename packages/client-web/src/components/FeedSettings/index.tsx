@@ -1,8 +1,9 @@
 import styled, { css } from "styled-components";
 import { ButtonPlain, HorizontalLoader } from "@quoll/ui-components";
-import { FeedName } from "../../services/feeds/types";
-import { FeedState } from "../../store/feeds";
-import FeedLogo from "../FeedLogo";
+
+import { FeedName } from "@modules/feeds/types";
+import { FeedState } from "@modules/feeds/model/store";
+import FeedLogo from "@components/FeedLogo";
 
 const Wrapper = styled.div(
   ({ theme: { colors } }) => css`

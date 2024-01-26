@@ -1,19 +1,12 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 
-import {
-  getOauthUrl,
-  authenticateFeed,
-  disconnectFeed,
-  FeedState,
-  selectFeeds,
-} from "../../store/feeds";
-import FeedSettings from "../../components/FeedSettings";
+import { FeedName } from "@modules/feeds/types";
+import { useFeedsViewModel } from "@modules/feeds/view-model";
+import FeedSettings from "@components/FeedSettings";
+import AlertModal from "@components/modals/AlertModal";
 import { requestAuth } from "../../services/oauth";
-import AlertModal from "../../components/modals/AlertModal";
-import { FeedName } from "../../services/feeds/types";
 import { SettingsLocationState } from "../types";
 
 const Wrapper = styled.div`
@@ -54,19 +47,12 @@ const INITIAL_STATE = {
 };
 
 const Settings = () => {
-  const dispatch = useDispatch();
-
   const history = useHistory();
   const location = useLocation<SettingsLocationState>();
 
   const [state, setState] = useState(INITIAL_STATE);
 
-  const feeds = Object.values(useSelector(selectFeeds));
-
-  const onConnect = (name: FeedName) => getOauthUrl(name)(dispatch);
-  const onOauthCodeReceived = (name: FeedName, code: string) =>
-    authenticateFeed(name, code)(dispatch);
-  const onDisconnect = (name: FeedName) => disconnectFeed(name)(dispatch);
+  const { feeds, connect, disconnect, authenticate } = useFeedsViewModel();
 
   const openModal = (message = INITIAL_STATE.modalMessage) =>
     setState({ showModal: true, modalMessage: message });
@@ -89,15 +75,15 @@ const Settings = () => {
       openModal(message);
 
     const onRequestAuthSuccess = (code: string) =>
-      onOauthCodeReceived(name, code).catch(openErrorModal);
+      authenticate(name, code).catch(openErrorModal);
 
-    onConnect(name)
+    connect(name)
       .then((url) => requestAuth(url, onRequestAuthSuccess, openErrorModal))
       .catch(openErrorModal);
   };
 
   const handleDisconnect = (name: FeedName) =>
-    onDisconnect(name)
+    disconnect(name)
       .then((message) => {
         if (message) {
           openModal(message);
@@ -107,21 +93,21 @@ const Settings = () => {
 
   const { showModal, modalMessage } = state;
 
-  const renderFeed = (feed: FeedState) => (
-    <FeedSettingsWrapper key={feed.name}>
-      <FeedSettings
-        feed={feed}
-        onConnect={handleConnect}
-        onDisconnect={handleDisconnect}
-      />
-    </FeedSettingsWrapper>
-  );
-
   return (
     <Wrapper>
       <Feeds>
         <FeedsTitle>Feeds</FeedsTitle>
-        <FeedsList>{feeds.map(renderFeed)}</FeedsList>
+        <FeedsList>
+          {feeds.map((feed) => (
+            <FeedSettingsWrapper key={feed.name}>
+              <FeedSettings
+                feed={feed}
+                onConnect={handleConnect}
+                onDisconnect={handleDisconnect}
+              />
+            </FeedSettingsWrapper>
+          ))}
+        </FeedsList>
       </Feeds>
       <AlertModal
         isOpen={showModal}

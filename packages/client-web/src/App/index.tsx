@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import { Route, Switch, useHistory, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 
+import userService from "@modules/user/service";
+import { useUserViewModel } from "@modules/user/view-model";
+import { useFeedsViewModel } from "@modules/feeds/view-model";
+import Header from "@components/Header";
+import SideBar from "@components/SideBar";
 import routes from "../routes";
-import Header from "../components/Header";
-import SideBar from "../components/SideBar";
 import WelcomeModal from "./WelcomeModal";
-import { loginUser, selectIsAuthenticating, signupUser } from "../store/user";
-import userService from "../services/user";
-import { selectHasFeedConnected } from "../store/feeds";
 
 const Wrapper = styled.div(
   ({ theme: { colors, media } }) => css`
@@ -39,27 +38,26 @@ const Main = styled.main`
 const App = () => {
   const history = useHistory();
   const location = useLocation();
-  const dispatch = useDispatch();
 
-  const hasFeedConnected = useSelector(selectHasFeedConnected);
-  const isAuthenticating = useSelector(selectIsAuthenticating);
+  const { isAuthenticating, login, signup } = useUserViewModel();
+  const { isOneConnected: isOneFeedConnected } = useFeedsViewModel();
 
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
 
   useEffect(() => {
     const userId = userService.getCurrentUser();
-    const action = userId ? () => loginUser(userId) : () => signupUser();
 
-    dispatch(action());
-  }, [dispatch]);
+    if (userId) login(userId);
+    else signup();
+  }, [login, signup]);
 
   // TODO: don't show the modal if user is already logged in and disconnects
   // all feeds
   useEffect(() => {
-    if (!isAuthenticating && !hasFeedConnected) {
+    if (!isAuthenticating && !isOneFeedConnected) {
       setShowWelcomeModal(true);
     }
-  }, [hasFeedConnected, isAuthenticating]);
+  }, [isOneFeedConnected, isAuthenticating]);
 
   const getRouteTitleFromLocation = () => {
     const route = routes.find((route) => route.path === location.pathname);

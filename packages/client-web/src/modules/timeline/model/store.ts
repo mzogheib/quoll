@@ -1,9 +1,8 @@
 import { Action } from "redux";
 
-import { AppDispatch, GetState, RootState } from "..";
+import { RootState } from "../../../store/types";
 
-import timelineService from "../../services/timeline";
-import { Entry } from "../../services/timeline/types";
+import { Entry } from "../types";
 
 export interface Timeline {
   isFetching: boolean;
@@ -36,17 +35,6 @@ export const setEntries = (entries: Entry[]): SetTimelineEntriesAction => ({
   type: TimelineActionType.SetEntries,
   entries,
 });
-
-export const fetchTimeline =
-  () => (dispatch: AppDispatch, getState: GetState) => {
-    const { date } = getState();
-
-    dispatch(setTimelineFetching(true));
-    return timelineService
-      .get(date)
-      .then((entries) => dispatch(setEntries(entries)))
-      .catch(() => dispatch(setTimelineFetching(false)));
-  };
 
 export const selectTimeline = (state: RootState) => state.timeline;
 

@@ -1,8 +1,8 @@
 import moment from "moment";
 
-import { PolylineConfig } from "../../components/Map/Component";
-import { decodePath } from "../../components/Map/utils";
-import { Entry } from "../../services/timeline/types";
+import { Entry } from "@modules/timeline/types";
+import { PolylineConfig } from "@components/Map/Component";
+import { decodePath } from "@components/Map/utils";
 
 const mapElementColors = {
   default: "#eb4434",

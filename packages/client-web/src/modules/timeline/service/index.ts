@@ -1,7 +1,7 @@
 import moment from "moment";
 
-import api from "../api";
-import { Entry, EntryType } from "./types";
+import api from "../../../services/api";
+import { Entry, EntryType } from "../types";
 
 const EntryConfig = {
   [EntryType.Bike]: { label: "Bike", image: "🚲" },

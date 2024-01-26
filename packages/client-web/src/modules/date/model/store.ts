@@ -1,6 +1,6 @@
 import moment from "moment";
 import { Action } from "redux";
-import { RootState } from "..";
+import { RootState } from "../../../store/types";
 
 enum DateActionType {
   Set = "SET_DATE",

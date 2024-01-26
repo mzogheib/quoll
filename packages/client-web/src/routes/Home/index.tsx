@@ -2,17 +2,13 @@ import { useEffect, useMemo, useState } from "react";
 import styled, { css } from "styled-components";
 import moment from "moment";
 import { HorizontalLoader } from "@quoll/ui-components";
-import { useDispatch, useSelector } from "react-redux";
 
-import { selectDate, setDate } from "../../store/date";
-import { fetchTimeline, selectTimeline } from "../../store/timeline";
-import DatePicker from "../../components/DatePicker";
-import Timeline from "../../components/Timeline";
-import Map from "../../components/Map";
-import store from "../../store";
+import { useTimelineViewModel } from "@modules/timeline/view-model";
+import { useDateViewModelModel } from "@modules/date/view-model";
+import DatePicker from "@modules/date/views/DatePicker";
+import Timeline from "@modules/timeline/views/Timeline";
+import Map from "@components/Map";
 import { makePolylineConfigs, makeInfoWindowOptions } from "./mapUtils";
-
-const { getState } = store;
 
 const Wrapper = styled.div(
   ({ theme: { media } }) => css`
@@ -83,9 +79,8 @@ const LoaderWrapper = styled.div`
 `;
 
 const Home = () => {
-  const dispatch = useDispatch();
-  const date = useSelector(selectDate);
-  const { isFetching, entries } = useSelector(selectTimeline);
+  const { date, setDate } = useDateViewModelModel();
+  const { isFetching, entries, fetchTimeline } = useTimelineViewModel();
 
   const [isMapReady, setIsMapReady] = useState(false);
   const [focussedEntryId, setFocussedEntryId] = useState<string>();
@@ -101,7 +96,7 @@ const Home = () => {
   const handleDateChange = (date: string) => {
     setFocussedEntryId(undefined);
     setFocussedEntryLatLng(undefined);
-    dispatch(setDate(date));
+    setDate(date);
   };
 
   const polylineConfigs = useMemo(() => {
@@ -120,8 +115,8 @@ const Home = () => {
 
   // This fetches on every date change
   useEffect(() => {
-    fetchTimeline()(dispatch, getState);
-  }, [date, dispatch]);
+    fetchTimeline();
+  }, [date, fetchTimeline]);
 
   const dateIsToday = (date: string) => moment(date).isSame(moment(), "day");
 

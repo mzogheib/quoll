@@ -2,10 +2,10 @@ import { createStore, applyMiddleware, combineReducers } from "redux";
 import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
-import user from "./user";
-import date from "./date";
-import feeds from "./feeds";
-import timeline from "./timeline";
+import user from "@modules/user/model/store";
+import date from "@modules/date/model/store";
+import feeds from "@modules/feeds/model/store";
+import timeline from "@modules/timeline/model/store";
 
 const reducer = combineReducers({
   user,
@@ -18,9 +18,5 @@ const store = createStore(
   reducer,
   composeWithDevTools(applyMiddleware(thunkMiddleware)),
 );
-
-export type GetState = typeof store.getState;
-export type RootState = ReturnType<GetState>;
-export type AppDispatch = typeof store.dispatch;
 
 export default store;
