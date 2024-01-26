@@ -10,6 +10,8 @@ export const makeStore = <State extends object>(
 ) => {
   type StatePropertyName = keyof State;
 
+  // Setter
+
   const makeActionType = (name: StatePropertyName) => {
     return `${storeName}__set__${String(name)}`;
   };
@@ -41,6 +43,26 @@ export const makeStore = <State extends object>(
     return setProperty;
   };
 
+  // Selector
+
+  const selectProperty =
+    <Name extends StatePropertyName>(name: Name) =>
+    (rootState: RootState): State[Name] => {
+      const _storeName = storeName as keyof RootState;
+      const storeState = rootState[_storeName] as State;
+      return storeState[name];
+    };
+
+  const useSelectProperty = <Name extends StatePropertyName>(
+    name: Name,
+  ): State[Name] => {
+    const value = useSelector(selectProperty(name));
+
+    return value;
+  };
+
+  // Reducer
+
   const reducer = (
     state: State = initialState,
     action: SetPropertyAction,
@@ -62,25 +84,9 @@ export const makeStore = <State extends object>(
     }
   };
 
-  const selectProperty =
-    <Name extends StatePropertyName>(name: Name) =>
-    (rootState: RootState): State[Name] => {
-      const _storeName = storeName as keyof RootState;
-      const storeState = rootState[_storeName] as State;
-      return storeState[name];
-    };
-
-  const useSelectProperty = <Name extends StatePropertyName>(
-    name: Name,
-  ): State[Name] => {
-    const value = useSelector(selectProperty(name));
-
-    return value;
-  };
-
   return {
-    reducer,
-    useSelectProperty,
     useSetProperty,
+    useSelectProperty,
+    reducer,
   };
 };
