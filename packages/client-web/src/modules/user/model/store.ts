@@ -1,7 +1,8 @@
+import { useCallback } from "react";
 import { Action } from "redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { RootState } from "../../../store";
-
 import { User } from "../types";
 
 enum UserActionType {
@@ -57,3 +58,29 @@ const userReducer = (
 };
 
 export default userReducer;
+
+export const useUserStore = () => {
+  const dispatch = useDispatch();
+
+  const user = useSelector(selectUser);
+
+  const isAuthenticating = useSelector(selectIsAuthenticating);
+
+  const _setUserAuthenticating = useCallback(() => {
+    dispatch(setUserAuthenticating());
+  }, [dispatch]);
+
+  const _setUserReady = useCallback(
+    (user: User) => {
+      dispatch(setUserReady(user));
+    },
+    [dispatch],
+  );
+
+  return {
+    user,
+    isAuthenticating,
+    setUserAuthenticating: _setUserAuthenticating,
+    setUserReady: _setUserReady,
+  };
+};
