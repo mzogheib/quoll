@@ -1,4 +1,4 @@
-import { createStore, combineReducers } from "redux";
+import { legacy_createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 
@@ -15,7 +15,7 @@ const reducer = combineReducers({
   timeline,
 });
 
-const store = createStore(reducer, composeWithDevTools());
+const store = legacy_createStore(reducer, composeWithDevTools());
 
 export type RootState = {
   user: UserState;
