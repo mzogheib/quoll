@@ -9,10 +9,10 @@ import * as feedsStore from "modules/feeds/model/store";
 import * as timelineStore from "modules/timeline/model/store";
 
 const reducer = combineReducers({
-  user: userStore.useStore,
-  date: dateStore.useStore,
-  feeds: feedsStore.useStore,
-  timeline: timelineStore.useStore,
+  user: userStore.reducer,
+  date: dateStore.reducer,
+  feeds: feedsStore.reducer,
+  timeline: timelineStore.reducer,
 });
 
 const store = legacy_createStore(reducer, composeWithDevTools());
