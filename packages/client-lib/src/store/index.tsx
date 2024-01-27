@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import { ReducersMapObject, combineReducers, legacy_createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 
-export const createGlobalStore = <M extends ReducersMapObject<any, any>>(
+export const makeGlobalStore = <M extends ReducersMapObject<any, any>>(
   reducers: M,
 ) => {
   const globalReducer = combineReducers(reducers);

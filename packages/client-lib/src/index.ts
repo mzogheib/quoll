@@ -1,2 +1,2 @@
 export { makeStore } from "./store/factory";
-export { createGlobalStore } from "./store";
+export { makeGlobalStore as createGlobalStore } from "./store";
