@@ -1,10 +1,10 @@
 import { useCallback } from "react";
 
-import { useTimelineStore } from "./store";
+import { useStore } from "./store";
 import timelineService from "../service";
 
 export const useTimelineModel = () => {
-  const { isFetching, entries, setProperty } = useTimelineStore();
+  const { isFetching, entries, setProperty } = useStore();
 
   const fetchTimeline = useCallback(
     async (date: string) => {

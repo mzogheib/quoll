@@ -11,11 +11,7 @@ const defaultState: TimelineState = {
   entries: [],
 };
 
-const { reducer, useStore } = makeStore<TimelineState>(
+export const { reducer, useStore } = makeStore<TimelineState>(
   "timeline",
   defaultState,
 );
-
-export default reducer;
-
-export const useTimelineStore = useStore;

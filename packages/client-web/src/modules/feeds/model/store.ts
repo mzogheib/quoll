@@ -22,8 +22,7 @@ const defaultState: FeedsState = {
   [FeedName.Toshl]: makeDefaultFeedState(FeedName.Toshl),
 };
 
-const { reducer, useStore } = makeStore<FeedsState>("feeds", defaultState);
-
-export default reducer;
-
-export const useFeedsStore = useStore;
+export const { reducer, useStore } = makeStore<FeedsState>(
+  "feeds",
+  defaultState,
+);

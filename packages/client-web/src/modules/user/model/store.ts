@@ -11,8 +11,4 @@ const defaultState: UserState = {
   user: undefined,
 };
 
-const { reducer, useStore } = makeStore<UserState>("user", defaultState);
-
-export default reducer;
-
-export const useUserStore = useStore;
+export const { reducer, useStore } = makeStore<UserState>("user", defaultState);

@@ -1,10 +1,10 @@
 import { useCallback } from "react";
 
-import { useUserStore } from "./store";
+import { useStore } from "./store";
 import userService from "../service";
 
 export const useUserModel = () => {
-  const { user, isAuthenticating, setProperty } = useUserStore();
+  const { user, isAuthenticating, setProperty } = useStore();
 
   const login = useCallback(
     async (userId: string) => {

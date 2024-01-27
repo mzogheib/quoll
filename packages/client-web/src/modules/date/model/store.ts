@@ -10,5 +10,3 @@ const defaultState: DateState = {
 };
 
 export const { reducer, useStore } = makeStore<DateState>("date", defaultState);
-
-export default reducer;
