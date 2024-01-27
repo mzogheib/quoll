@@ -1,19 +1,17 @@
-import { useDispatch, useSelector } from "react-redux";
 import { useCallback } from "react";
 
-import { selectDate, setDate } from "./store";
+import { useStore } from "./store";
 
 export const useDateModel = () => {
-  const dispatch = useDispatch();
-  const date = useSelector(selectDate);
+  const { value, setProperty } = useStore();
 
   const _setDate = useCallback(
-    (newDate: string) => dispatch(setDate(newDate)),
-    [dispatch],
+    (newDate: string) => setProperty("value", newDate),
+    [setProperty],
   );
 
   return {
-    date: date.value,
+    date: value,
     setDate: _setDate,
   };
 };
