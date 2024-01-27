@@ -7,7 +7,7 @@ import { RootState } from "store";
 /**
  * Makes a store and returns the reducer and hook to use it.
  *
- * Store are simple. They have a state with properties that can be set and
+ * Stores are simple. They have a state with properties that can be set and
  * retrieved. There is no async logic in stores - that's done in the consumers.
  *
  * @param storeName - must be unique
