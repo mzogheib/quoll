@@ -1,66 +1,76 @@
 import { useCallback, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 import { FeedName } from "../types";
-import {
-  selectFeeds,
-  selectHasFeedConnected,
-  setFeedAuthenticating,
-  setFeedConnected,
-} from "./store";
+import { FeedState, useFeedsStore } from "./store";
 import feedsService from "../service";
 
 export const useFeedsModel = () => {
-  const dispatch = useDispatch();
+  const { setProperty, ...feeds } = useFeedsStore();
 
-  const _feeds = useSelector(selectFeeds);
-  const feeds = useMemo(() => Object.values(_feeds), [_feeds]);
+  const isOneConnected = useMemo(
+    () => Object.values(feeds).some((feed) => feed.isConnected),
+    [feeds],
+  );
 
-  const isOneConnected = useSelector(selectHasFeedConnected);
+  const setFeedProperty = useCallback(
+    <PN extends keyof FeedState>(
+      feedName: FeedName,
+      propertyName: PN,
+      value: FeedState[PN],
+    ) => {
+      const newFeed = {
+        ...feeds[feedName],
+        [propertyName]: value,
+      };
+
+      setProperty(feedName, newFeed);
+    },
+    [feeds, setProperty],
+  );
 
   const setConnected = useCallback(
     (name: FeedName, value: boolean) => {
-      dispatch(setFeedConnected(name, value));
+      setFeedProperty(name, "isConnected", value);
     },
-    [dispatch],
+    [setFeedProperty],
   );
 
   const connect = useCallback(
     async (name: FeedName) => {
-      dispatch(setFeedAuthenticating(name, true));
+      setFeedProperty(name, "isAuthenticating", true);
       const url = await feedsService.getOauthUrl(name);
-      dispatch(setFeedAuthenticating(name, false));
+      setFeedProperty(name, "isAuthenticating", false);
 
       return url;
     },
-    [dispatch],
+    [setFeedProperty],
   );
 
   const disconnect = useCallback(
     async (name: FeedName) => {
-      dispatch(setFeedAuthenticating(name, true));
+      setFeedProperty(name, "isAuthenticating", true);
       // BE may return a message for further, manual instructions
       const message = await feedsService.deauthorize(name);
-      setConnected(name, false);
-      dispatch(setFeedAuthenticating(name, false));
+      setFeedProperty(name, "isConnected", false);
+      setFeedProperty(name, "isAuthenticating", false);
 
       return message;
     },
-    [dispatch, setConnected],
+    [setFeedProperty],
   );
 
   const authenticate = useCallback(
     async (name: FeedName, code: string) => {
-      dispatch(setFeedAuthenticating(name, true));
+      setFeedProperty(name, "isAuthenticating", true);
       await feedsService.authenticate(name, { code });
-      setConnected(name, true);
-      dispatch(setFeedAuthenticating(name, false));
+      setFeedProperty(name, "isConnected", true);
+      setFeedProperty(name, "isAuthenticating", false);
     },
-    [dispatch, setConnected],
+    [setFeedProperty],
   );
 
   return {
-    feeds,
+    feeds: Object.values(feeds),
     isOneConnected,
     connect,
     disconnect,

@@ -1,54 +1,5 @@
-import { Action } from "redux";
-
-import { RootState } from "../../../store";
 import { FeedName } from "../types";
-
-enum FeedActionType {
-  SetConnected = "SET_FEED_CONNECTED",
-  SetAuthenticating = "SET_FEED_AUTHENTICATING",
-}
-
-interface SetFeedConnectedAction extends Action<FeedActionType.SetConnected> {
-  name: FeedName;
-  value: boolean;
-}
-
-export const setFeedConnected = (
-  name: FeedName,
-  value: boolean,
-): SetFeedConnectedAction => ({
-  type: FeedActionType.SetConnected,
-  name,
-  value,
-});
-
-interface SetFeedAuthenticatingAction
-  extends Action<FeedActionType.SetAuthenticating> {
-  name: FeedName;
-  value: boolean;
-}
-
-export const setFeedAuthenticating = (
-  name: FeedName,
-  value: boolean,
-): SetFeedAuthenticatingAction => ({
-  type: FeedActionType.SetAuthenticating,
-  name,
-  value,
-});
-
-export const selectFeeds = (state: RootState) => state.feeds;
-
-export const selectHasFeedConnected = (state: RootState) =>
-  Object.values(state.feeds).some(({ isConnected }) => isConnected);
-
-const makeDefaultFeedState = (name: FeedName) => ({
-  name,
-  isAuthenticating: false,
-  isConnected: false,
-});
-
-type FeedAction = SetFeedAuthenticatingAction | SetFeedConnectedAction;
+import { makeStore } from "store/factory";
 
 export type FeedState = {
   name: FeedName;
@@ -58,6 +9,12 @@ export type FeedState = {
 
 export type FeedsState = Record<FeedName, FeedState>;
 
+const makeDefaultFeedState = (name: FeedName) => ({
+  name,
+  isAuthenticating: false,
+  isConnected: false,
+});
+
 const defaultState: FeedsState = {
   [FeedName.Moves]: makeDefaultFeedState(FeedName.Moves),
   [FeedName.Strava]: makeDefaultFeedState(FeedName.Strava),
@@ -65,20 +22,8 @@ const defaultState: FeedsState = {
   [FeedName.Toshl]: makeDefaultFeedState(FeedName.Toshl),
 };
 
-const feeds = (
-  state: FeedsState = defaultState,
-  action: FeedAction,
-): FeedsState => {
-  const { type, name, value } = action;
+const { reducer, useStore } = makeStore<FeedsState>("feeds", defaultState);
 
-  switch (type) {
-    case FeedActionType.SetConnected:
-      return { ...state, [name]: { ...state[name], isConnected: value } };
-    case FeedActionType.SetAuthenticating:
-      return { ...state, [name]: { ...state[name], isAuthenticating: value } };
-    default:
-      return state;
-  }
-};
+export default reducer;
 
-export default feeds;
+export const useFeedsStore = useStore;
