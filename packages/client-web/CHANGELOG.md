@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.14](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.5.13...@quoll/client-web@0.5.14) (2024-01-27)
+
+### Bug Fixes
+
+- **client-web:** fix global reducer ([ee1e226](https://github.com/mzogheib/quoll/commit/ee1e226eadc976ae61b7ec13354062c99869b1d4))
+
 ## [0.5.13](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.5.12...@quoll/client-web@0.5.13) (2024-01-27)
 
 ### Bug Fixes

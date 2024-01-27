@@ -1,6 +1,6 @@
 {
   "name": "@quoll/client-web",
-  "version": "0.5.13",
+  "version": "0.5.14",
   "private": true,
   "scripts": {
     "start": "react-scripts start",
