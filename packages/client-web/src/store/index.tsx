@@ -1,21 +1,21 @@
+import { ReactNode } from "react";
 import { legacy_createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 
-import { reducer as userReducer, UserState } from "modules/user/model/store";
-import { reducer as dateReducer, DateState } from "modules/date/model/store";
-import { reducer as feedsReducer, FeedsState } from "modules/feeds/model/store";
+import { reducer as user, UserState } from "modules/user/model/store";
+import { reducer as date, DateState } from "modules/date/model/store";
+import { reducer as feeds, FeedsState } from "modules/feeds/model/store";
 import {
-  reducer as timelineReducer,
+  reducer as timeline,
   TimelineState,
 } from "modules/timeline/model/store";
-import { ReactNode } from "react";
 
 const reducer = combineReducers({
-  userReducer,
-  dateReducer,
-  feedsReducer,
-  timelineReducer,
+  user,
+  date,
+  feeds,
+  timeline,
 });
 
 const store = legacy_createStore(reducer, composeWithDevTools());
