@@ -9,7 +9,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "start": "tsc --watch",
-    "build": "tsc",
+    "clean-build": "rm -rf dist",
+    "build": "yarn clean-build && tsc",
     "type-check": "tsc --noEmit",
     "prepublishOnly": "yarn build"
   },
