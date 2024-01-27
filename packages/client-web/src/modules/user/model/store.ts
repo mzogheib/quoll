@@ -1,5 +1,7 @@
+import { makeStore } from "@quoll/client-lib";
+
+import { RootState } from "store";
 import { User } from "../types";
-import { makeStore } from "store/factory";
 
 export type State = {
   isAuthenticating: boolean;
@@ -11,4 +13,7 @@ const defaultState: State = {
   user: undefined,
 };
 
-export const { reducer, useStore } = makeStore<State>("user", defaultState);
+export const { reducer, useStore } = makeStore<State, RootState>(
+  "user",
+  defaultState,
+);

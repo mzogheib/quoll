@@ -1,5 +1,7 @@
+import { makeStore } from "@quoll/client-lib";
+
+import { RootState } from "store";
 import { FeedName } from "../types";
-import { makeStore } from "store/factory";
 
 export type FeedState = {
   name: FeedName;
@@ -22,4 +24,7 @@ const defaultState: State = {
   [FeedName.Toshl]: makeDefaultFeedState(FeedName.Toshl),
 };
 
-export const { reducer, useStore } = makeStore<State>("feeds", defaultState);
+export const { reducer, useStore } = makeStore<State, RootState>(
+  "feeds",
+  defaultState,
+);
