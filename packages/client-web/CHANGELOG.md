@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.13](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.5.12...@quoll/client-web@0.5.13) (2024-01-27)
+
+### Bug Fixes
+
+- **client-web:** fix path aliases ([#196](https://github.com/mzogheib/quoll/issues/196)) ([52d2426](https://github.com/mzogheib/quoll/commit/52d24269d4aaa9f34c79a9b18bd4c877924c9e76))
+
 ## [0.5.12](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.5.11...@quoll/client-web@0.5.12) (2024-01-03)
 
 **Note:** Version bump only for package @quoll/client-web
