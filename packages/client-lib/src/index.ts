@@ -1,1 +1,1 @@
-export const foo = "bar";
+export { makeStore } from "./store/factory";
