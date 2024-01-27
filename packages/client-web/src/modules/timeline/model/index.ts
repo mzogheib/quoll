@@ -1,24 +1,22 @@
 import { useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
-import { selectTimeline, setEntries, setTimelineFetching } from "./store";
+import { useStore } from "./store";
 import timelineService from "../service";
 
 export const useTimelineModel = () => {
-  const dispatch = useDispatch();
-  const { isFetching, entries } = useSelector(selectTimeline);
+  const { isFetching, entries, setProperty } = useStore();
 
   const fetchTimeline = useCallback(
     async (date: string) => {
-      dispatch(setTimelineFetching(true));
+      setProperty("isFetching", true);
       try {
         const newEntries = await timelineService.get(date);
-        dispatch(setEntries(newEntries));
+        setProperty("entries", newEntries);
       } finally {
-        dispatch(setTimelineFetching(false));
+        setProperty("isFetching", false);
       }
     },
-    [dispatch],
+    [setProperty],
   );
 
   return {

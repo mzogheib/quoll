@@ -1,56 +1,14 @@
-import { Action } from "redux";
-
-import { RootState } from "../../../store/types";
-
 import { Entry } from "../types";
+import { makeStore } from "store/factory";
 
-export interface Timeline {
+export type State = {
   isFetching: boolean;
   entries: Entry[];
-}
-
-enum TimelineActionType {
-  SetFetching = "SET_TIMELINE_FETCHING",
-  SetEntries = "SET_TIMELINE_ENTRIES",
-}
-
-interface SetTimelineFetchingAction
-  extends Action<TimelineActionType.SetFetching> {
-  value: boolean;
-}
-
-export const setTimelineFetching = (
-  value: boolean,
-): SetTimelineFetchingAction => ({
-  type: TimelineActionType.SetFetching,
-  value,
-});
-
-interface SetTimelineEntriesAction
-  extends Action<TimelineActionType.SetEntries> {
-  entries: Entry[];
-}
-
-export const setEntries = (entries: Entry[]): SetTimelineEntriesAction => ({
-  type: TimelineActionType.SetEntries,
-  entries,
-});
-
-export const selectTimeline = (state: RootState) => state.timeline;
-
-const defaultState: Timeline = { isFetching: true, entries: [] };
-
-type TimelineAction = SetTimelineFetchingAction | SetTimelineEntriesAction;
-
-const timeline = (state = defaultState, action: TimelineAction) => {
-  switch (action.type) {
-    case TimelineActionType.SetFetching:
-      return { ...state, isFetching: action.value };
-    case TimelineActionType.SetEntries:
-      return { entries: action.entries, isFetching: false };
-    default:
-      return state;
-  }
 };
 
-export default timeline;
+const defaultState: State = {
+  isFetching: true,
+  entries: [],
+};
+
+export const { reducer, useStore } = makeStore<State>("timeline", defaultState);

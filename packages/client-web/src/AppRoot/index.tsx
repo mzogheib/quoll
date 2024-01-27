@@ -1,12 +1,11 @@
 import { Fragment } from "react";
 import { css, createGlobalStyle, ThemeProvider } from "styled-components";
-import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { Modal, themes } from "@quoll/ui-components";
 import "typeface-pacifico";
 
 import App from "../App";
-import store from "../store";
+import { StoreProvider } from "../store";
 
 Modal.setAppElement("#root");
 
@@ -30,7 +29,7 @@ const GlobalStyle = createGlobalStyle(
 );
 
 const AppRoot = () => (
-  <Provider store={store}>
+  <StoreProvider>
     <BrowserRouter>
       <ThemeProvider theme={themes.default}>
         <Fragment>
@@ -39,7 +38,7 @@ const AppRoot = () => (
         </Fragment>
       </ThemeProvider>
     </BrowserRouter>
-  </Provider>
+  </StoreProvider>
 );
 
 export default AppRoot;

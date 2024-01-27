@@ -1,39 +1,29 @@
 import { useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
-import {
-  selectIsAuthenticating,
-  selectUser,
-  setUserAuthenticating,
-  setUserReady,
-} from "../model/store";
+import { useStore } from "./store";
 import userService from "../service";
 
 export const useUserModel = () => {
-  const dispatch = useDispatch();
-
-  const user = useSelector(selectUser);
-
-  const isAuthenticating = useSelector(selectIsAuthenticating);
+  const { user, isAuthenticating, setProperty } = useStore();
 
   const login = useCallback(
     async (userId: string) => {
-      dispatch(setUserAuthenticating());
-
+      setProperty("isAuthenticating", true);
       const user = await userService.login(userId);
-
-      dispatch(setUserReady(user));
+      setProperty("user", user);
+      setProperty("isAuthenticating", false);
 
       return user;
     },
-    [dispatch],
+    [setProperty],
   );
 
   const signup = useCallback(async () => {
-    dispatch(setUserAuthenticating());
+    setProperty("isAuthenticating", true);
     const user = await userService.signup();
-    dispatch(setUserReady(user));
-  }, [dispatch]);
+    setProperty("user", user);
+    setProperty("isAuthenticating", false);
+  }, [setProperty]);
 
   return {
     user,
