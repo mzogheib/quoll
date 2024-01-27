@@ -43,13 +43,17 @@ const App = () => {
   const { isOneConnected: isOneFeedConnected } = useFeedsViewModel();
 
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
+  const [didAuthenticate, setDidAuthenticate] = useState(false);
 
   useEffect(() => {
+    if (didAuthenticate) return;
+
     const userId = userService.getCurrentUser();
+    setDidAuthenticate(true);
 
     if (userId) login(userId);
     else signup();
-  }, [login, signup]);
+  }, [didAuthenticate, login, signup]);
 
   // TODO: don't show the modal if user is already logged in and disconnects
   // all feeds
