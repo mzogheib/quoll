@@ -15,6 +15,10 @@ export const makeGlobalStore = <M extends ReducersMapObject<any, any>>(
   );
 
   return {
+    /**
+     * Provides the store context for your app. Wrap your app with this high up
+     * in the component tree.
+     */
     StoreProvider,
   };
 };
