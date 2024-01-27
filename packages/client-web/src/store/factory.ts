@@ -58,7 +58,7 @@ export const makeStore = <State extends object>(
     return setProperty;
   };
 
-  // TODO this might trigger a rerender for changes in property even if a
+  // TODO this might trigger a rerender for changes to all properties even if a
   // consumer is only referring to one. But it might be ok since there are
   // only a few properties per store.
   const useSelectProperties = (): State => {
