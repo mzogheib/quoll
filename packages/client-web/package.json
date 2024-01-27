@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@googlemaps/react-wrapper": "^1.1.35",
+    "@quoll/client-lib": "^0.2.1",
     "@quoll/ui-components": "^0.2.17",
     "axios": "^1.6.0",
     "moment": "^2.27.0",
