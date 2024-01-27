@@ -7,7 +7,7 @@ export type FeedState = {
   isConnected: boolean;
 };
 
-export type FeedsState = Record<FeedName, FeedState>;
+export type State = Record<FeedName, FeedState>;
 
 const makeDefaultFeedState = (name: FeedName) => ({
   name,
@@ -15,14 +15,11 @@ const makeDefaultFeedState = (name: FeedName) => ({
   isConnected: false,
 });
 
-const defaultState: FeedsState = {
+const defaultState: State = {
   [FeedName.Moves]: makeDefaultFeedState(FeedName.Moves),
   [FeedName.Strava]: makeDefaultFeedState(FeedName.Strava),
   [FeedName.Uber]: makeDefaultFeedState(FeedName.Uber),
   [FeedName.Toshl]: makeDefaultFeedState(FeedName.Toshl),
 };
 
-export const { reducer, useStore } = makeStore<FeedsState>(
-  "feeds",
-  defaultState,
-);
+export const { reducer, useStore } = makeStore<State>("feeds", defaultState);

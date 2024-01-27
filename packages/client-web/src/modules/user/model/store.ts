@@ -1,14 +1,14 @@
 import { User } from "../types";
 import { makeStore } from "store/factory";
 
-export type UserState = {
+export type State = {
   isAuthenticating: boolean;
   user: User | undefined;
 };
 
-const defaultState: UserState = {
+const defaultState: State = {
   isAuthenticating: true,
   user: undefined,
 };
 
-export const { reducer, useStore } = makeStore<UserState>("user", defaultState);
+export const { reducer, useStore } = makeStore<State>("user", defaultState);

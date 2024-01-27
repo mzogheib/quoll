@@ -3,12 +3,15 @@ import { legacy_createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 
-import { reducer as user, UserState } from "modules/user/model/store";
-import { reducer as date, DateState } from "modules/date/model/store";
-import { reducer as feeds, FeedsState } from "modules/feeds/model/store";
+import { reducer as user, State as UserState } from "modules/user/model/store";
+import { reducer as date, State as DateState } from "modules/date/model/store";
+import {
+  reducer as feeds,
+  State as FeedsState,
+} from "modules/feeds/model/store";
 import {
   reducer as timeline,
-  TimelineState,
+  State as TimelineState,
 } from "modules/timeline/model/store";
 
 const reducer = combineReducers({

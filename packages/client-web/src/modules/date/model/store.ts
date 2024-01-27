@@ -1,12 +1,12 @@
 import moment from "moment";
 import { makeStore } from "store/factory";
 
-export type DateState = {
+export type State = {
   value: string;
 };
 
-const defaultState: DateState = {
+const defaultState: State = {
   value: moment().format("YYYY-MM-DD"),
 };
 
-export const { reducer, useStore } = makeStore<DateState>("date", defaultState);
+export const { reducer, useStore } = makeStore<State>("date", defaultState);
