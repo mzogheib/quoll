@@ -2,6 +2,7 @@ const child_process = require("child_process");
 
 const PACKAGES = [
   "api",
+  "client-lib",
   "client-mobile",
   "client-web",
   "ui-components",
