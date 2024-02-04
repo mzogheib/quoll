@@ -42,5 +42,6 @@ export const useTimelineViewModel = (): TimelineViewModel => {
   return {
     ...timelineModel,
     entries,
+    fetchTimeline,
   };
 };
