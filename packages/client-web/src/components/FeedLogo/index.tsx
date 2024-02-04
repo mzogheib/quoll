@@ -17,6 +17,10 @@ const logoMap = {
     colorSrc: require("./images/moves-206x206.png"),
     grayscaleSrc: require("./images/moves-gray-206x206.png"),
   },
+  media: {
+    colorSrc: null,
+    grayscaleSrc: null,
+  },
 };
 
 interface Props {
