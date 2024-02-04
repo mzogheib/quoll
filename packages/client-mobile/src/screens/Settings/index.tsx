@@ -8,7 +8,7 @@ import styles from "./styles";
 import { ScreenProps } from "../types";
 import ScreenTemplate from "../ScreenTemplate";
 import FeedSettings from "@components/FeedSettings";
-import { useMediaModel } from "@modules/media/model";
+import { useMediaViewModel } from "@modules/media/view-model";
 import { useGeolocation } from "@modules/geolocation/logic";
 
 const photosFeedSettings = {
@@ -36,16 +36,16 @@ const locationSettings = {
 };
 
 const SettingsScreen = (_: ScreenProps<"settings">) => {
-  const media = useMediaModel();
+  const mediaViewModel = useMediaViewModel();
   const geolocation = useGeolocation();
 
   const feeds = [
     {
       ...photosFeedSettings,
-      isConnected: media.isConnected,
-      isConnecting: media.isConnecting,
-      onConnect: media.connect,
-      onDisconnect: media.disconnect,
+      isConnected: mediaViewModel.isConnected,
+      isConnecting: mediaViewModel.isConnecting,
+      onConnect: mediaViewModel.connect,
+      onDisconnect: mediaViewModel.disconnect,
     },
   ];
 
