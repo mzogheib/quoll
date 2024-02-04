@@ -95,7 +95,7 @@ export const makeStore = <State extends object, RootState>(
 
     return {
       setProperty,
-      ...properties,
+      state: properties,
     };
   };
 

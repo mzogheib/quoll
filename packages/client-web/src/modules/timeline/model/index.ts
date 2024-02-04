@@ -4,7 +4,8 @@ import { useStore } from "./store";
 import timelineService from "../service";
 
 export const useTimelineModel = () => {
-  const { isFetching, entries, setProperty } = useStore();
+  const { state, setProperty } = useStore();
+  const { isFetching, entries } = state;
 
   const fetchTimeline = useCallback(
     async (date: string) => {
