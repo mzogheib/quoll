@@ -10,14 +10,17 @@ import ScreenTemplate from "../ScreenTemplate";
 import { useMedia } from "@modules/media/logic";
 import { makeDateFilter, makeISO8601Date } from "@modules/date-bar/logic";
 import { useDateModel } from "@modules/date-bar/model";
+import { useTimelineViewModel } from "@modules/timeline/view-model";
 
 const HomeScreen = (_: ScreenProps<"home">) => {
   const styles = useStyles();
   const { value, isConnected, isCheckingPermission, refresh } = useMedia();
   const { date, setDate } = useDateModel();
+  const { entries, fetchTimeline } = useTimelineViewModel();
 
   const handleDateChange = (newDate: Date) => {
     setDate(makeISO8601Date(newDate));
+    fetchTimeline(date);
   };
 
   useEffect(() => {
