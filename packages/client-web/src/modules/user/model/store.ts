@@ -1,4 +1,4 @@
-import { makeStore } from "@quoll/client-lib";
+import { makeReduxStoreSlice } from "@quoll/client-lib";
 
 import { RootState } from "store";
 import { User } from "../types";
@@ -13,7 +13,7 @@ const defaultState: State = {
   user: undefined,
 };
 
-export const { reducer, useStore } = makeStore<State, RootState>(
+export const { reducer, useStore } = makeReduxStoreSlice<State, RootState>(
   "user",
   defaultState,
 );

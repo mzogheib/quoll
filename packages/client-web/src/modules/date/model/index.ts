@@ -1,6 +1,6 @@
 import {
   DateState,
-  makeStore,
+  makeReduxStoreSlice,
   useDateModel as _useDateModel,
 } from "@quoll/client-lib";
 import moment from "moment";
@@ -11,6 +11,9 @@ const defaultState: DateState = {
   date: moment().format("YYYY-MM-DD"),
 };
 
-export const dateStore = makeStore<DateState, RootState>("date", defaultState);
+export const dateStore = makeReduxStoreSlice<DateState, RootState>(
+  "date",
+  defaultState,
+);
 
 export const useDateModel = () => _useDateModel(dateStore.useStore);

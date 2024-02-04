@@ -1,3 +1,3 @@
-export { makeStore } from "./factory";
-export { makeGlobalStore } from "./makeGlobalStore";
+export { makeReduxStoreSlice } from "./makeReduxStoreSlice";
+export { makeGlobalReduxStore } from "./makeGlobalReduxStore";
 export * from "./types";

@@ -1,6 +1,6 @@
 import {
   TimelineState,
-  makeStore,
+  makeReduxStoreSlice,
   useTimelineModel as _useTimelineMode,
 } from "@quoll/client-lib";
 
@@ -12,7 +12,7 @@ const defaultState: TimelineState = {
   entries: [],
 };
 
-export const timelineStore = makeStore<TimelineState, RootState>(
+export const timelineStore = makeReduxStoreSlice<TimelineState, RootState>(
   "timeline",
   defaultState,
 );

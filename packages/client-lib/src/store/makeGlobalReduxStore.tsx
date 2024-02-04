@@ -3,9 +3,11 @@ import { Provider } from "react-redux";
 import { ReducersMapObject, combineReducers, legacy_createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 
-export const makeGlobalStore = <M extends ReducersMapObject<any, any>>(
-  reducers: M,
-) => {
+/**
+ * Creates a global Redux store from an object of reducers. Returns the context
+ * provider with which to wrap your app.
+ */
+export const makeGlobalReduxStore = (reducers: ReducersMapObject<any, any>) => {
   const globalReducer = combineReducers(reducers);
 
   const store = legacy_createStore(globalReducer, composeWithDevTools());

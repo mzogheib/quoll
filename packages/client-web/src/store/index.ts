@@ -1,4 +1,4 @@
-import { TimelineState, makeGlobalStore } from "@quoll/client-lib";
+import { TimelineState, makeGlobalReduxStore } from "@quoll/client-lib";
 import { DateState } from "@quoll/client-lib";
 
 import * as userStore from "modules/user/model/store";
@@ -13,7 +13,7 @@ export type RootState = {
   timeline: TimelineState;
 };
 
-export const { StoreProvider } = makeGlobalStore({
+export const { StoreProvider } = makeGlobalReduxStore({
   user: userStore.reducer,
   date: dateStore.reducer,
   feeds: feedsStore.reducer,

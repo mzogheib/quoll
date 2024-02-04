@@ -1,4 +1,4 @@
-import { FeedName, makeStore } from "@quoll/client-lib";
+import { FeedName, makeReduxStoreSlice } from "@quoll/client-lib";
 
 import { RootState } from "store";
 
@@ -24,7 +24,7 @@ const defaultState: State = {
   media: makeDefaultFeedState("media"),
 };
 
-export const { reducer, useStore } = makeStore<State, RootState>(
+export const { reducer, useStore } = makeReduxStoreSlice<State, RootState>(
   "feeds",
   defaultState,
 );
