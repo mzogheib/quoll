@@ -19,8 +19,9 @@ const HomeScreen = (_: ScreenProps<"home">) => {
   const { entries, fetchTimeline } = useTimelineViewModel();
 
   const handleDateChange = (newDate: Date) => {
-    setDate(makeISO8601Date(newDate));
-    fetchTimeline(date);
+    const formattedDate = makeISO8601Date(newDate);
+    setDate(formattedDate);
+    fetchTimeline(formattedDate);
   };
 
   useEffect(() => {
