@@ -46,7 +46,7 @@ export const makeReduxStoreSlice = <State extends object, RootState>(
         const action = makeSetPropertyAction(name, value);
         dispatch(action);
       },
-      [],
+      [dispatch],
     );
 
     return setProperty;
