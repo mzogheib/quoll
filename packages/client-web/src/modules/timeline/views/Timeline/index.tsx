@@ -1,7 +1,7 @@
 import styled from "styled-components";
+import { TimelineEntry as ITimelineEntry } from "@quoll/client-lib";
 
 import TimelineEntry from "../TimelineEntry";
-import { Entry } from "../../types";
 
 const Wrapper = styled.div`
   display: flex;
@@ -9,7 +9,7 @@ const Wrapper = styled.div`
 `;
 
 interface Props {
-  entries: Entry[];
+  entries: ITimelineEntry[];
   onEntryClick: (id: string) => void;
 }
 

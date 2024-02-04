@@ -1,34 +1,38 @@
 import moment from "moment";
+import {
+  TimelineEntry,
+  TimelineEntryType,
+  TimelineService,
+} from "@quoll/client-lib";
 
 import api from "../../../services/api";
-import { Entry, EntryType } from "../types";
 
 const EntryConfig = {
-  [EntryType.Bike]: { label: "Bike", image: "🚲" },
-  [EntryType.Bus]: { label: "Bus", image: "🚌" },
-  [EntryType.Car]: { label: "Car", image: "🚗" },
-  [EntryType.EBike]: { label: "E-Bike", image: "🚲⚡️" },
-  [EntryType.Expense]: { label: "Expense", image: "💸" },
-  [EntryType.Ferry]: { label: "Ferry", image: "🛳️" },
-  [EntryType.Flight]: { label: "Flight", image: "✈️" },
-  [EntryType.Hike]: { label: "Hike", image: "🥾" },
-  [EntryType.Home]: { label: "Home", image: "🏠" },
-  [EntryType.Motorcycle]: { label: "Motorcycle", image: "🏍️" },
-  [EntryType.Place]: { label: "Place", image: "🏬" },
-  [EntryType.Run]: { label: "Run", image: "🏃‍♂️" },
-  [EntryType.Train]: { label: "Train", image: "🚆" },
-  [EntryType.Tram]: { label: "Tram", image: "🚊" },
-  [EntryType.Transport]: { label: "Transport", image: "⏩" },
-  [EntryType.Walk]: { label: "Walk", image: "🚶‍♂️" },
-  [EntryType.Work]: { label: "Work", image: "🏭" },
-  [EntryType.Yoga]: { label: "Yoga", image: "🧘‍♂️" },
+  [TimelineEntryType.Bike]: { label: "Bike", image: "🚲" },
+  [TimelineEntryType.Bus]: { label: "Bus", image: "🚌" },
+  [TimelineEntryType.Car]: { label: "Car", image: "🚗" },
+  [TimelineEntryType.EBike]: { label: "E-Bike", image: "🚲⚡️" },
+  [TimelineEntryType.Expense]: { label: "Expense", image: "💸" },
+  [TimelineEntryType.Ferry]: { label: "Ferry", image: "🛳️" },
+  [TimelineEntryType.Flight]: { label: "Flight", image: "✈️" },
+  [TimelineEntryType.Hike]: { label: "Hike", image: "🥾" },
+  [TimelineEntryType.Home]: { label: "Home", image: "🏠" },
+  [TimelineEntryType.Motorcycle]: { label: "Motorcycle", image: "🏍️" },
+  [TimelineEntryType.Place]: { label: "Place", image: "🏬" },
+  [TimelineEntryType.Run]: { label: "Run", image: "🏃‍♂️" },
+  [TimelineEntryType.Train]: { label: "Train", image: "🚆" },
+  [TimelineEntryType.Tram]: { label: "Tram", image: "🚊" },
+  [TimelineEntryType.Transport]: { label: "Transport", image: "⏩" },
+  [TimelineEntryType.Walk]: { label: "Walk", image: "🚶‍♂️" },
+  [TimelineEntryType.Work]: { label: "Work", image: "🏭" },
+  [TimelineEntryType.Yoga]: { label: "Yoga", image: "🧘‍♂️" },
 };
 
-export const getEntryImage = (entry: Entry) =>
+export const getEntryImage = (entry: TimelineEntry) =>
   EntryConfig[entry.type] ? EntryConfig[entry.type].image : "🤠";
 
 const get = (date: string) =>
-  api.get<Entry[]>({
+  api.get<TimelineEntry[]>({
     endpoint: "timeline",
     params: {
       from: moment(date).startOf("day").toISOString(),
@@ -36,7 +40,7 @@ const get = (date: string) =>
     },
   });
 
-const timelineService = {
+const timelineService: TimelineService = {
   get,
 };
 

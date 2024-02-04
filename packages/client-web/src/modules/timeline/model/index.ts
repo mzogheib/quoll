@@ -1,26 +1,21 @@
-import { useCallback } from "react";
+import {
+  TimelineState,
+  makeStore,
+  useTimelineModel as _useTimelineMode,
+} from "@quoll/client-lib";
 
-import { useStore } from "./store";
 import timelineService from "../service";
+import { RootState } from "store";
 
-export const useTimelineModel = () => {
-  const { state, setProperty } = useStore();
-
-  const fetchTimeline = useCallback(
-    async (date: string) => {
-      setProperty("isFetching", true);
-      try {
-        const newEntries = await timelineService.get(date);
-        setProperty("entries", newEntries);
-      } finally {
-        setProperty("isFetching", false);
-      }
-    },
-    [setProperty],
-  );
-
-  return {
-    ...state,
-    fetchTimeline,
-  };
+const defaultState: TimelineState = {
+  isFetching: false,
+  entries: [],
 };
+
+export const timelineStore = makeStore<TimelineState, RootState>(
+  "timeline",
+  defaultState,
+);
+
+export const useTimelineModel = () =>
+  _useTimelineMode(timelineStore.useStore, timelineService);

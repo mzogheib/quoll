@@ -82,6 +82,7 @@ const Home = () => {
   const { date, setDate } = useDateViewModelModel();
   const { isFetching, entries, fetchTimeline } = useTimelineViewModel();
 
+  const [didFetchOnce, setDidFetchOnce] = useState(false);
   const [isMapReady, setIsMapReady] = useState(false);
   const [focussedEntryId, setFocussedEntryId] = useState<string>();
   const [focussedEntryLatLng, setFocussedEntryLatLng] =
@@ -93,10 +94,11 @@ const Home = () => {
     setFocussedEntryLatLng(latLng);
   };
 
-  const handleDateChange = (date: string) => {
+  const handleDateChange = (newDate: string) => {
     setFocussedEntryId(undefined);
     setFocussedEntryLatLng(undefined);
-    setDate(date);
+    setDate(newDate);
+    fetchTimeline(newDate);
   };
 
   const polylineConfigs = useMemo(() => {
@@ -113,10 +115,12 @@ const Home = () => {
       : undefined;
   }, [focussedEntry, focussedEntryLatLng, isMapReady]);
 
-  // This fetches on every date change
   useEffect(() => {
-    fetchTimeline();
-  }, [date, fetchTimeline]);
+    if (didFetchOnce) return;
+
+    setDidFetchOnce(true);
+    fetchTimeline(date);
+  }, [date, didFetchOnce, fetchTimeline]);
 
   const dateIsToday = (date: string) => moment(date).isSame(moment(), "day");
 
