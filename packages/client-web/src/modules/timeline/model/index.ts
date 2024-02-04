@@ -5,7 +5,6 @@ import timelineService from "../service";
 
 export const useTimelineModel = () => {
   const { state, setProperty } = useStore();
-  const { isFetching, entries } = state;
 
   const fetchTimeline = useCallback(
     async (date: string) => {
@@ -21,8 +20,7 @@ export const useTimelineModel = () => {
   );
 
   return {
-    isFetching,
-    entries,
+    ...state,
     fetchTimeline,
   };
 };
