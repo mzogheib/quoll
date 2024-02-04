@@ -9,13 +9,13 @@ import { ScreenProps } from "../types";
 import ScreenTemplate from "../ScreenTemplate";
 import { useMediaModel } from "@modules/media/model";
 import { makeDateFilter, makeISO8601Date } from "@modules/date-bar/logic";
-import { useDateModel } from "@modules/date-bar/model";
+import { useDateViewModel } from "@modules/date-bar/view-model";
 import { useTimelineViewModel } from "@modules/timeline/view-model";
 
 const HomeScreen = (_: ScreenProps<"home">) => {
   const styles = useStyles();
   const { isConnected, isCheckingPermission, refresh } = useMediaModel();
-  const { date, setDate } = useDateModel();
+  const { date, setDate } = useDateViewModel();
   const { entries, fetchTimeline } = useTimelineViewModel();
 
   const handleDateChange = (newDate: Date) => {
