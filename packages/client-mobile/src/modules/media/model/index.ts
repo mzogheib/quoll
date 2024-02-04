@@ -76,7 +76,7 @@ const requestPermission = async () => {
   }
 };
 
-export const useMedia = () => {
+export const useMediaModel = () => {
   const [isConnected, setIsConnected] = usePersistedState("isConnected", false);
   const [isConnecting, setIsConnecting] = useState(false);
   const [isCheckingPermission, setIsCheckingPermission] = useState(true);

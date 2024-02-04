@@ -7,14 +7,14 @@ import { useStyles } from "./styles";
 
 import { ScreenProps } from "../types";
 import ScreenTemplate from "../ScreenTemplate";
-import { useMedia } from "@modules/media/logic";
+import { useMediaModel } from "@modules/media/model";
 import { makeDateFilter, makeISO8601Date } from "@modules/date-bar/logic";
 import { useDateModel } from "@modules/date-bar/model";
 import { useTimelineViewModel } from "@modules/timeline/view-model";
 
 const HomeScreen = (_: ScreenProps<"home">) => {
   const styles = useStyles();
-  const { value, isConnected, isCheckingPermission, refresh } = useMedia();
+  const { value, isConnected, isCheckingPermission, refresh } = useMediaModel();
   const { date, setDate } = useDateModel();
   const { entries, fetchTimeline } = useTimelineViewModel();
 

@@ -8,7 +8,7 @@ import styles from "./styles";
 import { ScreenProps } from "../types";
 import ScreenTemplate from "../ScreenTemplate";
 import FeedSettings from "@components/FeedSettings";
-import { useMedia } from "@modules/media/logic";
+import { useMediaModel } from "@modules/media/model";
 import { useGeolocation } from "@modules/geolocation/logic";
 
 const photosFeedSettings = {
@@ -36,7 +36,7 @@ const locationSettings = {
 };
 
 const SettingsScreen = (_: ScreenProps<"settings">) => {
-  const media = useMedia();
+  const media = useMediaModel();
   const geolocation = useGeolocation();
 
   const feeds = [
