@@ -1,6 +1,5 @@
 import { MediaItem } from "@modules/media/types";
-import { TimelineEntryMobile } from "@modules/timeline/types";
-import { TimelineEntryType } from "@quoll/client-lib";
+import { TimelineEntry, TimelineEntryType } from "@quoll/client-lib";
 
 const getType = (mediaItem: MediaItem): TimelineEntryType => {
   switch (mediaItem.subTypes) {
@@ -21,7 +20,7 @@ const getType = (mediaItem: MediaItem): TimelineEntryType => {
   }
 };
 
-export const mediaAdapter = (mediaItem: MediaItem): TimelineEntryMobile => {
+export const mediaAdapter = (mediaItem: MediaItem): TimelineEntry => {
   const { timestamp } = mediaItem;
   const location = {
     latitude: mediaItem.location?.latitude,
@@ -40,5 +39,6 @@ export const mediaAdapter = (mediaItem: MediaItem): TimelineEntryMobile => {
     locationStart: location,
     locationEnd: location,
     polyline: null,
+    mediaUri: mediaItem.image.uri,
   };
 };

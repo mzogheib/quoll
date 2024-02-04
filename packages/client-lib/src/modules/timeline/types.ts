@@ -40,4 +40,5 @@ export type TimelineEntry = {
   locationStart: TimelineEntryLocation;
   locationEnd: TimelineEntryLocation;
   polyline: string | null;
+  mediaUri: string | null;
 };

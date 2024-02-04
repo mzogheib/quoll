@@ -1,12 +1,10 @@
+import { TimelineEntry } from "@quoll/client-lib";
 import { useMediaModel } from "@modules/media/model";
 import { makeDateFilter } from "@modules/date-bar/logic";
 import { useTimelineModel } from "../model";
 import { mediaAdapter } from "./feed-adapters/media";
-import { TimelineEntryMobile } from "../types";
 
-const sortItemsByTimestamp = (
-  entries: TimelineEntryMobile[],
-): TimelineEntryMobile[] => {
+const sortItemsByTimestamp = (entries: TimelineEntry[]): TimelineEntry[] => {
   const sortedEntries = entries.slice();
 
   sortedEntries.sort((a, b) => a.timeStart - b.timeStart);
