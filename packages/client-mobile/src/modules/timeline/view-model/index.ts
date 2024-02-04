@@ -12,9 +12,11 @@ const sortItemsByTimestamp = (entries: TimelineEntry[]): TimelineEntry[] => {
   return sortedEntries;
 };
 
+type TimelineViewModel = ReturnType<typeof useTimelineModel>;
+
 // TODO should the media fetching and adapting be in a timeline service that
 // extends the base timeline service?
-export const useTimelineViewModel = () => {
+export const useTimelineViewModel = (): TimelineViewModel => {
   const timelineModel = useTimelineModel();
   const mediaModel = useMediaModel();
 
@@ -40,6 +42,5 @@ export const useTimelineViewModel = () => {
   return {
     ...timelineModel,
     entries,
-    fetchTimeline,
   };
 };
