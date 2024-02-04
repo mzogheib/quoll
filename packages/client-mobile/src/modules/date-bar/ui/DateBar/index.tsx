@@ -9,13 +9,13 @@ import { getEndOfDay, getOffsetDate } from "../../logic";
 
 type Props = {
   isDisabled?: boolean;
+  date: Date;
   onDateChange: (date: Date) => void;
 };
 
-export const DateBar = ({ isDisabled, onDateChange }: Props) => {
+export const DateBar = ({ isDisabled, date, onDateChange }: Props) => {
   const now = new Date();
 
-  const [date, setDate] = useState(now);
   const [isDPVisible, setIsDPVisible] = useState(false);
 
   const showDatePicker = () => setIsDPVisible(true);
@@ -23,19 +23,16 @@ export const DateBar = ({ isDisabled, onDateChange }: Props) => {
 
   const handlePrev = () => {
     const newDate = getOffsetDate(date, -1);
-    setDate(newDate);
     onDateChange(newDate);
   };
 
   const handleNext = () => {
     const newDate = getOffsetDate(date, 1);
-    setDate(newDate);
     onDateChange(newDate);
   };
 
   const handleDateChange = (newDate: Date) => {
     hideDatePicker();
-    setDate(newDate);
     onDateChange(newDate);
   };
 

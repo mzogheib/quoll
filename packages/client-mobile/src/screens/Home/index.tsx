@@ -8,16 +8,21 @@ import { useStyles } from "./styles";
 import { ScreenProps } from "../types";
 import ScreenTemplate from "../ScreenTemplate";
 import { useMedia } from "@modules/media/logic";
-import { makeDateFilter } from "@modules/date-bar/logic";
+import { makeDateFilter, makeISO8601Date } from "@modules/date-bar/logic";
+import { useDateModel } from "@modules/date-bar/model";
 
 const HomeScreen = (_: ScreenProps<"home">) => {
   const styles = useStyles();
   const { value, isConnected, isCheckingPermission, refresh } = useMedia();
-  const [date, setDate] = useState<Date>(new Date());
+  const { date, setDate } = useDateModel();
+
+  const handleDateChange = (newDate: Date) => {
+    setDate(makeISO8601Date(newDate));
+  };
 
   useEffect(() => {
     const _refresh = async () => {
-      const dateFilter = makeDateFilter(date);
+      const dateFilter = makeDateFilter(new Date(date));
       await refresh(dateFilter);
     };
 
@@ -49,7 +54,7 @@ const HomeScreen = (_: ScreenProps<"home">) => {
           <Map markers={markers} />
         </View>
         <View style={styles.sideBar}>
-          <DateBar onDateChange={setDate} />
+          <DateBar date={new Date(date)} onDateChange={handleDateChange} />
         </View>
       </View>
     </ScreenTemplate>
