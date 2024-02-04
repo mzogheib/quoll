@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { View } from "react-native";
 import { Map, MarkerProps } from "@modules/map/ui/Map";
 import { DateBar } from "@modules/date-bar/ui/DateBar";
@@ -14,7 +14,7 @@ import { useTimelineViewModel } from "@modules/timeline/view-model";
 
 const HomeScreen = (_: ScreenProps<"home">) => {
   const styles = useStyles();
-  const { value, isConnected, isCheckingPermission, refresh } = useMediaModel();
+  const { isConnected, isCheckingPermission, refresh } = useMediaModel();
   const { date, setDate } = useDateModel();
   const { entries, fetchTimeline } = useTimelineViewModel();
 
@@ -34,21 +34,29 @@ const HomeScreen = (_: ScreenProps<"home">) => {
     if (isConnected) _refresh();
   }, [date, isConnected, isCheckingPermission, refresh]);
 
-  const mediaWithLocations = value.filter(
-    (item) => item.location?.latitude && item.location.longitude,
-  );
+  const markers: MarkerProps[] = entries
+    .filter(({ locationStart, polyline, mediaUri }) => {
+      const hasLocation = locationStart?.latitude && locationStart.longitude;
 
-  const markers: MarkerProps[] = mediaWithLocations.map((item) => {
-    const location = {
-      latitude: item.location?.latitude,
-      longitude: item.location?.longitude,
-    } as MarkerProps["coordinate"]; // guaranteed to exist from above filter
+      return hasLocation && !polyline && !!mediaUri;
+    })
+    .map(({ locationStart, mediaUri }) => {
+      // These casts are safe based on above filter
 
-    return {
-      coordinate: location,
-      image: { uri: item.image.uri },
-    };
-  });
+      const coordinate = {
+        latitude: locationStart.latitude,
+        longitude: locationStart.longitude,
+      } as MarkerProps["coordinate"];
+
+      const image = {
+        uri: mediaUri,
+      } as MarkerProps["image"];
+
+      return {
+        coordinate,
+        image,
+      };
+    });
 
   return (
     <ScreenTemplate>
