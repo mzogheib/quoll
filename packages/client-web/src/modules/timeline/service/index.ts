@@ -33,6 +33,11 @@ const EntryConfig = {
 export const getEntryImage = (entry: TimelineEntry) =>
   EntryConfig[entry.type] ? EntryConfig[entry.type].image : "🤠";
 
+// TODO move this to client-lib
+// Convert to a class
+// Has an array of sources to fetch from
+// Consumer can push to the array
+
 const get = (date: string) =>
   api.get<TimelineEntry[]>({
     endpoint: "timeline",
