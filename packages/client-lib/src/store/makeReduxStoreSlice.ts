@@ -3,16 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { Action } from "redux";
 
 /**
- * Makes a store and returns the reducer and hook to use it.
- *
- * Stores are simple. They have a state with properties that can be set and
- * retrieved. There is no async logic in stores - that's done in the consumers.
+ * Makes a Redux store slice and returns the reducer and hook to use it.
  *
  * @param storeName - must be unique
  * @param initialState
  * @returns the store reducer and hook
  */
-export const makeStore = <State extends object, RootState>(
+export const makeReduxStoreSlice = <State extends object, RootState>(
   storeName: string,
   initialState: State,
 ) => {
@@ -95,7 +92,7 @@ export const makeStore = <State extends object, RootState>(
 
     return {
       setProperty,
-      ...properties,
+      state: properties,
     };
   };
 

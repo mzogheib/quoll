@@ -1,4 +1,5 @@
-import { AuthenticatePayload, FeedName } from "../types";
+import { FeedName } from "@quoll/client-lib";
+import { AuthenticatePayload } from "../types";
 import api from "../../../services/api";
 
 const endpoint = "feed-auth";
@@ -12,7 +13,7 @@ const authenticate = (feed: FeedName, payload: AuthenticatePayload) =>
 const deauthorize = (feed: FeedName) =>
   api.delete<void>({ endpoint, params: { feed } }).then(() => {
     // TODO: this should come from the BE
-    if (feed === FeedName.Moves) {
+    if (feed === "moves") {
       return "Remember to revoke access in the Moves app.";
     }
   });

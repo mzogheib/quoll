@@ -1,17 +1,19 @@
-import { useCallback } from "react";
+import {
+  DateState,
+  makeReduxStoreSlice,
+  useDateModel as _useDateModel,
+} from "@quoll/client-lib";
+import moment from "moment";
 
-import { useStore } from "./store";
+import { RootState } from "store";
 
-export const useDateModel = () => {
-  const { value, setProperty } = useStore();
-
-  const _setDate = useCallback(
-    (newDate: string) => setProperty("value", newDate),
-    [setProperty],
-  );
-
-  return {
-    date: value,
-    setDate: _setDate,
-  };
+const defaultState: DateState = {
+  date: moment().format("YYYY-MM-DD"),
 };
+
+export const dateStore = makeReduxStoreSlice<DateState, RootState>(
+  "date",
+  defaultState,
+);
+
+export const useDateModel = () => _useDateModel(dateStore.useStore);

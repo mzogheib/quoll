@@ -1,6 +1,6 @@
 import { FeedName } from "../feeds/types";
 
-export enum EntryType {
+export enum TimelineEntryType {
   Bike = "bike",
   Bus = "bus",
   Car = "car",
@@ -11,31 +11,34 @@ export enum EntryType {
   Hike = "hike",
   Home = "home",
   Motorcycle = "motorcycle",
+  Photo = "photo",
   Place = "place",
   Run = "run",
   Train = "train",
   Tram = "tram",
   Transport = "transport",
+  Video = "video",
   Walk = "walk",
   Work = "work",
   Yoga = "yoga",
 }
 
-interface EntryLocation {
+interface TimelineEntryLocation {
   latitude?: number;
   longitude?: number;
 }
 
-export interface Entry {
+export type TimelineEntry = {
   id: string;
   feed: FeedName;
-  type: EntryType;
+  type: TimelineEntryType;
   timeStart: number;
   timeEnd: number;
   title: string;
   valueLabel: string;
   description: string | null;
-  locationStart: EntryLocation;
-  locationEnd: EntryLocation;
+  locationStart: TimelineEntryLocation;
+  locationEnd: TimelineEntryLocation;
   polyline: string | null;
-}
+  mediaUri: string | null;
+};

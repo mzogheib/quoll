@@ -1,11 +1,11 @@
 import { useCallback, useMemo } from "react";
+import { FeedName } from "@quoll/client-lib";
 
-import { FeedName } from "../types";
 import { FeedState, useStore } from "./store";
 import feedsService from "../service";
 
 export const useFeedsModel = () => {
-  const { setProperty, ...feeds } = useStore();
+  const { setProperty, state: feeds } = useStore();
 
   const isOneConnected = useMemo(
     () => Object.values(feeds).some((feed) => feed.isConnected),

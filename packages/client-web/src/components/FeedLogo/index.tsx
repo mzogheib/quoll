@@ -1,21 +1,25 @@
-import { FeedName } from "modules/feeds/types";
+import { FeedName } from "@quoll/client-lib";
 
 const logoMap = {
-  [FeedName.Toshl]: {
+  toshl: {
     colorSrc: require("./images/toshl-196x196.png"),
     grayscaleSrc: require("./images/toshl-gray-196x196.png"),
   },
-  [FeedName.Strava]: {
+  strava: {
     colorSrc: require("./images/strava-96x96.png"),
     grayscaleSrc: require("./images/strava-gray-96x96.png"),
   },
-  [FeedName.Uber]: {
+  uber: {
     colorSrc: require("./images/uber-256x256.png"),
     grayscaleSrc: require("./images/uber-gray-256x256.png"),
   },
-  [FeedName.Moves]: {
+  moves: {
     colorSrc: require("./images/moves-206x206.png"),
     grayscaleSrc: require("./images/moves-gray-206x206.png"),
+  },
+  media: {
+    colorSrc: null,
+    grayscaleSrc: null,
   },
 };
 

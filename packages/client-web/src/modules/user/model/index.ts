@@ -4,7 +4,8 @@ import { useStore } from "./store";
 import userService from "../service";
 
 export const useUserModel = () => {
-  const { user, isAuthenticating, setProperty } = useStore();
+  const { state, setProperty } = useStore();
+  const { user, isAuthenticating } = state;
 
   const login = useCallback(
     async (userId: string) => {

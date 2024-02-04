@@ -1,6 +1,6 @@
 import moment from "moment";
+import { TimelineEntry } from "@quoll/client-lib";
 
-import { Entry } from "modules/timeline/types";
 import { PolylineConfig } from "components/Map/Component";
 import { decodePath } from "components/Map/utils";
 
@@ -10,7 +10,7 @@ const mapElementColors = {
 };
 
 export const makePolylineConfigs = (
-  entries: Entry[],
+  entries: TimelineEntry[],
   focussedItemId: string | undefined,
   onClick: (id: string, latLng?: google.maps.LatLngLiteral) => void,
 ): PolylineConfig[] =>
@@ -34,7 +34,7 @@ export const makePolylineConfigs = (
 
 // TODO
 export const makeMarkerOptions = (
-  entries: Entry[],
+  entries: TimelineEntry[],
 ): google.maps.MarkerOptions[] =>
   entries
     .filter((entry) => !entry.polyline && entry.locationStart)
@@ -50,7 +50,10 @@ export const makeMarkerOptions = (
 const makeInfoWindowPosition = ({
   locationStart,
   polyline: path,
-}: Entry): google.maps.LatLngLiteral | google.maps.LatLng | undefined => {
+}: TimelineEntry):
+  | google.maps.LatLngLiteral
+  | google.maps.LatLng
+  | undefined => {
   if (locationStart?.latitude && locationStart.longitude) {
     return {
       lat: locationStart.latitude,
@@ -67,7 +70,7 @@ const makeInfoWindowPosition = ({
 };
 
 export const makeInfoWindowOptions = (
-  entry: Entry,
+  entry: TimelineEntry,
   position?: google.maps.LatLngLiteral,
 ): google.maps.InfoWindowOptions => {
   const { title, timeStart } = entry;

@@ -1,7 +1,6 @@
-import { makeStore } from "@quoll/client-lib";
+import { FeedName, makeReduxStoreSlice } from "@quoll/client-lib";
 
 import { RootState } from "store";
-import { FeedName } from "../types";
 
 export type FeedState = {
   name: FeedName;
@@ -18,13 +17,14 @@ const makeDefaultFeedState = (name: FeedName) => ({
 });
 
 const defaultState: State = {
-  [FeedName.Moves]: makeDefaultFeedState(FeedName.Moves),
-  [FeedName.Strava]: makeDefaultFeedState(FeedName.Strava),
-  [FeedName.Uber]: makeDefaultFeedState(FeedName.Uber),
-  [FeedName.Toshl]: makeDefaultFeedState(FeedName.Toshl),
+  moves: makeDefaultFeedState("moves"),
+  strava: makeDefaultFeedState("strava"),
+  uber: makeDefaultFeedState("uber"),
+  toshl: makeDefaultFeedState("toshl"),
+  media: makeDefaultFeedState("media"),
 };
 
-export const { reducer, useStore } = makeStore<State, RootState>(
+export const { reducer, useStore } = makeReduxStoreSlice<State, RootState>(
   "feeds",
   defaultState,
 );

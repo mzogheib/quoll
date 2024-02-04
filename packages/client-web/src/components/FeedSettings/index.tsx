@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { ButtonPlain, HorizontalLoader } from "@quoll/ui-components";
+import { FeedName } from "@quoll/client-lib";
 
-import { FeedName } from "modules/feeds/types";
 import { FeedState } from "modules/feeds/model/store";
 import FeedLogo from "components/FeedLogo";
 
@@ -56,24 +56,28 @@ const Link = styled.a.attrs({
 );
 
 const feedConfig = {
-  [FeedName.Toshl]: {
+  toshl: {
     title: "Toshl",
     link: { url: "https://toshl.com", label: "toshl.com" },
   },
-  [FeedName.Strava]: {
+  strava: {
     title: "Strava",
     link: { url: "https://www.strava.com", label: "www.strava.com" },
   },
-  [FeedName.Uber]: {
+  uber: {
     title: "Uber",
     link: { url: "https://www.uber.com", label: "www.uber.com" },
   },
-  [FeedName.Moves]: {
+  moves: {
     title: "Moves",
     link: { url: "https://www.moves-app.com", label: "www.moves-app.com" },
   },
+  media: null,
 };
 
+// TODO This component shouldn't be the one deciding to hide `media`.
+// Lift the config out of this component and pass in the basic props,
+// e.g. title, URL etc.
 interface Props {
   feed: FeedState;
   onConnect: (name: FeedName) => void;
@@ -82,7 +86,11 @@ interface Props {
 
 const FeedSettings = ({ feed, onConnect, onDisconnect }: Props) => {
   const { isAuthenticating, isConnected, name } = feed;
-  const { title, link } = feedConfig[name];
+  const config = feedConfig[name];
+
+  if (!config) return null;
+
+  const { title, link } = config;
 
   const handleButtonClick = () => {
     if (isAuthenticating) {

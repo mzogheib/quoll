@@ -67,3 +67,15 @@ export const makeDateFilter = (date: Date) => {
   const createdBefore = getStartOfDay(dayAfter);
   return { createdAfter, createdBefore };
 };
+
+/**
+ * @param date the Date object
+ * @returns a string in the format `YYYY-MM-DD`
+ */
+export const makeISO8601Date = (date: Date) => {
+  const YYYY = date.getFullYear().toString();
+  const MM = (date.getMonth() + 1).toString().padStart(2, "0");
+  const DD = date.getDate().toString().padStart(2, "0");
+
+  return `${YYYY}-${MM}-${DD}`;
+};
