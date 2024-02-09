@@ -1,3 +1,5 @@
+import { ISO8601Date } from "../../types";
+
 /**
  * Offsets a date by the input number of days.
  *
@@ -43,7 +45,7 @@ export const getStartOfDay = (date: Date) => {
  * @param date the Date object
  * @returns a string in the format `YYYY-MM-DD`
  */
-export const makeISO8601Date = (date: Date) => {
+export const makeISO8601Date = (date: Date): ISO8601Date => {
   const YYYY = date.getFullYear().toString();
   const MM = (date.getMonth() + 1).toString().padStart(2, "0");
   const DD = date.getDate().toString().padStart(2, "0");
