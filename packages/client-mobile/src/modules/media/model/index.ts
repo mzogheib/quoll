@@ -5,6 +5,7 @@ import { MediaItem } from "../types";
 import { checkIsPermitted, getMedia, requestPermission } from "../service";
 import { makeStore } from "../../../store";
 import { usePersistedState } from "@modules/persisted-state/logic";
+import { makeDateFilter } from "./utils";
 
 type MediaState = {
   isConnecting: boolean;
@@ -73,18 +74,15 @@ export const useMediaModel = () => {
     setIsConnected(false);
   };
 
-  const refresh = useCallback(
-    async (params: { createdAfter: Date; createdBefore: Date }) => {
-      setProperty("isRefreshing", true);
-      const response = await getMedia(params);
-      const newValue = response.edges.map(
-        (photoIdentifier) => photoIdentifier.node,
-      );
-      setProperty("value", newValue);
-      setProperty("isRefreshing", false);
-    },
-    [],
-  );
+  const refresh = useCallback(async (date: string) => {
+    setProperty("isRefreshing", true);
+    const response = await getMedia(makeDateFilter(date));
+    const newValue = response.edges.map(
+      (photoIdentifier) => photoIdentifier.node,
+    );
+    setProperty("value", newValue);
+    setProperty("isRefreshing", false);
+  }, []);
 
   return {
     value,

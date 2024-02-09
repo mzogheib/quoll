@@ -1,6 +1,5 @@
 import { TimelineEntry } from "@quoll/client-lib";
 import { useMediaViewModel } from "@modules/media/view-model";
-import { makeDateFilter } from "@modules/date-bar/logic";
 import { useTimelineModel } from "../model";
 import { mediaAdapter } from "./feed-adapters/media";
 
@@ -25,8 +24,7 @@ export const useTimelineViewModel = (): TimelineViewModel => {
   const refreshMedia = async (date: string) => {
     if (!mediaViewModel.isConnected) return;
 
-    const dateFilter = makeDateFilter(new Date(date));
-    await mediaViewModel.refresh(dateFilter);
+    await mediaViewModel.refresh(date);
   };
 
   const fetchTimeline = async (date: string) => {

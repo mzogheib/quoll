@@ -1,8 +1,7 @@
-import {
-  CameraRoll,
-  GetPhotosParams,
-} from "@react-native-camera-roll/camera-roll";
+import { CameraRoll } from "@react-native-camera-roll/camera-roll";
 import { Platform, PermissionsAndroid } from "react-native";
+
+import { DateFilter } from "../types";
 
 const platformVersionAndroid = Number(Platform.Version);
 
@@ -71,12 +70,9 @@ export const requestPermission = async () => {
   }
 };
 
-export const getMedia = async (params: {
-  createdAfter: Date;
-  createdBefore: Date;
-}) =>
+export const getMedia = async (filter: DateFilter) =>
   await CameraRoll.getPhotos({
     first: 100,
-    fromTime: params.createdAfter.getTime(),
-    toTime: params.createdBefore.getTime(),
+    fromTime: filter.createdAfter.getTime(),
+    toTime: filter.createdBefore.getTime(),
   });
