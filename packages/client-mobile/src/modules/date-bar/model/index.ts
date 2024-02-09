@@ -1,6 +1,10 @@
-import { DateState, useDateModel as _useDateModel } from "@quoll/client-lib";
+import {
+  DateState,
+  useDateModel as _useDateModel,
+  makeISO8601Date,
+} from "@quoll/client-lib";
+
 import { makeStore } from "../../../store";
-import { makeISO8601Date } from "../logic";
 
 const defaultState: DateState = {
   date: makeISO8601Date(new Date()),
