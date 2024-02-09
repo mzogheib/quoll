@@ -5938,6 +5938,7 @@ __metadata:
     "@babel/core": "npm:^7.20.0"
     "@babel/preset-env": "npm:^7.20.0"
     "@babel/runtime": "npm:^7.20.0"
+    "@quoll/client-lib": "npm:^0.2.1"
     "@quoll/ui-primitives": "npm:^0.4.0"
     "@react-native-camera-roll/camera-roll": "npm:^7.3.0"
     "@react-native-community/geolocation": "npm:^3.1.0"
