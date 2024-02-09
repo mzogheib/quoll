@@ -6,8 +6,6 @@ import { useStyles } from "./styles";
 
 import { Map, MarkerProps } from "@modules/map/ui/Map";
 import { DateBar } from "@modules/date-bar/ui/DateBar";
-import { useMediaViewModel } from "@modules/media/view-model";
-import { makeDateFilter } from "@modules/date-bar/logic";
 import { useDateViewModel } from "@modules/date-bar/view-model";
 import { useTimelineViewModel } from "@modules/timeline/view-model";
 import { ScreenProps } from "../types";
@@ -15,7 +13,6 @@ import ScreenTemplate from "../ScreenTemplate";
 
 const HomeScreen = (_: ScreenProps<"home">) => {
   const styles = useStyles();
-  const { isConnected, isCheckingPermission, refresh } = useMediaViewModel();
   const { date, setDate } = useDateViewModel();
   const { entries, fetchTimeline } = useTimelineViewModel();
 
@@ -25,16 +22,10 @@ const HomeScreen = (_: ScreenProps<"home">) => {
     fetchTimeline(formattedDate);
   };
 
+  // TODO create a feeds model and don't fetch until isConnected is evaluated for each feed
   useEffect(() => {
-    const _refresh = async () => {
-      const dateFilter = makeDateFilter(new Date(date));
-      await refresh(dateFilter);
-    };
-
-    if (isCheckingPermission) return;
-
-    if (isConnected) _refresh();
-  }, [date, isConnected, isCheckingPermission, refresh]);
+    fetchTimeline(date);
+  }, []);
 
   const markers: MarkerProps[] = entries
     .filter(({ locationStart, polyline, mediaUri }) => {
