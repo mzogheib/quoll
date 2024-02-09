@@ -1,5 +1,6 @@
+import { useEffect } from "react";
 import { ISO8601Date, TimelineEntry } from "@quoll/client-lib";
-import { useMediaViewModel } from "@modules/media/view-model";
+import { useMediaModel } from "../../media/model";
 import { useTimelineModel } from "../model";
 import { mediaAdapter } from "./feed-adapters/media";
 
@@ -16,22 +17,28 @@ type TimelineViewModel = ReturnType<typeof useTimelineModel>;
 // TODO should the media fetching and adapting be in a timeline service that
 // extends the base timeline service? Yes. This will ensure the `isFetching`
 // value is accurate, which it currently is not.
-export const useTimelineViewModel = (): TimelineViewModel => {
+export const useTimelineViewModel = (date: ISO8601Date): TimelineViewModel => {
   const timelineModel = useTimelineModel();
-  const mediaViewModel = useMediaViewModel();
+  const mediaModel = useMediaModel();
 
-  // TODO need to wait until isCheckingPermission is done?
+  // Fetch on first render
+  useEffect(() => {
+    if (mediaModel.isCheckingPermission) return;
+
+    timelineModel.fetchTimeline(date);
+  }, []);
+
   const refreshMedia = async (date: ISO8601Date) => {
-    if (!mediaViewModel.isConnected) return;
+    if (!mediaModel.isConnected) return;
 
-    await mediaViewModel.refresh(date);
+    await mediaModel.refresh(date);
   };
 
   const fetchTimeline = async (date: ISO8601Date) => {
     await Promise.all([timelineModel.fetchTimeline(date), refreshMedia(date)]);
   };
 
-  const mediaEntries = mediaViewModel.value.map(mediaAdapter);
+  const mediaEntries = mediaModel.value.map(mediaAdapter);
 
   const entries = sortItemsByTimestamp([
     ...timelineModel.entries,

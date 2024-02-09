@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { View } from "react-native";
 import { makeISO8601Date } from "@quoll/client-lib";
 
@@ -14,18 +14,13 @@ import ScreenTemplate from "../ScreenTemplate";
 const HomeScreen = (_: ScreenProps<"home">) => {
   const styles = useStyles();
   const { date, setDate } = useDateViewModel();
-  const { entries, fetchTimeline } = useTimelineViewModel();
+  const { entries, fetchTimeline } = useTimelineViewModel(date);
 
   const handleDateChange = (newDate: Date) => {
     const formattedDate = makeISO8601Date(newDate);
     setDate(formattedDate);
     fetchTimeline(formattedDate);
   };
-
-  // TODO create a feeds model and don't fetch until isConnected is evaluated for each feed
-  useEffect(() => {
-    fetchTimeline(date);
-  }, []);
 
   const markers: MarkerProps[] = entries
     .filter(({ locationStart, polyline, mediaUri }) => {
