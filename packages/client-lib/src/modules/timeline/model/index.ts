@@ -1,4 +1,5 @@
 import { Store } from "../../../store/types";
+import { ISO8601Date } from "../../../types";
 import { TimelineService } from "../service";
 import { TimelineEntry } from "../types";
 
@@ -18,7 +19,7 @@ type TimelineActions = {
   /**
    * @param date the date formatted as `YYYY-MM-DD`.
    */
-  fetchTimeline: (date: string) => void;
+  fetchTimeline: (date: ISO8601Date) => void;
 };
 
 type TimelineModel = TimelineState & TimelineActions;
@@ -29,7 +30,7 @@ export const useTimelineModel = (
 ): TimelineModel => {
   const { state, setProperty } = useStore();
 
-  const fetchTimeline = async (date: string) => {
+  const fetchTimeline = async (date: ISO8601Date) => {
     setProperty("isFetching", true);
     try {
       const newEntries = await timelineService.get(date);
