@@ -11,7 +11,7 @@ const defaultState: TimelineState = {
   entries: [],
 };
 
-export const useTimelineStore = makeStore(defaultState);
+const useTimelineStore = makeStore(defaultState);
 
 export const useTimelineModel = () =>
   _useTimelineMode(useTimelineStore, timelineService);
