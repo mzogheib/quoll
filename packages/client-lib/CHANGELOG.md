@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/mzogheib/quoll/compare/@quoll/client-lib@0.2.1...@quoll/client-lib@0.3.0) (2024-02-09)
+
+### Features
+
+- **client-lib:** add ISO8601Date type ([35ca3b0](https://github.com/mzogheib/quoll/commit/35ca3b034d2fd46a8550ea4d873f6c7769ecbcce))
+
 ## [0.2.1](https://github.com/mzogheib/quoll/compare/@quoll/client-lib@0.2.0...@quoll/client-lib@0.2.1) (2024-01-27)
 
 **Note:** Version bump only for package @quoll/client-lib

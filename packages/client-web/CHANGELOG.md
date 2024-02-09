@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.15](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.5.14...@quoll/client-web@0.5.15) (2024-02-09)
+
+**Note:** Version bump only for package @quoll/client-web
+
 ## [0.5.14](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.5.13...@quoll/client-web@0.5.14) (2024-01-27)
 
 ### Bug Fixes
