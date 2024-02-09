@@ -15,8 +15,7 @@ const sortItemsByTimestamp = (entries: TimelineEntry[]): TimelineEntry[] => {
 type TimelineViewModel = ReturnType<typeof useTimelineModel>;
 
 // TODO should the media fetching and adapting be in a timeline service that
-// extends the base timeline service? Yes. This will ensure the `isFetching`
-// value is accurate, which it currently is not.
+// extends the base timeline service?
 export const useTimelineViewModel = (date: ISO8601Date): TimelineViewModel => {
   const timelineModel = useTimelineModel();
   const mediaModel = useMediaModel();
@@ -48,6 +47,7 @@ export const useTimelineViewModel = (date: ISO8601Date): TimelineViewModel => {
   return {
     ...timelineModel,
     entries,
+    isFetching: timelineModel.isFetching || mediaModel.isRefreshing,
     fetchTimeline,
   };
 };
