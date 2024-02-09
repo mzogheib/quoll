@@ -1,4 +1,9 @@
-import { getOffsetDate, getEndOfDay, getStartOfDay } from "@quoll/client-lib";
+import {
+  getOffsetDate,
+  getEndOfDay,
+  getStartOfDay,
+  ISO8601Date,
+} from "@quoll/client-lib";
 import { DateFilter } from "../types";
 
 /**
@@ -22,7 +27,7 @@ import { DateFilter } from "../types";
  * @param date the date for the filter in ISO 8601 format
  * @returns the filter object
  */
-export const makeDateFilter = (date: string): DateFilter => {
+export const makeDateFilter = (date: ISO8601Date): DateFilter => {
   const _date = new Date(date);
   const dayBefore = getOffsetDate(_date, -1);
   const dayAfter = getOffsetDate(_date, 1);

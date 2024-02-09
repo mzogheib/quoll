@@ -6,6 +6,7 @@ import { checkIsPermitted, getMedia, requestPermission } from "../service";
 import { makeStore } from "../../../store";
 import { usePersistedState } from "@modules/persisted-state/logic";
 import { makeDateFilter } from "./utils";
+import { ISO8601Date } from "@quoll/client-lib";
 
 type MediaState = {
   isConnecting: boolean;
@@ -74,7 +75,7 @@ export const useMediaModel = () => {
     setIsConnected(false);
   };
 
-  const refresh = useCallback(async (date: string) => {
+  const refresh = useCallback(async (date: ISO8601Date) => {
     setProperty("isRefreshing", true);
     const response = await getMedia(makeDateFilter(date));
     const newValue = response.edges.map(

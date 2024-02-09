@@ -1,4 +1,4 @@
-import { TimelineEntry } from "@quoll/client-lib";
+import { ISO8601Date, TimelineEntry } from "@quoll/client-lib";
 import { useMediaViewModel } from "@modules/media/view-model";
 import { useTimelineModel } from "../model";
 import { mediaAdapter } from "./feed-adapters/media";
@@ -21,13 +21,13 @@ export const useTimelineViewModel = (): TimelineViewModel => {
   const mediaViewModel = useMediaViewModel();
 
   // TODO need to wait until isCheckingPermission is done?
-  const refreshMedia = async (date: string) => {
+  const refreshMedia = async (date: ISO8601Date) => {
     if (!mediaViewModel.isConnected) return;
 
     await mediaViewModel.refresh(date);
   };
 
-  const fetchTimeline = async (date: string) => {
+  const fetchTimeline = async (date: ISO8601Date) => {
     await Promise.all([timelineModel.fetchTimeline(date), refreshMedia(date)]);
   };
 

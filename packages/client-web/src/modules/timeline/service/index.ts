@@ -1,5 +1,6 @@
 import moment from "moment";
 import {
+  ISO8601Date,
   TimelineEntry,
   TimelineEntryType,
   TimelineService,
@@ -38,7 +39,7 @@ export const getEntryImage = (entry: TimelineEntry) =>
 // Has an array of sources to fetch from
 // Consumer can push to the array
 
-const get = (date: string) =>
+const get = (date: ISO8601Date) =>
   api.get<TimelineEntry[]>({
     endpoint: "timeline",
     params: {

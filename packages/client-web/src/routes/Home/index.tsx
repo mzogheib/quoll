@@ -9,6 +9,7 @@ import DatePicker from "modules/date/views/DatePicker";
 import Timeline from "modules/timeline/views/Timeline";
 import Map from "components/Map";
 import { makePolylineConfigs, makeInfoWindowOptions } from "./mapUtils";
+import { ISO8601Date } from "@quoll/client-lib";
 
 const Wrapper = styled.div(
   ({ theme: { media } }) => css`
@@ -94,7 +95,7 @@ const Home = () => {
     setFocussedEntryLatLng(latLng);
   };
 
-  const handleDateChange = (newDate: string) => {
+  const handleDateChange = (newDate: ISO8601Date) => {
     setFocussedEntryId(undefined);
     setFocussedEntryLatLng(undefined);
     setDate(newDate);
@@ -122,7 +123,8 @@ const Home = () => {
     fetchTimeline(date);
   }, [date, didFetchOnce, fetchTimeline]);
 
-  const dateIsToday = (date: string) => moment(date).isSame(moment(), "day");
+  const dateIsToday = (date: ISO8601Date) =>
+    moment(date).isSame(moment(), "day");
 
   return (
     <Wrapper>

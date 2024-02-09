@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled, { css } from "styled-components";
 import moment from "moment";
 import { Calendar, IconButton } from "@quoll/ui-components";
+import { ISO8601Date } from "@quoll/client-lib";
 
 const Wrapper = styled.div`
   display: flex;
@@ -39,12 +40,12 @@ const StyledCalendar = styled(Calendar)`
 `;
 
 interface Props {
-  date: string;
-  maxDate: string;
+  date: ISO8601Date;
+  maxDate: ISO8601Date;
   calendarDisabled: boolean;
   prevDisabled: boolean;
   nextDisabled: boolean;
-  onDateChange: (date: string) => void;
+  onDateChange: (date: ISO8601Date) => void;
 }
 
 const DatePicker = (props: Props) => {
