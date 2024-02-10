@@ -5,6 +5,7 @@ const PACKAGES = [
   "client-lib",
   "client-mobile",
   "client-web",
+  "lib",
   "ui-components",
   "ui-primitives",
 ];
