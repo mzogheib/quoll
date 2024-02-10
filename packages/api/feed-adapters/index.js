@@ -1,4 +1,4 @@
-const { stravaSummaryActivitiesAdapter } = require("@quoll/client-lib");
+const { stravaSummaryActivitiesAdapter } = require("@quoll/lib");
 
 module.exports = {
   moves: require("./moves"),
