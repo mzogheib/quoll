@@ -1,6 +1,6 @@
-import { getUnixTimestamp } from "../../../date/utils";
-import { formatDistance } from "../../../misc/distance/utils";
-import { generateRandomString } from "../../../misc/randomString/utils";
+import { getUnixTimestamp } from "../../../date";
+import { formatDistance } from "../../../misc/distance";
+import { generateRandomString } from "../../../misc/randomString";
 import {
   TimelineEntry,
   TimelineEntryLocation,
@@ -56,7 +56,7 @@ export const stravaSummaryActivitiesAdapter = (
     const type = activityConfig?.type ?? "unknown";
     const title = activityConfig?.label ?? "Unknown";
     const _distance = formatDistance(distance);
-    const timeStart = getUnixTimestamp(start_date);
+    const timeStart = getUnixTimestamp(new Date(start_date));
     const timeEnd = timeStart + elapsed_time * 1000;
     const locationStart = isStravaLatLng(start_latlng)
       ? adaptLatLng(start_latlng)
