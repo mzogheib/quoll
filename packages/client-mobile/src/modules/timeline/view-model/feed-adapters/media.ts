@@ -21,11 +21,14 @@ const getType = (mediaItem: MediaItem): TimelineEntryType => {
 };
 
 export const mediaAdapter = (mediaItem: MediaItem): TimelineEntry => {
-  const { timestamp } = mediaItem;
-  const location = {
-    latitude: mediaItem.location?.latitude,
-    longitude: mediaItem.location?.longitude,
-  };
+  const { timestamp, location } = mediaItem;
+  const _location =
+    location?.latitude && location.longitude
+      ? {
+          latitude: location.latitude,
+          longitude: location.longitude,
+        }
+      : null;
 
   return {
     id: mediaItem.id,
@@ -36,8 +39,8 @@ export const mediaAdapter = (mediaItem: MediaItem): TimelineEntry => {
     title: "Photo",
     valueLabel: "", // TODO make this optional or null,
     description: null,
-    locationStart: location,
-    locationEnd: location,
+    locationStart: _location,
+    locationEnd: _location,
     polyline: null,
     mediaUri: mediaItem.image.uri,
   };

@@ -28,23 +28,14 @@ const HomeScreen = (_: ScreenProps<"home">) => {
 
       return hasLocation && !polyline && !!mediaUri;
     })
-    .map(({ locationStart, mediaUri }) => {
-      // These casts are safe based on above filter
-
-      const coordinate = {
-        latitude: locationStart.latitude,
-        longitude: locationStart.longitude,
-      } as MarkerProps["coordinate"];
-
-      const image = {
-        uri: mediaUri,
-      } as MarkerProps["image"];
-
-      return {
-        coordinate,
-        image,
-      };
-    });
+    .map(({ locationStart, mediaUri }) => ({
+      // The ! assertions are safe based on above filter
+      coordinate: {
+        latitude: locationStart!.latitude,
+        longitude: locationStart!.longitude,
+      },
+      image: { uri: mediaUri! },
+    }));
 
   return (
     <ScreenTemplate>

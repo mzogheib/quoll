@@ -23,8 +23,8 @@ export type TimelineEntryType =
   | "yoga";
 
 interface TimelineEntryLocation {
-  latitude?: number;
-  longitude?: number;
+  latitude: number;
+  longitude: number;
 }
 
 export type TimelineEntry = {
@@ -36,8 +36,8 @@ export type TimelineEntry = {
   title: string;
   valueLabel: string;
   description: string | null;
-  locationStart: TimelineEntryLocation;
-  locationEnd: TimelineEntryLocation;
+  locationStart: TimelineEntryLocation | null;
+  locationEnd: TimelineEntryLocation | null;
   polyline: string | null;
   mediaUri: string | null;
 };

@@ -40,8 +40,8 @@ export const makeMarkerOptions = (
     .filter((entry) => !entry.polyline && entry.locationStart)
     .map((entry) => ({
       id: entry.id,
-      latitude: entry.locationStart?.latitude,
-      longitude: entry.locationEnd?.longitude,
+      latitude: entry.locationStart!.latitude, // Guaranteed by above filter
+      longitude: entry.locationStart!.longitude, // Guaranteed by above filter
       title: entry.title,
       subTitle: moment.unix(entry.timeStart).format("h:mm a"),
       description: entry.description || "",
@@ -54,7 +54,7 @@ const makeInfoWindowPosition = ({
   | google.maps.LatLngLiteral
   | google.maps.LatLng
   | undefined => {
-  if (locationStart?.latitude && locationStart.longitude) {
+  if (locationStart) {
     return {
       lat: locationStart.latitude,
       lng: locationStart.longitude,
