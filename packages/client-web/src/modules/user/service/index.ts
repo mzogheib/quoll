@@ -1,15 +1,13 @@
 import api from "../../../services/api";
 import { User } from "../types";
 
-const login = (userId: string) =>
-  api.post<User>({ endpoint: "login", payload: { userId } }).then((user) => {
-    return user;
+const login = async (userId: string) =>
+  await api.post<User>({
+    endpoint: "login",
+    payload: { userId },
   });
 
-const signup = () =>
-  api.post<User>({ endpoint: "signup" }).then((user) => {
-    return user;
-  });
+const signup = async () => await api.post<User>({ endpoint: "signup" });
 
 const userService = { login, signup };
 
