@@ -1,0 +1,21 @@
+{
+  "name": "@quoll/lib",
+  "version": "0.1.0",
+  "description": "Shared code for client and server side packages",
+  "repository": "https://github.com/mzogheib/quoll",
+  "author": "mzogheib",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "start": "tsc --watch",
+    "clean-build": "rm -rf dist",
+    "build": "yarn clean-build && tsc",
+    "type-check": "tsc --noEmit",
+    "prepublishOnly": "yarn build"
+  },
+  "devDependencies": {
+    "@tsconfig/recommended": "^1.0.3",
+    "typescript": "^5.3.3"
+  }
+}
