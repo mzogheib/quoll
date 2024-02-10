@@ -1,7 +1,7 @@
+import { ISO8601Date, TimelineEntry } from "@quoll/lib";
+
 import { Store } from "../../../store/types";
-import { ISO8601Date } from "../../../types";
 import { TimelineService } from "../service";
-import { TimelineEntry } from "../types";
 
 export type TimelineState = {
   /**

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { TimelineEntry as ITimelineEntry } from "@quoll/client-lib";
+import { TimelineEntry as ITimelineEntry } from "@quoll/lib";
 
 import TimelineEntry from "../TimelineEntry";
 

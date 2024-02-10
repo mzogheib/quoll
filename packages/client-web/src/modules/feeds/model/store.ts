@@ -1,4 +1,5 @@
-import { FeedName, makeReduxStoreSlice } from "@quoll/client-lib";
+import { makeReduxStoreSlice } from "@quoll/client-lib";
+import { FeedName } from "@quoll/lib";
 
 import { RootState } from "store";
 

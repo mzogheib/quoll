@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "react-native";
-import { makeISO8601Date } from "@quoll/client-lib";
+import { makeISO8601Date } from "@quoll/lib";
 
 import { useStyles } from "./styles";
 

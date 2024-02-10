@@ -1,10 +1,6 @@
 import moment from "moment";
-import {
-  ISO8601Date,
-  TimelineEntry,
-  TimelineEntryType,
-  TimelineService,
-} from "@quoll/client-lib";
+import { ISO8601Date, TimelineEntry, TimelineEntryType } from "@quoll/lib";
+import { TimelineService } from "@quoll/client-lib";
 
 import api from "../../../services/api";
 

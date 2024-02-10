@@ -1,4 +1,4 @@
-import { FeedName } from "@quoll/client-lib";
+import { FeedName } from "@quoll/lib";
 
 const logoMap = {
   toshl: {

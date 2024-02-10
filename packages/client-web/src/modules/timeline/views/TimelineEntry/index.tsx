@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import moment from "moment";
-import { TimelineEntry as ITimelineEntry } from "@quoll/client-lib";
+import { TimelineEntry as ITimelineEntry } from "@quoll/lib";
 
 import FeedLogo from "components/FeedLogo";
 import { getEntryImage } from "../../service";

@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { FeedName } from "@quoll/client-lib";
+import { FeedName } from "@quoll/lib";
 
 import { FeedState, useStore } from "./store";
 import feedsService from "../service";

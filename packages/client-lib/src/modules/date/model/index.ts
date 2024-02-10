@@ -1,5 +1,6 @@
+import { ISO8601Date } from "@quoll/lib";
+
 import { Store } from "../../../store/types";
-import { ISO8601Date } from "../../../types";
 
 export type DateState = {
   /**

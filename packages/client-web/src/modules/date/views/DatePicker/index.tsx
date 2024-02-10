@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled, { css } from "styled-components";
 import moment from "moment";
 import { Calendar, IconButton } from "@quoll/ui-components";
-import { ISO8601Date } from "@quoll/client-lib";
+import { ISO8601Date } from "@quoll/lib";
 
 const Wrapper = styled.div`
   display: flex;

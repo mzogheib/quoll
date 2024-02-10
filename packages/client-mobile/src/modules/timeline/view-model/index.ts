@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { ISO8601Date, TimelineEntry } from "@quoll/client-lib";
+import { ISO8601Date, TimelineEntry } from "@quoll/lib";
 import { useMediaModel } from "../../media/model";
 import { useTimelineModel } from "../model";
 import { mediaAdapter } from "./feed-adapters/media";

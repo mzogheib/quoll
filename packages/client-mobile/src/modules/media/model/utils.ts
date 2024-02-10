@@ -3,7 +3,7 @@ import {
   getEndOfDay,
   getStartOfDay,
   ISO8601Date,
-} from "@quoll/client-lib";
+} from "@quoll/lib";
 import { DateFilter } from "../types";
 
 /**

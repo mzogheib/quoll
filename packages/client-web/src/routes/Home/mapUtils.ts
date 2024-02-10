@@ -1,5 +1,5 @@
 import moment from "moment";
-import { TimelineEntry } from "@quoll/client-lib";
+import { TimelineEntry } from "@quoll/lib";
 
 import { PolylineConfig } from "components/Map/Component";
 import { decodePath } from "components/Map/utils";
