@@ -8,7 +8,7 @@ import {
 } from "../../types";
 import {
   StravaSummaryActivity,
-  StravaActivityType,
+  StravaSportType,
   isStravaLatLng,
   StravaLatLng,
 } from "./types";
@@ -18,7 +18,7 @@ type ActivityConfig = {
   label: string;
 };
 
-const Activities: Record<StravaActivityType, ActivityConfig> = {
+const ActivityConfigMap: Partial<Record<StravaSportType, ActivityConfig>> = {
   EBikeRide: { type: "e-bike", label: "E-Bike" },
   Hike: { type: "hike", label: "Hike" },
   Ride: { type: "bike", label: "Bike" },
@@ -48,11 +48,13 @@ export const stravaSummaryActivitiesAdapter = (
       map,
       start_date,
       start_latlng,
-      type,
+      sport_type,
     } = activity;
 
-    const _type = Activities[type].type ?? "unknown";
-    const title = Activities[type].label ?? "Activity";
+    const activityConfig = ActivityConfigMap[sport_type];
+
+    const type = activityConfig?.type ?? "unknown";
+    const title = activityConfig?.label ?? "Unknown";
     const _distance = formatDistance(distance);
     const timeStart = getUnixTimestamp(start_date);
     const timeEnd = timeStart + elapsed_time * 1000;
@@ -67,7 +69,7 @@ export const stravaSummaryActivitiesAdapter = (
     return {
       feed: "strava",
       id: generateRandomString(32),
-      type: _type,
+      type,
       timeStart,
       timeEnd,
       title,

@@ -17,6 +17,7 @@ export type TimelineEntryType =
   | "train"
   | "tram"
   | "transport"
+  | "unknown"
   | "velomobile"
   | "video"
   | "walk"

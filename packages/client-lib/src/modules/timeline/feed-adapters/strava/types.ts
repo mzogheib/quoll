@@ -1,12 +1,57 @@
 import { ISO8601DateAndTime } from "../../../../types";
 
-export type StravaActivityType =
+// https://developers.strava.com/docs/reference
+
+export type StravaSportType =
+  | "AlpineSki"
+  | "BackcountrySki"
+  | "Badminton"
+  | "Canoeing"
+  | "Crossfit"
   | "EBikeRide"
+  | "Elliptical"
+  | "EMountainBikeRide"
+  | "Golf"
+  | "GravelRide"
+  | "Handcycle"
+  | "HighIntensityIntervalTraining"
   | "Hike"
+  | "IceSkate"
+  | "InlineSkate"
+  | "Kayaking"
+  | "Kitesurf"
+  | "MountainBikeRide"
+  | "NordicSki"
+  | "Pickleball"
+  | "Pilates"
+  | "Racquetball"
   | "Ride"
+  | "RockClimbing"
+  | "RollerSki"
+  | "Rowing"
   | "Run"
+  | "Sail"
+  | "Skateboard"
+  | "Snowboard"
+  | "Snowshoe"
+  | "Soccer"
+  | "Squash"
+  | "StairStepper"
+  | "StandUpPaddling"
+  | "Surfing"
+  | "Swim"
+  | "TableTennis"
+  | "Tennis"
+  | "TrailRun"
   | "Velomobile"
+  | "VirtualRide"
+  | "VirtualRow"
+  | "VirtualRun"
   | "Walk"
+  | "WeightTraining"
+  | "Wheelchair"
+  | "Windsurf"
+  | "Workout"
   | "Yoga";
 
 /**
@@ -27,7 +72,7 @@ type StravaPolylineMap = {
 };
 
 export type StravaSummaryActivity = {
-  type: StravaActivityType;
+  sport_type: StravaSportType;
   /**
    * Measured in meters.
    */

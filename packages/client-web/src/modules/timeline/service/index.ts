@@ -30,6 +30,7 @@ const EntryConfigMap: Record<TimelineEntryType, EntryConfig> = {
   train: { label: "Train", image: "🚆" },
   tram: { label: "Tram", image: "🚊" },
   transport: { label: "Transport", image: "⏩" },
+  unknown: { label: "Unknown", image: "🤷" },
   velomobile: { label: "Velomobile", image: "🚲🛡️" },
   video: { label: "Video", image: "🎥" },
   walk: { label: "Walk", image: "🚶‍♂️" },
