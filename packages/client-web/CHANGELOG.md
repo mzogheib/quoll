@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.2](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.6.1...@quoll/client-web@0.6.2) (2024-02-10)
+
+### Bug Fixes
+
+- **client-web:** fix bad import for type ([2165ebd](https://github.com/mzogheib/quoll/commit/2165ebd3d96d637df9823343a6f4ef657ac3681b))
+
 ## [0.6.1](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.6.0...@quoll/client-web@0.6.1) (2024-02-10)
 
 **Note:** Version bump only for package @quoll/client-web

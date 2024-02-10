@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/mzogheib/quoll/compare/@quoll/lib@0.2.0...@quoll/lib@0.3.0) (2024-02-10)
+
+### Features
+
+- add some new modules to lib and refactor unix timestamp function ([b9f72e6](https://github.com/mzogheib/quoll/commit/b9f72e6ea84cee0588c5e84de198f8eac6d199e4))
+- **lib:** add toshl entries adapter ([7bb45da](https://github.com/mzogheib/quoll/commit/7bb45dac1200b418e0dd078ec2727c01d5dc61dc))
+
 # 0.2.0 (2024-02-10)
 
 ### Features
