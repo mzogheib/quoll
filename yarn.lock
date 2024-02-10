@@ -5901,6 +5901,7 @@ __metadata:
   resolution: "@quoll/api@workspace:packages/api"
   dependencies:
     "@mapbox/polyline": "npm:^1.1.1"
+    "@quoll/client-lib": "npm:^0.3.0"
     body-parser: "npm:^1.20.0"
     cors: "npm:^2.8.5"
     dotenv: "npm:^16.0.1"
