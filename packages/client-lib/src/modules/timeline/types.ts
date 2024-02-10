@@ -1,27 +1,26 @@
 import { FeedName } from "../feeds/types";
 
-export enum TimelineEntryType {
-  Bike = "bike",
-  Bus = "bus",
-  Car = "car",
-  EBike = "e-bike",
-  Expense = "expense",
-  Ferry = "ferry",
-  Flight = "flight",
-  Hike = "hike",
-  Home = "home",
-  Motorcycle = "motorcycle",
-  Photo = "photo",
-  Place = "place",
-  Run = "run",
-  Train = "train",
-  Tram = "tram",
-  Transport = "transport",
-  Video = "video",
-  Walk = "walk",
-  Work = "work",
-  Yoga = "yoga",
-}
+export type TimelineEntryType =
+  | "bike"
+  | "bus"
+  | "car"
+  | "e-bike"
+  | "expense"
+  | "ferry"
+  | "flight"
+  | "hike"
+  | "home"
+  | "motorcycle"
+  | "photo"
+  | "place"
+  | "run"
+  | "train"
+  | "tram"
+  | "transport"
+  | "video"
+  | "walk"
+  | "work"
+  | "yoga";
 
 interface TimelineEntryLocation {
   latitude?: number;

@@ -8,15 +8,15 @@ const getType = (mediaItem: MediaItem): TimelineEntryType => {
     case "PhotoLive":
     case "PhotoPanorama":
     case "PhotoScreenshot":
-      return TimelineEntryType.Photo;
+      return "photo";
 
     case "VideoHighFrameRate":
     case "VideoStreamed":
     case "VideoTimelapse":
-      return TimelineEntryType.Video;
+      return "video";
 
     default:
-      return TimelineEntryType.Photo;
+      return "photo";
   }
 };
 

@@ -8,31 +8,36 @@ import {
 
 import api from "../../../services/api";
 
-const EntryConfig = {
-  [TimelineEntryType.Bike]: { label: "Bike", image: "🚲" },
-  [TimelineEntryType.Bus]: { label: "Bus", image: "🚌" },
-  [TimelineEntryType.Car]: { label: "Car", image: "🚗" },
-  [TimelineEntryType.EBike]: { label: "E-Bike", image: "🚲⚡️" },
-  [TimelineEntryType.Expense]: { label: "Expense", image: "💸" },
-  [TimelineEntryType.Ferry]: { label: "Ferry", image: "🛳️" },
-  [TimelineEntryType.Flight]: { label: "Flight", image: "✈️" },
-  [TimelineEntryType.Hike]: { label: "Hike", image: "🥾" },
-  [TimelineEntryType.Home]: { label: "Home", image: "🏠" },
-  [TimelineEntryType.Motorcycle]: { label: "Motorcycle", image: "🏍️" },
-  [TimelineEntryType.Place]: { label: "Place", image: "🏬" },
-  [TimelineEntryType.Photo]: { label: "Photo", image: "📸" },
-  [TimelineEntryType.Run]: { label: "Run", image: "🏃‍♂️" },
-  [TimelineEntryType.Train]: { label: "Train", image: "🚆" },
-  [TimelineEntryType.Tram]: { label: "Tram", image: "🚊" },
-  [TimelineEntryType.Transport]: { label: "Transport", image: "⏩" },
-  [TimelineEntryType.Video]: { label: "Video", image: "🎥" },
-  [TimelineEntryType.Walk]: { label: "Walk", image: "🚶‍♂️" },
-  [TimelineEntryType.Work]: { label: "Work", image: "🏭" },
-  [TimelineEntryType.Yoga]: { label: "Yoga", image: "🧘‍♂️" },
+type EntryConfig = {
+  label: string;
+  image: string;
+};
+
+const EntryConfigMap: Record<TimelineEntryType, EntryConfig> = {
+  bike: { label: "Bike", image: "🚲" },
+  bus: { label: "Bus", image: "🚌" },
+  car: { label: "Car", image: "🚗" },
+  "e-bike": { label: "E-Bike", image: "🚲⚡️" },
+  expense: { label: "Expense", image: "💸" },
+  ferry: { label: "Ferry", image: "🛳️" },
+  flight: { label: "Flight", image: "✈️" },
+  hike: { label: "Hike", image: "🥾" },
+  home: { label: "Home", image: "🏠" },
+  motorcycle: { label: "Motorcycle", image: "🏍️" },
+  photo: { label: "Photo", image: "📸" },
+  place: { label: "Place", image: "🏬" },
+  run: { label: "Run", image: "🏃‍♂️" },
+  train: { label: "Train", image: "🚆" },
+  tram: { label: "Tram", image: "🚊" },
+  transport: { label: "Transport", image: "⏩" },
+  video: { label: "Video", image: "🎥" },
+  walk: { label: "Walk", image: "🚶‍♂️" },
+  work: { label: "Work", image: "🏭" },
+  yoga: { label: "Yoga", image: "🧘‍♂️" },
 };
 
 export const getEntryImage = (entry: TimelineEntry) =>
-  EntryConfig[entry.type] ? EntryConfig[entry.type].image : "🤠";
+  EntryConfigMap[entry.type] ? EntryConfigMap[entry.type].image : "🤠";
 
 // TODO move this to client-lib
 // Convert to a class
