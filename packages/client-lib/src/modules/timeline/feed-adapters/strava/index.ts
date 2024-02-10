@@ -19,12 +19,13 @@ type ActivityConfig = {
 };
 
 const Activities: Record<StravaActivityType, ActivityConfig> = {
+  EBikeRide: { type: "e-bike", label: "E-Bike" },
+  Hike: { type: "hike", label: "Hike" },
   Ride: { type: "bike", label: "Bike" },
   Run: { type: "run", label: "Run" },
+  Velomobile: { type: "velomobile", label: "Velomobile" },
   Walk: { type: "walk", label: "Walk" },
-  Hike: { type: "hike", label: "Hike" },
   Yoga: { type: "yoga", label: "Yoga" },
-  EBikeRide: { type: "e-bike", label: "E-Bike" },
 };
 
 const adaptLatLng = ([

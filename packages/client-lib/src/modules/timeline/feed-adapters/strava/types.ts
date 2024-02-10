@@ -1,12 +1,13 @@
 import { ISO8601DateAndTime } from "../../../../types";
 
 export type StravaActivityType =
+  | "EBikeRide"
+  | "Hike"
   | "Ride"
   | "Run"
+  | "Velomobile"
   | "Walk"
-  | "Hike"
-  | "Yoga"
-  | "EBikeRide";
+  | "Yoga";
 
 /**
  * [latitude, longitude]
