@@ -19,6 +19,7 @@ const EntryConfigMap: Record<TimelineEntryType, EntryConfig> = {
   flight: { label: "Flight", image: "✈️" },
   hike: { label: "Hike", image: "🥾" },
   home: { label: "Home", image: "🏠" },
+  income: { label: "Income", image: "💰" },
   motorcycle: { label: "Motorcycle", image: "🏍️" },
   photo: { label: "Photo", image: "📸" },
   place: { label: "Place", image: "🏬" },
