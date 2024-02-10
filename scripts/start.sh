@@ -1,7 +1,7 @@
 #!/bin/bash
 
-emojis=("🗃️ " "🧰" "📱" "🌐" "🧩" "🎨")
-options=("api" "client-lib" "client-mobile" "client-web" "ui-components" "ui-primitives")
+emojis=("🗃️ " "🧰" "📱" "🌐" "🔩" "🧩" "🎨")
+options=("api" "client-lib" "client-mobile" "client-web" "lib" "ui-components" "ui-primitives")
 selected_option=0
 
 while true; do
