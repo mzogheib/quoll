@@ -9,6 +9,7 @@ export type TimelineEntryType =
   | "ferry"
   | "flight"
   | "hike"
+  | "income"
   | "home"
   | "motorcycle"
   | "photo"
