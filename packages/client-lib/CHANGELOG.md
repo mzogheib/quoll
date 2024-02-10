@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.1](https://github.com/mzogheib/quoll/compare/@quoll/client-lib@0.4.0...@quoll/client-lib@0.4.1) (2024-02-10)
+
+**Note:** Version bump only for package @quoll/client-lib
+
 # [0.4.0](https://github.com/mzogheib/quoll/compare/@quoll/client-lib@0.3.0...@quoll/client-lib@0.4.0) (2024-02-10)
 
 ### Features

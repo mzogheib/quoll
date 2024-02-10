@@ -1,6 +1,6 @@
 {
   "name": "@quoll/client-mobile",
-  "version": "0.20.2",
+  "version": "0.20.3",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -16,7 +16,7 @@
     "hoistingLimits": "workspaces"
   },
   "dependencies": {
-    "@quoll/client-lib": "^0.4.0",
+    "@quoll/client-lib": "^0.4.1",
     "@quoll/lib": "^0.2.0",
     "@quoll/ui-primitives": "^0.4.0",
     "@react-native-camera-roll/camera-roll": "^7.3.0",
