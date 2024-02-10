@@ -1,8 +1,11 @@
-const { stravaSummaryActivitiesAdapter } = require("@quoll/lib");
+const {
+  stravaSummaryActivitiesAdapter,
+  toshlEntriesAdapter,
+} = require("@quoll/lib");
 
 module.exports = {
   moves: require("./moves"),
   strava: { adapter: stravaSummaryActivitiesAdapter },
-  toshl: require("./toshl"),
+  toshl: { adapter: toshlEntriesAdapter },
   uber: require("./uber"),
 };
