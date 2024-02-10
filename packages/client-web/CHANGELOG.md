@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.5.15...@quoll/client-web@0.6.0) (2024-02-10)
+
+### Features
+
+- **client-lib:** add velomobile to strava adapter ([6861af0](https://github.com/mzogheib/quoll/commit/6861af0dcefbb168aad3de03d14ff546ce84e398))
+
 ## [0.5.15](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.5.14...@quoll/client-web@0.5.15) (2024-02-09)
 
 **Note:** Version bump only for package @quoll/client-web
