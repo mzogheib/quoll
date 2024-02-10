@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 
-import userService from "modules/user/service";
 import { useUserViewModel } from "modules/user/view-model";
 import { useFeedsViewModel } from "modules/feeds/view-model";
 import Header from "components/Header";
@@ -39,7 +38,8 @@ const App = () => {
   const history = useHistory();
   const location = useLocation();
 
-  const { isAuthenticating, login, signup } = useUserViewModel();
+  const { isAuthenticating, getCurrentUserId, login, signup } =
+    useUserViewModel();
   const { isOneConnected: isOneFeedConnected } = useFeedsViewModel();
 
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
@@ -48,12 +48,12 @@ const App = () => {
   useEffect(() => {
     if (didAuthenticate) return;
 
-    const userId = userService.getCurrentUser();
+    const userId = getCurrentUserId();
     setDidAuthenticate(true);
 
     if (userId) login(userId);
     else signup();
-  }, [didAuthenticate, login, signup]);
+  }, [didAuthenticate, getCurrentUserId, login, signup]);
 
   // TODO: don't show the modal if user is already logged in and disconnects
   // all feeds
