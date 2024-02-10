@@ -22,7 +22,7 @@ export type TimelineEntryType =
   | "work"
   | "yoga";
 
-interface TimelineEntryLocation {
+export interface TimelineEntryLocation {
   latitude: number;
   longitude: number;
 }
