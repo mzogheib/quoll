@@ -1,4 +1,4 @@
-import { ISO8601Date } from "../../types";
+import { ISO8601Date, ISO8601DateAndTime } from "../../types";
 
 /**
  * Offsets a date by the input number of days.
@@ -52,3 +52,10 @@ export const makeISO8601Date = (date: Date): ISO8601Date => {
 
   return `${YYYY}-${MM}-${DD}`;
 };
+
+/**
+ * @param date a full date and time in ISO 8601 format
+ * @returns the number of seconds since the epock
+ */
+export const getUnixTimestamp = (date: ISO8601DateAndTime) =>
+  Math.floor(new Date(date).getTime() / 1000);
