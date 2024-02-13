@@ -49,3 +49,9 @@ yarn start
 ## TODO & Issue Tracking
 
 Refer to [issues](https://github.com/mzogheib/quoll/issues).
+
+# Test
+
+<a href="quoll://">quoll</a>
+<br />
+<a href="quoll://settings">quoll settings</a>
