@@ -1,27 +1,9 @@
 import React, { ReactNode } from "react";
-import {
-  LinkingOptions,
-  NavigationContainer as RNNavigationContainer,
-} from "@react-navigation/native";
+import { NavigationContainer as RNNavigationContainer } from "@react-navigation/native";
+
 import { useNavigationStore } from "@screens/navigation";
-import { ScreenName, ScreenParamsMap } from "@screens/types";
-import { screenConfigMap } from "@screens/config";
-
-const screensConfig = Object.keys(screenConfigMap).reduce(
-  (prev, screenName) => ({
-    ...prev,
-    [screenName]: { path: screenName },
-  }),
-  {},
-);
-
-const linking: LinkingOptions<ScreenParamsMap> = {
-  prefixes: ["quoll://"],
-  config: {
-    initialRouteName: "home",
-    screens: screensConfig,
-  },
-};
+import { ScreenName } from "@screens/types";
+import { linking } from "@screens/config";
 
 type Props = {
   children: ReactNode;
