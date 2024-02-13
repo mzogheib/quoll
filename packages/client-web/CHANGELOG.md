@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.3](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.6.2...@quoll/client-web@0.6.3) (2024-02-13)
+
+### Bug Fixes
+
+- **client-web:** add missing income entry config ([8de959c](https://github.com/mzogheib/quoll/commit/8de959cd8f6c742d47325d2e5c78d17a4765bea0))
+
 ## [0.6.2](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.6.1...@quoll/client-web@0.6.2) (2024-02-10)
 
 ### Bug Fixes
