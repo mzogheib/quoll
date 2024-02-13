@@ -3,7 +3,13 @@ import { LinkingOptions, PathConfigMap } from "@react-navigation/native";
 import { ScreenName, ScreenParamsMap } from "./types";
 
 type ScreenConfig = {
+  /**
+   * The title to display at the top of the screen
+   */
   title: string;
+  /**
+   * The icon to display on the nav menu
+   */
   icon: string;
 };
 
