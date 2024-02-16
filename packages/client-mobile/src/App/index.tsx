@@ -24,7 +24,7 @@ function App() {
 
   return (
     <>
-      <View style={styles.navContent}>
+      <View style={styles.wrapper}>
         <NavBar onHelpClick={openWelcomeModal} />
         <Screens />
       </View>

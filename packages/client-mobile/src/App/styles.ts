@@ -4,16 +4,13 @@ import { useResponsiveStyles } from "@modules/dimensions/logic";
 const stylesDefault = StyleSheet.create({
   wrapper: {
     flex: 1,
-  },
-  navContent: {
-    flex: 1,
     flexDirection: "column-reverse",
   },
 });
 
 const stylesWide = StyleSheet.create({
   ...stylesDefault,
-  navContent: {
+  wrapper: {
     flex: 1,
     flexDirection: "row",
   },
