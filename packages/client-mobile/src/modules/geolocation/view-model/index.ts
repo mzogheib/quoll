@@ -5,6 +5,8 @@ import { usePersistedState } from "@modules/persisted-state/logic";
 import { promptAllowAccess } from "@modules/alert/logic";
 import { Coords } from "../types";
 
+// TODO refactor to use a model
+
 type GeolocationError =
   | "PERMISSION_DENIED"
   | "POSITION_UNAVAILABLE"
