@@ -12,7 +12,7 @@ const TabNavigator = createBottomTabNavigator<ScreenParamsMap>();
 /**
  * The screens with the header and tab bar hidden.
  */
-const Screens = () => (
+const ScreenStack = () => (
   <TabNavigator.Navigator
     screenOptions={{ headerShown: false, tabBarStyle: styles.tabBar }}
   >
@@ -21,4 +21,4 @@ const Screens = () => (
   </TabNavigator.Navigator>
 );
 
-export default Screens;
+export default ScreenStack;

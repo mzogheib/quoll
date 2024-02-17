@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View } from "react-native";
 import NavBar from "@components/NavBar";
 import WelcomeModal from "@components/WelcomeModal";
-import Screens from "@screens/Screens";
+import ScreenStack from "@screens/ScreenStack";
 import { useNavigate } from "@screens/navigation";
 
 import { useStyles } from "./styles";
@@ -26,7 +26,7 @@ function App() {
     <>
       <View style={styles.wrapper}>
         <NavBar onHelpClick={openWelcomeModal} />
-        <Screens />
+        <ScreenStack />
       </View>
       <WelcomeModal
         isOpen={isWelcomeModalOpen}
