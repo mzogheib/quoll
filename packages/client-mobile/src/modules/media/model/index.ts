@@ -8,14 +8,14 @@ import { makeStore } from "../../../store";
 import { usePersistedState } from "@modules/persisted-state/logic";
 import { makeDateFilter } from "./utils";
 
-type MediaState = {
+type State = {
   isConnecting: boolean;
   isCheckingPermission: boolean;
   isRefreshing: boolean;
   value: MediaItem[];
 };
 
-const defaultState: MediaState = {
+const defaultState: State = {
   isConnecting: false,
   isCheckingPermission: true,
   isRefreshing: false,
