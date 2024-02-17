@@ -97,7 +97,7 @@ type StylesMap<Name extends string> =
  * the first matching width below is used.
  */
 export const useResponsiveStyles = <Name extends string>(
-  stylesMap: StylesMap<Name>
+  stylesMap: StylesMap<Name>,
 ) => {
   const screenWidth = useScreenWidth();
 

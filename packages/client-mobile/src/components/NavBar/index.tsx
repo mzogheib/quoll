@@ -1,10 +1,10 @@
 import React from "react";
 import { View } from "react-native";
-import Logo from "@components/Logo";
-import { useScreenWidth } from "@modules/dimensions/logic";
 
 import styles from "./styles";
 
+import Logo from "@components/Logo";
+import { useScreenWidth } from "@utils/dimensions/logic";
 import GoToScreenButton from "./GoToScreenButton";
 import HelpButton from "./HelpButton";
 

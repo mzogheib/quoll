@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
-import { useResponsiveStyles } from "@modules/dimensions/logic";
+
+import { useResponsiveStyles } from "@utils/dimensions/logic";
 
 const stylesDefault = StyleSheet.create({
   wrapper: {
