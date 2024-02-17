@@ -3,10 +3,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import styles from "./styles";
 
-import HomeScreen from "../Home";
-import SettingsScreen from "../Settings";
 import { ScreenParamsMap } from "@screens/config";
-import OAuthScreen from "@screens/OAuth";
+import HomeScreen from "./Home";
+import SettingsScreen from "./Settings";
+import OAuthScreen from "./OAuth";
 
 const TabNavigator = createBottomTabNavigator<ScreenParamsMap>();
 

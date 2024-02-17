@@ -5,8 +5,8 @@ import { useStyles } from "./styles";
 
 import { Map } from "@modules/map/ui/Map";
 import { DateBar } from "@modules/date-bar/ui/DateBar";
-import { ScreenProps } from "../config";
-import ScreenTemplate from "../ScreenTemplate";
+import { ScreenProps } from "../../config";
+import ScreenTemplate from "../../ScreenTemplate";
 import useController from "./controller";
 
 const HomeScreen = ({ route }: ScreenProps<"home">) => {

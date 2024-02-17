@@ -5,8 +5,8 @@ import { colorPalette } from "@quoll/ui-primitives";
 
 import styles from "./styles";
 
-import { ScreenProps } from "../config";
-import ScreenTemplate from "../ScreenTemplate";
+import { ScreenProps } from "../../config";
+import ScreenTemplate from "../../ScreenTemplate";
 import FeedSettings from "@components/FeedSettings";
 import { useMediaViewModel } from "@modules/media/view-model";
 import { useGeolocation } from "@modules/geolocation/logic";
