@@ -1,86 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import Geolocation from "@react-native-community/geolocation";
-import { Platform, PermissionsAndroid, Alert } from "react-native";
+import { Alert } from "react-native";
 import { usePersistedState } from "@modules/persisted-state/logic";
 import { promptAllowAccess } from "@modules/alert/logic";
 import { Coords } from "../types";
+import { checkIsPermitted, errors, requestPermission } from "../service";
 
 // TODO refactor to use a model
-
-type GeolocationError =
-  | "PERMISSION_DENIED"
-  | "POSITION_UNAVAILABLE"
-  | "TIMEOUT"
-  | "ACTIVITY_NULL";
-
-const errors: Record<number, GeolocationError> = {
-  1: "PERMISSION_DENIED",
-  2: "POSITION_UNAVAILABLE",
-  3: "TIMEOUT",
-  4: "ACTIVITY_NULL",
-};
-
-const checkIsPermittedIOS = async () => {
-  return new Promise<boolean>((resolve) => {
-    Geolocation.getCurrentPosition(
-      () => resolve(true),
-      () => resolve(false),
-    );
-  });
-};
-
-const checkIsPermittedAndroid = async () => {
-  try {
-    return await PermissionsAndroid.check(
-      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-    );
-  } catch {
-    return false;
-  }
-};
-
-const checkIsPermitted = async () => {
-  try {
-    if (Platform.OS === "ios") {
-      return await checkIsPermittedIOS();
-    } else {
-      return await checkIsPermittedAndroid();
-    }
-  } catch {
-    return false;
-  }
-};
-
-const requestPermissionAndroid = async () => {
-  try {
-    const granted = await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-      {
-        title: "Allow access",
-        message: "Quoll works best with your location.",
-        buttonPositive: "Allow",
-      },
-    );
-
-    return granted === PermissionsAndroid.RESULTS.GRANTED;
-  } catch {
-    return false;
-  }
-};
-
-const requestPermissionIOS = async () => false;
-
-const requestPermission = async () => {
-  try {
-    if (Platform.OS === "ios") {
-      return await requestPermissionIOS();
-    } else {
-      return await requestPermissionAndroid();
-    }
-  } catch {
-    return false;
-  }
-};
 
 export const useGeolocationViewModel = () => {
   const [coords, setCoords] = usePersistedState<Coords | undefined>(
