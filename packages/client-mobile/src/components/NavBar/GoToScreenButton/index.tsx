@@ -19,10 +19,19 @@ const GoToScreenButton = ({ name, focusHighlightAxis = "vertical" }: Props) => {
 
   const isFocussed = name === currentRouteName;
 
+  const handlePress = () => {
+    switch (name) {
+      case "home":
+        navigate("home");
+      case "settings":
+        navigate("settings");
+    }
+  };
+
   const icon = (
     <TouchableIcon
       hitBox="max"
-      onPress={() => navigate(name)}
+      onPress={handlePress}
       disabled={isFocussed}
       name={screenConfigMap[name].icon}
       color={colorPalette.mediumAquamarine}

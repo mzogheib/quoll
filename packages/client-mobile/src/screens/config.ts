@@ -4,8 +4,8 @@ import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 /*
 Adding a new screen:
 1. Define the params type for the screen in ScreenParamsMap
-2. Add the screens config to screenConfigMap
-3. Add the screen to the stack in the Screens component
+2. Add the screen's config to screenConfigMap
+3. Add the screen to the stack in the ScreenStack component
 */
 
 /**
@@ -15,6 +15,11 @@ Adding a new screen:
 export type ScreenParamsMap = {
   home: undefined;
   settings: undefined;
+  oauth: {
+    code?: string;
+    state?: string;
+    error?: string;
+  };
 };
 
 /**
@@ -49,6 +54,11 @@ export const screenConfigMap: Record<ScreenName, ScreenConfig> = {
     path: "settings",
     title: "Settings",
     icon: "settings",
+  },
+  oauth: {
+    path: "oauth",
+    title: "OAuth",
+    icon: "lock",
   },
 };
 

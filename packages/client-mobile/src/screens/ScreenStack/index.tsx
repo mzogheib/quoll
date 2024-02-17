@@ -6,6 +6,7 @@ import styles from "./styles";
 import HomeScreen from "../Home";
 import SettingsScreen from "../Settings";
 import { ScreenParamsMap } from "@screens/config";
+import OAuthScreen from "@screens/OAuth";
 
 const TabNavigator = createBottomTabNavigator<ScreenParamsMap>();
 
@@ -18,6 +19,7 @@ const ScreenStack = () => (
   >
     <TabNavigator.Screen name="home" component={HomeScreen} />
     <TabNavigator.Screen name="settings" component={SettingsScreen} />
+    <TabNavigator.Screen name="oauth" component={OAuthScreen} />
   </TabNavigator.Navigator>
 );
 
