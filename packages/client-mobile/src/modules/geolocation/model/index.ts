@@ -45,9 +45,11 @@ export const useGeolocationModel = () => {
   }, []);
 
   const getPosition = useCallback(async () => {
+    setProperty("isRefreshing", true);
     Geolocation.getCurrentPosition(
       (info) => {
         setProperty("value", info.coords);
+        setProperty("isRefreshing", false);
       },
       ({ code }) => {
         const err = errors[code] ?? "PERMISSION_DENIED";
@@ -57,6 +59,7 @@ export const useGeolocationModel = () => {
         } else {
           Alert.alert("Could not get current location.");
         }
+        setProperty("isRefreshing", false);
       },
     );
   }, []);
@@ -86,6 +89,7 @@ export const useGeolocationModel = () => {
 
   return {
     value,
+    isRefreshing,
     isConnecting,
     isConnected,
     isCheckingPermission,
