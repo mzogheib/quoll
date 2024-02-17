@@ -1,10 +1,10 @@
 import { useCallback } from "react";
 import Geolocation from "@react-native-community/geolocation";
 
-import { usePersistedState } from "@modules/persisted-state/logic";
+import { usePersistedState } from "@utils/persisted-state/logic";
+import { makeStore } from "@utils/store";
 import { Coords } from "../types";
 import { checkIsPermitted, errors, requestPermission } from "../service";
-import { makeStore } from "../../../store";
 
 type State = {
   isConnecting: boolean;

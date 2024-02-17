@@ -3,8 +3,8 @@ import {
   useTimelineModel as _useTimelineMode,
 } from "@quoll/client-lib";
 
+import { makeStore } from "@utils/store";
 import timelineService from "../service";
-import { makeStore } from "../../../store";
 
 const defaultState: TimelineState = {
   isFetching: false,
