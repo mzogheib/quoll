@@ -11,28 +11,22 @@ import FeedSettings from "@components/FeedSettings";
 import { useMediaViewModel } from "@modules/media/view-model";
 import { useGeolocation } from "@modules/geolocation/logic";
 
+const renderIcon = (name: string, color: string) => (
+  <Icon name={name} size={35} color={color} />
+);
+
 const photosFeedSettings = {
   title: "Photos",
-  url: undefined,
-  imageConnected: (
-    <Icon name="image" size={35} color={colorPalette.mediumAquamarine} />
-  ),
-  imageDisconnected: (
-    <Icon name="image" size={35} color={colorPalette.matterhorn} />
-  ),
+  imageConnected: renderIcon("image", colorPalette.mediumAquamarine),
+  imageDisconnected: renderIcon("image", colorPalette.matterhorn),
 };
 
 const locationSettings = {
   title: "Current location",
-  url: undefined,
   connectLabel: "Enable",
   disconnectLabel: "Disable",
-  imageConnected: (
-    <Icon name="my-location" size={35} color={colorPalette.mediumAquamarine} />
-  ),
-  imageDisconnected: (
-    <Icon name="my-location" size={35} color={colorPalette.matterhorn} />
-  ),
+  imageConnected: renderIcon("my-location", colorPalette.mediumAquamarine),
+  imageDisconnected: renderIcon("my-location", colorPalette.matterhorn),
 };
 
 const SettingsScreen = ({ route }: ScreenProps<"settings">) => {
