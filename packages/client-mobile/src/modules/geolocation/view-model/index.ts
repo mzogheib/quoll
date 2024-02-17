@@ -1,8 +1,8 @@
 import { useCallback, useEffect } from "react";
-
-import { useGeolocationModel } from "../model";
 import { Alert } from "react-native";
-import { promptAllowAccess } from "@modules/alert/logic";
+
+import { promptAllowAccess } from "@components/Alert";
+import { useGeolocationModel } from "../model";
 
 export const useGeolocationViewModel = () => {
   const model = useGeolocationModel();

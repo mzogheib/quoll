@@ -1,6 +1,6 @@
 import { makeISO8601Date } from "@quoll/lib";
 
-import { MarkerProps } from "@modules/map/ui/Map";
+import { MarkerProps } from "@components/Map";
 import { useDateViewModel } from "@modules/date-bar/view-model";
 import { useTimelineViewModel } from "@modules/timeline/view-model";
 

@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from "react";
 import { ISO8601Date } from "@quoll/lib";
 
-import { promptAllowAccess } from "@modules/alert/logic";
+import { promptAllowAccess } from "@components/Alert";
 import { makeStore } from "@utils/store";
 import { usePersistedState } from "@utils/persisted-state/logic";
 import { MediaItem } from "../types";
