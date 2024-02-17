@@ -9,7 +9,7 @@ import { ScreenProps } from "../../config";
 import ScreenTemplate from "../../ScreenTemplate";
 import FeedSettings from "@components/FeedSettings";
 import { useMediaViewModel } from "@modules/media/view-model";
-import { useGeolocation } from "@modules/geolocation/logic";
+import { useGeolocationViewModel } from "@modules/geolocation/view-model";
 
 const renderIcon = (name: string, color: string) => (
   <Icon name={name} size={35} color={color} />
@@ -31,7 +31,7 @@ const locationSettings = {
 
 const SettingsScreen = ({ route }: ScreenProps<"settings">) => {
   const mediaViewModel = useMediaViewModel();
-  const geolocation = useGeolocation();
+  const geolocation = useGeolocationViewModel();
 
   const feeds = [
     {

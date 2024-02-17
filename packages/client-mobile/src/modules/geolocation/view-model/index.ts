@@ -80,7 +80,7 @@ const requestPermission = async () => {
   }
 };
 
-export const useGeolocation = () => {
+export const useGeolocationViewModel = () => {
   const [coords, setCoords] = usePersistedState<Coords | undefined>(
     "coords",
     undefined,

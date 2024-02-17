@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { ImageURISource } from "react-native";
 import MapView, { MapMarkerProps } from "react-native-maps";
-import { useGeolocation } from "@modules/geolocation/logic";
+import { useGeolocationViewModel } from "@modules/geolocation/view-model";
 
 import styles from "./styles";
 
@@ -26,7 +26,7 @@ type Props = {
 
 export const Map = ({ markers }: Props) => {
   const { coords, isConnected, isCheckingPermission, getPosition } =
-    useGeolocation();
+    useGeolocationViewModel();
 
   const markersRegion = makeRegion(markers.map((marker) => marker.coordinate));
 
