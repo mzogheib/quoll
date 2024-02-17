@@ -18,8 +18,6 @@ const NavigationContainer = ({ children }: Props) => {
       onStateChange={(state) => {
         if (!state) return;
 
-        // console.log("state", JSON.stringify(state, null, 2));
-
         const { index, routeNames } = state;
         // TODO avoid the type cast
         const currentRouteName = routeNames[index] as ScreenName;
