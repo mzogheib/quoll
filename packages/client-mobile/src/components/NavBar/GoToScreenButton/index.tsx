@@ -21,12 +21,8 @@ const GoToScreenButton = ({ name, focusHighlightAxis = "vertical" }: Props) => {
   const isFocussed = name === state.currentRouteName;
 
   const handlePress = () => {
-    switch (name) {
-      case "home":
-        navigate("home");
-      case "settings":
-        navigate("settings");
-    }
+    if (name === "home") navigate(name);
+    else if (name === "settings") navigate(name);
   };
 
   const icon = (
