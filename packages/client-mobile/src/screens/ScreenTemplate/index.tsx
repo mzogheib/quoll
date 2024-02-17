@@ -1,29 +1,21 @@
 import React, { ReactNode } from "react";
 import { Text, View } from "react-native";
-import { useRoute } from "@react-navigation/native";
-
 import styles from "./styles";
 
-import { screenConfigMap } from "../config";
-import { ScreenName } from "../config";
+import { ScreenName, screenConfigMap } from "../config";
 
 type Props = {
+  screenName: ScreenName;
   children: ReactNode;
 };
 
-const ScreenTemplate = ({ children }: Props) => {
-  const route = useRoute();
-
-  const currentScreen = screenConfigMap[route.name as ScreenName];
-
-  return (
-    <View style={styles.wrapper}>
-      <View style={styles.header}>
-        <Text style={styles.title}>{currentScreen.title}</Text>
-      </View>
-      {children}
+const ScreenTemplate = ({ screenName, children }: Props) => (
+  <View style={styles.wrapper}>
+    <View style={styles.header}>
+      <Text style={styles.title}>{screenConfigMap[screenName].title}</Text>
     </View>
-  );
-};
+    {children}
+  </View>
+);
 
 export default ScreenTemplate;

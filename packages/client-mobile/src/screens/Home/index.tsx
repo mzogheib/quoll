@@ -11,7 +11,7 @@ import { useTimelineViewModel } from "@modules/timeline/view-model";
 import { ScreenProps } from "../config";
 import ScreenTemplate from "../ScreenTemplate";
 
-const HomeScreen = (_: ScreenProps<"home">) => {
+const HomeScreen = ({ route }: ScreenProps<"home">) => {
   const styles = useStyles();
   const { date, setDate } = useDateViewModel();
   const { entries, fetchTimeline } = useTimelineViewModel(date);
@@ -38,7 +38,7 @@ const HomeScreen = (_: ScreenProps<"home">) => {
     }));
 
   return (
-    <ScreenTemplate>
+    <ScreenTemplate screenName={route.name}>
       <View style={styles.wrapper}>
         <View style={styles.map}>
           <Map markers={markers} />

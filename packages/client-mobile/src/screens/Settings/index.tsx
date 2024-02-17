@@ -35,7 +35,7 @@ const locationSettings = {
   ),
 };
 
-const SettingsScreen = (_: ScreenProps<"settings">) => {
+const SettingsScreen = ({ route }: ScreenProps<"settings">) => {
   const mediaViewModel = useMediaViewModel();
   const geolocation = useGeolocation();
 
@@ -50,7 +50,7 @@ const SettingsScreen = (_: ScreenProps<"settings">) => {
   ];
 
   return (
-    <ScreenTemplate>
+    <ScreenTemplate screenName={route.name}>
       <View style={styles.wrapper}>
         <View style={styles.content}>
           <Text style={styles.title}>Feeds</Text>
