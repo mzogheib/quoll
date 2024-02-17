@@ -29,7 +29,7 @@ export const Map = ({ markers }: Props) => {
     value: coords,
     isConnected,
     isCheckingPermission,
-    getPosition,
+    refresh,
   } = useGeolocationViewModel();
 
   const markersRegion = makeRegion(markers.map((marker) => marker.coordinate));
@@ -54,8 +54,8 @@ export const Map = ({ markers }: Props) => {
   useEffect(() => {
     if (isCheckingPermission) return;
 
-    if (isConnected) getPosition();
-  }, [isCheckingPermission, isConnected, getPosition]);
+    if (isConnected) refresh();
+  }, [isCheckingPermission, isConnected, refresh]);
 
   return (
     <MapView

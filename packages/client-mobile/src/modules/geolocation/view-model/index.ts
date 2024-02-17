@@ -32,9 +32,9 @@ export const useGeolocationViewModel = () => {
     }
   }, []);
 
-  const getPosition = useCallback(async () => {
+  const refresh = useCallback(async () => {
     try {
-      await model.getPosition();
+      await model.refresh();
     } catch (error) {
       handleError(error, "Could not get your current location.");
     }
@@ -43,6 +43,6 @@ export const useGeolocationViewModel = () => {
   return {
     ...model,
     connect,
-    getPosition,
+    refresh,
   };
 };

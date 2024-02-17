@@ -42,7 +42,7 @@ export const useGeolocationModel = () => {
     setProperty("isCheckingPermission", false);
   }, []);
 
-  const getPosition = useCallback(async () => {
+  const refresh = useCallback(async () => {
     return new Promise<void>((resolve, reject) => {
       setProperty("isRefreshing", true);
       Geolocation.getCurrentPosition(
@@ -93,7 +93,7 @@ export const useGeolocationModel = () => {
     isCheckingPermission,
     connect,
     disconnect,
-    getPosition,
+    refresh,
     checkPermission,
   };
 };
