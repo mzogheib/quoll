@@ -10,7 +10,7 @@ type Props = {
 };
 
 const NavigationContainer = ({ children }: Props) => {
-  const { setCurrentRouteName } = useNavigationStore();
+  const { setProperty } = useNavigationStore();
 
   return (
     <RNNavigationContainer
@@ -18,11 +18,13 @@ const NavigationContainer = ({ children }: Props) => {
       onStateChange={(state) => {
         if (!state) return;
 
-        const { index, routeNames } = state;
-        const currentRouteName = routeNames[index];
+        // console.log("state", JSON.stringify(state, null, 2));
 
+        const { index, routeNames } = state;
         // TODO avoid the type cast
-        setCurrentRouteName(currentRouteName as ScreenName);
+        const currentRouteName = routeNames[index] as ScreenName;
+
+        setProperty("currentRouteName", currentRouteName);
       }}
     >
       {children}

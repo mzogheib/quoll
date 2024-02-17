@@ -1,7 +1,7 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { create } from "zustand";
 
 import { ScreenParamsMap, ScreenName } from "./config";
+import { makeStore } from "../store";
 
 /**
  * @returns function to navigate to a specified screen.
@@ -9,14 +9,12 @@ import { ScreenParamsMap, ScreenName } from "./config";
 export const useNavigate = () =>
   useNavigation<NavigationProp<ScreenParamsMap>>().navigate;
 
-type NavigationStore = {
+type State = {
   currentRouteName: ScreenName;
-  setCurrentRouteName: (value: ScreenName) => void;
 };
 
-export const useNavigationStore = create<NavigationStore>((set) => ({
-  // TODO get the initial value from a config variable that defines the screen stack
+const defaultState: State = {
   currentRouteName: "home",
-  setCurrentRouteName: (value: ScreenName) =>
-    set(() => ({ currentRouteName: value })),
-}));
+};
+
+export const useNavigationStore = makeStore(defaultState);

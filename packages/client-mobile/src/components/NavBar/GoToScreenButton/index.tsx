@@ -1,6 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import { colorPalette } from "@quoll/ui-primitives";
+
 import TouchableIcon from "@components/TouchableIcon";
 import { useNavigate, useNavigationStore } from "@screens/navigation";
 import { screenConfigMap } from "@screens/config";
@@ -15,9 +16,9 @@ type Props = {
 
 const GoToScreenButton = ({ name, focusHighlightAxis = "vertical" }: Props) => {
   const navigate = useNavigate();
-  const { currentRouteName } = useNavigationStore();
+  const { state } = useNavigationStore();
 
-  const isFocussed = name === currentRouteName;
+  const isFocussed = name === state.currentRouteName;
 
   const handlePress = () => {
     switch (name) {
