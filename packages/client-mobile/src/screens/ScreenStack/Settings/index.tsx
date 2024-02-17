@@ -21,6 +21,12 @@ const photosFeedSettings = {
   imageDisconnected: renderIcon("image", colorPalette.matterhorn),
 };
 
+const stravaFeedSettings = {
+  title: "Strava",
+  imageConnected: renderIcon("directions-run", colorPalette.mediumAquamarine),
+  imageDisconnected: renderIcon("directions-run", colorPalette.matterhorn),
+};
+
 const locationSettings = {
   title: "Current location",
   connectLabel: "Enable",
@@ -41,6 +47,13 @@ const SettingsScreen = ({ route }: ScreenProps<"settings">) => {
       onConnect: mediaViewModel.connect,
       onDisconnect: mediaViewModel.disconnect,
     },
+    {
+      ...stravaFeedSettings,
+      isConnected: false,
+      isConnecting: false,
+      onConnect: () => null,
+      onDisconnect: () => null,
+    },
   ];
 
   return (
@@ -48,11 +61,11 @@ const SettingsScreen = ({ route }: ScreenProps<"settings">) => {
       <View style={styles.wrapper}>
         <View style={styles.content}>
           <Text style={styles.title}>Feeds</Text>
-          <View style={styles.feedSettingsWrapper}>
-            {feeds.map((props) => (
-              <FeedSettings key={props.title} {...props} />
-            ))}
-          </View>
+          {feeds.map((props) => (
+            <View key={props.title} style={styles.feedSettingsWrapper}>
+              <FeedSettings {...props} />
+            </View>
+          ))}
           <Text style={styles.title}>Map</Text>
           <View style={styles.feedSettingsWrapper}>
             <FeedSettings
