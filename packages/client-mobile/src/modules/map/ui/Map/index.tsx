@@ -25,8 +25,12 @@ type Props = {
 };
 
 export const Map = ({ markers }: Props) => {
-  const { coords, isConnected, isCheckingPermission, getPosition } =
-    useGeolocationViewModel();
+  const {
+    value: coords,
+    isConnected,
+    isCheckingPermission,
+    getPosition,
+  } = useGeolocationViewModel();
 
   const markersRegion = makeRegion(markers.map((marker) => marker.coordinate));
 

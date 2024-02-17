@@ -6,30 +6,48 @@ import { usePersistedState } from "@modules/persisted-state/logic";
 import { promptAllowAccess } from "@modules/alert/logic";
 import { Coords } from "../types";
 import { checkIsPermitted, errors, requestPermission } from "../service";
+import { makeStore } from "../../../store";
+
+type State = {
+  isConnecting: boolean;
+  isCheckingPermission: boolean;
+  isRefreshing: boolean;
+  value: Coords | undefined;
+};
+
+const defaultState: State = {
+  isConnecting: false,
+
+  isCheckingPermission: true,
+  isRefreshing: false,
+  value: undefined,
+};
+
+const useGeolocationStore = makeStore(defaultState);
 
 export const useGeolocationModel = () => {
-  const [coords, setCoords] = usePersistedState<Coords | undefined>(
-    "coords",
-    undefined,
-  );
-  const [isConnecting, setIsConnecting] = useState(false);
+  // isConnected should be in device state so that it can be persisted
+  // between app launches.
   const [isConnected, setIsConnected] = usePersistedState(
-    "isGeolocationConnected",
+    "geolocation::isConnected",
     false,
   );
-  const [isCheckingPermission, setIsCheckingPermission] = useState(true);
+
+  const { state, setProperty } = useGeolocationStore();
+
+  const { value, isConnecting, isRefreshing, isCheckingPermission } = state;
 
   const checkPermission = useCallback(async () => {
-    setIsCheckingPermission(true);
+    setProperty("isCheckingPermission", true);
     const isPermitted = await checkIsPermitted();
     setIsConnected(isPermitted);
-    setIsCheckingPermission(false);
+    setProperty("isCheckingPermission", false);
   }, []);
 
   const getPosition = useCallback(async () => {
     Geolocation.getCurrentPosition(
       (info) => {
-        setCoords(info.coords);
+        setProperty("value", info.coords);
       },
       ({ code }) => {
         const err = errors[code] ?? "PERMISSION_DENIED";
@@ -44,7 +62,7 @@ export const useGeolocationModel = () => {
   }, []);
 
   const connect = useCallback(async () => {
-    setIsConnecting(true);
+    setProperty("isConnecting", true);
     const isPermitted = await checkIsPermitted();
 
     if (isPermitted) {
@@ -58,16 +76,16 @@ export const useGeolocationModel = () => {
         promptAllowAccess("Quoll works best with your location.");
       }
     }
-    setIsConnecting(false);
+    setProperty("isConnecting", false);
   }, []);
 
   const disconnect = useCallback(() => {
-    setCoords(undefined);
+    setProperty("value", undefined);
     setIsConnected(false);
   }, []);
 
   return {
-    coords,
+    value,
     isConnecting,
     isConnected,
     isCheckingPermission,
