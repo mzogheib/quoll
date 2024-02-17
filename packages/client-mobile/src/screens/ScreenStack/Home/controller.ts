@@ -1,7 +1,7 @@
 import { makeISO8601Date } from "@quoll/lib";
 
 import { MarkerProps } from "@components/Map";
-import { useDateViewModel } from "@modules/date-bar/view-model";
+import { useDateViewModel } from "@modules/date/view-model";
 import { useTimelineViewModel } from "@modules/timeline/view-model";
 
 const useController = () => {

@@ -4,7 +4,7 @@ import { View } from "react-native";
 import { useStyles } from "./styles";
 
 import { Map } from "@components/Map";
-import { DateBar } from "@modules/date-bar/ui/DateBar";
+import { DateBar } from "@modules/date/ui/DateBar";
 import { ScreenProps } from "../../config";
 import ScreenTemplate from "../../ScreenTemplate";
 import useController from "./controller";
