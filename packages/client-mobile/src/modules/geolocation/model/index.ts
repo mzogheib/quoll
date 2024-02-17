@@ -1,9 +1,7 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import Geolocation from "@react-native-community/geolocation";
-import { Alert } from "react-native";
 
 import { usePersistedState } from "@modules/persisted-state/logic";
-import { promptAllowAccess } from "@modules/alert/logic";
 import { Coords } from "../types";
 import { checkIsPermitted, errors, requestPermission } from "../service";
 import { makeStore } from "../../../store";
@@ -45,28 +43,29 @@ export const useGeolocationModel = () => {
   }, []);
 
   const getPosition = useCallback(async () => {
-    setProperty("isRefreshing", true);
-    Geolocation.getCurrentPosition(
-      (info) => {
-        setProperty("value", info.coords);
-        setProperty("isRefreshing", false);
-      },
-      ({ code }) => {
-        const err = errors[code] ?? "PERMISSION_DENIED";
+    return new Promise<void>((resolve, reject) => {
+      setProperty("isRefreshing", true);
+      Geolocation.getCurrentPosition(
+        (info) => {
+          setProperty("value", info.coords);
+          setProperty("isRefreshing", false);
+          return resolve();
+        },
+        ({ code }) => {
+          const error = errors[code] ?? "PERMISSION_DENIED";
 
-        if (err === "PERMISSION_DENIED") {
-          promptAllowAccess("Quoll works best with your location.");
-        } else {
-          Alert.alert("Could not get current location.");
-        }
-        setProperty("isRefreshing", false);
-      },
-    );
+          setProperty("isRefreshing", false);
+
+          return reject(error);
+        },
+      );
+    });
   }, []);
 
   const connect = useCallback(async () => {
     setProperty("isConnecting", true);
     const isPermitted = await checkIsPermitted();
+    setProperty("isConnecting", false);
 
     if (isPermitted) {
       setIsConnected(true);
@@ -76,10 +75,9 @@ export const useGeolocationModel = () => {
       if (didPermit) {
         setIsConnected(true);
       } else {
-        promptAllowAccess("Quoll works best with your location.");
+        throw "PERMISSION_DENIED";
       }
     }
-    setProperty("isConnecting", false);
   }, []);
 
   const disconnect = useCallback(() => {

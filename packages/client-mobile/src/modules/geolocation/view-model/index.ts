@@ -1,6 +1,8 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 import { useGeolocationModel } from "../model";
+import { Alert } from "react-native";
+import { promptAllowAccess } from "@modules/alert/logic";
 
 export const useGeolocationViewModel = () => {
   const model = useGeolocationModel();
@@ -14,5 +16,33 @@ export const useGeolocationViewModel = () => {
     checkPermission();
   }, [isConnected, checkPermission]);
 
-  return model;
+  const handleError = (error: unknown, defaultMessage: string) => {
+    if (error === "PERMISSION_DENIED") {
+      promptAllowAccess("Quoll works best with your location.");
+    } else {
+      Alert.alert(defaultMessage);
+    }
+  };
+
+  const connect = useCallback(async () => {
+    try {
+      await model.connect();
+    } catch (error) {
+      handleError(error, "Could not enable your current location.");
+    }
+  }, []);
+
+  const getPosition = useCallback(async () => {
+    try {
+      await model.getPosition();
+    } catch (error) {
+      handleError(error, "Could not get your current location.");
+    }
+  }, []);
+
+  return {
+    ...model,
+    connect,
+    getPosition,
+  };
 };
