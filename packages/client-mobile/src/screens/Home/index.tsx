@@ -8,7 +8,7 @@ import { Map, MarkerProps } from "@modules/map/ui/Map";
 import { DateBar } from "@modules/date-bar/ui/DateBar";
 import { useDateViewModel } from "@modules/date-bar/view-model";
 import { useTimelineViewModel } from "@modules/timeline/view-model";
-import { ScreenProps } from "../types";
+import { ScreenProps } from "../config";
 import ScreenTemplate from "../ScreenTemplate";
 
 const HomeScreen = (_: ScreenProps<"home">) => {

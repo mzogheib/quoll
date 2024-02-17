@@ -5,7 +5,7 @@ import styles from "./styles";
 
 import HomeScreen from "../Home";
 import SettingsScreen from "../Settings";
-import { ScreenParamsMap } from "../types";
+import { ScreenParamsMap } from "@screens/config";
 
 const TabNavigator = createBottomTabNavigator<ScreenParamsMap>();
 

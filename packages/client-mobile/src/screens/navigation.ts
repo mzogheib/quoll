@@ -1,7 +1,7 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { create } from "zustand";
 
-import { ScreenParamsMap, ScreenName } from "./types";
+import { ScreenParamsMap, ScreenName } from "./config";
 
 /**
  * @returns function to navigate to a specified screen.

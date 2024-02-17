@@ -5,7 +5,7 @@ import { colorPalette } from "@quoll/ui-primitives";
 
 import styles from "./styles";
 
-import { ScreenProps } from "../types";
+import { ScreenProps } from "../config";
 import ScreenTemplate from "../ScreenTemplate";
 import FeedSettings from "@components/FeedSettings";
 import { useMediaViewModel } from "@modules/media/view-model";

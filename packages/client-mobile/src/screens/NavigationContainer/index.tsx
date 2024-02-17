@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import { NavigationContainer as RNNavigationContainer } from "@react-navigation/native";
 
 import { useNavigationStore } from "@screens/navigation";
-import { ScreenName } from "@screens/types";
+import { ScreenName } from "@screens/config";
 import { linking } from "@screens/config";
 
 type Props = {

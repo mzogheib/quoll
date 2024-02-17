@@ -4,7 +4,7 @@ import { colorPalette } from "@quoll/ui-primitives";
 import TouchableIcon from "@components/TouchableIcon";
 import { useNavigate, useNavigationStore } from "@screens/navigation";
 import { screenConfigMap } from "@screens/config";
-import { ScreenName } from "@screens/types";
+import { ScreenName } from "@screens/config";
 
 import styles from "./styles";
 

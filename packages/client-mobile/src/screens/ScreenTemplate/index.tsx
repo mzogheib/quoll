@@ -5,7 +5,7 @@ import { useRoute } from "@react-navigation/native";
 import styles from "./styles";
 
 import { screenConfigMap } from "../config";
-import { ScreenName } from "../types";
+import { ScreenName } from "../config";
 
 type Props = {
   children: ReactNode;
