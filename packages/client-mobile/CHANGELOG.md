@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.21.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.20.5...@quoll/client-mobile@0.21.0) (2024-02-17)
+
+### Bug Fixes
+
+- **client-mobile:** fix broken navigation in go to screen button ([8ab9ada](https://github.com/mzogheib/quoll/commit/8ab9ada2cdceebec3384c235c760d08eb6f8e74c))
+
+### Features
+
+- **client-mobile:** add oauth screen ([23a11eb](https://github.com/mzogheib/quoll/commit/23a11ebbc0f2d0ccfb9e392fc79e4275e65c9b2b))
+
 ## [0.20.5](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.20.4...@quoll/client-mobile@0.20.5) (2024-02-13)
 
 **Note:** Version bump only for package @quoll/client-mobile
