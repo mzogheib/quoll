@@ -2,6 +2,7 @@ import { useCallback } from "react";
 
 import { makeStorage } from "@utils/storage";
 import { makeStore } from "@utils/store";
+import apiService from "@utils/api";
 import { User } from "../types";
 import * as userService from "../service";
 
@@ -39,6 +40,7 @@ export const useUserModel = () => {
     async (userId: string) => {
       setProperty("isAuthenticating", true);
       const user = await userService.login(userId);
+      apiService.authenticate(userId);
       setProperty("user", user);
       setProperty("isAuthenticating", false);
 
@@ -50,6 +52,7 @@ export const useUserModel = () => {
   const signup = useCallback(async () => {
     setProperty("isAuthenticating", true);
     const user = await userService.signup();
+    apiService.authenticate(user._id);
     storage.setProperty("id", user._id);
     setProperty("user", user);
     setProperty("isAuthenticating", false);
