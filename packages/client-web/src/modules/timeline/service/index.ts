@@ -2,7 +2,7 @@ import moment from "moment";
 import { ISO8601Date, TimelineEntry, TimelineEntryType } from "@quoll/lib";
 import { TimelineService } from "@quoll/client-lib";
 
-import api from "../../../services/api";
+import { apiService } from "@quoll/client-lib";
 
 type EntryConfig = {
   label: string;
@@ -44,7 +44,7 @@ export const getEntryImage = (entry: TimelineEntry) =>
 // Consumer can push to the array
 
 const get = (date: ISO8601Date) =>
-  api.get<TimelineEntry[]>({
+  apiService.get<TimelineEntry[]>({
     endpoint: "timeline",
     params: {
       from: moment(date).startOf("day").toISOString(),
