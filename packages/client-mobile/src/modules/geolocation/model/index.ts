@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import Geolocation from "@react-native-community/geolocation";
 
-import { usePersistedState } from "@utils/persisted-state/logic";
+import { usePersistedState } from "@utils/storage";
 import { makeStore } from "@utils/store";
 import { Coords } from "../types";
 import { checkIsPermitted, errors, requestPermission } from "../service";

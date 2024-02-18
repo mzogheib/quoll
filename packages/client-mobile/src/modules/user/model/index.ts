@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 
-import { usePersistedState } from "@utils/persisted-state/logic";
+import { usePersistedState } from "@utils/storage";
 import { makeStore } from "@utils/store";
 import { User } from "../types";
 import * as userService from "../service";

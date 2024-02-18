@@ -3,7 +3,7 @@ import { ISO8601Date } from "@quoll/lib";
 
 import { promptAllowAccess } from "@components/Alert";
 import { makeStore } from "@utils/store";
-import { usePersistedState } from "@utils/persisted-state/logic";
+import { usePersistedState } from "@utils/storage";
 import { MediaItem } from "../types";
 import { checkIsPermitted, getMedia, requestPermission } from "../service";
 import { makeDateFilter } from "./utils";
