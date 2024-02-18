@@ -1,7 +1,8 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig, Method } from "axios";
 
 type RequestParams = {
   endpoint: string;
+  method: Method;
   params?: AxiosRequestConfig["params"];
   payload?: AxiosRequestConfig["data"];
 };
@@ -14,7 +15,7 @@ export class ApiService {
     this.baseUrl = baseUrl;
   }
 
-  private makeUrl({ endpoint, params }: RequestParams) {
+  private makeUrl(endpoint: string, params: AxiosRequestConfig["params"]) {
     const baseUrl = `${this.baseUrl}/${endpoint}`;
 
     const search = new URLSearchParams(params);
@@ -25,37 +26,46 @@ export class ApiService {
     return baseUrl;
   }
 
+  private async request<ResponseData>({
+    method,
+    endpoint,
+    params,
+  }: RequestParams) {
+    const config = { method, headers: this.authHeader };
+
+    const url = this.makeUrl(endpoint, params);
+
+    const response = await axios<ResponseData>(url, config);
+
+    return response.data;
+  }
+
   authenticate(userId: string): void {
     this.authHeader = { Authorization: `Basic ${userId}:` };
   }
 
   async get<ResponseData>({ endpoint, params }: RequestParams) {
-    const config = { headers: this.authHeader };
-
-    const url = this.makeUrl({ endpoint, params });
-
-    const response = await axios.get<ResponseData>(url, config);
-
-    return response.data;
+    return await this.request<ResponseData>({
+      method: "GET",
+      endpoint,
+      params,
+    });
   }
 
   async post<ResponseData>({ endpoint, payload, params }: RequestParams) {
-    const config = { headers: this.authHeader };
-
-    const url = this.makeUrl({ endpoint, params });
-
-    const response = await axios.post<ResponseData>(url, payload, config);
-
-    return response.data;
+    return await this.request<ResponseData>({
+      method: "POST",
+      endpoint,
+      payload,
+      params,
+    });
   }
 
   async delete<ResponseData>({ endpoint, params }: RequestParams) {
-    const config = { headers: this.authHeader };
-
-    const url = this.makeUrl({ endpoint, params });
-
-    const response = await axios.delete<ResponseData>(url, config);
-
-    return response.data;
+    return await this.request<ResponseData>({
+      method: "DELETE",
+      endpoint,
+      params,
+    });
   }
 }
