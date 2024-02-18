@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.22.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.21.0...@quoll/client-mobile@0.22.0) (2024-02-18)
+
+### Features
+
+- **client-mobile:** add foundational user model ([287ddfa](https://github.com/mzogheib/quoll/commit/287ddfa90753ebe3127a308d3ebc17dba1ba0d7f))
+- **client-mobile:** add strava placeholder to feed settings ([79a792f](https://github.com/mzogheib/quoll/commit/79a792f111daa58d8447208e1604c9d27fbc1230))
+- **client-mobile:** implement the user service ([#205](https://github.com/mzogheib/quoll/issues/205)) ([efe0247](https://github.com/mzogheib/quoll/commit/efe0247be8ef05970aee2c10573e2185c9c33f00))
+
 # [0.21.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.20.5...@quoll/client-mobile@0.21.0) (2024-02-17)
 
 ### Bug Fixes
