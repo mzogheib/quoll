@@ -1,7 +1,7 @@
 import { User } from "../types";
 
 export const login = async (userId: string): Promise<User> => ({
-  id: userId,
+  _id: userId,
 });
 
-export const signup = async (): Promise<User> => ({ id: "123-abc" });
+export const signup = async (): Promise<User> => ({ _id: "123-abc" });
