@@ -1,5 +1,4 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { API_URL } from "@env";
 
 // TODO: come up with a better way than this.
 let authHeader: AxiosRequestConfig["headers"];
@@ -15,7 +14,7 @@ interface RequestParams {
 }
 
 const makeUrl = ({ endpoint, params }: RequestParams) => {
-  const baseUrl = `${API_URL}/${endpoint}`;
+  const baseUrl = `${process.env.REACT_APP_API_URL}/${endpoint}`;
 
   const search = new URLSearchParams(params);
   const searchString = search.toString();
@@ -59,11 +58,9 @@ const deleteReq = async <ResponseData>({ endpoint, params }: RequestParams) => {
   return response.data;
 };
 
-const apiService = {
+export const apiService = {
   authenticate,
   get,
   post,
   delete: deleteReq,
 };
-
-export default apiService;

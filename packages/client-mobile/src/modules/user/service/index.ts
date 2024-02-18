@@ -1,10 +1,11 @@
-import api from "@utils/api";
+import { apiService } from "@quoll/client-lib";
 import { User } from "../types";
 
 export const login = async (userId: string) =>
-  await api.post<User>({
+  await apiService.post<User>({
     endpoint: "login",
     payload: { userId },
   });
 
-export const signup = async () => await api.post<User>({ endpoint: "signup" });
+export const signup = async () =>
+  await apiService.post<User>({ endpoint: "signup" });
