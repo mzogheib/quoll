@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 
-import { usePersistedState } from "@utils/storage";
+import { makeStorage } from "@utils/storage";
 import { makeStore } from "@utils/store";
 import { User } from "../types";
 import * as userService from "../service";
@@ -17,13 +17,20 @@ const defaultState: State = {
 
 const useUserStore = makeStore(defaultState);
 
-export const useUserModel = () => {
-  const [userId, setUserId] = usePersistedState<string | undefined>(
-    "user::userId",
-    undefined,
-  );
+type StoredState = {
+  id: string | undefined;
+};
 
-  const getCurrentUserId = () => userId;
+const defaultStoredState: StoredState = {
+  id: undefined,
+};
+
+const useStorage = makeStorage("user", defaultStoredState);
+
+export const useUserModel = () => {
+  const storage = useStorage();
+
+  const getCurrentUserId = () => storage.state.id;
 
   const { state, setProperty } = useUserStore();
   const { user, isAuthenticating } = state;
@@ -43,7 +50,7 @@ export const useUserModel = () => {
   const signup = useCallback(async () => {
     setProperty("isAuthenticating", true);
     const user = await userService.signup();
-    setUserId(user._id);
+    storage.setProperty("id", user._id);
     setProperty("user", user);
     setProperty("isAuthenticating", false);
   }, [setProperty]);

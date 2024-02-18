@@ -3,18 +3,27 @@ import { MMKVLoader, useMMKVStorage } from "react-native-mmkv-storage";
 const MMKV = new MMKVLoader().initialize();
 
 /**
- * Returns a stateful value and a function to update it. Persists the value
+ * Creates a hook through which to set and access a store that is persisted
  * between app launches.
  *
  * @param key a unique key for the persisted value
  * @param initialValue the initial value
- * @returns a tuple of the value and update function
+ * @returns a hook to access the persisted store
  */
-export const usePersistedState = <V>(
-  key: string,
-  initialValue: V,
-): [V, (newValue: V) => void] => {
-  const [value, setValue] = useMMKVStorage(key, MMKV, initialValue);
+export const makeStorage =
+  <State extends object>(key: string, initialState: State) =>
+  () => {
+    const [state, setState] = useMMKVStorage(key, MMKV, initialState);
 
-  return [value, setValue];
-};
+    const setProperty = <Name extends keyof State>(
+      name: Name,
+      value: State[Name],
+    ) => {
+      setState({ ...state, [name]: value });
+    };
+
+    return {
+      state,
+      setProperty,
+    };
+  };

@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import Geolocation from "@react-native-community/geolocation";
 
-import { usePersistedState } from "@utils/storage";
+import { makeStorage } from "@utils/storage";
 import { makeStore } from "@utils/store";
 import { Coords } from "../types";
 import { checkIsPermitted, errors, requestPermission } from "../service";
@@ -23,13 +23,20 @@ const defaultState: State = {
 
 const useGeolocationStore = makeStore(defaultState);
 
+// isConnected should be in device state so that it can be persisted
+// between app launches.
+type StoredState = {
+  isConnected: boolean;
+};
+
+const defaultStoredState: StoredState = {
+  isConnected: false,
+};
+
+const useStorage = makeStorage("geolocation", defaultStoredState);
+
 export const useGeolocationModel = () => {
-  // isConnected should be in device state so that it can be persisted
-  // between app launches.
-  const [isConnected, setIsConnected] = usePersistedState(
-    "geolocation::isConnected",
-    false,
-  );
+  const storage = useStorage();
 
   const { state, setProperty } = useGeolocationStore();
 
@@ -38,7 +45,7 @@ export const useGeolocationModel = () => {
   const checkPermission = useCallback(async () => {
     setProperty("isCheckingPermission", true);
     const isPermitted = await checkIsPermitted();
-    setIsConnected(isPermitted);
+    storage.setProperty("isConnected", isPermitted);
     setProperty("isCheckingPermission", false);
   }, []);
 
@@ -68,12 +75,12 @@ export const useGeolocationModel = () => {
     setProperty("isConnecting", false);
 
     if (isPermitted) {
-      setIsConnected(true);
+      storage.setProperty("isConnected", true);
     } else {
       const didPermit = await requestPermission();
 
       if (didPermit) {
-        setIsConnected(true);
+        storage.setProperty("isConnected", true);
       } else {
         throw "PERMISSION_DENIED";
       }
@@ -82,14 +89,14 @@ export const useGeolocationModel = () => {
 
   const disconnect = useCallback(() => {
     setProperty("value", undefined);
-    setIsConnected(false);
+    storage.setProperty("isConnected", false);
   }, []);
 
   return {
     value,
     isRefreshing,
     isConnecting,
-    isConnected,
+    isConnected: storage.state.isConnected,
     isCheckingPermission,
     connect,
     disconnect,
