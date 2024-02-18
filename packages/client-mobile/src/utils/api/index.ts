@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { API_URL } from "@env";
 
-// TODO: come up with a better way than this. Redux or a cookie.
+// TODO: come up with a better way than this.
 let authHeader: AxiosRequestConfig["headers"];
 
 const authenticate = (userId: string) => {
