@@ -1,9 +1,9 @@
 import { useCallback } from "react";
-import { apiService } from "@quoll/client-lib";
 
+import { apiService } from "services/api";
+import storage from "services/storage";
 import { useStore } from "./store";
 import userService from "../service";
-import storage from "../../../services/storage";
 
 const userKey = "user";
 

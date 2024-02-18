@@ -2,7 +2,7 @@ import moment from "moment";
 import { ISO8601Date, TimelineEntry, TimelineEntryType } from "@quoll/lib";
 import { TimelineService } from "@quoll/client-lib";
 
-import { apiService } from "@quoll/client-lib";
+import { apiService } from "services/api";
 
 type EntryConfig = {
   label: string;

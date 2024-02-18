@@ -1,8 +1,8 @@
 import { useCallback } from "react";
-import { apiService } from "@quoll/client-lib";
 
 import { makeStorage } from "@utils/storage";
 import { makeStore } from "@utils/store";
+import { apiService } from "@utils/api";
 import { User } from "../types";
 import * as userService from "../service";
 

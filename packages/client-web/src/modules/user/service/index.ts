@@ -1,5 +1,4 @@
-import { apiService } from "@quoll/client-lib";
-
+import { apiService } from "services/api";
 import { User } from "../types";
 
 const login = async (userId: string) =>

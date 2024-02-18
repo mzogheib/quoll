@@ -1,6 +1,7 @@
 import { FeedName } from "@quoll/lib";
+
+import { apiService } from "services/api";
 import { AuthenticatePayload } from "../types";
-import { apiService } from "@quoll/client-lib";
 
 const endpoint = "feed-auth";
 
