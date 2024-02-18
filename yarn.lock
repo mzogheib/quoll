@@ -5962,6 +5962,7 @@ __metadata:
     react: "npm:18.2.0"
     react-native: "npm:0.73.0"
     react-native-date-picker: "npm:^4.3.5"
+    react-native-dotenv: "npm:^3.4.10"
     react-native-maps: "npm:^1.8.4"
     react-native-mmkv-storage: "npm:^0.9.1"
     react-native-safe-area-context: "npm:^4.8.2"
@@ -15552,6 +15553,13 @@ __metadata:
   version: 16.0.3
   resolution: "dotenv@npm:16.0.3"
   checksum: 109457ac5f9e930ca8066ea33887b6f839ab24d647a7a8b49ddcd1f32662e2c35591c5e5b9819063e430148a664d0927f0cbe60cf9575d89bc524f47ff7e78f0
+  languageName: node
+  linkType: hard
+
+"dotenv@npm:^16.4.1":
+  version: 16.4.4
+  resolution: "dotenv@npm:16.4.4"
+  checksum: f66ad105144c9106a868c8e244ace6097a0318f63284894e6c7b298c7e096911958837117d936d3c341db550e2fcb21a7a5ad396437638f605460e82b1dd30ee
   languageName: node
   linkType: hard
 
@@ -28798,6 +28806,17 @@ __metadata:
     react: ">= 17.0.1"
     react-native: ">= 0.64.3"
   checksum: 8b0755609e1d87fd376209c9dec9faa8f4d7e62d38f9ca244e7583004cc9fb0c0d78e949875de1e1ae6a9b3a7d487a6cef0f4ad59709e3aaffc47baeecbc090d
+  languageName: node
+  linkType: hard
+
+"react-native-dotenv@npm:^3.4.10":
+  version: 3.4.10
+  resolution: "react-native-dotenv@npm:3.4.10"
+  dependencies:
+    dotenv: "npm:^16.4.1"
+  peerDependencies:
+    "@babel/runtime": ^7.20.6
+  checksum: d5e6166ef6d87ca167a22653ae5ef789128e06ce161e7d4e8a9f1e0319fe7ed0b13aa1a7ba052d6d61b6931d42992e19b954ae9addca5999b138b6b5049c20dd
   languageName: node
   linkType: hard
 
