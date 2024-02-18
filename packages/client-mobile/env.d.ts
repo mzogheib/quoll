@@ -1,3 +1,3 @@
 declare module "@env" {
-  export const TEST_VAR: string;
+  export const API_URL: string;
 }
