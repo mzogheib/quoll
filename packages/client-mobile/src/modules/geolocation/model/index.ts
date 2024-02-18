@@ -21,7 +21,7 @@ const defaultState: State = {
   value: undefined,
 };
 
-const useGeolocationStore = makeStore(defaultState);
+const useStore = makeStore(defaultState);
 
 // isConnected should be in device state so that it can be persisted
 // between app launches.
@@ -38,7 +38,7 @@ const useStorage = makeStorage("geolocation", defaultStoredState);
 export const useGeolocationModel = () => {
   const storage = useStorage();
 
-  const { state, setProperty } = useGeolocationStore();
+  const { state, setProperty } = useStore();
 
   const { value, isConnecting, isRefreshing, isCheckingPermission } = state;
 

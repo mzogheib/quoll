@@ -7,6 +7,6 @@ const defaultState: DateState = {
   date: makeISO8601Date(new Date()),
 };
 
-const useDateStore = makeStore(defaultState);
+const useStore = makeStore(defaultState);
 
-export const useDateModel = () => _useDateModel(useDateStore);
+export const useDateModel = () => _useDateModel(useStore);

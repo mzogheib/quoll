@@ -22,7 +22,7 @@ const defaultState: State = {
   value: [],
 };
 
-const useMediaStore = makeStore(defaultState);
+const useStore = makeStore(defaultState);
 
 // isConnected should be in device state so that it can be persisted
 // between app launches.
@@ -39,7 +39,7 @@ const useStorage = makeStorage("media", defaultStoredState);
 export const useMediaModel = () => {
   const storage = useStorage();
 
-  const { state, setProperty } = useMediaStore();
+  const { state, setProperty } = useStore();
 
   const { isConnecting, isCheckingPermission, isRefreshing, value } = state;
 

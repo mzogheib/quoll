@@ -15,7 +15,7 @@ const defaultState: State = {
   user: undefined,
 };
 
-const useUserStore = makeStore(defaultState);
+const useStore = makeStore(defaultState);
 
 type StoredState = {
   id: string | undefined;
@@ -32,7 +32,7 @@ export const useUserModel = () => {
 
   const getCurrentUserId = () => storage.state.id;
 
-  const { state, setProperty } = useUserStore();
+  const { state, setProperty } = useStore();
   const { user, isAuthenticating } = state;
 
   const login = useCallback(
