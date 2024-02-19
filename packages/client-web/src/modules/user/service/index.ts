@@ -4,14 +4,14 @@ import { User } from "../types";
 const login = async (userId: string) =>
   await apiService.request<User>({
     method: "POST",
-    endpoint: "login",
+    endpoint: "/login",
     payload: { userId },
   });
 
 const signup = async () =>
   await apiService.request<User>({
     method: "POST",
-    endpoint: "signup",
+    endpoint: "/signup",
   });
 
 const userService = { login, signup };

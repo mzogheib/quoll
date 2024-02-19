@@ -46,7 +46,7 @@ export const getEntryImage = (entry: TimelineEntry) =>
 const get = (date: ISO8601Date) =>
   apiService.request<TimelineEntry[]>({
     method: "GET",
-    endpoint: "timeline",
+    endpoint: "/timeline",
     params: {
       from: moment(date).startOf("day").toISOString(),
       to: moment(date).endOf("day").toISOString(),

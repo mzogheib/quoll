@@ -16,7 +16,7 @@ export class ApiService {
   }
 
   private makeUrl(endpoint: string, params: AxiosRequestConfig["params"]) {
-    const baseUrl = `${this.baseUrl}/${endpoint}`;
+    const baseUrl = `${this.baseUrl}${endpoint}`;
 
     const search = new URLSearchParams(params);
     const searchString = search.toString();

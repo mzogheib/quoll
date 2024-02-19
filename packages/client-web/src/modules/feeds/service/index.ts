@@ -3,7 +3,7 @@ import { FeedName } from "@quoll/lib";
 import { apiService } from "services/api";
 import { AuthenticatePayload } from "../types";
 
-const endpoint = "feed-auth";
+const endpoint = "/feed-auth";
 
 const getOauthUrl = (feed: FeedName) =>
   apiService.request<string>({
