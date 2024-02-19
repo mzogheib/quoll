@@ -2,7 +2,6 @@ import axios, { AxiosRequestConfig, Method } from "axios";
 
 type RequestParams = {
   endpoint: string;
-  method: Method;
   params?: AxiosRequestConfig["params"];
   payload?: AxiosRequestConfig["data"];
 };
@@ -30,7 +29,7 @@ export class ApiService {
     method,
     endpoint,
     params,
-  }: RequestParams) {
+  }: RequestParams & { method: Method }) {
     const config = { method, headers: this.authHeader };
 
     const url = this.makeUrl(endpoint, params);
