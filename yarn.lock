@@ -5993,7 +5993,6 @@ __metadata:
     "@types/react-dom": "npm:^18.0.6"
     "@types/react-router-dom": "npm:^5.3.3"
     "@types/styled-components": "npm:^5.1.26"
-    axios: "npm:^1.6.0"
     eslint-config-react-app: "npm:^7.0.1"
     moment: "npm:^2.27.0"
     msw: "npm:^2.0.11"
@@ -11723,17 +11722,6 @@ __metadata:
     form-data: "npm:^4.0.0"
     proxy-from-env: "npm:^1.1.0"
   checksum: 9b77e030e85e4f9cbcba7bb52fbff67d6ce906c92d213e0bd932346a50140faf83733bf786f55bd58301bd92f9973885c7b87d6348023e10f7eaf286d0791a1d
-  languageName: node
-  linkType: hard
-
-"axios@npm:^1.6.0":
-  version: 1.6.0
-  resolution: "axios@npm:1.6.0"
-  dependencies:
-    follow-redirects: "npm:^1.15.0"
-    form-data: "npm:^4.0.0"
-    proxy-from-env: "npm:^1.1.0"
-  checksum: 2879e17b96cbca7e2096d231a44e2d0f03e657d79f8928ea38ec5fbaf5a5b7bf952d580cdb58a66ba328c26eb3528b89d5a32da57cc5cf89813786c044f7e9d6
   languageName: node
   linkType: hard
 
