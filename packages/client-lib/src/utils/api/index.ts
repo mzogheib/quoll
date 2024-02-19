@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig, Method } from "axios";
 
 type RequestParams = {
+  method: Method;
   endpoint: string;
   params?: AxiosRequestConfig["params"];
   payload?: AxiosRequestConfig["data"];
@@ -25,12 +26,13 @@ export class ApiService {
     return baseUrl;
   }
 
-  private async request<ResponseData>({
+  async request<ResponseData>({
     method,
     endpoint,
     params,
-  }: RequestParams & { method: Method }) {
-    const config = { method, headers: this.authHeader };
+    payload,
+  }: RequestParams) {
+    const config = { method, payload, headers: this.authHeader };
 
     const url = this.makeUrl(endpoint, params);
 
@@ -41,30 +43,5 @@ export class ApiService {
 
   authenticate(userId: string): void {
     this.authHeader = { Authorization: `Basic ${userId}:` };
-  }
-
-  async get<ResponseData>({ endpoint, params }: RequestParams) {
-    return await this.request<ResponseData>({
-      method: "GET",
-      endpoint,
-      params,
-    });
-  }
-
-  async post<ResponseData>({ endpoint, payload, params }: RequestParams) {
-    return await this.request<ResponseData>({
-      method: "POST",
-      endpoint,
-      payload,
-      params,
-    });
-  }
-
-  async delete<ResponseData>({ endpoint, params }: RequestParams) {
-    return await this.request<ResponseData>({
-      method: "DELETE",
-      endpoint,
-      params,
-    });
   }
 }

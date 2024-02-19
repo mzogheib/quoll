@@ -44,7 +44,8 @@ export const getEntryImage = (entry: TimelineEntry) =>
 // Consumer can push to the array
 
 const get = (date: ISO8601Date) =>
-  apiService.get<TimelineEntry[]>({
+  apiService.request<TimelineEntry[]>({
+    method: "GET",
     endpoint: "timeline",
     params: {
       from: moment(date).startOf("day").toISOString(),
