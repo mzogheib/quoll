@@ -12,12 +12,10 @@ const MMKV = new MMKVLoader().initialize();
 export const makeStorage = <State extends object>(
   key: string,
 ): Storage<State> => {
-  const getState = () => MMKV.getMap<State | null>(key);
+  const getState: Storage<State>["getState"] = () =>
+    MMKV.getMap<State | null>(key);
 
-  const setProperty = <Name extends keyof State>(
-    name: Name,
-    value: State[Name],
-  ) => {
+  const setProperty: Storage<State>["setProperty"] = (name, value) => {
     const newValue = { ...getState(), [name]: value };
     MMKV.setMap(key, newValue);
   };
