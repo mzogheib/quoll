@@ -1,21 +1,19 @@
-import axios, { AxiosRequestConfig, Method } from "axios";
-
 type RequestParams = {
-  method: Method;
+  method: "GET" | "PUT" | "POST" | "DELETE";
   endpoint: string;
-  params?: AxiosRequestConfig["params"];
-  payload?: AxiosRequestConfig["data"];
+  params?: Record<string, string>;
+  payload?: object;
 };
 
 export class ApiService {
   private baseUrl: string;
-  private authHeader: AxiosRequestConfig["headers"];
+  private authHeader?: { Authorization: string };
 
   constructor(baseUrl: string) {
     this.baseUrl = baseUrl;
   }
 
-  private makeUrl(endpoint: string, params: AxiosRequestConfig["params"]) {
+  private makeUrl(endpoint: string, params?: Record<string, string>) {
     const baseUrl = `${this.baseUrl}${endpoint}`;
 
     const search = new URLSearchParams(params);
@@ -26,19 +24,27 @@ export class ApiService {
     return baseUrl;
   }
 
-  async request<ResponseData>({
+  async request<Response>({
     method,
     endpoint,
     params,
     payload,
   }: RequestParams) {
-    const config = { method, payload, headers: this.authHeader };
+    const init = {
+      method,
+      url: this.makeUrl(endpoint, params),
+      payload,
+      headers: {
+        ...this.authHeader,
+      },
+    };
 
-    const url = this.makeUrl(endpoint, params);
+    const response = await fetch(`${this.baseUrl}${endpoint}`, init);
+    const jsonData = await response.json();
 
-    const response = await axios<ResponseData>(url, config);
+    if (response.ok) return jsonData as Response;
 
-    return response.data;
+    throw new Error(JSON.stringify(jsonData));
   }
 
   authenticate(userId: string): void {
