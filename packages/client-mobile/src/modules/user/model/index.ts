@@ -6,11 +6,7 @@ import { apiService } from "@utils/api";
 import { User } from "../types";
 import * as userService from "../service";
 
-type StoredState = {
-  id: string | undefined;
-};
-
-const storage = makeStorage<StoredState>("user");
+const storage = makeStorage<{ id: string }>("user");
 
 const getCurrentUserId = () => storage.getData()?.id;
 

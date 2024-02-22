@@ -7,11 +7,7 @@ import { Coords } from "../types";
 import { checkIsPermitted, errors, requestPermission } from "../service";
 
 // isConnected should be stored between app launches.
-type StoredState = {
-  isConnected: boolean;
-};
-
-const storage = makeStorage<StoredState>("geolocation");
+const storage = makeStorage<{ isConnected: boolean }>("geolocation");
 
 type State = {
   isConnecting: boolean;

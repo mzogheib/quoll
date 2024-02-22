@@ -9,11 +9,7 @@ import { checkIsPermitted, getMedia, requestPermission } from "../service";
 import { makeDateFilter } from "./utils";
 
 // isConnected should be stored between app launches.
-type StoredState = {
-  isConnected: boolean;
-};
-
-const storage = makeStorage<StoredState>("media");
+const storage = makeStorage<{ isConnected: boolean }>("media");
 
 type State = {
   isConnecting: boolean;
