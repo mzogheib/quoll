@@ -19,8 +19,8 @@ export const makeStorage = <Data extends object>(
     MMKV.setMap(key, newValue);
   };
 
-  const clear = () => {
-    throw new Error("Unimplemented");
+  const clear: Storage<Data>["clear"] = () => {
+    MMKV.removeItem(key);
   };
 
   return {
