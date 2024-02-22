@@ -1,5 +1,7 @@
 import utils from "../utils";
-import storageService from "../storage";
+import { makeStorage } from "../storage";
+
+const storage = makeStorage<{ token: string }>("oauth");
 
 // OAuth Flow
 // 1. User clicks 'connect' on the settings page and BE returns a url for that feed
@@ -15,7 +17,7 @@ import storageService from "../storage";
 
 const makeToken = () => {
   const token = utils.makeRandomString(10);
-  storageService.set("oauth-state-token", token);
+  storage.setProperty("token", token);
   return token;
 };
 
@@ -25,8 +27,8 @@ const getTokenFromState = (state: string) => {
 };
 
 const isValidToken = (token: string) => {
-  const storedToken = storageService.get("oauth-state-token");
-  storageService.delete("oauth-state-token");
+  const storedToken = storage.getData()?.token;
+  storage.clear();
   return storedToken && token && storedToken === token;
 };
 
@@ -73,7 +75,7 @@ export const requestAuth = (
     try {
       token = getTokenFromState(state);
     } catch {
-      storageService.delete("oauth-state-token");
+      storage.clear();
       return onError("Could not authenticate feed. Try again.");
     }
 
@@ -88,14 +90,14 @@ export const requestAuth = (
 export const onOAuthResponse = (response: OAuthResponse, onError: OnError) => {
   // Perhaps the opener was closed for some reason
   if (!window.opener) {
-    storageService.delete("oauth-state-token");
+    storage.clear();
     onError("Could not authenticate feed. Try again.");
     return;
   }
 
   // This is an edge case. Fail silently until there's a need for a better solution
   if (!window.opener.quollOnOAuthResponse) {
-    storageService.delete("oauth-state-token");
+    storage.clear();
     window.close();
     return;
   }

@@ -1,22 +1,38 @@
+import { Storage } from "@quoll/client-lib";
+
 const prefix = "quoll";
 
 const makeKey = (key: string) => `${prefix}-${key}`;
 
-const get = (key: string) => {
-  const data = localStorage.getItem(makeKey(key));
+export const makeStorage = <Data extends object>(
+  key: string,
+): Storage<Data> => {
+  const getData: Storage<Data>["getData"] = () => {
+    const data = localStorage.getItem(makeKey(key));
 
-  if (data) return JSON.parse(data);
+    if (!data) return null;
+
+    try {
+      // TODO is this properly typed? The parsed data could be anything.
+      return JSON.parse(data);
+    } catch {
+      return null;
+    }
+  };
+
+  const setProperty: Storage<Data>["setProperty"] = (name, value) => {
+    const data = getData();
+    const newData = { ...data, [name]: value };
+    localStorage.setItem(makeKey(key), JSON.stringify(newData));
+  };
+
+  const clear = () => {
+    localStorage.removeItem(makeKey(key));
+  };
+
+  return {
+    getData,
+    setProperty,
+    clear,
+  };
 };
-
-const set = (key: string, data: string) =>
-  localStorage.setItem(makeKey(key), JSON.stringify(data));
-
-const remove = (key: string) => localStorage.removeItem(makeKey(key));
-
-const storageService = {
-  get,
-  set,
-  delete: remove,
-};
-
-export default storageService;

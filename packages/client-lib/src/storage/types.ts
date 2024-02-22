@@ -6,10 +6,20 @@ export type Storage<Data extends object> = {
    * Returns the stored data.
    */
   getData: () => Data | null;
+
   /**
    * Set the value of an individual stored data property.
    * @param name the property name
    * @param value the new value for the property
    */
   setProperty: <Name extends keyof Data>(name: Name, value: Data[Name]) => void;
+
+  /**
+   * Clears all stored data.
+   *
+   * @remarks
+   *
+   * A call to `getData` after this will return `null`.
+   */
+  clear: () => void;
 };
