@@ -9,19 +9,18 @@ const MMKV = new MMKVLoader().initialize();
  * @param key a unique key for the store
  * @returns functions to get and set the store state
  */
-export const makeStorage = <State extends object>(
+export const makeStorage = <Data extends object>(
   key: string,
-): Storage<State> => {
-  const getState: Storage<State>["getState"] = () =>
-    MMKV.getMap<State | null>(key);
+): Storage<Data> => {
+  const getData: Storage<Data>["getData"] = () => MMKV.getMap<Data | null>(key);
 
-  const setProperty: Storage<State>["setProperty"] = (name, value) => {
-    const newValue = { ...getState(), [name]: value };
+  const setProperty: Storage<Data>["setProperty"] = (name, value) => {
+    const newValue = { ...getData(), [name]: value };
     MMKV.setMap(key, newValue);
   };
 
   return {
-    getState,
+    getData,
     setProperty,
   };
 };
