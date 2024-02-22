@@ -23,7 +23,7 @@ type State = {
 
 const defaultState: State = {
   isConnecting: false,
-  isConnected: !!storage.getState()?.isConnected,
+  isConnected: !!storage.getData()?.isConnected,
   isCheckingPermission: true,
   isRefreshing: false,
   value: undefined,

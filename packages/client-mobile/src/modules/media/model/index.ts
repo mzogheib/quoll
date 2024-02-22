@@ -25,7 +25,7 @@ type State = {
 
 const defaultState: State = {
   isConnecting: false,
-  isConnected: !!storage.getState()?.isConnected,
+  isConnected: !!storage.getData()?.isConnected,
   isCheckingPermission: true,
   isRefreshing: false,
   value: [],
@@ -56,7 +56,7 @@ export const useMediaModel = () => {
   // User may have connected previously but then, via the app settings in the
   // OS, denied permissions. We should sync that setting here too.
   useEffect(() => {
-    if (!storage.getState()?.isConnected) return;
+    if (!storage.getData()?.isConnected) return;
 
     syncPermission();
   }, [syncPermission]);

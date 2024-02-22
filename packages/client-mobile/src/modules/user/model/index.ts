@@ -12,7 +12,7 @@ type StoredState = {
 
 const storage = makeStorage<StoredState>("user");
 
-const getCurrentUserId = () => storage.getState()?.id;
+const getCurrentUserId = () => storage.getData()?.id;
 
 type State = {
   isAuthenticating: boolean;
