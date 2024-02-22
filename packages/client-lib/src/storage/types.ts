@@ -5,7 +5,7 @@ export type Storage<State extends object> = {
   /**
    * Returns the stored data.
    */
-  getState: () => State;
+  getState: () => State | null;
   /**
    * Set the value of an individual stored data property.
    * @param name the property name
