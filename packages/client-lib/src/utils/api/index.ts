@@ -30,16 +30,17 @@ export class ApiService {
     params,
     payload,
   }: RequestParams) {
+    const url = this.makeUrl(endpoint, params);
     const init = {
       method,
-      url: this.makeUrl(endpoint, params),
-      payload,
+      body: JSON.stringify(payload),
       headers: {
+        "Content-Type": "application/json",
         ...this.authHeader,
       },
     };
 
-    const response = await fetch(`${this.baseUrl}${endpoint}`, init);
+    const response = await fetch(url, init);
     const jsonData = await response.json();
 
     if (response.ok) return jsonData as Response;
