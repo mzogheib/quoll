@@ -55,19 +55,21 @@ export class ApiService {
     const contentHeader = response.headers.get("Content-Length");
     const hasContent = contentHeader && contentHeader !== "0";
 
-    if (response.ok) {
-      // The caller should know whether or not the response has content.
-      // If it does, the `Response` type will be set as non-null.
-      // If it does not, the `Response` type will be set as `null`.
-      // Hence the type cast at the return statement will always match the
-      // intention of the caller.
+    // The caller should know whether or not the response has content.
+    // If it does, the `Response` type will be set as non-null.
+    // If it does not, the `Response` type will be set as `null`.
+    // Hence the value of responseJson will always match the caller's intention.
+    const responseJson: Response = hasContent ? await response.json() : null;
 
-      const responseJson = hasContent ? await response.json() : null;
+    if (response.ok) return responseJson;
 
-      return responseJson as Response;
-    }
+    const error = {
+      status: response.status,
+      statusText: response.statusText,
+      body: responseJson,
+    };
 
-    throw new Error(`${response.status}: ${response.statusText}`);
+    throw new Error(JSON.stringify(error));
   }
 
   authenticate(userId: string): void {
