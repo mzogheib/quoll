@@ -24,12 +24,22 @@ export class ApiService {
     return baseUrl;
   }
 
+  /**
+   * If the endpoint will not return any content then `Response` should be
+   * `null`.
+   *
+   * @example
+   *
+   * ```
+   * const data = apiService.request<null>({ ... })
+   * ```
+   */
   async request<Response>({
     method,
     endpoint,
     params,
     payload,
-  }: RequestParams) {
+  }: RequestParams): Promise<Response> {
     const url = this.makeUrl(endpoint, params);
     const init = {
       method,
@@ -41,11 +51,23 @@ export class ApiService {
     };
 
     const response = await fetch(url, init);
-    const jsonData = await response.json();
 
-    if (response.ok) return jsonData as Response;
+    const contentHeader = response.headers.get("Content-Length");
+    const hasContent = contentHeader && contentHeader !== "0";
 
-    throw new Error(JSON.stringify(jsonData));
+    if (response.ok) {
+      // The caller should know whether or not the response has content.
+      // If it does, the `Response` type will be set as non-null.
+      // If it does not, the `Response` type will be set as `null`.
+      // Hence the type cast at the return statement will always match the
+      // intention of the caller.
+
+      const responseJson = hasContent ? await response.json() : null;
+
+      return responseJson as Response;
+    }
+
+    throw new Error(`${response.status}: ${response.statusText}`);
   }
 
   authenticate(userId: string): void {
