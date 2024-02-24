@@ -4,7 +4,7 @@ import { useUserModel as _useUserModel } from "@quoll/client-lib";
 
 import { makeStorage } from "@utils/storage";
 import { makeStore } from "@utils/store";
-import * as userService from "../service";
+import { userService } from "../service";
 
 export const storage = makeStorage<{ id: string }>("user");
 

@@ -6,7 +6,7 @@ import {
 } from "@quoll/client-lib";
 
 import { makeStorage } from "services/storage";
-import userService from "../service";
+import { userService } from "../service";
 import { RootState } from "store";
 
 export const storage = makeStorage<{ id: string }>("user");

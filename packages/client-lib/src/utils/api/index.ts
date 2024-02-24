@@ -5,7 +5,7 @@ type RequestParams = {
   payload?: object;
 };
 
-export class ApiService {
+export abstract class ApiService {
   private baseUrl: string;
 
   constructor(baseUrl: string) {
@@ -33,7 +33,7 @@ export class ApiService {
    * const data = apiService.request<null>({ ... })
    * ```
    */
-  async request<Response>({
+  protected async request<Response>({
     method,
     endpoint,
     params,
