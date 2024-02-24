@@ -6,6 +6,10 @@ import { apiService } from "@utils/api";
 import { User } from "../types";
 import * as userService from "../service";
 
+const storage = makeStorage<{ id: string }>("user");
+
+const getCurrentUserId = () => storage.getData()?.id;
+
 type State = {
   isAuthenticating: boolean;
   user: User | undefined;
@@ -18,21 +22,7 @@ const defaultState: State = {
 
 const useStore = makeStore(defaultState);
 
-type StoredState = {
-  id: string | undefined;
-};
-
-const defaultStoredState: StoredState = {
-  id: undefined,
-};
-
-const useStorage = makeStorage("user", defaultStoredState);
-
 export const useUserModel = () => {
-  const storage = useStorage();
-
-  const getCurrentUserId = () => storage.state.id;
-
   const { state, setProperty } = useStore();
   const { user, isAuthenticating } = state;
 

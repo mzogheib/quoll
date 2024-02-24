@@ -8,8 +8,12 @@ import { MediaItem } from "../types";
 import { checkIsPermitted, getMedia, requestPermission } from "../service";
 import { makeDateFilter } from "./utils";
 
+// isConnected should be stored between app launches.
+const storage = makeStorage<{ isConnected: boolean }>("media");
+
 type State = {
   isConnecting: boolean;
+  isConnected: boolean;
   isCheckingPermission: boolean;
   isRefreshing: boolean;
   value: MediaItem[];
@@ -17,6 +21,7 @@ type State = {
 
 const defaultState: State = {
   isConnecting: false,
+  isConnected: !!storage.getData()?.isConnected,
   isCheckingPermission: true,
   isRefreshing: false,
   value: [],
@@ -24,24 +29,16 @@ const defaultState: State = {
 
 const useStore = makeStore(defaultState);
 
-// isConnected should be in device state so that it can be persisted
-// between app launches.
-type StoredState = {
-  isConnected: boolean;
-};
-
-const defaultStoredState: StoredState = {
-  isConnected: false,
-};
-
-const useStorage = makeStorage("media", defaultStoredState);
-
 export const useMediaModel = () => {
-  const storage = useStorage();
-
   const { state, setProperty } = useStore();
 
-  const { isConnecting, isCheckingPermission, isRefreshing, value } = state;
+  const {
+    isConnecting,
+    isConnected,
+    isCheckingPermission,
+    isRefreshing,
+    value,
+  } = state;
 
   const syncPermission = useCallback(async () => {
     setProperty("isCheckingPermission", true);
@@ -55,7 +52,7 @@ export const useMediaModel = () => {
   // User may have connected previously but then, via the app settings in the
   // OS, denied permissions. We should sync that setting here too.
   useEffect(() => {
-    if (!storage.state.isConnected) return;
+    if (!storage.getData()?.isConnected) return;
 
     syncPermission();
   }, [syncPermission]);
@@ -65,11 +62,13 @@ export const useMediaModel = () => {
     const isPermitted = await checkIsPermitted();
 
     if (isPermitted) {
+      setProperty("isConnected", true);
       storage.setProperty("isConnected", true);
     } else {
       const didPermit = await requestPermission();
 
       if (didPermit) {
+        setProperty("isConnected", true);
         storage.setProperty("isConnected", true);
       } else {
         promptAllowAccess("Quoll works best with your photos and videos.");
@@ -80,6 +79,7 @@ export const useMediaModel = () => {
 
   const disconnect = () => {
     setProperty("value", []);
+    setProperty("isConnected", false);
     storage.setProperty("isConnected", false);
   };
 
@@ -99,7 +99,7 @@ export const useMediaModel = () => {
     disconnect,
     refresh,
     isRefreshing,
-    isConnected: storage.state.isConnected,
+    isConnected,
     isConnecting,
     isCheckingPermission,
   };

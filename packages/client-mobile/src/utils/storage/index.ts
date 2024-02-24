@@ -1,29 +1,31 @@
-import { MMKVLoader, useMMKVStorage } from "react-native-mmkv-storage";
+import { Storage } from "@quoll/client-lib";
+import { MMKVLoader } from "react-native-mmkv-storage";
 
 const MMKV = new MMKVLoader().initialize();
 
 /**
- * Creates a hook through which to set and access a store that is persisted
- * between app launches.
+ * Creates a store that is persisted between app launches.
  *
- * @param key a unique key for the persisted value
- * @param initialValue the initial value
- * @returns a hook to access the persisted store
+ * @param key a unique key for the store
+ * @returns functions to get and set the store state
  */
-export const makeStorage =
-  <State extends object>(key: string, initialState: State) =>
-  () => {
-    const [state, setState] = useMMKVStorage(key, MMKV, initialState);
+export const makeStorage = <Data extends object>(
+  key: string,
+): Storage<Data> => {
+  const getData: Storage<Data>["getData"] = () => MMKV.getMap<Data | null>(key);
 
-    const setProperty = <Name extends keyof State>(
-      name: Name,
-      value: State[Name],
-    ) => {
-      setState({ ...state, [name]: value });
-    };
-
-    return {
-      state,
-      setProperty,
-    };
+  const setProperty: Storage<Data>["setProperty"] = (name, value) => {
+    const newValue = { ...getData(), [name]: value };
+    MMKV.setMap(key, newValue);
   };
+
+  const clear: Storage<Data>["clear"] = () => {
+    MMKV.removeItem(key);
+  };
+
+  return {
+    getData,
+    setProperty,
+    clear,
+  };
+};
