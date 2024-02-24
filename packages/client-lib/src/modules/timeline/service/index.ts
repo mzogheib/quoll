@@ -34,11 +34,11 @@ const EntryConfigMap: Record<TimelineEntryType, EntryConfig> = {
   yoga: { label: "Yoga", image: "🧘‍♂️" },
 };
 
+// TODO should this be somewhere else?
 export const getTimelineEntryImage = (entry: TimelineEntry) =>
   EntryConfigMap[entry.type] ? EntryConfigMap[entry.type].image : "🤠";
 
-// TODO move this to client-lib
-// Convert to a class
+// TODO
 // Has an array of sources to fetch from
 // Consumer can push to the array
 
