@@ -5,12 +5,11 @@ import {
   makeReduxStoreSlice,
 } from "@quoll/client-lib";
 
-import { apiService } from "services/api";
 import { makeStorage } from "services/storage";
-import userService from "../service";
+import { userService } from "../service";
 import { RootState } from "store";
 
-const storage = makeStorage<{ id: string }>("user");
+export const storage = makeStorage<{ id: string }>("user");
 
 const defaultState: UserState = {
   isAuthenticating: true,
@@ -28,7 +27,6 @@ export const useUserModel = () => {
   const login = useCallback(
     async (userId: string) => {
       const user = await model.login(userId);
-      apiService.authenticate(user._id);
 
       return user;
     },
@@ -36,8 +34,7 @@ export const useUserModel = () => {
   );
 
   const signup = useCallback(async () => {
-    const user = await model.signup();
-    apiService.authenticate(user._id);
+    await model.signup();
   }, [model]);
 
   return {

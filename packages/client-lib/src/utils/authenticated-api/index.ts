@@ -5,10 +5,12 @@ type RequestParams = {
   payload?: object;
 };
 
-export abstract class ApiService {
+export abstract class AuthenticatedApiService {
   private baseUrl: string;
+  private getAccessToken: () => Promise<string>;
 
-  constructor(baseUrl: string) {
+  constructor(getAccessToken: () => Promise<string>, baseUrl: string) {
+    this.getAccessToken = getAccessToken;
     this.baseUrl = baseUrl;
   }
 
@@ -23,6 +25,15 @@ export abstract class ApiService {
     return baseUrl;
   }
 
+  private async makeHeaders() {
+    const accessToken = await this.getAccessToken();
+
+    return {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${accessToken}`,
+    };
+  }
+
   /**
    * If the endpoint will not return any content then `Response` should be
    * `null`.
@@ -30,7 +41,7 @@ export abstract class ApiService {
    * @example
    *
    * ```
-   * const data = apiService.request<null>({ ... })
+   * const data = authenticatedApiService.request<null>({ ... })
    * ```
    */
   protected async request<Response>({
@@ -38,14 +49,12 @@ export abstract class ApiService {
     endpoint,
     params,
     payload,
-  }: RequestParams): Promise<Response> {
+  }: RequestParams) {
     const url = this.makeUrl(endpoint, params);
     const init = {
       method,
       body: JSON.stringify(payload),
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: await this.makeHeaders(),
     };
 
     const response = await fetch(url, init);

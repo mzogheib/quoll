@@ -1,9 +1,9 @@
 import styled, { css } from "styled-components";
 import moment from "moment";
 import { TimelineEntry as ITimelineEntry } from "@quoll/lib";
+import { getTimelineEntryImage } from "@quoll/client-lib";
 
 import FeedLogo from "components/FeedLogo";
-import { getEntryImage } from "../../service";
 
 const Wrapper = styled.div(
   ({ theme: { colors } }) => css`
@@ -60,7 +60,7 @@ interface Props {
 }
 
 const TimelineEntry = ({ entry, onClick }: Props) => {
-  const image = getEntryImage(entry);
+  const image = getTimelineEntryImage(entry);
 
   return (
     <Wrapper onClick={onClick}>

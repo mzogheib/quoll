@@ -1,14 +1,7 @@
 import { TimelineService } from "@quoll/client-lib";
-import { ISO8601Date } from "@quoll/lib";
+import { getAccessToken } from "@utils/session";
+import { API_URL } from "@env";
 
-const get = async (date: ISO8601Date) => {
-  console.log("getting timeline for", date);
-
-  return [];
-};
-
-const timelineService: TimelineService = {
-  get,
-};
+const timelineService = new TimelineService(getAccessToken, API_URL);
 
 export default timelineService;
