@@ -1,4 +1,5 @@
 import { useCallback } from "react";
+import { useUserModel as _useUserModel } from "@quoll/client-lib";
 
 import { apiService } from "services/api";
 import { makeStorage } from "services/storage";
@@ -7,38 +8,26 @@ import userService from "../service";
 
 const storage = makeStorage<{ id: string }>("user");
 
-const getCurrentUserId = () => storage.getData()?.id;
-
 export const useUserModel = () => {
-  const { state, setProperty } = useStore();
-  const { user, isAuthenticating } = state;
+  const model = _useUserModel(useStore, userService, storage);
 
   const login = useCallback(
     async (userId: string) => {
-      setProperty("isAuthenticating", true);
-      const user = await userService.login(userId);
-      apiService.authenticate(userId);
-      setProperty("user", user);
-      setProperty("isAuthenticating", false);
+      const user = await model.login(userId);
+      apiService.authenticate(user._id);
 
       return user;
     },
-    [setProperty],
+    [model],
   );
 
   const signup = useCallback(async () => {
-    setProperty("isAuthenticating", true);
-    const user = await userService.signup();
-    storage.setProperty("id", user._id);
+    const user = await model.signup();
     apiService.authenticate(user._id);
-    setProperty("user", user);
-    setProperty("isAuthenticating", false);
-  }, [setProperty]);
+  }, [model]);
 
   return {
-    user,
-    isAuthenticating,
-    getCurrentUserId,
+    ...model,
     login,
     signup,
   };

@@ -1,5 +1,6 @@
 import { useCallback } from "react";
 import { User } from "@quoll/lib";
+import { useUserModel as _useUserModel } from "@quoll/client-lib";
 
 import { makeStorage } from "@utils/storage";
 import { makeStore } from "@utils/store";
@@ -7,8 +8,6 @@ import { apiService } from "@utils/api";
 import * as userService from "../service";
 
 const storage = makeStorage<{ id: string }>("user");
-
-const getCurrentUserId = () => storage.getData()?.id;
 
 type State = {
   isAuthenticating: boolean;
@@ -23,35 +22,20 @@ const defaultState: State = {
 const useStore = makeStore(defaultState);
 
 export const useUserModel = () => {
-  const { state, setProperty } = useStore();
-  const { user, isAuthenticating } = state;
+  const model = _useUserModel(useStore, userService, storage);
 
-  const login = useCallback(
-    async (userId: string) => {
-      setProperty("isAuthenticating", true);
-      const user = await userService.login(userId);
-      apiService.authenticate(userId);
-      setProperty("user", user);
-      setProperty("isAuthenticating", false);
-
-      return user;
-    },
-    [setProperty],
-  );
+  const login = useCallback(async (userId: string) => {
+    const user = await model.login(userId);
+    apiService.authenticate(user._id);
+  }, []);
 
   const signup = useCallback(async () => {
-    setProperty("isAuthenticating", true);
-    const user = await userService.signup();
+    const user = await model.signup();
     apiService.authenticate(user._id);
-    storage.setProperty("id", user._id);
-    setProperty("user", user);
-    setProperty("isAuthenticating", false);
-  }, [setProperty]);
+  }, []);
 
   return {
-    user,
-    isAuthenticating,
-    getCurrentUserId,
+    ...model,
     login,
     signup,
   };
