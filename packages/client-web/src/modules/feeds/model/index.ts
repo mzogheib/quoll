@@ -12,15 +12,11 @@ export const useFeedsModel = () => {
     [feeds],
   );
 
-  const setFeedProperty = useCallback(
-    <PN extends keyof FeedState>(
-      feedName: FeedName,
-      propertyName: PN,
-      value: FeedState[PN],
-    ) => {
+  const updateFeed = useCallback(
+    (feedName: FeedName, newValue: Partial<FeedState>) => {
       const newFeed = {
         ...feeds[feedName],
-        [propertyName]: value,
+        ...newValue,
       };
 
       setProperty(feedName, newFeed);
@@ -30,43 +26,41 @@ export const useFeedsModel = () => {
 
   const setConnected = useCallback(
     (name: FeedName, value: boolean) => {
-      setFeedProperty(name, "isConnected", value);
+      updateFeed(name, { isConnected: value });
     },
-    [setFeedProperty],
+    [updateFeed],
   );
 
   const connect = useCallback(
     async (name: FeedName) => {
-      setFeedProperty(name, "isAuthenticating", true);
+      updateFeed(name, { isAuthenticating: true });
       const url = await feedsService.getOauthUrl(name);
-      setFeedProperty(name, "isAuthenticating", false);
+      updateFeed(name, { isAuthenticating: false });
 
       return url;
     },
-    [setFeedProperty],
+    [updateFeed],
   );
 
   const disconnect = useCallback(
     async (name: FeedName) => {
-      setFeedProperty(name, "isAuthenticating", true);
+      updateFeed(name, { isAuthenticating: true });
       // BE may return a message for further, manual instructions
       const message = await feedsService.deauthorize(name);
-      setFeedProperty(name, "isConnected", false);
-      setFeedProperty(name, "isAuthenticating", false);
+      updateFeed(name, { isConnected: false, isAuthenticating: false });
 
       return message;
     },
-    [setFeedProperty],
+    [updateFeed],
   );
 
   const authenticate = useCallback(
     async (name: FeedName, code: string) => {
-      setFeedProperty(name, "isAuthenticating", true);
+      updateFeed(name, { isAuthenticating: true });
       await feedsService.authenticate(name, { code });
-      setFeedProperty(name, "isConnected", true);
-      setFeedProperty(name, "isAuthenticating", false);
+      updateFeed(name, { isConnected: true, isAuthenticating: false });
     },
-    [setFeedProperty],
+    [updateFeed],
   );
 
   return {
