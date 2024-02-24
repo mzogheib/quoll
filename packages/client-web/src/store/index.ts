@@ -1,5 +1,9 @@
-import { TimelineState, makeGlobalReduxStore } from "@quoll/client-lib";
-import { DateState } from "@quoll/client-lib";
+import {
+  DateState,
+  TimelineState,
+  UserState,
+  makeGlobalReduxStore,
+} from "@quoll/client-lib";
 
 import * as userStore from "modules/user/model/store";
 import { dateStore } from "modules/date/model";
@@ -7,7 +11,7 @@ import * as feedsStore from "modules/feeds/model/store";
 import { timelineStore } from "modules/timeline/model";
 
 export type RootState = {
-  user: userStore.State;
+  user: UserState;
   date: DateState;
   feeds: feedsStore.State;
   timeline: TimelineState;
