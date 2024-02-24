@@ -10,7 +10,7 @@ import { makeStorage } from "services/storage";
 import userService from "../service";
 import { RootState } from "store";
 
-const storage = makeStorage<{ id: string }>("user");
+export const storage = makeStorage<{ id: string }>("user");
 
 const defaultState: UserState = {
   isAuthenticating: true,
