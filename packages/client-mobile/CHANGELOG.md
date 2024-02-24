@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.23.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.22.0...@quoll/client-mobile@0.23.0) (2024-02-24)
+
+### Bug Fixes
+
+- pass the api service base url from parent app ([1f2dfb1](https://github.com/mzogheib/quoll/commit/1f2dfb10885a8c08ba9166fa773c07e6ef63d7ac))
+
+### Features
+
+- **client-mobile:** authenticate the api on login and signup ([25bfbed](https://github.com/mzogheib/quoll/commit/25bfbede3f1e413e06206cfbb6905a939c9f065b))
+
 # [0.22.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.21.0...@quoll/client-mobile@0.22.0) (2024-02-18)
 
 ### Features
