@@ -79,6 +79,7 @@ export const useMediaModel = () => {
 
   const disconnect = () => {
     setProperty("value", []);
+    setProperty("isConnected", false);
     storage.setProperty("isConnected", false);
   };
 
