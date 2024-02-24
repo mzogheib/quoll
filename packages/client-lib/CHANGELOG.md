@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.3](https://github.com/mzogheib/quoll/compare/@quoll/client-lib@0.4.2...@quoll/client-lib@0.4.3) (2024-02-24)
+
+### Bug Fixes
+
+- **client-lib:** fix api service params and header ([ee37330](https://github.com/mzogheib/quoll/commit/ee3733088199794a885fe3711341704b42f4b4f1))
+- **client-lib:** remove method from request params ([910f8be](https://github.com/mzogheib/quoll/commit/910f8bee2d4068ae48ba744569656dc8fc510c42))
+- only parse the api response if there is content ([533240a](https://github.com/mzogheib/quoll/commit/533240af4a1bc0cc6c81f6688c6209ace68b9e48))
+- pass the api service base url from parent app ([1f2dfb1](https://github.com/mzogheib/quoll/commit/1f2dfb10885a8c08ba9166fa773c07e6ef63d7ac))
+
 ## [0.4.2](https://github.com/mzogheib/quoll/compare/@quoll/client-lib@0.4.1...@quoll/client-lib@0.4.2) (2024-02-10)
 
 **Note:** Version bump only for package @quoll/client-lib

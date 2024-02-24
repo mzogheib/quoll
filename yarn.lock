@@ -5917,7 +5917,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@quoll/client-lib@npm:^0.4.2, @quoll/client-lib@workspace:packages/client-lib":
+"@quoll/client-lib@npm:^0.4.3, @quoll/client-lib@workspace:packages/client-lib":
   version: 0.0.0-use.local
   resolution: "@quoll/client-lib@workspace:packages/client-lib"
   dependencies:
@@ -5940,7 +5940,7 @@ __metadata:
     "@babel/core": "npm:^7.20.0"
     "@babel/preset-env": "npm:^7.20.0"
     "@babel/runtime": "npm:^7.20.0"
-    "@quoll/client-lib": "npm:^0.4.2"
+    "@quoll/client-lib": "npm:^0.4.3"
     "@quoll/lib": "npm:^0.3.0"
     "@quoll/ui-primitives": "npm:^0.4.0"
     "@react-native-camera-roll/camera-roll": "npm:^7.3.0"
@@ -5979,7 +5979,7 @@ __metadata:
   resolution: "@quoll/client-web@workspace:packages/client-web"
   dependencies:
     "@googlemaps/react-wrapper": "npm:^1.1.35"
-    "@quoll/client-lib": "npm:^0.4.2"
+    "@quoll/client-lib": "npm:^0.4.3"
     "@quoll/lib": "npm:^0.3.0"
     "@quoll/ui-components": "npm:^0.2.17"
     "@testing-library/jest-dom": "npm:^5.16.5"

@@ -13,7 +13,7 @@ const getOauthUrl = (feed: FeedName) =>
   });
 
 const authenticate = (feed: FeedName, payload: AuthenticatePayload) =>
-  apiService.request<void>({
+  apiService.request<null>({
     method: "POST",
     endpoint,
     payload,
@@ -22,7 +22,7 @@ const authenticate = (feed: FeedName, payload: AuthenticatePayload) =>
 
 const deauthorize = (feed: FeedName) =>
   apiService
-    .request<void>({
+    .request<null>({
       method: "DELETE",
       endpoint,
       params: { feed },

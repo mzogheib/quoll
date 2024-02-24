@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.4](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.6.3...@quoll/client-web@0.6.4) (2024-02-24)
+
+### Bug Fixes
+
+- **client-web:** update multiple feed properties at once to avoid race condition ([ab98469](https://github.com/mzogheib/quoll/commit/ab98469de313bdf4cf7747877404b995a955a552))
+- only parse the api response if there is content ([533240a](https://github.com/mzogheib/quoll/commit/533240af4a1bc0cc6c81f6688c6209ace68b9e48))
+- pass the api service base url from parent app ([1f2dfb1](https://github.com/mzogheib/quoll/commit/1f2dfb10885a8c08ba9166fa773c07e6ef63d7ac))
+
 ## [0.6.3](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.6.2...@quoll/client-web@0.6.3) (2024-02-13)
 
 ### Bug Fixes
