@@ -41,7 +41,7 @@ export abstract class AuthenticatedApiService {
    * @example
    *
    * ```
-   * const data = apiService.request<null>({ ... })
+   * const data = authenticatedApiService.request<null>({ ... })
    * ```
    */
   protected async request<Response>({
