@@ -1,6 +1,31 @@
-import { useFeedsModel as _useFeedsModel } from "@quoll/client-lib";
+import {
+  FeedsState,
+  useFeedsModel as _useFeedsModel,
+  makeReduxStoreSlice,
+} from "@quoll/client-lib";
+import { FeedName } from "@quoll/lib";
 
-import { useStore } from "./store";
 import feedsService from "../service";
+import { RootState } from "store";
 
-export const useFeedsModel = () => _useFeedsModel(useStore, feedsService);
+const makeDefaultFeedState = (name: FeedName) => ({
+  name,
+  isAuthenticating: false,
+  isConnected: false,
+});
+
+const defaultState: FeedsState = {
+  moves: makeDefaultFeedState("moves"),
+  strava: makeDefaultFeedState("strava"),
+  uber: makeDefaultFeedState("uber"),
+  toshl: makeDefaultFeedState("toshl"),
+  media: makeDefaultFeedState("media"),
+};
+
+export const feedsStore = makeReduxStoreSlice<FeedsState, RootState>(
+  "feeds",
+  defaultState,
+);
+
+export const useFeedsModel = () =>
+  _useFeedsModel(feedsStore.useStore, feedsService);

@@ -6,21 +6,21 @@ import {
   makeGlobalReduxStore,
 } from "@quoll/client-lib";
 
-import * as userStore from "modules/user/model/store";
+import { userStore } from "modules/user/model";
 import { dateStore } from "modules/date/model";
-import * as feedsStore from "modules/feeds/model/store";
+import { feedsStore } from "modules/feeds/model";
 import { timelineStore } from "modules/timeline/model";
 
 export type RootState = {
-  user: UserState;
   date: DateState;
   feeds: FeedsState;
   timeline: TimelineState;
+  user: UserState;
 };
 
 export const { StoreProvider } = makeGlobalReduxStore({
-  user: userStore.reducer,
   date: dateStore.reducer,
   feeds: feedsStore.reducer,
   timeline: timelineStore.reducer,
+  user: userStore.reducer,
 });

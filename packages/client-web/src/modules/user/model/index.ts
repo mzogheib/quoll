@@ -1,15 +1,29 @@
 import { useCallback } from "react";
-import { useUserModel as _useUserModel } from "@quoll/client-lib";
+import {
+  UserState,
+  useUserModel as _useUserModel,
+  makeReduxStoreSlice,
+} from "@quoll/client-lib";
 
 import { apiService } from "services/api";
 import { makeStorage } from "services/storage";
-import { useStore } from "./store";
 import userService from "../service";
+import { RootState } from "store";
 
 const storage = makeStorage<{ id: string }>("user");
 
+const defaultState: UserState = {
+  isAuthenticating: true,
+  user: undefined,
+};
+
+export const userStore = makeReduxStoreSlice<UserState, RootState>(
+  "user",
+  defaultState,
+);
+
 export const useUserModel = () => {
-  const model = _useUserModel(useStore, userService, storage);
+  const model = _useUserModel(userStore.useStore, userService, storage);
 
   const login = useCallback(
     async (userId: string) => {
