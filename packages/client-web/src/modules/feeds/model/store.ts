@@ -1,13 +1,7 @@
-import { makeReduxStoreSlice } from "@quoll/client-lib";
+import { FeedState, makeReduxStoreSlice } from "@quoll/client-lib";
 import { FeedName } from "@quoll/lib";
 
 import { RootState } from "store";
-
-export type FeedState = {
-  name: FeedName;
-  isAuthenticating: boolean;
-  isConnected: boolean;
-};
 
 export type State = Record<FeedName, FeedState>;
 

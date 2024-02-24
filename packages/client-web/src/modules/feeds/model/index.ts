@@ -1,7 +1,8 @@
 import { useCallback, useMemo } from "react";
 import { FeedName } from "@quoll/lib";
+import { FeedState } from "@quoll/client-lib";
 
-import { FeedState, useStore } from "./store";
+import { useStore } from "./store";
 import feedsService from "../service";
 
 export const useFeedsModel = () => {
