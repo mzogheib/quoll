@@ -1,6 +1,7 @@
+import { AuthenticatedApiService, FeedsService } from "@quoll/client-lib";
 import { FeedName } from "@quoll/lib";
 
-import { apiService } from "services/api";
+import { getAccessToken } from "services/session";
 
 type AuthenticatePayload = {
   code: string;
@@ -8,39 +9,41 @@ type AuthenticatePayload = {
 
 const endpoint = "/feed-auth";
 
-const getOauthUrl = (feed: FeedName) =>
-  apiService.request<string>({
-    method: "GET",
-    endpoint,
-    params: { feed },
-  });
+class _FeedsService extends AuthenticatedApiService implements FeedsService {
+  async getOauthUrl(feed: FeedName) {
+    return this.request<string>({
+      method: "GET",
+      endpoint,
+      params: { feed },
+    });
+  }
 
-const authenticate = (feed: FeedName, payload: AuthenticatePayload) =>
-  apiService.request<null>({
-    method: "POST",
-    endpoint,
-    payload,
-    params: { feed },
-  });
+  async authenticate(feed: FeedName, payload: AuthenticatePayload) {
+    return this.request<null>({
+      method: "POST",
+      endpoint,
+      payload,
+      params: { feed },
+    });
+  }
 
-const deauthorize = (feed: FeedName) =>
-  apiService
-    .request<null>({
+  async deauthorize(feed: FeedName) {
+    return this.request<null>({
       method: "DELETE",
       endpoint,
       params: { feed },
-    })
-    .then(() => {
+    }).then(() => {
       // TODO: this should come from the BE
       if (feed === "moves") {
         return "Remember to revoke access in the Moves app.";
       }
     });
+  }
+}
 
-const feedsService = {
-  getOauthUrl,
-  authenticate,
-  deauthorize,
-};
+const feedsService = new _FeedsService(
+  getAccessToken,
+  `${process.env.REACT_APP_API_URL}`,
+);
 
 export default feedsService;

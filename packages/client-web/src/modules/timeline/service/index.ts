@@ -1,8 +1,8 @@
 import moment from "moment";
 import { ISO8601Date, TimelineEntry, TimelineEntryType } from "@quoll/lib";
-import { TimelineService } from "@quoll/client-lib";
+import { AuthenticatedApiService, TimelineService } from "@quoll/client-lib";
 
-import { apiService } from "services/api";
+import { getAccessToken } from "services/session";
 
 type EntryConfig = {
   label: string;
@@ -43,18 +43,25 @@ export const getEntryImage = (entry: TimelineEntry) =>
 // Has an array of sources to fetch from
 // Consumer can push to the array
 
-const get = (date: ISO8601Date) =>
-  apiService.request<TimelineEntry[]>({
-    method: "GET",
-    endpoint: "/timeline",
-    params: {
-      from: moment(date).startOf("day").toISOString(),
-      to: moment(date).endOf("day").toISOString(),
-    },
-  });
+class _TimelineService
+  extends AuthenticatedApiService
+  implements TimelineService
+{
+  async get(date: ISO8601Date) {
+    return this.request<TimelineEntry[]>({
+      method: "GET",
+      endpoint: "/timeline",
+      params: {
+        from: moment(date).startOf("day").toISOString(),
+        to: moment(date).endOf("day").toISOString(),
+      },
+    });
+  }
+}
 
-const timelineService: TimelineService = {
-  get,
-};
+const timelineService = new _TimelineService(
+  getAccessToken,
+  `${process.env.REACT_APP_API_URL}`,
+);
 
 export default timelineService;
