@@ -7,7 +7,6 @@ type RequestParams = {
 
 export class ApiService {
   private baseUrl: string;
-  private authHeader?: { Authorization: string };
 
   constructor(baseUrl: string) {
     this.baseUrl = baseUrl;
@@ -46,7 +45,6 @@ export class ApiService {
       body: JSON.stringify(payload),
       headers: {
         "Content-Type": "application/json",
-        ...this.authHeader,
       },
     };
 
@@ -70,9 +68,5 @@ export class ApiService {
     };
 
     throw new Error(JSON.stringify(error));
-  }
-
-  authenticate(userId: string): void {
-    this.authHeader = { Authorization: `Basic ${userId}:` };
   }
 }
