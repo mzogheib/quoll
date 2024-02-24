@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import { Alert } from "react-native";
 
 import { promptAllowAccess } from "@components/Alert";
@@ -6,15 +6,6 @@ import { useGeolocationModel } from "../model";
 
 export const useGeolocationViewModel = () => {
   const model = useGeolocationModel();
-
-  // User may have connected previously but then, via the app settings in the
-  // OS, denied permissions. We should sync that setting here too.
-  const { isConnected, checkPermission } = model;
-  useEffect(() => {
-    if (!isConnected) return;
-
-    checkPermission();
-  }, [isConnected, checkPermission]);
 
   const handleError = (error: unknown, defaultMessage: string) => {
     if (error === "PERMISSION_DENIED") {

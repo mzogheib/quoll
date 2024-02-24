@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import Geolocation from "@react-native-community/geolocation";
 
 import { makeStorage } from "@utils/storage";
@@ -45,25 +45,11 @@ export const useGeolocationModel = () => {
     setProperty("isCheckingPermission", false);
   }, []);
 
-  const refresh = useCallback(async () => {
-    return new Promise<void>((resolve, reject) => {
-      setProperty("isRefreshing", true);
-      Geolocation.getCurrentPosition(
-        (info) => {
-          setProperty("value", info.coords);
-          setProperty("isRefreshing", false);
-          return resolve();
-        },
-        ({ code }) => {
-          const error = errors[code] ?? "PERMISSION_DENIED";
-
-          setProperty("isRefreshing", false);
-
-          return reject(error);
-        },
-      );
-    });
-  }, []);
+  // User may have connected previously but then, via the app settings in the
+  // OS, denied permissions. We should sync that setting here too.
+  useEffect(() => {
+    if (!!storage.getData()?.isConnected) checkPermission();
+  }, [checkPermission]);
 
   const connect = useCallback(async () => {
     setProperty("isConnecting", true);
@@ -91,6 +77,26 @@ export const useGeolocationModel = () => {
     storage.setProperty("isConnected", false);
   }, []);
 
+  const refresh = useCallback(async () => {
+    return new Promise<void>((resolve, reject) => {
+      setProperty("isRefreshing", true);
+      Geolocation.getCurrentPosition(
+        (info) => {
+          setProperty("value", info.coords);
+          setProperty("isRefreshing", false);
+          return resolve();
+        },
+        ({ code }) => {
+          const error = errors[code] ?? "PERMISSION_DENIED";
+
+          setProperty("isRefreshing", false);
+
+          return reject(error);
+        },
+      );
+    });
+  }, []);
+
   return {
     value,
     isRefreshing,
@@ -100,6 +106,5 @@ export const useGeolocationModel = () => {
     connect,
     disconnect,
     refresh,
-    checkPermission,
   };
 };
