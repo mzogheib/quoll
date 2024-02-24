@@ -1,4 +1,4 @@
-import { FeedName } from "@quoll/lib";
+import { FeedName } from "../feeds";
 
 interface UserFeed {
   name: FeedName;

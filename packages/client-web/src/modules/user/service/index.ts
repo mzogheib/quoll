@@ -1,5 +1,5 @@
+import { User } from "@quoll/lib";
 import { apiService } from "services/api";
-import { User } from "../types";
 
 const login = async (userId: string) =>
   await apiService.request<User>({

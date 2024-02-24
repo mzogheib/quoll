@@ -1,7 +1,7 @@
 import { makeReduxStoreSlice } from "@quoll/client-lib";
+import { User } from "@quoll/lib";
 
 import { RootState } from "store";
-import { User } from "../types";
 
 export type State = {
   isAuthenticating: boolean;
