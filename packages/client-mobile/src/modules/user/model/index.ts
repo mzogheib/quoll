@@ -7,7 +7,7 @@ import { makeStore } from "@utils/store";
 import { apiService } from "@utils/api";
 import * as userService from "../service";
 
-const storage = makeStorage<{ id: string }>("user");
+export const storage = makeStorage<{ id: string }>("user");
 
 type State = {
   isAuthenticating: boolean;
