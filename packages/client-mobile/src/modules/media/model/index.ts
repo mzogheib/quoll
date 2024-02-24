@@ -1,7 +1,6 @@
 import { useCallback, useEffect } from "react";
 import { ISO8601Date } from "@quoll/lib";
 
-import { promptAllowAccess } from "@components/Alert";
 import { makeStore } from "@utils/store";
 import { makeStorage } from "@utils/storage";
 import { MediaItem } from "../types";
@@ -40,7 +39,7 @@ export const useMediaModel = () => {
     value,
   } = state;
 
-  const syncPermission = useCallback(async () => {
+  const checkPermission = useCallback(async () => {
     setProperty("isCheckingPermission", true);
     const isPermitted = await checkIsPermitted();
     storage.setProperty("isConnected", isPermitted);
@@ -52,14 +51,23 @@ export const useMediaModel = () => {
   // User may have connected previously but then, via the app settings in the
   // OS, denied permissions. We should sync that setting here too.
   useEffect(() => {
-    if (!storage.getData()?.isConnected) return;
+    if (!!storage.getData()?.isConnected) checkPermission();
+  }, [checkPermission]);
 
-    syncPermission();
-  }, [syncPermission]);
+  const refresh = useCallback(async (date: ISO8601Date) => {
+    setProperty("isRefreshing", true);
+    const response = await getMedia(makeDateFilter(date));
+    const newValue = response.edges.map(
+      (photoIdentifier) => photoIdentifier.node,
+    );
+    setProperty("value", newValue);
+    setProperty("isRefreshing", false);
+  }, []);
 
   const connect = async () => {
     setProperty("isConnecting", true);
     const isPermitted = await checkIsPermitted();
+    setProperty("isConnecting", false);
 
     if (isPermitted) {
       setProperty("isConnected", true);
@@ -71,10 +79,9 @@ export const useMediaModel = () => {
         setProperty("isConnected", true);
         storage.setProperty("isConnected", true);
       } else {
-        promptAllowAccess("Quoll works best with your photos and videos.");
+        throw "PERMISSION_DENIED";
       }
     }
-    setProperty("isConnecting", false);
   };
 
   const disconnect = () => {
@@ -82,16 +89,6 @@ export const useMediaModel = () => {
     setProperty("isConnected", false);
     storage.setProperty("isConnected", false);
   };
-
-  const refresh = useCallback(async (date: ISO8601Date) => {
-    setProperty("isRefreshing", true);
-    const response = await getMedia(makeDateFilter(date));
-    const newValue = response.edges.map(
-      (photoIdentifier) => photoIdentifier.node,
-    );
-    setProperty("value", newValue);
-    setProperty("isRefreshing", false);
-  }, []);
 
   return {
     value,
