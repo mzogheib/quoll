@@ -1,5 +1,6 @@
 import {
   DateState,
+  FeedsState,
   TimelineState,
   UserState,
   makeGlobalReduxStore,
@@ -13,7 +14,7 @@ import { timelineStore } from "modules/timeline/model";
 export type RootState = {
   user: UserState;
   date: DateState;
-  feeds: feedsStore.State;
+  feeds: FeedsState;
   timeline: TimelineState;
 };
 

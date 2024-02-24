@@ -5,3 +5,5 @@ export type FeedState = {
   isAuthenticating: boolean;
   isConnected: boolean;
 };
+
+export type FeedsState = Record<FeedName, FeedState>;
