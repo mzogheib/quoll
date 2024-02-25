@@ -19,7 +19,7 @@ const renderRoot = () => {
 };
 
 const initApp = async () => {
-  await initMocks();
+  // await initMocks();
   renderRoot();
 };
 

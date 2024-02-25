@@ -1,5 +1,10 @@
-import moment from "moment";
-import { ISO8601Date, TimelineEntry, TimelineEntryType } from "@quoll/lib";
+import {
+  ISO8601Date,
+  TimelineEntry,
+  TimelineEntryType,
+  getEndOfDay,
+  getStartOfDay,
+} from "@quoll/lib";
 
 import { AuthenticatedApiService } from "../../../utils";
 
@@ -44,12 +49,13 @@ export const getTimelineEntryImage = (entry: TimelineEntry) =>
 
 export class TimelineService extends AuthenticatedApiService {
   async get(date: ISO8601Date) {
+    const _date = new Date(date);
     return this.request<TimelineEntry[]>({
       method: "GET",
       endpoint: "/timeline",
       params: {
-        from: moment(date).startOf("day").toISOString(),
-        to: moment(date).endOf("day").toISOString(),
+        from: getStartOfDay(_date).toISOString(),
+        to: getEndOfDay(_date).toISOString(),
       },
     });
   }
