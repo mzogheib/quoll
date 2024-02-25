@@ -1,6 +1,10 @@
 import { getTimelineEntryImage } from "@quoll/client-lib";
-import { TimelineEntry as ITimelineEntry } from "@quoll/lib";
-import { TouchableHighlight, Text } from "react-native";
+import {
+  TimelineEntry as ITimelineEntry,
+  makeDateFromUnixTimestamp,
+  makeTimeString,
+} from "@quoll/lib";
+import { TouchableHighlight, Text, View } from "react-native";
 
 interface Props {
   entry: ITimelineEntry;
@@ -9,14 +13,18 @@ interface Props {
 
 const TimelineEntry = ({ entry, onPress }: Props) => {
   const image = getTimelineEntryImage(entry);
+  const startDate = makeDateFromUnixTimestamp(entry.timeStart);
+  const time = makeTimeString(startDate);
 
   return (
     <TouchableHighlight onPress={onPress}>
-      <Text>{entry.feed}</Text>
-      <Text>{entry.timeStart}</Text>
-      <Text>{image}</Text>
-      <Text>{entry.title}</Text>
-      <Text>{entry.valueLabel}</Text>
+      <View>
+        <Text>{entry.feed}</Text>
+        <Text>{time}</Text>
+        <Text>{image}</Text>
+        <Text>{entry.title}</Text>
+        <Text>{entry.valueLabel}</Text>
+      </View>
     </TouchableHighlight>
   );
 };
