@@ -27,7 +27,7 @@ const HomeScreen = ({ route }: ScreenProps<"home">) => {
         </View>
         <View style={styles.sideBar}>
           <DateBar date={new Date(date)} onDateChange={handleDateChange} />
-          <ScrollView style={styles.timeline}>
+          <ScrollView>
             <Timeline entries={entries} onEntryPress={handleEntryPress} />
           </ScrollView>
         </View>
