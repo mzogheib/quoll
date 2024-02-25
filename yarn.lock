@@ -5994,7 +5994,6 @@ __metadata:
     "@types/styled-components": "npm:^5.1.26"
     eslint-config-react-app: "npm:^7.0.1"
     msw: "npm:^2.0.11"
-    prop-types: "npm:^15.7.2"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
     react-router-dom: "npm:^5.2.0"
