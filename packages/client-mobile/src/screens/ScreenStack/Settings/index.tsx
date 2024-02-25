@@ -1,8 +1,5 @@
 import React from "react";
 import { Text, View } from "react-native";
-import Icon from "react-native-vector-icons/MaterialIcons";
-import { colorPalette } from "@quoll/ui-primitives";
-
 import styles from "./styles";
 
 import { ScreenProps } from "../../config";
@@ -10,29 +7,26 @@ import ScreenTemplate from "../../ScreenTemplate";
 import FeedSettings from "@components/FeedSettings";
 import { useMediaViewModel } from "@modules/media/view-model";
 import { useGeolocationViewModel } from "@modules/geolocation/view-model";
-
-const renderIcon = (name: string, color: string) => (
-  <Icon name={name} size={35} color={color} />
-);
+import FeedLogo from "@components/FeedLogo";
 
 const photosFeedSettings = {
   title: "Photos",
-  imageConnected: renderIcon("image", colorPalette.mediumAquamarine),
-  imageDisconnected: renderIcon("image", colorPalette.matterhorn),
+  imageConnected: <FeedLogo name="media" size={35} />,
+  imageDisconnected: <FeedLogo name="media" size={35} isGrayscale />,
 };
 
 const stravaFeedSettings = {
   title: "Strava",
-  imageConnected: renderIcon("directions-run", colorPalette.mediumAquamarine),
-  imageDisconnected: renderIcon("directions-run", colorPalette.matterhorn),
+  imageConnected: <FeedLogo name="strava" size={35} />,
+  imageDisconnected: <FeedLogo name="strava" size={35} isGrayscale />,
 };
 
 const locationSettings = {
   title: "Current location",
   connectLabel: "Enable",
   disconnectLabel: "Disable",
-  imageConnected: renderIcon("my-location", colorPalette.mediumAquamarine),
-  imageDisconnected: renderIcon("my-location", colorPalette.matterhorn),
+  imageConnected: <FeedLogo name="location" size={35} />,
+  imageDisconnected: <FeedLogo name="location" size={35} isGrayscale />,
 };
 
 const SettingsScreen = ({ route }: ScreenProps<"settings">) => {
