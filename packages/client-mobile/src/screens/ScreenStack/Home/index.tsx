@@ -15,6 +15,10 @@ const HomeScreen = ({ route }: ScreenProps<"home">) => {
 
   const { entries, markers, date, handleDateChange } = useController();
 
+  const handleEntryPress = (id: string) => {
+    console.log(entries.find((entry) => entry.id === id));
+  };
+
   return (
     <ScreenTemplate screenName={route.name}>
       <View style={styles.wrapper}>
@@ -23,7 +27,7 @@ const HomeScreen = ({ route }: ScreenProps<"home">) => {
         </View>
         <View style={styles.sideBar}>
           <DateBar date={new Date(date)} onDateChange={handleDateChange} />
-          <Timeline entries={entries} onEntryPress={() => {}} />
+          <Timeline entries={entries} onEntryPress={handleEntryPress} />
         </View>
       </View>
     </ScreenTemplate>
