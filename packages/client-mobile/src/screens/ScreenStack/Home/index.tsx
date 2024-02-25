@@ -5,6 +5,7 @@ import { useStyles } from "./styles";
 
 import { Map } from "@components/Map";
 import { DateBar } from "@modules/date/ui/DateBar";
+import Timeline from "@modules/timeline/views/Timeline";
 import { ScreenProps } from "../../config";
 import ScreenTemplate from "../../ScreenTemplate";
 import useController from "./controller";
@@ -12,7 +13,7 @@ import useController from "./controller";
 const HomeScreen = ({ route }: ScreenProps<"home">) => {
   const styles = useStyles();
 
-  const { markers, date, handleDateChange } = useController();
+  const { entries, markers, date, handleDateChange } = useController();
 
   return (
     <ScreenTemplate screenName={route.name}>
@@ -22,6 +23,7 @@ const HomeScreen = ({ route }: ScreenProps<"home">) => {
         </View>
         <View style={styles.sideBar}>
           <DateBar date={new Date(date)} onDateChange={handleDateChange} />
+          <Timeline entries={entries} onEntryPress={() => {}} />
         </View>
       </View>
     </ScreenTemplate>

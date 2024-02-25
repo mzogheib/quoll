@@ -30,6 +30,7 @@ const useController = () => {
     }));
 
   return {
+    entries,
     markers,
     date,
     handleDateChange,
