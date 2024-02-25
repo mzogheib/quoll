@@ -26,7 +26,7 @@ const stylesWide = StyleSheet.create({
     flex: 1,
   },
   sideBar: {
-    maxWidth: 300,
+    maxWidth: 350,
   },
   timeline: {},
 });
@@ -35,5 +35,6 @@ export const useStyles = () =>
   useResponsiveStyles({
     xs: stylesDefault,
     sm: stylesDefault,
-    md: stylesWide,
+    md: stylesDefault,
+    lg: stylesWide,
   });
