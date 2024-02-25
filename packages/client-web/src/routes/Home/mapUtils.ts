@@ -1,5 +1,8 @@
-import moment from "moment";
-import { TimelineEntry } from "@quoll/lib";
+import {
+  TimelineEntry,
+  makeDateFromUnixTimestamp,
+  makeTimeString,
+} from "@quoll/lib";
 
 import { PolylineConfig } from "components/Map/Component";
 import { decodePath } from "components/Map/utils";
@@ -43,7 +46,7 @@ export const makeMarkerOptions = (
       latitude: entry.locationStart!.latitude, // Guaranteed by above filter
       longitude: entry.locationStart!.longitude, // Guaranteed by above filter
       title: entry.title,
-      subTitle: moment.unix(entry.timeStart).format("h:mm a"),
+      subTitle: makeTimeString(makeDateFromUnixTimestamp(entry.timeStart)),
       description: entry.description || "",
     }));
 
@@ -76,7 +79,8 @@ export const makeInfoWindowOptions = (
   const { title, timeStart } = entry;
 
   const description = entry.description ?? "";
-  const subTitle = moment.unix(timeStart).format("h:mm a");
+  const startDate = makeDateFromUnixTimestamp(timeStart);
+  const subTitle = makeTimeString(startDate);
 
   const content =
     "<div>" +
