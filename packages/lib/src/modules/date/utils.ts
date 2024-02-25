@@ -54,6 +54,16 @@ export const makeISO8601Date = (date: Date): ISO8601Date => {
 };
 
 /**
+ * Returns the time in the format `h:mm a`, e.g. `9:07 am`, `11:35 pm`
+ */
+export const makeTimeString = (date: Date) => {
+  const h = date.getHours() % 12 || 12; // Handle midnight (0 hours)
+  const mm = String(date.getMinutes()).padStart(2, "0");
+  const a = date.getHours() >= 12 ? "pm" : "am";
+  return `${h}:${mm} ${a}`;
+};
+
+/**
  * Checks if two dates are on the same day.
  */
 export const isSameDay = (date1: Date, date2: Date) =>
@@ -65,6 +75,12 @@ export const isSameDay = (date1: Date, date2: Date) =>
  */
 export const getUnixTimestamp = (date: Date) =>
   Math.floor(date.getTime() / 1000);
+
+/**
+ * Makes a Date from a Unix timestamp
+ */
+export const makeDateFromUnixTimestamp = (timestamp: number) =>
+  new Date(timestamp * 1000);
 
 const ISO8601_TIME_REGEX = /[0-9][0-9]:[0-9][0-9]:[0-9][0-9]/;
 

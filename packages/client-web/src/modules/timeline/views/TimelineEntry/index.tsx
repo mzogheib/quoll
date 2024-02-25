@@ -1,6 +1,9 @@
 import styled, { css } from "styled-components";
-import moment from "moment";
-import { TimelineEntry as ITimelineEntry } from "@quoll/lib";
+import {
+  TimelineEntry as ITimelineEntry,
+  makeDateFromUnixTimestamp,
+  makeTimeString,
+} from "@quoll/lib";
 import { getTimelineEntryImage } from "@quoll/client-lib";
 
 import FeedLogo from "components/FeedLogo";
@@ -61,13 +64,15 @@ interface Props {
 
 const TimelineEntry = ({ entry, onClick }: Props) => {
   const image = getTimelineEntryImage(entry);
+  const startDate = makeDateFromUnixTimestamp(entry.timeStart);
+  const time = makeTimeString(startDate);
 
   return (
     <Wrapper onClick={onClick}>
       <Logo>
         <FeedLogo name={entry.feed} />
       </Logo>
-      <Time>{moment.unix(entry.timeStart).format("h:mm a")}</Time>
+      <Time>{time}</Time>
       <Image>{image}</Image>
       <Label>{entry.title}</Label>
       <Value>{entry.valueLabel}</Value>
