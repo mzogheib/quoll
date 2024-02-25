@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import styled, { css } from "styled-components";
-import moment from "moment";
 import { HorizontalLoader } from "@quoll/ui-components";
-import { ISO8601Date } from "@quoll/lib";
+import { ISO8601Date, isSameDay, makeISO8601Date } from "@quoll/lib";
 
 import { useTimelineViewModel } from "modules/timeline/view-model";
 import { useDateViewModelModel } from "modules/date/view-model";
@@ -124,14 +123,14 @@ const Home = () => {
   }, [date, didFetchOnce, fetchTimeline]);
 
   const dateIsToday = (date: ISO8601Date) =>
-    moment(date).isSame(moment(), "day");
+    isSameDay(new Date(date), new Date());
 
   return (
     <Wrapper>
       <Left>
         <DatePicker
           date={date}
-          maxDate={moment().format("YYYY-MM-DD")}
+          maxDate={makeISO8601Date(new Date())}
           prevDisabled={isFetching}
           nextDisabled={isFetching || dateIsToday(date)}
           calendarDisabled={isFetching}

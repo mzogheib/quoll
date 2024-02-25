@@ -3,12 +3,12 @@ import {
   makeReduxStoreSlice,
   useDateModel as _useDateModel,
 } from "@quoll/client-lib";
-import moment from "moment";
+import { makeISO8601Date } from "@quoll/lib";
 
 import { RootState } from "store";
 
 const defaultState: DateState = {
-  date: moment().format("YYYY-MM-DD"),
+  date: makeISO8601Date(new Date()),
 };
 
 export const dateStore = makeReduxStoreSlice<DateState, RootState>(

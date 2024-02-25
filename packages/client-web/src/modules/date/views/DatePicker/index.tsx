@@ -1,8 +1,7 @@
 import { useState } from "react";
 import styled, { css } from "styled-components";
-import moment from "moment";
 import { Calendar, IconButton } from "@quoll/ui-components";
-import { ISO8601Date } from "@quoll/lib";
+import { ISO8601Date, getOffsetDate, makeISO8601Date } from "@quoll/lib";
 
 const Wrapper = styled.div`
   display: flex;
@@ -61,19 +60,19 @@ const DatePicker = (props: Props) => {
   const [showCalendar, setShowCalendar] = useState(false);
 
   const previous = () => {
-    const yesterday = moment(date).subtract(1, "day");
-    handleDateChange(yesterday.toDate());
+    const yesterday = getOffsetDate(new Date(date), -1);
+    handleDateChange(yesterday);
   };
 
   const next = () => {
-    const tomorrow = moment(date).add(1, "day");
-    handleDateChange(tomorrow.toDate());
+    const tomorrow = getOffsetDate(new Date(date), 1);
+    handleDateChange(tomorrow);
   };
 
   const handleDateChange = (newDate: Date | Date[]) => {
     if (Array.isArray(newDate)) return;
 
-    onDateChange(moment(newDate).format("YYYY-MM-DD"));
+    onDateChange(makeISO8601Date(newDate));
     setShowCalendar(false);
   };
 
