@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 
 import { useStyles } from "./styles";
 
@@ -27,7 +27,9 @@ const HomeScreen = ({ route }: ScreenProps<"home">) => {
         </View>
         <View style={styles.sideBar}>
           <DateBar date={new Date(date)} onDateChange={handleDateChange} />
-          <Timeline entries={entries} onEntryPress={handleEntryPress} />
+          <ScrollView style={styles.timeline}>
+            <Timeline entries={entries} onEntryPress={handleEntryPress} />
+          </ScrollView>
         </View>
       </View>
     </ScreenTemplate>

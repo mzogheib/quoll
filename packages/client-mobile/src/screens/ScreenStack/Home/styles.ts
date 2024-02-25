@@ -7,9 +7,14 @@ const stylesDefault = StyleSheet.create({
     flex: 1,
   },
   map: {
-    flex: 1,
+    flex: 5,
   },
-  sideBar: {},
+  sideBar: {
+    flex: 2,
+  },
+  timeline: {
+    overflow: "scroll",
+  },
 });
 
 const stylesWide = StyleSheet.create({
@@ -23,6 +28,7 @@ const stylesWide = StyleSheet.create({
   sideBar: {
     maxWidth: 300,
   },
+  timeline: {},
 });
 
 export const useStyles = () =>
