@@ -54,6 +54,12 @@ export const makeISO8601Date = (date: Date): ISO8601Date => {
 };
 
 /**
+ * Checks if two dates are on the same day.
+ */
+export const isSameDay = (date1: Date, date2: Date) =>
+  makeISO8601Date(date1) === makeISO8601Date(date2);
+
+/**
  * @param date a full date and time in ISO 8601 format
  * @returns the number of seconds since the epock
  */
