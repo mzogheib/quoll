@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/mzogheib/quoll/compare/@quoll/lib@0.3.0...@quoll/lib@0.4.0) (2024-02-25)
+
+### Features
+
+- **lib:** add isSameDay date util ([f41f1fe](https://github.com/mzogheib/quoll/commit/f41f1fe90504b5f389c3d4b83ecac08263ed26ce))
+
 # [0.3.0](https://github.com/mzogheib/quoll/compare/@quoll/lib@0.2.0...@quoll/lib@0.3.0) (2024-02-10)
 
 ### Features

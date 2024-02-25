@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.24.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.23.0...@quoll/client-mobile@0.24.0) (2024-02-25)
+
+### Features
+
+- **client-web:** add timeline entry ([#211](https://github.com/mzogheib/quoll/issues/211)) ([6f723b9](https://github.com/mzogheib/quoll/commit/6f723b916aa9ef16525260aeaa14223ed07234f4))
+
 # [0.23.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.22.0...@quoll/client-mobile@0.23.0) (2024-02-24)
 
 ### Bug Fixes
