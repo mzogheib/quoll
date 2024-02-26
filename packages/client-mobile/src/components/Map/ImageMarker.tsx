@@ -4,11 +4,12 @@ import { ImageURISource } from "react-native";
 import { MapMarkerProps, Marker, Callout, MapMarker } from "react-native-maps";
 
 export type Props = {
+  id: string;
   image: ImageURISource;
   coordinate: MapMarkerProps["coordinate"];
 };
 
-const ImageMarker = ({ image, ...rest }: Props) => {
+const ImageMarker = ({ id, image, coordinate }: Props) => {
   const markerRef = useRef<MapMarker>(null);
 
   useEffect(() => {
@@ -18,7 +19,7 @@ const ImageMarker = ({ image, ...rest }: Props) => {
   }, []);
 
   return (
-    <Marker ref={markerRef} {...rest}>
+    <Marker ref={markerRef} identifier={id} coordinate={coordinate}>
       <OriginalAspectRatioImage source={image} width={40} height={40} />
       <Callout>
         <OriginalAspectRatioImage source={image} width={325} />

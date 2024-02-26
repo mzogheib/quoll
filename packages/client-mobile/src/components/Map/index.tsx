@@ -9,6 +9,7 @@ import ImageMarker from "./ImageMarker";
 import { makeRegion } from "@components/Map/utils";
 
 export type MarkerProps = {
+  id: string;
   coordinate: MapMarkerProps["coordinate"];
   image: ImageURISource;
 };
