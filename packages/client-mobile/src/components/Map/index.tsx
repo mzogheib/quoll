@@ -7,8 +7,10 @@ import styles from "./styles";
 
 import ImageMarker from "./ImageMarker";
 import { makeRegion } from "@components/Map/utils";
+import { useFocussedEntryViewModel } from "@modules/focussedEntry/view-model";
 
 export type MarkerProps = {
+  id: string;
   coordinate: MapMarkerProps["coordinate"];
   image: ImageURISource;
 };
@@ -31,6 +33,7 @@ export const Map = ({ markers }: Props) => {
     isCheckingPermission,
     refresh,
   } = useGeolocationViewModel();
+  const { setFocussedEntryId } = useFocussedEntryViewModel();
 
   const markersRegion = makeRegion(markers.map((marker) => marker.coordinate));
 
@@ -62,6 +65,7 @@ export const Map = ({ markers }: Props) => {
       style={styles.wrapper}
       region={region}
       showsUserLocation={isConnected}
+      onPress={() => setFocussedEntryId(null)}
     >
       {markers.map((props, i) => (
         <ImageMarker key={i} {...props} />
