@@ -1,4 +1,5 @@
 import { OriginalAspectRatioImage } from "@components/OriginalAspectRatioImage";
+import { useFocussedEntryViewModel } from "@modules/focussedEntry/view-model";
 import { useEffect, useRef } from "react";
 import { ImageURISource } from "react-native";
 import { MapMarkerProps, Marker, Callout, MapMarker } from "react-native-maps";
@@ -10,7 +11,15 @@ export type Props = {
 };
 
 const ImageMarker = ({ id, image, coordinate }: Props) => {
+  const { focussedEntryId, setFocussedEntryId } = useFocussedEntryViewModel();
+
   const markerRef = useRef<MapMarker>(null);
+
+  useEffect(() => {
+    if (id === focussedEntryId) {
+      markerRef.current?.showCallout();
+    }
+  }, [id, focussedEntryId]);
 
   useEffect(() => {
     return () => {
@@ -19,7 +28,12 @@ const ImageMarker = ({ id, image, coordinate }: Props) => {
   }, []);
 
   return (
-    <Marker ref={markerRef} identifier={id} coordinate={coordinate}>
+    <Marker
+      ref={markerRef}
+      identifier={id}
+      coordinate={coordinate}
+      onPress={() => setFocussedEntryId(id)}
+    >
       <OriginalAspectRatioImage source={image} width={40} height={40} />
       <Callout>
         <OriginalAspectRatioImage source={image} width={325} />
