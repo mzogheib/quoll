@@ -33,7 +33,7 @@ export const Map = ({ markers }: Props) => {
     isCheckingPermission,
     refresh,
   } = useGeolocationViewModel();
-  const { setFocussedEntryId } = useFocussedEntryViewModel();
+  const { focussedEntryId, setFocussedEntryId } = useFocussedEntryViewModel();
 
   const markersRegion = makeRegion(markers.map((marker) => marker.coordinate));
 
@@ -68,7 +68,12 @@ export const Map = ({ markers }: Props) => {
       onPress={() => setFocussedEntryId(null)}
     >
       {markers.map((props, i) => (
-        <ImageMarker key={i} {...props} />
+        <ImageMarker
+          key={i}
+          onPress={() => setFocussedEntryId(props.id)}
+          isFocussed={props.id === focussedEntryId}
+          {...props}
+        />
       ))}
     </MapView>
   );

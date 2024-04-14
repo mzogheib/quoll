@@ -3,13 +3,14 @@ import { MapMarkerProps, Marker, Callout, MapMarker } from "react-native-maps";
 import { useEffect, useRef, useState } from "react";
 
 import { OriginalAspectRatioImage } from "@components/OriginalAspectRatioImage";
-import { useFocussedEntryViewModel } from "@modules/focussedEntry/view-model";
 import styles from "./styles";
 
-export type Props = {
+type Props = {
   id: string;
   image: ImageURISource;
   coordinate: MapMarkerProps["coordinate"];
+  isFocussed: boolean;
+  onPress: (id: string) => void;
 };
 
 // A delay (via `setTimeout`) is added after calling `showCallout`.
@@ -19,9 +20,7 @@ export type Props = {
 // pan until there is enough space to display it. When the map eventually
 // finishes the pan, _another_ `showCallout` event is somehow triggered.
 
-const ImageMarker = ({ id, image, coordinate }: Props) => {
-  const { focussedEntryId, setFocussedEntryId } = useFocussedEntryViewModel();
-
+const ImageMarker = ({ id, image, coordinate, isFocussed, onPress }: Props) => {
   const markerRef = useRef<MapMarker>(null);
 
   const [isCalloutReadyToDisplay, setIsCalloutReadyToDisplay] = useState(false);
@@ -29,13 +28,13 @@ const ImageMarker = ({ id, image, coordinate }: Props) => {
   useEffect(() => {
     setIsCalloutReadyToDisplay(false);
 
-    if (id === focussedEntryId) {
+    if (isFocussed) {
       markerRef.current?.showCallout();
       setTimeout(() => {
         setIsCalloutReadyToDisplay(true);
       }, 500);
     }
-  }, [id, focussedEntryId]);
+  }, [isFocussed]);
 
   useEffect(() => {
     return () => {
@@ -53,7 +52,7 @@ const ImageMarker = ({ id, image, coordinate }: Props) => {
       // Stops the press event from reaching the Map, which deselects the entry.
       stopPropagation
       calloutOffset={{ x: 5, y: 5 }}
-      onPress={() => setFocussedEntryId(id)}
+      onPress={() => onPress(id)}
     >
       <OriginalAspectRatioImage source={image} width={40} height={40} />
       <Callout style={{ opacity: calloutOpacity }} tooltip>
