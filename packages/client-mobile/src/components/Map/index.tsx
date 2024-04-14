@@ -1,17 +1,12 @@
 import React, { useEffect } from "react";
-import { ImageURISource } from "react-native";
-import MapView, { MapMarkerProps } from "react-native-maps";
+import MapView from "react-native-maps";
 import { useGeolocationViewModel } from "@modules/geolocation/view-model";
 
 import styles from "./styles";
 
 import ImageMarker from "./ImageMarker";
 import { makeRegion } from "@components/Map/utils";
-
-export type MarkerProps = {
-  coordinate: MapMarkerProps["coordinate"];
-  image: ImageURISource;
-};
+import { MarkerProps } from "./types";
 
 // TODO: cycle through different world locations
 // Centre of Australia
@@ -22,9 +17,10 @@ const defaultCoords = {
 
 type Props = {
   markers: MarkerProps[];
+  onMarkerPress: (id: string | null) => void;
 };
 
-export const Map = ({ markers }: Props) => {
+export const Map = ({ markers, onMarkerPress }: Props) => {
   const {
     value: coords,
     isConnected,
@@ -62,9 +58,17 @@ export const Map = ({ markers }: Props) => {
       style={styles.wrapper}
       region={region}
       showsUserLocation={isConnected}
+      onPress={() => onMarkerPress(null)}
     >
-      {markers.map((props, i) => (
-        <ImageMarker key={i} {...props} />
+      {markers.map(({ id, image, isSelected, coordinate }, i) => (
+        <ImageMarker
+          key={i}
+          id={id}
+          image={image}
+          shouldShowCallout={isSelected}
+          coordinate={coordinate}
+          onPress={() => onMarkerPress(id)}
+        />
       ))}
     </MapView>
   );

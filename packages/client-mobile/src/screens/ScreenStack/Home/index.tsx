@@ -13,22 +13,19 @@ import useController from "./controller";
 const HomeScreen = ({ route }: ScreenProps<"home">) => {
   const styles = useStyles();
 
-  const { entries, markers, date, handleDateChange } = useController();
-
-  const handleEntryPress = (id: string) => {
-    console.log(entries.find((entry) => entry.id === id));
-  };
+  const { entries, markers, date, handleEntrySelect, handleDateChange } =
+    useController();
 
   return (
     <ScreenTemplate screenName={route.name}>
       <View style={styles.wrapper}>
         <View style={styles.map}>
-          <Map markers={markers} />
+          <Map markers={markers} onMarkerPress={handleEntrySelect} />
         </View>
         <View style={styles.sideBar}>
           <DateBar date={new Date(date)} onDateChange={handleDateChange} />
           <ScrollView>
-            <Timeline entries={entries} onEntryPress={handleEntryPress} />
+            <Timeline entries={entries} onEntryPress={handleEntrySelect} />
           </ScrollView>
         </View>
       </View>
