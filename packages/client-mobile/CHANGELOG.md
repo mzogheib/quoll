@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.25.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.24.0...@quoll/client-mobile@0.25.0) (2024-04-14)
+
+### Features
+
+- **client-mobile:** add timeline entry focussing ([#212](https://github.com/mzogheib/quoll/issues/212)) ([2cade1a](https://github.com/mzogheib/quoll/commit/2cade1a797a3a750c7abaa190dfa13b5aec16251))
+- **client-mobile:** make timeline scrollable ([299ebb4](https://github.com/mzogheib/quoll/commit/299ebb4cdee6533ea90b1c58e53b65d55e6ca640))
+- **client-mobile:** update styles for home screen ([4618cf0](https://github.com/mzogheib/quoll/commit/4618cf0389cb1fbbea699b1e35e4d32e18eada82))
+
 # [0.24.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.23.0...@quoll/client-mobile@0.24.0) (2024-02-25)
 
 ### Features
