@@ -39,7 +39,7 @@ const ImageMarker = ({ id, image, coordinate, isFocussed, onPress }: Props) => {
       markerRef.current?.showCallout();
       setTimeout(() => {
         setIsCalloutReadyToDisplay(true);
-      }, 500);
+      }, 350);
     }
   }, [isFocussed]);
 
