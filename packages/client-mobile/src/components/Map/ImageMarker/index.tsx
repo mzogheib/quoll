@@ -5,14 +5,6 @@ import { useEffect, useRef, useState } from "react";
 import { OriginalAspectRatioImage } from "@components/OriginalAspectRatioImage";
 import styles from "./styles";
 
-type Props = {
-  id: string;
-  image: ImageURISource;
-  coordinate: MapMarkerProps["coordinate"];
-  isFocussed: boolean;
-  onPress: (id: string) => void;
-};
-
 // A delay (via `setTimeout`) is added after calling `showCallout` as a
 // workaround to a visual bug.
 //
@@ -27,21 +19,35 @@ type Props = {
 // So the workaround is to give the map time to finish panning before displaying
 // the callout via opacity.
 
-const ImageMarker = ({ id, image, coordinate, isFocussed, onPress }: Props) => {
+type Props = {
+  id: string;
+  image: ImageURISource;
+  coordinate: MapMarkerProps["coordinate"];
+  shouldShowCallout: boolean;
+  onPress: (id: string) => void;
+};
+
+const ImageMarker = ({
+  id,
+  image,
+  coordinate,
+  shouldShowCallout,
+  onPress,
+}: Props) => {
   const markerRef = useRef<MapMarker>(null);
 
-  const [isCalloutReadyToDisplay, setIsCalloutReadyToDisplay] = useState(false);
+  const [isReadyToShowCallout, setIsReadyToShowCallout] = useState(false);
 
   useEffect(() => {
-    setIsCalloutReadyToDisplay(false);
+    setIsReadyToShowCallout(false);
 
-    if (isFocussed) {
+    if (shouldShowCallout) {
       markerRef.current?.showCallout();
       setTimeout(() => {
-        setIsCalloutReadyToDisplay(true);
+        setIsReadyToShowCallout(true);
       }, 350);
     }
-  }, [isFocussed]);
+  }, [shouldShowCallout]);
 
   useEffect(() => {
     return () => {
@@ -49,7 +55,7 @@ const ImageMarker = ({ id, image, coordinate, isFocussed, onPress }: Props) => {
     };
   }, []);
 
-  const calloutOpacity = isCalloutReadyToDisplay ? 1 : 0;
+  const calloutOpacity = isReadyToShowCallout ? 1 : 0;
 
   return (
     <Marker

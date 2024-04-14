@@ -1,6 +1,6 @@
 import { makeISO8601Date } from "@quoll/lib";
 
-import { MarkerProps } from "@components/Map";
+import { MarkerProps } from "@components/Map/types";
 import { useDateViewModel } from "@modules/date/view-model";
 import { useTimelineViewModel } from "@modules/timeline/view-model";
 import { useState } from "react";
@@ -8,12 +8,12 @@ import { useState } from "react";
 const useController = () => {
   const { date, setDate } = useDateViewModel();
   const { entries, fetchTimeline } = useTimelineViewModel(date);
-  const [focussedEntryId, setFocussedEntryId] = useState<string | null>(null);
+  const [selectedEntryId, setSelectedEntryId] = useState<string | null>(null);
 
-  const handleEntrySelect = (id: string | null) => setFocussedEntryId(id);
+  const handleEntrySelect = (id: string | null) => setSelectedEntryId(id);
 
   const handleDateChange = (newDate: Date) => {
-    setFocussedEntryId(null);
+    setSelectedEntryId(null);
     const formattedDate = makeISO8601Date(newDate);
     setDate(formattedDate);
     fetchTimeline(formattedDate);
@@ -33,7 +33,7 @@ const useController = () => {
         longitude: locationStart!.longitude,
       },
       image: { uri: mediaUri! },
-      isFocussed: id === focussedEntryId,
+      isSelected: id === selectedEntryId,
     }));
 
   return {
