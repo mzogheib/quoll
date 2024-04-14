@@ -7,12 +7,12 @@ import styles from "./styles";
 
 import ImageMarker from "./ImageMarker";
 import { makeRegion } from "@components/Map/utils";
-import { useFocussedEntryViewModel } from "@modules/focussedEntry/view-model";
 
 export type MarkerProps = {
   id: string;
-  coordinate: MapMarkerProps["coordinate"];
   image: ImageURISource;
+  isFocussed: boolean;
+  coordinate: MapMarkerProps["coordinate"];
 };
 
 // TODO: cycle through different world locations
@@ -24,16 +24,16 @@ const defaultCoords = {
 
 type Props = {
   markers: MarkerProps[];
+  onMarkerPress: (id: string | null) => void;
 };
 
-export const Map = ({ markers }: Props) => {
+export const Map = ({ markers, onMarkerPress }: Props) => {
   const {
     value: coords,
     isConnected,
     isCheckingPermission,
     refresh,
   } = useGeolocationViewModel();
-  const { focussedEntryId, setFocussedEntryId } = useFocussedEntryViewModel();
 
   const markersRegion = makeRegion(markers.map((marker) => marker.coordinate));
 
@@ -65,13 +65,12 @@ export const Map = ({ markers }: Props) => {
       style={styles.wrapper}
       region={region}
       showsUserLocation={isConnected}
-      onPress={() => setFocussedEntryId(null)}
+      onPress={() => onMarkerPress(null)}
     >
       {markers.map((props, i) => (
         <ImageMarker
           key={i}
-          onPress={() => setFocussedEntryId(props.id)}
-          isFocussed={props.id === focussedEntryId}
+          onPress={() => onMarkerPress(props.id)}
           {...props}
         />
       ))}

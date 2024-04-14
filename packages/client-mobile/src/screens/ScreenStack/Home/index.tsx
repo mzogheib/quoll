@@ -20,7 +20,7 @@ const HomeScreen = ({ route }: ScreenProps<"home">) => {
     <ScreenTemplate screenName={route.name}>
       <View style={styles.wrapper}>
         <View style={styles.map}>
-          <Map markers={markers} />
+          <Map markers={markers} onMarkerPress={handleEntrySelect} />
         </View>
         <View style={styles.sideBar}>
           <DateBar date={new Date(date)} onDateChange={handleDateChange} />

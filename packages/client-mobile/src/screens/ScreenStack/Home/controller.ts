@@ -8,9 +8,9 @@ import { useFocussedEntryViewModel } from "@modules/focussedEntry/view-model";
 const useController = () => {
   const { date, setDate } = useDateViewModel();
   const { entries, fetchTimeline } = useTimelineViewModel(date);
-  const { setFocussedEntryId } = useFocussedEntryViewModel();
+  const { focussedEntryId, setFocussedEntryId } = useFocussedEntryViewModel();
 
-  const handleEntrySelect = (id: string) => setFocussedEntryId(id);
+  const handleEntrySelect = (id: string | null) => setFocussedEntryId(id);
 
   const handleDateChange = (newDate: Date) => {
     setFocussedEntryId(null);
@@ -33,6 +33,7 @@ const useController = () => {
         longitude: locationStart!.longitude,
       },
       image: { uri: mediaUri! },
+      isFocussed: id === focussedEntryId,
     }));
 
   return {
