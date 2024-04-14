@@ -13,12 +13,19 @@ type Props = {
   onPress: (id: string) => void;
 };
 
-// A delay (via `setTimeout`) is added after calling `showCallout`.
-// Why? It's a workaround to a "double render" bug that occurs when an entry
-// is selected via the timeline. When an entry is selected via the timeline
-// the callout is displayed immediately, as opposed to waiting for the map to
-// pan until there is enough space to display it. When the map eventually
-// finishes the pan, _another_ `showCallout` event is somehow triggered.
+// A delay (via `setTimeout`) is added after calling `showCallout` as a
+// workaround to a visual bug.
+//
+// The bug:
+// - When an entry is selected via the timeline the callout is displayed
+//   immediately.
+// - If the callout is partially off screen, the map will pan until there is
+//   enough space to display it. The callout remains displayed during the pan.
+// - When the map finishes panning, the callout is hidden and then displayed
+//   again.
+//
+// So the workaround is to give the map time to finish panning before displaying
+// the callout via opacity.
 
 const ImageMarker = ({ id, image, coordinate, isFocussed, onPress }: Props) => {
   const markerRef = useRef<MapMarker>(null);
