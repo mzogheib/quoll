@@ -9,13 +9,12 @@ import Timeline from "@modules/timeline/views/Timeline";
 import { ScreenProps } from "../../config";
 import ScreenTemplate from "../../ScreenTemplate";
 import useController from "./controller";
-import { useFocussedEntryViewModel } from "@modules/focussedEntry/view-model";
 
 const HomeScreen = ({ route }: ScreenProps<"home">) => {
   const styles = useStyles();
 
-  const { entries, markers, date, handleDateChange } = useController();
-  const { setFocussedEntryId } = useFocussedEntryViewModel();
+  const { entries, markers, date, handleEntrySelect, handleDateChange } =
+    useController();
 
   return (
     <ScreenTemplate screenName={route.name}>
@@ -26,7 +25,7 @@ const HomeScreen = ({ route }: ScreenProps<"home">) => {
         <View style={styles.sideBar}>
           <DateBar date={new Date(date)} onDateChange={handleDateChange} />
           <ScrollView>
-            <Timeline entries={entries} onEntryPress={setFocussedEntryId} />
+            <Timeline entries={entries} onEntryPress={handleEntrySelect} />
           </ScrollView>
         </View>
       </View>
