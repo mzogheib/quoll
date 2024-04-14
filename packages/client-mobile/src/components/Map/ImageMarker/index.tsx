@@ -12,20 +12,27 @@ export type Props = {
   coordinate: MapMarkerProps["coordinate"];
 };
 
+// A delay (via `setTimeout`) is added after calling `showCallout`.
+// Why? It's a workaround to a "double render" bug that occurs when an entry
+// is selected via the timeline. When an entry is selected via the timeline
+// the callout is displayed immediately, as opposed to waiting for the map to
+// pan until there is enough space to display it. When the map eventually
+// finishes the pan, _another_ `showCallout` event is somehow triggered.
+
 const ImageMarker = ({ id, image, coordinate }: Props) => {
   const { focussedEntryId, setFocussedEntryId } = useFocussedEntryViewModel();
 
   const markerRef = useRef<MapMarker>(null);
 
-  const [isCalloutVisible, setIsCalloutVisible] = useState(false);
+  const [isCalloutReadyToDisplay, setIsCalloutReadyToDisplay] = useState(false);
 
   useEffect(() => {
-    setIsCalloutVisible(false);
+    setIsCalloutReadyToDisplay(false);
 
     if (id === focussedEntryId) {
       markerRef.current?.showCallout();
       setTimeout(() => {
-        setIsCalloutVisible(true);
+        setIsCalloutReadyToDisplay(true);
       }, 500);
     }
   }, [id, focussedEntryId]);
@@ -36,13 +43,14 @@ const ImageMarker = ({ id, image, coordinate }: Props) => {
     };
   }, []);
 
-  const calloutOpacity = isCalloutVisible ? 1 : 0;
+  const calloutOpacity = isCalloutReadyToDisplay ? 1 : 0;
 
   return (
     <Marker
       ref={markerRef}
       identifier={id}
       coordinate={coordinate}
+      // Stops the press event from reaching the Map, which deselects the entry.
       stopPropagation
       calloutOffset={{ x: 5, y: 5 }}
       onPress={() => setFocussedEntryId(id)}
