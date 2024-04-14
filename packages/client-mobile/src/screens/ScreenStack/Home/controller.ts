@@ -3,12 +3,12 @@ import { makeISO8601Date } from "@quoll/lib";
 import { MarkerProps } from "@components/Map";
 import { useDateViewModel } from "@modules/date/view-model";
 import { useTimelineViewModel } from "@modules/timeline/view-model";
-import { useFocussedEntryViewModel } from "@modules/focussedEntry/view-model";
+import { useState } from "react";
 
 const useController = () => {
   const { date, setDate } = useDateViewModel();
   const { entries, fetchTimeline } = useTimelineViewModel(date);
-  const { focussedEntryId, setFocussedEntryId } = useFocussedEntryViewModel();
+  const [focussedEntryId, setFocussedEntryId] = useState<string | null>(null);
 
   const handleEntrySelect = (id: string | null) => setFocussedEntryId(id);
 
