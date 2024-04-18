@@ -13,7 +13,7 @@ COPY packages/api/package.json ./packages/api/
 
 RUN yarn workspaces focus --production @quoll/api
 
-COPY packages/api/ ./packages/api/
+COPY packages/api/src ./packages/api/src
 
 EXPOSE 3001
 
