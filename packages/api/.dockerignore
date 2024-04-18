@@ -11,3 +11,5 @@ Dockerfile
 .github
 
 .env*
+
+*.log
