@@ -9,9 +9,11 @@ WORKDIR /app
 
 COPY package.json yarn.lock .yarnrc.yml ./
 COPY .yarn ./.yarn
-COPY packages/api/ ./packages/api/
+COPY packages/api/package.json ./packages/api/
 
 RUN yarn workspaces focus --production @quoll/api
+
+COPY packages/api/ ./packages/api/
 
 EXPOSE 3001
 
