@@ -1,3 +1,6 @@
+# Run from the root 
+# docker build -t api -f packages/api/Dockerfile .
+
 FROM node:18.20.2-alpine
 
 RUN apk add git
