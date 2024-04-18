@@ -9,3 +9,5 @@ Dockerfile
 .git
 .vscode
 .github
+
+.env*
