@@ -1,6 +1,6 @@
 {
   "name": "@quoll/client-mobile",
-  "version": "0.25.4",
+  "version": "0.25.5",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -16,9 +16,9 @@
     "hoistingLimits": "workspaces"
   },
   "dependencies": {
-    "@quoll/client-lib": "^0.4.8",
-    "@quoll/lib": "^0.4.4",
-    "@quoll/ui-primitives": "^0.4.4",
+    "@quoll/client-lib": "^0.4.9",
+    "@quoll/lib": "^0.4.5",
+    "@quoll/ui-primitives": "^0.4.5",
     "@react-native-camera-roll/camera-roll": "^7.3.0",
     "@react-native-community/geolocation": "^3.1.0",
     "@react-navigation/bottom-tabs": "^6.5.11",
