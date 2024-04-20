@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.4.1 (2024-04-20)
+
+**Note:** Version bump only for package @quoll/lib
+
 # [0.4.0](https://github.com/mzogheib/quoll/compare/@quoll/lib@0.3.0...@quoll/lib@0.4.0) (2024-02-25)
 
 ### Features
