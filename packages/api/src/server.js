@@ -65,5 +65,3 @@ process.on("SIGINT", gracefulShutdown);
 
 // e.g. used by nodemon, type rs while nodemon is running
 process.once("SIGUSR2", gracefulShutdown);
-
-// Trigger deployment
