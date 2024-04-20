@@ -1,0 +1,17 @@
+name: Publish NPM packages
+
+description: Publishes new package versions to the NPM registry
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        registry-url: "https://npm.pkg.github.com/"
+        node-version-file: .nvmrc
+        cache: yarn
+
+    - name: Install
+      shell: bash
+      run: yarn install --immutable

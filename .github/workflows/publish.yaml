@@ -13,4 +13,4 @@ jobs:
       packages: write
     steps:
       - name: Publish
-        run: echo "publish workflow"
+        uses: ./.github/actions/publish
