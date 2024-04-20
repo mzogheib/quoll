@@ -2,6 +2,11 @@ name: Publish NPM packages
 
 description: Publishes new package versions to the NPM registry
 
+inputs:
+  NPM_TOKEN:
+    description: "The NPM access token"
+    required: true
+
 runs:
   using: composite
   steps:
@@ -19,3 +24,5 @@ runs:
     - name: Release
       shell: bash
       run: yarn release
+      env:
+        NODE_AUTH_TOKEN: ${{ inputs.NPM_TOKEN }}
