@@ -12,5 +12,6 @@ jobs:
       contents: write
       packages: write
     steps:
+      - uses: actions/checkout@v4
       - name: Publish
         uses: ./.github/actions/publish
