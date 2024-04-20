@@ -1,0 +1,16 @@
+name: Publish packages
+
+on: workflow_dispatch
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+    steps:
+      - name: Publish
+        run: echo "publish workflow"
