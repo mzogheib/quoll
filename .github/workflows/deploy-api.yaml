@@ -1,0 +1,13 @@
+name: Deploy api
+
+on:
+  push:
+    tags:
+      - "@quoll/api@"
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install
+        shell: bash
+        run: echo "Deploying api..."
