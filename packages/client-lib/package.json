@@ -1,6 +1,6 @@
 {
   "name": "@quoll/client-lib",
-  "version": "0.4.10",
+  "version": "0.4.11",
   "description": "Shared code for client side packages",
   "repository": "https://github.com/mzogheib/quoll",
   "author": "mzogheib",
@@ -15,7 +15,7 @@
     "prepublishOnly": "yarn build"
   },
   "dependencies": {
-    "@quoll/lib": "^0.4.6",
+    "@quoll/lib": "^0.4.7",
     "react-redux": "^7.2.1",
     "redux": "^4.0.5"
   },

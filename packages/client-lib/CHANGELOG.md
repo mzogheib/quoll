@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.4.11 (2024-04-20)
+
+**Note:** Version bump only for package @quoll/client-lib
+
 ## 0.4.10 (2024-04-20)
 
 **Note:** Version bump only for package @quoll/client-lib
