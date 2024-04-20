@@ -46,6 +46,12 @@ cd quoll && yarn
 yarn start
 ```
 
+## Release process
+
+1. Push to `master`.
+2. Run the "Publish packages" workflow [here](https://github.com/mzogheib/quoll/actions/workflows/publish.yaml). Ensure the branch is `master`.
+3. The workflow will add git tags and publish to NPM where applicable.
+
 ## TODO & Issue Tracking
 
 Refer to [issues](https://github.com/mzogheib/quoll/issues).
