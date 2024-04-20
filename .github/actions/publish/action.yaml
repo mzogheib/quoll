@@ -15,3 +15,7 @@ runs:
     - name: Install
       shell: bash
       run: yarn install --immutable
+
+    - name: Release
+      shell: bash
+      run: yarn release
