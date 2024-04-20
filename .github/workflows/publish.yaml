@@ -16,6 +16,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0 # need to fetch all historical tags for lerna to calculate the changes
+          fetch-tags: true
       - name: Configure git credentials
         uses: OleksiyRudenko/gha-git-credentials@v2
         with:
