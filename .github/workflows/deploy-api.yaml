@@ -3,7 +3,7 @@ name: Deploy api
 on:
   push:
     tags:
-      - "@quoll/api@"
+      - "@quoll/api@*"
 
 jobs:
   deploy:
