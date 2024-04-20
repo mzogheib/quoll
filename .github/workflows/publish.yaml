@@ -15,12 +15,17 @@ jobs:
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          fetch-depth: 0 # need to fetch all historical tags for lerna to calculate the changes
-          fetch-tags: true
+          # need to fetch all history for lerna to calculate the changes
+          fetch-depth: 0
+
+      # pulls all tags for lerna to calculate the changes
+      - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+
       - name: Configure git credentials
         uses: OleksiyRudenko/gha-git-credentials@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+
       - uses: actions/checkout@v4
       - name: Publish
         uses: ./.github/actions/publish
