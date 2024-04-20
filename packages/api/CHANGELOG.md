@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/mzogheib/quoll/compare/@quoll/api@0.4.0...@quoll/api@0.5.0) (2024-04-20)
+
+### Features
+
+- **api:** trigger a deployment ([c872c3d](https://github.com/mzogheib/quoll/commit/c872c3d9ca362043995375a8ea3984a5c1ff78b0))
+
 # [0.4.0](https://github.com/mzogheib/quoll/compare/@quoll/api@0.3.15...@quoll/api@0.4.0) (2024-04-20)
 
 ### Features
