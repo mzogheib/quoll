@@ -1,6 +1,6 @@
 {
   "name": "@quoll/ui-components",
-  "version": "0.2.19",
+  "version": "0.2.20",
   "description": "UI components for the web apps",
   "main": "dist/index.js",
   "repository": "https://github.com/mzogheib/quoll",
@@ -27,7 +27,7 @@
     "chromatic": "node scripts/chromatic.js"
   },
   "dependencies": {
-    "@quoll/ui-primitives": "^0.4.2",
+    "@quoll/ui-primitives": "^0.4.3",
     "polished": "^3.4.1",
     "react-calendar": "^2.19.2",
     "react-icons": "^3.7.0",
