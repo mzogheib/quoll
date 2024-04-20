@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.25.6 (2024-04-20)
+
+**Note:** Version bump only for package @quoll/client-mobile
+
 ## 0.25.5 (2024-04-20)
 
 **Note:** Version bump only for package @quoll/client-mobile
