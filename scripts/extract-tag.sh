@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# A script to parse the version from a git tag.
+# A script to extract the semver version from a git tag.
 # For example, @quoll/some-package@1.2.3 --> 1.2.3
 
 # Function to check if the input string matches the required format
