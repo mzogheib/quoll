@@ -4,6 +4,12 @@ on:
   push:
     tags:
       - "@quoll/api@*"
+  workflow_dispatch:
+    inputs:
+      git-tag:
+        description: The formatted git tag.
+        required: true
+        type: string
 
 jobs:
   docker-build-push:

@@ -1,20 +1,6 @@
 name: Docker build & push
 
 on:
-  workflow_dispatch:
-    inputs:
-      file:
-        description: The path to the Dockerfile.
-        required: true
-        type: string
-      git-tag:
-        description: The formatted git tag.
-        required: true
-        type: string
-      package-name:
-        description: The name of the package.
-        required: true
-        type: string
   workflow_call:
     inputs:
       file:
