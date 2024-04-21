@@ -6,6 +6,12 @@ on:
   push:
     tags:
       - "@quoll/client-mobile@*"
+  workflow_dispatch:
+    inputs:
+      git-tag:
+        description: The formatted git tag.
+        required: true
+        type: string
 
 jobs:
   deploy:
