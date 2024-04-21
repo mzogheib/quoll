@@ -29,11 +29,11 @@ jobs:
         shell: bash
         id: version
         run: |
-          echo "version=$(./scripts/parse-tag.sh "${{ github.ref_name }}")" >> "$GITHUB_ENV"
+          echo "version=$(./scripts/parse-tag.sh "${{ github.ref_name }}")" >> "$GITHUB_OUTPUT"
 
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
           push: true
           file: packages/api/Dockerfile
-          tags: "${{ secrets.DOCKERHUB_REPO }}:$version"
+          tags: ${{ secrets.DOCKERHUB_REPO }}:quoll-api-${{ steps.version.outputs.value }}
