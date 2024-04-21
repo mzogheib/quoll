@@ -8,6 +8,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Parse tag
+      - name: Get the latest version
+        id: version
+        run: |
+          value=$(./scripts/parse-tag.sh @quoll/api/2.2.4)
+      - name: Echo version from previous step
         shell: bash
-        run: ./scripts/parse-tag.sh @quoll/api@3.3.3
+        run: echo "Version is ${{ steps.version.outputs.value }}"
