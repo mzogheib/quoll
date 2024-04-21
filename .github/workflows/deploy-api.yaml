@@ -27,4 +27,4 @@ jobs:
         with:
           push: true
           file: packages/api/Dockerfile
-          tags: ${{ secrets.DOCKERHUB_REPO }}:$GITHUB_REF_NAME
+          tags: ${{ secrets.DOCKERHUB_REPO }}:${{  github.ref_name }}
