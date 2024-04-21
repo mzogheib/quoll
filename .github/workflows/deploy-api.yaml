@@ -22,15 +22,18 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Get the latest version
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get the version from the git tag
+        shell: bash
         id: version
         run: |
-          value=$(./scripts/parse-tag.sh "${{  github.ref_name }}")
-          echo "::set-output name=version::$output"
+          echo "version=$(./scripts/parse-tag.sh "${{ github.ref_name }}")" >> "$GITHUB_ENV"
 
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
           push: true
           file: packages/api/Dockerfile
-          tags: ${{ secrets.DOCKERHUB_REPO }}:${{ steps.version.outputs.value }}
+          tags: "${{ secrets.DOCKERHUB_REPO }}:$version"
