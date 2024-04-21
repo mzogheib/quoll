@@ -9,10 +9,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Get the latest version
+        shell: bash
         id: version
         run: |
-          value=$(./scripts/parse-tag.sh "@quoll/api/2.2.4")
-          echo "::set-output name=value::$output"
-      - name: Echo version from previous step
-        shell: bash
-        run: echo "Version is ${{ steps.version.outputs.value }}"
+          echo "version=$(./scripts/parse-tag.sh "@quoll/api@23.3.3")" >> "$GITHUB_ENV"
+      - name: Use the value
+        run: |
+          printf '%s\n' "THE VERSION IS: $version"
