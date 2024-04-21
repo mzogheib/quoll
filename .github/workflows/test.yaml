@@ -6,6 +6,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
       - name: Parse tag
         shell: bash
         run: ./scripts/parse-tag.sh @quoll/api@3.3.3
