@@ -9,6 +9,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Install
+      - name: Deploy
         shell: bash
         run: echo "Deploying api..."
