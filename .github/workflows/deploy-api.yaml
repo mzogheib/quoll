@@ -24,15 +24,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Get the version from the git tag
-        shell: bash
+      - name: Get the version
         id: version
-        run: |
-          echo "value=$(./scripts/parse-tag.sh "${{ github.ref_name }}")" >> "$GITHUB_OUTPUT"
+        uses: ./.github/actions/extract-version
+        with:
+          tag: ${{ github.ref_name }}
 
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
           push: true
           file: packages/api/Dockerfile
-          tags: ${{ secrets.DOCKERHUB_REPO }}:quoll-api-${{ steps.version.outputs.value }}
+          tags: ${{ secrets.DOCKERHUB_REPO }}:quoll-api-${{ steps.version.outputs.version }}
