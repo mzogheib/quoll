@@ -12,6 +12,7 @@ jobs:
         id: version
         run: |
           value=$(./scripts/parse-tag.sh "@quoll/api/2.2.4")
+          echo "::set-output name=value::$output"
       - name: Echo version from previous step
         shell: bash
         run: echo "Version is ${{ steps.version.outputs.value }}"
