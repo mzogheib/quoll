@@ -8,4 +8,4 @@ jobs:
     steps:
       - name: Parse tag
         shell: bash
-        run: scripts/parse-tag.sh @quoll/api@3.3.3
+        run: ./scripts/parse-tag.sh @quoll/api@3.3.3
