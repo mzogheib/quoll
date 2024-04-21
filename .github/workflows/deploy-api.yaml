@@ -11,4 +11,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build Docker image
+        shell: bash
         run: docker build -t api -f packages/api/Dockerfile .
