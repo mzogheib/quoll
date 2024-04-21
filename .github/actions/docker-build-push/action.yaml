@@ -10,7 +10,7 @@ inputs:
     description: The access token for Docker Hub.
     required: true
   file:
-    description: The path to the packages/api/Dockerfile
+    description: The path to the Dockerfile.
     required: true
   repository:
     description: The name of the repository.
