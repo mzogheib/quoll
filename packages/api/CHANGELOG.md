@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/mzogheib/quoll/compare/@quoll/api@0.7.1...@quoll/api@0.8.0) (2024-04-21)
+
+### Features
+
+- **api:** test ([a329c63](https://github.com/mzogheib/quoll/commit/a329c638b5694d965ae0baa6784ac73e310c7985))
+
 ## [0.7.1](https://github.com/mzogheib/quoll/compare/@quoll/api@0.7.0...@quoll/api@0.7.1) (2024-04-21)
 
 **Note:** Version bump only for package @quoll/api
