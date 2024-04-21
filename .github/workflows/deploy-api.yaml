@@ -22,9 +22,15 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Get the latest version
+        id: version
+        run: |
+          value=$(./script_name.sh "${{  github.ref_name }}")
+          echo "::set-output name=version::$output"
+
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
           push: true
           file: packages/api/Dockerfile
-          tags: ${{ secrets.DOCKERHUB_REPO }}:${{  github.ref_name }}
+          tags: ${{ secrets.DOCKERHUB_REPO }}:${{ steps.version.outputs.value }}
