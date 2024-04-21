@@ -1,6 +1,7 @@
 name: Deploy api
 
 on:
+  workflow_dispatch:
   push:
     tags:
       - "@quoll/api@*"
@@ -9,6 +10,5 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy
-        shell: bash
-        run: echo "Deploying api..."
+      - name: Build Docker image
+        run: docker build -t api -f packages/api/Dockerfile .
