@@ -11,9 +11,9 @@ inputs:
     required: true
 
 outputs:
-  value:
+  version:
     description: The version extracted from the tag
-    value: ${{ steps.extract-version.outputs.value }}
+    value: ${{ steps.extract-version.outputs.version }}
 
 runs:
   using: composite
@@ -22,4 +22,4 @@ runs:
       id: extract-version
       shell: bash
       run: |
-        echo "value=$(./scripts/parse-tag.sh "${{ inputs.tag }}")" >> "$GITHUB_OUTPUT"
+        echo "version=$(./scripts/parse-tag.sh "${{ inputs.tag }}")" >> "$GITHUB_OUTPUT"
