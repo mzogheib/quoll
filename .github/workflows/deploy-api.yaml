@@ -1,7 +1,6 @@
 name: Deploy api
 
 on:
-  workflow_dispatch:
   push:
     tags:
       - "@quoll/api@*"
