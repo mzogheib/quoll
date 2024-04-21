@@ -1,6 +1,6 @@
 {
   "name": "@quoll/api",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "private": true,
   "dependencies": {
     "@mapbox/polyline": "^1.1.1",
