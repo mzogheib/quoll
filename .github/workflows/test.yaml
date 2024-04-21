@@ -12,7 +12,7 @@ jobs:
         id: version
         uses: ./.github/actions/extract-version
         with:
-          tag: "@quoll/api/3.4.5"
+          tag: "@quoll/api@3.4.5"
       - name: Run Echo Input Action
         uses: ./.github/actions/echo
         with:
