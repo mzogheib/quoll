@@ -7,7 +7,7 @@ on:
 
 jobs:
   docker-build-push:
-    uses: ./.github/reusable-workflows/docker-build-push.yaml
+    uses: ./.github/workflows/docker-build-push.yaml
     with:
       file: packages/api/Dockerfile
       package-name: quoll-api
