@@ -1,5 +1,7 @@
 name: Deploy api
 
+run-name: Deploy api version ${{ github.ref_name }}
+
 on:
   push:
     tags:

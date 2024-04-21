@@ -1,5 +1,7 @@
 name: Deploy client-mobile
 
+run-name: Deploy client-mobile version ${{ github.ref_name }}
+
 on:
   push:
     tags:
