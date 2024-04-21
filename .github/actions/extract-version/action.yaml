@@ -10,10 +10,16 @@ inputs:
     description: The git tag
     required: true
 
+outputs:
+  value:
+    description: The version extracted from the tag
+    value: ${{ steps.extract-version.outputs.value }}
+
 runs:
   using: composite
   steps:
     - name: Extract version
+      id: extract-version
       shell: bash
       run: |
         echo "value=$(./scripts/parse-tag.sh "${{ inputs.tag }}")" >> "$GITHUB_OUTPUT"
