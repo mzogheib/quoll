@@ -1,0 +1,41 @@
+name: Publish packages
+
+on: workflow_dispatch
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+          # need to fetch all history for lerna to calculate the changes
+          fetch-depth: 0
+
+      - name: Configure git credentials
+        uses: OleksiyRudenko/gha-git-credentials@v2
+        with:
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          registry-url: "https://registry.npmjs.org/"
+          node-version-file: .nvmrc
+          cache: yarn
+
+      - name: Install
+        shell: bash
+        run: yarn install --immutable
+
+      - name: Release
+        shell: bash
+        run: yarn release
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

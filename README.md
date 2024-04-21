@@ -46,6 +46,10 @@ cd quoll && yarn
 yarn start
 ```
 
+## Release process
+
+See [here](https://github.com/mzogheib/quoll/wiki/Release-Instructions).
+
 ## TODO & Issue Tracking
 
 Refer to [issues](https://github.com/mzogheib/quoll/issues).

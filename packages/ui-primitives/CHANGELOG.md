@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.4.7 (2024-04-20)
+
+**Note:** Version bump only for package @quoll/ui-primitives
+
+## 0.4.6 (2024-04-20)
+
+**Note:** Version bump only for package @quoll/ui-primitives
+
+## 0.4.5 (2024-04-20)
+
+**Note:** Version bump only for package @quoll/ui-primitives
+
+## 0.4.4 (2024-04-20)
+
+**Note:** Version bump only for package @quoll/ui-primitives
+
+## 0.4.3 (2024-04-20)
+
+**Note:** Version bump only for package @quoll/ui-primitives
+
+## 0.4.2 (2024-04-20)
+
+**Note:** Version bump only for package @quoll/ui-primitives
+
+## 0.4.1 (2024-04-20)
+
+**Note:** Version bump only for package @quoll/ui-primitives
+
 # [0.4.0](https://github.com/mzogheib/quoll/compare/@quoll/ui-primitives@0.3.3...@quoll/ui-primitives@0.4.0) (2024-01-03)
 
 ### Features

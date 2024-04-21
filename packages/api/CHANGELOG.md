@@ -3,6 +3,62 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/mzogheib/quoll/compare/@quoll/api@0.6.0...@quoll/api@0.7.0) (2024-04-20)
+
+### Features
+
+- **api:** re-add comment ([534a876](https://github.com/mzogheib/quoll/commit/534a8765b2e6c1f34631c47424cabec8b48bffd2))
+
+# [0.6.0](https://github.com/mzogheib/quoll/compare/@quoll/api@0.5.0...@quoll/api@0.6.0) (2024-04-20)
+
+### Features
+
+- **api:** remove comment ([60fea98](https://github.com/mzogheib/quoll/commit/60fea982959e38799da29d2ffe506d8c906cb304))
+
+# [0.5.0](https://github.com/mzogheib/quoll/compare/@quoll/api@0.4.0...@quoll/api@0.5.0) (2024-04-20)
+
+### Features
+
+- **api:** trigger a deployment ([c872c3d](https://github.com/mzogheib/quoll/commit/c872c3d9ca362043995375a8ea3984a5c1ff78b0))
+
+# [0.4.0](https://github.com/mzogheib/quoll/compare/@quoll/api@0.3.15...@quoll/api@0.4.0) (2024-04-20)
+
+### Features
+
+- **api:** update readme ([17518ae](https://github.com/mzogheib/quoll/commit/17518aec979887ba7aa8bdbccc4dc5c18fa35273))
+
+## [0.3.15](https://github.com/mzogheib/quoll/compare/@quoll/api@0.3.14...@quoll/api@0.3.15) (2024-04-20)
+
+**Note:** Version bump only for package @quoll/api
+
+## 0.3.14 (2024-04-20)
+
+**Note:** Version bump only for package @quoll/api
+
+## 0.3.13 (2024-04-20)
+
+**Note:** Version bump only for package @quoll/api
+
+## 0.3.12 (2024-04-20)
+
+**Note:** Version bump only for package @quoll/api
+
+## 0.3.11 (2024-04-20)
+
+**Note:** Version bump only for package @quoll/api
+
+## 0.3.10 (2024-04-20)
+
+**Note:** Version bump only for package @quoll/api
+
+## 0.3.9 (2024-04-20)
+
+**Note:** Version bump only for package @quoll/api
+
+## 0.3.8 (2024-04-20)
+
+**Note:** Version bump only for package @quoll/api
+
 ## [0.3.7](https://github.com/mzogheib/quoll/compare/@quoll/api@0.3.6...@quoll/api@0.3.7) (2024-02-25)
 
 **Note:** Version bump only for package @quoll/api

@@ -1,0 +1,14 @@
+name: Deploy client-web
+
+on:
+  push:
+    tags:
+      - "@quoll/client-web@*"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
+        shell: bash
+        run: echo "Deploying client-web..."

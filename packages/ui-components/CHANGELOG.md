@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.2.24 (2024-04-20)
+
+**Note:** Version bump only for package @quoll/ui-components
+
+## 0.2.23 (2024-04-20)
+
+**Note:** Version bump only for package @quoll/ui-components
+
+## 0.2.22 (2024-04-20)
+
+**Note:** Version bump only for package @quoll/ui-components
+
+## 0.2.21 (2024-04-20)
+
+**Note:** Version bump only for package @quoll/ui-components
+
+## 0.2.20 (2024-04-20)
+
+**Note:** Version bump only for package @quoll/ui-components
+
+## 0.2.19 (2024-04-20)
+
+**Note:** Version bump only for package @quoll/ui-components
+
+## 0.2.18 (2024-04-20)
+
+**Note:** Version bump only for package @quoll/ui-components
+
 ## [0.2.17](https://github.com/mzogheib/quoll/compare/@quoll/ui-components@0.2.16...@quoll/ui-components@0.2.17) (2024-01-03)
 
 **Note:** Version bump only for package @quoll/ui-components
