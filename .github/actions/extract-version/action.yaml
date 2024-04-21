@@ -1,0 +1,19 @@
+# The tags in this repo are automatically created by lerna and have the format
+# @scope/package@0.0.0. Sometimes we need just the semver version, i.e. 0.0.0.
+
+name: Extract version from tag
+
+description: Extracts the semver version from a git tag.
+
+inputs:
+  tag:
+    description: The git tag
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Extract version
+      shell: bash
+      run: |
+        echo "value=$(./scripts/parse-tag.sh "${{ inputs.tag }}")" >> "$GITHUB_OUTPUT"

@@ -9,10 +9,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Get the latest version
-        shell: bash
         id: version
-        run: |
-          echo "value=$(./scripts/parse-tag.sh "@quoll/api@23.3.3")" >> "$GITHUB_OUTPUT"
+        uses: ./.github/actions/extract-version
+        with:
+          tag: "@quoll/api/3.4.5"
       - name: Run Echo Input Action
         uses: ./.github/actions/echo
         with:
