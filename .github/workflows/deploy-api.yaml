@@ -6,23 +6,10 @@ on:
       - "@quoll/api@*"
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Get the version
-        id: extract-version
-        uses: ./.github/actions/extract-version
-        with:
-          tag: ${{ github.ref_name }}
-
-      - name: Build and push
-        uses: ./.github/actions/docker-build-push
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          token: ${{ secrets.DOCKERHUB_TOKEN }}
-          file: packages/api/Dockerfile
-          repository: ${{ secrets.DOCKERHUB_REPO }}
-          tag: quoll-api-${{ steps.extract-version.outputs.version }}
+  docker-build-push:
+    uses: ./.github/workflows/docker-build-push.yaml
+    with:
+      file: packages/api/Dockerfile
+      package-name: quoll-api
+      git-tag: ${{ github.ref_name }}
+    secrets: inherit
