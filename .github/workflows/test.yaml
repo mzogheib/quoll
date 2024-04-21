@@ -11,7 +11,7 @@ jobs:
       - name: Get the latest version
         id: version
         run: |
-          value=$(./scripts/parse-tag.sh @quoll/api/2.2.4)
+          value=$(./scripts/parse-tag.sh "@quoll/api/2.2.4")
       - name: Echo version from previous step
         shell: bash
         run: echo "Version is ${{ steps.version.outputs.value }}"
