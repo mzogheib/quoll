@@ -27,4 +27,4 @@ jobs:
         with:
           push: true
           file: packages/api/Dockerfile
-          tags: ${{ secrets.DOCKERHUB_REPO }}:quoll-api-latest
+          tags: ${{ secrets.DOCKERHUB_REPO }}:$GITHUB_REF_NAME
