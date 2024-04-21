@@ -1,6 +1,6 @@
 name: Deploy api
 
-run-name: Deploy api version ${{ github.ref_name }}
+run-name: "Deploy api: ${{ github.ref_name }}"
 
 on:
   push:

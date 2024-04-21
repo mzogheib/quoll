@@ -1,6 +1,6 @@
 name: Deploy client-web
 
-run-name: Deploy client-web version ${{ github.ref_name }}
+run-name: "Deploy client-web: ${{ github.ref_name }}"
 
 on:
   push:
