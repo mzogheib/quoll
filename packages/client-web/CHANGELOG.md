@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.1](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.7.0...@quoll/client-web@0.7.1) (2024-04-21)
+
+### Bug Fixes
+
+- **client-web:** remove comment ([bd82605](https://github.com/mzogheib/quoll/commit/bd826057e910d292db34f09bec098834961fca80))
+
 # [0.7.0](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.6.12...@quoll/client-web@0.7.0) (2024-04-21)
 
 ### Features
