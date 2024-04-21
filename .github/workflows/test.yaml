@@ -13,6 +13,7 @@ jobs:
         id: version
         run: |
           echo "version=$(./scripts/parse-tag.sh "@quoll/api@23.3.3")" >> "$GITHUB_ENV"
-      - name: Use the value
-        run: |
-          printf '%s\n' "THE VERSION IS: $version"
+      - name: Run Echo Input Action
+        uses: ./.github/actions/echo
+        with:
+          message: "Version is: $version"
