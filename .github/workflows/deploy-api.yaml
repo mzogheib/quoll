@@ -26,6 +26,5 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          context: "{{defaultContext}}:packages/api"
           file: packages/api/Dockerfile
           tags: ${{ secrets.DOCKERHUB_REPO }}:quoll-api-latest
