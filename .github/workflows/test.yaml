@@ -12,8 +12,8 @@ jobs:
         shell: bash
         id: version
         run: |
-          echo "version=$(./scripts/parse-tag.sh "@quoll/api@23.3.3")" >> "$GITHUB_ENV"
+          echo "value=$(./scripts/parse-tag.sh "@quoll/api@23.3.3")" >> "$GITHUB_OUTPUT"
       - name: Run Echo Input Action
         uses: ./.github/actions/echo
         with:
-          message: "Version is: $version"
+          message: "Version is: ${{ steps.version.outputs.value }}"
