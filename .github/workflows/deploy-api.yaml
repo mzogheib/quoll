@@ -13,3 +13,10 @@ jobs:
       package-name: quoll-api
       git-tag: ${{ github.ref_name }}
     secrets: inherit
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
+        shell: bash
+        run: echo "Deploying to cloud..."
