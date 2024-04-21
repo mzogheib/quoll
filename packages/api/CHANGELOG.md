@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.3](https://github.com/mzogheib/quoll/compare/@quoll/api@0.8.2...@quoll/api@0.8.3) (2024-04-21)
+
+### Bug Fixes
+
+- **api:** remove comment ([2f93002](https://github.com/mzogheib/quoll/commit/2f9300243166321d0e9a8d8b5ef9047b63f4cc53))
+
 ## [0.8.2](https://github.com/mzogheib/quoll/compare/@quoll/api@0.8.1...@quoll/api@0.8.2) (2024-04-21)
 
 ### Bug Fixes
