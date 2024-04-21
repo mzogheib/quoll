@@ -29,10 +29,16 @@ on:
         description: The name of the package.
         required: true
         type: string
+    outputs:
+      image-tag:
+        description: "The Docker image tag"
+        value: ${{ jobs.main.outputs.image-tag }}
 
 jobs:
   main:
     runs-on: ubuntu-latest
+    outputs:
+      image-tag: ${{ steps.make-image-tag.outputs.image-tag }}
     steps:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -49,11 +55,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Get the version
+      - name: Get version
         id: extract-version
         uses: ./.github/actions/extract-version
         with:
           tag: ${{ inputs.git-tag }}
+
+      - name: Make image tag
+        id: make-image-tag
+        shell: bash
+        # e.g. some-package-0.0.1
+        run: |
+          echo "image-tag=${{ inputs.package-name }}-${{ steps.extract-version.outputs.version }}" >> "$GITHUB_OUTPUT"
 
       - name: Build and push
         uses: docker/build-push-action@v5
@@ -61,4 +74,4 @@ jobs:
           push: true
           file: ${{ inputs.file }}
           # e.g. username/repo:some-package-0.0.1
-          tags: ${{ secrets.DOCKERHUB_REPO }}:${{ inputs.package-name }}-${{ steps.extract-version.outputs.version }}
+          tags: ${{ secrets.DOCKERHUB_REPO }}:${{ steps.make-image-tag.outputs.image-tag }}
