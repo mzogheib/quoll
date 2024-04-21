@@ -9,11 +9,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Get the latest version
-        id: version
+        id: extract-version
         uses: ./.github/actions/extract-version
         with:
           tag: "@quoll/api@3.4.5"
       - name: Run Echo Input Action
         uses: ./.github/actions/echo
         with:
-          message: "Version is: ${{ steps.version.outputs.value }}"
+          message: "Version is: ${{ steps.extract-version.outputs.version }}"
