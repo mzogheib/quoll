@@ -1,0 +1,14 @@
+name: Deploy client-mobile
+
+on:
+  push:
+    tags:
+      - "@quoll/client-mobile@*"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
+        shell: bash
+        run: echo "Deploying client-mobile..."
