@@ -25,7 +25,7 @@ jobs:
       - name: Get the latest version
         id: version
         run: |
-          value=$(./script_name.sh "${{  github.ref_name }}")
+          value=$(./scripts/parse-tag.sh "${{  github.ref_name }}")
           echo "::set-output name=version::$output"
 
       - name: Build and push
