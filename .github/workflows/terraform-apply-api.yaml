@@ -1,4 +1,4 @@
-name: "Terraform Plan - api"
+name: "Terraform Apply - api"
 
 on:
   workflow_dispatch:
