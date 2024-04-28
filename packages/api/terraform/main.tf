@@ -9,4 +9,7 @@ terraform {
   required_version = ">= 1.1.0"
 }
 
-resource "random_pet" "my-pet" {}
+resource "random_pet" "my-pet" {
+  length = 4
+  separator = "_"
+}
