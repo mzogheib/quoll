@@ -1,4 +1,4 @@
-variable "docker_image_tag" {
-  description = "The Docker image tag"
+variable "docker_image_name" {
+  description = "The Docker image name"
   type        = string
 }

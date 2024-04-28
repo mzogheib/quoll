@@ -18,7 +18,7 @@ env:
   TF_CLOUD_ORGANIZATION: "${{ secrets.TF_CLOUD_ORGANIZATION }}"
   TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
   TF_WORKSPACE: "${{ secrets.TF_WORKSPACE }}"
-  TF_VAR_docker_image_tag: '"${{ inputs.docker-image-tag }}"'
+  TF_VAR_docker_image_name: '"${{ secrets.DOCKERHUB_REPO}}:${{ inputs.docker-image-tag }}"'
   CONFIG_DIRECTORY: "./packages/api/terraform"
 
 jobs:
