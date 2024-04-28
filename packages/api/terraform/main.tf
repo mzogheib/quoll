@@ -10,6 +10,7 @@ terraform {
 }
 
 resource "random_pet" "my-pet" {
-  length = 4
+  length    = 4
   separator = "_"
+  prefix    = var.docker_image_tag
 }
