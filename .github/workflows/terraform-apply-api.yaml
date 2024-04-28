@@ -2,6 +2,11 @@ name: "Terraform Apply - api"
 
 on:
   workflow_dispatch:
+    inputs:
+      docker-image-tag:
+        description: The tag for the Docker image.
+        required: true
+        type: string
   workflow_call:
     inputs:
       docker-image-tag:
