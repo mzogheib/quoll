@@ -1,16 +1,16 @@
 name: "Terraform Apply"
 
-run-name: "Terraform Apply: ${{ inputs.CONFIG_DIRECTORY_NAME }}"
+run-name: "Terraform Apply: ${{ inputs.config-directory-name }}"
 
 on:
   workflow_dispatch:
     inputs:
-      CONFIG_DIRECTORY_NAME:
+      config-directory-name:
         required: true
         type: string
   workflow_call:
     inputs:
-      CONFIG_DIRECTORY_NAME:
+      config-directory-name:
         required: true
         type: string
 
@@ -19,7 +19,7 @@ env:
   TF_CLOUD_ORGANIZATION: "${{ secrets.TF_CLOUD_ORGANIZATION }}"
   TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
   TF_WORKSPACE: "${{ secrets.TF_WORKSPACE }}"
-  CONFIG_DIRECTORY: "./${{ inputs.CONFIG_DIRECTORY_NAME }}"
+  CONFIG_DIRECTORY: "./${{ inputs.config-directory-name }}"
 
 jobs:
   terraform:
