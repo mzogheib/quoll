@@ -1,0 +1,56 @@
+name: "Terraform Destroy"
+
+run-name: "Terraform Destroy: ${{ inputs.CONFIG_DIRECTORY_NAME }}"
+
+on:
+  workflow_dispatch:
+    inputs:
+      CONFIG_DIRECTORY_NAME:
+        required: true
+        type: string
+  workflow_call:
+    inputs:
+      CONFIG_DIRECTORY_NAME:
+        required: true
+        type: string
+
+# Terraform Cloud has the AWS API keys
+env:
+  TF_CLOUD_ORGANIZATION: "${{ secrets.TF_CLOUD_ORGANIZATION }}"
+  TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
+  TF_WORKSPACE: "${{ secrets.TF_WORKSPACE }}"
+  CONFIG_DIRECTORY: "./${{ inputs.CONFIG_DIRECTORY_NAME }}"
+
+jobs:
+  terraform:
+    if: github.repository != 'hashicorp-education/learn-terraform-github-actions'
+    name: "Terraform Destroy"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Upload Configuration
+        uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.3.0
+        id: destroy-upload
+        with:
+          workspace: ${{ env.TF_WORKSPACE }}
+          directory: ${{ env.CONFIG_DIRECTORY }}
+
+      - name: Create Destroy Run
+        uses: hashicorp/tfc-workflows-github/actions/create-run@v1.3.0
+        id: destroy-run
+        with:
+          workspace: ${{ env.TF_WORKSPACE }}
+          configuration_version: ${{ steps.destroy-upload.outputs.configuration_version_id }}
+          is_destroy: true
+
+      - name: Destroy
+        uses: hashicorp/tfc-workflows-github/actions/apply-run@v1.3.0
+        if: fromJSON(steps.destroy-run.outputs.payload).data.attributes.actions.IsConfirmable
+        id: destroy
+        with:
+          run: ${{ steps.destroy-run.outputs.run_id }}
+          comment: "Destroy Run from GitHub Actions CI ${{ github.sha }}"
