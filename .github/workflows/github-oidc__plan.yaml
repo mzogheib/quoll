@@ -4,7 +4,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  docker-build-push:
+  oidc-plan:
+    name: "OIDC - plan"
     uses: ./.github/workflows/terraform-plan.yaml
     with:
       config-directory-name: "./infrastructure"
