@@ -9,6 +9,10 @@
 
 ## References
 
-- https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services
-- https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html
-- https://medium.com/@thiagosalvatore/using-terraform-to-connect-github-actions-and-aws-with-oidc-0e3d27f00123
+- How to configure the GitHub identity provider in AWS
+  - https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services
+  - https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html
+- How to do the above using Terraform
+  - https://medium.com/@thiagosalvatore/using-terraform-to-connect-github-actions-and-aws-with-oidc-0e3d27f00123
+- Integrating with GitHub Actions workflows
+  - https://github.com/aws-actions/configure-aws-credentials?tab=readme-ov-file#oidc
