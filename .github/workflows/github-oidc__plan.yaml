@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  oidc-plan:
-    name: "OIDC - plan"
+  oidc:
+    name: "OIDC"
     uses: ./.github/workflows/terraform-plan.yaml
     with:
       config-directory-name: "./infrastructure"
