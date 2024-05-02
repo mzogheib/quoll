@@ -1,4 +1,4 @@
-name: "Destroy OIDC resources"
+name: "OIDC - destroy"
 
 on:
   workflow_dispatch:

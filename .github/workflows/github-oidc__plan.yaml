@@ -1,4 +1,4 @@
-name: "Plan OIDC resources"
+name: "OIDC - plan"
 
 on:
   workflow_dispatch:

@@ -1,4 +1,4 @@
-name: "Apply OIDC resources"
+name: "OIDC - apply"
 
 on:
   workflow_dispatch:
