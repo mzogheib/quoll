@@ -55,7 +55,7 @@ data "aws_iam_policy_document" "oidc" {
 }
 
 resource "aws_iam_role" "github_actions" {
-  name               = "github_oidc_role"
+  name               = "quoll-github-actions-oidc-role"
   assume_role_policy = data.aws_iam_policy_document.oidc.json
 }
 
@@ -73,7 +73,7 @@ data "aws_iam_policy_document" "deploy" {
 }
 
 resource "aws_iam_policy" "deploy" {
-  name        = "ci-deploy-policy"
+  name        = "quoll-github-actions-deploy-policy"
   description = "Policy used for deployments on GitHub Actions"
   policy      = data.aws_iam_policy_document.deploy.json
 }
