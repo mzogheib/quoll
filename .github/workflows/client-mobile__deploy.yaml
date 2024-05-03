@@ -1,6 +1,6 @@
-name: client-mobile deploy
+name: client-mobile - deploy
 
-run-name: "client-mobile deploy: ${{ github.ref_name }}"
+run-name: "client-mobile - deploy: ${{ github.ref_name }}"
 
 on:
   push:
