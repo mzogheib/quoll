@@ -15,7 +15,7 @@ on:
 
 jobs:
   docker-build-push:
-    uses: ./.github/workflows/docker-build-push.yaml
+    uses: ./.github/workflows/reuse__docker-build-push.yaml
     with:
       file: packages/api/Dockerfile
       package-name: quoll-api
@@ -24,6 +24,6 @@ jobs:
 
   deploy:
     needs: docker-build-push
-    uses: ./.github/workflows/terraform-apply-api.yaml
+    uses: ./.github/workflows/reuse__terraform-apply.yaml
     with:
-      docker-image-tag: ${{ needs.docker-build-push.outputs.image-tag }}
+      config-directory-name: "packages/api/terraform"
