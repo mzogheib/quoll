@@ -11,8 +11,8 @@ provider "aws" {
   region = "us-east-1"
 }
 
-resource "aws_ecr_repository" "foo" {
-  name                 = "bar"
+resource "aws_ecr_repository" "quoll" {
+  name                 = "quoll"
   image_tag_mutability = "IMMUTABLE"
 
   image_scanning_configuration {
@@ -22,5 +22,5 @@ resource "aws_ecr_repository" "foo" {
 
 output "ecr_repository_url" {
   description = "The URL of the public site ECR repository"
-  value       = aws_ecr_repository.foo.repository_url
+  value       = aws_ecr_repository.quoll.repository_url
 }
