@@ -14,16 +14,7 @@ on:
         type: string
 
 jobs:
-  docker-build-push:
-    uses: ./.github/workflows/reuse__docker-build-push.yaml
-    with:
-      file: packages/api/Dockerfile
-      package-name: quoll-api
-      git-tag: ${{ github.ref_name }}
-    secrets: inherit
-
-  deploy:
-    needs: docker-build-push
+  create-aws-resources:
     uses: ./.github/workflows/reuse__terraform-apply.yaml
     with:
       config-directory-name: "packages/api/terraform"
