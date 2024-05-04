@@ -7,7 +7,7 @@ env:
   TF_CLOUD_ORGANIZATION: "${{ secrets.TF_CLOUD_ORGANIZATION }}"
   TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
   TF_WORKSPACE: "${{ secrets.TF_WORKSPACE }}"
-  TF_VAR_repo_name: "${{ secrets.AWS_ECR_REPO_NAME }}"
+  TF_VAR_repo_name: '"${{ secrets.AWS_ECR_REPO_NAME }}"'
   CONFIG_DIRECTORY: "./infrastructure/ecr"
 
 jobs:
