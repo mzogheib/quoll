@@ -25,11 +25,11 @@ jobs:
       - name: Get version
         id: extract-version
         uses: ./.github/actions/extract-version
-        continue-on-error: false
         with:
           tag: "${{ inputs.git-tag }}"
 
       - name: Make image tag
+        if: success(${{ steps.extract-version.outcome == 'success' }})
         id: make-image-tag
         shell: bash
         env:
