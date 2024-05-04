@@ -26,7 +26,7 @@ jobs:
         id: extract-version
         uses: ./.github/actions/extract-version
         with:
-          tag: ${{ inputs.git-tag }}
+          tag: ${{ github.ref_name }}
 
       - name: Make image tag
         id: make-image-tag
