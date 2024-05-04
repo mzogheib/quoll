@@ -22,4 +22,5 @@ runs:
       id: extract-version
       shell: bash
       run: |
+        set -e
         echo "version=$(./scripts/extract-tag.sh "${{ inputs.tag }}")" >> "$GITHUB_OUTPUT"
