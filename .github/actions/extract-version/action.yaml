@@ -22,9 +22,10 @@ runs:
       id: extract-version
       shell: bash
       run: |
-        version=$(./scripts/extract-tag.sh "${{ inputs.tag }}")
+        output=$(./scripts/extract-tag.sh "${{ inputs.tag }}")
         exit_code=$?
         if [ $exit_code -ne 0 ]; then
+          echo "$output"
           exit $exit_code
         fi
-        echo "version=$version" >> "$GITHUB_OUTPUT"
+        echo "version=$output" >> "$GITHUB_OUTPUT"
