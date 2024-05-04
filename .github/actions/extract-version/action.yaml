@@ -23,4 +23,5 @@ runs:
       shell: bash
       run: |
         version="${{ inputs.tag }}"
+        echo $version
         exit 1
