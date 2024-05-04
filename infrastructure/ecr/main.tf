@@ -21,6 +21,6 @@ resource "aws_ecr_repository" "quoll" {
 }
 
 output "ecr_repository_url" {
-  description = "The URL of the site ECR repository"
+  description = "The URL of the ECR repository"
   value       = aws_ecr_repository.quoll.repository_url
 }
