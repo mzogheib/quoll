@@ -16,5 +16,6 @@ on:
 jobs:
   create-aws-resources:
     uses: ./.github/workflows/reuse__terraform-apply.yaml
+    secrets: inherit
     with:
       config-directory-name: "packages/api/terraform"
