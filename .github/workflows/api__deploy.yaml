@@ -13,10 +13,6 @@ on:
         required: true
         type: string
 
-env:
-  AWS_REGION: "us-east-1"
-  DOCKER_IMAGE_TAG_PREFIX: quoll-api
-
 permissions:
   id-token: write
 
@@ -35,12 +31,16 @@ jobs:
       - name: Make image tag
         id: make-image-tag
         shell: bash
+        env:
+          DOCKER_IMAGE_TAG_PREFIX: quoll-api
         # e.g. some-package-0.0.1
         run: |
           echo "image-tag=${{ env.DOCKER_IMAGE_TAG_PREFIX }}-${{ steps.extract-version.outputs.version }}" >> "$GITHUB_OUTPUT"
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
+        env:
+          AWS_REGION: "us-east-1"
         with:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.AWS_GITHUB_OIDC_ROLE_NAME }}
           aws-region: ${{ env.AWS_REGION }}
