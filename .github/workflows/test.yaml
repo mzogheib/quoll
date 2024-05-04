@@ -1,0 +1,30 @@
+name: test
+
+on:
+  workflow_dispatch:
+    inputs:
+      git-tag:
+        description: The formatted git tag.
+        required: true
+        type: string
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get version
+        id: extract-version
+        uses: ./.github/actions/extract-version
+        with:
+          tag: "${{ inputs.git-tag }}"
+
+      - name: Make image tag
+        id: make-image-tag
+        shell: bash
+        env:
+          DOCKER_IMAGE_TAG_PREFIX: quoll-api
+        # e.g. some-package-0.0.1
+        run: |
+          echo "image-tag=${{ env.DOCKER_IMAGE_TAG_PREFIX }}-${{ steps.extract-version.outputs.version }}" >> "$GITHUB_OUTPUT"
