@@ -29,7 +29,6 @@ jobs:
           tag: "${{ inputs.git-tag }}"
 
       - name: Make image tag
-        if: ${{ steps.extract-version.conclusion == 'success' }}
         id: make-image-tag
         shell: bash
         env:
