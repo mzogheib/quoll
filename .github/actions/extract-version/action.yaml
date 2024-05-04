@@ -22,17 +22,9 @@ runs:
       id: extract-version
       shell: bash
       run: |
-        tag="${{ inputs.tag }}"
-
-        validate_input() {
-            if [[ ! "$tag" =~ ^@[^@]+/[^@]+@[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-                echo "Error: Input string must be in the format '@<namespace>/<name>@<semver-version>'"
-                exit 1
-            fi
-        }
-
-        validate_input "$tag"
-
-        version=$(echo "$tag" | sed 's/.*@[^@]*@\([^@]*\)/\1/')
-
+        version=$(./scripts/extract-tag.sh "${{ inputs.tag }}")
+        exit_code=$?
+        if [ $exit_code -ne 0 ]; then
+          exit $exit_code
+        fi
         echo "version=$version" >> "$GITHUB_OUTPUT"
