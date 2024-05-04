@@ -15,6 +15,7 @@ on:
 
 env:
   AWS_REGION: "us-east-1"
+  DOCKER_IMAGE_TAG_PREFIX: quoll-api
 
 permissions:
   id-token: write
@@ -37,3 +38,16 @@ jobs:
         with:
           registries: ${{ secrets.AWS_ACCOUNT_ID }}
           mask-password: "true"
+
+      - name: Get version
+        id: extract-version
+        uses: ./.github/actions/extract-version
+        with:
+          tag: ${{ inputs.git-tag }}
+
+      - name: Make image tag
+        id: make-image-tag
+        shell: bash
+        # e.g. some-package-0.0.1
+        run: |
+          echo "image-tag=${{ env.DOCKER_IMAGE_TAG_PREFIX }}-${{ steps.extract-version.outputs.version }}" >> "$GITHUB_OUTPUT"
