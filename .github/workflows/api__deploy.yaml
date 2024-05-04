@@ -25,6 +25,7 @@ jobs:
       - name: Get version
         id: extract-version
         uses: ./.github/actions/extract-version
+        continue-on-error: false
         with:
           tag: "${{ inputs.git-tag }}"
 
