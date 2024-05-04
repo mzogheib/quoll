@@ -4,7 +4,7 @@
 
 ## Authentication with AWS
 
-- This is done manually using OIDC providers
+- This is done manually for both GitHub and Terraform Cloud using OIDC providers
 - Refer to wiki
 
 ## ECR
