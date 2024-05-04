@@ -13,9 +13,20 @@ on:
         required: true
         type: string
 
+env:
+  AWS_REGION: "us-east-1"
+
+permissions:
+  id-token: write
+
 jobs:
   create-aws-resources:
-    uses: ./.github/workflows/reuse__terraform-apply.yaml
-    secrets: inherit
-    with:
-      config-directory-name: "packages/api/terraform"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.AWS_GITHUB_OIDC_ROLE_NAME }}
+          aws-region: ${{ env.AWS_REGION }}
