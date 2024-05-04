@@ -10,6 +10,7 @@
 ## ECR
 
 - Set a GitHub secret `AWS_ECR_REPO_NAME` with the name of the repo
-- Run the `terraform-apply` workflow with input `infrastructure/ecr`
+- Run the `infra__deploy-ecr` workflow
 - This builds the private repo via Terraform Cloud
 - The registry URL and repo name will now be available to other workflows
+- To delete, run the `infra__delete-ecr` workflow
