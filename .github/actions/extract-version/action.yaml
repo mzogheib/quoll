@@ -22,6 +22,7 @@ runs:
       id: extract-version
       shell: bash
       run: |
+        set +e
         version=$(./scripts/extract-tag.sh "${{ inputs.tag }}")
         exit_code=$?
         if [ $exit_code -ne 0 ]; then
