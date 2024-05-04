@@ -61,7 +61,7 @@ jobs:
           IMAGE_TAG: ${{ steps.make-image-tag.outputs.image-tag }}
           DOCKERFILE_PATH: "./packages/api/Dockerfile"
         run: |
-          docker build -f "${{ env.DOCKERFILE_PATH }}" -t "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+          docker build . -f "${{ env.DOCKERFILE_PATH }}" -t "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
           docker push "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
           echo "IMAGE $IMAGE_TAG is pushed to $ECR_REGISTRY/$ECR_REPOSITORY"
           echo "image_tag=$IMAGE_TAG" 
