@@ -7,7 +7,7 @@ tag=$1
 
 if [[ ! "$tag" =~ ^@[^@]+/[^@]+@[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
     echo "Error: Input string must be in the format '@<namespace>/<name>@<semver-version>'"
-    # exit 1
+    exit 1
 fi
 
 version=$(echo "$tag" | sed 's/.*@[^@]*@\([^@]*\)/\1/')
