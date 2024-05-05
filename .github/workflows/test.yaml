@@ -16,8 +16,6 @@ jobs:
 
       - name: Get version
         id: extract-version
-        env:
-          ACTIONS_STEP_DEBUG: true
         uses: ./.github/actions/extract-version
         with:
           tag: "${{ inputs.git-tag }}"
