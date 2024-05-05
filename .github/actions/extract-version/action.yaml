@@ -18,24 +18,14 @@ outputs:
 runs:
   using: composite
   steps:
-    # - name: Extract version
-    #   id: extract-version
-    #   shell: bash
-    #   run: |
-    #     output=$(./scripts/extract-tag.sh "${{ inputs.tag }}")
-    #     exit_code=$?
-    #     if [ $exit_code -ne 0 ]; then
-    #       echo "$output"
-    #       exit $exit_code
-    #     fi
-    #     echo "version=$output" >> "$GITHUB_OUTPUT"    
     - name: Extract version
       id: extract-version
       shell: bash
       run: |
         output=$(./scripts/extract-tag.sh "${{ inputs.tag }}")
-  
-    - name: Process output
-      shell: bash
-      run: |
-        echo "version=$output"
+        exit_code=$?
+        if [ $exit_code -ne 0 ]; then
+          echo "$output"
+          exit $exit_code
+        fi
+        echo "version=$output" >> "$GITHUB_OUTPUT"    
