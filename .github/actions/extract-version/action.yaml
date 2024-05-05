@@ -22,7 +22,6 @@ runs:
       id: extract-version
       shell: bash
       run: |
-        echo "::set-env name=ACTIONS_STEP_DEBUG::true"
         output=$(./scripts/extract-tag.sh "${{ inputs.tag }}")
         exit_code=$?
         if [ $exit_code -ne 0 ]; then
