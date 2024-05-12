@@ -25,3 +25,17 @@ resource "aws_ecr_repository" "main" {
     scan_on_push = true
   }
 }
+
+resource "aws_instance" "api_server" {
+  ami           = "ami-07caf09b362be10b8"
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "quoll-api"
+  }
+}
+
+output "instance_public_ip" {
+  description = "Public IP address of the EC2 instance"
+  value       = aws_instance.app_server.public_ip
+}
