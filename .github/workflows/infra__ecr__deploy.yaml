@@ -1,4 +1,4 @@
-name: "infra - deploy ecr"
+name: "infra - ecr - deploy"
 
 on:
   workflow_dispatch:

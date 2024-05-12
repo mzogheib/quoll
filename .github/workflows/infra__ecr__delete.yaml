@@ -1,4 +1,4 @@
-name: "infra - delete ecr"
+name: "infra - ecr - delete"
 
 on:
   workflow_dispatch:
