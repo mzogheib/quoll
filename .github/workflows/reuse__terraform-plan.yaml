@@ -8,22 +8,16 @@ on:
       config-directory-name:
         required: true
         type: string
-      workspace:
-        required: true
-        type: string
   workflow_call:
     inputs:
       config-directory-name:
-        required: true
-        type: string
-      workspace:
         required: true
         type: string
 
 env:
   TF_CLOUD_ORGANIZATION: "${{ secrets.TF_CLOUD_ORGANIZATION }}"
   TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
-  TF_WORKSPACE: "${{ inputs.workspace }}"
+  TF_WORKSPACE: "${{ secrets.TF_WORKSPACE }}"
   CONFIG_DIRECTORY: "./${{ inputs.config-directory-name }}"
 
 jobs:
