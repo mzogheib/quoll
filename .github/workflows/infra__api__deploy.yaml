@@ -1,4 +1,4 @@
-name: "infra - ecr - deploy"
+name: "infra - api - deploy"
 
 on:
   workflow_dispatch:
@@ -8,7 +8,7 @@ env:
   TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
   TF_WORKSPACE: "${{ secrets.TF_WORKSPACE }}"
   TF_VAR_repo_name: '"${{ secrets.AWS_ECR_REPO_NAME }}"'
-  CONFIG_DIRECTORY: "./infrastructure/ecr"
+  CONFIG_DIRECTORY: "./infrastructure"
 
 jobs:
   terraform:
