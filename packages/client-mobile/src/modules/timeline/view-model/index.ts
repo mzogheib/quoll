@@ -25,7 +25,8 @@ export const useTimelineViewModel = (date: ISO8601Date): TimelineViewModel => {
     if (mediaModel.isCheckingPermission) return;
 
     timelineModel.fetchTimeline(date);
-  }, []);
+    refreshMedia(date);
+  }, [mediaModel.isCheckingPermission]);
 
   const refreshMedia = async (date: ISO8601Date) => {
     if (!mediaModel.isConnected) return;
