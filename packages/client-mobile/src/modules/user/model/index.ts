@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import { User } from "@quoll/lib";
 import { useUserModel as _useUserModel } from "@quoll/client-lib";
 
@@ -20,20 +19,4 @@ const defaultState: State = {
 
 const useStore = makeStore(defaultState);
 
-export const useUserModel = () => {
-  const model = _useUserModel(useStore, userService, storage);
-
-  const login = useCallback(async (userId: string) => {
-    const user = await model.login(userId);
-  }, []);
-
-  const signup = useCallback(async () => {
-    const user = await model.signup();
-  }, []);
-
-  return {
-    ...model,
-    login,
-    signup,
-  };
-};
+export const useUserModel = () => _useUserModel(useStore, userService, storage);
