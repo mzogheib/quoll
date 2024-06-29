@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.26.1](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.26.0...@quoll/client-mobile@0.26.1) (2024-06-29)
+
+### Bug Fixes
+
+- **client-mobile:** fetch media on app launch ([239fb24](https://github.com/mzogheib/quoll/commit/239fb249ac6e4de43b03618fc91922bdeef1d2de))
+
 # [0.26.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.25.7...@quoll/client-mobile@0.26.0) (2024-04-21)
 
 ### Features

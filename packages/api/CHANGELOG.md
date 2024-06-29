@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.11.0](https://github.com/mzogheib/quoll/compare/@quoll/api@0.10.13...@quoll/api@0.11.0) (2024-06-29)
+
+### Bug Fixes
+
+- **api:** add connections config to nginx ([b2599e7](https://github.com/mzogheib/quoll/commit/b2599e7476adecf637b3eb4a98a33f0d55459bbf))
+
+### Features
+
+- **api:** add basic nginx config ([13d07c5](https://github.com/mzogheib/quoll/commit/13d07c5bc831844810391f3ed018eed1ae5cbaaf))
+
 ## [0.10.13](https://github.com/mzogheib/quoll/compare/@quoll/api@0.10.12...@quoll/api@0.10.13) (2024-05-04)
 
 ### Bug Fixes
