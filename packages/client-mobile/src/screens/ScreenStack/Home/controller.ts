@@ -19,22 +19,26 @@ const useController = () => {
     fetchTimeline(formattedDate);
   };
 
-  const markers: MarkerProps[] = entries
-    .filter(({ locationStart, polyline, mediaUri }) => {
-      const hasLocation = locationStart?.latitude && locationStart.longitude;
+  const markers: MarkerProps[] | null =
+    entries === null
+      ? null
+      : entries
+          .filter(({ locationStart, polyline, mediaUri }) => {
+            const hasLocation =
+              locationStart?.latitude && locationStart.longitude;
 
-      return hasLocation && !polyline && !!mediaUri;
-    })
-    .map(({ id, locationStart, mediaUri }) => ({
-      // The ! assertions are safe based on above filter
-      id,
-      coordinate: {
-        latitude: locationStart!.latitude,
-        longitude: locationStart!.longitude,
-      },
-      image: { uri: mediaUri! },
-      isSelected: id === selectedEntryId,
-    }));
+            return hasLocation && !polyline && !!mediaUri;
+          })
+          .map(({ id, locationStart, mediaUri }) => ({
+            // The ! assertions are safe based on above filter
+            id,
+            coordinate: {
+              latitude: locationStart!.latitude,
+              longitude: locationStart!.longitude,
+            },
+            image: { uri: mediaUri! },
+            isSelected: id === selectedEntryId,
+          }));
 
   return {
     entries,

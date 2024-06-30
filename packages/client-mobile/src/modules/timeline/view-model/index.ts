@@ -38,12 +38,13 @@ export const useTimelineViewModel = (date: ISO8601Date): TimelineViewModel => {
     await Promise.all([timelineModel.fetchTimeline(date), refreshMedia(date)]);
   };
 
-  const mediaEntries = mediaModel.value.map(mediaAdapter);
-
-  const entries = sortItemsByTimestamp([
-    ...timelineModel.entries,
-    ...mediaEntries,
-  ]);
+  const entries =
+    mediaModel.value !== null && timelineModel.entries !== null
+      ? sortItemsByTimestamp([
+          ...timelineModel.entries,
+          ...mediaModel.value.map(mediaAdapter),
+        ])
+      : null;
 
   return {
     ...timelineModel,

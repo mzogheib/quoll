@@ -15,7 +15,7 @@ type State = {
   isConnected: boolean;
   isCheckingPermission: boolean;
   isRefreshing: boolean;
-  value: MediaItem[];
+  value: MediaItem[] | null;
 };
 
 const defaultState: State = {
@@ -23,7 +23,7 @@ const defaultState: State = {
   isConnected: !!storage.getData()?.isConnected,
   isCheckingPermission: true,
   isRefreshing: false,
-  value: [],
+  value: null,
 };
 
 const useStore = makeStore(defaultState);

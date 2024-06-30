@@ -8,7 +8,7 @@ import timelineService from "../service";
 
 const defaultState: TimelineState = {
   isFetching: false,
-  entries: [],
+  entries: null,
 };
 
 const useTimelineStore = makeStore(defaultState);
