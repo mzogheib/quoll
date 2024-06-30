@@ -6,6 +6,7 @@ import Supercluster, {
 } from "supercluster";
 import { MarkerProps } from "./types";
 import { useState, useEffect, useCallback, useMemo } from "react";
+import { useGeolocationViewModel } from "@modules/geolocation/view-model";
 
 type Bounds = {
   minLat: number;
@@ -107,11 +108,6 @@ type PointProperties = {
 };
 type ClusterFeature = IClusterFeature<PointProperties>;
 
-type UseClustersParams = {
-  markers: MarkerProps[];
-  region: Region;
-};
-
 /**
  * A hook to manage clustering of markers on a map. Will update clusters on
  * change of markers.
@@ -119,7 +115,12 @@ type UseClustersParams = {
  * @returns clusters The clusters to display on the map.
  * @returns updateClusters Update the clusters based on the given region.
  */
-export const useClusters = ({ markers, region }: UseClustersParams) => {
+export const useClusters = (params: {
+  markers: MarkerProps[];
+  region: Region;
+}) => {
+  const { markers, region } = params;
+
   const [clusters, setClusters] = useState<ClusterFeature[]>([]);
 
   const supercluster = useMemo(() => {
@@ -175,4 +176,57 @@ export const useClusters = ({ markers, region }: UseClustersParams) => {
   }, [markers]);
 
   return { clusters, updateClusters };
+};
+
+// TODO: cycle through different world locations
+// Centre of Australia
+const defaultCoords = {
+  latitude: -25.898716,
+  longitude: 133.843298,
+};
+
+/**
+ * Calculates the region to display on the map. Region precedence is:
+ * 1. Markers
+ * 1. User's location
+ * 1. Default location
+ *
+ * @returns region The region to display on the map.
+ */
+export const useRegion = (params: { markers: MarkerProps[] }) => {
+  const { markers } = params;
+
+  const {
+    value: coords,
+    isConnected,
+    isCheckingPermission,
+    refresh,
+  } = useGeolocationViewModel();
+
+  const markersRegion = makeRegion(markers.map((marker) => marker.coordinate));
+
+  const userRegion =
+    isConnected && coords
+      ? {
+          latitude: coords.latitude,
+          longitude: coords.longitude,
+          latitudeDelta: 0.1,
+          longitudeDelta: 0.1,
+        }
+      : {
+          latitude: defaultCoords.latitude,
+          longitude: defaultCoords.longitude,
+          latitudeDelta: 50,
+          longitudeDelta: 50,
+        };
+
+  const region = markersRegion ?? userRegion;
+
+  useEffect(() => {
+    if (isCheckingPermission) return;
+
+    if (isConnected) refresh();
+  }, [isCheckingPermission, isConnected, refresh]);
+
+  return { region };
 };
