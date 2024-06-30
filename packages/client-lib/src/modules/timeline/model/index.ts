@@ -12,7 +12,7 @@ export type TimelineState = {
   /**
    * The array of timeline entries.
    */
-  entries: TimelineEntry[];
+  entries: TimelineEntry[] | null;
 };
 
 type TimelineActions = {
