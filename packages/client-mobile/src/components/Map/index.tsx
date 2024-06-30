@@ -1,17 +1,12 @@
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useEffect } from "react";
 import MapView, { Region } from "react-native-maps";
-import Supercluster, {
-  ClusterProperties,
-  ClusterFeature as IClusterFeature,
-} from "supercluster";
-import { ImageURISource } from "react-native";
 import { useGeolocationViewModel } from "@modules/geolocation/view-model";
 
 import styles from "./styles";
 
 import ImageMarker from "./ImageMarker";
 import ClusterMarker from "./ClusterMarker";
-import { makeRegion } from "@components/Map/utils";
+import { makeRegion, useClusters } from "@components/Map/utils";
 import { MarkerProps } from "./types";
 
 // TODO: cycle through different world locations
@@ -25,13 +20,6 @@ type Props = {
   markers: MarkerProps[];
   onMarkerPress: (id: string | null) => void;
 };
-
-type PointProperties = {
-  markerId: string;
-  image: ImageURISource;
-  isSelected: boolean;
-};
-type ClusterFeature = IClusterFeature<PointProperties>;
 
 export const Map = ({ markers, onMarkerPress }: Props) => {
   const {
@@ -66,62 +54,11 @@ export const Map = ({ markers, onMarkerPress }: Props) => {
     if (isConnected) refresh();
   }, [isCheckingPermission, isConnected, refresh]);
 
-  const supercluster = useMemo(() => {
-    const _supercluster = new Supercluster<PointProperties, ClusterProperties>({
-      radius: 40,
-      maxZoom: 16,
-    });
-
-    _supercluster.load(
-      markers.map((marker) => ({
-        type: "Feature",
-        geometry: {
-          type: "Point",
-          coordinates: [
-            marker.coordinate.longitude,
-            marker.coordinate.latitude,
-          ],
-        },
-        properties: {
-          markerId: marker.id,
-          image: marker.image,
-          isSelected: marker.isSelected,
-        },
-      })),
-    );
-
-    return _supercluster;
-  }, [markers]);
-
-  const [clusters, setClusters] = useState<ClusterFeature[]>([]);
-
-  const makeClusters = useCallback(
-    (newRegion: Region) => {
-      const bbox = [
-        newRegion.longitude - newRegion.longitudeDelta,
-        newRegion.latitude - newRegion.latitudeDelta,
-        newRegion.longitude + newRegion.longitudeDelta,
-        newRegion.latitude + newRegion.latitudeDelta,
-      ] as [number, number, number, number];
-
-      const zoom = Math.floor(Math.log2(360 / newRegion.longitudeDelta)) - 1;
-      const _clusters = supercluster.getClusters(
-        bbox,
-        zoom,
-      ) as ClusterFeature[]; // Looks like the type is wrong in the library
-
-      setClusters(_clusters);
-    },
-    [markers, supercluster],
-  );
+  const { clusters, updateClusters } = useClusters({ markers, region });
 
   const onRegionChangeComplete = (newRegion: Region) => {
-    makeClusters(newRegion);
+    updateClusters(newRegion);
   };
-
-  useEffect(() => {
-    makeClusters(region);
-  }, [markers]);
 
   return (
     <MapView
