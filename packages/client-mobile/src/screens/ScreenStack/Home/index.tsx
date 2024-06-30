@@ -20,14 +20,14 @@ const HomeScreen = ({ route }: ScreenProps<"home">) => {
     <ScreenTemplate screenName={route.name}>
       <View style={styles.wrapper}>
         <View style={styles.map}>
-          {markers && (
+          {markers !== null && (
             <Map markers={markers} onMarkerPress={handleEntrySelect} />
           )}
         </View>
         <View style={styles.sideBar}>
           <DateBar date={new Date(date)} onDateChange={handleDateChange} />
           <ScrollView>
-            {entries && (
+            {entries !== null && (
               <Timeline entries={entries} onEntryPress={handleEntrySelect} />
             )}
           </ScrollView>
