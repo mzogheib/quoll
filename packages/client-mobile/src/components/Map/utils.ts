@@ -85,7 +85,7 @@ const findCenter = (bounds: Bounds): LatLng => {
  * @param points
  * @returns
  */
-export const makeRegion = (points: LatLng[]) => {
+const makeRegion = (points: LatLng[]) => {
   if (!points.length) return;
 
   const bounds = findBounds(points, 500);
@@ -213,14 +213,16 @@ export const useRegion = (params: { markers: MarkerProps[] }) => {
           latitudeDelta: 0.1,
           longitudeDelta: 0.1,
         }
-      : {
-          latitude: defaultCoords.latitude,
-          longitude: defaultCoords.longitude,
-          latitudeDelta: 50,
-          longitudeDelta: 50,
-        };
+      : null;
 
-  const region = markersRegion ?? userRegion;
+  const defaultRegion = {
+    latitude: defaultCoords.latitude,
+    longitude: defaultCoords.longitude,
+    latitudeDelta: 50,
+    longitudeDelta: 50,
+  };
+
+  const region = markersRegion ?? userRegion ?? defaultRegion;
 
   useEffect(() => {
     if (isCheckingPermission) return;
