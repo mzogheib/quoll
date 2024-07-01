@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import MapView from "react-native-maps";
-import { useGeolocationViewModel } from "@modules/geolocation/view-model";
 
 import styles from "./styles";
 
-import ImageMarker from "./ImageMarker";
+import { useClusters } from "@components/Map/clusters";
 import { useRegion } from "@components/Map/region";
+import { useGeolocationViewModel } from "@modules/geolocation/view-model";
+import ImageMarker from "./ImageMarker";
+import ClusterMarker from "./ClusterMarker";
 import { MarkerProps } from "./types";
 
 type Props = {
@@ -15,8 +17,8 @@ type Props = {
 
 export const Map = ({ markers, onMarkerPress }: Props) => {
   const { isConnected } = useGeolocationViewModel();
-
   const { region } = useRegion({ markers });
+  const { clusters, updateClusters } = useClusters({ markers, region });
 
   return (
     <MapView
@@ -24,17 +26,40 @@ export const Map = ({ markers, onMarkerPress }: Props) => {
       region={region}
       showsUserLocation={isConnected}
       onPress={() => onMarkerPress(null)}
+      onRegionChangeComplete={updateClusters}
     >
-      {markers.map(({ id, image, isSelected, coordinate }, i) => (
-        <ImageMarker
-          key={i}
-          id={id}
-          image={image}
-          shouldShowCallout={isSelected}
-          coordinate={coordinate}
-          onPress={() => onMarkerPress(id)}
-        />
-      ))}
+      {clusters?.map((cluster) => {
+        const [longitude, latitude] = cluster.geometry.coordinates;
+        const {
+          cluster: isCluster,
+          cluster_id,
+          point_count,
+          markerId,
+          image,
+          isSelected,
+        } = cluster.properties;
+
+        if (isCluster) {
+          return (
+            <ClusterMarker
+              key={cluster_id}
+              count={point_count}
+              coordinate={{ latitude, longitude }}
+            />
+          );
+        }
+
+        return (
+          <ImageMarker
+            key={markerId}
+            id={markerId}
+            image={image}
+            shouldShowCallout={isSelected}
+            coordinate={{ latitude, longitude }}
+            onPress={() => onMarkerPress(markerId)}
+          />
+        );
+      })}
     </MapView>
   );
 };
