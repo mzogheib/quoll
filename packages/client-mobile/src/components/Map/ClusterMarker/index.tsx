@@ -10,7 +10,7 @@ type Props = {
 const ClusterMarker = ({ count, coordinate }: Props) => (
   <Marker coordinate={coordinate}>
     <View style={styles.wrapper}>
-      <Text style={{ color: "white" }}>{count}</Text>
+      <Text style={styles.text}>{count}</Text>
     </View>
   </Marker>
 );
