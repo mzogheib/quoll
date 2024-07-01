@@ -12,6 +12,7 @@ export const colorPalette = {
   matterhorn: "#4F4F4F",
   mediumAquamarine: "#6FCF97",
   mineShaft: "#333333",
+  red: "#FF0000",
   royalBlue: "#2F80ED",
   transparent: "transparent",
   white: "#FFFFFF",
