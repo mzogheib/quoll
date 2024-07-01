@@ -1,10 +1,7 @@
 import { useState, useMemo, useCallback, useEffect } from "react";
 import { ImageURISource } from "react-native";
 import { Region } from "react-native-maps";
-import Supercluster, {
-  ClusterProperties,
-  ClusterFeature as IClusterFeature,
-} from "supercluster";
+import Supercluster, { ClusterProperties, ClusterFeature } from "supercluster";
 import { MarkerProps } from "./types";
 
 type PointProperties = {
@@ -12,7 +9,7 @@ type PointProperties = {
   image: ImageURISource;
   isSelected: boolean;
 };
-type ClusterFeature = IClusterFeature<PointProperties>;
+type Cluster = ClusterFeature<PointProperties>;
 
 /**
  * A hook to manage clustering of markers on a map. Will update clusters on
@@ -27,7 +24,7 @@ export const useClusters = (params: {
 }) => {
   const { markers, region } = params;
 
-  const [clusters, setClusters] = useState<ClusterFeature[] | null>(null);
+  const [clusters, setClusters] = useState<Cluster[] | null>(null);
 
   const supercluster = useMemo(() => {
     const _supercluster = new Supercluster<PointProperties, ClusterProperties>({
@@ -66,10 +63,7 @@ export const useClusters = (params: {
       ] as [number, number, number, number];
 
       const zoom = Math.floor(Math.log2(360 / newRegion.longitudeDelta)) - 1;
-      const _clusters = supercluster.getClusters(
-        bbox,
-        zoom,
-      ) as ClusterFeature[]; // Looks like the type is wrong in the library
+      const _clusters = supercluster.getClusters(bbox, zoom) as Cluster[]; // Looks like the type is wrong in the library
 
       setClusters(_clusters);
     },
