@@ -6,8 +6,8 @@ import styles from "./styles";
 
 import ImageMarker from "./ImageMarker";
 import ClusterMarker from "./ClusterMarker";
-import { useRegion } from "@components/Map/utils";
 import { useClusters } from "@components/Map/clusters";
+import { useRegion } from "@components/Map/region";
 import { MarkerProps } from "./types";
 
 type Props = {
