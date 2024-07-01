@@ -32,8 +32,8 @@ export const Map = ({ markers, onMarkerPress }: Props) => {
         const [longitude, latitude] = cluster.geometry.coordinates;
         const {
           cluster: isCluster,
-          cluster_id: clusterId,
-          point_count: pointCount,
+          cluster_id,
+          point_count,
           markerId,
           image,
           isSelected,
@@ -42,8 +42,8 @@ export const Map = ({ markers, onMarkerPress }: Props) => {
         if (isCluster) {
           return (
             <ClusterMarker
-              key={clusterId}
-              count={pointCount}
+              key={cluster_id}
+              count={point_count}
               coordinate={{ latitude, longitude }}
             />
           );
