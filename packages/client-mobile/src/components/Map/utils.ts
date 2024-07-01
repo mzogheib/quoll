@@ -1,4 +1,7 @@
 import { LatLng } from "react-native-maps";
+import { useEffect } from "react";
+import { useGeolocationViewModel } from "@modules/geolocation/view-model";
+import { MarkerProps } from "./types";
 
 type Bounds = {
   minLat: number;
@@ -77,7 +80,7 @@ const findCenter = (bounds: Bounds): LatLng => {
  * @param points
  * @returns
  */
-export const makeRegion = (points: LatLng[]) => {
+const makeRegion = (points: LatLng[]) => {
   if (!points.length) return;
 
   const bounds = findBounds(points, 500);
@@ -91,4 +94,59 @@ export const makeRegion = (points: LatLng[]) => {
     latitudeDelta: maxLat - minLat,
     longitudeDelta: maxLng - minLng,
   };
+};
+
+// TODO: cycle through different world locations
+// Centre of Australia
+const defaultCoords = {
+  latitude: -25.898716,
+  longitude: 133.843298,
+};
+
+/**
+ * Calculates the region to display on the map. Region precedence is:
+ * 1. Markers
+ * 1. User's location
+ * 1. Default location
+ *
+ * @returns region The region to display on the map.
+ */
+export const useRegion = (params: { markers: MarkerProps[] }) => {
+  const { markers } = params;
+
+  const {
+    value: coords,
+    isConnected,
+    isCheckingPermission,
+    refresh,
+  } = useGeolocationViewModel();
+
+  const markersRegion = makeRegion(markers.map((marker) => marker.coordinate));
+
+  const userRegion =
+    isConnected && coords
+      ? {
+          latitude: coords.latitude,
+          longitude: coords.longitude,
+          latitudeDelta: 0.1,
+          longitudeDelta: 0.1,
+        }
+      : null;
+
+  const defaultRegion = {
+    latitude: defaultCoords.latitude,
+    longitude: defaultCoords.longitude,
+    latitudeDelta: 50,
+    longitudeDelta: 50,
+  };
+
+  const region = markersRegion ?? userRegion ?? defaultRegion;
+
+  useEffect(() => {
+    if (isCheckingPermission) return;
+
+    if (isConnected) refresh();
+  }, [isCheckingPermission, isConnected, refresh]);
+
+  return { region };
 };
