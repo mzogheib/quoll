@@ -27,7 +27,7 @@ export const useClusters = (params: {
 }) => {
   const { markers, region } = params;
 
-  const [clusters, setClusters] = useState<ClusterFeature[]>([]);
+  const [clusters, setClusters] = useState<ClusterFeature[] | null>(null);
 
   const supercluster = useMemo(() => {
     const _supercluster = new Supercluster<PointProperties, ClusterProperties>({

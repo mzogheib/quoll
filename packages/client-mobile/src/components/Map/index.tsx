@@ -28,7 +28,7 @@ export const Map = ({ markers, onMarkerPress }: Props) => {
       onPress={() => onMarkerPress(null)}
       onRegionChangeComplete={updateClusters}
     >
-      {clusters.map((cluster) => {
+      {clusters?.map((cluster) => {
         const [longitude, latitude] = cluster.geometry.coordinates;
         const {
           cluster: isCluster,
