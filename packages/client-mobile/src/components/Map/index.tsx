@@ -5,7 +5,7 @@ import { useGeolocationViewModel } from "@modules/geolocation/view-model";
 import styles from "./styles";
 
 import ImageMarker from "./ImageMarker";
-import { useRegion } from "@components/Map/utils";
+import { useRegion } from "@components/Map/region";
 import { MarkerProps } from "./types";
 
 type Props = {
