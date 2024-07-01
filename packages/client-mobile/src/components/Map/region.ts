@@ -1,7 +1,7 @@
-import { LatLng } from "react-native-maps";
+import { LatLng, Region } from "react-native-maps";
+import { MarkerProps } from "./types";
 import { useEffect } from "react";
 import { useGeolocationViewModel } from "@modules/geolocation/view-model";
-import { MarkerProps } from "./types";
 
 type Bounds = {
   minLat: number;
@@ -111,7 +111,9 @@ const defaultCoords = {
  *
  * @returns region The region to display on the map.
  */
-export const useRegion = (params: { markers: MarkerProps[] }) => {
+export const useRegion = (params: {
+  markers: MarkerProps[];
+}): { region: Region } => {
   const { markers } = params;
 
   const {
