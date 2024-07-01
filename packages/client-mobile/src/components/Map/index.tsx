@@ -1,13 +1,13 @@
 import React from "react";
 import MapView from "react-native-maps";
-import { useGeolocationViewModel } from "@modules/geolocation/view-model";
 
 import styles from "./styles";
 
-import ImageMarker from "./ImageMarker";
-import ClusterMarker from "./ClusterMarker";
 import { useClusters } from "@components/Map/clusters";
 import { useRegion } from "@components/Map/region";
+import { useGeolocationViewModel } from "@modules/geolocation/view-model";
+import ImageMarker from "./ImageMarker";
+import ClusterMarker from "./ClusterMarker";
 import { MarkerProps } from "./types";
 
 type Props = {
