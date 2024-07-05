@@ -87,7 +87,7 @@ const Home = () => {
   const [focussedEntryId, setFocussedEntryId] = useState<string>();
   const [focussedEntryLatLng, setFocussedEntryLatLng] =
     useState<google.maps.LatLngLiteral>();
-  const focussedEntry = entries.find(({ id }) => id === focussedEntryId);
+  const focussedEntry = entries?.find(({ id }) => id === focussedEntryId);
 
   const handleEntryClick = (id: string, latLng?: google.maps.LatLngLiteral) => {
     setFocussedEntryId(id);
@@ -102,17 +102,15 @@ const Home = () => {
   };
 
   const polylineConfigs = useMemo(() => {
-    if (!isMapReady) return [];
+    if (!isMapReady || entries === null) return;
 
     return makePolylineConfigs(entries, focussedEntryId, handleEntryClick);
   }, [entries, focussedEntryId, isMapReady]);
 
   const infoWindowOptions = useMemo(() => {
-    if (!isMapReady) return;
+    if (!isMapReady || focussedEntry === undefined) return;
 
-    return focussedEntry
-      ? makeInfoWindowOptions(focussedEntry, focussedEntryLatLng)
-      : undefined;
+    return makeInfoWindowOptions(focussedEntry, focussedEntryLatLng);
   }, [focussedEntry, focussedEntryLatLng, isMapReady]);
 
   useEffect(() => {
@@ -138,7 +136,9 @@ const Home = () => {
         />
         <TimelineWrapper>
           <TimelineBody>
-            <Timeline entries={entries} onEntryClick={handleEntryClick} />
+            {entries === null ? null : (
+              <Timeline entries={entries} onEntryClick={handleEntryClick} />
+            )}
           </TimelineBody>
         </TimelineWrapper>
       </Left>

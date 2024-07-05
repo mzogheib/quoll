@@ -9,7 +9,7 @@ import { RootState } from "store";
 
 const defaultState: TimelineState = {
   isFetching: false,
-  entries: [],
+  entries: null,
 };
 
 export const timelineStore = makeReduxStoreSlice<TimelineState, RootState>(
