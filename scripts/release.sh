@@ -5,4 +5,4 @@ if [ -z "$CI" ]; then
   exit 1
 fi
 
-cross-env HUSKY_BYPASS=true lerna publish --conventional-commits --yes
+cross-env lerna publish --message "chore: publish packages" --conventional-commits --yes
