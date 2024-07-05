@@ -22,8 +22,6 @@
     "prepare": "tsdx build",
     "size": "size-limit",
     "analyze": "size-limit --why",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
     "chromatic": "node scripts/chromatic.js"
   },
   "dependencies": {
@@ -37,11 +35,6 @@
   "devDependencies": {
     "@babel/core": "^7.18.10",
     "@size-limit/preset-small-lib": "^8.0.1",
-    "@storybook/addon-essentials": "^6.5.10",
-    "@storybook/addon-info": "^5.3.21",
-    "@storybook/addon-links": "^6.5.10",
-    "@storybook/addons": "^6.5.10",
-    "@storybook/react": "^6.5.10",
     "@types/react": "^18.2.45",
     "@types/react-dom": "^18.0.6",
     "@types/react-modal": "^3.13.1",
