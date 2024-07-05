@@ -1,8 +1,17 @@
-type RequestParams = {
+type Headers = Record<string, string>;
+
+type Params = Record<string, string>;
+
+export type RequestParams = {
   method: "GET" | "PUT" | "POST" | "DELETE";
   endpoint: string;
-  params?: Record<string, string>;
+  headers?: Headers;
+  params?: Params;
   payload?: object;
+};
+
+const baseHeaders = {
+  "Content-Type": "application/json",
 };
 
 export abstract class ApiService {
@@ -12,7 +21,7 @@ export abstract class ApiService {
     this.baseUrl = baseUrl;
   }
 
-  private makeUrl(endpoint: string, params?: Record<string, string>) {
+  private makeUrl(endpoint: string, params?: Params) {
     const baseUrl = `${this.baseUrl}${endpoint}`;
 
     const search = new URLSearchParams(params);
@@ -36,16 +45,21 @@ export abstract class ApiService {
   protected async request<Response>({
     method,
     endpoint,
+    headers,
     params,
     payload,
   }: RequestParams): Promise<Response> {
     const url = this.makeUrl(endpoint, params);
+
+    const allHeaders = {
+      ...baseHeaders,
+      ...headers,
+    };
+
     const init = {
       method,
       body: JSON.stringify(payload),
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: allHeaders,
     };
 
     const response = await fetch(url, init);
