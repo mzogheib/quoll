@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.26](https://github.com/mzogheib/quoll/compare/@quoll/ui-components@0.2.25...@quoll/ui-components@0.2.26) (2024-07-05)
+
+### Bug Fixes
+
+- **ui-components:** add display names to button ([b21913d](https://github.com/mzogheib/quoll/commit/b21913d975e968d5e6c7fecef634b38cc205e339))
+
 ## [0.2.25](https://github.com/mzogheib/quoll/compare/@quoll/ui-components@0.2.24...@quoll/ui-components@0.2.25) (2024-07-05)
 
 **Note:** Version bump only for package @quoll/ui-components

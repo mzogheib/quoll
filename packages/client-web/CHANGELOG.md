@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.3](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.7.2...@quoll/client-web@0.7.3) (2024-07-05)
+
+### Bug Fixes
+
+- **client-web:** handle null entries ([57a6a66](https://github.com/mzogheib/quoll/commit/57a6a667ed7c5c83b26a1125c8c8d9c7a09d353a))
+
 ## [0.7.2](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.7.1...@quoll/client-web@0.7.2) (2024-07-05)
 
 **Note:** Version bump only for package @quoll/client-web
