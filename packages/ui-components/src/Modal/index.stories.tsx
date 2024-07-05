@@ -8,7 +8,7 @@ import { Modal } from ".";
 
 export default { title: "Modal" };
 
-Modal.setAppElement("#root");
+Modal.setAppElement("#modal-root");
 
 const Wrapper = styled.div`
   width: 200px;
