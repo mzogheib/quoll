@@ -47,7 +47,6 @@ export const Button = styled.button(({ theme: { colors, font }, disabled }) =>
     disabled,
   }),
 );
-Button.displayName = "Button";
 
 export const ButtonPrimary = styled.button(
   ({ theme: { colors, font }, disabled }) =>
@@ -58,7 +57,6 @@ export const ButtonPrimary = styled.button(
       disabled,
     }),
 );
-ButtonPrimary.displayName = "ButtonPrimary";
 
 export const ButtonPlain = styled.button(
   ({ theme: { colors, font }, disabled }) =>
@@ -71,4 +69,3 @@ export const ButtonPlain = styled.button(
       noHitbox: true,
     }),
 );
-ButtonPlain.displayName = "ButtonPlain";
