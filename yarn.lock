@@ -6173,7 +6173,7 @@ __metadata:
     tslib: "npm:^2.4.0"
     typescript: "npm:^4.7.4"
   peerDependencies:
-    react: ">=16"
+    react: ^18.2.0
   languageName: unknown
   linkType: soft
 
