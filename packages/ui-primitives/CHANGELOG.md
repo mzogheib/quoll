@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/mzogheib/quoll/compare/@quoll/ui-primitives@0.4.7...@quoll/ui-primitives@0.5.0) (2024-07-05)
+
+### Features
+
+- **ui-primitives:** add red to color palette ([aaac1c5](https://github.com/mzogheib/quoll/commit/aaac1c5b86b148d63367c5bff94ae38a248e6c33))
+
 ## 0.4.7 (2024-04-20)
 
 **Note:** Version bump only for package @quoll/ui-primitives

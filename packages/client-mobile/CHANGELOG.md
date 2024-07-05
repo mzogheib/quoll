@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.27.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.26.1...@quoll/client-mobile@0.27.0) (2024-07-05)
+
+### Features
+
+- **client-mobile:** add marker clustering ([#222](https://github.com/mzogheib/quoll/issues/222)) ([6dec3de](https://github.com/mzogheib/quoll/commit/6dec3de9375e60cfe51baeea9ea192f8301f14c5))
+
 ## [0.26.1](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.26.0...@quoll/client-mobile@0.26.1) (2024-06-29)
 
 ### Bug Fixes

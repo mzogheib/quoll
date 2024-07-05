@@ -1,6 +1,6 @@
 {
   "name": "@quoll/client-web",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "private": true,
   "scripts": {
     "start": "react-scripts start",
@@ -26,9 +26,9 @@
   },
   "dependencies": {
     "@googlemaps/react-wrapper": "^1.1.35",
-    "@quoll/client-lib": "^0.4.11",
+    "@quoll/client-lib": "^0.4.12",
     "@quoll/lib": "^0.4.7",
-    "@quoll/ui-components": "^0.2.24",
+    "@quoll/ui-components": "^0.2.25",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^5.2.0",
