@@ -1,8 +1,7 @@
 import React from "react";
-import styled, { StyledComponent, ThemeProvider } from "styled-components";
+import styled, { StyledComponent } from "styled-components";
 
 import { Button, ButtonPlain, ButtonPrimary } from ".";
-import { themes } from "../themes";
 
 export default { title: "Button" };
 
@@ -46,16 +45,14 @@ const renderButton = ({ variation, disabled }: RenderButtonParams) => {
 };
 
 export const Default = () => (
-  <ThemeProvider theme={themes.default}>
-    <Row>
-      {buttonDisabledProp.map((disabled) => (
-        <Column key={`${disabled}`}>
-          <div>{disabled ? "Disabled" : "Enabled"}</div>
-          {buttonVariations.map((variation) =>
-            renderButton({ variation, disabled }),
-          )}
-        </Column>
-      ))}
-    </Row>
-  </ThemeProvider>
+  <Row>
+    {buttonDisabledProp.map((disabled) => (
+      <Column key={`${disabled}`}>
+        <div>{disabled ? "Disabled" : "Enabled"}</div>
+        {buttonVariations.map((variation) =>
+          renderButton({ variation, disabled }),
+        )}
+      </Column>
+    ))}
+  </Row>
 );

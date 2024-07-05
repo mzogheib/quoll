@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import styled, { ThemeProvider } from "styled-components";
+import styled from "styled-components";
 import ReactModal from "react-modal";
 
 import { Button } from "../Button";
 
 import { Modal } from ".";
-import { themes } from "../themes";
 
 export default { title: "Modal" };
 
@@ -55,23 +54,21 @@ export const Default = () => {
   const [isDefaultModalOpen, setDefaultModalOpen] = useState(false);
   const [isNarrowModalOpen, setNarrowModalOpen] = useState(false);
   return (
-    <ThemeProvider theme={themes.default}>
-      <Wrapper>
-        <Button onClick={() => setDefaultModalOpen(true)}>
-          Open default modal
-        </Button>
-        <Button onClick={() => setNarrowModalOpen(true)}>
-          Open narrow modal
-        </Button>
-        <DefaultModal
-          isOpen={isDefaultModalOpen}
-          onRequestClose={() => setDefaultModalOpen(false)}
-        />
-        <NarrowModal
-          isOpen={isNarrowModalOpen}
-          onRequestClose={() => setNarrowModalOpen(false)}
-        />
-      </Wrapper>
-    </ThemeProvider>
+    <Wrapper>
+      <Button onClick={() => setDefaultModalOpen(true)}>
+        Open default modal
+      </Button>
+      <Button onClick={() => setNarrowModalOpen(true)}>
+        Open narrow modal
+      </Button>
+      <DefaultModal
+        isOpen={isDefaultModalOpen}
+        onRequestClose={() => setDefaultModalOpen(false)}
+      />
+      <NarrowModal
+        isOpen={isNarrowModalOpen}
+        onRequestClose={() => setNarrowModalOpen(false)}
+      />
+    </Wrapper>
   );
 };
