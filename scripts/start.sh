@@ -20,7 +20,7 @@ while true; do
     done
 
     echo ""
-    echo "(type q to quit)"
+    echo "q: quit"
 
     read -rsn1 key
 
