@@ -49,4 +49,4 @@ clear
 
 echo "Running "${selected_option_emoji}" "${selected_option_label}"..."
 
-node scripts/start.js "${selected_option_label}"
+yarn workspace @quoll/${selected_option_label} start
