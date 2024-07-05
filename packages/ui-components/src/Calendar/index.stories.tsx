@@ -11,6 +11,8 @@ const Wrapper = styled.div`
 
 export const Default = () => {
   const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
   const [date, setDate] = useState<Date | Date[]>(today);
 
   return (
