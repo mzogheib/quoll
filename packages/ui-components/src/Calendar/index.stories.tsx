@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 
 import { Calendar } from ".";
+import { themes } from "../themes";
 
 export default { title: "Calendar" };
 
@@ -14,9 +15,11 @@ export const Default = () => {
   const [date, setDate] = useState<Date | Date[]>(today);
 
   return (
-    <Wrapper>
-      <Calendar maxDate={today} value={date} onChange={setDate} />
-      <code>{date.toLocaleString()}</code>
-    </Wrapper>
+    <ThemeProvider theme={themes.default}>
+      <Wrapper>
+        <Calendar maxDate={today} value={date} onChange={setDate} />
+        <code>{date.toLocaleString()}</code>
+      </Wrapper>
+    </ThemeProvider>
   );
 };
