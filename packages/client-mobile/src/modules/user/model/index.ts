@@ -1,5 +1,4 @@
-import { User } from "@quoll/lib";
-import { useUserModel as _useUserModel } from "@quoll/client-lib";
+import { UserState, useUserModel as _useUserModel } from "@quoll/client-lib";
 
 import { makeStorage } from "@utils/storage";
 import { makeStore } from "@utils/store";
@@ -7,14 +6,9 @@ import { userService } from "../service";
 
 export const storage = makeStorage<{ id: string }>("user");
 
-type State = {
-  isAuthenticating: boolean;
-  user: User | undefined;
-};
-
-const defaultState: State = {
+const defaultState: UserState = {
   isAuthenticating: true,
-  user: undefined,
+  user: null,
 };
 
 const useStore = makeStore(defaultState);

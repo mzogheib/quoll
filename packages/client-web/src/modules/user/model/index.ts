@@ -13,7 +13,7 @@ export const storage = makeStorage<{ id: string }>("user");
 
 const defaultState: UserState = {
   isAuthenticating: true,
-  user: undefined,
+  user: null,
 };
 
 export const userStore = makeReduxStoreSlice<UserState, RootState>(

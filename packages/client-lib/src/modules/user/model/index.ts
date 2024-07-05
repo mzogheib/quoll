@@ -6,7 +6,7 @@ import { UserService } from "../service";
 
 export type UserState = {
   isAuthenticating: boolean;
-  user: User | undefined;
+  user: User | null;
 };
 
 type UserActions = {
