@@ -7124,6 +7124,7 @@ __metadata:
   dependencies:
     "@mapbox/polyline": "npm:^1.1.1"
     "@quoll/lib": "npm:^0.4.8"
+    "@types/cors": "npm:^2.8.17"
     body-parser: "npm:^1.20.0"
     cors: "npm:^2.8.5"
     dotenv: "npm:^16.0.1"
@@ -10232,6 +10233,15 @@ __metadata:
   version: 0.4.1
   resolution: "@types/cookie@npm:0.4.1"
   checksum: f96afe12bd51be1ec61410b0641243d93fa3a494702407c787a4c872b5c8bcd39b224471452055e44a9ce42af1a636e87d161994226eaf4c2be9c30f60418409
+  languageName: node
+  linkType: hard
+
+"@types/cors@npm:^2.8.17":
+  version: 2.8.17
+  resolution: "@types/cors@npm:2.8.17"
+  dependencies:
+    "@types/node": "npm:*"
+  checksum: 457364c28c89f3d9ed34800e1de5c6eaaf344d1bb39af122f013322a50bc606eb2aa6f63de4e41a7a08ba7ef454473926c94a830636723da45bf786df032696d
   languageName: node
   linkType: hard
 
