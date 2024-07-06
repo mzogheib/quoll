@@ -12,7 +12,7 @@
     "moment": "^2.29.4",
     "mongoose": "^6.12.3",
     "node-moves": "https://github.com/mzogheib/node-moves",
-    "node-strava": "https://github.com/mzogheib/node-strava#0.2.0",
+    "node-strava": "https://github.com/mzogheib/node-strava",
     "node-toshl": "https://github.com/mzogheib/node-toshl",
     "node-uber": "https://github.com/mzogheib/node-uber",
     "uuid": "^8.3.2"
