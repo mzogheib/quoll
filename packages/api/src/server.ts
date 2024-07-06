@@ -4,7 +4,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 
-const routes = require("./routes");
+import routes from "./routes";
 
 dotenv.config();
 
