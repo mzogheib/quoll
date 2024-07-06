@@ -2,20 +2,22 @@ import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
+import mongoose from "mongoose";
 
-const mongoose = require("mongoose");
 const routes = require("./routes");
 
 dotenv.config();
 
-mongoose.connect(process.env.MONGODB_CONNECTION_STRING, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+if (process.env.MONGODB_CONNECTION_STRING === undefined) {
+  console.error("DB connection string is not set");
+  process.exit(1);
+}
+
+mongoose.connect(process.env.MONGODB_CONNECTION_STRING);
 
 const db = mongoose.connection;
-if (!db) console.log("Error connecting db");
-else console.log("Db connected successfully");
+if (!db) console.log("Error connecting DB");
+else console.log("DB connected successfully");
 
 const app = express();
 
