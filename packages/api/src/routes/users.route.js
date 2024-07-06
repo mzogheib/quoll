@@ -1,17 +1,19 @@
-import {
-  login as _login,
-  createUser,
-  get,
-} from "../controllers/users.controller";
+const ctrlUsers = require("../controllers/users.controller");
 
-export function login(req, res) {
+module.exports = {
+  login,
+  signup,
+  authenticate,
+};
+
+function login(req, res) {
   // TODO: userId should be a bearer token?
   const userId = req.body.userId;
 
   if (!userId) {
     respond({ status: 400, message: "No client key provided." });
   } else {
-    _login(userId).then(onSuccess).catch(onError);
+    ctrlUsers.login(userId).then(onSuccess).catch(onError);
   }
 
   function onSuccess(user) {
@@ -34,8 +36,8 @@ export function login(req, res) {
   }
 }
 
-export function signup(req, res) {
-  createUser().then(onSuccess).catch(onError);
+function signup(req, res) {
+  ctrlUsers.createUser().then(onSuccess).catch(onError);
 
   function onSuccess(user) {
     respond({ status: 200, message: user });
@@ -50,13 +52,13 @@ export function signup(req, res) {
   }
 }
 
-export function authenticate(req, res, next) {
+function authenticate(req, res, next) {
   const authHeader = req.headers.authorization;
 
   if (authHeader) {
     // "Authorization: Basic userId:". Want the userId from that string
     const userId = authHeader.split(" ")[1].split(":")[0];
-    const user = get(userId);
+    const user = ctrlUsers.get(userId);
     if (user) {
       req.userId = userId;
       next();
