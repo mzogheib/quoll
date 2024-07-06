@@ -7115,7 +7115,7 @@ __metadata:
     node-strava: "https://github.com/mzogheib/node-strava#0.2.0"
     node-toshl: "https://github.com/mzogheib/node-toshl"
     node-uber: "https://github.com/mzogheib/node-uber"
-    nodemon: "npm:^2.0.19"
+    nodemon: "npm:^3.1.4"
     uuid: "npm:^8.3.2"
   languageName: unknown
   linkType: soft
@@ -15384,7 +15384,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:^4.3.1":
+"debug@npm:^4, debug@npm:^4.3.1":
   version: 4.3.5
   resolution: "debug@npm:4.3.5"
   dependencies:
@@ -24893,23 +24893,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nodemon@npm:^2.0.19":
-  version: 2.0.19
-  resolution: "nodemon@npm:2.0.19"
+"nodemon@npm:^3.1.4":
+  version: 3.1.4
+  resolution: "nodemon@npm:3.1.4"
   dependencies:
     chokidar: "npm:^3.5.2"
-    debug: "npm:^3.2.7"
+    debug: "npm:^4"
     ignore-by-default: "npm:^1.0.1"
-    minimatch: "npm:^3.0.4"
+    minimatch: "npm:^3.1.2"
     pstree.remy: "npm:^1.1.8"
-    semver: "npm:^5.7.1"
-    simple-update-notifier: "npm:^1.0.7"
+    semver: "npm:^7.5.3"
+    simple-update-notifier: "npm:^2.0.0"
     supports-color: "npm:^5.5.0"
     touch: "npm:^3.1.0"
     undefsafe: "npm:^2.0.5"
   bin:
     nodemon: bin/nodemon.js
-  checksum: 53ccc2cf92bce69046399173b23e281a04be62d59ac6e6689cbb0f5ada83673720e52795abe74113bffabb47078632a198b877e458f7b3f8756186d26dcf729c
+  checksum: be2335396a4c25549f86e9c69bb57e6a21758a9649d74182a359d88b80afbe84f67a1651e293a08c6d77ecdf5c6224d02990de9de225f70d7c659021206c877f
   languageName: node
   linkType: hard
 
@@ -29551,7 +29551,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:2 || 3 || 4 || 5, semver@npm:^5.5.0, semver@npm:^5.6.0, semver@npm:^5.7.1":
+"semver@npm:2 || 3 || 4 || 5, semver@npm:^5.5.0, semver@npm:^5.6.0":
   version: 5.7.1
   resolution: "semver@npm:5.7.1"
   bin:
@@ -29569,7 +29569,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:7.0.0, semver@npm:~7.0.0":
+"semver@npm:7.0.0":
   version: 7.0.0
   resolution: "semver@npm:7.0.0"
   bin:
@@ -29910,12 +29910,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"simple-update-notifier@npm:^1.0.7":
-  version: 1.0.7
-  resolution: "simple-update-notifier@npm:1.0.7"
+"simple-update-notifier@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "simple-update-notifier@npm:2.0.0"
   dependencies:
-    semver: "npm:~7.0.0"
-  checksum: a1c536a037818f45128cbeb96e89d11c8a241f13eb2a301b95c4b78a563e1b652a7d2213d3c111383babac2bcbef7b04e6b33e7ae48023d5f660f4d44e7ecfbe
+    semver: "npm:^7.5.3"
+  checksum: 2a00bd03bfbcbf8a737c47ab230d7920f8bfb92d1159d421bdd194479f6d01ebc995d13fbe13d45dace23066a78a3dc6642999b4e3b38b847e6664191575b20c
   languageName: node
   linkType: hard
 
