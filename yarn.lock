@@ -7108,7 +7108,7 @@ __metadata:
     body-parser: "npm:^1.20.0"
     cors: "npm:^2.8.5"
     dotenv: "npm:^16.0.1"
-    express: "npm:^4.18.1"
+    express: "npm:^4.19.2"
     moment: "npm:^2.29.4"
     mongoose: "npm:^6.12.3"
     node-moves: "https://github.com/mzogheib/node-moves"
@@ -17803,7 +17803,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"express@npm:^4.17.3, express@npm:^4.18.1":
+"express@npm:^4.17.3, express@npm:^4.19.2":
   version: 4.19.2
   resolution: "express@npm:4.19.2"
   dependencies:
