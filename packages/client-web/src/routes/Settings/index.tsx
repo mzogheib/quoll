@@ -83,13 +83,9 @@ const Settings = () => {
   };
 
   const handleDisconnect = (name: FeedName) =>
-    disconnect(name)
-      .then((message) => {
-        if (message) {
-          openModal(message);
-        }
-      })
-      .catch(() => openModal("Could not disconnect feed. Please try again."));
+    disconnect(name).catch(() =>
+      openModal("Could not disconnect feed. Please try again."),
+    );
 
   const { showModal, modalMessage } = state;
 
