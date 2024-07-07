@@ -12,7 +12,6 @@ const DefaultFeeds = [
   { name: "strava", auth: null },
   { name: "toshl", auth: null },
   { name: "moves", auth: null },
-  { name: "uber", auth: null },
 ];
 
 function createUser() {

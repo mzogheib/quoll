@@ -24,14 +24,6 @@ const apis = [
       client_secret: process.env.TOSHL_CLIENT_SECRET,
     },
   },
-  {
-    name: "uber",
-    packageName: "node-uber",
-    auth: {
-      client_id: process.env.UBER_CLIENT_ID,
-      client_secret: process.env.UBER_CLIENT_SECRET,
-    },
-  },
 ];
 
 module.exports = apis.reduce((exp, api) => {
