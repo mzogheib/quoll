@@ -34,7 +34,7 @@ declare module "node-toshl" {
         from: string;
         to: string;
         access_token: string;
-      }): Promise<{ id: string }[]>;
+      }): Promise<{ id: string; tags: string[] }[]>;
     };
   }
 }
