@@ -5,8 +5,6 @@ import { colorPalette } from "@quoll/ui-primitives";
 const iconMap = {
   toshl: null,
   strava: "directions-run",
-  uber: null,
-  moves: null,
   media: "image",
   location: "my-location",
 };
