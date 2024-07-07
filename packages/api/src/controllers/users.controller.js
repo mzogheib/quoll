@@ -1,19 +1,11 @@
 import User from "../models/user.model";
 
-export default {
-  createUser,
-  login,
-  get,
-  setFeedAuth,
-  getFeedAuth,
-};
-
 const DefaultFeeds = [
   { name: "strava", auth: null },
   { name: "toshl", auth: null },
 ];
 
-function createUser() {
+export function createUser() {
   return new Promise((resolve, reject) => {
     User.create({ feeds: DefaultFeeds }, (error, user) => {
       if (error) reject(error);
@@ -22,7 +14,7 @@ function createUser() {
   });
 }
 
-function login(userId) {
+export function login(userId) {
   return new Promise((resolve, reject) => {
     User.findById(userId, (error, user) => {
       if (error) reject(error);
@@ -62,7 +54,7 @@ function update(user) {
   });
 }
 
-function setFeedAuth(userId, feedName, data) {
+export function setFeedAuth(userId, feedName, data) {
   return get(userId)
     .then((user) => {
       user.feeds.find((feed) => feed.name === feedName).auth = data;
@@ -71,7 +63,7 @@ function setFeedAuth(userId, feedName, data) {
     .then(update);
 }
 
-function getFeedAuth(userId, feedName) {
+export function getFeedAuth(userId, feedName) {
   return get(userId).then((user) => {
     return user.feeds.find((feed) => feed.name === feedName).auth;
   });
