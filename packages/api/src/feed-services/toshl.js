@@ -5,17 +5,9 @@ import { ToshlUserModel } from "../models/toshlUser.model";
 
 const { deleteOne, findOne, create } = ToshlUserModel;
 
-export const service = {
-  getOAuthUrl,
-  authenticate,
-  deauthorize,
-  refreshAuth,
-  getEntries,
-};
-
-function getOAuthUrl() {
+const getOAuthUrl = () => {
   return toshlApi.oauth.url();
-}
+};
 
 const transformAuthResponse = ({
   expires_in,
@@ -27,19 +19,19 @@ const transformAuthResponse = ({
   refresh_token,
 });
 
-function authenticate(code) {
+const authenticate = (code) => {
   return toshlApi.oauth.token({ code }).then(transformAuthResponse);
-}
+};
 
-function deauthorize(auth) {
+const deauthorize = (auth) => {
   return toshlApi.oauth.deauthorize({ ...auth }).then(() => {
     deleteOne({ accessToken: auth.access_token }, (error) => {
       // TODO: handle errors
     });
   });
-}
+};
 
-function refreshAuth(auth) {
+const refreshAuth = (auth) => {
   return toshlApi.oauth.refresh({ ...auth }).then((data) => {
     // Clear cache identified by old access_token
     deleteOne({ accessToken: auth.access_token }, (error) => {
@@ -47,9 +39,9 @@ function refreshAuth(auth) {
     });
     return transformAuthResponse(data);
   });
-}
+};
 
-function getTags(accessToken) {
+const getTags = (accessToken) => {
   return new Promise((resolve, reject) => {
     findOne({ accessToken }, (error, toshlUser) => {
       if (error) return reject(error);
@@ -74,9 +66,9 @@ function getTags(accessToken) {
       });
     });
   });
-}
+};
 
-function getEntries(from, to, token) {
+const getEntries = (from, to, token) => {
   // Toshl dates are in the user's timezone so convert the ISO string
   // to local (default moment output for an ISO string input) and format
   const fromDate = moment(from).format("YYYY-MM-DD");
@@ -96,9 +88,17 @@ function getEntries(from, to, token) {
       });
       return decoratedEntries;
     });
-}
+};
 
-function calculateExpiryTime(expiresIn) {
+const calculateExpiryTime = (expiresIn) => {
   // Substract a small amount to account for lag
   return Math.floor(Date.now() / 1000 + (expiresIn || 3600) - 300);
-}
+};
+
+export const service = {
+  getOAuthUrl,
+  authenticate,
+  deauthorize,
+  refreshAuth,
+  getEntries,
+};
