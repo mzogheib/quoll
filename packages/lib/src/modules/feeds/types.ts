@@ -1,1 +1,1 @@
-export type FeedName = "media" | "moves" | "strava" | "toshl" | "uber";
+export type FeedName = "media" | "strava" | "toshl";
