@@ -15,9 +15,7 @@ const makeDefaultFeedState = (name: FeedName) => ({
 });
 
 const defaultState: FeedsState = {
-  moves: makeDefaultFeedState("moves"),
   strava: makeDefaultFeedState("strava"),
-  uber: makeDefaultFeedState("uber"),
   toshl: makeDefaultFeedState("toshl"),
   media: makeDefaultFeedState("media"),
 };

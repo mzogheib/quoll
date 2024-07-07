@@ -16,7 +16,7 @@ type FeedsModel = {
   feeds: FeedState[];
   isOneConnected: boolean;
   connect: (name: FeedName) => Promise<string>;
-  disconnect: (name: FeedName) => Promise<string | undefined>;
+  disconnect: (name: FeedName) => Promise<void>;
   authenticate: (name: FeedName, code: string) => Promise<void>;
   setConnected: (name: FeedName, value: boolean) => void;
 };
@@ -65,11 +65,8 @@ export const useFeedsModel = (
   const disconnect = useCallback(
     async (name: FeedName) => {
       updateFeed(name, { isAuthenticating: true });
-      // BE may return a message for further, manual instructions
-      const message = await feedsService.deauthorize(name);
+      await feedsService.deauthorize(name);
       updateFeed(name, { isConnected: false, isAuthenticating: false });
-
-      return message;
     },
     [updateFeed],
   );

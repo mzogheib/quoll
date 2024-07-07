@@ -64,14 +64,6 @@ const feedConfig = {
     title: "Strava",
     link: { url: "https://www.strava.com", label: "www.strava.com" },
   },
-  uber: {
-    title: "Uber",
-    link: { url: "https://www.uber.com", label: "www.uber.com" },
-  },
-  moves: {
-    title: "Moves",
-    link: { url: "https://www.moves-app.com", label: "www.moves-app.com" },
-  },
   media: null,
 };
 

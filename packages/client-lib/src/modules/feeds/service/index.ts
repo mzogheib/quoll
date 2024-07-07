@@ -30,11 +30,6 @@ export class FeedsService extends AuthenticatedApiService {
       method: "DELETE",
       endpoint,
       params: { feed },
-    }).then(() => {
-      // TODO: this should come from the BE
-      if (feed === "moves") {
-        return "Remember to revoke access in the Moves app.";
-      }
     });
   }
 }

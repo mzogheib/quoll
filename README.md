@@ -12,11 +12,11 @@ Currently supports:
 
 - [Strava](https://www.strava.com) - Fitness tracking
 - [Toshl](https://toshl.com) - Finance tracking
-- [Uber](https://www.uber.com) - Ride sharing
 
 Previously supported:
 
 - [Moves](https://www.moves-app.com/) - Fitness tracking (RIP 🙏)
+- [Uber](https://www.uber.com) - Ride sharing (deprecated)
 
 ## Getting Started
 
