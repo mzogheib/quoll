@@ -4,9 +4,10 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 
-import routes from "./routes";
-
+// Do this before import code which uses process.env
 dotenv.config();
+
+import routes from "./routes";
 
 if (process.env.MONGODB_CONNECTION_STRING === undefined) {
   console.error("DB connection string is not set");
