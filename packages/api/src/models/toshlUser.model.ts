@@ -7,6 +7,7 @@ const schema = new Schema({
   },
   tags: {
     type: Object,
+    required: true,
   },
 });
 
