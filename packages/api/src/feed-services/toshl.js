@@ -1,7 +1,9 @@
 import moment from "moment";
 
 import { toshlApi } from "../feed-apis";
-import { deleteOne, findOne, create } from "../models/toshlUser.model";
+import { ToshlUserModel } from "../models/toshlUser.model";
+
+const { deleteOne, findOne, create } = ToshlUserModel;
 
 export const service = {
   getOAuthUrl,
