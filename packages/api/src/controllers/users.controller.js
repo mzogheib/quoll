@@ -1,4 +1,4 @@
-import User from "../models/user.model";
+import { UserModel } from "../models/user.model";
 
 const DefaultFeeds = [
   { name: "strava", auth: null },
@@ -7,7 +7,7 @@ const DefaultFeeds = [
 
 export function createUser() {
   return new Promise((resolve, reject) => {
-    User.create({ feeds: DefaultFeeds }, (error, user) => {
+    UserModel.create({ feeds: DefaultFeeds }, (error, user) => {
       if (error) reject(error);
       else resolve(sanitizeUser(user));
     });
@@ -16,7 +16,7 @@ export function createUser() {
 
 export function login(userId) {
   return new Promise((resolve, reject) => {
-    User.findById(userId, (error, user) => {
+    UserModel.findById(userId, (error, user) => {
       if (error) reject(error);
       else resolve(sanitizeUser(user));
     });
@@ -38,7 +38,7 @@ function sanitizeUser(user) {
 
 function get(userId) {
   return new Promise((resolve, reject) => {
-    User.findById(userId, (error, user) => {
+    UserModel.findById(userId, (error, user) => {
       if (error) reject(error);
       else resolve(user);
     });
@@ -47,7 +47,7 @@ function get(userId) {
 
 function update(user) {
   return new Promise((resolve, reject) => {
-    User.updateOne({ _id: user._id }, user, (error) => {
+    UserModel.updateOne({ _id: user._id }, user, (error) => {
       if (error) reject(error);
       else resolve();
     });

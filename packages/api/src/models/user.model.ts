@@ -7,4 +7,4 @@ const schema = new Schema({
   },
 });
 
-export default model("User", schema, "users");
+export const UserModel = model("User", schema, "users");
