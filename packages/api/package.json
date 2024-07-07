@@ -19,7 +19,8 @@
     "start": "nodemon src/server.ts",
     "clean-dist": "rm -rf dist",
     "build": "tsc",
-    "serve": "node dist/server.js"
+    "serve": "node dist/server.js",
+    "type-check": "tsc --noEmit"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.7",
