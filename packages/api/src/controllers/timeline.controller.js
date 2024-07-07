@@ -1,7 +1,7 @@
 import * as feedServices from "../feed-services";
 import * as feedAdapters from "../feed-adapters";
 
-export function get(from, to, user) {
+export const get = async (from, to, user) => {
   const promises = user.feeds
     .filter((feed) => feed.auth)
     .map((feed) =>
@@ -10,9 +10,9 @@ export function get(from, to, user) {
         .then(feedAdapters[feed.name].adapter),
     );
 
-  return Promise.all(promises).then((arraysOfFeedItems) =>
-    arraysOfFeedItems
-      .reduce((prev, next) => prev.concat([].concat(...next)), []) // Flatten
-      .sort((a, b) => a.timeStart - b.timeStart),
-  );
-}
+  const arraysOfFeedItems = await Promise.all(promises);
+
+  return arraysOfFeedItems
+    .reduce((prev, next) => prev.concat([].concat(...next)), []) // Flatten
+    .sort((a, b) => a.timeStart - b.timeStart);
+};
