@@ -1,11 +1,7 @@
-const ctrlUsers = require("../controllers/users.controller");
-const ctrlTimeline = require("../controllers/timeline.controller");
+import { get as getUser } from "../controllers/users.controller";
+import { get as getTimeline } from "../controllers/timeline.controller";
 
-module.exports = {
-  get,
-};
-
-function get(req, res) {
+export const get = (req, res) => {
   const { from, to } = req.query;
   const { userId } = req;
 
@@ -14,9 +10,8 @@ function get(req, res) {
   const onError = (error) =>
     respond({ status: error.status || 500, message: error.message });
 
-  ctrlUsers
-    .get(userId)
-    .then((user) => ctrlTimeline.get(from, to, user))
+  getUser(userId)
+    .then((user) => getTimeline(from, to, user))
     .then(onSuccess)
     .catch(onError);
-}
+};
