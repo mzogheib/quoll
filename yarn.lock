@@ -7138,7 +7138,6 @@ __metadata:
     node-moves: "https://github.com/mzogheib/node-moves"
     node-strava: "https://github.com/mzogheib/node-strava"
     node-toshl: "https://github.com/mzogheib/node-toshl"
-    node-uber: "https://github.com/mzogheib/node-uber"
     nodemon: "npm:^3.1.4"
     ts-node: "npm:^10.9.2"
     typescript: "npm:^5.5.3"
@@ -25011,15 +25010,6 @@ __metadata:
   dependencies:
     axios: "npm:^0.18.1"
   checksum: 66a4cdd4290a03160c705c266af7145334198addd1065d44869545f0627357f2fdd9bdd3092b05e08977919fac661a4c9a52bf15f3c75070c45b10033aae11c3
-  languageName: node
-  linkType: hard
-
-"node-uber@https://github.com/mzogheib/node-uber":
-  version: 0.1.0
-  resolution: "node-uber@https://github.com/mzogheib/node-uber.git#commit=da2b3d1f68536fa3b514a0f23edbc966aeef68bf"
-  dependencies:
-    axios: "npm:^0.18.1"
-  checksum: 8e13929bbac00a503a4dbc39ffa2c17a0da5204d42b3833f6b30c3f1e9b0e526952759bec88830ab5f2516e27fe9f221b66fde119866de0739df7f65eeb20e73
   languageName: node
   linkType: hard
 
