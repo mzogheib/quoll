@@ -19,6 +19,7 @@
   },
   "scripts": {
     "start": "nodemon src/server.ts",
+    "clean-dist": "rm -rf dist",
     "build": "tsc",
     "serve": "node dist/server.js"
   },
