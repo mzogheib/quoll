@@ -1,10 +1,6 @@
-const moment = require("moment");
-const { v4: uuidv4 } = require("uuid");
-const polyline = require("@mapbox/polyline");
-
-module.exports = {
-  adapter,
-};
+import moment from "moment";
+import { v4 as uuidv4 } from "uuid";
+import { encode } from "@mapbox/polyline";
 
 const Activities = {
   walking: { type: "walk", label: "Walk" },
@@ -16,7 +12,7 @@ const Activities = {
   bus: { type: "bus", label: "Bus" },
 };
 
-function adapter(segments) {
+export function adapter(segments) {
   return segments.map((segment) => {
     switch (segment.type) {
       case "move":
@@ -31,9 +27,7 @@ function adapter(segments) {
           const distance = formatDistance(activity.distance);
           const encodedPath =
             activity.trackPoints.length &&
-            polyline.encode(
-              activity.trackPoints.map((point) => [point.lat, point.lon]),
-            );
+            encode(activity.trackPoints.map((point) => [point.lat, point.lon]));
           const startPoint =
             activity.trackPoints.length && activity.trackPoints[0];
           const endPoint =

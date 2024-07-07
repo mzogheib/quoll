@@ -1,11 +1,11 @@
-const {
+import {
   stravaSummaryActivitiesAdapter,
   toshlEntriesAdapter,
-} = require("@quoll/lib");
+} from "@quoll/lib";
+import { adapter as movesAdapter } from "./moves";
+import { adapter as uberAdapter } from "./uber";
 
-module.exports = {
-  moves: require("./moves"),
-  strava: { adapter: stravaSummaryActivitiesAdapter },
-  toshl: { adapter: toshlEntriesAdapter },
-  uber: require("./uber"),
-};
+export const moves = { adapter: movesAdapter };
+export const strava = { adapter: stravaSummaryActivitiesAdapter };
+export const toshl = { adapter: toshlEntriesAdapter };
+export const uber = { adapter: uberAdapter };

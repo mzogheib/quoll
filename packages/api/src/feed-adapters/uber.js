@@ -1,14 +1,10 @@
-const moment = require("moment");
-const { v4: uuidv4 } = require("uuid");
+import { v4 as uuidv4 } from "uuid";
 
-module.exports = {
-  adapter,
-};
 const Activities = {
   car: { type: "car", label: "Car" },
 };
 
-function adapter(entries) {
+export function adapter(entries) {
   return entries
     .filter((entry) => entry.status === "completed")
     .map((entry) => {
