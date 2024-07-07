@@ -1,5 +1,5 @@
 const feedServices = require("../feed-services");
-const ctrlUsers = require("../controllers/users.controller").default;
+const ctrlUsers = require("../controllers/users.controller");
 const moment = require("moment");
 
 module.exports = {
