@@ -7135,7 +7135,6 @@ __metadata:
     express: "npm:^4.19.2"
     moment: "npm:^2.29.4"
     mongoose: "npm:^6.12.3"
-    node-moves: "https://github.com/mzogheib/node-moves"
     node-strava: "https://github.com/mzogheib/node-strava"
     node-toshl: "https://github.com/mzogheib/node-toshl"
     nodemon: "npm:^3.1.4"
@@ -24949,15 +24948,6 @@ __metadata:
   version: 1.1.12
   resolution: "node-machine-id@npm:1.1.12"
   checksum: ab2fea5f75a6f1ce3c76c5e0ae3903b631230e0a99b003d176568fff8ddbdf7b2943be96cd8d220c497ca0f6149411831f8a450601929f326781cb1b59bab7f8
-  languageName: node
-  linkType: hard
-
-"node-moves@https://github.com/mzogheib/node-moves":
-  version: 0.1.0
-  resolution: "node-moves@https://github.com/mzogheib/node-moves.git#commit=71d3d95949d09f4aa9d323b93f687c4661540fe8"
-  dependencies:
-    axios: "npm:^0.18.1"
-  checksum: 2643d070ce633b050c6b1d3ab507e9e0ef71c6483b827da0843dff58861d9a594d79b93d16ea41a8c31726133ea9115ed3c043869f71894ac1c365f7a575615a
   languageName: node
   linkType: hard
 
