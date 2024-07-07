@@ -2,17 +2,9 @@ import moment from "moment";
 
 import { stravaApi } from "../feed-apis";
 
-export const service = {
-  getOAuthUrl,
-  authenticate,
-  deauthorize,
-  refreshAuth,
-  getAthleteActivities,
-};
-
-function getOAuthUrl() {
+const getOAuthUrl = () => {
   return stravaApi.oauth.url();
-}
+};
 
 const transformAuthResponse = ({
   expires_in,
@@ -28,38 +20,48 @@ const transformAuthResponse = ({
   refresh_token,
 });
 
-function authenticate(code: string) {
-  return stravaApi.oauth.token({ code }).then(transformAuthResponse);
-}
+const authenticate = async (code: string) => {
+  const result = await stravaApi.oauth.token({ code });
+  return transformAuthResponse(result);
+};
 
-function refreshAuth({ refresh_token }: { refresh_token: string }) {
-  return stravaApi.oauth.refresh({ refresh_token }).then(transformAuthResponse);
-}
+const refreshAuth = async ({ refresh_token }: { refresh_token: string }) => {
+  const result = await stravaApi.oauth.refresh({ refresh_token });
+  return transformAuthResponse(result);
+};
 
-async function deauthorize({ access_token }: { access_token: string }) {
+const deauthorize = async ({ access_token }: { access_token: string }) => {
   return stravaApi.oauth.deauthorize({ access_token });
-}
+};
 
-function getAthleteActivities(from: string, to: string, token: string) {
-  const after = moment(from).unix() - 1;
-  const before = moment(to).unix() + 1;
-  const perPage = 20;
+const getAthleteActivities = async (
+  from: string,
+  to: string,
+  token: string,
+) => {
+  const activities = await stravaApi.athlete.activities.list({
+    after: moment(from).unix() - 1,
+    before: moment(to).unix() + 1,
+    per_page: 20,
+    access_token: token,
+  });
 
-  return stravaApi.athlete.activities
-    .list({ after, before, per_page: perPage, access_token: token })
-    .then((activities) => {
-      const promises = activities.map((activity) => {
-        return stravaApi.activities.get({
-          id: activity.id,
-          access_token: token,
-        });
-      });
+  const promises = activities.map(({ id }) =>
+    stravaApi.activities.get({ id, access_token: token }),
+  );
 
-      return Promise.all(promises);
-    });
-}
+  return await Promise.all(promises);
+};
 
-function calculateExpiryTime(expiresIn: number) {
+const calculateExpiryTime = (expiresIn: number) => {
   // Substract a small amount to account for lag
   return Math.floor(Date.now() / 1000 + (expiresIn || 3600) - 300);
-}
+};
+
+export const service = {
+  getOAuthUrl,
+  authenticate,
+  deauthorize,
+  refreshAuth,
+  getAthleteActivities,
+};
