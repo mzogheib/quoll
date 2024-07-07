@@ -6,12 +6,7 @@ const schema = new Schema({
     required: true,
   },
   tags: {
-    type: [
-      {
-        id: { type: String, required: true },
-        name: { type: String, required: true },
-      },
-    ],
+    type: Object,
   },
 });
 
