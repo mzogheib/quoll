@@ -1,11 +1,7 @@
-const feedServices = require("../feed-services");
-const feedAdapters = require("../feed-adapters");
+import * as feedServices from "../feed-services";
+import * as feedAdapters from "../feed-adapters";
 
-module.exports = {
-  get,
-};
-
-function get(from, to, user) {
+export function get(from, to, user) {
   const promises = user.feeds
     .filter((feed) => feed.auth)
     .map((feed) =>
