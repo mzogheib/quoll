@@ -1,9 +1,9 @@
-const moment = require("moment");
+import moment from "moment";
 
-const apiToshl = require("../feed-apis").toshl;
-const ToshlUser = require("../models/toshlUser.model");
+import { toshlApi } from "../feed-apis";
+import { deleteOne, findOne, create } from "../models/toshlUser.model";
 
-module.exports = {
+export const service = {
   getOAuthUrl,
   authenticate,
   deauthorize,
@@ -12,7 +12,7 @@ module.exports = {
 };
 
 function getOAuthUrl() {
-  return apiToshl.oauth.url();
+  return toshlApi.oauth.url();
 }
 
 const transformAuthResponse = ({
@@ -26,21 +26,21 @@ const transformAuthResponse = ({
 });
 
 function authenticate(code) {
-  return apiToshl.oauth.token({ code }).then(transformAuthResponse);
+  return toshlApi.oauth.token({ code }).then(transformAuthResponse);
 }
 
 function deauthorize(auth) {
-  return apiToshl.oauth.deauthorize({ ...auth }).then(() => {
-    ToshlUser.deleteOne({ accessToken: auth.access_token }, (error) => {
+  return toshlApi.oauth.deauthorize({ ...auth }).then(() => {
+    deleteOne({ accessToken: auth.access_token }, (error) => {
       // TODO: handle errors
     });
   });
 }
 
 function refreshAuth(auth) {
-  return apiToshl.oauth.refresh({ ...auth }).then((data) => {
+  return toshlApi.oauth.refresh({ ...auth }).then((data) => {
     // Clear cache identified by old access_token
-    ToshlUser.deleteOne({ accessToken: auth.access_token }, (error) => {
+    deleteOne({ accessToken: auth.access_token }, (error) => {
       // TODO: handle errors
     });
     return transformAuthResponse(data);
@@ -49,11 +49,11 @@ function refreshAuth(auth) {
 
 function getTags(accessToken) {
   return new Promise((resolve, reject) => {
-    ToshlUser.findOne({ accessToken }, (error, toshlUser) => {
+    findOne({ accessToken }, (error, toshlUser) => {
       if (error) return reject(error);
       if (toshlUser && toshlUser.tags) return resolve(toshlUser.tags);
-      return apiToshl.tags.list({ access_token: accessToken }).then((tags) => {
-        ToshlUser.create(
+      return toshlApi.tags.list({ access_token: accessToken }).then((tags) => {
+        create(
           {
             accessToken,
             tags: tags.reduce(
@@ -80,7 +80,7 @@ function getEntries(from, to, token) {
   const fromDate = moment(from).format("YYYY-MM-DD");
   const toDate = moment(to).format("YYYY-MM-DD");
   let decoratedEntries;
-  return apiToshl.entries
+  return toshlApi.entries
     .list({ from: fromDate, to: toDate, access_token: token })
     .then((entries) => {
       decoratedEntries = entries;

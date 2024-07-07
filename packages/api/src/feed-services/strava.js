@@ -1,7 +1,8 @@
-const moment = require("moment");
-const apiStrava = require("../feed-apis").strava;
+import moment from "moment";
 
-module.exports = {
+import { stravaApi } from "../feed-apis";
+
+export const service = {
   getOAuthUrl,
   authenticate,
   deauthorize,
@@ -10,7 +11,7 @@ module.exports = {
 };
 
 function getOAuthUrl() {
-  return apiStrava.oauth.url();
+  return stravaApi.oauth.url();
 }
 
 const transformAuthResponse = ({
@@ -24,15 +25,15 @@ const transformAuthResponse = ({
 });
 
 function authenticate(code) {
-  return apiStrava.oauth.token({ code }).then(transformAuthResponse);
+  return stravaApi.oauth.token({ code }).then(transformAuthResponse);
 }
 
 function refreshAuth({ refresh_token }) {
-  return apiStrava.oauth.refresh({ refresh_token }).then(transformAuthResponse);
+  return stravaApi.oauth.refresh({ refresh_token }).then(transformAuthResponse);
 }
 
 function deauthorize({ access_token }) {
-  return apiStrava.oauth.deauthorize({ access_token });
+  return stravaApi.oauth.deauthorize({ access_token });
 }
 
 function getAthleteActivities(from, to, token) {
@@ -40,11 +41,11 @@ function getAthleteActivities(from, to, token) {
   const before = moment(to).unix() + 1;
   const perPage = 20;
 
-  return apiStrava.athlete.activities
+  return stravaApi.athlete.activities
     .list({ after, before, per_page: perPage, access_token: token })
     .then((activities) => {
       const promises = activities.map((activity) => {
-        return apiStrava.activities.get({
+        return stravaApi.activities.get({
           id: activity.id,
           access_token: token,
         });
