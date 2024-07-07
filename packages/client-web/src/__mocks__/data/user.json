@@ -12,10 +12,6 @@
     {
       "name": "toshl",
       "isConnected": false
-    },
-    {
-      "name": "uber",
-      "isConnected": false
     }
   ]
 }
