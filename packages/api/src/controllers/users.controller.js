@@ -1,6 +1,6 @@
-const User = require("../models/user.model");
+import User from "../models/user.model";
 
-module.exports = {
+export default {
   createUser,
   login,
   get,

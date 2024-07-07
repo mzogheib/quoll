@@ -1,10 +1,10 @@
-const mongoose = require("mongoose");
+import { Schema, model } from "mongoose";
 
-const schema = new mongoose.Schema({
+const schema = new Schema({
   feeds: {
     type: Array,
     required: true,
   },
 });
 
-module.exports = mongoose.model("User", schema, "users");
+export default model("User", schema, "users");
