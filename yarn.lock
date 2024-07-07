@@ -7128,6 +7128,7 @@ __metadata:
     "@types/body-parser": "npm:^1.19.5"
     "@types/cors": "npm:^2.8.17"
     "@types/express": "npm:^4.17.21"
+    "@types/mapbox__polyline": "npm:^1.0.5"
     body-parser: "npm:^1.20.0"
     cors: "npm:^2.8.5"
     dotenv: "npm:^16.0.1"
@@ -10603,6 +10604,15 @@ __metadata:
   version: 4.17.6
   resolution: "@types/lodash@npm:4.17.6"
   checksum: 3b197ac47af9443fee8c4719c5ffde527d7febc018b827d44a6bc2523c728c7adfdd25196fdcfe3eed827993e0c41a917d0da6e78938b18b2be94164789f1117
+  languageName: node
+  linkType: hard
+
+"@types/mapbox__polyline@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "@types/mapbox__polyline@npm:1.0.5"
+  dependencies:
+    "@types/geojson": "npm:*"
+  checksum: 34c1a1a7fdf0b1f30bc827bf8d671b170527562fea3a785118a9ab2bb0e0cc7ae69d2809d451825e9e4c6da34a6abc1beee47b02f868c04d7b3bbc63eeceb4f1
   languageName: node
   linkType: hard
 
