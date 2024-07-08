@@ -1,15 +1,9 @@
-const feedServices = require("../feed-services");
-const ctrlUsers = require("../controllers/users.controller");
-const moment = require("moment");
+import moment from "moment";
 
-module.exports = {
-  getOAuthUrl,
-  authenticate,
-  deauthorize,
-  checkAuth,
-};
+import * as feedServices from "../feed-services";
+import { setFeedAuth, get, getFeedAuth } from "../controllers/users.controller";
 
-function getOAuthUrl(req, res) {
+export function getOAuthUrl(req, res) {
   const { feed } = req.query;
   const respond = ({ status, message }) => res.status(status).json(message);
 
@@ -26,7 +20,7 @@ function getOAuthUrl(req, res) {
   }
 }
 
-function authenticate(req, res) {
+export function authenticate(req, res) {
   const { feed } = req.query;
   const { code } = req.body;
   const { userId } = req;
@@ -47,21 +41,21 @@ function authenticate(req, res) {
       respond({ status: 404, message: `Unkown feed: ${feed}` });
     } else {
       authenticate(code)
-        .then((data) => ctrlUsers.setFeedAuth(userId, feed, data))
+        .then((data) => setFeedAuth(userId, feed, data))
         .then(onSuccess)
         .catch(onError);
     }
   }
 }
 
-function checkAuth(req, res, next) {
+export function checkAuth(req, res, next) {
   const { userId } = req;
 
   const respond = ({ status, message }) => res.status(status).json(message);
   const onError = (error) =>
     respond({ status: error.status || 500, message: error.message });
 
-  ctrlUsers.get(userId).then((user) => {
+  get(userId).then((user) => {
     const promises = user.feeds
       .filter((feed) => feed.auth)
       .map((feed) => {
@@ -86,7 +80,7 @@ function checkAuth(req, res, next) {
 
         return refreshAuth(feed.auth)
           .then((refreshedAuth) =>
-            ctrlUsers.setFeedAuth(userId, feed.name, refreshedAuth),
+            setFeedAuth(userId, feed.name, refreshedAuth),
           )
           .catch(onError);
       });
@@ -95,7 +89,7 @@ function checkAuth(req, res, next) {
   });
 }
 
-function deauthorize(req, res) {
+export function deauthorize(req, res) {
   const { feed } = req.query;
   const { userId } = req;
 
@@ -112,10 +106,9 @@ function deauthorize(req, res) {
     if (!deauthorize) {
       respond({ status: 404, message: `Unkown feed: ${feed}` });
     } else {
-      ctrlUsers
-        .getFeedAuth(userId, feed)
+      getFeedAuth(userId, feed)
         .then(deauthorize)
-        .then(() => ctrlUsers.setFeedAuth(userId, feed, null))
+        .then(() => setFeedAuth(userId, feed, null))
         .then(onSuccess)
         .catch(onError);
     }
