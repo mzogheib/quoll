@@ -1,7 +1,4 @@
-import {
-  stravaSummaryActivitiesAdapter,
-  toshlEntriesAdapter,
+export {
+  stravaSummaryActivitiesAdapter as strava,
+  toshlEntriesAdapter as toshl,
 } from "@quoll/lib";
-
-export const strava = { adapter: stravaSummaryActivitiesAdapter };
-export const toshl = { adapter: toshlEntriesAdapter };

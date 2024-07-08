@@ -10,7 +10,7 @@ export const get = async (from: string, to: string, user: UserDoc) => {
     if (feed.name === "media") return [];
 
     const feedService = feedServices[feed.name];
-    const feedAdapter = feedAdapters[feed.name].adapter;
+    const feedAdapter = feedAdapters[feed.name];
 
     const accessToken = feed.auth!.access_token;
 
