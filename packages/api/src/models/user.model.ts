@@ -2,7 +2,7 @@ import { FeedName } from "@quoll/lib";
 import { HydratedDocument, Schema, model } from "mongoose";
 
 export type IAuth = {
-  expiry_time: string;
+  expiry_time: number;
   access_token: string;
   refresh_token: string;
 };
