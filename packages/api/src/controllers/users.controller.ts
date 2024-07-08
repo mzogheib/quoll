@@ -41,7 +41,7 @@ export const get = async (userId: string): Promise<UserDoc> => {
 export const setFeedAuth = async (
   userId: string,
   feedName: FeedName,
-  data: IAuth,
+  data: IAuth | null,
 ) => {
   const user = await get(userId);
 
