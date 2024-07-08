@@ -25,7 +25,7 @@ router
   )
   .get((req, res) => getOAuthUrl(req as AuthenticatedRequest, res))
   .post((req, res) => authenticateFeed(req as AuthenticatedRequest, res))
-  .delete(deauthorize);
+  .delete((req, res) => deauthorize(req as AuthenticatedRequest, res));
 
 router
   .route("/timeline")
