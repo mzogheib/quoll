@@ -1,12 +1,12 @@
 import moment from "moment";
 import { NextFunction, Response } from "express";
 
-import * as feedServices from "../feed-services";
+import { feedServices } from "../feed-services";
 import { setFeedAuth, get, getFeedAuth } from "../controllers/users.controller";
 import { AuthenticatedRequest } from "./types";
 
-const supportedFeeds = ["toshl", "strava"] as const;
-type SupportedFeed = (typeof supportedFeeds)[number];
+const supportedFeeds = Object.keys(feedServices);
+type SupportedFeed = keyof typeof feedServices;
 
 const isSupportedFeed = (feed: string): feed is SupportedFeed =>
   supportedFeeds.includes(feed as SupportedFeed);

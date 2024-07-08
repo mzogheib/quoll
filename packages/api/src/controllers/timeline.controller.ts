@@ -1,4 +1,4 @@
-import * as feedServices from "../feed-services";
+import { feedServices } from "../feed-services";
 import * as feedAdapters from "../feed-adapters";
 import { UserDoc } from "../models/user.model";
 
