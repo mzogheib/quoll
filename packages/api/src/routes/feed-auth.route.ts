@@ -5,6 +5,12 @@ import * as feedServices from "../feed-services";
 import { setFeedAuth, get, getFeedAuth } from "../controllers/users.controller";
 import { AuthenticatedRequest } from "./types";
 
+const supportedFeeds = ["toshl", "strava"] as const;
+type SupportedFeed = (typeof supportedFeeds)[number];
+
+const isSupportedFeed = (feed: string): feed is SupportedFeed =>
+  supportedFeeds.includes(feed as SupportedFeed);
+
 export const getOAuthUrl = (req: AuthenticatedRequest, res: Response) => {
   const { feed } = req.query;
 
@@ -13,19 +19,14 @@ export const getOAuthUrl = (req: AuthenticatedRequest, res: Response) => {
     return;
   }
 
-  if (feed === "toshl") {
-    const url = feedServices.toshl.getOAuthUrl();
-    res.status(200).json(url);
+  if (!isSupportedFeed(feed)) {
+    res.status(404).json(`Unknown feed: ${feed}`);
     return;
   }
 
-  if (feed === "strava") {
-    const url = feedServices.strava.getOAuthUrl();
-    res.status(200).json(url);
-    return;
-  }
+  const url = feedServices[feed].getOAuthUrl();
 
-  res.status(404).json(`Unknown feed: ${feed}`);
+  res.status(200).json(url);
 };
 
 export const authenticate = async (
@@ -41,26 +42,20 @@ export const authenticate = async (
     return;
   }
 
+  if (!isSupportedFeed(feed)) {
+    res.status(404).json(`Unknown feed: ${feed}`);
+    return;
+  }
+
   if (!code) {
     res.status(400).json("No authorization code provided.");
     return;
   }
 
-  if (feed === "toshl") {
-    const data = await feedServices.toshl.authenticate(code);
-    await setFeedAuth(userId, feed, data);
-    res.status(240).end();
-    return;
-  }
+  const data = await feedServices[feed].authenticate(code);
+  await setFeedAuth(userId, feed, data);
 
-  if (feed === "strava") {
-    const data = await feedServices.strava.authenticate(code);
-    await setFeedAuth(userId, feed, data);
-    res.status(204).end();
-    return;
-  }
-
-  res.status(404).json(`Unknown feed: ${feed}`);
+  res.status(240).end();
 };
 
 // TODO this shouldn't be done here. Do it in the feed service or somewhere
@@ -85,20 +80,16 @@ export const checkAuth = async (
         return Promise.resolve();
       }
 
-      if (feed.name === "toshl") {
-        const newAuth = await feedServices.toshl.refreshAuth(feed.auth!);
-        await setFeedAuth(userId, feed.name, newAuth);
-        return Promise.resolve();
+      if (!isSupportedFeed(feed.name)) {
+        return Promise.reject(
+          res.status(404).json(`Unkown feed: ${feed.name}`),
+        );
       }
 
-      if (feed.name === "strava") {
-        const newAuth = await feedServices.strava.refreshAuth(feed.auth!);
-        console.log(newAuth);
-        await setFeedAuth(userId, feed.name, newAuth);
-        return Promise.resolve();
-      }
+      const newAuth = await feedServices[feed.name].refreshAuth(feed.auth!);
+      await setFeedAuth(userId, feed.name, newAuth);
 
-      return Promise.reject(res.status(404).json(`Unkown feed: ${feed.name}`));
+      return Promise.resolve();
     });
 
   return Promise.all(promises).then(() => next());
@@ -108,42 +99,27 @@ export const deauthorize = async (req: AuthenticatedRequest, res: Response) => {
   const { feed } = req.query;
   const { userId } = req;
 
-  if (!feed) {
+  if (feed === undefined || typeof feed !== "string") {
     res.status(400).json("No feed provided.");
     return;
   }
 
-  if (feed === "toshl") {
-    const authData = await getFeedAuth(userId, feed);
-
-    if (!authData) {
-      res.status(404).json("No feed auth data found.");
-      return;
-    }
-
-    await feedServices.toshl.deauthorize(authData);
-    await setFeedAuth(userId, feed, null);
-
-    res.status(204).end();
-
+  if (!isSupportedFeed(feed)) {
+    res.status(404).json(`Unknown feed: ${feed}`);
     return;
   }
 
-  if (feed === "strava") {
-    const authData = await getFeedAuth(userId, feed);
+  const authData = await getFeedAuth(userId, feed);
 
-    if (!authData) {
-      res.status(404).json("No feed auth data found.");
-      return;
-    }
-
-    await feedServices.strava.deauthorize(authData);
-    await setFeedAuth(userId, feed, null);
-
-    res.status(204).end();
-
+  if (!authData) {
+    res.status(404).json("No feed auth data found.");
     return;
   }
 
-  res.status(404).json(`Unknown feed: ${feed}`);
+  await feedServices[feed].deauthorize(authData);
+  await setFeedAuth(userId, feed, null);
+
+  res.status(204).end();
+
+  return;
 };
