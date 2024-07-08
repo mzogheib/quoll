@@ -4,7 +4,7 @@ import {
 } from "@quoll/lib";
 
 import { service as stravaService } from "./strava/service";
-import { service as toshlService } from "./toshl/service_";
+import { service as toshlService } from "./toshl/service";
 
 export const feedServices = {
   strava: stravaService,
