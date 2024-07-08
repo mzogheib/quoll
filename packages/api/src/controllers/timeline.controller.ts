@@ -1,5 +1,4 @@
-import { feedServices } from "../feed-services";
-import * as feedAdapters from "../feed-adapters";
+import { feedServices, feedAdapters } from "../feeds";
 import { UserDoc } from "../models/user.model";
 
 export const get = async (from: string, to: string, user: UserDoc) => {

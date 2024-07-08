@@ -1,7 +1,7 @@
 import moment from "moment";
 import { NextFunction, Response } from "express";
 
-import { feedServices } from "../feed-services";
+import { feedServices } from "../feeds";
 import { setFeedAuth, get, getFeedAuth } from "../controllers/users.controller";
 import { AuthenticatedRequest } from "./types";
 

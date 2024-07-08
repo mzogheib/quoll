@@ -1,7 +1,7 @@
 import moment from "moment";
 
-import { toshlApi } from "../feed-apis";
-import { ToshlUserModel } from "../models/toshlUser.model";
+import { toshlApi } from "../api";
+import { ToshlUserModel } from "../../../models/toshlUser.model";
 
 const { deleteOne, findOne, create } = ToshlUserModel;
 

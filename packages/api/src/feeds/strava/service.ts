@@ -1,6 +1,6 @@
 import moment from "moment";
 
-import { stravaApi } from "../feed-apis";
+import { stravaApi } from "./api";
 
 const getOAuthUrl = () => {
   return stravaApi.oauth.url();
