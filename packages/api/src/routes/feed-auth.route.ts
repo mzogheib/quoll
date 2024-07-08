@@ -1,15 +1,9 @@
 import moment from "moment";
 import { NextFunction, Response } from "express";
 
-import { feedServices } from "../feeds";
+import { feedServices, isSupportedFeed } from "../feeds";
 import { setFeedAuth, get, getFeedAuth } from "../controllers/users.controller";
 import { AuthenticatedRequest } from "./types";
-
-const supportedFeeds = Object.keys(feedServices);
-type SupportedFeed = keyof typeof feedServices;
-
-const isSupportedFeed = (feed: string): feed is SupportedFeed =>
-  supportedFeeds.includes(feed as SupportedFeed);
 
 export const getOAuthUrl = (req: AuthenticatedRequest, res: Response) => {
   const { feed } = req.query;
