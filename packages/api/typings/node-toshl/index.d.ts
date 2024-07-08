@@ -1,4 +1,20 @@
 declare module "node-toshl" {
+  export type AuthData = {
+    expires_in: number;
+    access_token: string;
+    refresh_token: string;
+  };
+
+  export type Entry = {
+    id: string;
+    tags: string[];
+  };
+
+  export type Tag = {
+    id: string;
+    name: string;
+  };
+
   export default class NodeToshl {
     constructor(config: {
       redirect_uri: string;
@@ -8,25 +24,15 @@ declare module "node-toshl" {
 
     oauth: {
       url(): string;
-      token(params: { code: string }): Promise<{
-        expires_in: number;
-        access_token: string;
-        refresh_token: string;
-      }>;
-      refresh(params: { refresh_token: string }): Promise<{
-        expires_in: number;
-        access_token: string;
-        refresh_token: string;
-      }>;
+      token(params: { code: string }): Promise<AuthData>;
+      refresh(params: { refresh_token: string }): Promise<AuthData>;
       deauthorize(params: {
         access_token: string;
       }): Promise<{ access_token: string }>;
     };
 
     tags: {
-      list(params: {
-        access_token: string;
-      }): Promise<{ id: string; name: string }[]>;
+      list(params: { access_token: string }): Promise<Tag[]>;
     };
 
     entries: {
@@ -34,7 +40,7 @@ declare module "node-toshl" {
         from: string;
         to: string;
         access_token: string;
-      }): Promise<{ id: string; tags: string[] }[]>;
+      }): Promise<Entry[]>;
     };
   }
 }
