@@ -93,5 +93,5 @@ export const service = {
   authenticate,
   deauthorize,
   refreshAuth,
-  getEntries,
+  getData: getEntries,
 };

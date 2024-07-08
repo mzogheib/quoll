@@ -63,5 +63,5 @@ export const service = {
   authenticate,
   deauthorize,
   refreshAuth,
-  getAthleteActivities,
+  getData: getAthleteActivities,
 };
