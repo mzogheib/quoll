@@ -1,12 +1,11 @@
-import { feedServices, feedAdapters } from "../feeds";
+import { feedServices, feedAdapters, isSupportedFeed } from "../feeds";
 import { UserDoc } from "../models/user.model";
 
 export const get = async (from: string, to: string, user: UserDoc) => {
   const authenticatedFeeds = user.feeds.filter((feed) => feed.auth !== null);
 
   const promises = authenticatedFeeds.map(async (feed) => {
-    // TODO: decouple 'media' from the api
-    if (feed.name === "media") return [];
+    if (!isSupportedFeed(feed.name)) return [];
 
     const feedService = feedServices[feed.name];
     const feedAdapter = feedAdapters[feed.name];
