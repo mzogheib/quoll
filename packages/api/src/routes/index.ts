@@ -19,7 +19,6 @@ router.route("/signup").post(signup);
 router
   .route("/feed-auth")
   .all(authenticate)
-  // TODO can this be removed? Do any of these endpoints need an authenticated feed?
   .all((req, res, next) =>
     checkFeedAuth(req as AuthenticatedRequest, res, next),
   )
