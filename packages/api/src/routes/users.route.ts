@@ -4,18 +4,8 @@ import {
   createUser,
   get,
 } from "../controllers/users.controller";
-import { isApiError } from "../utils/error";
+import { handleError } from "../utils/error";
 import { AuthenticatedRequest } from "./types";
-
-const handleError = (error: unknown, res: Response) => {
-  if (isApiError(error)) {
-    const { status = 500, message } = error;
-    res.status(status).json(message);
-    return;
-  }
-
-  res.status(500).json("Unknown error");
-};
 
 export const login = async (req: Request, res: Response) => {
   // TODO: userId should be a bearer token?
@@ -35,7 +25,7 @@ export const login = async (req: Request, res: Response) => {
     }
 
     res.status(200).json(user);
-  } catch (error: unknown) {
+  } catch (error) {
     handleError(error, res);
   }
 };
@@ -44,7 +34,7 @@ export const signup = async (_: Request, res: Response) => {
   try {
     const user = await createUser();
     res.status(200).json(user);
-  } catch (error: unknown) {
+  } catch (error) {
     handleError(error, res);
   }
 };
@@ -74,7 +64,7 @@ export const authenticate = async (
     // TODO come up with a better typing
     (req as AuthenticatedRequest).userId = userId;
     next();
-  } catch (error: unknown) {
+  } catch (error) {
     handleError(error, res);
   }
 };
