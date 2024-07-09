@@ -64,9 +64,14 @@ export const useFeedsModel = (
 
   const disconnect = useCallback(
     async (name: FeedName) => {
-      updateFeed(name, { isAuthenticating: true });
-      await feedsService.deauthorize(name);
-      updateFeed(name, { isConnected: false, isAuthenticating: false });
+      try {
+        updateFeed(name, { isAuthenticating: true });
+        await feedsService.deauthorize(name);
+        updateFeed(name, { isConnected: false, isAuthenticating: false });
+      } catch (error) {
+        updateFeed(name, { isConnected: true, isAuthenticating: false });
+        throw error;
+      }
     },
     [updateFeed],
   );
