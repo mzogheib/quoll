@@ -4,6 +4,7 @@ import { NextFunction, Response } from "express";
 import { feedServices, isSupportedFeed } from "../feeds";
 import { setFeedAuth, get, getFeedAuth } from "../controllers/users.controller";
 import { AuthenticatedRequest } from "./types";
+import { handleError } from "../utils/error";
 
 export const getOAuthUrl = (req: AuthenticatedRequest, res: Response) => {
   const { feed } = req.query;
@@ -66,6 +67,7 @@ export const checkAuth = async (
   const promises = user.feeds
     .filter((feed) => feed.auth)
     .map(async (feed) => {
+      console.log(feed.auth);
       if (!feed.auth!.expiry_time) {
         return Promise.resolve();
       }
@@ -103,17 +105,21 @@ export const deauthorize = async (req: AuthenticatedRequest, res: Response) => {
     return;
   }
 
-  const authData = await getFeedAuth(userId, feed);
+  try {
+    const authData = await getFeedAuth(userId, feed);
 
-  if (!authData) {
-    res.status(404).json("No feed auth data found.");
-    return;
+    if (!authData) {
+      res.status(404).json("No feed auth data found.");
+      return;
+    }
+
+    await feedServices[feed].deauthorize(authData);
+    await setFeedAuth(userId, feed, null);
+
+    res.status(204).end();
+  } catch (error) {
+    handleError(error, res);
   }
-
-  await feedServices[feed].deauthorize(authData);
-  await setFeedAuth(userId, feed, null);
-
-  res.status(204).end();
 
   return;
 };
