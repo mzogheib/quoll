@@ -69,7 +69,7 @@ const Settings = () => {
 
   const closeModal = () => setState({ ...INITIAL_STATE });
 
-  const handleConnect = (name: FeedName) => {
+  const handleConnect = async (name: FeedName) => {
     const defaultErrorMessage = "Could not connect feed. Please try again.";
     const openErrorModal = (message = defaultErrorMessage) =>
       openModal(message);
@@ -77,9 +77,13 @@ const Settings = () => {
     const onRequestAuthSuccess = (code: string) =>
       authenticate(name, code).catch(openErrorModal);
 
-    connect(name)
-      .then((url) => requestAuth(url, onRequestAuthSuccess, openErrorModal))
-      .catch(openErrorModal);
+    try {
+      const url = await connect(name);
+      requestAuth(url, onRequestAuthSuccess, openErrorModal);
+    } catch (error) {
+      const message = typeof error === "string" ? error : defaultErrorMessage;
+      openErrorModal(message);
+    }
   };
 
   const handleDisconnect = (name: FeedName) =>
