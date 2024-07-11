@@ -87,7 +87,9 @@ export const checkAuth = async (
       return Promise.resolve();
     });
 
-  return Promise.all(promises).then(() => next());
+  await Promise.all(promises);
+
+  next();
 };
 
 export const deauthorize = async (req: AuthenticatedRequest, res: Response) => {
