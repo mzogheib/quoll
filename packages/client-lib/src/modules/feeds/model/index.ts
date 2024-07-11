@@ -54,10 +54,14 @@ export const useFeedsModel = (
   const connect = useCallback(
     async (name: FeedName) => {
       updateFeed(name, { isAuthenticating: true });
-      const url = await feedsService.connect(name);
+      const config = await feedsService.connect(name);
       updateFeed(name, { isAuthenticating: false });
 
-      return url;
+      if (config.type === "oauth") {
+        return config.data.url;
+      }
+
+      throw new Error(`Unsupported connection type: ${config.type}`);
     },
     [updateFeed],
   );
