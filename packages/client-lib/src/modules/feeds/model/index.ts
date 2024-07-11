@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from "react";
-import { FeedName } from "@quoll/lib";
+import { FeedConnectionConfig, FeedName } from "@quoll/lib";
 
 import { Store } from "../../../store";
 import { FeedsService } from "../service";
@@ -15,7 +15,7 @@ export type FeedsState = Record<FeedName, FeedState>;
 type FeedsModel = {
   feeds: FeedState[];
   isOneConnected: boolean;
-  connect: (name: FeedName) => Promise<string>;
+  connect: (name: FeedName) => Promise<FeedConnectionConfig>;
   disconnect: (name: FeedName) => Promise<void>;
   authenticate: (name: FeedName, code: string) => Promise<void>;
   setConnected: (name: FeedName, value: boolean) => void;
@@ -57,11 +57,7 @@ export const useFeedsModel = (
       const config = await feedsService.connect(name);
       updateFeed(name, { isAuthenticating: false });
 
-      if (config.type === "oauth") {
-        return config.data.url;
-      }
-
-      throw new Error(`Unsupported connection type: ${config.type}`);
+      return config;
     },
     [updateFeed],
   );

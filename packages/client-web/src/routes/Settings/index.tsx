@@ -78,8 +78,15 @@ const Settings = () => {
       authenticate(name, code).catch(openErrorModal);
 
     try {
-      const url = await connect(name);
-      requestAuth(url, onRequestAuthSuccess, openErrorModal);
+      const config = await connect(name);
+
+      if (config.type === "oauth") {
+        const { url } = config.data;
+        requestAuth(url, onRequestAuthSuccess, openErrorModal);
+        return;
+      }
+
+      throw new Error(`Unsupported connection type: ${config.type}`);
     } catch (error) {
       const message = typeof error === "string" ? error : defaultErrorMessage;
       openErrorModal(message);
