@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/mzogheib/quoll/compare/@quoll/lib@0.4.9...@quoll/lib@0.5.0) (2024-07-11)
+
+### Features
+
+- update Toshl connection method ([#226](https://github.com/mzogheib/quoll/issues/226)) ([a2effdd](https://github.com/mzogheib/quoll/commit/a2effdd296895371f56c730f3da665bb6f7ef783))
+
 ## [0.4.9](https://github.com/mzogheib/quoll/compare/@quoll/lib@0.4.8...@quoll/lib@0.4.9) (2024-07-07)
 
 **Note:** Version bump only for package @quoll/lib

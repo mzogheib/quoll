@@ -7123,7 +7123,7 @@ __metadata:
   resolution: "@quoll/api@workspace:packages/api"
   dependencies:
     "@mapbox/polyline": "npm:^1.1.1"
-    "@quoll/lib": "npm:^0.4.9"
+    "@quoll/lib": "npm:^0.5.0"
     "@tsconfig/recommended": "npm:^1.0.7"
     "@types/body-parser": "npm:^1.19.5"
     "@types/cors": "npm:^2.8.17"
@@ -7144,11 +7144,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@quoll/client-lib@npm:^0.4.15, @quoll/client-lib@workspace:packages/client-lib":
+"@quoll/client-lib@npm:^0.5.0, @quoll/client-lib@workspace:packages/client-lib":
   version: 0.0.0-use.local
   resolution: "@quoll/client-lib@workspace:packages/client-lib"
   dependencies:
-    "@quoll/lib": "npm:^0.4.9"
+    "@quoll/lib": "npm:^0.5.0"
     "@tsconfig/recommended": "npm:^1.0.3"
     "@types/react": "npm:^18.2.45"
     react-redux: "npm:^7.2.1"
@@ -7167,8 +7167,8 @@ __metadata:
     "@babel/core": "npm:^7.20.0"
     "@babel/preset-env": "npm:^7.20.0"
     "@babel/runtime": "npm:^7.20.0"
-    "@quoll/client-lib": "npm:^0.4.15"
-    "@quoll/lib": "npm:^0.4.9"
+    "@quoll/client-lib": "npm:^0.5.0"
+    "@quoll/lib": "npm:^0.5.0"
     "@quoll/ui-primitives": "npm:^0.5.1"
     "@react-native-camera-roll/camera-roll": "npm:^7.3.0"
     "@react-native-community/geolocation": "npm:^3.1.0"
@@ -7208,8 +7208,8 @@ __metadata:
   resolution: "@quoll/client-web@workspace:packages/client-web"
   dependencies:
     "@googlemaps/react-wrapper": "npm:^1.1.35"
-    "@quoll/client-lib": "npm:^0.4.15"
-    "@quoll/lib": "npm:^0.4.9"
+    "@quoll/client-lib": "npm:^0.5.0"
+    "@quoll/lib": "npm:^0.5.0"
     "@quoll/ui-components": "npm:^0.2.27"
     "@testing-library/jest-dom": "npm:^5.16.5"
     "@testing-library/react": "npm:^13.3.0"
@@ -7234,7 +7234,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@quoll/lib@npm:^0.4.9, @quoll/lib@workspace:packages/lib":
+"@quoll/lib@npm:^0.5.0, @quoll/lib@workspace:packages/lib":
   version: 0.0.0-use.local
   resolution: "@quoll/lib@workspace:packages/lib"
   dependencies:

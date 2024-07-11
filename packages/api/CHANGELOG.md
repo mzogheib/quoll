@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.12.0](https://github.com/mzogheib/quoll/compare/@quoll/api@0.11.3...@quoll/api@0.12.0) (2024-07-11)
+
+### Bug Fixes
+
+- **api:** call dotenv.config before importing code ([8f94ae0](https://github.com/mzogheib/quoll/commit/8f94ae011f185b0282a1b819e98623526f85f11a))
+- **api:** catch and handle deauthorize feed errors ([8766db3](https://github.com/mzogheib/quoll/commit/8766db35b443f1ccd642d61a2da99c6990412ce9))
+- **api:** fix user controller import ([976fb7b](https://github.com/mzogheib/quoll/commit/976fb7b2194b60a1186cf9271eb72ef7a774e720))
+- **api:** update default export to named exports in users controller ([19818ea](https://github.com/mzogheib/quoll/commit/19818eabb92204b87ebfb4d3fcfd62795f2ada49))
+
+### Features
+
+- update Toshl connection method ([#226](https://github.com/mzogheib/quoll/issues/226)) ([a2effdd](https://github.com/mzogheib/quoll/commit/a2effdd296895371f56c730f3da665bb6f7ef783))
+
 ## [0.11.3](https://github.com/mzogheib/quoll/compare/@quoll/api@0.11.2...@quoll/api@0.11.3) (2024-07-07)
 
 **Note:** Version bump only for package @quoll/api

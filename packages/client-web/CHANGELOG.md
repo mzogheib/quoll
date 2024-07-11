@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.7.5...@quoll/client-web@0.8.0) (2024-07-11)
+
+### Features
+
+- update Toshl connection method ([#226](https://github.com/mzogheib/quoll/issues/226)) ([a2effdd](https://github.com/mzogheib/quoll/commit/a2effdd296895371f56c730f3da665bb6f7ef783))
+
 ## [0.7.5](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.7.4...@quoll/client-web@0.7.5) (2024-07-07)
 
 **Note:** Version bump only for package @quoll/client-web
