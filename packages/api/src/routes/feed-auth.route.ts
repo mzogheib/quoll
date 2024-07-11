@@ -67,7 +67,6 @@ export const checkAuth = async (
   const promises = user.feeds
     .filter((feed) => feed.auth)
     .map(async (feed) => {
-      console.log(feed.auth);
       if (!feed.auth!.expiry_time) {
         return Promise.resolve();
       }
