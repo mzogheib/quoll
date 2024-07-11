@@ -20,13 +20,17 @@ export const connect = (req: AuthenticatedRequest, res: Response) => {
     return;
   }
 
-  const url = feedServices[feed].getOAuthUrl();
+  if (feed === "toshl") {
+    const response: FeedConnectionConfig = { type: "personal-token" };
+    res.status(200).json(response);
+    return;
+  }
 
+  const url = feedServices[feed].getOAuthUrl();
   const response: FeedConnectionConfig = {
     type: "oauth",
     data: { url },
   };
-
   res.status(200).json(response);
 };
 
