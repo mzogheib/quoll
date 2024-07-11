@@ -19,11 +19,12 @@ router.route("/signup").post(signup);
 router
   .route("/feed-auth")
   .all(authenticate)
+  .get((req, res) => getOAuthUrl(req as AuthenticatedRequest, res))
+  .post((req, res) => authenticateFeed(req as AuthenticatedRequest, res))
+  // Only the deauthorize endpoint requires the feed to be authenticated
   .all((req, res, next) =>
     checkFeedAuth(req as AuthenticatedRequest, res, next),
   )
-  .get((req, res) => getOAuthUrl(req as AuthenticatedRequest, res))
-  .post((req, res) => authenticateFeed(req as AuthenticatedRequest, res))
   .delete((req, res) => deauthorize(req as AuthenticatedRequest, res));
 
 router
