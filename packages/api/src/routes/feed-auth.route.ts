@@ -6,7 +6,7 @@ import { setFeedAuth, get, getFeedAuth } from "../controllers/users.controller";
 import { AuthenticatedRequest } from "./types";
 import { handleError } from "../utils/error";
 
-export const getOAuthUrl = (req: AuthenticatedRequest, res: Response) => {
+export const connect = (req: AuthenticatedRequest, res: Response) => {
   const { feed } = req.query;
 
   if (feed === undefined || typeof feed !== "string") {

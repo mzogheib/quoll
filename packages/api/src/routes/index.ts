@@ -3,7 +3,7 @@ import { Router } from "express";
 import { login, signup, authenticate } from "./users.route";
 import {
   checkAuth as checkFeedAuth,
-  getOAuthUrl,
+  connect,
   authenticate as authenticateFeed,
   deauthorize,
 } from "./feed-auth.route";
@@ -19,7 +19,7 @@ router.route("/signup").post(signup);
 router
   .route("/feed-auth")
   .all(authenticate)
-  .get((req, res) => getOAuthUrl(req as AuthenticatedRequest, res))
+  .get((req, res) => connect(req as AuthenticatedRequest, res))
   .post((req, res) => authenticateFeed(req as AuthenticatedRequest, res))
   // Only the deauthorize endpoint requires the feed to be authenticated
   .all((req, res, next) =>
