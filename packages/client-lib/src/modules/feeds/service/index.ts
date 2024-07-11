@@ -1,4 +1,4 @@
-import { FeedName } from "@quoll/lib";
+import { FeedConnectionConfig, FeedName } from "@quoll/lib";
 import { AuthenticatedApiService } from "../../../utils";
 
 type AuthenticatePayload = {
@@ -8,8 +8,8 @@ type AuthenticatePayload = {
 const endpoint = "/feed-auth";
 
 export class FeedsService extends AuthenticatedApiService {
-  async getOauthUrl(feed: FeedName) {
-    return this.request<string>({
+  async connect(feed: FeedName) {
+    return this.request<FeedConnectionConfig>({
       method: "GET",
       endpoint,
       params: { feed },

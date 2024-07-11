@@ -5,8 +5,9 @@ import { feedServices, isSupportedFeed } from "../feeds";
 import { setFeedAuth, get, getFeedAuth } from "../controllers/users.controller";
 import { AuthenticatedRequest } from "./types";
 import { handleError } from "../utils/error";
+import { FeedConnectionConfig } from "@quoll/lib";
 
-export const getOAuthUrl = (req: AuthenticatedRequest, res: Response) => {
+export const connect = (req: AuthenticatedRequest, res: Response) => {
   const { feed } = req.query;
 
   if (feed === undefined || typeof feed !== "string") {
@@ -19,9 +20,18 @@ export const getOAuthUrl = (req: AuthenticatedRequest, res: Response) => {
     return;
   }
 
-  const url = feedServices[feed].getOAuthUrl();
+  if (feed === "toshl") {
+    const response: FeedConnectionConfig = { type: "personal-token" };
+    res.status(200).json(response);
+    return;
+  }
 
-  res.status(200).json(url);
+  const url = feedServices[feed].getOAuthUrl();
+  const response: FeedConnectionConfig = {
+    type: "oauth",
+    data: { url },
+  };
+  res.status(200).json(response);
 };
 
 export const authenticate = async (

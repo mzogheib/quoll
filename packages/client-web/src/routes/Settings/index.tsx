@@ -69,7 +69,7 @@ const Settings = () => {
 
   const closeModal = () => setState({ ...INITIAL_STATE });
 
-  const handleConnect = (name: FeedName) => {
+  const handleConnect = async (name: FeedName) => {
     const defaultErrorMessage = "Could not connect feed. Please try again.";
     const openErrorModal = (message = defaultErrorMessage) =>
       openModal(message);
@@ -77,9 +77,20 @@ const Settings = () => {
     const onRequestAuthSuccess = (code: string) =>
       authenticate(name, code).catch(openErrorModal);
 
-    connect(name)
-      .then((url) => requestAuth(url, onRequestAuthSuccess, openErrorModal))
-      .catch(openErrorModal);
+    try {
+      const config = await connect(name);
+
+      if (config.type === "oauth") {
+        const { url } = config.data;
+        requestAuth(url, onRequestAuthSuccess, openErrorModal);
+        return;
+      }
+
+      throw new Error(`Unsupported connection type: ${config.type}`);
+    } catch (error) {
+      const message = typeof error === "string" ? error : defaultErrorMessage;
+      openErrorModal(message);
+    }
   };
 
   const handleDisconnect = (name: FeedName) =>
