@@ -8,7 +8,7 @@ type AuthenticatePayload = {
 const endpoint = "/feed-auth";
 
 export class FeedsService extends AuthenticatedApiService {
-  async getOauthUrl(feed: FeedName) {
+  async connect(feed: FeedName) {
     return this.request<string>({
       method: "GET",
       endpoint,

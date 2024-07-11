@@ -54,7 +54,7 @@ export const useFeedsModel = (
   const connect = useCallback(
     async (name: FeedName) => {
       updateFeed(name, { isAuthenticating: true });
-      const url = await feedsService.getOauthUrl(name);
+      const url = await feedsService.connect(name);
       updateFeed(name, { isAuthenticating: false });
 
       return url;
