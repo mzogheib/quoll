@@ -42,37 +42,33 @@ const FeedSettingsWrapper = styled.div`
   margin: 40px 0 0;
 `;
 
-const INITIAL_STATE = {
-  showModal: false,
-  modalMessage: "Oops, something went wrong.",
-};
-
 const Settings = () => {
   const history = useHistory();
   const location = useLocation<SettingsLocationState>();
 
-  const [state, setState] = useState(INITIAL_STATE);
-  const [isTokenModalOpen, setIsTokenModalOpen] = useState(false);
-
   const { feeds, connect, disconnect, authenticate } = useFeedsViewModel();
 
-  const openModal = (message = INITIAL_STATE.modalMessage) =>
-    setState({ showModal: true, modalMessage: message });
+  const [alertModalMessage, setAlertModalMessage] = useState<string | null>(
+    null,
+  );
+
+  const openAlertModal = (message: string) => setAlertModalMessage(message);
+  const closeAlertModal = () => setAlertModalMessage(null);
+
+  const [isTokenModalOpen, setIsTokenModalOpen] = useState(false);
+
+  const openTokenModal = () => setIsTokenModalOpen(true);
+  const closeTokenModal = () => setIsTokenModalOpen(false);
 
   useEffect(() => {
     const { state: locationState } = location;
     if (locationState && locationState.errorMessage) {
-      openModal(locationState.errorMessage);
+      openAlertModal(locationState.errorMessage);
       // Replace the current location without a state so that this error
       // message doesn't keep getting displayed
       history.replace("/settings");
     }
   }, [history, location]);
-
-  const closeModal = () => setState({ ...INITIAL_STATE });
-
-  const openTokenModal = () => setIsTokenModalOpen(true);
-  const closeTokenModal = () => setIsTokenModalOpen(false);
 
   const handleSubmitToken = (value: string) => {
     // TODO submit somewhere
@@ -81,18 +77,16 @@ const Settings = () => {
 
   const handleConnect = async (name: FeedName) => {
     const defaultErrorMessage = "Could not connect feed. Please try again.";
-    const openErrorModal = (message = defaultErrorMessage) =>
-      openModal(message);
 
     const onRequestAuthSuccess = (code: string) =>
-      authenticate(name, code).catch(openErrorModal);
+      authenticate(name, code).catch(openAlertModal);
 
     try {
       const config = await connect(name);
 
       if (config.type === "oauth") {
         const { url } = config.data;
-        requestAuth(url, onRequestAuthSuccess, openErrorModal);
+        requestAuth(url, onRequestAuthSuccess, openAlertModal);
         return;
       }
 
@@ -102,16 +96,14 @@ const Settings = () => {
       }
     } catch (error) {
       const message = typeof error === "string" ? error : defaultErrorMessage;
-      openErrorModal(message);
+      openAlertModal(message);
     }
   };
 
   const handleDisconnect = (name: FeedName) =>
     disconnect(name).catch(() =>
-      openModal("Could not disconnect feed. Please try again."),
+      openAlertModal("Could not disconnect feed. Please try again."),
     );
-
-  const { showModal, modalMessage } = state;
 
   return (
     <Wrapper>
@@ -129,11 +121,7 @@ const Settings = () => {
           ))}
         </FeedsList>
       </Feeds>
-      <AlertModal
-        isOpen={showModal}
-        message={modalMessage}
-        onClose={closeModal}
-      />
+      <AlertModal message={alertModalMessage} onClose={closeAlertModal} />
       <TokenModal
         isOpen={isTokenModalOpen}
         onCancel={closeTokenModal}

@@ -12,13 +12,12 @@ const Actions = styled.div`
 `;
 
 interface Props {
-  isOpen: boolean;
-  message: string;
+  message: string | null;
   onClose: () => void;
 }
 
-const AlertModal = ({ isOpen, message, onClose }: Props) => (
-  <Modal isOpen={isOpen} onRequestClose={onClose}>
+const AlertModal = ({ message, onClose }: Props) => (
+  <Modal isOpen={message !== null} onRequestClose={onClose}>
     <InnerWrapper>
       <div>{message}</div>
       <Actions>
