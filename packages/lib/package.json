@@ -12,7 +12,8 @@
     "clean-build": "rm -rf dist",
     "build": "yarn clean-build && tsc",
     "type-check": "tsc --noEmit",
-    "prepublishOnly": "yarn build"
+    "prepare": "yarn build",
+    "postinstall": "yarn build"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.3",
