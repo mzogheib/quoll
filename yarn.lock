@@ -7162,7 +7162,7 @@ __metadata:
     "@babel/runtime": "npm:^7.20.0"
     "@quoll/client-lib": "npm:^0.5.1"
     "@quoll/lib": "npm:^0.5.1"
-    "@quoll/ui-primitives": "npm:^0.5.2"
+    "@quoll/ui-primitives": "npm:^0.5.3"
     "@react-native-camera-roll/camera-roll": "npm:^7.3.0"
     "@react-native-community/geolocation": "npm:^3.1.0"
     "@react-native/babel-preset": "npm:^0.73.18"
@@ -7203,7 +7203,7 @@ __metadata:
     "@googlemaps/react-wrapper": "npm:^1.1.35"
     "@quoll/client-lib": "npm:^0.5.1"
     "@quoll/lib": "npm:^0.5.1"
-    "@quoll/ui-components": "npm:^0.3.0"
+    "@quoll/ui-components": "npm:^0.3.1"
     "@testing-library/jest-dom": "npm:^5.16.5"
     "@testing-library/react": "npm:^13.3.0"
     "@testing-library/user-event": "npm:^13.5.0"
@@ -7235,12 +7235,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@quoll/ui-components@npm:^0.3.0, @quoll/ui-components@workspace:packages/ui-components":
+"@quoll/ui-components@npm:^0.3.1, @quoll/ui-components@workspace:packages/ui-components":
   version: 0.0.0-use.local
   resolution: "@quoll/ui-components@workspace:packages/ui-components"
   dependencies:
     "@babel/core": "npm:^7.18.10"
-    "@quoll/ui-primitives": "npm:^0.5.2"
+    "@quoll/ui-primitives": "npm:^0.5.3"
     "@size-limit/preset-small-lib": "npm:^8.0.1"
     "@storybook/addon-essentials": "npm:^8.1.11"
     "@storybook/addon-interactions": "npm:^8.1.11"
@@ -7275,7 +7275,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@quoll/ui-primitives@npm:^0.5.2, @quoll/ui-primitives@workspace:packages/ui-primitives":
+"@quoll/ui-primitives@npm:^0.5.3, @quoll/ui-primitives@workspace:packages/ui-primitives":
   version: 0.0.0-use.local
   resolution: "@quoll/ui-primitives@workspace:packages/ui-primitives"
   dependencies:
