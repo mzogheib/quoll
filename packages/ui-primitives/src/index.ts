@@ -3,7 +3,7 @@
  *
  * @remarks
  *
- * Color names from https://www.color-blindness.com/color-name-hue
+ * Color names from https://www.color-blindness.com/color-name-hue.
  */
 export const colorPalette = {
   black: "#000000",
