@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { StyledComponent } from "styled-components";
+import styled from "styled-components";
 
 import { Button, ButtonPlain, ButtonPrimary } from ".";
 
@@ -26,11 +26,11 @@ const buttonVariations = [Button, ButtonPrimary, ButtonPlain];
 const buttonDisabledProp = [false, true];
 
 type RenderButtonParams = {
-  variation: StyledComponent<"button", any>;
+  ButtonComponent: typeof Button | typeof ButtonPrimary | typeof ButtonPlain;
   disabled: boolean;
 };
-const renderButton = ({ variation, disabled }: RenderButtonParams) => {
-  const ButtonComponent = variation;
+
+const renderButton = ({ ButtonComponent, disabled }: RenderButtonParams) => {
   const variationLabel = ButtonComponent.displayName;
   return (
     <ButtonWrapper key={`${variationLabel}-${disabled}`}>
@@ -49,8 +49,8 @@ export const Default = () => (
     {buttonDisabledProp.map((disabled) => (
       <Column key={`${disabled}`}>
         <div>{disabled ? "Disabled" : "Enabled"}</div>
-        {buttonVariations.map((variation) =>
-          renderButton({ variation, disabled }),
+        {buttonVariations.map((ButtonComponent) =>
+          renderButton({ ButtonComponent, disabled }),
         )}
       </Column>
     ))}
