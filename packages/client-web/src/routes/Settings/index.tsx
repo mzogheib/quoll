@@ -8,6 +8,7 @@ import FeedSettings from "components/FeedSettings";
 import AlertModal from "components/modals/AlertModal";
 import { requestAuth } from "../../services/oauth";
 import { SettingsLocationState } from "../types";
+import TokenModal from "./TokenModal";
 
 const Wrapper = styled.div`
   display: flex;
@@ -51,6 +52,7 @@ const Settings = () => {
   const location = useLocation<SettingsLocationState>();
 
   const [state, setState] = useState(INITIAL_STATE);
+  const [isTokenModalOpen, setIsTokenModalOpen] = useState(false);
 
   const { feeds, connect, disconnect, authenticate } = useFeedsViewModel();
 
@@ -69,6 +71,14 @@ const Settings = () => {
 
   const closeModal = () => setState({ ...INITIAL_STATE });
 
+  const openTokenModal = () => setIsTokenModalOpen(true);
+  const closeTokenModal = () => setIsTokenModalOpen(false);
+
+  const handleSubmitToken = (value: string) => {
+    // TODO submit somewhere
+    closeTokenModal();
+  };
+
   const handleConnect = async (name: FeedName) => {
     const defaultErrorMessage = "Could not connect feed. Please try again.";
     const openErrorModal = (message = defaultErrorMessage) =>
@@ -86,7 +96,10 @@ const Settings = () => {
         return;
       }
 
-      throw new Error(`Unsupported connection type: ${config.type}`);
+      if (config.type === "personal-token") {
+        openTokenModal();
+        return;
+      }
     } catch (error) {
       const message = typeof error === "string" ? error : defaultErrorMessage;
       openErrorModal(message);
@@ -120,6 +133,11 @@ const Settings = () => {
         isOpen={showModal}
         message={modalMessage}
         onClose={closeModal}
+      />
+      <TokenModal
+        isOpen={isTokenModalOpen}
+        onCancel={closeTokenModal}
+        onSubmit={handleSubmitToken}
       />
     </Wrapper>
   );
