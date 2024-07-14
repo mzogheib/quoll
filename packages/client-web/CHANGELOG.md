@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.8.2...@quoll/client-web@0.9.0) (2024-07-14)
+
+### Features
+
+- **client-web:** add comment ([3482961](https://github.com/mzogheib/quoll/commit/3482961447f5211293da869ca33b3b5249d2b957))
+
 ## [0.8.2](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.8.1...@quoll/client-web@0.8.2) (2024-07-14)
 
 **Note:** Version bump only for package @quoll/client-web
