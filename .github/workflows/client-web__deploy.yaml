@@ -1,11 +1,8 @@
 name: client-web - deploy
 
-run-name: "client-web - deploy: ${{ github.ref_name }}"
+run-name: "client-web - deploy: ${{ inputs.git-tag }}"
 
 on:
-  push:
-    tags:
-      - "*"
   workflow_dispatch:
     inputs:
       git-tag:
@@ -16,7 +13,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/@quoll/client-web@')
+    if: startsWith(inputs.git-tag, '@quoll/client-web@')
     steps:
       - name: Deploy
         shell: bash

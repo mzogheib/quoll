@@ -1,11 +1,8 @@
 name: api - deploy
 
-run-name: "api - deploy: ${{ github.ref_name }}"
+run-name: "api - deploy: ${{ inputs.git-tag }}"
 
 on:
-  push:
-    tags:
-      - "@quoll/api@*"
   workflow_dispatch:
     inputs:
       git-tag:
@@ -19,6 +16,7 @@ permissions:
 jobs:
   docker-build-push:
     runs-on: ubuntu-latest
+    if: startsWith(inputs.git-tag, '@quoll/api@')
     steps:
       - uses: actions/checkout@v4
 
@@ -26,7 +24,7 @@ jobs:
         id: extract-version
         uses: ./.github/actions/extract-version
         with:
-          tag: ${{ inputs.git-tag || github.ref_name }}
+          tag: ${{ inputs.git-tag }}
 
       - name: Make image tag
         id: make-image-tag
@@ -64,5 +62,5 @@ jobs:
           docker build . -f "${{ env.DOCKERFILE_PATH }}" -t "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
           docker push "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
           echo "IMAGE $IMAGE_TAG is pushed to $ECR_REGISTRY/$ECR_REPOSITORY"
-          echo "image_tag=$IMAGE_TAG" 
+          echo "image_tag=$IMAGE_TAG"
           echo "full_image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
