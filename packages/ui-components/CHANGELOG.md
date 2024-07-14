@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/mzogheib/quoll/compare/@quoll/ui-components@0.2.27...@quoll/ui-components@0.3.0) (2024-07-14)
+
+### Features
+
+- **ui-components:** remove narrow modal story ([ea7a9ff](https://github.com/mzogheib/quoll/commit/ea7a9ffa582c4853cf74c60e2884880c2ce8679b))
+
 ## [0.2.27](https://github.com/mzogheib/quoll/compare/@quoll/ui-components@0.2.26...@quoll/ui-components@0.2.27) (2024-07-06)
 
 **Note:** Version bump only for package @quoll/ui-components
