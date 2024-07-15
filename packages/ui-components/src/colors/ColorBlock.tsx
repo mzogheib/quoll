@@ -7,11 +7,11 @@ const Wrapper = styled.div`
   padding: 5px;
 `;
 
-const Color = styled.div<Pick<Props, "colorValue">>(
-  ({ colorValue }) => css`
+const Color = styled.div<{ $colorValue: string }>(
+  ({ $colorValue }) => css`
     width: 50px;
     height: 50px;
-    background-color: ${colorValue};
+    background-color: ${$colorValue};
   `,
 );
 
@@ -29,7 +29,7 @@ type Props = {
 
 const ColorBlock = ({ colorName, colorValue }: Props) => (
   <Wrapper>
-    <Color colorValue={colorValue} />
+    <Color $colorValue={colorValue} />
     &nbsp;
     <Label>{colorName}</Label>
   </Wrapper>
