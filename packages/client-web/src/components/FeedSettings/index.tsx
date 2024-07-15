@@ -12,11 +12,11 @@ const Wrapper = styled.div(
   `,
 );
 
-const Content = styled.div<{ isAuthenticating: boolean }>(
-  ({ isAuthenticating }) => css`
+const Content = styled.div<{ $isAuthenticating: boolean }>(
+  ({ $isAuthenticating }) => css`
     display: flex;
     align-items: center;
-    padding: ${isAuthenticating
+    padding: ${$isAuthenticating
       ? "16px 30px 20px 20px"
       : "20px 30px 20px 20px"};
   `,
@@ -94,7 +94,7 @@ const FeedSettings = ({ feed, onConnect, onDisconnect }: Props) => {
   return (
     <Wrapper>
       {isAuthenticating && <HorizontalLoader />}
-      <Content isAuthenticating={isAuthenticating}>
+      <Content $isAuthenticating={isAuthenticating}>
         <Logo>
           <FeedLogo name={name} isGrayscale={!isConnected} />
         </Logo>
