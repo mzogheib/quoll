@@ -15,7 +15,14 @@ const ReactModalAdapter = ({ className, ...props }: ReactModal.Props) => (
 
 ReactModalAdapter.setAppElement = (id: string) => ReactModal.setAppElement(id);
 
-export const Modal = styled(ReactModalAdapter)(
+type IReactModalAdapter = typeof ReactModalAdapter;
+
+interface IModal extends IReactModalAdapter {
+  Body: typeof Body;
+  Actions: typeof Actions;
+}
+
+export const Modal: IModal = styled(ReactModalAdapter)(
   ({ theme: { colors } }) => css`
     margin: 200px 0 0;
     width: 100%;
@@ -47,3 +54,16 @@ export const Modal = styled(ReactModalAdapter)(
     }
   `,
 );
+
+const Body = styled.div`
+  padding: 20px;
+`;
+
+const Actions = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+`;
+
+Modal.Body = Body;
+Modal.Actions = Actions;

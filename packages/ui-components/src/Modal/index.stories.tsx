@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import ReactModal from "react-modal";
 
-import { Button } from "../Button";
+import { Button, ButtonPrimary } from "../Button";
 
 import { Modal } from ".";
 
@@ -42,6 +42,29 @@ export const Default = () => {
         isOpen={isDefaultModalOpen}
         onRequestClose={() => setDefaultModalOpen(false)}
       />
+    </Wrapper>
+  );
+};
+
+export const WithActions = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
+
+  return (
+    <Wrapper>
+      <Button onClick={openModal}>Open modal</Button>
+
+      <Modal isOpen={isOpen} onRequestClose={closeModal}>
+        <Modal.Body>
+          <div>This is a modal with actions.</div>
+          <Modal.Actions>
+            <Button onClick={closeModal}>Cancel</Button>
+            <ButtonPrimary onClick={closeModal}>Submit</ButtonPrimary>
+          </Modal.Actions>
+        </Modal.Body>
+      </Modal>
     </Wrapper>
   );
 };
