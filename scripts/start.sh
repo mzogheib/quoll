@@ -1,7 +1,7 @@
 #!/bin/bash
 
-emojis=("🗃️ " "🧰" "📱" "🌐" "🔩" "🧩" "🎨")
-options=("api" "client-lib" "client-mobile" "client-web" "lib" "ui-components" "ui-primitives")
+emojis=("🗄️ " "🗃️ " "🧰" "📱" "🌐" "🔩" "🧩" "🎨")
+options=("db" "api" "client-lib" "client-mobile" "client-web" "lib" "ui-components" "ui-primitives")
 selected_option=0
 
 while true; do
@@ -48,5 +48,11 @@ selected_option_emoji="${emojis[selected_option]}"
 clear
 
 echo "Running "${selected_option_emoji}" "${selected_option_label}"..."
+
+# db has a non-standard start script
+if [ "$selected_option_label" == "db" ]; then
+    yarn workspace @quoll/api start-db
+    exit 0
+fi
 
 yarn workspace @quoll/${selected_option_label} start
