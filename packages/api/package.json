@@ -17,7 +17,7 @@
   },
   "scripts": {
     "start": "nodemon src/server.ts",
-    "start-db": "docker-compose -f db/local/compose.yml up",
+    "start-db": "docker-compose -f db/local/compose.yaml up",
     "clean-dist": "rm -rf dist",
     "build": "tsc",
     "serve": "node dist/server.js",
