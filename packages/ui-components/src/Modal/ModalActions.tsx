@@ -22,7 +22,7 @@ const _ModalActions = styled.div<{ $align: Align }>(
     display: flex;
     justify-content: ${alignMap[$align]};
     gap: 10px;
-    margin-top: 10px;
+    margin-top: 15px;
   `,
 );
 
