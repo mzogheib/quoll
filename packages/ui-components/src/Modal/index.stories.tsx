@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { Button, ButtonPrimary } from "../Button";
 
 import { Modal } from ".";
-import { ModalHeader } from "./ModalHeader";
 
 export default { title: "Modal" };
 
@@ -30,7 +29,7 @@ export const Default = () => {
 
       <Modal isOpen={isOpen} onRequestClose={closeModal}>
         <Modal.Body>
-          <ModalHeader onClose={closeModal}>Title</ModalHeader>
+          <Modal.Header onClose={closeModal}>Title</Modal.Header>
           <div>
             This is a modal with actions. You can click also outside the modal
             to close it.

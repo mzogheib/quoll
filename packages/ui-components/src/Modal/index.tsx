@@ -2,6 +2,10 @@ import React from "react";
 import styled, { css } from "styled-components";
 import ReactModal from "react-modal";
 
+import { ModalBody } from "./ModalBody";
+import { ModalHeader } from "./ModalHeader";
+import { ModalActions } from "./ModalActions";
+
 // Inspired by https://github.com/reactjs/react-modal/issues/603
 
 const ReactModalAdapter = ({ className, ...props }: ReactModal.Props) => (
@@ -18,8 +22,9 @@ ReactModalAdapter.setAppElement = (id: string) => ReactModal.setAppElement(id);
 type IReactModalAdapter = typeof ReactModalAdapter;
 
 interface IModal extends IReactModalAdapter {
-  Body: typeof Body;
-  Actions: typeof Actions;
+  Header: typeof ModalHeader;
+  Body: typeof ModalBody;
+  Actions: typeof ModalActions;
 }
 
 export const Modal: IModal = styled(ReactModalAdapter)(
@@ -55,16 +60,6 @@ export const Modal: IModal = styled(ReactModalAdapter)(
   `,
 );
 
-const Body = styled.div`
-  padding: 20px;
-`;
-
-const Actions = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: 10px;
-`;
-
-Modal.Body = Body;
-Modal.Actions = Actions;
+Modal.Body = ModalBody;
+Modal.Header = ModalHeader;
+Modal.Actions = ModalActions;
