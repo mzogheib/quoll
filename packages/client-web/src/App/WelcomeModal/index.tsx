@@ -1,11 +1,5 @@
 import styled, { css } from "styled-components";
-import { ButtonPrimary, IconButton, Modal } from "@quoll/ui-components";
-
-const Header = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  padding: 10px;
-`;
+import { ButtonPrimary, Modal } from "@quoll/ui-components";
 
 const Title = styled.div(
   ({ theme: { font } }) => css`
@@ -22,12 +16,6 @@ const Message = styled.div`
   justify-content: center;
 `;
 
-const Actions = styled.div`
-  display: flex;
-  justify-content: center;
-  padding: 30px 0 30px;
-`;
-
 interface Props {
   isOpen: boolean;
   onCancel: () => void;
@@ -36,14 +24,14 @@ interface Props {
 
 const WelcomeModal = ({ isOpen, onCancel, onConnect }: Props) => (
   <Modal isOpen={isOpen} onRequestClose={onCancel}>
-    <Header>
-      <IconButton icon="Close" size={30} onClick={onCancel} />
-    </Header>
-    <Title>Quoll</Title>
-    <Message>Map ya life!</Message>
-    <Actions>
-      <ButtonPrimary onClick={onConnect}>Connect Feeds</ButtonPrimary>
-    </Actions>
+    <Modal.Inner>
+      <Modal.Header onClose={onCancel} />
+      <Title>Quoll</Title>
+      <Message>Map ya life!</Message>
+      <Modal.Actions align="center">
+        <ButtonPrimary onClick={onConnect}>Connect Feeds</ButtonPrimary>
+      </Modal.Actions>
+    </Modal.Inner>
   </Modal>
 );
 
