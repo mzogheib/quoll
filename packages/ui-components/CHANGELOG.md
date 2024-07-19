@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/mzogheib/quoll/compare/@quoll/ui-components@0.3.2...@quoll/ui-components@0.4.0) (2024-07-19)
+
+### Features
+
+- **ui-components:** add an align prop to Modal.Actions ([9bcdc2b](https://github.com/mzogheib/quoll/commit/9bcdc2bec965ccfaf49b0e35a80eb020759e0480))
+- **ui-components:** add colors story ([5ae2c70](https://github.com/mzogheib/quoll/commit/5ae2c70769b0ff9744e28a6a0e842ef7465b7e0f))
+- **ui-components:** add Input component ([cfa8196](https://github.com/mzogheib/quoll/commit/cfa81962c5c1b641b966c37bd720b2e94b9a25a2))
+- **ui-components:** add margin to modal actions ([884b80c](https://github.com/mzogheib/quoll/commit/884b80c675b6758e8ce76889188e8ebb5c6d234b))
+- **ui-components:** add modal body and actions components ([0c134a6](https://github.com/mzogheib/quoll/commit/0c134a6adeaf59466acc4059585fe732c721ea3e))
+- **ui-components:** add ModalHeader ([36aa332](https://github.com/mzogheib/quoll/commit/36aa3328cd9e6f132cb5ac411a4c3a6816a7271a))
+- **ui-components:** adjust margin-top for ModalActions ([65370f5](https://github.com/mzogheib/quoll/commit/65370f59ebcbbfa069310b6f9767bd7fa314f051))
+
 ## [0.3.2](https://github.com/mzogheib/quoll/compare/@quoll/ui-components@0.3.1...@quoll/ui-components@0.3.2) (2024-07-14)
 
 **Note:** Version bump only for package @quoll/ui-components

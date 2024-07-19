@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.11.0](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.10.0...@quoll/client-web@0.11.0) (2024-07-19)
+
+### Features
+
+- **client-web:** add access token modal ([3742d3a](https://github.com/mzogheib/quoll/commit/3742d3a4957628b317574f8f59a11963b95b19c2))
+- **client-web:** replace header close icon with cancel button for token modal ([db5c91f](https://github.com/mzogheib/quoll/commit/db5c91f8d3c76ab72a579924b8f13e971b9a8ac3))
+
 # [0.10.0](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.9.0...@quoll/client-web@0.10.0) (2024-07-14)
 
 ### Features
