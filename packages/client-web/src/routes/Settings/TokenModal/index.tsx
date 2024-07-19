@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ButtonPrimary, Modal } from "@quoll/ui-components";
+import { Button, ButtonPrimary, Modal } from "@quoll/ui-components";
 import { Input } from "@quoll/ui-components";
 
 interface Props {
@@ -18,15 +18,15 @@ const TokenModal = ({ isOpen, onCancel, onSubmit }: Props) => {
   };
 
   return (
-    <Modal isOpen={isOpen} onRequestClose={onCancel}>
+    <Modal isOpen={isOpen}>
       <Modal.Inner>
-        <Modal.Header onClose={onCancel} />
         <Input
           value={value}
           onChange={setValue}
           placeholder="Enter your personal access token"
         />
         <Modal.Actions>
+          <Button onClick={onCancel}>Cancel</Button>
           <ButtonPrimary onClick={handleSubmit}>Submit</ButtonPrimary>
         </Modal.Actions>
       </Modal.Inner>
