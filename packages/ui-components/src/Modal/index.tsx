@@ -2,7 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import ReactModal from "react-modal";
 
-import { ModalBody } from "./ModalBody";
+import { ModalInner } from "./ModalInner";
 import { ModalHeader } from "./ModalHeader";
 import { ModalActions } from "./ModalActions";
 
@@ -23,7 +23,7 @@ type IReactModalAdapter = typeof ReactModalAdapter;
 
 interface IModal extends IReactModalAdapter {
   Header: typeof ModalHeader;
-  Body: typeof ModalBody;
+  Inner: typeof ModalInner;
   Actions: typeof ModalActions;
 }
 
@@ -60,6 +60,6 @@ export const Modal: IModal = styled(ReactModalAdapter)(
   `,
 );
 
-Modal.Body = ModalBody;
+Modal.Inner = ModalInner;
 Modal.Header = ModalHeader;
 Modal.Actions = ModalActions;

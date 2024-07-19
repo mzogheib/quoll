@@ -28,7 +28,7 @@ export const Default = () => {
       <Button onClick={openModal}>Open</Button>
 
       <Modal isOpen={isOpen} onRequestClose={closeModal}>
-        <Modal.Body>
+        <Modal.Inner>
           <Modal.Header onClose={closeModal}>Title</Modal.Header>
           <div>
             This is a modal with actions. You can click also outside the modal
@@ -38,7 +38,7 @@ export const Default = () => {
             <Button onClick={closeModal}>Cancel</Button>
             <ButtonPrimary onClick={closeModal}>Submit</ButtonPrimary>
           </Modal.Actions>
-        </Modal.Body>
+        </Modal.Inner>
       </Modal>
     </Wrapper>
   );

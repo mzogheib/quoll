@@ -1,5 +1,5 @@
 import styled from "styled-components";
 
-export const ModalBody = styled.div`
+export const ModalInner = styled.div`
   padding: 20px;
 `;
