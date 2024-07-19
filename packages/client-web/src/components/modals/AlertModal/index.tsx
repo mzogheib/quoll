@@ -1,15 +1,4 @@
-import styled from "styled-components";
-import { Button, Modal } from "@quoll/ui-components";
-
-const InnerWrapper = styled.div`
-  padding: 20px;
-`;
-
-const Actions = styled.div`
-  margin: 30px 0 0;
-  display: flex;
-  justify-content: flex-end;
-`;
+import { ButtonPrimary, Modal } from "@quoll/ui-components";
 
 interface Props {
   message: string | null;
@@ -18,12 +7,12 @@ interface Props {
 
 const AlertModal = ({ message, onClose }: Props) => (
   <Modal isOpen={message !== null} onRequestClose={onClose}>
-    <InnerWrapper>
+    <Modal.Inner>
       <div>{message}</div>
-      <Actions>
-        <Button onClick={onClose}>OK</Button>
-      </Actions>
-    </InnerWrapper>
+      <Modal.Actions>
+        <ButtonPrimary onClick={onClose}>OK</ButtonPrimary>
+      </Modal.Actions>
+    </Modal.Inner>
   </Modal>
 );
 
