@@ -4,7 +4,7 @@ import {
   makeTimeString,
 } from "@quoll/lib";
 
-import { PolylineConfig } from "components/Map/Component";
+import { MarkerConfig, PolylineConfig } from "components/Map/Component";
 import { decodePath } from "components/Map/utils";
 
 const mapElementColors = {
@@ -35,20 +35,23 @@ export const makePolylineConfigs = (
       };
     });
 
-// TODO
-export const makeMarkerOptions = (
-  entries: TimelineEntry[],
-): google.maps.MarkerOptions[] =>
+export const makeMarkerOptions = (entries: TimelineEntry[]): MarkerConfig[] =>
   entries
     .filter((entry) => !entry.polyline && entry.locationStart)
-    .map((entry) => ({
-      id: entry.id,
-      latitude: entry.locationStart!.latitude, // Guaranteed by above filter
-      longitude: entry.locationStart!.longitude, // Guaranteed by above filter
-      title: entry.title,
-      subTitle: makeTimeString(makeDateFromUnixTimestamp(entry.timeStart)),
-      description: entry.description || "",
-    }));
+    .map((entry) => {
+      return {
+        options: {
+          id: entry.id,
+          position: {
+            lat: entry.locationStart!.latitude, // Guaranteed by above filter
+            lng: entry.locationStart!.longitude, // Guaranteed by above filter
+          },
+          title: entry.title,
+          subTitle: makeTimeString(makeDateFromUnixTimestamp(entry.timeStart)),
+          description: entry.description || "",
+        },
+      };
+    });
 
 const makeInfoWindowPosition = ({
   locationStart,

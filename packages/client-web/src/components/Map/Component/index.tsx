@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import InfoWindow from "../InfoWindow";
 import Polyline from "../Polyline";
+import Marker from "../Marker";
 import { makeBounds } from "../utils";
 
 const Wrapper = styled.div`
@@ -15,12 +16,22 @@ export interface PolylineConfig {
   onClick?: (event: google.maps.MapMouseEvent) => void;
 }
 
+export interface MarkerConfig {
+  options: google.maps.MarkerOptions;
+  onClick?: (event: google.maps.MapMouseEvent) => void;
+}
+
 export interface Props {
+  markerConfigs?: MarkerConfig[];
   polylineConfigs?: PolylineConfig[];
   infoWindowOptions?: google.maps.InfoWindowOptions;
 }
 
-const MapComponent = ({ polylineConfigs, infoWindowOptions }: Props) => {
+const MapComponent = ({
+  markerConfigs,
+  polylineConfigs,
+  infoWindowOptions,
+}: Props) => {
   const ref = useRef<HTMLDivElement>(null);
   const [map, setMap] = useState<google.maps.Map>();
 
@@ -28,6 +39,12 @@ const MapComponent = ({ polylineConfigs, infoWindowOptions }: Props) => {
     map &&
     polylineConfigs?.map(({ options, onClick }, i) => (
       <Polyline key={i} options={options} onClick={onClick} map={map} />
+    ));
+
+  const renderMarkers = () =>
+    map &&
+    markerConfigs?.map(({ options, onClick }, i) => (
+      <Marker key={i} options={options} onClick={onClick} map={map} />
     ));
 
   // Set the map on first render with a default center
@@ -45,15 +62,20 @@ const MapComponent = ({ polylineConfigs, infoWindowOptions }: Props) => {
     if (!map) return;
 
     const polylinesOptions = polylineConfigs?.map(({ options }) => options);
+    const markersOptions = markerConfigs?.map(({ options }) => options);
 
-    const bounds = makeBounds({ polylinesOptions });
+    const bounds = makeBounds({
+      polylinesOptions,
+      markersOptions,
+    });
 
     if (!bounds.isEmpty()) map.fitBounds(bounds);
-  }, [map, polylineConfigs]);
+  }, [map, markerConfigs, polylineConfigs]);
 
   return (
     <Wrapper ref={ref}>
       {renderPolylines()}
+      {renderMarkers()}
       {map && infoWindowOptions && (
         <InfoWindow options={infoWindowOptions} map={map} />
       )}

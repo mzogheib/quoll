@@ -8,7 +8,11 @@ import { useDateViewModelModel } from "modules/date/view-model";
 import DatePicker from "modules/date/views/DatePicker";
 import Timeline from "modules/timeline/views/Timeline";
 import Map from "components/Map";
-import { makePolylineConfigs, makeInfoWindowOptions } from "./mapUtils";
+import {
+  makePolylineConfigs,
+  makeInfoWindowOptions,
+  makeMarkerOptions,
+} from "./mapUtils";
 
 const Wrapper = styled.div(
   ({ theme: { media } }) => css`
@@ -107,6 +111,12 @@ const Home = () => {
     return makePolylineConfigs(entries, focussedEntryId, handleEntryClick);
   }, [entries, focussedEntryId, isMapReady]);
 
+  const markerOptions = useMemo(() => {
+    if (!isMapReady || entries === null) return;
+
+    return makeMarkerOptions(entries);
+  }, [entries, isMapReady]);
+
   const infoWindowOptions = useMemo(() => {
     if (!isMapReady || focussedEntry === undefined) return;
 
@@ -145,6 +155,7 @@ const Home = () => {
       <MapWrapper>
         <MapBody>
           <Map
+            markerConfigs={markerOptions}
             polylineConfigs={polylineConfigs}
             infoWindowOptions={infoWindowOptions}
             onMapLoaded={() => setIsMapReady(true)}
