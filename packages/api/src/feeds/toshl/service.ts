@@ -3,8 +3,6 @@ import moment from "moment";
 import { toshlApi } from "./api";
 import { ToshlUserModel } from "../../models/toshlUser.model";
 
-const { deleteOne, findOne, create } = ToshlUserModel;
-
 const getOAuthUrl = () => {
   return toshlApi.oauth.url();
 };
@@ -30,7 +28,7 @@ const authenticate = async (code: string) => {
 
 const deauthorize = async ({ access_token }: { access_token: string }) => {
   await toshlApi.oauth.deauthorize({ access_token });
-  await deleteOne({ accessToken: access_token });
+  await ToshlUserModel.deleteOne({ accessToken: access_token });
 };
 
 const refreshAuth = async ({
@@ -42,18 +40,18 @@ const refreshAuth = async ({
 }) => {
   const data = await toshlApi.oauth.refresh({ refresh_token });
   // Clear cache identified by old access_token
-  await deleteOne({ accessToken: access_token });
+  await ToshlUserModel.deleteOne({ accessToken: access_token });
   return transformAuthResponse(data);
 };
 
 const getTags = async (accessToken: string) => {
-  const toshlUser = await findOne({ accessToken });
+  const toshlUser = await ToshlUserModel.findOne({ accessToken });
 
   if (toshlUser?.tags) return toshlUser.tags;
 
   const tags = await toshlApi.tags.list({ access_token: accessToken });
 
-  const newToshlUser = await create({
+  const newToshlUser = await ToshlUserModel.create({
     accessToken,
     tags: tags.reduce((prev, tag) => ({ [tag.id]: tag.name, ...prev }), {}),
   });
