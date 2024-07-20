@@ -35,7 +35,11 @@ export const makePolylineConfigs = (
       };
     });
 
-export const makeMarkerOptions = (entries: TimelineEntry[]): MarkerConfig[] =>
+export const makeMarkerOptions = (
+  entries: TimelineEntry[],
+  focussedItemId: string | undefined, // TODO
+  onClick: (id: string, latLng?: google.maps.LatLngLiteral) => void,
+): MarkerConfig[] =>
   entries
     .filter((entry) => !entry.polyline && entry.locationStart)
     .map((entry) => {
@@ -50,6 +54,7 @@ export const makeMarkerOptions = (entries: TimelineEntry[]): MarkerConfig[] =>
           subTitle: makeTimeString(makeDateFromUnixTimestamp(entry.timeStart)),
           description: entry.description || "",
         },
+        onClick: ({ latLng }) => onClick(entry.id, latLng?.toJSON()),
       };
     });
 

@@ -114,8 +114,8 @@ const Home = () => {
   const markerOptions = useMemo(() => {
     if (!isMapReady || entries === null) return;
 
-    return makeMarkerOptions(entries);
-  }, [entries, isMapReady]);
+    return makeMarkerOptions(entries, focussedEntryId, handleEntryClick);
+  }, [entries, focussedEntryId, isMapReady]);
 
   const infoWindowOptions = useMemo(() => {
     if (!isMapReady || focussedEntry === undefined) return;
