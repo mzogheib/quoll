@@ -1,6 +1,6 @@
 import moment from "moment";
 
-import { toshlApi } from "./api";
+import { _toshlApi, toshlApi } from "./api";
 import { ToshlUserModel } from "../../models/toshlUser.model";
 
 const getOAuthUrl = () => {
@@ -49,7 +49,7 @@ const getTags = async (accessToken: string) => {
 
   if (toshlUser?.tags) return toshlUser.tags;
 
-  const tags = await toshlApi.tags.list({ access_token: accessToken });
+  const tags = await _toshlApi.tagsList({ accessToken });
 
   const newToshlUser = await ToshlUserModel.create({
     accessToken,
@@ -59,19 +59,19 @@ const getTags = async (accessToken: string) => {
   return newToshlUser.tags;
 };
 
-const getEntries = async (from: string, to: string, token: string) => {
+const getEntries = async (from: string, to: string, accessToken: string) => {
   // Toshl dates are in the user's timezone so convert the ISO string
   // to local (default moment output for an ISO string input) and format
   const fromDate = moment(from).format("YYYY-MM-DD");
   const toDate = moment(to).format("YYYY-MM-DD");
 
-  const entries = await toshlApi.entries.list({
+  const entries = await _toshlApi.entriesList({
     from: fromDate,
     to: toDate,
-    access_token: token,
+    accessToken,
   });
 
-  const tags = await getTags(token);
+  const tags = await getTags(accessToken);
 
   return entries.map((entry) => {
     return {
