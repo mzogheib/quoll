@@ -1,5 +1,5 @@
 import {
-  AuthenticatedApiService,
+  AuthenticatedHttpService,
   ISO8601Date,
   TimelineEntry,
   TimelineEntryType,
@@ -46,7 +46,7 @@ export const getTimelineEntryImage = (entry: TimelineEntry) =>
 // Has an array of sources to fetch from
 // Consumer can push to the array
 
-export class TimelineService extends AuthenticatedApiService {
+export class TimelineService extends AuthenticatedHttpService {
   async get(date: ISO8601Date) {
     const _date = new Date(date);
     return this.request<TimelineEntry[]>({

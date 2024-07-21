@@ -14,7 +14,7 @@ const baseHeaders = {
   "Content-Type": "application/json",
 };
 
-export abstract class ApiService {
+export abstract class HttpService {
   private baseUrl: string;
 
   constructor(baseUrl: string) {
@@ -39,7 +39,7 @@ export abstract class ApiService {
    * @example
    *
    * ```
-   * const data = apiService.request<null>({ ... })
+   * const data = httpService.request<null>({ ... })
    * ```
    */
   protected async request<Response>({

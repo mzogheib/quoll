@@ -1,7 +1,6 @@
-import { User } from "@quoll/lib";
-import { ApiService } from "../../../utils";
+import { HttpService, User } from "@quoll/lib";
 
-export class UserService extends ApiService {
+export class UserService extends HttpService {
   async login(userId: string) {
     return this.request<User>({
       method: "POST",

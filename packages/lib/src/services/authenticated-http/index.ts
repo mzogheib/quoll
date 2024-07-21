@@ -1,6 +1,6 @@
-import { ApiService, RequestParams } from "../api";
+import { HttpService, RequestParams } from "../http";
 
-export abstract class AuthenticatedApiService extends ApiService {
+export abstract class AuthenticatedHttpService extends HttpService {
   private getAccessToken: () => Promise<string>;
 
   constructor(getAccessToken: () => Promise<string>, baseUrl: string) {
