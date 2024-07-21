@@ -64,14 +64,12 @@ export abstract class HttpService {
 
     const response = await fetch(url, init);
 
-    const contentHeader = response.headers.get("Content-Length");
-    const hasContent = contentHeader && contentHeader !== "0";
-
     // The caller should know whether or not the response has content.
     // If it does, the `Response` type will be set as non-null.
     // If it does not, the `Response` type will be set as `null`.
     // Hence the value of responseJson will always match the caller's intention.
-    const responseJson: Response = hasContent ? await response.json() : null;
+    const responseJson: Response =
+      response.status === 204 ? null : await response.json();
 
     if (response.ok) return responseJson;
 
