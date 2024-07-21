@@ -35,7 +35,7 @@ export const makePolylineConfigs = (
       };
     });
 
-export const makeMarkerOptions = (
+export const makeMarkerConfigs = (
   entries: TimelineEntry[],
   focussedItemId: string | undefined, // TODO
   onClick: (id: string, latLng?: google.maps.LatLngLiteral) => void,

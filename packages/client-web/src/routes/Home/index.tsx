@@ -11,7 +11,7 @@ import Map from "components/Map";
 import {
   makePolylineConfigs,
   makeInfoWindowOptions,
-  makeMarkerOptions,
+  makeMarkerConfigs,
 } from "./mapUtils";
 
 const Wrapper = styled.div(
@@ -111,10 +111,10 @@ const Home = () => {
     return makePolylineConfigs(entries, focussedEntryId, handleEntryClick);
   }, [entries, focussedEntryId, isMapReady]);
 
-  const markerOptions = useMemo(() => {
+  const markerConfigs = useMemo(() => {
     if (!isMapReady || entries === null) return;
 
-    return makeMarkerOptions(entries, focussedEntryId, handleEntryClick);
+    return makeMarkerConfigs(entries, focussedEntryId, handleEntryClick);
   }, [entries, focussedEntryId, isMapReady]);
 
   const infoWindowOptions = useMemo(() => {
@@ -155,7 +155,7 @@ const Home = () => {
       <MapWrapper>
         <MapBody>
           <Map
-            markerConfigs={markerOptions}
+            markerConfigs={markerConfigs}
             polylineConfigs={polylineConfigs}
             infoWindowOptions={infoWindowOptions}
             onMapLoaded={() => setIsMapReady(true)}
