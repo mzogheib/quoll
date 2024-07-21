@@ -1,6 +1,6 @@
 import moment from "moment";
 
-import { stravaApi } from "./api";
+import { _stravaApi, stravaApi } from "./api";
 
 const getOAuthUrl = () => {
   return stravaApi.oauth.url();
@@ -37,17 +37,17 @@ const deauthorize = async ({ access_token }: { access_token: string }) => {
 const getAthleteActivities = async (
   from: string,
   to: string,
-  token: string,
+  accessToken: string,
 ) => {
-  const activities = await stravaApi.athlete.activities.list({
+  const activities = await _stravaApi.atheleteActivitiesList({
     after: moment(from).unix() - 1,
     before: moment(to).unix() + 1,
     per_page: 20,
-    access_token: token,
+    accessToken,
   });
 
   const promises = activities.map(({ id }) =>
-    stravaApi.activities.get({ id, access_token: token }),
+    _stravaApi.activitiesGet({ id, accessToken }),
   );
 
   return await Promise.all(promises);
