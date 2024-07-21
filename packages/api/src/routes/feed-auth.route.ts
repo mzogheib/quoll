@@ -60,7 +60,7 @@ export const authenticate = async (
   const data = await feedServices[feed].authenticate(code);
   await setFeedAuth(userId, feed, data);
 
-  res.status(240).end();
+  res.status(204).end();
 };
 
 // TODO this shouldn't be done here. Do it in the feed service or somewhere
