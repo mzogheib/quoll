@@ -1,5 +1,8 @@
-import { FeedConnectionConfig, FeedName } from "@quoll/lib";
-import { AuthenticatedApiService } from "../../../utils";
+import {
+  AuthenticatedApiService,
+  FeedConnectionConfig,
+  FeedName,
+} from "@quoll/lib";
 
 type AuthenticatePayload = {
   code: string;

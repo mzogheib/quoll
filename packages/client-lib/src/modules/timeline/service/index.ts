@@ -1,12 +1,11 @@
 import {
+  AuthenticatedApiService,
   ISO8601Date,
   TimelineEntry,
   TimelineEntryType,
   getEndOfDay,
   getStartOfDay,
 } from "@quoll/lib";
-
-import { AuthenticatedApiService } from "../../../utils";
 
 type EntryConfig = {
   label: string;
