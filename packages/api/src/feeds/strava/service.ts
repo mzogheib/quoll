@@ -1,9 +1,10 @@
 import moment from "moment";
 
-import { _stravaApi, stravaApi } from "./api";
+import { stravaAuthApi } from "./oauth-api";
+import { stravaApi } from "./api";
 
 const getOAuthUrl = () => {
-  return stravaApi.oauth.url();
+  return stravaAuthApi.url();
 };
 
 const transformAuthResponse = ({
@@ -21,17 +22,18 @@ const transformAuthResponse = ({
 });
 
 const authenticate = async (code: string) => {
-  const result = await stravaApi.oauth.token({ code });
+  const result = await stravaAuthApi.token({ code });
   return transformAuthResponse(result);
 };
 
 const refreshAuth = async ({ refresh_token }: { refresh_token: string }) => {
-  const result = await stravaApi.oauth.refresh({ refresh_token });
+  const result = await stravaAuthApi.refresh({ refresh_token });
   return transformAuthResponse(result);
 };
 
 const deauthorize = async ({ access_token }: { access_token: string }) => {
-  return stravaApi.oauth.deauthorize({ access_token });
+  console.log("Deauthorizing Strava", access_token);
+  return stravaAuthApi.deauthorize({ access_token });
 };
 
 const getAthleteActivities = async (
@@ -39,7 +41,7 @@ const getAthleteActivities = async (
   to: string,
   accessToken: string,
 ) => {
-  const activities = await _stravaApi.atheleteActivitiesList({
+  const activities = await stravaApi.atheleteActivitiesList({
     after: moment(from).unix() - 1,
     before: moment(to).unix() + 1,
     per_page: 20,
@@ -47,7 +49,7 @@ const getAthleteActivities = async (
   });
 
   const promises = activities.map(({ id }) =>
-    _stravaApi.activitiesGet({ id, accessToken }),
+    stravaApi.activitiesGet({ id, accessToken }),
   );
 
   return await Promise.all(promises);
