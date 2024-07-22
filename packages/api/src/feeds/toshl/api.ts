@@ -1,13 +1,5 @@
 import { HttpService } from "@quoll/lib";
 
-if (!process.env.CLIENT_OAUTH_URL) {
-  throw new Error("Client OAuth URL not found");
-}
-
-if (!process.env.TOSHL_CLIENT_ID || !process.env.TOSHL_CLIENT_SECRET) {
-  throw new Error("Toshl credentials not found");
-}
-
 type Entry = {
   id: string;
   tags: string[];
