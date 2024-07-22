@@ -1,10 +1,11 @@
 import moment from "moment";
 
-import { _toshlApi, toshlApi } from "./api";
+import { toshlAuthApi } from "./oauth-api";
+import { toshlApi } from "./api";
 import { ToshlUserModel } from "../../models/toshlUser.model";
 
 const getOAuthUrl = () => {
-  return toshlApi.oauth.url();
+  return toshlAuthApi.url();
 };
 
 const transformAuthResponse = ({
@@ -22,12 +23,18 @@ const transformAuthResponse = ({
 });
 
 const authenticate = async (code: string) => {
-  const result = await toshlApi.oauth.token({ code });
+  const result = await toshlAuthApi.token({ code });
   return transformAuthResponse(result);
 };
 
-const deauthorize = async ({ access_token }: { access_token: string }) => {
-  await toshlApi.oauth.deauthorize({ access_token });
+const deauthorize = async ({
+  refresh_token,
+  access_token,
+}: {
+  refresh_token: string;
+  access_token: string;
+}) => {
+  await toshlAuthApi.deauthorize({ refresh_token, access_token });
   await ToshlUserModel.deleteOne({ accessToken: access_token });
 };
 
@@ -38,7 +45,7 @@ const refreshAuth = async ({
   access_token: string;
   refresh_token: string;
 }) => {
-  const data = await toshlApi.oauth.refresh({ refresh_token });
+  const data = await toshlAuthApi.refresh({ refresh_token });
   // Clear cache identified by old access_token
   await ToshlUserModel.deleteOne({ accessToken: access_token });
   return transformAuthResponse(data);
@@ -49,7 +56,7 @@ const getTags = async (accessToken: string) => {
 
   if (toshlUser?.tags) return toshlUser.tags;
 
-  const tags = await _toshlApi.tagsList({ accessToken });
+  const tags = await toshlApi.tagsList({ accessToken });
 
   const newToshlUser = await ToshlUserModel.create({
     accessToken,
@@ -65,7 +72,7 @@ const getEntries = async (from: string, to: string, accessToken: string) => {
   const fromDate = moment(from).format("YYYY-MM-DD");
   const toDate = moment(to).format("YYYY-MM-DD");
 
-  const entries = await _toshlApi.entriesList({
+  const entries = await toshlApi.entriesList({
     from: fromDate,
     to: toDate,
     accessToken,
