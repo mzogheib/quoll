@@ -7128,7 +7128,6 @@ __metadata:
     express: "npm:^4.19.2"
     moment: "npm:^2.29.4"
     mongoose: "npm:^6.12.3"
-    node-toshl: "https://github.com/mzogheib/node-toshl"
     nodemon: "npm:^3.1.4"
     ts-node: "npm:^10.9.2"
     typescript: "npm:^5.5.3"
@@ -12735,16 +12734,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^0.18.1":
-  version: 0.18.1
-  resolution: "axios@npm:0.18.1"
-  dependencies:
-    follow-redirects: "npm:1.5.10"
-    is-buffer: "npm:^2.0.2"
-  checksum: 13d86542ad3e1de286a6262213b1cd62654307d89617bef5015e82aad389408c6f66bafa1e467b80af971cfe5ac5ed0b40a250f682f46ab9a1487060f0b6b661
-  languageName: node
-  linkType: hard
-
 "axios@npm:^1.6.0":
   version: 1.7.2
   resolution: "axios@npm:1.7.2"
@@ -15445,15 +15434,6 @@ __metadata:
     supports-color:
       optional: true
   checksum: cedbec45298dd5c501d01b92b119cd3faebe5438c3917ff11ae1bff86a6c722930ac9c8659792824013168ba6db7c4668225d845c633fbdafbbf902a6389f736
-  languageName: node
-  linkType: hard
-
-"debug@npm:=3.1.0":
-  version: 3.1.0
-  resolution: "debug@npm:3.1.0"
-  dependencies:
-    ms: "npm:2.0.0"
-  checksum: 5bff34a352d7b2eaa31886eeaf2ee534b5461ec0548315b2f9f80bd1d2533cab7df1fa52e130ce27bc31c3945fbffb0fc72baacdceb274b95ce853db89254ea4
   languageName: node
   linkType: hard
 
@@ -18373,15 +18353,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:1.5.10":
-  version: 1.5.10
-  resolution: "follow-redirects@npm:1.5.10"
-  dependencies:
-    debug: "npm:=3.1.0"
-  checksum: f56ca26dcf3c9996a6cf8868b61e369a35d4000ade0292bdd27b5e0934902681b037060b9fabe58e7042bb8b85166d5db8bbcf027f1825c1577e4cffd904fd3f
-  languageName: node
-  linkType: hard
-
 "follow-redirects@npm:^1.0.0":
   version: 1.15.3
   resolution: "follow-redirects@npm:1.15.3"
@@ -20352,13 +20323,6 @@ __metadata:
   version: 1.1.6
   resolution: "is-buffer@npm:1.1.6"
   checksum: ae18aa0b6e113d6c490ad1db5e8df9bdb57758382b313f5a22c9c61084875c6396d50bbf49315f5b1926d142d74dfb8d31b40d993a383e0a158b15fea7a82234
-  languageName: node
-  linkType: hard
-
-"is-buffer@npm:^2.0.2":
-  version: 2.0.5
-  resolution: "is-buffer@npm:2.0.5"
-  checksum: e603f6fced83cf94c53399cff3bda1a9f08e391b872b64a73793b0928be3e5f047f2bcece230edb7632eaea2acdbfcb56c23b33d8a20c820023b230f1485679a
   languageName: node
   linkType: hard
 
@@ -24943,15 +24907,6 @@ __metadata:
   version: 1.15.0
   resolution: "node-stream-zip@npm:1.15.0"
   checksum: 429fce95d7e90e846adbe096c61d2ea8d18defc155c0345d25d0f98dd6fc72aeb95039318484a4e0a01dc3814b6d0d1ae0fe91847a29669dff8676ec064078c9
-  languageName: node
-  linkType: hard
-
-"node-toshl@https://github.com/mzogheib/node-toshl":
-  version: 0.1.0
-  resolution: "node-toshl@https://github.com/mzogheib/node-toshl.git#commit=1ede5b8942a60e8f4f0544ededcb6a03645e1e3e"
-  dependencies:
-    axios: "npm:^0.18.1"
-  checksum: 66a4cdd4290a03160c705c266af7145334198addd1065d44869545f0627357f2fdd9bdd3092b05e08977919fac661a4c9a52bf15f3c75070c45b10033aae11c3
   languageName: node
   linkType: hard
 
