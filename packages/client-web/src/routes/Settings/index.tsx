@@ -70,8 +70,8 @@ const Settings = () => {
     }
   }, [history, location]);
 
-  const handleSubmitToken = (value: string) => {
-    // TODO submit somewhere
+  const handleSubmitToken = async (value: string) => {
+    await authenticate("toshl", value);
     closeTokenModal();
   };
 

@@ -23,18 +23,20 @@ const transformAuthResponse = ({
 });
 
 const authenticate = async (code: string) => {
-  const result = await toshlAuthApi.token({ code });
+  const result = {
+    expires_in: 9999999999,
+    access_token: code,
+    refresh_token: "",
+  };
   return transformAuthResponse(result);
 };
 
 const deauthorize = async ({
-  refresh_token,
   access_token,
 }: {
   refresh_token: string;
   access_token: string;
 }) => {
-  await toshlAuthApi.deauthorize({ refresh_token, access_token });
   await ToshlUserModel.deleteOne({ accessToken: access_token });
 };
 
