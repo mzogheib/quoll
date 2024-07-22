@@ -15,6 +15,7 @@ const TokenModal = ({ isOpen, onCancel, onSubmit }: Props) => {
     if (value === "") return;
 
     onSubmit(value);
+    setValue("");
   };
 
   return (
