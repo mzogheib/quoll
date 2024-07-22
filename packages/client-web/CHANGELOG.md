@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.12.0](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.11.0...@quoll/client-web@0.12.0) (2024-07-22)
+
+### Bug Fixes
+
+- **client-web:** clear token value after token modal close ([0ce99ef](https://github.com/mzogheib/quoll/commit/0ce99ef6f102c3c504d71ac060eaaa8849c93ff0))
+
+### Features
+
+- **ui-components:** implement map markers ([b76178a](https://github.com/mzogheib/quoll/commit/b76178af5ebaaa13ad6588bc28fb231fca3b5df3))
+- **ui-components:** make markers clickable ([1d68f28](https://github.com/mzogheib/quoll/commit/1d68f282c8a04c9397d46653748e9dab350ebdb2))
+
 # [0.11.0](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.10.0...@quoll/client-web@0.11.0) (2024-07-19)
 
 ### Features

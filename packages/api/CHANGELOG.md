@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.12.3](https://github.com/mzogheib/quoll/compare/@quoll/api@0.12.2...@quoll/api@0.12.3) (2024-07-22)
+
+### Bug Fixes
+
+- **api:** set correct response status for authenticate feed endpoint ([2040f97](https://github.com/mzogheib/quoll/commit/2040f97bf5a834bac335a3b07d254fce44833418))
+
 ## [0.12.2](https://github.com/mzogheib/quoll/compare/@quoll/api@0.12.1...@quoll/api@0.12.2) (2024-07-19)
 
 **Note:** Version bump only for package @quoll/api
