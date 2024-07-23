@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import {
   UserState,
   useUserModel as _useUserModel,
@@ -21,25 +20,5 @@ export const userStore = makeReduxStoreSlice<UserState, RootState>(
   defaultState,
 );
 
-export const useUserModel = () => {
-  const model = _useUserModel(userStore.useStore, userService, storage);
-
-  const login = useCallback(
-    async (userId: string) => {
-      const user = await model.login(userId);
-
-      return user;
-    },
-    [model],
-  );
-
-  const signup = useCallback(async () => {
-    await model.signup();
-  }, [model]);
-
-  return {
-    ...model,
-    login,
-    signup,
-  };
-};
+export const useUserModel = () =>
+  _useUserModel(userStore.useStore, userService, storage);
