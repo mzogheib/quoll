@@ -30,43 +30,41 @@ type RefreshResponse = {
 
 class StravaAuthApi extends HttpService {
   constructor(params: {
-    base_url: string;
-    client_id: string;
-    client_secret: string;
-    redirect_uri: string;
+    baseUrl: string;
+    clientId: string;
+    clientSecret: string;
+    redirectUri: string;
   }) {
-    const { base_url, client_id, client_secret, redirect_uri } = params;
+    const { baseUrl, clientId, clientSecret, redirectUri } = params;
 
-    super(base_url);
+    super(baseUrl);
 
-    this.baseOauthUrl = base_url;
-    this.client_id = client_id;
-    this.client_secret = client_secret;
-    this.redirect_uri = redirect_uri;
+    this.clientId = clientId;
+    this.clientSecret = clientSecret;
+    this.redirectUri = redirectUri;
   }
 
-  private client_id: string;
-  private client_secret: string;
-  private redirect_uri: string;
-  private baseOauthUrl: string;
+  private clientId: string;
+  private clientSecret: string;
+  private redirectUri: string;
 
   url() {
     const queryParams = {
-      client_id: this.client_id,
-      redirect_uri: this.redirect_uri,
+      client_id: this.clientId,
+      redirect_uri: this.redirectUri,
       response_type: "code",
       scope: "read,read_all,activity:read_all",
     };
     const searchString = new URLSearchParams(queryParams).toString();
 
-    return `${this.baseOauthUrl}/authorize?${searchString}`;
+    return `${this.baseUrl}/authorize?${searchString}`;
   }
 
   async authorize(params: { code: string }) {
     const data = {
       code: params.code,
-      client_id: this.client_id,
-      client_secret: this.client_secret,
+      client_id: this.clientId,
+      client_secret: this.clientSecret,
       grant_type: "authorization_code",
     };
 
@@ -88,8 +86,8 @@ class StravaAuthApi extends HttpService {
   async refresh(params: { refresh_token: string }) {
     const data = {
       refresh_token: params.refresh_token,
-      client_id: this.client_id,
-      client_secret: this.client_secret,
+      client_id: this.clientId,
+      client_secret: this.clientSecret,
       grant_type: "refresh_token",
     };
     return super.request<RefreshResponse>({
@@ -101,8 +99,8 @@ class StravaAuthApi extends HttpService {
 }
 
 export const stravaAuthApi = new StravaAuthApi({
-  base_url: "https://www.strava.com/oauth",
-  redirect_uri: process.env.CLIENT_OAUTH_URL,
-  client_id: process.env.STRAVA_CLIENT_ID,
-  client_secret: process.env.STRAVA_CLIENT_SECRET,
+  baseUrl: "https://www.strava.com/oauth",
+  redirectUri: process.env.CLIENT_OAUTH_URL,
+  clientId: process.env.STRAVA_CLIENT_ID,
+  clientSecret: process.env.STRAVA_CLIENT_SECRET,
 });
