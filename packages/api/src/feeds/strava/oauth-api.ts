@@ -30,14 +30,13 @@ type RefreshResponse = {
 
 class StravaAuthApi extends HttpService {
   constructor(params: {
-    baseUrl: string;
     clientId: string;
     clientSecret: string;
     redirectUri: string;
   }) {
-    const { baseUrl, clientId, clientSecret, redirectUri } = params;
+    const { clientId, clientSecret, redirectUri } = params;
 
-    super(baseUrl);
+    super("https://www.strava.com/oauth");
 
     this.clientId = clientId;
     this.clientSecret = clientSecret;
@@ -99,7 +98,6 @@ class StravaAuthApi extends HttpService {
 }
 
 export const stravaAuthApi = new StravaAuthApi({
-  baseUrl: "https://www.strava.com/oauth",
   redirectUri: process.env.CLIENT_OAUTH_URL,
   clientId: process.env.STRAVA_CLIENT_ID,
   clientSecret: process.env.STRAVA_CLIENT_SECRET,
