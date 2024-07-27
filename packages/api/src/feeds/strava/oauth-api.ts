@@ -1,3 +1,5 @@
+import { HttpService } from "@quoll/lib";
+
 if (!process.env.CLIENT_OAUTH_URL) {
   throw new Error("Client OAuth URL not found");
 }
@@ -6,13 +8,39 @@ if (!process.env.STRAVA_CLIENT_ID || !process.env.STRAVA_CLIENT_SECRET) {
   throw new Error("Strava credentials not found");
 }
 
-class StravaAuthApi {
+type TokenResponse = {
+  token_type: string;
+  expires_at: number;
+  expires_in: number;
+  refresh_token: string;
+  access_token: string;
+  athlete: object;
+};
+
+type DeauthorizeResponse = {
+  access_token: string;
+};
+
+type RefreshResponse = {
+  token_type: string;
+  expires_at: number;
+  expires_in: number;
+  access_token: string;
+  refresh_token: string;
+};
+
+class StravaAuthApi extends HttpService {
   constructor(params: {
+    base_url: string;
     client_id: string;
     client_secret: string;
     redirect_uri: string;
   }) {
-    const { client_id, client_secret, redirect_uri } = params;
+    const { base_url, client_id, client_secret, redirect_uri } = params;
+
+    super(base_url);
+
+    this.baseOauthUrl = base_url;
     this.client_id = client_id;
     this.client_secret = client_secret;
     this.redirect_uri = redirect_uri;
@@ -21,40 +49,7 @@ class StravaAuthApi {
   private client_id: string;
   private client_secret: string;
   private redirect_uri: string;
-
-  private baseOauthUrl = "https://www.strava.com/oauth";
-
-  private async request(params: {
-    method: string;
-    endpoint: string;
-    payload: any;
-  }) {
-    const { method, endpoint, payload } = params;
-
-    const url = `${this.baseOauthUrl}${endpoint}`;
-
-    const init: RequestInit = {
-      method,
-      body: JSON.stringify(payload),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-
-    const response = await fetch(url, init);
-
-    const responseJson = await response.json();
-
-    if (response.ok) return responseJson;
-
-    const error = {
-      status: response.status,
-      statusText: response.statusText,
-      body: responseJson,
-    };
-
-    throw new Error(JSON.stringify(error));
-  }
+  private baseOauthUrl: string;
 
   url() {
     const queryParams = {
@@ -76,11 +71,15 @@ class StravaAuthApi {
       grant_type: "authorization_code",
     };
 
-    return this.request({ method: "POST", endpoint: "/token", payload: data });
+    return super.request<TokenResponse>({
+      method: "POST",
+      endpoint: "/token",
+      payload: data,
+    });
   }
 
   async deauthorize(params: { access_token: string }) {
-    return this.request({
+    return super.request<DeauthorizeResponse>({
       method: "POST",
       endpoint: "/deauthorize",
       payload: params,
@@ -94,11 +93,16 @@ class StravaAuthApi {
       client_secret: this.client_secret,
       grant_type: "refresh_token",
     };
-    return this.request({ method: "POST", endpoint: "/token", payload: data });
+    return super.request<RefreshResponse>({
+      method: "POST",
+      endpoint: "/token",
+      payload: data,
+    });
   }
 }
 
 export const stravaAuthApi = new StravaAuthApi({
+  base_url: "https://www.strava.com/oauth",
   redirect_uri: process.env.CLIENT_OAUTH_URL,
   client_id: process.env.STRAVA_CLIENT_ID,
   client_secret: process.env.STRAVA_CLIENT_SECRET,

@@ -32,8 +32,8 @@ const refreshAuth = async ({ refresh_token }: { refresh_token: string }) => {
 };
 
 const deauthorize = async ({ access_token }: { access_token: string }) => {
-  console.log("Deauthorizing Strava", access_token);
-  return stravaAuthApi.deauthorize({ access_token });
+  const result = await stravaAuthApi.deauthorize({ access_token });
+  return result;
 };
 
 const getAthleteActivities = async (
