@@ -5,6 +5,7 @@ import { ISO8601Date, isSameDay, makeISO8601Date } from "@quoll/lib";
 
 import { useTimelineViewModel } from "modules/timeline/view-model";
 import { useDateViewModelModel } from "modules/date/view-model";
+import { useUserViewModel } from "modules/user/view-model";
 import DatePicker from "modules/date/views/DatePicker";
 import Timeline from "modules/timeline/views/Timeline";
 import Map from "components/Map";
@@ -83,6 +84,7 @@ const LoaderWrapper = styled.div`
 `;
 
 const Home = () => {
+  const { user } = useUserViewModel();
   const { date, setDate } = useDateViewModelModel();
   const { isFetching, entries, fetchTimeline } = useTimelineViewModel();
 
@@ -124,11 +126,11 @@ const Home = () => {
   }, [focussedEntry, focussedEntryLatLng, isMapReady]);
 
   useEffect(() => {
-    if (didFetchOnce) return;
+    if (didFetchOnce || user === null) return;
 
     setDidFetchOnce(true);
     fetchTimeline(date);
-  }, [date, didFetchOnce, fetchTimeline]);
+  }, [date, didFetchOnce, fetchTimeline, user]);
 
   const dateIsToday = (date: ISO8601Date) =>
     isSameDay(new Date(date), new Date());
