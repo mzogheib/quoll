@@ -15,7 +15,7 @@ const baseHeaders = {
 };
 
 export abstract class HttpService {
-  private baseUrl: string;
+  protected baseUrl: string;
 
   constructor(baseUrl: string) {
     this.baseUrl = baseUrl;
