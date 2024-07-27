@@ -17,4 +17,9 @@ export type Store<State extends object> = {
     name: Name,
     value: State[Name],
   ) => void;
+
+  /**
+   * Resets the store to its initial state
+   */
+  reset: () => void;
 };
