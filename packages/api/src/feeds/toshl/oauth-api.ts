@@ -76,7 +76,7 @@ class ToshlAuthApi {
     return `${this.baseOauthUrl}/authorize?${searchString}`;
   }
 
-  async token(params: { code: string }) {
+  async authorize(params: { code: string }) {
     const payload = {
       code: params.code,
       grant_type: "authorization_code",

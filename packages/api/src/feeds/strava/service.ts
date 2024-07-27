@@ -22,7 +22,7 @@ const transformAuthResponse = ({
 });
 
 const authenticate = async (code: string) => {
-  const result = await stravaAuthApi.token({ code });
+  const result = await stravaAuthApi.authorize({ code });
   return transformAuthResponse(result);
 };
 

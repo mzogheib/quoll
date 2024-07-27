@@ -62,7 +62,7 @@ class StravaAuthApi extends HttpService {
     return `${this.baseOauthUrl}/authorize?${searchString}`;
   }
 
-  async token(params: { code: string }) {
+  async authorize(params: { code: string }) {
     const data = {
       code: params.code,
       client_id: this.client_id,
