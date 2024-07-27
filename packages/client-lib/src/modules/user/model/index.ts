@@ -28,6 +28,7 @@ export const useUserModel = (
   const login = async (userId: string) => {
     setProperty("isAuthenticating", true);
     const user = await service.login(userId);
+    storage.setProperty("id", userId);
     setProperty("user", user);
     setProperty("isAuthenticating", false);
 
