@@ -52,6 +52,18 @@ export const makeReduxStoreSlice = <State extends object, RootState>(
     return setProperty;
   };
 
+  const makeResetActionType = () => `${storeName}__reset`;
+
+  const useReset = () => {
+    const dispatch = useDispatch();
+
+    const reset = useCallback(() => {
+      dispatch({ type: makeResetActionType() });
+    }, [dispatch]);
+
+    return reset;
+  };
+
   // TODO this might trigger a rerender for changes to all properties even if a
   // consumer is only referring to one. But it might be ok since there are
   // only a few properties per store.
@@ -69,6 +81,8 @@ export const makeReduxStoreSlice = <State extends object, RootState>(
     state: State = initialState,
     action: SetPropertyAction,
   ): State => {
+    if (action.type === makeResetActionType()) return initialState;
+
     // TODO workout why this can be falsey but the typing doesn't catch it
     if (!action.payload) return state;
 
@@ -88,10 +102,12 @@ export const makeReduxStoreSlice = <State extends object, RootState>(
 
   const useStore = () => {
     const setProperty = useSetProperty();
+    const reset = useReset();
     const properties = useSelectProperties();
 
     return {
       setProperty,
+      reset,
       state: properties,
     };
   };
