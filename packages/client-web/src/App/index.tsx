@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 
-import { useUserViewModel } from "modules/user/view-model";
+import { useSessionViewModel } from "modules/session/view-model";
 import Header from "components/Header";
 import SideBar from "components/SideBar";
 import routes from "../routes";
@@ -37,21 +37,17 @@ const App = () => {
   const history = useHistory();
   const location = useLocation();
 
-  const { getCurrentUserId, login } = useUserViewModel();
+  const { isAuthenticated, isAuthenticating } = useSessionViewModel();
 
+  const [didCheckAuth, setDidCheckAuth] = useState(false);
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
 
   useEffect(() => {
-    const userId = getCurrentUserId();
+    if (isAuthenticating || isAuthenticated || didCheckAuth) return;
 
-    if (userId === undefined) {
-      setShowWelcomeModal(true);
-      return;
-    }
-
-    login(userId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    setDidCheckAuth(true);
+    setShowWelcomeModal(true);
+  }, [didCheckAuth, isAuthenticated, isAuthenticating]);
 
   const getRouteTitleFromLocation = () => {
     const route = routes.find((route) => route.path === location.pathname);
