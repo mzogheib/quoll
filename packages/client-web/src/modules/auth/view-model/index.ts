@@ -17,7 +17,7 @@ export const useAuthViewModel = (): AuthViewModel => {
   const { isAuthenticated, isLoading, loginWithRedirect, logout } = useAuth0();
 
   const signup = async () =>
-    loginWithRedirect({ authorizationParams: { screen_hint: "signup" } });
+    await loginWithRedirect({ authorizationParams: { screen_hint: "signup" } });
 
   return {
     isAuthenticated,
