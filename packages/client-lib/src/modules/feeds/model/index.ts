@@ -19,13 +19,14 @@ type FeedsModel = {
   disconnect: (name: FeedName) => Promise<void>;
   authenticate: (name: FeedName, code: string) => Promise<void>;
   setConnected: (name: FeedName, value: boolean) => void;
+  reset: () => void;
 };
 
 export const useFeedsModel = (
   useStore: () => Store<FeedsState>,
   feedsService: FeedsService,
 ): FeedsModel => {
-  const { setProperty, state: feeds } = useStore();
+  const { setProperty, state: feeds, reset } = useStore();
 
   const isOneConnected = useMemo(
     () => Object.values(feeds).some((feed) => feed.isConnected),
@@ -92,5 +93,6 @@ export const useFeedsModel = (
     disconnect,
     authenticate,
     setConnected,
+    reset,
   };
 };

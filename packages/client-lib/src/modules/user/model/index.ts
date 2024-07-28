@@ -13,6 +13,7 @@ type UserActions = {
   login: (userId: string) => Promise<User>;
   signup: () => Promise<User>;
   getCurrentUserId: () => string | undefined;
+  reset: () => void;
 };
 
 type UserModel = UserState & UserActions;
@@ -22,7 +23,7 @@ export const useUserModel = (
   service: UserService,
   storage: Storage<{ id: string }>,
 ): UserModel => {
-  const { state, setProperty } = useStore();
+  const { state, setProperty, reset } = useStore();
   const { user, isAuthenticating } = state;
 
   const login = async (userId: string) => {
@@ -53,5 +54,6 @@ export const useUserModel = (
     getCurrentUserId,
     login,
     signup,
+    reset,
   };
 };

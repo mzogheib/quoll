@@ -20,6 +20,11 @@ type TimelineActions = {
    * @param date the date formatted as `YYYY-MM-DD`.
    */
   fetchTimeline: (date: ISO8601Date) => void;
+
+  /**
+   * Resets the model to its initial state
+   */
+  reset: () => void;
 };
 
 type TimelineModel = TimelineState & TimelineActions;
@@ -28,7 +33,7 @@ export const useTimelineModel = (
   useStore: () => Store<TimelineState>,
   timelineService: TimelineService,
 ): TimelineModel => {
-  const { state, setProperty } = useStore();
+  const { state, setProperty, reset } = useStore();
 
   const fetchTimeline = async (date: ISO8601Date) => {
     setProperty("isFetching", true);
@@ -43,5 +48,6 @@ export const useTimelineModel = (
   return {
     ...state,
     fetchTimeline,
+    reset,
   };
 };
