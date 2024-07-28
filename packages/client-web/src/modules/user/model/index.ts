@@ -11,7 +11,7 @@ import { RootState } from "store";
 export const storage = makeStorage<{ id: string }>("user");
 
 const defaultState: UserState = {
-  isAuthenticating: true,
+  isAuthenticating: false,
   user: null,
 };
 

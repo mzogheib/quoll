@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 
 import { useUserViewModel } from "modules/user/view-model";
-import { useFeedsViewModel } from "modules/feeds/view-model";
 import Header from "components/Header";
 import SideBar from "components/SideBar";
 import routes from "../routes";
@@ -38,50 +37,39 @@ const App = () => {
   const history = useHistory();
   const location = useLocation();
 
-  const { isAuthenticating, getCurrentUserId, login, signup } =
-    useUserViewModel();
-  const { isOneConnected: isOneFeedConnected } = useFeedsViewModel();
+  const { getCurrentUserId, login } = useUserViewModel();
 
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
-  const [didAuthenticate, setDidAuthenticate] = useState(false);
 
   useEffect(() => {
-    if (didAuthenticate) return;
-
     const userId = getCurrentUserId();
-    setDidAuthenticate(true);
 
-    if (userId) login(userId);
-    else signup();
-  }, [didAuthenticate, getCurrentUserId, login, signup]);
-
-  // TODO: don't show the modal if user is already logged in and disconnects
-  // all feeds
-  useEffect(() => {
-    if (!isAuthenticating && !isOneFeedConnected) {
+    if (userId === undefined) {
       setShowWelcomeModal(true);
+      return;
     }
-  }, [isOneFeedConnected, isAuthenticating]);
+
+    login(userId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const getRouteTitleFromLocation = () => {
     const route = routes.find((route) => route.path === location.pathname);
     return (route && route.title) || "";
   };
 
-  const handleWelcomeCancel = () => {
+  const closeWelcomeModal = () => {
     setShowWelcomeModal(false);
-  };
-
-  const handleWelcomeConnect = () => {
-    setShowWelcomeModal(false);
-    history.push("/settings");
   };
 
   const handleSideBarHelpClick = () => {
     setShowWelcomeModal(true);
   };
 
-  const renderLoading = () => <div>Loading...</div>;
+  const handleSignupComplete = () => {
+    closeWelcomeModal();
+    history.push("/settings");
+  };
 
   const renderApp = () => {
     return (
@@ -104,14 +92,15 @@ const App = () => {
         </Content>
         <WelcomeModal
           isOpen={showWelcomeModal}
-          onCancel={handleWelcomeCancel}
-          onConnect={handleWelcomeConnect}
+          onCancel={closeWelcomeModal}
+          onLoginComplete={closeWelcomeModal}
+          onSignupComplete={handleSignupComplete}
         />
       </Wrapper>
     );
   };
 
-  return isAuthenticating ? renderLoading() : renderApp();
+  return renderApp();
 };
 
 export default App;

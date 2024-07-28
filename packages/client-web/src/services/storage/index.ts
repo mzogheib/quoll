@@ -8,7 +8,7 @@ export const makeStorage = <Data extends object>(
   key: string,
 ): Storage<Data> => {
   const getData: Storage<Data>["getData"] = () => {
-    const data = localStorage.getItem(makeKey(key));
+    const data = sessionStorage.getItem(makeKey(key));
 
     if (!data) return null;
 
@@ -23,11 +23,11 @@ export const makeStorage = <Data extends object>(
   const setProperty: Storage<Data>["setProperty"] = (name, value) => {
     const data = getData();
     const newData = { ...data, [name]: value };
-    localStorage.setItem(makeKey(key), JSON.stringify(newData));
+    sessionStorage.setItem(makeKey(key), JSON.stringify(newData));
   };
 
   const clear = () => {
-    localStorage.removeItem(makeKey(key));
+    sessionStorage.removeItem(makeKey(key));
   };
 
   return {
