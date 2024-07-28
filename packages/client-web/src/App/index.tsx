@@ -67,35 +67,31 @@ const App = () => {
     history.push("/settings");
   };
 
-  const renderApp = () => {
-    return (
-      <Wrapper>
-        <SideBar onHelpClick={handleSideBarHelpClick} />
-        <Content>
-          <Header>{getRouteTitleFromLocation()}</Header>
-          <Main>
-            <Switch>
-              {routes.map((route, index) => (
-                <Route
-                  key={index}
-                  path={route.path}
-                  exact={route.exact}
-                  component={route.component}
-                />
-              ))}
-            </Switch>
-          </Main>
-        </Content>
-        <WelcomeModal
-          isOpen={showWelcomeModal}
-          onCancel={closeWelcomeModal}
-          onConnectFeeds={handleConnectFeeds}
-        />
-      </Wrapper>
-    );
-  };
-
-  return renderApp();
+  return (
+    <Wrapper>
+      <SideBar onHelpClick={handleSideBarHelpClick} />
+      <Content>
+        <Header>{getRouteTitleFromLocation()}</Header>
+        <Main>
+          <Switch>
+            {routes.map((route, index) => (
+              <Route
+                key={index}
+                path={route.path}
+                exact={route.exact}
+                component={route.component}
+              />
+            ))}
+          </Switch>
+        </Main>
+      </Content>
+      <WelcomeModal
+        isOpen={showWelcomeModal}
+        onCancel={closeWelcomeModal}
+        onConnectFeeds={handleConnectFeeds}
+      />
+    </Wrapper>
+  );
 };
 
 export default App;
