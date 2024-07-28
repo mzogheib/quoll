@@ -42,24 +42,24 @@ const App = () => {
   const [didCheckAuth, setDidCheckAuth] = useState(false);
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
 
-  useEffect(() => {
-    if (isAuthenticating || isAuthenticated || didCheckAuth) return;
-
-    setDidCheckAuth(true);
+  const openWelcomeModal = () => {
     setShowWelcomeModal(true);
-  }, [didCheckAuth, isAuthenticated, isAuthenticating]);
-
-  const getRouteTitleFromLocation = () => {
-    const route = routes.find((route) => route.path === location.pathname);
-    return (route && route.title) || "";
   };
 
   const closeWelcomeModal = () => {
     setShowWelcomeModal(false);
   };
 
-  const handleSideBarHelpClick = () => {
-    setShowWelcomeModal(true);
+  useEffect(() => {
+    if (isAuthenticating || isAuthenticated || didCheckAuth) return;
+
+    setDidCheckAuth(true);
+    openWelcomeModal();
+  }, [didCheckAuth, isAuthenticated, isAuthenticating]);
+
+  const getRouteTitleFromLocation = () => {
+    const route = routes.find((route) => route.path === location.pathname);
+    return (route && route.title) || "";
   };
 
   const handleConnectFeeds = () => {
@@ -69,7 +69,7 @@ const App = () => {
 
   return (
     <Wrapper>
-      <SideBar onHelpClick={handleSideBarHelpClick} />
+      <SideBar onHelpClick={openWelcomeModal} />
       <Content>
         <Header>{getRouteTitleFromLocation()}</Header>
         <Main>
