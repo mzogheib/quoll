@@ -29,7 +29,6 @@ interface IModal extends IReactModalAdapter {
 
 export const Modal: IModal = styled(ReactModalAdapter)(
   ({ theme: { colors } }) => css`
-    margin: 200px 0 0;
     width: 100%;
     max-width: 400px;
     background-color: ${colors.white};
@@ -46,6 +45,7 @@ export const Modal: IModal = styled(ReactModalAdapter)(
       background-color: rgba(196, 196, 196, 0.5);
       display: flex;
       flex-direction: column;
+      justify-content: center;
       align-items: center;
       z-index: 1;
     }
