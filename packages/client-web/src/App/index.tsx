@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 
-import { useSessionViewModel } from "modules/session/view-model";
+import { useAuthViewModel } from "modules/auth/view-model";
 import Header from "components/Header";
 import SideBar from "components/SideBar";
 import routes from "../routes";
@@ -37,7 +37,7 @@ const App = () => {
   const history = useHistory();
   const location = useLocation();
 
-  const { isAuthenticated, isAuthenticating } = useSessionViewModel();
+  const { isAuthenticated, isAuthenticating } = useAuthViewModel();
 
   const [didCheckAuth, setDidCheckAuth] = useState(false);
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);

@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { Button, ButtonPrimary, Modal } from "@quoll/ui-components";
 
-import { useSessionViewModel } from "modules/session/view-model";
+import { useAuthViewModel } from "modules/auth/view-model";
 
 const Title = styled.div(
   ({ theme: { font } }) => css`
@@ -26,7 +26,7 @@ interface Props {
 
 const WelcomeModal = ({ isOpen, onCancel, onConnectFeeds }: Props) => {
   const { isAuthenticated, isAuthenticating, login, signup, logout } =
-    useSessionViewModel();
+    useAuthViewModel();
 
   const renderUnauthed = () => (
     <Modal.Actions align="center" direction="column">

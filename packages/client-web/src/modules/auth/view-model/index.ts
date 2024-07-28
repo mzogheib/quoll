@@ -1,19 +1,19 @@
 import { useAuth0 } from "@auth0/auth0-react";
 
-type SessionState = {
+type AuthState = {
   isAuthenticating: boolean;
   isAuthenticated: boolean;
 };
 
-type SessionActions = {
+type AuthActions = {
   login: () => Promise<void>;
   signup: () => Promise<void>;
   logout: () => Promise<void>;
 };
 
-type SessionViewModel = SessionState & SessionActions;
+type AuthViewModel = AuthState & AuthActions;
 
-export const useSessionViewModel = (): SessionViewModel => {
+export const useAuthViewModel = (): AuthViewModel => {
   const { isAuthenticated, isLoading, loginWithRedirect, logout } = useAuth0();
 
   const _signup = async () =>
