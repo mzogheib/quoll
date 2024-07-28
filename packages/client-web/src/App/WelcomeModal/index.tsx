@@ -50,7 +50,7 @@ const WelcomeModal = ({
   const renderUnauthed = () => (
     <>
       <Input value={userId} onChange={setUserId} placeholder="User ID" />
-      <Modal.Actions align="center">
+      <Modal.Actions align="center" direction="column">
         <ButtonPrimary onClick={handleLogin}>Log in</ButtonPrimary>
         <Button onClick={handleSignup}>or, sign up</Button>
       </Modal.Actions>
@@ -58,7 +58,7 @@ const WelcomeModal = ({
   );
 
   const renderAuthed = () => (
-    <Modal.Actions align="center">
+    <Modal.Actions align="center" direction="column">
       <Button onClick={logout}>Log out</Button>
     </Modal.Actions>
   );
