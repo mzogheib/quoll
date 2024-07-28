@@ -58,7 +58,7 @@ const App = () => {
     return (route && route.title) || "";
   };
 
-  const handleWelcomeClose = () => {
+  const closeWelcomeModal = () => {
     setShowWelcomeModal(false);
   };
 
@@ -67,7 +67,7 @@ const App = () => {
   };
 
   const handleSignupComplete = () => {
-    setShowWelcomeModal(false);
+    closeWelcomeModal();
     history.push("/settings");
   };
 
@@ -92,8 +92,8 @@ const App = () => {
         </Content>
         <WelcomeModal
           isOpen={showWelcomeModal}
-          onCancel={handleWelcomeClose}
-          onLoginComplete={handleWelcomeClose}
+          onCancel={closeWelcomeModal}
+          onLoginComplete={closeWelcomeModal}
           onSignupComplete={handleSignupComplete}
         />
       </Wrapper>
