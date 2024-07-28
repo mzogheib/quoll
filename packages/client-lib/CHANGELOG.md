@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/mzogheib/quoll/compare/@quoll/client-lib@0.5.2...@quoll/client-lib@0.6.0) (2024-07-28)
+
+### Bug Fixes
+
+- **client-lib:** toggle off isAuthenticating on feed connect error ([ffc37ae](https://github.com/mzogheib/quoll/commit/ffc37ae6c1dd4d5efcaf7871c37d29df834d373d))
+
+### Features
+
+- **client-lib:** add a reset store action ([9cce099](https://github.com/mzogheib/quoll/commit/9cce0994348f0bb9ab8c22c8d7e99b51fa8dabad))
+- **client-lib:** add reset action to models ([a40f907](https://github.com/mzogheib/quoll/commit/a40f907853092ea25b90700cc8eb71d35e136a75))
+- **client-lib:** add user logout action ([a6699e4](https://github.com/mzogheib/quoll/commit/a6699e45acf4d4872803f91173c37e427fe7ebf0))
+- update auth flow to manual user input instead of automatic ([#228](https://github.com/mzogheib/quoll/issues/228)) ([57b813d](https://github.com/mzogheib/quoll/commit/57b813df410f8e5b77034e8fa2c728142a291c53))
+
 ## [0.5.2](https://github.com/mzogheib/quoll/compare/@quoll/client-lib@0.5.1...@quoll/client-lib@0.5.2) (2024-07-22)
 
 **Note:** Version bump only for package @quoll/client-lib

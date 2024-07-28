@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.13.0](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.12.0...@quoll/client-web@0.13.0) (2024-07-28)
+
+### Features
+
+- **client-web:** reset all models on user logout ([3fa66dd](https://github.com/mzogheib/quoll/commit/3fa66dd5909e7c2e278a17c2d11a7919a6dcfb26))
+- update auth flow to manual user input instead of automatic ([#228](https://github.com/mzogheib/quoll/issues/228)) ([57b813d](https://github.com/mzogheib/quoll/commit/57b813df410f8e5b77034e8fa2c728142a291c53))
+
 # [0.12.0](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.11.0...@quoll/client-web@0.12.0) (2024-07-22)
 
 ### Bug Fixes

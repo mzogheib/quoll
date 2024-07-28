@@ -1,6 +1,6 @@
 {
   "name": "@quoll/client-mobile",
-  "version": "0.27.8",
+  "version": "0.27.9",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -16,8 +16,8 @@
     "hoistingLimits": "workspaces"
   },
   "dependencies": {
-    "@quoll/client-lib": "^0.5.2",
-    "@quoll/lib": "^0.5.2",
+    "@quoll/client-lib": "^0.6.0",
+    "@quoll/lib": "^0.5.3",
     "@quoll/ui-primitives": "^0.5.4",
     "@react-native-camera-roll/camera-roll": "^7.3.0",
     "@react-native-community/geolocation": "^3.1.0",
