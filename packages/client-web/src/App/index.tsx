@@ -41,11 +41,19 @@ const App = () => {
 
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
 
+  const openWelcomeModal = () => {
+    setShowWelcomeModal(true);
+  };
+
+  const closeWelcomeModal = () => {
+    setShowWelcomeModal(false);
+  };
+
   useEffect(() => {
     const userId = getCurrentUserId();
 
     if (userId === undefined) {
-      setShowWelcomeModal(true);
+      openWelcomeModal();
       return;
     }
 
@@ -58,14 +66,6 @@ const App = () => {
     return (route && route.title) || "";
   };
 
-  const closeWelcomeModal = () => {
-    setShowWelcomeModal(false);
-  };
-
-  const handleSideBarHelpClick = () => {
-    setShowWelcomeModal(true);
-  };
-
   const handleSignupComplete = () => {
     closeWelcomeModal();
     history.push("/settings");
@@ -73,7 +73,7 @@ const App = () => {
 
   return (
     <Wrapper>
-      <SideBar onHelpClick={handleSideBarHelpClick} />
+      <SideBar onHelpClick={openWelcomeModal} />
       <Content>
         <Header>{getRouteTitleFromLocation()}</Header>
         <Main>
