@@ -32,7 +32,7 @@ const WelcomeModal = ({
   onLoginComplete,
   onSignupComplete,
 }: Props) => {
-  const { user, login, signup } = useUserViewModel();
+  const { user, login, signup, logout } = useUserViewModel();
 
   const [userId, setUserId] = useState<string>("");
 
@@ -59,7 +59,7 @@ const WelcomeModal = ({
 
   const renderAuthed = () => (
     <Modal.Actions align="center">
-      <Button onClick={onCancel}>Log out</Button>
+      <Button onClick={logout}>Log out</Button>
     </Modal.Actions>
   );
 
