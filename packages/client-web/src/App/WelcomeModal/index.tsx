@@ -28,10 +28,6 @@ const WelcomeModal = ({ isOpen, onCancel, onConnectFeeds }: Props) => {
   const { isAuthenticated, isAuthenticating, login, signup, logout } =
     useSessionViewModel();
 
-  const handleLogout = async () => {
-    await logout();
-  };
-
   const renderUnauthed = () => (
     <Modal.Actions align="center" direction="column">
       <ButtonPrimary onClick={login} disabled={isAuthenticating}>
@@ -48,7 +44,7 @@ const WelcomeModal = ({ isOpen, onCancel, onConnectFeeds }: Props) => {
       <ButtonPrimary onClick={onConnectFeeds} disabled={isAuthenticating}>
         Connect feeds
       </ButtonPrimary>
-      <Button onClick={handleLogout} disabled={isAuthenticating}>
+      <Button onClick={logout} disabled={isAuthenticating}>
         Log out
       </Button>
     </Modal.Actions>
