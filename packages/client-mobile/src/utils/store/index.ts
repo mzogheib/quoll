@@ -7,8 +7,9 @@ import { create } from "zustand";
  *
  * ```
  * {
- *   state, // An object of properties to persist
- *   setProperty // A function to update an individual property
+ *   state,       // An object of properties to persist
+ *   setProperty, // A function to update an individual property
+ *   reset        // A function to reset the store to its initial state
  * }
  * ```
  *
@@ -20,4 +21,5 @@ export const makeStore = <State extends object>(initialState: State) =>
     state: initialState,
     setProperty: (name, value) =>
       set((store) => ({ state: { ...store.state, [name]: value } })),
+    reset: () => set({ state: initialState }),
   }));
