@@ -66,7 +66,7 @@ const App = () => {
     setShowWelcomeModal(true);
   };
 
-  const handleSignupComplete = () => {
+  const handleConnectFeeds = () => {
     closeWelcomeModal();
     history.push("/settings");
   };
@@ -93,8 +93,7 @@ const App = () => {
         <WelcomeModal
           isOpen={showWelcomeModal}
           onCancel={closeWelcomeModal}
-          onLoginComplete={closeWelcomeModal}
-          onSignupComplete={handleSignupComplete}
+          onConnectFeeds={handleConnectFeeds}
         />
       </Wrapper>
     );

@@ -1,8 +1,7 @@
-import { useState } from "react";
 import styled, { css } from "styled-components";
-import { Button, ButtonPrimary, Input, Modal } from "@quoll/ui-components";
+import { Button, ButtonPrimary, Modal } from "@quoll/ui-components";
 
-import { useUserViewModel } from "modules/user/view-model";
+import { useSessionViewModel } from "modules/session/view-model";
 
 const Title = styled.div(
   ({ theme: { font } }) => css`
@@ -22,44 +21,36 @@ const Message = styled.div`
 interface Props {
   isOpen: boolean;
   onCancel: () => void;
-  onLoginComplete: () => void;
-  onSignupComplete: () => void;
+  onConnectFeeds: () => void;
 }
 
-const WelcomeModal = ({
-  isOpen,
-  onCancel,
-  onLoginComplete,
-  onSignupComplete,
-}: Props) => {
-  const { user, login, signup, logout } = useUserViewModel();
+const WelcomeModal = ({ isOpen, onCancel, onConnectFeeds }: Props) => {
+  const { isAuthenticated, isAuthenticating, login, signup, logout } =
+    useSessionViewModel();
 
-  const [userId, setUserId] = useState<string>("");
-
-  const handleLogin = async () => {
-    await login(userId);
-    setUserId("");
-    onLoginComplete();
-  };
-
-  const handleSignup = async () => {
-    await signup();
-    onSignupComplete();
+  const handleLogout = async () => {
+    await logout();
   };
 
   const renderUnauthed = () => (
-    <>
-      <Input value={userId} onChange={setUserId} placeholder="User ID" />
-      <Modal.Actions align="center" direction="column">
-        <ButtonPrimary onClick={handleLogin}>Log in</ButtonPrimary>
-        <Button onClick={handleSignup}>or, sign up</Button>
-      </Modal.Actions>
-    </>
+    <Modal.Actions align="center" direction="column">
+      <ButtonPrimary onClick={login} disabled={isAuthenticating}>
+        Log in
+      </ButtonPrimary>
+      <Button onClick={signup} disabled={isAuthenticating}>
+        or, sign up
+      </Button>
+    </Modal.Actions>
   );
 
   const renderAuthed = () => (
     <Modal.Actions align="center" direction="column">
-      <Button onClick={logout}>Log out</Button>
+      <ButtonPrimary onClick={onConnectFeeds} disabled={isAuthenticating}>
+        Connect feeds
+      </ButtonPrimary>
+      <Button onClick={handleLogout} disabled={isAuthenticating}>
+        Log out
+      </Button>
     </Modal.Actions>
   );
 
@@ -69,7 +60,7 @@ const WelcomeModal = ({
         <Modal.Header onClose={onCancel} />
         <Title>Quoll</Title>
         <Message>Map ya life!</Message>
-        {user === null ? renderUnauthed() : renderAuthed()}
+        {isAuthenticated ? renderAuthed() : renderUnauthed()}
       </Modal.Inner>
     </Modal>
   );
