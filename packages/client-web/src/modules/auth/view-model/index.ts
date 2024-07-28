@@ -16,14 +16,14 @@ type AuthViewModel = AuthState & AuthActions;
 export const useAuthViewModel = (): AuthViewModel => {
   const { isAuthenticated, isLoading, loginWithRedirect, logout } = useAuth0();
 
-  const _signup = async () =>
+  const signup = async () =>
     loginWithRedirect({ authorizationParams: { screen_hint: "signup" } });
 
   return {
     isAuthenticated,
     isAuthenticating: isLoading,
     login: loginWithRedirect,
-    signup: _signup,
+    signup,
     logout,
   };
 };
