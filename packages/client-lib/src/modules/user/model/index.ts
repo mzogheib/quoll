@@ -12,6 +12,7 @@ export type UserState = {
 type UserActions = {
   login: (userId: string) => Promise<User>;
   signup: () => Promise<User>;
+  logout: () => Promise<void>;
   getCurrentUserId: () => string | undefined;
   reset: () => void;
 };
@@ -48,12 +49,20 @@ export const useUserModel = (
 
   const getCurrentUserId = () => storage.getData()?.id;
 
+  const logout = async () => {
+    setProperty("isAuthenticating", true);
+    storage.clear();
+    setProperty("user", null);
+    setProperty("isAuthenticating", false);
+  };
+
   return {
     user,
     isAuthenticating,
     getCurrentUserId,
     login,
     signup,
+    logout,
     reset,
   };
 };
