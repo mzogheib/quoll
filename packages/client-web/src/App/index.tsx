@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 
@@ -6,6 +6,7 @@ import Header from "components/Header";
 import SideBar from "components/SideBar";
 import routes from "../routes";
 import WelcomeModal from "./WelcomeModal";
+import { useUserViewModel } from "modules/user/view-model";
 
 const Wrapper = styled.div(
   ({ theme: { colors, media } }) => css`
@@ -35,8 +36,21 @@ const Main = styled.main`
 const App = () => {
   const history = useHistory();
   const location = useLocation();
+  const { getCurrentUserId, login } = useUserViewModel();
 
-  const [showWelcomeModal, setShowWelcomeModal] = useState(true);
+  const [showWelcomeModal, setShowWelcomeModal] = useState(false);
+
+  useEffect(() => {
+    const userId = getCurrentUserId();
+
+    if (userId === undefined) {
+      setShowWelcomeModal(true);
+      return;
+    }
+
+    login(userId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const getRouteTitleFromLocation = () => {
     const route = routes.find((route) => route.path === location.pathname);
