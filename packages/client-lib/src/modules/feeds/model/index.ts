@@ -54,11 +54,16 @@ export const useFeedsModel = (
 
   const connect = useCallback(
     async (name: FeedName) => {
-      updateFeed(name, { isAuthenticating: true });
-      const config = await feedsService.connect(name);
-      updateFeed(name, { isAuthenticating: false });
+      try {
+        updateFeed(name, { isAuthenticating: true });
+        const config = await feedsService.connect(name);
 
-      return config;
+        return config;
+      } catch (error) {
+        throw error;
+      } finally {
+        updateFeed(name, { isAuthenticating: false });
+      }
     },
     [updateFeed],
   );
