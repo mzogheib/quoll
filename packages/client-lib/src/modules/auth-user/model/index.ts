@@ -9,7 +9,7 @@ export type AuthUserState = {
 };
 
 type AuthUserActions = {
-  getMe: (userId: string) => Promise<User>;
+  getMe: () => Promise<User>;
   reset: () => void;
 };
 
