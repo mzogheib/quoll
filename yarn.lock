@@ -7145,6 +7145,7 @@ __metadata:
     cors: "npm:^2.8.5"
     dotenv: "npm:^16.0.1"
     express: "npm:^4.19.2"
+    express-oauth2-jwt-bearer: "npm:^1.6.0"
     moment: "npm:^2.29.4"
     mongoose: "npm:^6.12.3"
     nodemon: "npm:^3.1.4"
@@ -17892,6 +17893,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"express-oauth2-jwt-bearer@npm:^1.6.0":
+  version: 1.6.0
+  resolution: "express-oauth2-jwt-bearer@npm:1.6.0"
+  dependencies:
+    jose: "npm:^4.13.1"
+  checksum: e68c9b0ded0d2103d2728e3724a25cafef6baf759f7ef4a185c94b0f2b9a0183f700c72e8581398d3965dce6af205a116c1e96b0f9f29ef1d86f921417409091
+  languageName: node
+  linkType: hard
+
 "express@npm:^4.17.3, express@npm:^4.19.2":
   version: 4.19.2
   resolution: "express@npm:4.19.2"
@@ -22597,6 +22607,13 @@ __metadata:
     "@sideway/formula": "npm:^3.0.1"
     "@sideway/pinpoint": "npm:^2.0.0"
   checksum: c41c86fe772828b88fbdbcaef2e41235ccbb107c22523a377f9a2fd39829f203213f37a352589f49d9a9b38bf1c645846defede8b81d8c1f3123117c1a600010
+  languageName: node
+  linkType: hard
+
+"jose@npm:^4.13.1":
+  version: 4.15.9
+  resolution: "jose@npm:4.15.9"
+  checksum: 4ed4ddf4a029db04bd167f2215f65d7245e4dc5f36d7ac3c0126aab38d66309a9e692f52df88975d99429e357e5fd8bab340ff20baab544d17684dd1d940a0f4
   languageName: node
   linkType: hard
 
