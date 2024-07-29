@@ -14,12 +14,19 @@ type AuthActions = {
   login: () => Promise<void>;
   signup: () => Promise<void>;
   logout: () => Promise<void>;
+  getAccessToken: () => Promise<string>;
 };
 
 type AuthViewModel = AuthState & AuthActions;
 
 export const useAuthViewModel = (): AuthViewModel => {
-  const { isAuthenticated, isLoading, loginWithRedirect, logout } = useAuth0();
+  const {
+    isAuthenticated,
+    isLoading,
+    loginWithRedirect,
+    logout,
+    getAccessTokenSilently,
+  } = useAuth0();
   const timelineModel = useTimelineModel();
   const feedsModel = useFeedsModel();
   const dateModel = useDateModel();
@@ -43,5 +50,6 @@ export const useAuthViewModel = (): AuthViewModel => {
     login: loginWithRedirect,
     signup,
     logout: _logout,
+    getAccessToken: getAccessTokenSilently,
   };
 };
