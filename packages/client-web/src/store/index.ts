@@ -1,4 +1,5 @@
 import {
+  AuthUserState,
   DateState,
   FeedsState,
   TimelineState,
@@ -17,6 +18,7 @@ export type RootState = {
   feeds: FeedsState;
   timeline: TimelineState;
   user: UserState;
+  authUser: AuthUserState;
 };
 
 export const { StoreProvider } = makeGlobalReduxStore({
