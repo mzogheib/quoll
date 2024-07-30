@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled, { css } from "styled-components";
 import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 
-import { useAuthViewModel } from "modules/auth/view-model";
+import { useCheckAuthOnce } from "modules/auth/view-model";
+import { useAuthUserViewModel } from "modules/auth-user/view-model";
 import Header from "components/Header";
 import SideBar from "components/SideBar";
 import routes from "../routes";
@@ -37,9 +38,8 @@ const App = () => {
   const history = useHistory();
   const location = useLocation();
 
-  const { isAuthenticated, isAuthenticating } = useAuthViewModel();
+  const { getMe } = useAuthUserViewModel();
 
-  const [didCheckAuth, setDidCheckAuth] = useState(false);
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
 
   const openWelcomeModal = () => {
@@ -50,12 +50,7 @@ const App = () => {
     setShowWelcomeModal(false);
   };
 
-  useEffect(() => {
-    if (isAuthenticating || isAuthenticated || didCheckAuth) return;
-
-    setDidCheckAuth(true);
-    openWelcomeModal();
-  }, [didCheckAuth, isAuthenticated, isAuthenticating]);
+  useCheckAuthOnce(getMe, openWelcomeModal);
 
   const getRouteTitleFromLocation = () => {
     const route = routes.find((route) => route.path === location.pathname);

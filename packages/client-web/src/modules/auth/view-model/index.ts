@@ -3,6 +3,7 @@ import { useTimelineModel } from "modules/timeline/model";
 import { useFeedsModel } from "modules/feeds/model";
 import { useDateModel } from "modules/date/model";
 import { useAuthUserModel } from "modules/auth-user/model";
+import { useEffect, useState } from "react";
 
 type AuthViewModel = AuthModel;
 
@@ -28,4 +29,31 @@ export const useAuthViewModel = (): AuthViewModel => {
     ...authModel,
     logout: _logout,
   };
+};
+
+export const useCheckAuthOnce = (
+  onAuthenticated: () => void,
+  onUnauthenticated: () => void,
+) => {
+  const { isAuthenticated, isAuthenticating } = useAuthModel();
+
+  const [didCheckAuth, setDidCheckAuth] = useState(false);
+
+  useEffect(() => {
+    if (isAuthenticating || didCheckAuth) return;
+
+    setDidCheckAuth(true);
+
+    if (isAuthenticated) {
+      onAuthenticated();
+    } else {
+      onUnauthenticated();
+    }
+  }, [
+    didCheckAuth,
+    isAuthenticated,
+    isAuthenticating,
+    onAuthenticated,
+    onUnauthenticated,
+  ]);
 };
