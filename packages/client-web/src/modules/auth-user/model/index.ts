@@ -6,10 +6,7 @@ import {
 } from "@quoll/client-lib";
 import { useMemo } from "react";
 
-import { makeStorage } from "services/storage";
 import { RootState } from "store";
-
-export const storage = makeStorage<{ id: string }>("user");
 
 const defaultState: AuthUserState = {
   user: null,
