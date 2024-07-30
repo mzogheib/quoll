@@ -22,7 +22,7 @@ export type RootState = {
 };
 
 export const { StoreProvider } = makeGlobalReduxStore({
-  authUserStore: authUserStore.reducer,
+  authUser: authUserStore.reducer,
   date: dateStore.reducer,
   feeds: feedsStore.reducer,
   timeline: timelineStore.reducer,
