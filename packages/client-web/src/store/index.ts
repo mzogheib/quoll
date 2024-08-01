@@ -1,4 +1,5 @@
 import {
+  AuthUserState,
   DateState,
   FeedsState,
   TimelineState,
@@ -6,6 +7,7 @@ import {
   makeGlobalReduxStore,
 } from "@quoll/client-lib";
 
+import { authUserStore } from "modules/auth-user/model";
 import { userStore } from "modules/user/model";
 import { dateStore } from "modules/date/model";
 import { feedsStore } from "modules/feeds/model";
@@ -16,9 +18,11 @@ export type RootState = {
   feeds: FeedsState;
   timeline: TimelineState;
   user: UserState;
+  authUser: AuthUserState;
 };
 
 export const { StoreProvider } = makeGlobalReduxStore({
+  authUser: authUserStore.reducer,
   date: dateStore.reducer,
   feeds: feedsStore.reducer,
   timeline: timelineStore.reducer,
