@@ -6,6 +6,7 @@ import "typeface-pacifico";
 
 import App from "../App";
 import { StoreProvider } from "../store";
+import AuthProvider from "./AuthProvider";
 
 Modal.setAppElement("#root");
 
@@ -29,16 +30,18 @@ const GlobalStyle = createGlobalStyle(
 );
 
 const AppRoot = () => (
-  <StoreProvider>
-    <BrowserRouter>
-      <ThemeProvider theme={themes.default}>
-        <Fragment>
-          <App />
-          <GlobalStyle />
-        </Fragment>
-      </ThemeProvider>
-    </BrowserRouter>
-  </StoreProvider>
+  <AuthProvider>
+    <StoreProvider>
+      <BrowserRouter>
+        <ThemeProvider theme={themes.default}>
+          <Fragment>
+            <App />
+            <GlobalStyle />
+          </Fragment>
+        </ThemeProvider>
+      </BrowserRouter>
+    </StoreProvider>
+  </AuthProvider>
 );
 
 export default AppRoot;
