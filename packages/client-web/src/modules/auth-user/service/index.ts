@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { AuthUserService } from "@quoll/client-lib";
+import { AuthUserService } from "@quoll/client-lib/modules";
 
 export const useAuthUserService = (getAccessToken: () => Promise<string>) => {
   const service = useMemo(() => {

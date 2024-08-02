@@ -1,4 +1,4 @@
-import { Storage } from "@quoll/client-lib";
+import { Storage } from "@quoll/client-lib/storage";
 
 const prefix = "quoll";
 

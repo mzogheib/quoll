@@ -1,7 +1,7 @@
 import {
   TimelineState,
   useTimelineModel as _useTimelineMode,
-} from "@quoll/client-lib";
+} from "@quoll/client-lib/modules";
 
 import { makeStore } from "@utils/store";
 import timelineService from "../service";

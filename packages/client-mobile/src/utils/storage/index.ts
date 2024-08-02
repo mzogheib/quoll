@@ -1,4 +1,4 @@
-import { Storage } from "@quoll/client-lib";
+import { Storage } from "@quoll/client-lib/storage";
 import { MMKVLoader } from "react-native-mmkv-storage";
 
 const MMKV = new MMKVLoader().initialize();
