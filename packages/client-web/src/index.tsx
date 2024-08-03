@@ -4,6 +4,7 @@ import { createRoot } from "react-dom/client";
 import AppRoot from "./AppRoot";
 import reportWebVitals from "./reportWebVitals";
 import { initMocks } from "./__mocks__";
+import { initFeatureFlags } from "services/feature-flags";
 
 const renderRoot = () => {
   const container = document.getElementById("root");
@@ -19,6 +20,7 @@ const renderRoot = () => {
 };
 
 const initApp = async () => {
+  initFeatureFlags();
   // await initMocks();
   renderRoot();
 };
