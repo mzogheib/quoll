@@ -1,6 +1,6 @@
 import { makeStorage } from "services/storage";
 
-const features = ["SOME_FEATURE", "ANOTHER_FEATURE"] as const;
+const features = ["NEW_AUTH"] as const;
 
 type Feature = (typeof features)[number];
 
