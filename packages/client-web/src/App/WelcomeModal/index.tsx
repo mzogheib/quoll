@@ -21,10 +21,16 @@ const Message = styled.div`
 interface Props {
   isOpen: boolean;
   onCancel: () => void;
-  onConnectFeeds: () => void;
+  onLoginComplete: () => void;
+  onSignupComplete: () => void;
 }
 
-const WelcomeModal = ({ isOpen, onCancel, onConnectFeeds }: Props) => {
+const WelcomeModal = ({
+  isOpen,
+  onCancel,
+  onLoginComplete,
+  onSignupComplete,
+}: Props) => {
   return (
     <Modal isOpen={isOpen} onRequestClose={onCancel}>
       <Modal.Inner>
@@ -32,8 +38,8 @@ const WelcomeModal = ({ isOpen, onCancel, onConnectFeeds }: Props) => {
         <Title>Quoll</Title>
         <Message>Map ya life!</Message>
         <WelcomeModalActions
-          onLoginComplete={onCancel}
-          onSignupComplete={onConnectFeeds}
+          onLoginComplete={onLoginComplete}
+          onSignupComplete={onSignupComplete}
         />
       </Modal.Inner>
     </Modal>
