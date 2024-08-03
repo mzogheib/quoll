@@ -4,8 +4,8 @@ import {
   FeedsState,
   TimelineState,
   UserState,
-  makeGlobalReduxStore,
-} from "@quoll/client-lib";
+} from "@quoll/client-lib/modules";
+import { makeGlobalReduxStore } from "@quoll/client-lib/store";
 
 import { authUserStore } from "modules/auth-user/model";
 import { userStore } from "modules/user/model";

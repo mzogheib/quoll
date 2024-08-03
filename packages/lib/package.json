@@ -16,7 +16,8 @@
     "postinstall": "yarn build"
   },
   "devDependencies": {
-    "@tsconfig/recommended": "^1.0.3",
+    "@tsconfig/node18": "^18.2.4",
+    "@types/node": "^22.1.0",
     "typescript": "^5.5.3"
   }
 }

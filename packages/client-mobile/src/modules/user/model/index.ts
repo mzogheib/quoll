@@ -1,4 +1,7 @@
-import { UserState, useUserModel as _useUserModel } from "@quoll/client-lib";
+import {
+  UserState,
+  useUserModel as _useUserModel,
+} from "@quoll/client-lib/modules";
 
 import { makeStorage } from "@utils/storage";
 import { makeStore } from "@utils/store";
