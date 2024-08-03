@@ -20,14 +20,6 @@ type DeauthorizeResponse = {
   access_token: string;
 };
 
-type RefreshResponse = {
-  token_type: string;
-  expires_at: number;
-  expires_in: number;
-  access_token: string;
-  refresh_token: string;
-};
-
 class StravaAuthApi extends HttpService {
   constructor(params: {
     clientId: string;
@@ -89,7 +81,7 @@ class StravaAuthApi extends HttpService {
       client_secret: this.clientSecret,
       grant_type: "refresh_token",
     };
-    return super.request<RefreshResponse>({
+    return super.request<TokenResponse>({
       method: "POST",
       endpoint: "/token",
       payload: data,
