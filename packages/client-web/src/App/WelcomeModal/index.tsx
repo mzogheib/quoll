@@ -1,8 +1,7 @@
-import { useState } from "react";
 import styled, { css } from "styled-components";
-import { Button, ButtonPrimary, Input, Modal } from "@quoll/ui-components";
+import { Modal } from "@quoll/ui-components";
 
-import { useUserViewModel } from "modules/user/view-model";
+import WelcomeModalActions from "./WelcomeModalActions";
 
 const Title = styled.div(
   ({ theme: { font } }) => css`
@@ -22,54 +21,20 @@ const Message = styled.div`
 interface Props {
   isOpen: boolean;
   onCancel: () => void;
-  onLoginComplete: () => void;
-  onSignupComplete: () => void;
+  onConnectFeeds: () => void;
 }
 
-const WelcomeModal = ({
-  isOpen,
-  onCancel,
-  onLoginComplete,
-  onSignupComplete,
-}: Props) => {
-  const { user, login, signup, logout } = useUserViewModel();
-
-  const [userId, setUserId] = useState<string>("");
-
-  const handleLogin = async () => {
-    await login(userId);
-    setUserId("");
-    onLoginComplete();
-  };
-
-  const handleSignup = async () => {
-    await signup();
-    onSignupComplete();
-  };
-
-  const renderUnauthed = () => (
-    <>
-      <Input value={userId} onChange={setUserId} placeholder="User ID" />
-      <Modal.Actions align="center" direction="column">
-        <ButtonPrimary onClick={handleLogin}>Log in</ButtonPrimary>
-        <Button onClick={handleSignup}>or, sign up</Button>
-      </Modal.Actions>
-    </>
-  );
-
-  const renderAuthed = () => (
-    <Modal.Actions align="center" direction="column">
-      <Button onClick={logout}>Log out</Button>
-    </Modal.Actions>
-  );
-
+const WelcomeModal = ({ isOpen, onCancel, onConnectFeeds }: Props) => {
   return (
     <Modal isOpen={isOpen} onRequestClose={onCancel}>
       <Modal.Inner>
         <Modal.Header onClose={onCancel} />
         <Title>Quoll</Title>
         <Message>Map ya life!</Message>
-        {user === null ? renderUnauthed() : renderAuthed()}
+        <WelcomeModalActions
+          onLoginComplete={onCancel}
+          onSignupComplete={onConnectFeeds}
+        />
       </Modal.Inner>
     </Modal>
   );
