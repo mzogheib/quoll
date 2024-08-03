@@ -68,8 +68,9 @@ export abstract class HttpService {
     // If it does, the `Response` type will be set as non-null.
     // If it does not, the `Response` type will be set as `null`.
     // Hence the value of responseJson will always match the caller's intention.
-    const responseJson: Response =
-      response.status === 204 ? null : await response.json();
+    const responseJson = (
+      response.status === 204 ? null : await response.json()
+    ) as Response;
 
     if (response.ok) return responseJson;
 
