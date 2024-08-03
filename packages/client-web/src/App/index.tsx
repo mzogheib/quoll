@@ -38,7 +38,7 @@ const App = () => {
   const history = useHistory();
   const location = useLocation();
 
-  const { login } = useUserViewModel();
+  const { login, getCurrentUserId } = useUserViewModel();
 
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
 
@@ -50,7 +50,15 @@ const App = () => {
     setShowWelcomeModal(false);
   };
 
-  useBootstrapApp(login, openWelcomeModal);
+  const _login = () => {
+    const userId = getCurrentUserId();
+
+    if (userId === undefined) return;
+
+    login(userId);
+  };
+
+  useBootstrapApp(_login, openWelcomeModal);
 
   const getRouteTitleFromLocation = () => {
     const route = routes.find((route) => route.path === location.pathname);

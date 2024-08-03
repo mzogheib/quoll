@@ -2,7 +2,7 @@ import { useUserViewModel } from "modules/user/view-model";
 import { useEffect } from "react";
 
 export const useBootstrapApp = (
-  onAuthenticated: (userId: string) => void,
+  onAuthenticated: () => void,
   onUnauthenticated: () => void,
 ) => {
   const { getCurrentUserId } = useUserViewModel();
@@ -15,7 +15,7 @@ export const useBootstrapApp = (
       return;
     }
 
-    onAuthenticated(userId);
+    onAuthenticated();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
