@@ -2,7 +2,6 @@ import { useState } from "react";
 import styled, { css } from "styled-components";
 import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 
-import { useCheckAuthOnce } from "modules/auth/view-model";
 import { useAuthUserViewModel } from "modules/auth-user/view-model";
 import Header from "components/Header";
 import SideBar from "components/SideBar";
@@ -10,6 +9,7 @@ import routes from "../routes";
 import WelcomeModal from "./WelcomeModal";
 import { useBootstrapApp } from "./utils";
 import { useUserViewModel } from "modules/user/view-model";
+import { checkIsFeatureEnabled } from "services/feature-flags";
 
 const Wrapper = styled.div(
   ({ theme: { colors, media } }) => css`
@@ -40,7 +40,7 @@ const App = () => {
   const history = useHistory();
   const location = useLocation();
 
-  const { login } = useUserViewModel();
+  const { login, getCurrentUserId } = useUserViewModel();
   const { getMe } = useAuthUserViewModel();
 
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
@@ -53,8 +53,19 @@ const App = () => {
     setShowWelcomeModal(false);
   };
 
-  useCheckAuthOnce(getMe, openWelcomeModal);
-  // useBootstrapApp(login, openWelcomeModal);
+  const _login = () => {
+    const userId = getCurrentUserId();
+
+    if (userId === undefined) return;
+
+    login(userId);
+  };
+
+  const handleAuthenticated = checkIsFeatureEnabled("NEW_AUTH")
+    ? getMe
+    : _login;
+
+  useBootstrapApp(handleAuthenticated, openWelcomeModal);
 
   const getRouteTitleFromLocation = () => {
     const route = routes.find((route) => route.path === location.pathname);

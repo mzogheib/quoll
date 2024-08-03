@@ -1,7 +1,9 @@
 import styled, { css } from "styled-components";
 import { Modal } from "@quoll/ui-components";
 
+import { checkIsFeatureEnabled } from "services/feature-flags";
 import WelcomeModalActions from "./WelcomeModalActions";
+import WelcomeModalActionsNewAuth from "./WelcomeModalActionsNewAuth";
 
 const Title = styled.div(
   ({ theme: { font } }) => css`
@@ -31,10 +33,14 @@ const WelcomeModal = ({ isOpen, onCancel, onConnectFeeds }: Props) => {
         <Modal.Header onClose={onCancel} />
         <Title>Quoll</Title>
         <Message>Map ya life!</Message>
-        <WelcomeModalActions
-          onLoginComplete={onCancel}
-          onSignupComplete={onConnectFeeds}
-        />
+        {checkIsFeatureEnabled("NEW_AUTH") ? (
+          <WelcomeModalActionsNewAuth onConnectFeeds={onConnectFeeds} />
+        ) : (
+          <WelcomeModalActions
+            onLoginComplete={onCancel}
+            onSignupComplete={onConnectFeeds}
+          />
+        )}
       </Modal.Inner>
     </Modal>
   );
