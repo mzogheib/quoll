@@ -8,6 +8,8 @@ import Header from "components/Header";
 import SideBar from "components/SideBar";
 import routes from "../routes";
 import WelcomeModal from "./WelcomeModal";
+import { useBootstrapApp } from "./utils";
+import { useUserViewModel } from "modules/user/view-model";
 
 const Wrapper = styled.div(
   ({ theme: { colors, media } }) => css`
@@ -38,6 +40,7 @@ const App = () => {
   const history = useHistory();
   const location = useLocation();
 
+  const { login } = useUserViewModel();
   const { getMe } = useAuthUserViewModel();
 
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
@@ -51,6 +54,7 @@ const App = () => {
   };
 
   useCheckAuthOnce(getMe, openWelcomeModal);
+  // useBootstrapApp(login, openWelcomeModal);
 
   const getRouteTitleFromLocation = () => {
     const route = routes.find((route) => route.path === location.pathname);
