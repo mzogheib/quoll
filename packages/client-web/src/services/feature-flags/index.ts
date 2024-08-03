@@ -28,19 +28,23 @@ export const initFeatureFlags = () => {
   featureParams.forEach((param) => {
     const feature = param.slice(featureParamPrefix.length) as Feature;
 
+    // Set from the URL
     if (urlParams.has(param)) {
       setFeatureFlag(feature, urlParams.get(param) === "true");
-      urlParams.delete(param);
       return;
     }
 
     // Already set froma previous visit
     if (getFeatureFlag(feature) !== undefined) return;
 
+    // Default to false
     setFeatureFlag(feature, false);
   });
 
-  // Remove the feature feature params now that we've processed them
-  const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+  // Now that we've processed the feature flags, remove them from the URL.
+  featureParams.forEach((fp) => urlParams.delete(fp));
+  const urlParamsString = urlParams.toString();
+  const searchString = urlParamsString ? `?${urlParamsString}` : "";
+  const newUrl = `${window.location.pathname}${searchString}`;
   window.history.replaceState({}, "", newUrl);
 };
