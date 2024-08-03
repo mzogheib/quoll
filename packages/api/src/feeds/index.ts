@@ -1,7 +1,7 @@
 import {
   stravaSummaryActivitiesAdapter,
   toshlEntriesAdapter,
-} from "@quoll/lib";
+} from "@quoll/lib/modules";
 
 import { service as stravaService } from "./strava/service";
 import { service as toshlService } from "./toshl/service";

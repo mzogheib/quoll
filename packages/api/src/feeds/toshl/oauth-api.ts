@@ -6,7 +6,15 @@ if (!process.env.TOSHL_CLIENT_ID || !process.env.TOSHL_CLIENT_SECRET) {
   throw new Error("Toshl credentials not found");
 }
 
-// Toshl Oauth is not currently working so this implementation ma be broken.
+// Toshl Oauth is not currently working so this implementation may be broken.
+
+type TokenResponse = {
+  access_token: string;
+  token_type: string;
+  expires_in: number;
+  refresh_token: string;
+  scope: string;
+};
 
 class ToshlAuthApi {
   constructor(params: {
@@ -31,7 +39,7 @@ class ToshlAuthApi {
       "Basic " + Buffer.from(username + ":" + password).toString("base64"),
   });
 
-  private async request(params: {
+  private async request<Response>(params: {
     method: string;
     endpoint: string;
     headers?: Record<string, string>;
@@ -52,7 +60,7 @@ class ToshlAuthApi {
 
     const response = await fetch(url, init);
 
-    const responseJson = await response.json();
+    const responseJson = (await response.json()) as Response;
 
     if (response.ok) return responseJson;
 
@@ -88,7 +96,7 @@ class ToshlAuthApi {
       this.client_secret,
     );
 
-    return this.request({
+    return this.request<TokenResponse>({
       method: "POST",
       endpoint: "/token",
       headers,
@@ -124,7 +132,7 @@ class ToshlAuthApi {
       this.client_secret,
     );
 
-    return this.request({
+    return this.request<TokenResponse>({
       method: "POST",
       endpoint: "/token",
       headers,

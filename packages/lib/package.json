@@ -5,8 +5,16 @@
   "repository": "https://github.com/mzogheib/quoll",
   "author": "mzogheib",
   "license": "MIT",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "exports": {
+    "./modules": {
+      "import": "./dist/modules/index.js",
+      "types": "./dist/modules/index.d.ts"
+    },
+    "./services": {
+      "import": "./dist/services/index.js",
+      "types": "./dist/services/index.d.ts"
+    }
+  },
   "scripts": {
     "start": "tsc --watch",
     "clean-build": "rm -rf dist",

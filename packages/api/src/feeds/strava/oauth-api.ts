@@ -1,4 +1,4 @@
-import { HttpService } from "@quoll/lib";
+import { HttpService } from "@quoll/lib/services";
 
 if (!process.env.CLIENT_OAUTH_URL) {
   throw new Error("Client OAuth URL not found");
@@ -18,14 +18,6 @@ type TokenResponse = {
 
 type DeauthorizeResponse = {
   access_token: string;
-};
-
-type RefreshResponse = {
-  token_type: string;
-  expires_at: number;
-  expires_in: number;
-  access_token: string;
-  refresh_token: string;
 };
 
 class StravaAuthApi extends HttpService {
@@ -89,7 +81,7 @@ class StravaAuthApi extends HttpService {
       client_secret: this.clientSecret,
       grant_type: "refresh_token",
     };
-    return super.request<RefreshResponse>({
+    return super.request<TokenResponse>({
       method: "POST",
       endpoint: "/token",
       payload: data,
