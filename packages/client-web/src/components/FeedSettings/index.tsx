@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { ButtonPlain, HorizontalLoader } from "@quoll/ui-components";
-import { FeedName } from "@quoll/lib";
+import { FeedName } from "@quoll/lib/modules";
 import { FeedState } from "@quoll/client-lib/modules";
 
 import FeedLogo from "components/FeedLogo";

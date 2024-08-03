@@ -1,4 +1,4 @@
-import { ISO8601Date, TimelineEntry } from "@quoll/lib";
+import { ISO8601Date, TimelineEntry } from "@quoll/lib/modules";
 
 import { Store } from "../../../store/types";
 import { TimelineService } from "../service";

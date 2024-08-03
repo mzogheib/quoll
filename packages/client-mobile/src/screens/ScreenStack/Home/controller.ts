@@ -1,4 +1,4 @@
-import { makeISO8601Date } from "@quoll/lib";
+import { makeISO8601Date } from "@quoll/lib/modules";
 
 import { MarkerProps } from "@components/Map/types";
 import { useDateViewModel } from "@modules/date/view-model";

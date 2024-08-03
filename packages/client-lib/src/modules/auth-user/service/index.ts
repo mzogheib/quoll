@@ -1,4 +1,5 @@
-import { AuthenticatedHttpService, User } from "@quoll/lib";
+import { User } from "@quoll/lib/modules";
+import { AuthenticatedHttpService } from "@quoll/lib/services";
 
 export class AuthUserService extends AuthenticatedHttpService {
   async getMe() {
