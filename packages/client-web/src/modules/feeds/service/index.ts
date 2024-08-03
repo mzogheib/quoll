@@ -1,4 +1,4 @@
-import { FeedsService } from "@quoll/client-lib/modules";
+import { FeedsService } from "@quoll/client-lib";
 
 import { getAccessToken } from "services/session";
 
