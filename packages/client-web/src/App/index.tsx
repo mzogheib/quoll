@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled, { css } from "styled-components";
 import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 
@@ -7,6 +7,7 @@ import Header from "components/Header";
 import SideBar from "components/SideBar";
 import routes from "../routes";
 import WelcomeModal from "./WelcomeModal";
+import { useBootstrapApp } from "./utils";
 
 const Wrapper = styled.div(
   ({ theme: { colors, media } }) => css`
@@ -37,7 +38,7 @@ const App = () => {
   const history = useHistory();
   const location = useLocation();
 
-  const { getCurrentUserId, login } = useUserViewModel();
+  const { login } = useUserViewModel();
 
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
 
@@ -49,17 +50,7 @@ const App = () => {
     setShowWelcomeModal(false);
   };
 
-  useEffect(() => {
-    const userId = getCurrentUserId();
-
-    if (userId === undefined) {
-      openWelcomeModal();
-      return;
-    }
-
-    login(userId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  useBootstrapApp(login, openWelcomeModal);
 
   const getRouteTitleFromLocation = () => {
     const route = routes.find((route) => route.path === location.pathname);
