@@ -33,7 +33,7 @@
     "redux": "^4.0.5"
   },
   "devDependencies": {
-    "@tsconfig/recommended": "^1.0.3",
+    "@tsconfig/node18": "^18.2.4",
     "@types/react": "^18.2.45",
     "redux-devtools-extension": "^2.13.9",
     "typescript": "^5.3.3"

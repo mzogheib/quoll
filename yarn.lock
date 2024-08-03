@@ -7159,7 +7159,7 @@ __metadata:
   resolution: "@quoll/client-lib@workspace:packages/client-lib"
   dependencies:
     "@quoll/lib": "npm:^0.5.3"
-    "@tsconfig/recommended": "npm:^1.0.3"
+    "@tsconfig/node18": "npm:^18.2.4"
     "@types/react": "npm:^18.2.45"
     react-redux: "npm:^7.2.1"
     redux: "npm:^4.0.5"
