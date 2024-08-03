@@ -7225,6 +7225,7 @@ __metadata:
     "@testing-library/jest-dom": "npm:^5.16.5"
     "@testing-library/react": "npm:^13.3.0"
     "@testing-library/user-event": "npm:^13.5.0"
+    "@tsconfig/create-react-app": "npm:^2.0.5"
     "@types/google.maps": "npm:^3.50.4"
     "@types/jest": "npm:^27.5.2"
     "@types/node": "npm:^16.11.48"
@@ -10072,6 +10073,13 @@ __metadata:
   version: 0.2.0
   resolution: "@trysound/sax@npm:0.2.0"
   checksum: 44907308549ce775a41c38a815f747009ac45929a45d642b836aa6b0a536e4978d30b8d7d680bbd116e9dd73b7dbe2ef0d1369dcfc2d09e83ba381e485ecbe12
+  languageName: node
+  linkType: hard
+
+"@tsconfig/create-react-app@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "@tsconfig/create-react-app@npm:2.0.5"
+  checksum: 4bc2b66b758c0d1c4d5f19afef07d3bcf989c40c1d996f19add7471ace5fb31d59bf0fa604dcccc32b0a79700824111d33114c104cccac5e8d0e9878da9d74b6
   languageName: node
   linkType: hard
 
