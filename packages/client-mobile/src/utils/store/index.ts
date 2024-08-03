@@ -1,4 +1,4 @@
-import { Store } from "@quoll/client-lib/store";
+import { Store } from "@quoll/client-lib";
 import { create } from "zustand";
 
 /**

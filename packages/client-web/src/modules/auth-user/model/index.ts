@@ -1,8 +1,8 @@
 import {
   AuthUserState,
   useAuthUserModel as _useAuthUserModel,
-} from "@quoll/client-lib/modules";
-import { makeReduxStoreSlice } from "@quoll/client-lib/store";
+  makeReduxStoreSlice,
+} from "@quoll/client-lib";
 
 import { useAuthUserService } from "../service";
 import { RootState } from "store";

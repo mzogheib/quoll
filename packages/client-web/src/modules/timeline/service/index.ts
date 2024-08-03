@@ -1,4 +1,4 @@
-import { TimelineService } from "@quoll/client-lib/modules";
+import { TimelineService } from "@quoll/client-lib";
 
 import { getAccessToken } from "services/session";
 

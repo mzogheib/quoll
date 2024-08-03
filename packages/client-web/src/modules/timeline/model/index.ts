@@ -1,8 +1,8 @@
 import {
   TimelineState,
+  makeReduxStoreSlice,
   useTimelineModel as _useTimelineMode,
-} from "@quoll/client-lib/modules";
-import { makeReduxStoreSlice } from "@quoll/client-lib/store";
+} from "@quoll/client-lib";
 
 import timelineService from "../service";
 import { RootState } from "store";
