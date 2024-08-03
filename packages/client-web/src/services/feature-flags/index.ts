@@ -6,13 +6,14 @@ type Feature = (typeof features)[number];
 
 const storage = makeStorage<Record<Feature, boolean>>("feature-flags");
 
-export const checkIsFeatureEnabled = (feature: Feature) => {
+const getFeatureFlag = (feature: Feature) => {
   const flags = storage.getData();
 
-  if (flags === null) return false;
-
-  return flags[feature] ?? false;
+  return flags?.[feature];
 };
+
+export const checkIsFeatureEnabled = (feature: Feature) =>
+  getFeatureFlag(feature) ?? false;
 
 const setFeatureFlag = (feature: Feature, isEnabled: boolean) => {
   storage.setProperty(feature, isEnabled);
@@ -26,12 +27,17 @@ export const initFeatureFlags = () => {
 
   featureParams.forEach((param) => {
     const feature = param.slice(featureParamPrefix.length) as Feature;
+
     if (urlParams.has(param)) {
       setFeatureFlag(feature, urlParams.get(param) === "true");
       urlParams.delete(param);
-    } else {
-      setFeatureFlag(feature, false);
+      return;
     }
+
+    // Already set froma previous visit
+    if (getFeatureFlag(feature) !== undefined) return;
+
+    setFeatureFlag(feature, false);
   });
 
   // Remove the feature feature params now that we've processed them
