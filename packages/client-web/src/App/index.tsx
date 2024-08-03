@@ -2,7 +2,6 @@ import { useState } from "react";
 import styled, { css } from "styled-components";
 import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 
-import { useUserViewModel } from "modules/user/view-model";
 import Header from "components/Header";
 import SideBar from "components/SideBar";
 import routes from "../routes";
@@ -38,8 +37,6 @@ const App = () => {
   const history = useHistory();
   const location = useLocation();
 
-  const { login, getCurrentUserId } = useUserViewModel();
-
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
 
   const openWelcomeModal = () => {
@@ -50,15 +47,7 @@ const App = () => {
     setShowWelcomeModal(false);
   };
 
-  const _login = () => {
-    const userId = getCurrentUserId();
-
-    if (userId === undefined) return;
-
-    login(userId);
-  };
-
-  useBootstrapApp(_login, openWelcomeModal);
+  useBootstrapApp(openWelcomeModal);
 
   const getRouteTitleFromLocation = () => {
     const route = routes.find((route) => route.path === location.pathname);
