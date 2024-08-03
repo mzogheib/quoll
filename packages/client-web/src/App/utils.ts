@@ -1,16 +1,14 @@
+import { useAuthUserViewModel } from "modules/auth-user/view-model";
 import { useAuthModel } from "modules/auth/model";
 import { useUserViewModel } from "modules/user/view-model";
 import { useEffect, useState } from "react";
 import { checkIsFeatureEnabled } from "services/feature-flags";
 
-export const useBootstrapApp = (
-  onAuthenticated: () => void,
-  onUnauthenticated: () => void,
-) => {
+export const useBootstrapApp = (onUnauthenticated: () => void) => {
   const isNewAuth = checkIsFeatureEnabled("NEW_AUTH");
 
   // Old auth
-  const { getCurrentUserId } = useUserViewModel();
+  const { login, getCurrentUserId } = useUserViewModel();
 
   useEffect(() => {
     if (isNewAuth) return;
@@ -22,12 +20,13 @@ export const useBootstrapApp = (
       return;
     }
 
-    onAuthenticated();
+    login(userId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // New auth
   const { isAuthenticated, isAuthenticating } = useAuthModel();
+  const { getMe } = useAuthUserViewModel();
 
   const [didCheckAuth, setDidCheckAuth] = useState(false);
 
@@ -39,16 +38,16 @@ export const useBootstrapApp = (
     setDidCheckAuth(true);
 
     if (isAuthenticated) {
-      onAuthenticated();
+      getMe();
     } else {
       onUnauthenticated();
     }
   }, [
     didCheckAuth,
+    getMe,
     isAuthenticated,
     isAuthenticating,
     isNewAuth,
-    onAuthenticated,
     onUnauthenticated,
   ]);
 };

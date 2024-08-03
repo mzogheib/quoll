@@ -2,9 +2,6 @@ import { useState } from "react";
 import styled, { css } from "styled-components";
 import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 
-import { checkIsFeatureEnabled } from "services/feature-flags";
-import { useUserViewModel } from "modules/user/view-model";
-import { useAuthUserViewModel } from "modules/auth-user/view-model";
 import Header from "components/Header";
 import SideBar from "components/SideBar";
 import routes from "../routes";
@@ -40,9 +37,6 @@ const App = () => {
   const history = useHistory();
   const location = useLocation();
 
-  const { login, getCurrentUserId } = useUserViewModel();
-  const { getMe } = useAuthUserViewModel();
-
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
 
   const openWelcomeModal = () => {
@@ -53,19 +47,7 @@ const App = () => {
     setShowWelcomeModal(false);
   };
 
-  const _login = () => {
-    const userId = getCurrentUserId();
-
-    if (userId === undefined) return;
-
-    login(userId);
-  };
-
-  const handleAuthenticated = checkIsFeatureEnabled("NEW_AUTH")
-    ? getMe
-    : _login;
-
-  useBootstrapApp(handleAuthenticated, openWelcomeModal);
+  useBootstrapApp(openWelcomeModal);
 
   const getRouteTitleFromLocation = () => {
     const route = routes.find((route) => route.path === location.pathname);
