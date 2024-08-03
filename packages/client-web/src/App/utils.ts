@@ -1,5 +1,5 @@
 import { useAuthUserViewModel } from "modules/auth-user/view-model";
-import { useAuthModel } from "modules/auth/model";
+import { useAuthViewModel } from "modules/auth/view-model";
 import { useUserViewModel } from "modules/user/view-model";
 import { useEffect, useState } from "react";
 import { checkIsFeatureEnabled } from "services/feature-flags";
@@ -25,7 +25,7 @@ export const useBootstrapApp = (onUnauthenticated: () => void) => {
   }, []);
 
   // New auth
-  const { isAuthenticated, isAuthenticating } = useAuthModel();
+  const { isAuthenticated, isAuthenticating } = useAuthViewModel();
   const { getMe } = useAuthUserViewModel();
 
   const [didCheckAuth, setDidCheckAuth] = useState(false);
