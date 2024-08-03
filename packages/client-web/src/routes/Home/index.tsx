@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import styled, { css } from "styled-components";
 import { HorizontalLoader } from "@quoll/ui-components";
-import { ISO8601Date, isSameDay, makeISO8601Date } from "@quoll/lib/modules";
+import { ISO8601Date, isSameDay, makeISO8601Date } from "@quoll/lib";
 
 import { useTimelineViewModel } from "modules/timeline/view-model";
 import { useDateViewModelModel } from "modules/date/view-model";

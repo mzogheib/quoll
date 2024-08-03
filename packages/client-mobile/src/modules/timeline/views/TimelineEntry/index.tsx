@@ -4,7 +4,7 @@ import {
   TimelineEntry as ITimelineEntry,
   makeDateFromUnixTimestamp,
   makeTimeString,
-} from "@quoll/lib/modules";
+} from "@quoll/lib";
 import { TouchableHighlight, Text, View } from "react-native";
 import styles from "./styles";
 

@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { Alert } from "react-native";
-import { ISO8601Date } from "@quoll/lib/modules";
+import { ISO8601Date } from "@quoll/lib";
 
 import { promptAllowAccess } from "@components/Alert";
 import { useMediaModel } from "../model";

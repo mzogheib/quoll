@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from "react";
-import { ISO8601Date } from "@quoll/lib/modules";
+import { ISO8601Date } from "@quoll/lib";
 
 import { makeStore } from "@utils/store";
 import { makeStorage } from "@utils/storage";

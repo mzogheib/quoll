@@ -1,4 +1,4 @@
-import { ISO8601Date } from "@quoll/lib/modules";
+import { ISO8601Date } from "@quoll/lib";
 
 import { Store } from "../../../store/types";
 

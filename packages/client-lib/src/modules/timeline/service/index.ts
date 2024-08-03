@@ -1,11 +1,11 @@
 import {
+  AuthenticatedHttpService,
   ISO8601Date,
   TimelineEntry,
   TimelineEntryType,
   getEndOfDay,
   getStartOfDay,
-} from "@quoll/lib/modules";
-import { AuthenticatedHttpService } from "@quoll/lib/services";
+} from "@quoll/lib";
 
 type EntryConfig = {
   label: string;
