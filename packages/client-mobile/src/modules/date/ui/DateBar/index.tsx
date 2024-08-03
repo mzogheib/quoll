@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { View, TouchableHighlight, Text } from "react-native";
 import DatePicker from "react-native-date-picker";
-import { getEndOfDay, getOffsetDate } from "@quoll/lib/modules";
+import { getEndOfDay, getOffsetDate } from "@quoll/lib";
 
 import styles from "./styles";
 

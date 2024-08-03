@@ -1,5 +1,4 @@
-import { User } from "@quoll/lib/modules";
-import { HttpService } from "@quoll/lib/services";
+import { HttpService, User } from "@quoll/lib";
 
 export class UserService extends HttpService {
   async login(userId: string) {

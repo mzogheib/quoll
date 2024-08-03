@@ -3,7 +3,7 @@ import {
   useDateModel as _useDateModel,
 } from "@quoll/client-lib/modules";
 import { makeReduxStoreSlice } from "@quoll/client-lib/store";
-import { makeISO8601Date } from "@quoll/lib/modules";
+import { makeISO8601Date } from "@quoll/lib";
 
 import { RootState } from "store";
 

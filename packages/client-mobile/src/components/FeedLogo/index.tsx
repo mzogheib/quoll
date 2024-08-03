@@ -1,5 +1,5 @@
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { FeedName } from "@quoll/lib/modules";
+import { FeedName } from "@quoll/lib";
 import { colorPalette } from "@quoll/ui-primitives";
 
 const iconMap = {

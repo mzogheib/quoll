@@ -7,6 +7,7 @@ import "typeface-pacifico";
 import App from "../App";
 import { StoreProvider } from "../store";
 import AuthProvider from "./AuthProvider";
+import { initFeatureFlags } from "services/feature-flags";
 
 Modal.setAppElement("#root");
 
@@ -28,6 +29,8 @@ const GlobalStyle = createGlobalStyle(
     }
   `,
 );
+
+initFeatureFlags();
 
 const AppRoot = () => (
   <AuthProvider>

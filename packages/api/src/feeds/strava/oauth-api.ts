@@ -1,4 +1,4 @@
-import { HttpService } from "@quoll/lib/services";
+import { HttpService } from "@quoll/lib";
 
 if (!process.env.CLIENT_OAUTH_URL) {
   throw new Error("Client OAuth URL not found");

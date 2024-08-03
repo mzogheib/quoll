@@ -1,4 +1,4 @@
-import { FeedName } from "@quoll/lib/modules";
+import { FeedName } from "@quoll/lib";
 import { HydratedDocument, Schema, model } from "mongoose";
 
 export type IAuth = {
