@@ -2,14 +2,14 @@ import { useState } from "react";
 import styled, { css } from "styled-components";
 import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 
+import { checkIsFeatureEnabled } from "services/feature-flags";
+import { useUserViewModel } from "modules/user/view-model";
 import { useAuthUserViewModel } from "modules/auth-user/view-model";
 import Header from "components/Header";
 import SideBar from "components/SideBar";
 import routes from "../routes";
 import WelcomeModal from "./WelcomeModal";
 import { useBootstrapApp } from "./utils";
-import { useUserViewModel } from "modules/user/view-model";
-import { checkIsFeatureEnabled } from "services/feature-flags";
 
 const Wrapper = styled.div(
   ({ theme: { colors, media } }) => css`
