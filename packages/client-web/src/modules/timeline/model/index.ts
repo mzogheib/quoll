@@ -4,7 +4,7 @@ import {
   useTimelineModel as _useTimelineMode,
 } from "@quoll/client-lib";
 
-import timelineService from "../service";
+import { useTimelineService } from "../service";
 import { RootState } from "store";
 
 const defaultState: TimelineState = {
@@ -17,5 +17,7 @@ export const timelineStore = makeReduxStoreSlice<TimelineState, RootState>(
   defaultState,
 );
 
-export const useTimelineModel = () =>
-  _useTimelineMode(timelineStore.useStore, timelineService);
+export const useTimelineModel = (getAccessToken: () => Promise<string>) => {
+  const timelineService = useTimelineService(getAccessToken);
+  return _useTimelineMode(timelineStore.useStore, timelineService);
+};
