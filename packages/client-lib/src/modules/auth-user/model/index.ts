@@ -9,7 +9,7 @@ export type AuthUserState = {
 };
 
 type AuthUserActions = {
-  getMe: () => Promise<User>;
+  getMe: () => Promise<User | null>;
   reset: () => void;
 };
 
@@ -23,12 +23,21 @@ export const useAuthUserModel = (
   const { user, isLoading } = state;
 
   const getMe = async () => {
-    setProperty("isLoading", true);
-    const user = await service.getMe();
-    setProperty("user", user);
-    setProperty("isLoading", false);
+    try {
+      setProperty("isLoading", true);
+      const user = await service.getMe();
+      setProperty("user", user);
+      return user;
+    } catch (error) {
+      if (error instanceof Error) {
+        const parseError = JSON.parse(error.message);
+        if (parseError.status === 404) return null;
+      }
 
-    return user;
+      throw error;
+    } finally {
+      setProperty("isLoading", false);
+    }
   };
 
   return {
