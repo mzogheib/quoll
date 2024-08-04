@@ -11,8 +11,8 @@ export const useAuthViewModel = (): AuthViewModel => {
   const { getAccessToken } = useAuthModel();
 
   const authModel = useAuthModel();
-  const timelineModel = useTimelineModel();
-  const feedsModel = useFeedsModel();
+  const timelineModel = useTimelineModel(getAccessToken);
+  const feedsModel = useFeedsModel(getAccessToken);
   const dateModel = useDateModel();
   const authUserModel = useAuthUserModel(getAccessToken);
 

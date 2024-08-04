@@ -4,11 +4,12 @@ import { useUserModel } from "../model";
 import { useFeedsModel } from "modules/feeds/model";
 import { useTimelineModel } from "modules/timeline/model";
 import { useDateModel } from "modules/date/model";
+import { getAccessToken } from "services/session";
 
 export const useUserViewModel = () => {
   const userModel = useUserModel();
-  const feedsModel = useFeedsModel();
-  const timelineModel = useTimelineModel();
+  const feedsModel = useFeedsModel(getAccessToken);
+  const timelineModel = useTimelineModel(getAccessToken);
   const dateModel = useDateModel();
 
   const { login } = userModel;
