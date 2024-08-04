@@ -14,15 +14,16 @@ import { createMeRoute, getMeRoute } from "./user.route";
 
 const router = Router();
 
-router.route("/login").post(login);
-
-router.route("/signup").post(signup);
-
+// New auth
 router
   .route("/user/me")
   .all(authMiddleware)
   .get(getMeRoute)
   .post(createMeRoute);
+
+// Legacy auth
+router.route("/login").post(login);
+router.route("/signup").post(signup);
 
 router
   .route("/feed-auth")
