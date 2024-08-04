@@ -30,5 +30,6 @@ export const getUser = async (auth0Id: string): Promise<User | null> => {
 
 export const createUser = async (auth0Id: string): Promise<User> => {
   const user = await UserModel.create({ auth0Id, feeds: DefaultFeeds });
+
   return sanitizeUser(user);
 };
