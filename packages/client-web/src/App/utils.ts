@@ -37,11 +37,22 @@ export const useBootstrapApp = (onUnauthenticated: () => void) => {
 
     setDidCheckAuth(true);
 
-    if (isAuthenticated) {
-      getMe();
-    } else {
+    if (!isAuthenticated) {
       onUnauthenticated();
+      return;
     }
+
+    const getOrCreateUser = async () => {
+      const me = await getMe();
+
+      if (me === null) {
+        // TODO create user
+        onUnauthenticated();
+        return;
+      }
+    };
+
+    getOrCreateUser();
   }, [
     didCheckAuth,
     getMe,

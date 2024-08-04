@@ -21,7 +21,13 @@ function sanitizeUser(user: UserDoc): User {
 }
 
 export const createUser = async () => {
-  const user = await UserModel.create({ feeds: DefaultFeeds });
+  //  Not relevant here so we can make it up
+  const auth0Id = Math.random().toString(36).substring(2, 18);
+
+  const user = await UserModel.create({
+    auth0Id,
+    feeds: DefaultFeeds,
+  });
   return sanitizeUser(user);
 };
 

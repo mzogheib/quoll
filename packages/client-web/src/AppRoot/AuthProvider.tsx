@@ -18,6 +18,7 @@ const AuthProvider = ({ children }: Props) => (
     authorizationParams={{
       audience: process.env.REACT_APP_AUTH0_AUDIENCE,
       redirect_uri: window.location.origin,
+      scope: "openid profile read:all_data",
     }}
     // These allow the session to be persisted across page refreshes
     useRefreshTokens={true}
