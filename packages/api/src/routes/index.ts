@@ -9,12 +9,16 @@ import {
 } from "./feed-auth.route";
 import { get } from "./timeline.route";
 import { AuthenticatedRequest } from "./types";
+import { authMiddleware } from "./auth";
+import { getMeRoute } from "./user.route";
 
 const router = Router();
 
 router.route("/login").post(login);
 
 router.route("/signup").post(signup);
+
+router.route("/user/me").all(authMiddleware).get(getMeRoute);
 
 router
   .route("/feed-auth")
