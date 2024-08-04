@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { createUser, getUser } from "../controllers/user.controller";
 import { handleError } from "../utils/error";
-import { AuthenticatedRequest } from "./types";
+import { RequestWithUserId } from "./types";
 
 export const getMeRoute = async (req: Request, res: Response) => {
   const auth0Id = req.auth?.payload.sub;
@@ -62,7 +62,7 @@ export const addUserIdMiddleware = async (
       return;
     }
 
-    (req as AuthenticatedRequest).userId = user._id;
+    (req as RequestWithUserId).userId = user._id;
 
     next();
   } catch (error) {

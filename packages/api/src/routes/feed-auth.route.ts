@@ -3,11 +3,11 @@ import { NextFunction, Response } from "express";
 
 import { feedServices, isSupportedFeed } from "../feeds";
 import { setFeedAuth, get, getFeedAuth } from "../controllers/users.controller";
-import { AuthenticatedRequest } from "./types";
+import { RequestWithUserId } from "./types";
 import { handleError } from "../utils/error";
 import { FeedConnectionConfig } from "@quoll/lib";
 
-export const connect = (req: AuthenticatedRequest, res: Response) => {
+export const connect = (req: RequestWithUserId, res: Response) => {
   const { feed } = req.query;
 
   if (feed === undefined || typeof feed !== "string") {
@@ -34,10 +34,7 @@ export const connect = (req: AuthenticatedRequest, res: Response) => {
   res.status(200).json(response);
 };
 
-export const authenticate = async (
-  req: AuthenticatedRequest,
-  res: Response,
-) => {
+export const authenticate = async (req: RequestWithUserId, res: Response) => {
   const { feed } = req.query;
   const { code } = req.body;
   const { userId } = req;
@@ -66,7 +63,7 @@ export const authenticate = async (
 // TODO this shouldn't be done here. Do it in the feed service or somewhere
 // closer to the feed
 export const checkAuth = async (
-  req: AuthenticatedRequest,
+  req: RequestWithUserId,
   res: Response,
   next: NextFunction,
 ) => {
@@ -102,7 +99,7 @@ export const checkAuth = async (
   next();
 };
 
-export const deauthorize = async (req: AuthenticatedRequest, res: Response) => {
+export const deauthorize = async (req: RequestWithUserId, res: Response) => {
   const { feed } = req.query;
   const { userId } = req;
 

@@ -5,7 +5,7 @@ import {
   get,
 } from "../controllers/users.controller";
 import { handleError } from "../utils/error";
-import { AuthenticatedRequest } from "./types";
+import { RequestWithUserId } from "./types";
 
 export const login = async (req: Request, res: Response) => {
   // TODO: userId should be a bearer token?
@@ -62,7 +62,7 @@ export const authenticate = async (
     }
 
     // TODO come up with a better typing
-    (req as AuthenticatedRequest).userId = userId;
+    (req as RequestWithUserId).userId = userId;
     next();
   } catch (error) {
     handleError(error, res);

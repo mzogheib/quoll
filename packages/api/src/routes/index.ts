@@ -8,7 +8,7 @@ import {
   deauthorize,
 } from "./feed-auth.route";
 import { get } from "./timeline.route";
-import { AuthenticatedRequest } from "./types";
+import { RequestWithUserId } from "./types";
 import { authMiddleware } from "./auth";
 import { addUserIdMiddleware, createMeRoute, getMeRoute } from "./user.route";
 
@@ -21,21 +21,17 @@ router.route("/signup").post(signup);
 router
   .route("/feed-auth")
   .all(authenticate)
-  .get((req, res) => connect(req as AuthenticatedRequest, res))
-  .post((req, res) => authenticateFeed(req as AuthenticatedRequest, res))
+  .get((req, res) => connect(req as RequestWithUserId, res))
+  .post((req, res) => authenticateFeed(req as RequestWithUserId, res))
   // Only the deauthorize endpoint requires the feed to be authenticated
-  .all((req, res, next) =>
-    checkFeedAuth(req as AuthenticatedRequest, res, next),
-  )
-  .delete((req, res) => deauthorize(req as AuthenticatedRequest, res));
+  .all((req, res, next) => checkFeedAuth(req as RequestWithUserId, res, next))
+  .delete((req, res) => deauthorize(req as RequestWithUserId, res));
 
 router
   .route("/timeline")
   .all(authenticate)
-  .all((req, res, next) =>
-    checkFeedAuth(req as AuthenticatedRequest, res, next),
-  )
-  .get((req, res) => get(req as AuthenticatedRequest, res));
+  .all((req, res, next) => checkFeedAuth(req as RequestWithUserId, res, next))
+  .get((req, res) => get(req as RequestWithUserId, res));
 
 // v2 - new auth
 router
@@ -48,21 +44,17 @@ router
   .route("/v2/feed-auth")
   .all(authMiddleware)
   .all(addUserIdMiddleware)
-  .get((req, res) => connect(req as AuthenticatedRequest, res))
-  .post((req, res) => authenticateFeed(req as AuthenticatedRequest, res))
+  .get((req, res) => connect(req as RequestWithUserId, res))
+  .post((req, res) => authenticateFeed(req as RequestWithUserId, res))
   // Only the deauthorize endpoint requires the feed to be authenticated
-  .all((req, res, next) =>
-    checkFeedAuth(req as AuthenticatedRequest, res, next),
-  )
-  .delete((req, res) => deauthorize(req as AuthenticatedRequest, res));
+  .all((req, res, next) => checkFeedAuth(req as RequestWithUserId, res, next))
+  .delete((req, res) => deauthorize(req as RequestWithUserId, res));
 
 router
   .route("/v2/timeline")
   .all(authMiddleware)
   .all(addUserIdMiddleware)
-  .all((req, res, next) =>
-    checkFeedAuth(req as AuthenticatedRequest, res, next),
-  )
-  .get((req, res) => get(req as AuthenticatedRequest, res));
+  .all((req, res, next) => checkFeedAuth(req as RequestWithUserId, res, next))
+  .get((req, res) => get(req as RequestWithUserId, res));
 
 export default router;

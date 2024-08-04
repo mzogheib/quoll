@@ -3,9 +3,9 @@ import { Response } from "express";
 import { get as getUser } from "../controllers/users.controller";
 import { get as getTimeline } from "../controllers/timeline.controller";
 import { handleError } from "../utils/error";
-import { AuthenticatedRequest } from "./types";
+import { RequestWithUserId } from "./types";
 
-export const get = async (req: AuthenticatedRequest, res: Response) => {
+export const get = async (req: RequestWithUserId, res: Response) => {
   try {
     const { from, to } = req.query;
     const { userId } = req;
