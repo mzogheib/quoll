@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.27.10](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.27.9...@quoll/client-mobile@0.27.10) (2024-08-04)
+
+### Bug Fixes
+
+- **client-mobile:** add reset store function ([72ba58e](https://github.com/mzogheib/quoll/commit/72ba58e2b83f46928c84a737d5e18fe1791917fc))
+- revert subpath exports and tsconfig ([#233](https://github.com/mzogheib/quoll/issues/233)) ([3e23f39](https://github.com/mzogheib/quoll/commit/3e23f39055d7192e2b46e89b0f854d3b490bebd2))
+
 ## [0.27.9](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.27.8...@quoll/client-mobile@0.27.9) (2024-07-28)
 
 **Note:** Version bump only for package @quoll/client-mobile

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/mzogheib/quoll/compare/@quoll/client-lib@0.6.0...@quoll/client-lib@0.7.0) (2024-08-04)
+
+### Bug Fixes
+
+- revert subpath exports and tsconfig ([#233](https://github.com/mzogheib/quoll/issues/233)) ([3e23f39](https://github.com/mzogheib/quoll/commit/3e23f39055d7192e2b46e89b0f854d3b490bebd2))
+
+### Features
+
+- add an authenticated `/user/me` endpoint to get a user ([#234](https://github.com/mzogheib/quoll/issues/234)) ([8237709](https://github.com/mzogheib/quoll/commit/8237709515dc77879f1664ee3979ee81bebe2612))
+- **client-lib:** add a auth-user module ([2aa6a22](https://github.com/mzogheib/quoll/commit/2aa6a22fe99e1b112139f9b18879633f67ef09fb))
+
 # [0.6.0](https://github.com/mzogheib/quoll/compare/@quoll/client-lib@0.5.2...@quoll/client-lib@0.6.0) (2024-07-28)
 
 ### Bug Fixes

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.13.0](https://github.com/mzogheib/quoll/compare/@quoll/api@0.12.4...@quoll/api@0.13.0) (2024-08-04)
+
+### Features
+
+- add an authenticated `/user/me` endpoint to get a user ([#234](https://github.com/mzogheib/quoll/issues/234)) ([8237709](https://github.com/mzogheib/quoll/commit/8237709515dc77879f1664ee3979ee81bebe2612))
+
 ## [0.12.4](https://github.com/mzogheib/quoll/compare/@quoll/api@0.12.3...@quoll/api@0.12.4) (2024-07-28)
 
 **Note:** Version bump only for package @quoll/api

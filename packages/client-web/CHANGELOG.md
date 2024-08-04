@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.14.0](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.13.0...@quoll/client-web@0.14.0) (2024-08-04)
+
+### Bug Fixes
+
+- **client-web:** fix welcome modal props ([a1a9f64](https://github.com/mzogheib/quoll/commit/a1a9f647ec4cdd9e3dea4269436dde7c3a50d4c0))
+- **client-web:** improve the URL seach string rewrite for feature flags ([beff7b4](https://github.com/mzogheib/quoll/commit/beff7b48eb07a378e532c51efa05fcf200699449))
+- **client-web:** persist feature flag values between page refreshes ([cb7ebc0](https://github.com/mzogheib/quoll/commit/cb7ebc0a4622e4aa4e85247945b9c21492c4352b))
+- revert subpath exports and tsconfig ([#233](https://github.com/mzogheib/quoll/issues/233)) ([3e23f39](https://github.com/mzogheib/quoll/commit/3e23f39055d7192e2b46e89b0f854d3b490bebd2))
+
+### Features
+
+- add an authenticated `/user/me` endpoint to get a user ([#234](https://github.com/mzogheib/quoll/issues/234)) ([8237709](https://github.com/mzogheib/quoll/commit/8237709515dc77879f1664ee3979ee81bebe2612))
+- **client-web:** create a feature flags service ([587bba2](https://github.com/mzogheib/quoll/commit/587bba2705f1a8153300236635b070ccc766afdb))
+- **client-web:** support login and signup via Auth0 ([#232](https://github.com/mzogheib/quoll/issues/232)) ([af3a31f](https://github.com/mzogheib/quoll/commit/af3a31f59c10f7f5cc03b169d8f3bf27330ae5a4))
+- **client-web:** vertically stack welcome modal buttons ([6699d7e](https://github.com/mzogheib/quoll/commit/6699d7eb7750d52874d54ca70f777b32bae31585))
+
 # [0.13.0](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.12.0...@quoll/client-web@0.13.0) (2024-07-28)
 
 ### Features

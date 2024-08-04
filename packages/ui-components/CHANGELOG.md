@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/mzogheib/quoll/compare/@quoll/ui-components@0.4.0...@quoll/ui-components@0.5.0) (2024-08-04)
+
+### Features
+
+- **ui-components:** add direction prop to modal actions ([b7a1abb](https://github.com/mzogheib/quoll/commit/b7a1abb3f4e75374afc037107f10de10089a7d17))
+- **ui-components:** display modals in middle of screen ([937b57b](https://github.com/mzogheib/quoll/commit/937b57be8c497731a0e3cc4358e9b74b724c4c27))
+
 # [0.4.0](https://github.com/mzogheib/quoll/compare/@quoll/ui-components@0.3.2...@quoll/ui-components@0.4.0) (2024-07-19)
 
 ### Features
