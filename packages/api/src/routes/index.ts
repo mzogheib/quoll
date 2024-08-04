@@ -10,7 +10,7 @@ import {
 import { get } from "./timeline.route";
 import { AuthenticatedRequest } from "./types";
 import { authMiddleware } from "./auth";
-import { createMeRoute, getMeRoute } from "./user.route";
+import { addUserIdMiddleware, createMeRoute, getMeRoute } from "./user.route";
 
 const router = Router();
 
@@ -20,6 +20,18 @@ router
   .all(authMiddleware)
   .get(getMeRoute)
   .post(createMeRoute);
+
+router
+  .route("/v2/feed-auth")
+  .all(authMiddleware)
+  .all(addUserIdMiddleware)
+  .get((req, res) => connect(req as AuthenticatedRequest, res))
+  .post((req, res) => authenticateFeed(req as AuthenticatedRequest, res))
+  // Only the deauthorize endpoint requires the feed to be authenticated
+  .all((req, res, next) =>
+    checkFeedAuth(req as AuthenticatedRequest, res, next),
+  )
+  .delete((req, res) => deauthorize(req as AuthenticatedRequest, res));
 
 // Legacy auth
 router.route("/login").post(login);
