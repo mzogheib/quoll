@@ -30,8 +30,8 @@ export const useAuthUserModel = (
       return user;
     } catch (error) {
       if (error instanceof Error) {
-        const parseError = JSON.parse(error.message);
-        if (parseError.status === 404) return null;
+        const parsedError = JSON.parse(error.message);
+        if (parsedError.status === 404) return null;
       }
 
       throw error;
