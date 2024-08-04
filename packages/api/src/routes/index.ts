@@ -14,26 +14,7 @@ import { addUserIdMiddleware, createMeRoute, getMeRoute } from "./user.route";
 
 const router = Router();
 
-// New auth
-router
-  .route("/user/me")
-  .all(authMiddleware)
-  .get(getMeRoute)
-  .post(createMeRoute);
-
-router
-  .route("/v2/feed-auth")
-  .all(authMiddleware)
-  .all(addUserIdMiddleware)
-  .get((req, res) => connect(req as AuthenticatedRequest, res))
-  .post((req, res) => authenticateFeed(req as AuthenticatedRequest, res))
-  // Only the deauthorize endpoint requires the feed to be authenticated
-  .all((req, res, next) =>
-    checkFeedAuth(req as AuthenticatedRequest, res, next),
-  )
-  .delete((req, res) => deauthorize(req as AuthenticatedRequest, res));
-
-// Legacy auth
+// v1 - legacy auth
 router.route("/login").post(login);
 router.route("/signup").post(signup);
 
@@ -55,5 +36,24 @@ router
     checkFeedAuth(req as AuthenticatedRequest, res, next),
   )
   .get((req, res) => get(req as AuthenticatedRequest, res));
+
+// v2 - new auth
+router
+  .route("/user/me")
+  .all(authMiddleware)
+  .get(getMeRoute)
+  .post(createMeRoute);
+
+router
+  .route("/v2/feed-auth")
+  .all(authMiddleware)
+  .all(addUserIdMiddleware)
+  .get((req, res) => connect(req as AuthenticatedRequest, res))
+  .post((req, res) => authenticateFeed(req as AuthenticatedRequest, res))
+  // Only the deauthorize endpoint requires the feed to be authenticated
+  .all((req, res, next) =>
+    checkFeedAuth(req as AuthenticatedRequest, res, next),
+  )
+  .delete((req, res) => deauthorize(req as AuthenticatedRequest, res));
 
 export default router;
