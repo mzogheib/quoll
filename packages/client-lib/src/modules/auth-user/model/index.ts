@@ -10,6 +10,7 @@ export type AuthUserState = {
 
 type AuthUserActions = {
   getMe: () => Promise<User | null>;
+  createMe: () => Promise<User>;
   reset: () => void;
 };
 
@@ -40,10 +41,24 @@ export const useAuthUserModel = (
     }
   };
 
+  const createMe = async () => {
+    try {
+      setProperty("isLoading", true);
+      const user = await service.createMe();
+      setProperty("user", user);
+      return user;
+    } catch (error) {
+      throw error;
+    } finally {
+      setProperty("isLoading", false);
+    }
+  };
+
   return {
     user,
     isLoading,
     getMe,
+    createMe,
     reset,
   };
 };

@@ -26,7 +26,7 @@ export const useBootstrapApp = (onUnauthenticated: () => void) => {
 
   // New auth
   const { isAuthenticated, isAuthenticating } = useAuthViewModel();
-  const { getMe } = useAuthUserViewModel();
+  const { getMe, createMe } = useAuthUserViewModel();
 
   const [didCheckAuth, setDidCheckAuth] = useState(false);
 
@@ -46,14 +46,14 @@ export const useBootstrapApp = (onUnauthenticated: () => void) => {
       const me = await getMe();
 
       if (me === null) {
-        // TODO create user
-        onUnauthenticated();
+        await createMe();
         return;
       }
     };
 
     getOrCreateUser();
   }, [
+    createMe,
     didCheckAuth,
     getMe,
     isAuthenticated,

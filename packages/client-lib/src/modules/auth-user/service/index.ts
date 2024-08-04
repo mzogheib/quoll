@@ -7,4 +7,11 @@ export class AuthUserService extends AuthenticatedHttpService {
       endpoint: "/user/me",
     });
   }
+
+  async createMe() {
+    return this.request<User>({
+      method: "POST",
+      endpoint: "/user/me",
+    });
+  }
 }
