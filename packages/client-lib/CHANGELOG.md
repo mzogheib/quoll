@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/mzogheib/quoll/compare/@quoll/client-lib@0.7.0...@quoll/client-lib@0.8.0) (2024-08-04)
+
+### Features
+
+- **client-web:** create a user if they do not exist ([d92a2a4](https://github.com/mzogheib/quoll/commit/d92a2a4dc4e2f8aabef2c257f3d799645c257f9d))
+
 # [0.7.0](https://github.com/mzogheib/quoll/compare/@quoll/client-lib@0.6.0...@quoll/client-lib@0.7.0) (2024-08-04)
 
 ### Bug Fixes

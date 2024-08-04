@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.15.0](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.14.0...@quoll/client-web@0.15.0) (2024-08-04)
+
+### Bug Fixes
+
+- **client-web:** add access token to model hooks ([4e5f30b](https://github.com/mzogheib/quoll/commit/4e5f30b67234e40b019d7422aef09034f0b901a9))
+
+### Features
+
+- **client-web:** create a user if they do not exist ([d92a2a4](https://github.com/mzogheib/quoll/commit/d92a2a4dc4e2f8aabef2c257f3d799645c257f9d))
+- **client-web:** enable v2 timeline ([dd1603e](https://github.com/mzogheib/quoll/commit/dd1603ed7670d6592a66d79351154b23189a33ae))
+- **client-web:** fetch timeline using new auth ([acf22bb](https://github.com/mzogheib/quoll/commit/acf22bb587a10bda5bff529c73f03a146036f0de))
+
 # [0.14.0](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.13.0...@quoll/client-web@0.14.0) (2024-08-04)
 
 ### Bug Fixes

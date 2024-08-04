@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.14.0](https://github.com/mzogheib/quoll/compare/@quoll/api@0.13.0...@quoll/api@0.14.0) (2024-08-04)
+
+### Bug Fixes
+
+- **api:** change local db exposed port to 8080 ([ca66197](https://github.com/mzogheib/quoll/commit/ca66197b91dd469991205ce58759615dbf11cd58))
+
+### Features
+
+- **api:** add v2 feeds-auth endpoint for new auth ([d3755c8](https://github.com/mzogheib/quoll/commit/d3755c833d20afabd94803efac76146a50524de0))
+- **api:** add v2 timeline ([9716fe9](https://github.com/mzogheib/quoll/commit/9716fe9409f7ba9ba754151487c9371b1f672d5c))
+
 # [0.13.0](https://github.com/mzogheib/quoll/compare/@quoll/api@0.12.4...@quoll/api@0.13.0) (2024-08-04)
 
 ### Features
