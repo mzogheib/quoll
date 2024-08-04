@@ -56,4 +56,13 @@ router
   )
   .delete((req, res) => deauthorize(req as AuthenticatedRequest, res));
 
+router
+  .route("/v2/timeline")
+  .all(authMiddleware)
+  .all(addUserIdMiddleware)
+  .all((req, res, next) =>
+    checkFeedAuth(req as AuthenticatedRequest, res, next),
+  )
+  .get((req, res) => get(req as AuthenticatedRequest, res));
+
 export default router;
