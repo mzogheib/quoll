@@ -1,10 +1,14 @@
 import { FeedsService } from "@quoll/client-lib";
+import { useMemo } from "react";
 
-import { getAccessToken } from "services/session";
+export const useFeedsService = (getAccessToken: () => Promise<string>) => {
+  const feedService = useMemo(() => {
+    if (process.env.REACT_APP_API_URL === undefined) {
+      throw new Error("REACT_APP_API_URL is not defined");
+    }
 
-const feedsService = new FeedsService(
-  getAccessToken,
-  `${process.env.REACT_APP_API_URL}`,
-);
+    return new FeedsService(getAccessToken, process.env.REACT_APP_API_URL);
+  }, [getAccessToken]);
 
-export default feedsService;
+  return feedService;
+};
