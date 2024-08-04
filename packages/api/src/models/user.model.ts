@@ -14,6 +14,7 @@ type IFeed = {
 
 type IUser = {
   feeds: IFeed[];
+  auth0Id: string;
 };
 
 export type UserDoc = HydratedDocument<IUser>;
@@ -26,6 +27,10 @@ const schema = new Schema<IUser>({
         auth: { type: Object },
       },
     ],
+    required: true,
+  },
+  auth0Id: {
+    type: String,
     required: true,
   },
 });
