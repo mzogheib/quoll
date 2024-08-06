@@ -23,14 +23,14 @@ export const useBootstrapApp = (onUnauthenticated: () => void) => {
     const initUser = async () => {
       const me = await getMe();
 
-      if (me === null) {
-        await createMe();
+      if (me !== null) {
+        me.feeds.forEach(({ name, isConnected }) => {
+          setConnected(name, isConnected);
+        });
         return;
       }
 
-      me.feeds.forEach(({ name, isConnected }) => {
-        setConnected(name, isConnected);
-      });
+      await createMe();
     };
 
     initUser();
