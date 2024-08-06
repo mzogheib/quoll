@@ -1,10 +1,12 @@
 import { useAuthUserViewModel } from "modules/auth-user/view-model";
 import { useAuthViewModel } from "modules/auth/view-model";
+import { useFeedsViewModel } from "modules/feeds/view-model";
 import { useEffect, useState } from "react";
 
 export const useBootstrapApp = (onUnauthenticated: () => void) => {
   const { isAuthenticated, isAuthenticating } = useAuthViewModel();
   const { getMe, createMe } = useAuthUserViewModel();
+  const { setConnected } = useFeedsViewModel();
 
   const [didCheckAuth, setDidCheckAuth] = useState(false);
 
@@ -18,16 +20,20 @@ export const useBootstrapApp = (onUnauthenticated: () => void) => {
       return;
     }
 
-    const getOrCreateUser = async () => {
+    const initUser = async () => {
       const me = await getMe();
 
       if (me === null) {
         await createMe();
         return;
       }
+
+      me.feeds.forEach(({ name, isConnected }) => {
+        setConnected(name, isConnected);
+      });
     };
 
-    getOrCreateUser();
+    initUser();
   }, [
     createMe,
     didCheckAuth,
@@ -35,5 +41,6 @@ export const useBootstrapApp = (onUnauthenticated: () => void) => {
     isAuthenticated,
     isAuthenticating,
     onUnauthenticated,
+    setConnected,
   ]);
 };
