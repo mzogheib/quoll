@@ -4,6 +4,8 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "outDir": "dist",
-    "declaration": true
+    "declaration": true,
+    "sourceMap": true,
+    "declarationMap": true
   }
 }
