@@ -74,9 +74,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.client_mobile"
+    namespace "com.quollClientMobile"
     defaultConfig {
-        applicationId "com.client_mobile"
+        applicationId "com.quollClientMobile"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -85,7 +85,7 @@ android {
         // Get property values, e.g. API keys
         Properties properties = new Properties()
         properties.load(project.rootProject.file("local.properties").newDataInputStream())
-    
+
         // Set the values to variables
         resValue "string", "GOOGLE_MAPS_API_KEY", "\"${properties.getProperty("GOOGLE_MAPS_API_KEY")}\""
     }
