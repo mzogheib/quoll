@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier="primary"
                BlueprintIdentifier="13B07F861A680F5B00A75B9A"
-               BuildableName="quollClientMobile.app"
-               BlueprintName="quollClientMobile"
-               ReferencedContainer="container:quollClientMobile.xcodeproj">
+               BuildableName="quollclientmobile.app"
+               BlueprintName="quollclientmobile"
+               ReferencedContainer="container:quollclientmobile.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier="primary"
                BlueprintIdentifier="00E356ED1AD99517003FC87E"
-               BuildableName="quollClientMobileTests.xctest"
-               BlueprintName="quollClientMobileTests"
-               ReferencedContainer="container:quollClientMobile.xcodeproj">
+               BuildableName="quollclientmobiletests.xctest"
+               BlueprintName="quollclientmobiletests"
+               ReferencedContainer="container:quollclientmobile.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier="primary"
             BlueprintIdentifier="13B07F861A680F5B00A75B9A"
-            BuildableName="quollClientMobile.app"
-            BlueprintName="quollClientMobile"
-            ReferencedContainer="container:quollClientMobile.xcodeproj">
+            BuildableName="quollclientmobile.app"
+            BlueprintName="quollclientmobile"
+            ReferencedContainer="container:quollclientmobile.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier="primary"
             BlueprintIdentifier="13B07F861A680F5B00A75B9A"
-            BuildableName="quollClientMobile.app"
-            BlueprintName="quollClientMobile"
-            ReferencedContainer="container:quollClientMobile.xcodeproj">
+            BuildableName="quollclientmobile.app"
+            BlueprintName="quollclientmobile"
+            ReferencedContainer="container:quollclientmobile.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
