@@ -1,4 +1,4 @@
-package com.client_mobile
+package com.quollClientMobile
 
 import android.app.Application
 import com.facebook.react.PackageList
