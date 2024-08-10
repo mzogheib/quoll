@@ -74,9 +74,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.quollClientMobile"
+    namespace "com.quollclientmobile"
     defaultConfig {
-        applicationId "com.quollClientMobile"
+        applicationId "com.quollclientmobile"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
