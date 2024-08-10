@@ -1,4 +1,4 @@
 import { UserService } from "@quoll/client-lib";
-import { API_URL } from "@env";
+import { getApiBaseUrl } from "@utils/api";
 
-export const userService = new UserService(API_URL);
+export const userService = new UserService(getApiBaseUrl());
