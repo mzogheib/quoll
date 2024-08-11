@@ -1,9 +1,9 @@
-import { Button, Modal, Text, View } from "react-native";
-import { colorPalette } from "@quoll/ui-primitives";
+import { Modal, Text, View } from "react-native";
 import Logo from "@components/Logo";
 
 import styles from "./styles";
 import TouchableIcon from "@components/TouchableIcon";
+import WelcomeModalActions from "./WelcomeModalActions";
 
 interface Props {
   isOpen: boolean;
@@ -29,9 +29,7 @@ const WelcomeModal = ({ isOpen, onCancel, onConnect }: Props) => (
         <View style={styles.message}>
           <Text>Map ya life!</Text>
         </View>
-        <View style={styles.actions}>
-          <Button onPress={onConnect} title="Connect Feeds" />
-        </View>
+        <WelcomeModalActions onConnectFeeds={onConnect} />
       </View>
     </View>
   </Modal>
