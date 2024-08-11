@@ -9,6 +9,10 @@ import App from "../App";
 import { AUTH0_DOMAIN, AUTH0_CLIENT_ID } from "@env";
 
 function AppRoot() {
+  if (!AUTH0_DOMAIN || !AUTH0_CLIENT_ID) {
+    throw new Error("Missing Auth0 configuration");
+  }
+
   return (
     <Auth0Provider domain={AUTH0_DOMAIN} clientId={AUTH0_CLIENT_ID}>
       <SafeAreaView style={styles.wrapper}>
