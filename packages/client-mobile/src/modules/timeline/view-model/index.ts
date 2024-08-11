@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { ISO8601Date, TimelineEntry } from "@quoll/lib";
-import { useMediaModel } from "../../media/model";
+import { useMediaModel } from "@modules/media/model";
+import { useAuthModel } from "@modules/auth/model";
 import { useTimelineModel } from "../model";
 import { mediaAdapter } from "./feed-adapters/media";
 
@@ -17,7 +18,8 @@ type TimelineViewModel = ReturnType<typeof useTimelineModel>;
 // TODO should the media fetching and adapting be in a timeline service that
 // extends the base timeline service?
 export const useTimelineViewModel = (date: ISO8601Date): TimelineViewModel => {
-  const timelineModel = useTimelineModel();
+  const { getAccessToken } = useAuthModel();
+  const timelineModel = useTimelineModel(getAccessToken);
   const mediaModel = useMediaModel();
 
   // Fetch on first render

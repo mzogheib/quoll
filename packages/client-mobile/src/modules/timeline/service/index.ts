@@ -1,7 +1,11 @@
 import { TimelineService } from "@quoll/client-lib";
-import { getAccessToken } from "@utils/session";
 import { getApiBaseUrl } from "@utils/api";
+import { useMemo } from "react";
 
-const timelineService = new TimelineService(getAccessToken, getApiBaseUrl());
+export const useTimelineService = (getAccessToken: () => Promise<string>) => {
+  const service = useMemo(() => {
+    return new TimelineService(getAccessToken, getApiBaseUrl());
+  }, [getAccessToken]);
 
-export default timelineService;
+  return service;
+};
