@@ -35,7 +35,7 @@ router
 
 // v2 - new auth
 router
-  .route("/user/me")
+  .route("/v2/user/me")
   .all(authMiddleware)
   .get(getMeRoute)
   .post(createMeRoute);
