@@ -1,4 +1,3 @@
-import { LinkingOptions, PathConfigMap } from "@react-navigation/native";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 
 /*
@@ -59,20 +58,5 @@ export const screenConfigMap: Record<ScreenName, ScreenConfig> = {
     path: "oauth",
     title: "OAuth",
     icon: "lock",
-  },
-};
-
-const screens: PathConfigMap<ScreenParamsMap> = Object.entries(
-  screenConfigMap,
-).reduce((prev, [name, { path }]) => ({ ...prev, [name]: { path } }), {});
-
-/**
- * The deep linking config.
- */
-export const linking: LinkingOptions<ScreenParamsMap> = {
-  prefixes: ["quoll://"],
-  config: {
-    initialRouteName: "home",
-    screens,
   },
 };
