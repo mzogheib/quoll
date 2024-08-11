@@ -6,7 +6,7 @@ export const getApiBaseUrl = () => {
     throw new Error("Missing API URL configuration");
   }
 
-  const version = "";
+  const version = "/v2";
   const apiUrl = Platform.OS === "android" ? API_URL_ANDROID : API_URL;
 
   return `${apiUrl}${version}`;
