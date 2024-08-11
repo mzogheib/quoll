@@ -1,4 +1,14 @@
+import { AUTH0_AUDIENCE } from "@env";
 import { useAuth0 } from "react-native-auth0";
+
+const makeAuthParams = () => {
+  if (!AUTH0_AUDIENCE) throw new Error("Missing Auth0 configuration");
+
+  return {
+    audience: AUTH0_AUDIENCE,
+    scope: "openid profile read:all_data",
+  };
+};
 
 type AuthState = {
   isAuthenticating: boolean;
@@ -25,11 +35,14 @@ export const useAuthModel = (): AuthModel => {
   } = useAuth0();
 
   const login = async () => {
-    await authorize();
+    await authorize({ ...makeAuthParams() });
   };
 
   const signup = async () => {
-    await authorize({ additionalParameters: { screen_hint: "signup" } });
+    await authorize({
+      ...makeAuthParams(),
+      additionalParameters: { screen_hint: "signup" },
+    });
   };
 
   const logout = async () => {
