@@ -7200,6 +7200,7 @@ __metadata:
     jest: "npm:^29.6.3"
     react: "npm:18.2.0"
     react-native: "npm:0.73.0"
+    react-native-auth0: "npm:^3.2.1"
     react-native-date-picker: "npm:^4.3.5"
     react-native-dotenv: "npm:^3.4.10"
     react-native-maps: "npm:^1.8.4"
@@ -13288,6 +13289,13 @@ __metadata:
   version: 1.0.2
   resolution: "balanced-match@npm:1.0.2"
   checksum: 9308baf0a7e4838a82bbfd11e01b1cb0f0cf2893bc1676c27c2a8c0e70cbae1c59120c3268517a8ae7fb6376b4639ef81ca22582611dbee4ed28df945134aaee
+  languageName: node
+  linkType: hard
+
+"base-64@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "base-64@npm:0.1.0"
+  checksum: fe0dcf076e823f04db7ee9b02495be08a91c445fbc6db03cb9913be9680e2fcc0af8b74459041fe08ad16800b1f65a549501d8f08696a8a6d32880789b7de69d
   languageName: node
   linkType: hard
 
@@ -23017,6 +23025,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jwt-decode@npm:^3.1.2":
+  version: 3.1.2
+  resolution: "jwt-decode@npm:3.1.2"
+  checksum: a951547946b5e8b1d9df818152d6b1dbaf13eebb3a6e6daceedf888968f5d255959852c8188aae2c825dc9104a99d25cb6c23f25d76545d1aa0315b968b6912e
+  languageName: node
+  linkType: hard
+
 "kareem@npm:2.5.1":
   version: 2.5.1
   resolution: "kareem@npm:2.5.1"
@@ -27294,6 +27309,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"prettier-quick@npm:^0.0.5":
+  version: 0.0.5
+  resolution: "prettier-quick@npm:0.0.5"
+  checksum: 477c0162c9d2de0b2b145545aa878b1ad175bb989d36d41c30032a84475ec0e15b89db078cc9b8a81bfba278ef4521438c8e1fc360869c9c5559b4934f312f34
+  languageName: node
+  linkType: hard
+
 "prettier@npm:^3.1.1":
   version: 3.1.1
   resolution: "prettier@npm:3.1.1"
@@ -27981,6 +28003,26 @@ __metadata:
     react: ^0.14.0 || ^15.0.0 || ^16 || ^17 || ^18
     react-dom: ^0.14.0 || ^15.0.0 || ^16 || ^17 || ^18
   checksum: 90711c29557b9b5b13728ef65d586929c9ca2f3e3b6875d688a5ac2ed4bd3227e1ec136778b9c8236989730f942915d97c7b47f26ef1c101345bfd41197781aa
+  languageName: node
+  linkType: hard
+
+"react-native-auth0@npm:^3.2.1":
+  version: 3.2.1
+  resolution: "react-native-auth0@npm:3.2.1"
+  dependencies:
+    base-64: "npm:^0.1.0"
+    jwt-decode: "npm:^3.1.2"
+    prettier-quick: "npm:^0.0.5"
+    prop-types: "npm:^15.8.1"
+    url: "npm:^0.11.0"
+  peerDependencies:
+    expo: ">=48.0.0"
+    react: ^16.11.0 || ^17 || ^18
+    react-native: ">=0.65.0 <1.0.x"
+  peerDependenciesMeta:
+    expo:
+      optional: true
+  checksum: edcc9dfba3c93548c1a35d426520ca08c50fcd6fadc2acbd55531133ca4c0377f2d2b88a0fec78434f6cdf479533aa2e2b537135bbd6c800bf805ac29427cfc8
   languageName: node
   linkType: hard
 

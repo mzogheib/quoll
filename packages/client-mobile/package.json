@@ -25,6 +25,7 @@
     "@react-navigation/native": "^6.1.9",
     "react": "18.2.0",
     "react-native": "0.73.0",
+    "react-native-auth0": "^3.2.1",
     "react-native-date-picker": "^4.3.5",
     "react-native-maps": "^1.8.4",
     "react-native-mmkv-storage": "^0.9.1",
