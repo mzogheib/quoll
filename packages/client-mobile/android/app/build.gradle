@@ -88,6 +88,8 @@ android {
 
         // Set the values to variables
         resValue "string", "GOOGLE_MAPS_API_KEY", "\"${properties.getProperty("GOOGLE_MAPS_API_KEY")}\""
+
+        manifestPlaceholders = [auth0Domain: "${properties.getProperty("AUTH0_DOMAIN")}", auth0Scheme: "${applicationId}.auth0"]
     }
     signingConfigs {
         debug {
