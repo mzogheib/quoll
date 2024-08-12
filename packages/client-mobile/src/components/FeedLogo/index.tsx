@@ -3,7 +3,7 @@ import { FeedName } from "@quoll/lib";
 import { colorPalette } from "@quoll/ui-primitives";
 
 const iconMap = {
-  toshl: null,
+  toshl: "attach-money",
   strava: "directions-run",
   media: "image",
   location: "my-location",

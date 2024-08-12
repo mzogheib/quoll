@@ -21,6 +21,12 @@ const stravaFeedSettings = {
   imageDisconnected: <FeedLogo name="strava" size={35} isGrayscale />,
 };
 
+const toshlFeedSettings = {
+  title: "Toshl",
+  imageConnected: <FeedLogo name="toshl" size={35} />,
+  imageDisconnected: <FeedLogo name="toshl" size={35} isGrayscale />,
+};
+
 const locationSettings = {
   title: "Current location",
   connectLabel: "Enable",
@@ -43,6 +49,13 @@ const SettingsScreen = ({ route }: ScreenProps<"settings">) => {
     },
     {
       ...stravaFeedSettings,
+      isConnected: false,
+      isConnecting: false,
+      onConnect: () => null,
+      onDisconnect: () => null,
+    },
+    {
+      ...toshlFeedSettings,
       isConnected: false,
       isConnecting: false,
       onConnect: () => null,
