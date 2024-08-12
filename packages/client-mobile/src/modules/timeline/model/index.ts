@@ -11,10 +11,10 @@ const defaultState: TimelineState = {
   entries: null,
 };
 
-const useTimelineStore = makeStore(defaultState);
+const useStore = makeStore(defaultState);
 
 export const useTimelineModel = (getAccessToken: () => Promise<string>) => {
   const service = useTimelineService(getAccessToken);
 
-  return _useTimelineMode(useTimelineStore, service);
+  return _useTimelineMode(useStore, service);
 };
