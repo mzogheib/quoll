@@ -1,4 +1,3 @@
-import { useMemo, useCallback } from "react";
 import { FeedConnectionConfig, FeedName } from "@quoll/lib";
 
 import { Store } from "../../../store";
@@ -28,68 +27,52 @@ export const useFeedsModel = (
 ): FeedsModel => {
   const { setProperty, state: feeds, reset } = useStore();
 
-  const isOneConnected = useMemo(
-    () => Object.values(feeds).some((feed) => feed.isConnected),
-    [feeds],
-  );
+  console.log({ feeds });
 
-  const updateFeed = useCallback(
-    (feedName: FeedName, newValue: Partial<FeedState>) => {
-      const newFeed = {
-        ...feeds[feedName],
-        ...newValue,
-      };
+  const isOneConnected = Object.values(feeds).some((feed) => feed.isConnected);
 
-      setProperty(feedName, newFeed);
-    },
-    [feeds, setProperty],
-  );
+  const updateFeed = (feedName: FeedName, newValue: Partial<FeedState>) => {
+    const newFeed = {
+      ...feeds[feedName],
+      ...newValue,
+    };
 
-  const setConnected = useCallback(
-    (name: FeedName, value: boolean) => {
-      updateFeed(name, { isConnected: value });
-    },
-    [updateFeed],
-  );
+    setProperty(feedName, newFeed);
+  };
 
-  const connect = useCallback(
-    async (name: FeedName) => {
-      try {
-        updateFeed(name, { isAuthenticating: true });
-        const config = await feedsService.connect(name);
+  const setConnected = (name: FeedName, value: boolean) => {
+    updateFeed(name, { isConnected: value });
+  };
 
-        return config;
-      } catch (error) {
-        throw error;
-      } finally {
-        updateFeed(name, { isAuthenticating: false });
-      }
-    },
-    [updateFeed],
-  );
-
-  const disconnect = useCallback(
-    async (name: FeedName) => {
-      try {
-        updateFeed(name, { isAuthenticating: true });
-        await feedsService.deauthorize(name);
-        updateFeed(name, { isConnected: false, isAuthenticating: false });
-      } catch (error) {
-        updateFeed(name, { isConnected: true, isAuthenticating: false });
-        throw error;
-      }
-    },
-    [updateFeed],
-  );
-
-  const authenticate = useCallback(
-    async (name: FeedName, code: string) => {
+  const connect = async (name: FeedName) => {
+    try {
       updateFeed(name, { isAuthenticating: true });
-      await feedsService.authenticate(name, { code });
+      const config = await feedsService.connect(name);
+
+      return config;
+    } catch (error) {
+      throw error;
+    } finally {
+      updateFeed(name, { isAuthenticating: false });
+    }
+  };
+
+  const disconnect = async (name: FeedName) => {
+    try {
+      updateFeed(name, { isAuthenticating: true });
+      await feedsService.deauthorize(name);
+      updateFeed(name, { isConnected: false, isAuthenticating: false });
+    } catch (error) {
       updateFeed(name, { isConnected: true, isAuthenticating: false });
-    },
-    [updateFeed],
-  );
+      throw error;
+    }
+  };
+
+  const authenticate = async (name: FeedName, code: string) => {
+    updateFeed(name, { isAuthenticating: true });
+    await feedsService.authenticate(name, { code });
+    updateFeed(name, { isConnected: true, isAuthenticating: false });
+  };
 
   return {
     feeds: Object.values(feeds),
