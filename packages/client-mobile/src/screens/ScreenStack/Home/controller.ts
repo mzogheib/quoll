@@ -1,14 +1,24 @@
+import { useEffect, useState } from "react";
 import { makeISO8601Date } from "@quoll/lib";
 
 import { MarkerProps } from "@components/Map/types";
 import { useDateViewModel } from "@modules/date/view-model";
 import { useTimelineViewModel } from "@modules/timeline/view-model";
-import { useState } from "react";
+import { useAuthViewModel } from "@modules/auth/view-model";
 
 const useController = () => {
+  const { isAuthenticated } = useAuthViewModel();
   const { date, setDate } = useDateViewModel();
-  const { entries, fetchTimeline } = useTimelineViewModel(date);
+  const { entries, fetchTimeline } = useTimelineViewModel();
+  const [didFetchOnce, setDidFetchOnce] = useState(false);
   const [selectedEntryId, setSelectedEntryId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (didFetchOnce || !isAuthenticated) return;
+
+    setDidFetchOnce(true);
+    fetchTimeline(date);
+  }, [date, didFetchOnce, fetchTimeline, isAuthenticated]);
 
   const handleEntrySelect = (id: string | null) => setSelectedEntryId(id);
 

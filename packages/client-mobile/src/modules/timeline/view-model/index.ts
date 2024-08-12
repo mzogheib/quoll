@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { ISO8601Date, TimelineEntry } from "@quoll/lib";
 import { useMediaModel } from "@modules/media/model";
 import { useAuthModel } from "@modules/auth/model";
@@ -17,18 +16,10 @@ type TimelineViewModel = ReturnType<typeof useTimelineModel>;
 
 // TODO should the media fetching and adapting be in a timeline service that
 // extends the base timeline service?
-export const useTimelineViewModel = (date: ISO8601Date): TimelineViewModel => {
+export const useTimelineViewModel = (): TimelineViewModel => {
   const { getAccessToken } = useAuthModel();
   const timelineModel = useTimelineModel(getAccessToken);
   const mediaModel = useMediaModel();
-
-  // Fetch on first render
-  useEffect(() => {
-    if (mediaModel.isCheckingPermission) return;
-
-    timelineModel.fetchTimeline(date);
-    refreshMedia(date);
-  }, [mediaModel.isCheckingPermission]);
 
   const refreshMedia = async (date: ISO8601Date) => {
     if (!mediaModel.isConnected) return;
