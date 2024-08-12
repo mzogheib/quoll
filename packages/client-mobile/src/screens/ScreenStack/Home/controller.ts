@@ -26,6 +26,9 @@ const useController = () => {
     setSelectedEntryId(null);
     const formattedDate = makeISO8601Date(newDate);
     setDate(formattedDate);
+
+    if (!isAuthenticated) return;
+
     fetchTimeline(formattedDate);
   };
 
