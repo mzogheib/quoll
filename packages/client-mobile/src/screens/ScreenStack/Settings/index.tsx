@@ -8,6 +8,7 @@ import FeedSettings from "@components/FeedSettings";
 import { useMediaViewModel } from "@modules/media/view-model";
 import { useGeolocationViewModel } from "@modules/geolocation/view-model";
 import FeedLogo from "@components/FeedLogo";
+import { useFeedsViewModel } from "@modules/feeds/view-model";
 
 const photosFeedSettings = {
   title: "Photos",
@@ -38,6 +39,15 @@ const locationSettings = {
 const SettingsScreen = ({ route }: ScreenProps<"settings">) => {
   const mediaViewModel = useMediaViewModel();
   const geolocation = useGeolocationViewModel();
+  const feedsViewModel = useFeedsViewModel();
+
+  const stravaFeed = feedsViewModel.feeds.find(
+    (feed) => feed.name === "strava",
+  );
+  const toshlFeed = feedsViewModel.feeds.find((feed) => feed.name === "toshl");
+
+  if (stravaFeed === undefined) throw new Error("strava feed not found");
+  if (toshlFeed === undefined) throw new Error("toshl feed not found");
 
   const feeds = [
     {
@@ -49,15 +59,15 @@ const SettingsScreen = ({ route }: ScreenProps<"settings">) => {
     },
     {
       ...stravaFeedSettings,
-      isConnected: false,
-      isConnecting: false,
+      isConnected: stravaFeed.isConnected,
+      isConnecting: stravaFeed.isAuthenticating,
       onConnect: () => null,
       onDisconnect: () => null,
     },
     {
       ...toshlFeedSettings,
-      isConnected: false,
-      isConnecting: false,
+      isConnected: toshlFeed.isConnected,
+      isConnecting: toshlFeed.isAuthenticating,
       onConnect: () => null,
       onDisconnect: () => null,
     },
