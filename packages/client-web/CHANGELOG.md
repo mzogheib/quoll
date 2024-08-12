@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.16.0](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.15.0...@quoll/client-web@0.16.0) (2024-08-12)
+
+### Bug Fixes
+
+- **client-web:** set connected feeds after login ([f4ea42b](https://github.com/mzogheib/quoll/commit/f4ea42bc8ac10b2389aba612fae2c84b6070148c))
+
+### Features
+
+- change /user/me api to v2 ([433b22c](https://github.com/mzogheib/quoll/commit/433b22cb3f9838d3d8a93b8efdade73020eabc11))
+
 # [0.15.0](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.14.0...@quoll/client-web@0.15.0) (2024-08-04)
 
 ### Bug Fixes

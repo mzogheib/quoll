@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.28.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.27.11...@quoll/client-mobile@0.28.0) (2024-08-12)
+
+### Bug Fixes
+
+- **client-mobile:** add linking manager to app delegate ([eaf265c](https://github.com/mzogheib/quoll/commit/eaf265c561af81aace0efa556131d76412bd44aa))
+- **client-mobile:** clear timeline state on logout ([121cc6b](https://github.com/mzogheib/quoll/commit/121cc6bb87d988a3a30170203b12c09f1592ddb0))
+- **client-mobile:** display map even when there are no markers ([9f67bf3](https://github.com/mzogheib/quoll/commit/9f67bf3b0e5207cc8fa2a9eaa61c559378c1ef20))
+- **client-mobile:** do not fetch timeline if unauthenticated ([122973e](https://github.com/mzogheib/quoll/commit/122973e73fab8ce329699ef2863fb4d15bacc40a))
+- **client-mobile:** set a different API url for android to suit local dev ([860453d](https://github.com/mzogheib/quoll/commit/860453d74e509f0f0d2c3200a168d3da4cd78acc))
+- **client-mobile:** use new auth access token for timeline service ([bed3b95](https://github.com/mzogheib/quoll/commit/bed3b95fa2d9d5870bdb3a10eef3d38dd90a87cb))
+
+### Features
+
+- **client-mobile:** add auth model ([fdf7512](https://github.com/mzogheib/quoll/commit/fdf7512ecddc78fa537c1aa860cc15ef7a3334e4))
+- **client-mobile:** add auth view model ([15980a1](https://github.com/mzogheib/quoll/commit/15980a1834605b0a1760199f403c218a3ba6aea1))
+- **client-mobile:** add auth-user module ([ece3157](https://github.com/mzogheib/quoll/commit/ece31579e1b4a7698555c92f5f3d8e6866d4845c))
+- **client-mobile:** add base Auth0 config ([#237](https://github.com/mzogheib/quoll/issues/237)) ([87cc9b4](https://github.com/mzogheib/quoll/commit/87cc9b40028a1d37870b1a4ccbbe0741a4ea5314))
+- **client-mobile:** authenticate with the required API params ([76ac780](https://github.com/mzogheib/quoll/commit/76ac7808add42656999720de6f630b9af7751ad2))
+- **client-mobile:** update app bootstrap logic to use new auth ([5b9b8b7](https://github.com/mzogheib/quoll/commit/5b9b8b760d9960fe25ab31a1117ce59ed9074efe))
+
 ## [0.27.11](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.27.10...@quoll/client-mobile@0.27.11) (2024-08-04)
 
 **Note:** Version bump only for package @quoll/client-mobile
