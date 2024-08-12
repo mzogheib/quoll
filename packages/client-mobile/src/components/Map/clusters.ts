@@ -19,7 +19,7 @@ type Cluster = ClusterFeature<PointProperties>;
  * @returns updateClusters Update the clusters based on the given region.
  */
 export const useClusters = (params: {
-  markers: MarkerProps[];
+  markers: MarkerProps[] | null;
   region: Region;
 }) => {
   const { markers, region } = params;
@@ -27,6 +27,8 @@ export const useClusters = (params: {
   const [clusters, setClusters] = useState<Cluster[] | null>(null);
 
   const supercluster = useMemo(() => {
+    if (!markers) return null;
+
     const _supercluster = new Supercluster<PointProperties, ClusterProperties>({
       radius: 40,
       maxZoom: 16,
@@ -63,7 +65,10 @@ export const useClusters = (params: {
       ] as [number, number, number, number];
 
       const zoom = Math.floor(Math.log2(360 / newRegion.longitudeDelta)) - 1;
-      const _clusters = supercluster.getClusters(bbox, zoom) as Cluster[]; // Looks like the type is wrong in the library
+      const _clusters =
+        supercluster === null
+          ? null
+          : (supercluster.getClusters(bbox, zoom) as Cluster[]); // Looks like the type is wrong in the library
 
       setClusters(_clusters);
     },

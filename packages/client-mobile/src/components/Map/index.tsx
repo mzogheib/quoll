@@ -11,7 +11,7 @@ import ClusterMarker from "./ClusterMarker";
 import { MarkerProps } from "./types";
 
 type Props = {
-  markers: MarkerProps[];
+  markers: MarkerProps[] | null;
   onMarkerPress: (id: string | null) => void;
 };
 

@@ -75,13 +75,11 @@ const findCenter = (bounds: Bounds): LatLng => {
 };
 
 /**
- * Make a region that covers an array of points
- *
- * @param points
- * @returns
+ * Make a region that covers an array of points. Return `null` if the input
+ * array's length is 0.
  */
 const makeRegion = (points: LatLng[]) => {
-  if (!points.length) return;
+  if (points.length === 0) return null;
 
   const bounds = findBounds(points, 500);
 
@@ -112,7 +110,7 @@ const defaultCoords = {
  * @returns region The region to display on the map.
  */
 export const useRegion = (params: {
-  markers: MarkerProps[];
+  markers: MarkerProps[] | null;
 }): { region: Region } => {
   const { markers } = params;
 
@@ -123,7 +121,10 @@ export const useRegion = (params: {
     refresh,
   } = useGeolocationViewModel();
 
-  const markersRegion = makeRegion(markers.map((marker) => marker.coordinate));
+  const markersRegion =
+    markers !== null
+      ? makeRegion(markers.map((marker) => marker.coordinate))
+      : null;
 
   const userRegion =
     isConnected && coords
