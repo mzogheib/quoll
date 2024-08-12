@@ -61,15 +61,15 @@ const SettingsScreen = ({ route }: ScreenProps<"settings">) => {
       ...stravaFeedSettings,
       isConnected: stravaFeed.isConnected,
       isConnecting: stravaFeed.isAuthenticating,
-      onConnect: () => null,
-      onDisconnect: () => null,
+      onConnect: () => feedsViewModel.connect("strava"),
+      onDisconnect: () => feedsViewModel.disconnect("strava"),
     },
     {
       ...toshlFeedSettings,
       isConnected: toshlFeed.isConnected,
       isConnecting: toshlFeed.isAuthenticating,
-      onConnect: () => null,
-      onDisconnect: () => null,
+      onConnect: () => feedsViewModel.connect("toshl"),
+      onDisconnect: () => feedsViewModel.disconnect("toshl"),
     },
   ];
 
