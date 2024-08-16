@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.29.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.28.0...@quoll/client-mobile@0.29.0) (2024-08-16)
+
+### Features
+
+- **client-mobile:** add connect and disconnect handlers to feed settings ([f7b6e83](https://github.com/mzogheib/quoll/commit/f7b6e839c9ca337f4a57ff73755da75035a1e0d5))
+- **client-mobile:** add feeds module ([26bce46](https://github.com/mzogheib/quoll/commit/26bce463459a9c1e4e529c1f932c1851bea254fa))
+- **client-mobile:** add toshl to feed settings ([01650bd](https://github.com/mzogheib/quoll/commit/01650bde3d28c2f3f27ab9f1d9f39d747383037d))
+- **client-mobile:** display connected status for feeds ([b3efc6d](https://github.com/mzogheib/quoll/commit/b3efc6dae2ddf4608a0f2e0698361aaf6af05274))
+- **client-mobile:** set connected feeds on login ([90d27c7](https://github.com/mzogheib/quoll/commit/90d27c74c8ba2db5c07e2730a0fb7a003f087fbb))
+
 # [0.28.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.27.11...@quoll/client-mobile@0.28.0) (2024-08-12)
 
 ### Bug Fixes

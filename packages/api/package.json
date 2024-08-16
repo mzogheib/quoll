@@ -1,10 +1,10 @@
 {
   "name": "@quoll/api",
-  "version": "0.15.0",
+  "version": "0.15.1",
   "private": true,
   "dependencies": {
     "@mapbox/polyline": "^1.1.1",
-    "@quoll/lib": "^0.5.5",
+    "@quoll/lib": "^0.5.6",
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
