@@ -7141,6 +7141,7 @@ __metadata:
     "@types/cors": "npm:^2.8.17"
     "@types/express": "npm:^4.17.21"
     "@types/mapbox__polyline": "npm:^1.0.5"
+    "@types/node": "npm:^22.1.0"
     body-parser: "npm:^1.20.0"
     cors: "npm:^2.8.5"
     dotenv: "npm:^16.0.1"
