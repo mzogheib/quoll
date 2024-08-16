@@ -27,8 +27,6 @@ export const useFeedsModel = (
 ): FeedsModel => {
   const { setProperty, state: feeds, reset } = useStore();
 
-  console.log({ feeds });
-
   const isOneConnected = Object.values(feeds).some((feed) => feed.isConnected);
 
   const updateFeed = (feedName: FeedName, newValue: Partial<FeedState>) => {
