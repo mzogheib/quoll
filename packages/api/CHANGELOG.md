@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.2](https://github.com/mzogheib/quoll/compare/@quoll/api@0.15.1...@quoll/api@0.15.2) (2024-08-16)
+
+### Bug Fixes
+
+- **api:** add missing types package ([94ecb23](https://github.com/mzogheib/quoll/commit/94ecb232d0b6faebb6e2094d6d0e8de92e547ea5))
+
 ## [0.15.1](https://github.com/mzogheib/quoll/compare/@quoll/api@0.15.0...@quoll/api@0.15.1) (2024-08-16)
 
 **Note:** Version bump only for package @quoll/api
