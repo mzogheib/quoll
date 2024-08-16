@@ -10,6 +10,14 @@ extract_deps() {
 deps=$(extract_deps)
 
 for dep in $deps; do
-  echo "Building $dep"
-  yarn workspace $dep run build
+  # Get the path to the package
+  pkg_path=$(yarn workspace $dep exec pwd)
+
+  # Check if dist folder exists
+  if [ ! -d "$pkg_path/dist" ]; then
+    echo "Building $dep"
+    yarn workspace $dep run build
+  fi
+
+  echo "$dep built"
 done
