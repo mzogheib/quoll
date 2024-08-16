@@ -3,7 +3,8 @@
   "version": "0.16.1",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
+    "build-deps": "../../scripts/build-deps.sh",
+    "start": "yarn build-deps && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

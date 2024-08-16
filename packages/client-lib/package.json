@@ -8,7 +8,8 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "start": "tsc --watch",
+    "build-deps": "../../scripts/build-deps.sh",
+    "start": "yarn build-deps && tsc --watch",
     "clean-build": "rm -rf dist",
     "build": "yarn clean-build && tsc",
     "type-check": "tsc --noEmit",

@@ -15,7 +15,8 @@
     "node": ">=18"
   },
   "scripts": {
-    "start": "tsdx watch",
+    "build-deps": "../../scripts/build-deps.sh",
+    "start": "yarn build-deps && tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test --passWithNoTests",
     "lint": "tsdx lint",
