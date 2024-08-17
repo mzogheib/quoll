@@ -32,7 +32,7 @@ function isPackageBuilt(packageName) {
 
 // Recursive function to gather all dependencies that need building
 function getDependenciesToBuild(packageName, visited = new Set()) {
-  if (visited.has(packageName)) return []; // Avoid circular dependencies
+  if (visited.has(packageName)) return [];
   visited.add(packageName);
 
   const packageJson = getPackageJson(packageName);
@@ -43,7 +43,13 @@ function getDependenciesToBuild(packageName, visited = new Set()) {
   let packagesToBuild = [];
 
   for (const depName of Object.keys(allDependencies)) {
-    if (!depName.startsWith(npmScope) || isPackageBuilt(depName)) continue;
+    if (
+      !depName.startsWith(npmScope) ||
+      isPackageBuilt(depName) ||
+      visited.has(depName) // May be a dependency of another package that's already been visited
+    ) {
+      continue;
+    }
 
     packagesToBuild.push(depName);
 
