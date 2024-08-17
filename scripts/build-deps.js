@@ -9,8 +9,6 @@ const fs = require("fs");
 const path = require("path");
 const { execSync } = require("child_process");
 
-const npmScope = "@quoll/";
-
 // Set up the base directory (root of the monorepo)
 const rootDir = path.resolve(__dirname, ".."); // Go up one level from `scripts/`
 
@@ -22,6 +20,13 @@ function getPackageJson(packageName) {
     packageName.replace(npmScope, ""),
   );
   return require(path.join(packageDir, "package.json"));
+}
+
+// Helper function to check if a package is part of the workspace.
+// Ideally this would do an actual file and package name check but this is
+// good enough for now.
+function isWorkspacePackage(packageName) {
+  return packageName.startsWith("@quoll/");
 }
 
 // Helper function to check if a package has been built (i.e., if the `dist` folder exists)
@@ -49,7 +54,7 @@ function getDependenciesToBuild(packageName, visited = new Set()) {
 
   for (const depName of Object.keys(allDependencies)) {
     if (
-      !depName.startsWith(npmScope) ||
+      !isWorkspacePackage(depName) ||
       isPackageBuilt(depName) ||
       visited.has(depName) // May be a dependency of another package that's already been visited
     ) {
@@ -72,11 +77,8 @@ function buildDependencies() {
   const packageJson = require(path.join(packageDir, "package.json"));
   const packageName = packageJson.name;
 
-  // Ensure that the current package is part of the workspace
-  if (!packageName.startsWith(npmScope)) {
-    console.error(
-      `Package ${packageName} is not in the ${npmScope} workspace. Aborting.`,
-    );
+  if (!isWorkspacePackage(packageName)) {
+    console.error(`Package ${packageName} is not in the workspace. Aborting.`);
     process.exit(1);
   }
 
