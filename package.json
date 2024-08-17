@@ -11,7 +11,7 @@
     "start": "./scripts/start.sh",
     "release": "./scripts/release.sh",
     "clean-build": "lerna exec -- rm -rf ./build ./dist && rm -rf ./build ./dist",
-    "clean-node-modules": "lerna exec -- rm -rf ./node_modules && rm -rf ./node_modules",
+    "clean-node-modules": "lerna clean && rm -rf ./node_modules",
     "prepare": "husky install",
     "format": "prettier --write"
   },
