@@ -8,8 +8,7 @@
     "ios": "react-native run-ios",
     "ios-rebuild": "cd ios/ && rm -rf ios/ Pods/ && bundle install && bundle exec pod install && cd ..",
     "lint": "eslint .",
-    "build-deps": "../../scripts/build-deps.sh",
-    "start": "yarn build-deps && react-native start",
+    "start": "quoll-build-deps && react-native start",
     "test": "jest",
     "type-check": "tsc --noEmit"
   },
