@@ -1,5 +1,10 @@
 #!/usr/bin/env node
 
+// Run this script in a package directory and it will build all the
+// dependencies, which have not already been built. It is useful during local
+// development when you want to build only the dependencies of a package and
+// not the entire monorepo.
+
 const fs = require("fs");
 const path = require("path");
 const { execSync } = require("child_process");
@@ -61,7 +66,6 @@ function getDependenciesToBuild(packageName, visited = new Set()) {
   return packagesToBuild;
 }
 
-// Main function to start the build process
 function buildDependencies() {
   // Start at the package from which the script is run
   const packageDir = process.cwd();
@@ -84,12 +88,15 @@ function buildDependencies() {
   const includeFlags = packagesToBuild
     .map((pkg) => `--include ${pkg}`)
     .join(" ");
-  const command = `yarn workspaces foreach -Rt ${includeFlags} run build`;
+  const command = [
+    "yarn workspaces foreach",
+    "-Rt", // Run in topological order
+    includeFlags,
+    "run build",
+  ].join(" ");
 
-  console.log("Building dependencies...");
-
-  // Run the command
   try {
+    console.log("Building dependencies...");
     execSync(command, { stdio: "inherit" });
   } catch (error) {
     console.error(`Failed to build packages: ${error.message}`);
