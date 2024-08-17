@@ -39,58 +39,48 @@ function getDependenciesToBuild(packageName, visited = new Set()) {
   const dependencies = packageJson.dependencies || {};
   const devDependencies = packageJson.devDependencies || {};
   const allDependencies = { ...dependencies, ...devDependencies };
+
   let packagesToBuild = [];
 
   for (const depName of Object.keys(allDependencies)) {
-    // Only consider dependencies that are in the `@quoll/` namespace
-    if (depName.startsWith(npmScope)) {
-      if (!isPackageBuilt(depName)) {
-        packagesToBuild.push(depName);
-        // Recurse to collect dependencies of this dependency
-        packagesToBuild = packagesToBuild.concat(
-          getDependenciesToBuild(depName, visited),
-        );
-      }
-    }
+    if (!depName.startsWith(npmScope) || isPackageBuilt(depName)) continue;
+
+    packagesToBuild.push(depName);
+
+    packagesToBuild = packagesToBuild.concat(
+      getDependenciesToBuild(depName, visited),
+    );
   }
 
   return packagesToBuild;
 }
 
 // Main function to start the build process
-function buildDependencies(currentPackageDir) {
-  // Get the package name from the `package.json` in the current package directory
-  const packageJson = require(path.join(currentPackageDir, "package.json"));
+function buildDependencies() {
+  // Start at the package from which the script is run
+  const packageDir = process.cwd();
+  const packageJson = require(path.join(packageDir, "package.json"));
   const packageName = packageJson.name;
 
-  // Ensure that the current package is in the `@quoll/` namespace
+  // Ensure that the current package is part of the workspace
   if (!packageName.startsWith(npmScope)) {
     console.error(
-      `Package ${packageName} is not in the @quoll/ namespace. Aborting.`,
+      `Package ${packageName} is not in the ${npmScope} workspace. Aborting.`,
     );
     process.exit(1);
   }
 
   const packagesToBuild = getDependenciesToBuild(packageName);
 
-  // If no dependencies need building, we're done
-  if (packagesToBuild.length === 0) {
-    console.log(`No dependencies need to be built for ${packageName}`);
-    return;
-  }
-
-  // Include the current package in the build list
-  packagesToBuild.push(packageName);
+  if (packagesToBuild.length === 0) return;
 
   // Create the yarn workspaces foreach command
   const includeFlags = packagesToBuild
-    .filter((pkg) => pkg !== packageName) // Exclude the current package
     .map((pkg) => `--include ${pkg}`)
     .join(" ");
-  const excludeFlag = `--exclude ${packageName}`;
-  const command = `yarn workspaces foreach -Rt ${includeFlags} ${excludeFlag} run build`;
+  const command = `yarn workspaces foreach -Rt ${includeFlags} run build`;
 
-  console.log(`Running command: ${command}`);
+  console.log("Building dependencies...");
 
   // Run the command
   try {
@@ -101,7 +91,4 @@ function buildDependencies(currentPackageDir) {
   }
 }
 
-// Entry point
-const currentPackageDir = process.cwd(); // Get the directory from which the script is executed
-
-buildDependencies(currentPackageDir);
+buildDependencies();
