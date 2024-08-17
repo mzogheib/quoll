@@ -4,6 +4,9 @@
   "workspaces": [
     "packages/*"
   ],
+  "bin": {
+    "quoll-build-deps": "./scripts/build-deps.js"
+  },
   "scripts": {
     "start": "./scripts/start.sh",
     "release": "./scripts/release.sh",

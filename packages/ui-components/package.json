@@ -15,7 +15,7 @@
     "node": ">=18"
   },
   "scripts": {
-    "start": "tsdx watch",
+    "start": "quoll-build-deps && tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test --passWithNoTests",
     "lint": "tsdx lint",

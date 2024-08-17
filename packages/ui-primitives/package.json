@@ -8,8 +8,8 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "start": "tsc --watch",
     "build": "tsc",
+    "start": "quoll-build-deps && tsc --watch",
     "prepare": "yarn build",
     "type-check": "tsc --noEmit"
   },
