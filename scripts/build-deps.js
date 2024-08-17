@@ -4,6 +4,8 @@ const fs = require("fs");
 const path = require("path");
 const { execSync } = require("child_process");
 
+const npmScope = "@quoll/";
+
 // Set up the base directory (root of the monorepo)
 const rootDir = path.resolve(__dirname, ".."); // Go up one level from `scripts/`
 
@@ -12,7 +14,7 @@ function getPackageJson(packageName) {
   const packageDir = path.join(
     rootDir,
     "packages",
-    packageName.replace("@quoll/", ""),
+    packageName.replace(npmScope, ""),
   );
   return require(path.join(packageDir, "package.json"));
 }
@@ -22,7 +24,7 @@ function isPackageBuilt(packageName) {
   const packageDir = path.join(
     rootDir,
     "packages",
-    packageName.replace("@quoll/", ""),
+    packageName.replace(npmScope, ""),
   );
   const distPath = path.join(packageDir, "dist");
   return fs.existsSync(distPath);
@@ -39,7 +41,7 @@ function getDependenciesToBuild(packageName, visited = new Set()) {
 
   for (const depName of Object.keys(dependencies)) {
     // Only consider dependencies that are in the `@quoll/` namespace
-    if (depName.startsWith("@quoll/")) {
+    if (depName.startsWith(npmScope)) {
       if (!isPackageBuilt(depName)) {
         packagesToBuild.push(depName);
         // Recurse to collect dependencies of this dependency
@@ -60,7 +62,7 @@ function buildDependencies(currentPackageDir) {
   const packageName = packageJson.name;
 
   // Ensure that the current package is in the `@quoll/` namespace
-  if (!packageName.startsWith("@quoll/")) {
+  if (!packageName.startsWith(npmScope)) {
     console.error(
       `Package ${packageName} is not in the @quoll/ namespace. Aborting.`,
     );
