@@ -37,9 +37,11 @@ function getDependenciesToBuild(packageName, visited = new Set()) {
 
   const packageJson = getPackageJson(packageName);
   const dependencies = packageJson.dependencies || {};
+  const devDependencies = packageJson.devDependencies || {};
+  const allDependencies = { ...dependencies, ...devDependencies };
   let packagesToBuild = [];
 
-  for (const depName of Object.keys(dependencies)) {
+  for (const depName of Object.keys(allDependencies)) {
     // Only consider dependencies that are in the `@quoll/` namespace
     if (depName.startsWith(npmScope)) {
       if (!isPackageBuilt(depName)) {
