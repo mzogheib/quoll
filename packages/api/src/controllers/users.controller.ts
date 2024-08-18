@@ -1,4 +1,4 @@
-import { FeedName, User } from "@quoll/lib";
+import { FeedName, User } from "@quoll/lib/modules";
 import { IAuth, UserDoc, UserModel } from "../models/user.model";
 
 const DefaultFeeds = [

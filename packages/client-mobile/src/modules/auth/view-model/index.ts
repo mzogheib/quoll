@@ -1,4 +1,4 @@
-import { AuthModel } from "@quoll/client-lib";
+import { AuthModel } from "@quoll/client-lib/modules";
 import { useAuthModel } from "../model";
 import { useDateModel } from "@modules/date/model";
 import { useUserModel } from "@modules/auth-user/model";

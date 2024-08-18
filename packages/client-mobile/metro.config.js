@@ -11,6 +11,10 @@ const config = {
   resolver: {
     // Helps with importing local packages
     nodeModulesPaths: [path.resolve(__dirname, "./node_modules")],
+    // To support `exports` field in dependencies
+    unstable_enablePackageExports: true,
+    // To support `exports` field's `require` in dependencies
+    unstable_conditionNames: ["require"],
   },
   watchFolders: [
     // Helps with importing local packages

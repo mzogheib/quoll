@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { UserService } from "@quoll/client-lib";
+import { UserService } from "@quoll/client-lib/modules";
 import { getApiBaseUrl } from "@utils/api";
 
 export const useUserService = (getAccessToken: () => Promise<string>) => {

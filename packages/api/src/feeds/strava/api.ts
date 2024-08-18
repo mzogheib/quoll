@@ -1,4 +1,4 @@
-import { HttpService } from "@quoll/lib";
+import { HttpService } from "@quoll/lib/services";
 
 type Activity = {
   id: number;

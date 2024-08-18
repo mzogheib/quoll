@@ -1,6 +1,6 @@
 import { AUTH0_AUDIENCE } from "@env";
 import { useAuth0 } from "react-native-auth0";
-import { AuthModel } from "@quoll/client-lib";
+import { AuthModel } from "@quoll/client-lib/modules";
 
 const makeAuthParams = () => {
   if (!AUTH0_AUDIENCE) throw new Error("Missing Auth0 configuration");

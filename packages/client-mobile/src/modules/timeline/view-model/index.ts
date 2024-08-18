@@ -1,4 +1,4 @@
-import { ISO8601Date, TimelineEntry } from "@quoll/lib";
+import { ISO8601Date, TimelineEntry } from "@quoll/lib/modules";
 import { useMediaModel } from "@modules/media/model";
 import { useAuthModel } from "@modules/auth/model";
 import { useTimelineModel } from "../model";

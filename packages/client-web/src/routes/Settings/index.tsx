@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useHistory, useLocation } from "react-router-dom";
-import { FeedName } from "@quoll/lib";
+import { FeedName } from "@quoll/lib/modules";
 
 import { useFeedsViewModel } from "modules/feeds/view-model";
 import FeedSettings from "components/FeedSettings";

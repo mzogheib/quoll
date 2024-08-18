@@ -3,8 +3,8 @@ import {
   TimelineEntry as ITimelineEntry,
   makeDateFromUnixTimestamp,
   makeTimeString,
-} from "@quoll/lib";
-import { getTimelineEntryImage } from "@quoll/client-lib";
+} from "@quoll/lib/modules";
+import { getTimelineEntryImage } from "@quoll/client-lib/modules";
 
 import FeedLogo from "components/FeedLogo";
 

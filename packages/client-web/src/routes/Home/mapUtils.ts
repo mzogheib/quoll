@@ -2,7 +2,7 @@ import {
   TimelineEntry,
   makeDateFromUnixTimestamp,
   makeTimeString,
-} from "@quoll/lib";
+} from "@quoll/lib/modules";
 
 import { MarkerConfig, PolylineConfig } from "components/Map/Component";
 import { decodePath } from "components/Map/utils";

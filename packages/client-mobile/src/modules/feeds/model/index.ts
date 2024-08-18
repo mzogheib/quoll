@@ -1,5 +1,5 @@
-import { FeedsState, makeFeedsModel } from "@quoll/client-lib";
-import { FeedName } from "@quoll/lib";
+import { FeedsState, makeFeedsModel } from "@quoll/client-lib/modules";
+import { FeedName } from "@quoll/lib/modules";
 
 import { makeStore } from "@utils/store";
 import { useFeedsService } from "../service";

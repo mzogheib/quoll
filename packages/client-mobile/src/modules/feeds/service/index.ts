@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { FeedsService } from "@quoll/client-lib";
+import { FeedsService } from "@quoll/client-lib/modules";
 import { getApiBaseUrl } from "@utils/api";
 
 export const useFeedsService = (getAccessToken: () => Promise<string>) => {

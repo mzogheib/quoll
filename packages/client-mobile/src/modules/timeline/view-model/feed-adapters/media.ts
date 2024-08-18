@@ -1,5 +1,5 @@
 import { MediaItem } from "@modules/media/types";
-import { TimelineEntry, TimelineEntryType } from "@quoll/lib";
+import { TimelineEntry, TimelineEntryType } from "@quoll/lib/modules";
 
 const getType = (mediaItem: MediaItem): TimelineEntryType => {
   switch (mediaItem.subTypes) {

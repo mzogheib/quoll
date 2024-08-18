@@ -1,4 +1,4 @@
-import { TimelineService } from "@quoll/client-lib";
+import { TimelineService } from "@quoll/client-lib/modules";
 import { getApiBaseUrl } from "@utils/api";
 import { useMemo } from "react";
 
