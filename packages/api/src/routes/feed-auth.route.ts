@@ -5,7 +5,7 @@ import { feedServices, isSupportedFeed } from "../feeds";
 import { setFeedAuth, get, getFeedAuth } from "../controllers/users.controller";
 import { RequestWithUserId } from "./types";
 import { handleError } from "../utils/error";
-import { FeedConnectionConfig } from "@quoll/lib";
+import { FeedConnectionConfig } from "@quoll/lib/modules";
 
 export const connect = (req: RequestWithUserId, res: Response) => {
   const { feed } = req.query;

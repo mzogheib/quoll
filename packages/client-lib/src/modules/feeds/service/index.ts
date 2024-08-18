@@ -1,8 +1,5 @@
-import {
-  AuthenticatedHttpService,
-  FeedConnectionConfig,
-  FeedName,
-} from "@quoll/lib";
+import { FeedConnectionConfig, FeedName } from "@quoll/lib/modules";
+import { AuthenticatedHttpService } from "@quoll/lib/services";
 
 type AuthenticatePayload = {
   code: string;

@@ -3,7 +3,7 @@ import {
   makeFeedsModel,
   makeReduxStoreSlice,
 } from "@quoll/client-lib";
-import { FeedName } from "@quoll/lib";
+import { FeedName } from "@quoll/lib/modules";
 
 import { useFeedsService } from "../service";
 import { RootState } from "store";

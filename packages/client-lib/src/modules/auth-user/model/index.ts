@@ -1,4 +1,4 @@
-import { User } from "@quoll/lib";
+import { User } from "@quoll/lib/modules";
 
 import { Store } from "../../../store/types";
 import { UserService } from "../service";

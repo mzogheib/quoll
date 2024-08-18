@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import { TimelineEntry as ITimelineEntry } from "@quoll/lib";
+import { TimelineEntry as ITimelineEntry } from "@quoll/lib/modules";
 
 import TimelineEntry from "../TimelineEntry";
 
