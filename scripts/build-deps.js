@@ -14,16 +14,6 @@ const NPM_SCOPE = "@quoll";
 // Set up the base directory (root of the monorepo)
 const rootDir = path.resolve(__dirname, ".."); // Go up one level from `scripts/`
 
-// Helper function to resolve the path to a package's `package.json`
-function getPackageJson(packageName) {
-  const packageDir = path.join(
-    rootDir,
-    "packages",
-    packageName.replace(`${NPM_SCOPE}/`, ""),
-  );
-  return require(path.join(packageDir, "package.json"));
-}
-
 // Helper function to check if a package is part of the workspace.
 // Ideally this would do an actual file and package name check but this is
 // good enough for now.
@@ -31,13 +21,28 @@ function isWorkspacePackage(packageName) {
   return packageName.startsWith(NPM_SCOPE);
 }
 
-// Helper function to check if a package has been built (i.e., if the `dist` folder exists)
-function isPackageBuilt(packageName) {
-  const packageDir = path.join(
+// Helper function to get the path to a package's directory
+function getWorkspacePackageDir(packageName) {
+  if (!isWorkspacePackage(packageName)) {
+    throw new Error(`Package ${packageName} is not in the workspace.`);
+  }
+
+  return path.join(
     rootDir,
     "packages",
-    packageName.replace(npmScope, ""),
+    packageName.replace(`${NPM_SCOPE}/`, ""),
   );
+}
+
+// Helper function to resolve the path to a package's `package.json`
+function getPackageJson(packageName) {
+  const packageDir = getWorkspacePackageDir(packageName);
+  return require(path.join(packageDir, "package.json"));
+}
+
+// Helper function to check if a package has been built (i.e., if the `dist` folder exists)
+function isPackageBuilt(packageName) {
+  const packageDir = getWorkspacePackageDir(packageName);
   const distPath = path.join(packageDir, "dist");
   return fs.existsSync(distPath);
 }
