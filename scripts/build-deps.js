@@ -9,6 +9,8 @@ const fs = require("fs");
 const path = require("path");
 const { execSync } = require("child_process");
 
+const NPM_SCOPE = "@quoll";
+
 // Set up the base directory (root of the monorepo)
 const rootDir = path.resolve(__dirname, ".."); // Go up one level from `scripts/`
 
@@ -17,7 +19,7 @@ function getPackageJson(packageName) {
   const packageDir = path.join(
     rootDir,
     "packages",
-    packageName.replace(npmScope, ""),
+    packageName.replace(`${NPM_SCOPE}/`, ""),
   );
   return require(path.join(packageDir, "package.json"));
 }
@@ -26,7 +28,7 @@ function getPackageJson(packageName) {
 // Ideally this would do an actual file and package name check but this is
 // good enough for now.
 function isWorkspacePackage(packageName) {
-  return packageName.startsWith("@quoll/");
+  return packageName.startsWith(NPM_SCOPE);
 }
 
 // Helper function to check if a package has been built (i.e., if the `dist` folder exists)
