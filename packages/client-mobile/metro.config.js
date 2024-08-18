@@ -11,6 +11,8 @@ const config = {
   resolver: {
     // Helps with importing local packages
     nodeModulesPaths: [path.resolve(__dirname, "./node_modules")],
+    unstable_enablePackageExports: true,
+    unstable_conditionNames: ["browser", "require", "react-native"],
   },
   watchFolders: [
     // Helps with importing local packages
