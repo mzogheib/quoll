@@ -29,11 +29,11 @@ type TimelineActions = {
 
 type TimelineModel = TimelineState & TimelineActions;
 
-export const useTimelineModel = (
-  useStore: () => Store<TimelineState>,
+export const makeTimelineModel = (
+  store: Store<TimelineState>,
   timelineService: TimelineService,
 ): TimelineModel => {
-  const { state, setProperty, reset } = useStore();
+  const { state, setProperty, reset } = store;
 
   const fetchTimeline = async (date: ISO8601Date) => {
     setProperty("isFetching", true);

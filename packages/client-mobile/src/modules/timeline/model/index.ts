@@ -1,7 +1,4 @@
-import {
-  TimelineState,
-  useTimelineModel as _useTimelineMode,
-} from "@quoll/client-lib";
+import { TimelineState, makeTimelineModel } from "@quoll/client-lib";
 
 import { makeStore } from "@utils/store";
 import { useTimelineService } from "../service";
@@ -14,7 +11,8 @@ const defaultState: TimelineState = {
 const useStore = makeStore(defaultState);
 
 export const useTimelineModel = (getAccessToken: () => Promise<string>) => {
+  const store = useStore();
   const service = useTimelineService(getAccessToken);
 
-  return _useTimelineMode(useStore, service);
+  return makeTimelineModel(store, service);
 };
