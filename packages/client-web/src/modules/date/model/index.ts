@@ -1,7 +1,7 @@
 import {
   DateState,
   makeReduxStoreSlice,
-  useDateModel as _useDateModel,
+  makeDateModel,
 } from "@quoll/client-lib";
 import { makeISO8601Date } from "@quoll/lib";
 
@@ -16,4 +16,7 @@ export const dateStore = makeReduxStoreSlice<DateState, RootState>(
   defaultState,
 );
 
-export const useDateModel = () => _useDateModel(dateStore.useStore);
+export const useDateModel = () => {
+  const store = dateStore.useStore();
+  return makeDateModel(store);
+};
