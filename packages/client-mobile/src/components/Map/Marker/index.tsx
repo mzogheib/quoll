@@ -1,8 +1,12 @@
-import { ImageURISource, View } from "react-native";
-import { MapMarkerProps, Marker, Callout, MapMarker } from "react-native-maps";
-import { useEffect, useRef, useState } from "react";
+import { View } from "react-native";
+import {
+  MapMarkerProps,
+  Marker as RNMMarker,
+  Callout,
+  MapMarker,
+} from "react-native-maps";
+import { ReactNode, useEffect, useRef, useState } from "react";
 
-import { OriginalAspectRatioImage } from "@components/OriginalAspectRatioImage";
 import styles from "./styles";
 
 // A delay (via `setTimeout`) is added after calling `showCallout` as a
@@ -21,18 +25,20 @@ import styles from "./styles";
 
 type Props = {
   id: string;
-  image: ImageURISource;
   coordinate: MapMarkerProps["coordinate"];
   shouldShowCallout: boolean;
+  children: ReactNode;
   onPress: (id: string) => void;
+  renderCallout?: () => ReactNode;
 };
 
-const ImageMarker = ({
+const Marker = ({
   id,
-  image,
   coordinate,
   shouldShowCallout,
+  children,
   onPress,
+  renderCallout,
 }: Props) => {
   const markerRef = useRef<MapMarker>(null);
 
@@ -58,7 +64,7 @@ const ImageMarker = ({
   const calloutOpacity = isReadyToShowCallout ? 1 : 0;
 
   return (
-    <Marker
+    <RNMMarker
       ref={markerRef}
       identifier={id}
       coordinate={coordinate}
@@ -67,14 +73,14 @@ const ImageMarker = ({
       calloutOffset={{ x: 5, y: 5 }}
       onPress={() => onPress(id)}
     >
-      <OriginalAspectRatioImage source={image} width={40} height={40} />
-      <Callout style={{ opacity: calloutOpacity }} tooltip>
-        <View style={styles.calloutTooltip}>
-          <OriginalAspectRatioImage source={image} width={325} />
-        </View>
-      </Callout>
-    </Marker>
+      {children}
+      {renderCallout !== undefined ? (
+        <Callout style={{ opacity: calloutOpacity }} tooltip>
+          <View style={styles.calloutTooltip}>{renderCallout()}</View>
+        </Callout>
+      ) : null}
+    </RNMMarker>
   );
 };
 
-export default ImageMarker;
+export default Marker;

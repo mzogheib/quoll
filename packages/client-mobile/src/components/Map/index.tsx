@@ -6,9 +6,10 @@ import styles from "./styles";
 import { useClusters } from "@components/Map/clusters";
 import { useRegion } from "@components/Map/region";
 import { useGeolocationViewModel } from "@modules/geolocation/view-model";
-import ImageMarker from "./ImageMarker";
+import Marker from "./Marker";
 import ClusterMarker from "./ClusterMarker";
 import { MarkerProps } from "./types";
+import { OriginalAspectRatioImage } from "@components/OriginalAspectRatioImage";
 
 type Props = {
   markers: MarkerProps[] | null;
@@ -49,15 +50,24 @@ export const Map = ({ markers, onMarkerPress }: Props) => {
           );
         }
 
+        const renderCallout = image
+          ? () => <OriginalAspectRatioImage source={image} width={325} />
+          : undefined;
+        const markerChildren = image ? (
+          <OriginalAspectRatioImage source={image} width={40} height={40} />
+        ) : null;
+
         return (
-          <ImageMarker
+          <Marker
             key={markerId}
             id={markerId}
-            image={image}
             shouldShowCallout={isSelected}
             coordinate={{ latitude, longitude }}
             onPress={() => onMarkerPress(markerId)}
-          />
+            renderCallout={renderCallout}
+          >
+            {markerChildren}
+          </Marker>
         );
       })}
     </MapView>

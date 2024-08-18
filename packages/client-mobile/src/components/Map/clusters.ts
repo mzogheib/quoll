@@ -6,7 +6,7 @@ import { MarkerProps } from "./types";
 
 type PointProperties = {
   markerId: string;
-  image: ImageURISource;
+  image: ImageURISource | null;
   isSelected: boolean;
 };
 type Cluster = ClusterFeature<PointProperties>;

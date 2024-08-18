@@ -40,7 +40,7 @@ const useController = () => {
             const hasLocation =
               locationStart?.latitude && locationStart.longitude;
 
-            return hasLocation && !polyline && !!mediaUri;
+            return hasLocation && !polyline;
           })
           .map(({ id, locationStart, mediaUri }) => ({
             // The ! assertions are safe based on above filter
@@ -49,7 +49,7 @@ const useController = () => {
               latitude: locationStart!.latitude,
               longitude: locationStart!.longitude,
             },
-            image: { uri: mediaUri! },
+            image: mediaUri === null ? null : { uri: mediaUri },
             isSelected: id === selectedEntryId,
           }));
 
