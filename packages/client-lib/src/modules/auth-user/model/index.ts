@@ -16,11 +16,11 @@ type AuthUserActions = {
 
 type AuthUserModel = AuthUserState & AuthUserActions;
 
-export const useAuthUserModel = (
-  useStore: () => Store<AuthUserState>,
+export const makeAuthUserModel = (
+  store: Store<AuthUserState>,
   service: AuthUserService,
 ): AuthUserModel => {
-  const { state, setProperty, reset } = useStore();
+  const { state, setProperty, reset } = store;
   const { user, isLoading } = state;
 
   const getMe = async () => {
