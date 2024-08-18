@@ -1,6 +1,6 @@
 import {
   FeedsState,
-  useFeedsModel as _useFeedsModel,
+  makeFeedsModel,
   makeReduxStoreSlice,
 } from "@quoll/client-lib";
 import { FeedName } from "@quoll/lib";
@@ -26,6 +26,7 @@ export const feedsStore = makeReduxStoreSlice<FeedsState, RootState>(
 );
 
 export const useFeedsModel = (getAccessToken: () => Promise<string>) => {
+  const store = feedsStore.useStore();
   const feedsService = useFeedsService(getAccessToken);
-  return _useFeedsModel(feedsStore.useStore, feedsService);
+  return makeFeedsModel(store, feedsService);
 };

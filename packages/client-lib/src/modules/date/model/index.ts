@@ -23,8 +23,8 @@ type DateActions = {
 
 type DateModel = DateState & DateActions;
 
-export const useDateModel = (useStore: () => Store<DateState>): DateModel => {
-  const { state, setProperty, reset } = useStore();
+export const makeDateModel = (store: Store<DateState>): DateModel => {
+  const { state, setProperty, reset } = store;
 
   const setDate = (newDate: ISO8601Date) => setProperty("date", newDate);
 

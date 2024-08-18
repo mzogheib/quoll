@@ -21,11 +21,11 @@ type FeedsModel = {
   reset: () => void;
 };
 
-export const useFeedsModel = (
-  useStore: () => Store<FeedsState>,
+export const makeFeedsModel = (
+  store: Store<FeedsState>,
   feedsService: FeedsService,
 ): FeedsModel => {
-  const { setProperty, state: feeds, reset } = useStore();
+  const { setProperty, state: feeds, reset } = store;
 
   const isOneConnected = Object.values(feeds).some((feed) => feed.isConnected);
 

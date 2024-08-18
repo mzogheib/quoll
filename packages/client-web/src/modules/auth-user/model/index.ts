@@ -1,6 +1,6 @@
 import {
   AuthUserState,
-  useAuthUserModel as _useAuthUserModel,
+  makeAuthUserModel,
   makeReduxStoreSlice,
 } from "@quoll/client-lib";
 
@@ -18,7 +18,8 @@ export const authUserStore = makeReduxStoreSlice<AuthUserState, RootState>(
 );
 
 export const useAuthUserModel = (getAccessToken: () => Promise<string>) => {
+  const store = authUserStore.useStore();
   const service = useAuthUserService(getAccessToken);
 
-  return _useAuthUserModel(authUserStore.useStore, service);
+  return makeAuthUserModel(store, service);
 };

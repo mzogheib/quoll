@@ -1,5 +1,5 @@
 import { makeISO8601Date } from "@quoll/lib";
-import { DateState, useDateModel as _useDateModel } from "@quoll/client-lib";
+import { DateState, makeDateModel } from "@quoll/client-lib";
 
 import { makeStore } from "@utils/store";
 
@@ -9,4 +9,7 @@ const defaultState: DateState = {
 
 const useStore = makeStore(defaultState);
 
-export const useDateModel = () => _useDateModel(useStore);
+export const useDateModel = () => {
+  const store = useStore();
+  return makeDateModel(store);
+};

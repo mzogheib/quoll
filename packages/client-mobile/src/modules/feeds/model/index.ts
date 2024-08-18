@@ -1,4 +1,4 @@
-import { FeedsState, useFeedsModel as _useFeedsModel } from "@quoll/client-lib";
+import { FeedsState, makeFeedsModel } from "@quoll/client-lib";
 import { FeedName } from "@quoll/lib";
 
 import { makeStore } from "@utils/store";
@@ -19,6 +19,7 @@ const defaultState: FeedsState = {
 const useStore = makeStore(defaultState);
 
 export const useFeedsModel = (getAccessToken: () => Promise<string>) => {
+  const store = useStore();
   const feedsService = useFeedsService(getAccessToken);
-  return _useFeedsModel(useStore, feedsService);
+  return makeFeedsModel(store, feedsService);
 };
