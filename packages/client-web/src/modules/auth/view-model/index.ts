@@ -2,7 +2,7 @@ import { AuthModel, useAuthModel } from "../model";
 import { useTimelineModel } from "modules/timeline/model";
 import { useFeedsModel } from "modules/feeds/model";
 import { useDateModel } from "modules/date/model";
-import { useAuthUserModel } from "modules/auth-user/model";
+import { useUserModel } from "modules/auth-user/model";
 import { useEffect, useState } from "react";
 
 type AuthViewModel = AuthModel;
@@ -14,13 +14,13 @@ export const useAuthViewModel = (): AuthViewModel => {
   const timelineModel = useTimelineModel(getAccessToken);
   const feedsModel = useFeedsModel(getAccessToken);
   const dateModel = useDateModel();
-  const authUserModel = useAuthUserModel(getAccessToken);
+  const userModel = useUserModel(getAccessToken);
 
   const _logout = async () => {
     timelineModel.reset();
     feedsModel.reset();
     dateModel.reset();
-    authUserModel.reset();
+    userModel.reset();
 
     return await authModel.logout();
   };

@@ -1,11 +1,11 @@
-import { useAuthUserViewModel } from "@modules/auth-user/view-model";
+import { useUserViewModel } from "@modules/auth-user/view-model";
 import { useAuthViewModel } from "@modules/auth/view-model";
 import { useFeedsViewModel } from "@modules/feeds/view-model";
 import { useEffect, useState } from "react";
 
 export const useBootstrapApp = (onUnauthenticated: () => void) => {
   const { isAuthenticated, isAuthenticating } = useAuthViewModel();
-  const { getMe, createMe } = useAuthUserViewModel();
+  const { getMe, createMe } = useUserViewModel();
   const { setConnected } = useFeedsViewModel();
 
   const [didCheckAuth, setDidCheckAuth] = useState(false);

@@ -1,8 +1,8 @@
-import { useAuthUserModel } from "../model";
+import { useUserModel } from "../model";
 import { useAuthModel } from "@modules/auth/model";
 
-export const useAuthUserViewModel = () => {
+export const useUserViewModel = () => {
   const { getAccessToken } = useAuthModel();
 
-  return useAuthUserModel(getAccessToken);
+  return useUserModel(getAccessToken);
 };

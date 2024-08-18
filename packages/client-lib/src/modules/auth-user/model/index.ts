@@ -1,25 +1,25 @@
 import { User } from "@quoll/lib";
 
 import { Store } from "../../../store/types";
-import { AuthUserService } from "../service";
+import { UserService } from "../service";
 
-export type AuthUserState = {
+export type UserState = {
   isLoading: boolean;
   user: User | null;
 };
 
-type AuthUserActions = {
+type UserActions = {
   getMe: () => Promise<User | null>;
   createMe: () => Promise<User>;
   reset: () => void;
 };
 
-type AuthUserModel = AuthUserState & AuthUserActions;
+type UserModel = UserState & UserActions;
 
-export const makeAuthUserModel = (
-  store: Store<AuthUserState>,
-  service: AuthUserService,
-): AuthUserModel => {
+export const makeUserModel = (
+  store: Store<UserState>,
+  service: UserService,
+): UserModel => {
   const { state, setProperty, reset } = store;
   const { user, isLoading } = state;
 

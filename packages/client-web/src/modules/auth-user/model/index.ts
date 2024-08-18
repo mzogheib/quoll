@@ -1,25 +1,25 @@
 import {
-  AuthUserState,
-  makeAuthUserModel,
+  UserState,
+  makeUserModel,
   makeReduxStoreSlice,
 } from "@quoll/client-lib";
 
-import { useAuthUserService } from "../service";
+import { useUserService } from "../service";
 import { RootState } from "store";
 
-const defaultState: AuthUserState = {
+const defaultState: UserState = {
   user: null,
   isLoading: false,
 };
 
-export const authUserStore = makeReduxStoreSlice<AuthUserState, RootState>(
-  "authUser",
+export const userStore = makeReduxStoreSlice<UserState, RootState>(
+  "user",
   defaultState,
 );
 
-export const useAuthUserModel = (getAccessToken: () => Promise<string>) => {
-  const store = authUserStore.useStore();
-  const service = useAuthUserService(getAccessToken);
+export const useUserModel = (getAccessToken: () => Promise<string>) => {
+  const store = userStore.useStore();
+  const service = useUserService(getAccessToken);
 
-  return makeAuthUserModel(store, service);
+  return makeUserModel(store, service);
 };

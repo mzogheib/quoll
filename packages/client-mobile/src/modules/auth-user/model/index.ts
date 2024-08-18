@@ -1,18 +1,18 @@
-import { AuthUserState, makeAuthUserModel } from "@quoll/client-lib";
+import { UserState, makeUserModel } from "@quoll/client-lib";
 
 import { makeStore } from "@utils/store";
-import { useAuthUserService } from "../service";
+import { useUserService } from "../service";
 
-const defaultState: AuthUserState = {
+const defaultState: UserState = {
   user: null,
   isLoading: false,
 };
 
 const useStore = makeStore(defaultState);
 
-export const useAuthUserModel = (getAccessToken: () => Promise<string>) => {
+export const useUserModel = (getAccessToken: () => Promise<string>) => {
   const store = useStore();
-  const service = useAuthUserService(getAccessToken);
+  const service = useUserService(getAccessToken);
 
-  return makeAuthUserModel(store, service);
+  return makeUserModel(store, service);
 };
