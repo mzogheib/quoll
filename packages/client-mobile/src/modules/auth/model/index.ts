@@ -1,5 +1,6 @@
 import { AUTH0_AUDIENCE } from "@env";
 import { useAuth0 } from "react-native-auth0";
+import { AuthModel } from "@quoll/client-lib";
 
 const makeAuthParams = () => {
   if (!AUTH0_AUDIENCE) throw new Error("Missing Auth0 configuration");
@@ -9,20 +10,6 @@ const makeAuthParams = () => {
     scope: "openid profile read:all_data",
   };
 };
-
-type AuthState = {
-  isAuthenticating: boolean;
-  isAuthenticated: boolean;
-};
-
-type AuthActions = {
-  login: () => Promise<void>;
-  signup: () => Promise<void>;
-  logout: () => Promise<void>;
-  getAccessToken: () => Promise<string>;
-};
-
-export type AuthModel = AuthState & AuthActions;
 
 export const useAuthModel = (): AuthModel => {
   const {
