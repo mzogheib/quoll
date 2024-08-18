@@ -1,4 +1,4 @@
-import { FeedsService } from "@quoll/client-lib";
+import { FeedsService } from "@quoll/client-lib/modules";
 import { useMemo } from "react";
 import { getApiBaseUrl } from "services/api";
 

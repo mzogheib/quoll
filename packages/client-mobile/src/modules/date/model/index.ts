@@ -1,5 +1,5 @@
 import { makeISO8601Date } from "@quoll/lib/modules";
-import { DateState, makeDateModel } from "@quoll/client-lib";
+import { DateState, makeDateModel } from "@quoll/client-lib/modules";
 
 import { makeStore } from "@utils/store";
 

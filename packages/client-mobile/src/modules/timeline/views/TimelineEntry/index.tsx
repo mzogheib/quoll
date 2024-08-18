@@ -1,5 +1,5 @@
 import FeedLogo from "@components/FeedLogo";
-import { getTimelineEntryImage } from "@quoll/client-lib";
+import { getTimelineEntryImage } from "@quoll/client-lib/modules";
 import {
   TimelineEntry as ITimelineEntry,
   makeDateFromUnixTimestamp,

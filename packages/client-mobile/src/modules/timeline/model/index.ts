@@ -1,4 +1,4 @@
-import { TimelineState, makeTimelineModel } from "@quoll/client-lib";
+import { TimelineState, makeTimelineModel } from "@quoll/client-lib/modules";
 
 import { makeStore } from "@utils/store";
 import { useTimelineService } from "../service";

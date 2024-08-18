@@ -4,7 +4,7 @@ import {
   makeDateFromUnixTimestamp,
   makeTimeString,
 } from "@quoll/lib/modules";
-import { getTimelineEntryImage } from "@quoll/client-lib";
+import { getTimelineEntryImage } from "@quoll/client-lib/modules";
 
 import FeedLogo from "components/FeedLogo";
 

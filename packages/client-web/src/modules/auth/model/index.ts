@@ -1,5 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { AuthModel } from "@quoll/client-lib";
+import { AuthModel } from "@quoll/client-lib/modules";
 
 export const useAuthModel = (): AuthModel => {
   const {

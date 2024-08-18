@@ -1,8 +1,5 @@
-import {
-  UserState,
-  makeUserModel,
-  makeReduxStoreSlice,
-} from "@quoll/client-lib";
+import { UserState, makeUserModel } from "@quoll/client-lib/modules";
+import { makeReduxStoreSlice } from "@quoll/client-lib/store";
 
 import { useUserService } from "../service";
 import { RootState } from "store";

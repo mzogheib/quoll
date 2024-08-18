@@ -3,8 +3,8 @@ import {
   DateState,
   FeedsState,
   TimelineState,
-  makeGlobalReduxStore,
-} from "@quoll/client-lib";
+} from "@quoll/client-lib/modules";
+import { makeGlobalReduxStore } from "@quoll/client-lib/store";
 
 import { userStore } from "modules/auth-user/model";
 import { dateStore } from "modules/date/model";

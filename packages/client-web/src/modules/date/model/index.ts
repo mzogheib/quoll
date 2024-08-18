@@ -1,8 +1,5 @@
-import {
-  DateState,
-  makeReduxStoreSlice,
-  makeDateModel,
-} from "@quoll/client-lib";
+import { DateState, makeDateModel } from "@quoll/client-lib/modules";
+import { makeReduxStoreSlice } from "@quoll/client-lib/store";
 import { makeISO8601Date } from "@quoll/lib/modules";
 
 import { RootState } from "store";

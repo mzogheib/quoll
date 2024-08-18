@@ -1,11 +1,8 @@
-import {
-  TimelineState,
-  makeReduxStoreSlice,
-  makeTimelineModel,
-} from "@quoll/client-lib";
+import { TimelineState, makeTimelineModel } from "@quoll/client-lib/modules";
 
 import { useTimelineService } from "../service";
 import { RootState } from "store";
+import { makeReduxStoreSlice } from "@quoll/client-lib/store";
 
 const defaultState: TimelineState = {
   isFetching: false,
