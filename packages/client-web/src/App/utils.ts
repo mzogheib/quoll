@@ -1,4 +1,4 @@
-import { useUserViewModel } from "modules/auth-user/view-model";
+import { useUserViewModel } from "modules/user/view-model";
 import { useAuthViewModel } from "modules/auth/view-model";
 import { useFeedsViewModel } from "modules/feeds/view-model";
 import { useEffect, useState } from "react";

@@ -3,7 +3,7 @@ import { useAuthModel } from "../model";
 import { useTimelineModel } from "modules/timeline/model";
 import { useFeedsModel } from "modules/feeds/model";
 import { useDateModel } from "modules/date/model";
-import { useUserModel } from "modules/auth-user/model";
+import { useUserModel } from "modules/user/model";
 import { useEffect, useState } from "react";
 
 type AuthViewModel = AuthModel;

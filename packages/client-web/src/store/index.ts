@@ -6,7 +6,7 @@ import {
 } from "@quoll/client-lib/modules";
 import { makeGlobalReduxStore } from "@quoll/client-lib/store";
 
-import { userStore } from "modules/auth-user/model";
+import { userStore } from "modules/user/model";
 import { dateStore } from "modules/date/model";
 import { feedsStore } from "modules/feeds/model";
 import { timelineStore } from "modules/timeline/model";
