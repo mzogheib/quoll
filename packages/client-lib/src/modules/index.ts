@@ -2,4 +2,4 @@ export * from "./auth";
 export * from "./date";
 export * from "./feeds";
 export * from "./timeline";
-export * from "./auth-user";
+export * from "./user";
