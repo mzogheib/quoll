@@ -1,19 +1,22 @@
 import { Store } from "./types";
 
-export const makeMockStore = <State extends object>(initialState: State) => {
-  const mockStore: jest.Mocked<Store<State>> = {
-    state: initialState as any, // TODO fix this type cast
-    setProperty: jest.fn(),
-    reset: jest.fn(),
+export function makeMockStore<State extends object>(initialState: State) {
+  const setPropertyMock = jest.fn();
+  const resetMock = jest.fn();
+
+  const mockStore: Store<State> = {
+    state: initialState,
+    setProperty: setPropertyMock,
+    reset: resetMock,
   };
 
   const clearMockStore = () => {
-    mockStore.setProperty.mockClear();
-    mockStore.reset.mockClear();
+    setPropertyMock.mockClear();
+    resetMock.mockClear();
   };
 
   return {
     mockStore,
     clearMockStore,
   };
-};
+}
