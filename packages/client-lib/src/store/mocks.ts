@@ -7,5 +7,13 @@ export const makeMockStore = <State extends object>(initialState: State) => {
     reset: jest.fn(),
   };
 
-  return mockStore;
+  const clearMockStore = () => {
+    mockStore.setProperty.mockClear();
+    mockStore.reset.mockClear();
+  };
+
+  return {
+    mockStore,
+    clearMockStore,
+  };
 };

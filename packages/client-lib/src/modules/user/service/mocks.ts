@@ -1,10 +1,18 @@
 import { IUserService } from ".";
 
-export const makeMockUserService = (): jest.Mocked<IUserService> => {
-  const mockService: jest.Mocked<IUserService> = {
+export const makeMockUserService = () => {
+  const mockUserService: jest.Mocked<IUserService> = {
     getMe: jest.fn(),
     createMe: jest.fn(),
   };
 
-  return mockService;
+  const clearMockUserService = () => {
+    mockUserService.getMe.mockClear();
+    mockUserService.createMe.mockClear();
+  };
+
+  return {
+    mockUserService,
+    clearMockUserService,
+  };
 };
