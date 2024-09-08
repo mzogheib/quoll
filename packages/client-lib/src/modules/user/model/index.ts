@@ -1,7 +1,7 @@
 import { User } from "@quoll/lib/modules";
 
 import { Store } from "../../../store/types";
-import { UserService } from "../service";
+import { IUserService } from "../service";
 
 export type UserState = {
   isLoading: boolean;
@@ -18,7 +18,7 @@ type UserModel = UserState & UserActions;
 
 export const makeUserModel = (
   store: Store<UserState>,
-  service: UserService,
+  service: IUserService,
 ): UserModel => {
   const { state, setProperty, reset } = store;
   const { user, isLoading } = state;
