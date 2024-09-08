@@ -1,6 +1,6 @@
-name: api - deploy
+name: Deploy - api
 
-run-name: "api - deploy: ${{ inputs.git-tag }}"
+run-name: "Deploy - api: ${{ inputs.git-tag }}"
 
 on:
   workflow_dispatch:

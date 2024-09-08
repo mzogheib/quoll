@@ -1,6 +1,6 @@
-name: client-web - deploy
+name: Deploy - client-mobile
 
-run-name: "client-web - deploy: ${{ inputs.git-tag }}"
+run-name: "Deploy - client-mobile: ${{ inputs.git-tag }}"
 
 on:
   workflow_dispatch:
@@ -13,8 +13,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: startsWith(inputs.git-tag, '@quoll/client-web@')
+    if: startsWith(inputs.git-tag, '@quoll/client-mobile@')
     steps:
       - name: Deploy
         shell: bash
-        run: echo "Deploying client-web..."
+        run: echo "Deploying client-mobile..."
