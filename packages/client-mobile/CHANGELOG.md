@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.30.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.29.0...@quoll/client-mobile@0.30.0) (2024-09-08)
+
+### Features
+
+- **client-mobile:** display default markers for non image entries ([601f433](https://github.com/mzogheib/quoll/commit/601f433ace09bfcb2e68fb94b6ce318c210b7539))
+
 # [0.29.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.28.0...@quoll/client-mobile@0.29.0) (2024-08-16)
 
 ### Features
