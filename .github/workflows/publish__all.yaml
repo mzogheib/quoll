@@ -2,9 +2,6 @@ name: Publish - all
 
 on: workflow_dispatch
 
-permissions:
-  contents: write
-
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -14,14 +11,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GH_PAT }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           # need to fetch all history for lerna to calculate the changes
           fetch-depth: 0
 
       - name: Configure git credentials
         uses: OleksiyRudenko/gha-git-credentials@v2
         with:
-          token: ${{ secrets.GH_PAT }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node
         uses: actions/setup-node@v4
