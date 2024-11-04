@@ -15,7 +15,6 @@
 		6132EF182BDFF13200BBE14D /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 6132EF172BDFF13200BBE14D /* PrivacyInfo.xcprivacy */; };
 		7699B88040F8A987B510C191 /* libPods-quollclientmobile-quollclientmobiletests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-quollclientmobile-quollclientmobiletests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		8DBFCBAE2B413CA200053547 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8DBFCBAD2B413CA200053547 /* MaterialIcons.ttf */; };
 		EF058872590D43F5969E6DE4 /* Pacifico-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ACDAEC98238241859E953316 /* Pacifico-Regular.ttf */; };
 /* End PBXBuildFile section */
 
@@ -261,7 +260,6 @@
 				6132EF182BDFF13200BBE14D /* PrivacyInfo.xcprivacy in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				8DBFCBAE2B413CA200053547 /* MaterialIcons.ttf in Resources */,
 				EF058872590D43F5969E6DE4 /* Pacifico-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
