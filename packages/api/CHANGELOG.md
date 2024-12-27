@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.4](https://github.com/mzogheib/quoll/compare/@quoll/api@0.15.3...@quoll/api@0.15.4) (2024-12-27)
+
+### Bug Fixes
+
+- **api:** add env config to docker compose file ([03e0430](https://github.com/mzogheib/quoll/commit/03e04300ab831ea3e650d6eaae1d2cf300c89f6e))
+
 ## [0.15.3](https://github.com/mzogheib/quoll/compare/@quoll/api@0.15.2...@quoll/api@0.15.3) (2024-09-08)
 
 **Note:** Version bump only for package @quoll/api
