@@ -35,7 +35,11 @@ WORKDIR /app
 
 COPY package.json yarn.lock .yarnrc.yml ./
 COPY .yarn ./.yarn
+COPY packages/lib/package.json ./packages/lib/
 COPY packages/api/package.json ./packages/api/
+
+# Copy the built workspace dependencies
+COPY --from=builder /app/packages/lib/dist ./packages/lib/dist
 
 # Dev dependencies are not needed now so install with --production
 RUN yarn workspaces focus --production @quoll/api
