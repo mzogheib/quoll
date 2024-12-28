@@ -22,7 +22,7 @@ export class StravaApi extends HttpService {
   async activitiesGet(params: { id: number; accessToken: string }) {
     const { id, accessToken } = params;
 
-    return await super.request<Activity[]>({
+    return await super.request<Activity>({
       method: "GET",
       endpoint: `/activities/${id}`,
       headers: this.makeAuthHeader(accessToken),
