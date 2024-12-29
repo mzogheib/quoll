@@ -1,12 +1,5 @@
 import { HttpService } from "@quoll/lib/services";
-
-if (!process.env.CLIENT_OAUTH_URL) {
-  throw new Error("Client OAuth URL not found");
-}
-
-if (!process.env.TOSHL_CLIENT_ID || !process.env.TOSHL_CLIENT_SECRET) {
-  throw new Error("Toshl credentials not found");
-}
+import { getEnvVariable } from "../../utils/env";
 
 const baseHeaders = {
   "Content-Type": "application/x-www-form-urlencoded",
@@ -127,7 +120,7 @@ class ToshlAuthApi extends HttpService {
 }
 
 export const toshlAuthApi = new ToshlAuthApi({
-  redirect_uri: process.env.CLIENT_OAUTH_URL,
-  client_id: process.env.TOSHL_CLIENT_ID,
-  client_secret: process.env.TOSHL_CLIENT_SECRET,
+  redirect_uri: getEnvVariable("CLIENT_OAUTH_URL"),
+  client_id: getEnvVariable("TOSHL_CLIENT_ID"),
+  client_secret: getEnvVariable("TOSHL_CLIENT_SECRET"),
 });

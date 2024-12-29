@@ -1,12 +1,5 @@
 import { HttpService } from "@quoll/lib/services";
-
-if (!process.env.CLIENT_OAUTH_URL) {
-  throw new Error("Client OAuth URL not found");
-}
-
-if (!process.env.STRAVA_CLIENT_ID || !process.env.STRAVA_CLIENT_SECRET) {
-  throw new Error("Strava credentials not found");
-}
+import { getEnvVariable } from "../../utils/env";
 
 type TokenResponse = {
   token_type: string;
@@ -90,7 +83,7 @@ class StravaAuthApi extends HttpService {
 }
 
 export const stravaAuthApi = new StravaAuthApi({
-  redirectUri: process.env.CLIENT_OAUTH_URL,
-  clientId: process.env.STRAVA_CLIENT_ID,
-  clientSecret: process.env.STRAVA_CLIENT_SECRET,
+  redirectUri: getEnvVariable("CLIENT_OAUTH_URL"),
+  clientId: getEnvVariable("STRAVA_CLIENT_ID"),
+  clientSecret: getEnvVariable("STRAVA_CLIENT_SECRET"),
 });

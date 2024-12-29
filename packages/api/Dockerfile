@@ -1,4 +1,4 @@
-# Run from the root 
+# Run from the root
 # docker build -t api -f packages/api/Dockerfile .
 
 # Builder stage
@@ -13,8 +13,15 @@ WORKDIR /app
 # with TypeScript, which is a dev dependency
 COPY package.json yarn.lock .yarnrc.yml ./
 COPY .yarn ./.yarn
+COPY packages/lib/package.json ./packages/lib/
+RUN yarn workspaces focus @quoll/lib
 COPY packages/api/package.json ./packages/api/
 RUN yarn workspaces focus @quoll/api
+
+# Copy the source code and build the workspace dependencies
+COPY packages/lib/src ./packages/lib/src
+COPY packages/lib/tsconfig.json ./packages/lib/
+RUN yarn workspace @quoll/lib build
 
 # Copy the source code and build the app
 COPY packages/api/src ./packages/api/src
@@ -28,7 +35,11 @@ WORKDIR /app
 
 COPY package.json yarn.lock .yarnrc.yml ./
 COPY .yarn ./.yarn
+COPY packages/lib/package.json ./packages/lib/
 COPY packages/api/package.json ./packages/api/
+
+# Copy the built workspace dependencies
+COPY --from=builder /app/packages/lib/dist ./packages/lib/dist
 
 # Dev dependencies are not needed now so install with --production
 RUN yarn workspaces focus --production @quoll/api
