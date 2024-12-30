@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { View, TouchableHighlight, Text } from "react-native";
 import DatePicker from "react-native-date-picker";
 import { getEndOfDay, getOffsetDate } from "@quoll/lib/modules";
@@ -52,7 +52,6 @@ export const DateBar = ({ isDisabled, date, onDateChange }: Props) => {
         onConfirm={handleDateChange}
         date={date}
         mode="date"
-        androidVariant="nativeAndroid"
         maximumDate={now}
       />
 

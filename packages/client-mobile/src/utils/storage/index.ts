@@ -12,7 +12,8 @@ const MMKV = new MMKVLoader().initialize();
 export const makeStorage = <Data extends object>(
   key: string,
 ): Storage<Data> => {
-  const getData: Storage<Data>["getData"] = () => MMKV.getMap<Data | null>(key);
+  const getData: Storage<Data>["getData"] = () =>
+    MMKV.getMap<Data | null>(key) ?? null;
 
   const setProperty: Storage<Data>["setProperty"] = (name, value) => {
     const newValue = { ...getData(), [name]: value };
