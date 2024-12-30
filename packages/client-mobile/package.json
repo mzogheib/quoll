@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
-    "android-clean": "cd android/ && ./gradlew clean && cd ..",
+    "android-clean": "cd android/ && rm -rf build/ && ./gradlew clean && cd ..",
     "ios": "react-native run-ios",
-    "ios-rebuild": "cd ios/ && rm -rf ios/ Pods/ && bundle install && bundle exec pod install && cd ..",
+    "ios-rebuild": "cd ios/ && rm -rf build/ Pods/ && bundle install && bundle exec pod install && cd ..",
     "lint": "eslint .",
     "start": "quoll-build-deps && react-native start",
     "test": "jest",
