@@ -1,8 +1,16 @@
 import moment from "moment";
+import { ToshlApi, ToshlAuthApi } from "@quoll/lib/feeds/toshl";
 
-import { toshlAuthApi } from "./oauth-api";
-import { toshlApi } from "./api";
 import { ToshlUserModel } from "../../models/toshlUser.model";
+import { getEnvVariable } from "../../utils/env";
+
+const toshlApi = new ToshlApi({ baseUrl: "https://api.toshl.com" });
+const toshlAuthApi = new ToshlAuthApi({
+  baseUrl: "https://toshl.com/oauth/v2",
+  redirect_uri: getEnvVariable("CLIENT_OAUTH_URL"),
+  client_id: getEnvVariable("TOSHL_CLIENT_ID"),
+  client_secret: getEnvVariable("TOSHL_CLIENT_SECRET"),
+});
 
 const getOAuthUrl = () => {
   return toshlAuthApi.url();

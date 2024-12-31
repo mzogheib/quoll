@@ -1,7 +1,16 @@
 import moment from "moment";
+import { StravaApi, StravaAuthApi } from "@quoll/lib/feeds/strava";
 
-import { stravaAuthApi } from "./oauth-api";
-import { stravaApi } from "./api";
+import { getEnvVariable } from "../../utils/env";
+
+const stravaApi = new StravaApi({ baseUrl: "https://www.strava.com/api/v3" });
+const stravaAuthApi = new StravaAuthApi({
+  baseUrl: "https://www.strava.com/oauth",
+  redirectUri: getEnvVariable("CLIENT_OAUTH_URL"),
+  clientId: getEnvVariable("STRAVA_CLIENT_ID"),
+  clientSecret: getEnvVariable("STRAVA_CLIENT_SECRET"),
+  scopes: ["read", "read_all", "activity:read_all"],
+});
 
 const getOAuthUrl = () => {
   return stravaAuthApi.url();
