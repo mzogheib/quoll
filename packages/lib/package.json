@@ -6,6 +6,11 @@
   "author": "mzogheib",
   "license": "MIT",
   "exports": {
+    "./feeds/strava": {
+      "types": "./dist/feeds/strava/index.d.ts",
+      "import": "./dist/feeds/strava/index.js",
+      "require": "./dist/feeds/strava/index.js"
+    },
     "./modules": {
       "types": "./dist/modules/index.d.ts",
       "import": "./dist/modules/index.js",
@@ -18,7 +23,7 @@
     }
   },
   "scripts": {
-    "start": "quoll-build-deps && tsc --watch",
+    "start": "tsc --watch",
     "clean-build": "rm -rf dist",
     "build": "yarn clean-build && tsc",
     "type-check": "tsc --noEmit",
