@@ -11,6 +11,11 @@
       "import": "./dist/feeds/strava/index.js",
       "require": "./dist/feeds/strava/index.js"
     },
+    "./feeds/toshl": {
+      "types": "./dist/feeds/toshl/index.d.ts",
+      "import": "./dist/feeds/toshl/index.js",
+      "require": "./dist/feeds/toshl/index.js"
+    },
     "./modules": {
       "types": "./dist/modules/index.d.ts",
       "import": "./dist/modules/index.js",
