@@ -1,5 +1,9 @@
 import moment from "moment";
-import { ToshlApi, ToshlAuthApi } from "@quoll/lib/feeds/toshl";
+import {
+  ToshlResolvedEntry,
+  ToshlApi,
+  ToshlAuthApi,
+} from "@quoll/lib/feeds/toshl";
 
 import { ToshlUserModel } from "../../models/toshlUser.model";
 import { getEnvVariable } from "../../utils/env";
@@ -76,7 +80,11 @@ const getTags = async (accessToken: string) => {
   return newToshlUser.tags;
 };
 
-const getEntries = async (from: string, to: string, accessToken: string) => {
+const getEntries = async (
+  from: string,
+  to: string,
+  accessToken: string,
+): Promise<ToshlResolvedEntry[]> => {
   // Toshl dates are in the user's timezone so convert the ISO string
   // to local (default moment output for an ISO string input) and format
   const fromDate = moment(from).format("YYYY-MM-DD");
