@@ -11,7 +11,7 @@ import {
   StravaSportType,
   isStravaLatLng,
   StravaLatLng,
-} from "./types";
+} from "../../../../feeds/strava";
 
 type ActivityConfig = {
   type: TimelineEntryType;

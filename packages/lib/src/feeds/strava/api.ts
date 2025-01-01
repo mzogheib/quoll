@@ -1,5 +1,5 @@
 import { HttpService } from "../../services";
-import { Activity, AthleteActivity } from "./types";
+import { StravaDetailedActivity, StravaSummaryActivity } from "./types";
 
 type Params = {
   baseUrl: string;
@@ -19,7 +19,7 @@ export class StravaApi extends HttpService {
   async activitiesGet(params: { id: number; accessToken: string }) {
     const { id, accessToken } = params;
 
-    return await super.request<Activity>({
+    return await super.request<StravaDetailedActivity>({
       method: "GET",
       endpoint: `/activities/${id}`,
       headers: this.makeAuthHeader(accessToken),
@@ -34,7 +34,7 @@ export class StravaApi extends HttpService {
   }) {
     const { after, before, per_page, accessToken } = params;
 
-    return await super.request<AthleteActivity[]>({
+    return await super.request<StravaSummaryActivity[]>({
       method: "GET",
       endpoint: "/athlete/activities",
       headers: this.makeAuthHeader(accessToken),
