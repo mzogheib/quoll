@@ -1,9 +1,8 @@
 // https://developers.strava.com/docs/reference
 
-export type StravaDetailedActivity = {
-  id: number;
-};
-
+/**
+ * An enumeration of the sport types an activity may have.
+ */
 export type StravaSportType =
   | "AlpineSki"
   | "BackcountrySki"
@@ -57,7 +56,11 @@ export type StravaSportType =
   | "Yoga";
 
 /**
- * [latitude, longitude]
+ * A collection of float objects. A pair of latitude/longitude coordinates,
+ * represented as an array of 2 floating point numbers.
+ *
+ * @example
+ * [37.238246, -115.802635]
  */
 export type StravaLatLng = [number, number];
 
@@ -68,36 +71,60 @@ export const isStravaLatLng = (value: any): value is StravaLatLng =>
   typeof value[1] === "number";
 
 type StravaPolylineMap = {
+  /**
+   * The identifier of the map.
+   */
   id: string;
+  /**
+   * The polyline of the map, only returned on detailed representation of an
+   * object.
+   */
   polyline: string | null;
+  /**
+   * The summary polyline of the map.
+   */
   summary_polyline: string | null;
 };
 
 export type StravaSummaryActivity = {
+  /**
+   * The unique identifier of the activity.
+   */
   id: number;
+  /**
+   * An instance of StravaSportType.
+   */
   sport_type: StravaSportType;
   /**
-   * Measured in meters.
+   * The activity's distance, in meters.
    */
   distance: number;
-  description: string;
   /**
-   * Start date and time at UTC in ISO 8601.
-   *
-   * @example "2018-07-21T14:28:35Z"
+   * The time at which the activity was started.
    */
   start_date: string;
   /**
-   * Measured in seconds.
+   * The activity's elapsed time, in seconds.
    */
   elapsed_time: number;
-  map: StravaPolylineMap;
   /**
-   * The start point.
+   * An instance of StravaPolylineMap.
+   */
+  map: StravaPolylineMap;
+
+  /**
+   * An instance of StravaLatLng.
    */
   start_latlng: string | StravaLatLng;
   /**
-   * The end point.
+   * An instance of StravaLatLng.
    */
   end_latlng: string | StravaLatLng;
+};
+
+export type StravaDetailedActivity = StravaSummaryActivity & {
+  /**
+   * The description of the activity.
+   */
+  description: string;
 };

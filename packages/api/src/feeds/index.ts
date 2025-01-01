@@ -1,5 +1,5 @@
 import {
-  stravaSummaryActivitiesAdapter,
+  stravaDetailedActivitiesAdapter,
   toshlEntriesAdapter,
 } from "@quoll/lib/modules";
 
@@ -12,7 +12,7 @@ export const feedServices = {
 };
 
 export const feedAdapters = {
-  strava: stravaSummaryActivitiesAdapter,
+  strava: stravaDetailedActivitiesAdapter,
   toshl: toshlEntriesAdapter,
 };
 

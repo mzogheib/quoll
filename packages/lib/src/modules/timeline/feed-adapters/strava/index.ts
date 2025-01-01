@@ -7,7 +7,7 @@ import {
   TimelineEntryType,
 } from "../../types";
 import {
-  StravaSummaryActivity,
+  StravaDetailedActivity,
   StravaSportType,
   isStravaLatLng,
   StravaLatLng,
@@ -36,8 +36,8 @@ const adaptLatLng = ([
   longitude,
 });
 
-export const stravaSummaryActivitiesAdapter = (
-  activities: StravaSummaryActivity[],
+export const stravaDetailedActivitiesAdapter = (
+  activities: StravaDetailedActivity[],
 ): TimelineEntry[] => {
   return activities.map((activity) => {
     const {

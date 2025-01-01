@@ -1,5 +1,9 @@
 import moment from "moment";
-import { StravaApi, StravaAuthApi } from "@quoll/lib/feeds/strava";
+import {
+  StravaApi,
+  StravaAuthApi,
+  StravaDetailedActivity,
+} from "@quoll/lib/feeds/strava";
 
 import { getEnvVariable } from "../../utils/env";
 
@@ -49,7 +53,7 @@ const getAthleteActivities = async (
   from: string,
   to: string,
   accessToken: string,
-) => {
+): Promise<StravaDetailedActivity[]> => {
   const activities = await stravaApi.atheleteActivitiesList({
     after: moment(from).unix() - 1,
     before: moment(to).unix() + 1,
