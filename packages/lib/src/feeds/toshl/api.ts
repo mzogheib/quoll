@@ -1,14 +1,5 @@
 import { HttpService } from "../../services";
-
-type Entry = {
-  id: string;
-  tags: string[];
-};
-
-type Tag = {
-  id: string;
-  name: string;
-};
+import { Entry, Tag } from "./types";
 
 type Params = {
   baseUrl: string;

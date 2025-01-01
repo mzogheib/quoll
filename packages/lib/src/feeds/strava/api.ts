@@ -1,12 +1,5 @@
 import { HttpService } from "../../services";
-
-type Activity = {
-  id: number;
-};
-
-type AthleteActivity = {
-  id: number;
-};
+import { Activity, AthleteActivity } from "./types";
 
 type Params = {
   baseUrl: string;
