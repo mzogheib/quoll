@@ -6,19 +6,24 @@ import {
 import { generateRandomString } from "../../../misc/randomString";
 import { formatAmount } from "../../../misc/currency";
 import { TimelineEntry, TimelineEntryLocation } from "../../types";
-import { ToshlEntry, ToshlLocation } from "./types";
+import {
+  ToshlResolvedEntry,
+  ToshlEntryLocation,
+} from "../../../../feeds/toshl";
 
 const DefaultTime = "12:00:00";
 
 const adaptLocation = ({
   latitude,
   longitude,
-}: ToshlLocation): TimelineEntryLocation => ({
+}: ToshlEntryLocation): TimelineEntryLocation => ({
   latitude,
   longitude,
 });
 
-export const toshlEntriesAdapter = (entries: ToshlEntry[]): TimelineEntry[] => {
+export const toshlEntriesAdapter = (
+  entries: ToshlResolvedEntry[],
+): TimelineEntry[] => {
   return entries.map((entry) => {
     const { amount, currency, tags, desc, date, location } = entry;
 

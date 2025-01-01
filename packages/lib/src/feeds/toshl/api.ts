@@ -1,5 +1,5 @@
 import { HttpService } from "../../services";
-import { Entry, Tag } from "./types";
+import { ToshlEntry, ToshlTag } from "./types";
 
 type Params = {
   baseUrl: string;
@@ -21,7 +21,7 @@ export class ToshlApi extends HttpService {
   async entriesList(params: { from: string; to: string; accessToken: string }) {
     const { from, to, accessToken } = params;
 
-    return await super.request<Entry[]>({
+    return await super.request<ToshlEntry[]>({
       method: "GET",
       endpoint: "/entries",
       headers: this.makeAuthHeader(accessToken),
@@ -32,7 +32,7 @@ export class ToshlApi extends HttpService {
   async tagsList(params: { accessToken: string }) {
     const { accessToken } = params;
 
-    return await super.request<Tag[]>({
+    return await super.request<ToshlTag[]>({
       method: "GET",
       endpoint: "/tags",
       headers: this.makeAuthHeader(accessToken),
