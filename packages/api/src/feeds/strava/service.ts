@@ -4,6 +4,7 @@ import {
   StravaAuthApi,
   StravaDetailedActivity,
 } from "@quoll/lib/feeds/strava";
+import { stravaDetailedActivitiesAdapter } from "@quoll/lib/modules";
 
 import { getEnvVariable } from "../../utils/env";
 
@@ -68,6 +69,11 @@ const getAthleteActivities = async (
   return await Promise.all(promises);
 };
 
+const getTimeline = async (from: string, to: string, accessToken: string) => {
+  const activities = await getAthleteActivities(from, to, accessToken);
+  return stravaDetailedActivitiesAdapter(activities);
+};
+
 const calculateExpiryTime = (expiresIn: number) => {
   // Substract a small amount to account for lag
   return Math.floor(Date.now() / 1000 + (expiresIn || 3600) - 300);
@@ -78,5 +84,5 @@ export const service = {
   authenticate,
   deauthorize,
   refreshAuth,
-  getData: getAthleteActivities,
+  getTimeline,
 };

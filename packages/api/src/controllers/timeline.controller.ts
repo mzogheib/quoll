@@ -1,4 +1,4 @@
-import { feedServices, feedAdapters, isSupportedFeed } from "../feeds";
+import { feedServices, isSupportedFeed } from "../feeds";
 import { UserDoc } from "../models/user.model";
 
 export const get = async (from: string, to: string, user: UserDoc) => {
@@ -8,14 +8,10 @@ export const get = async (from: string, to: string, user: UserDoc) => {
     if (!isSupportedFeed(feed.name)) return [];
 
     const feedService = feedServices[feed.name];
-    const feedAdapter = feedAdapters[feed.name];
 
     const accessToken = feed.auth!.access_token;
 
-    const data = await feedService.getData(from, to, accessToken);
-
-    // TODO add the types
-    return feedAdapter(data as any);
+    return await feedService.getTimeline(from, to, accessToken);
   });
 
   const arraysOfEntries = await Promise.all(promises);

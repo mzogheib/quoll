@@ -4,6 +4,7 @@ import {
   ToshlApi,
   ToshlAuthApi,
 } from "@quoll/lib/feeds/toshl";
+import { toshlEntriesAdapter } from "@quoll/lib/modules";
 
 import { ToshlUserModel } from "../../models/toshlUser.model";
 import { getEnvVariable } from "../../utils/env";
@@ -106,6 +107,11 @@ const getEntries = async (
   });
 };
 
+const getTimeline = async (from: string, to: string, accessToken: string) => {
+  const entries = await getEntries(from, to, accessToken);
+  return toshlEntriesAdapter(entries);
+};
+
 const calculateExpiryTime = (expiresIn: number) => {
   // Substract a small amount to account for lag
   return Math.floor(Date.now() / 1000 + (expiresIn || 3600) - 300);
@@ -116,5 +122,5 @@ export const service = {
   authenticate,
   deauthorize,
   refreshAuth,
-  getData: getEntries,
+  getTimeline,
 };
