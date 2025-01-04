@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { createUser, getUser } from "../controllers/user.controller";
+import { createUser, getUser } from "../controllers/users.controller";
 import { handleError } from "../utils/error";
 import { RequestWithUserId } from "./types";
 

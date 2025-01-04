@@ -1,4 +1,4 @@
-import { FeedName } from "@quoll/lib/modules";
+import { User, FeedName } from "@quoll/lib/modules";
 import { IAuth, UserDoc, UserModel } from "../models/user.model";
 
 export const get = async (userId: string): Promise<UserDoc> => {
@@ -32,4 +32,37 @@ export const getFeedAuth = async (userId: string, feedName: FeedName) => {
   if (feed === undefined) throw new Error("Feed not found");
 
   return feed.auth;
+};
+
+const DefaultFeeds = [
+  { name: "strava", auth: null },
+  { name: "toshl", auth: null },
+];
+
+const sanitizeUser = (user: UserDoc): User => {
+  const feeds = user.feeds.map((feed) => {
+    return {
+      name: feed.name,
+      isConnected: feed.auth !== null,
+    };
+  });
+
+  return {
+    _id: user._id.toString(),
+    feeds,
+  };
+};
+
+export const getUser = async (auth0Id: string): Promise<User | null> => {
+  const user = await UserModel.findOne({ auth0Id });
+
+  if (user === null) return null;
+
+  return sanitizeUser(user);
+};
+
+export const createUser = async (auth0Id: string): Promise<User> => {
+  const user = await UserModel.create({ auth0Id, feeds: DefaultFeeds });
+
+  return sanitizeUser(user);
 };
