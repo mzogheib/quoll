@@ -14,7 +14,7 @@ import { addUserIdMiddleware, createMeRoute, getMeRoute } from "./user.route";
 const router = Router();
 
 router
-  .route("/v2/user/me")
+  .route("/v2/users/me")
   .all(authMiddleware)
   .get(getMeRoute)
   .post(createMeRoute);

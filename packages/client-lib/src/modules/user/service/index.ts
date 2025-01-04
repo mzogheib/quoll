@@ -13,14 +13,14 @@ export class UserService
   async getMe() {
     return this.request<User>({
       method: "GET",
-      endpoint: "/user/me",
+      endpoint: "/users/me",
     });
   }
 
   async createMe() {
     return this.request<User>({
       method: "POST",
-      endpoint: "/user/me",
+      endpoint: "/users/me",
     });
   }
 }
