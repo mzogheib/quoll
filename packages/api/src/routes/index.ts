@@ -9,7 +9,7 @@ import {
 import { get } from "./timeline.route";
 import { RequestWithUserId } from "./types";
 import { authMiddleware } from "./auth";
-import { addUserIdMiddleware, createMeRoute, getMeRoute } from "./user.route";
+import { addUserIdMiddleware, createMeRoute, getMeRoute } from "./users.route";
 
 const router = Router();
 
