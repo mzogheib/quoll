@@ -8042,7 +8042,7 @@ __metadata:
     ts-jest: "npm:^29.2.5"
     typescript: "npm:^5.3.3"
   peerDependencies:
-    react: ^18.2.0
+    react: ^18.3.1
   languageName: unknown
   linkType: soft
 
@@ -8113,7 +8113,7 @@ __metadata:
     "@types/react-router-dom": "npm:^5.3.3"
     eslint-config-react-app: "npm:^7.0.1"
     msw: "npm:^2.0.11"
-    react: "npm:^18.2.0"
+    react: "npm:^18.3.1"
     react-dom: "npm:^18.2.0"
     react-router-dom: "npm:^5.2.0"
     react-scripts: "npm:5.0.1"
@@ -8159,7 +8159,7 @@ __metadata:
     husky: "npm:^8.0.1"
     lodash: "npm:^4.17.20"
     polished: "npm:^3.4.1"
-    react: "npm:^18.2.0"
+    react: "npm:^18.3.1"
     react-calendar: "npm:^2.19.2"
     react-dom: "npm:^18.2.0"
     react-icons: "npm:^3.7.0"
@@ -8172,7 +8172,7 @@ __metadata:
     tslib: "npm:^2.4.0"
     typescript: "npm:^5.5.3"
   peerDependencies:
-    react: ^18.2.0
+    react: ^18.3.1
   languageName: unknown
   linkType: soft
 
@@ -29160,21 +29160,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:18.3.1, react@npm:^16.8.0 || ^17.0.0 || ^18.0.0":
+"react@npm:18.3.1, react@npm:^16.8.0 || ^17.0.0 || ^18.0.0, react@npm:^18.3.1":
   version: 18.3.1
   resolution: "react@npm:18.3.1"
   dependencies:
     loose-envify: "npm:^1.1.0"
   checksum: 10c0/283e8c5efcf37802c9d1ce767f302dd569dd97a70d9bb8c7be79a789b9902451e0d16334b05d73299b20f048cbc3c7d288bbbde10b701fa194e2089c237dbea3
-  languageName: node
-  linkType: hard
-
-"react@npm:^18.2.0":
-  version: 18.2.0
-  resolution: "react@npm:18.2.0"
-  dependencies:
-    loose-envify: "npm:^1.1.0"
-  checksum: 10c0/b562d9b569b0cb315e44b48099f7712283d93df36b19a39a67c254c6686479d3980b7f013dc931f4a5a3ae7645eae6386b4aa5eea933baa54ecd0f9acb0902b8
   languageName: node
   linkType: hard
 
