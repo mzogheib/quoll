@@ -1,3 +1,3 @@
 FROM nginx:alpine
 
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY packages/api/web-server/nginx.conf /etc/nginx/nginx.conf
