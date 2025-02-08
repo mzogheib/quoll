@@ -15,10 +15,10 @@
     "uuid": "^8.3.2"
   },
   "scripts": {
-    "start": "quoll-build-deps && nodemon src/server.ts",
+    "start": "node ../../scripts/build-deps.js && nodemon src/server.ts",
     "start-db": "docker-compose -f db/local/compose.yaml up",
     "clean-dist": "rm -rf dist",
-    "build": "tsc",
+    "build": "node ../../scripts/build-deps.js && tsc",
     "serve": "node dist/server.js",
     "type-check": "tsc --noEmit"
   },

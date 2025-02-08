@@ -23,11 +23,11 @@
     }
   },
   "scripts": {
-    "start": "quoll-build-deps && tsc --watch",
+    "start": "node ../../scripts/build-deps.js && tsc --watch",
     "clean-build": "rm -rf dist",
-    "build": "yarn clean-build && tsc",
+    "build": "node ../../scripts/build-deps.js && yarn clean-build && tsc",
     "type-check": "tsc --noEmit",
-    "prepare": "yarn build",
+    "prepack": "yarn build",
     "test": "jest"
   },
   "dependencies": {
