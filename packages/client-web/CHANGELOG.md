@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.3](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.16.2...@quoll/client-web@0.16.3) (2025-02-08)
+
+### Bug Fixes
+
+- revert use same react for all packages and rebuild lock file ([b9eb4f2](https://github.com/mzogheib/quoll/commit/b9eb4f212fa4a01b852a245d8c7971ae81e2008d))
+- use same react for all packages and rebuild lock file ([deeaa79](https://github.com/mzogheib/quoll/commit/deeaa79c6485c6e46ec2b9e3798ad725b5e1405c))
+
 ## [0.16.2](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.16.1...@quoll/client-web@0.16.2) (2024-09-08)
 
 **Note:** Version bump only for package @quoll/client-web

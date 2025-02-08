@@ -1,6 +1,6 @@
 {
   "name": "@quoll/ui-components",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "UI components for the web apps",
   "main": "dist/index.js",
   "repository": "https://github.com/mzogheib/quoll",
@@ -27,7 +27,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@quoll/ui-primitives": "^0.5.7",
+    "@quoll/ui-primitives": "^0.5.8",
     "polished": "^3.4.1",
     "react-calendar": "^2.19.2",
     "react-icons": "^3.7.0",

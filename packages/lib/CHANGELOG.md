@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/mzogheib/quoll/compare/@quoll/lib@0.5.7...@quoll/lib@0.6.0) (2025-02-08)
+
+### Features
+
+- **lib:** add strava api classes ([93ef9d1](https://github.com/mzogheib/quoll/commit/93ef9d1f11d7ed9ca6ee174ffbd9f7633a288c7e))
+- **lib:** add toshl api classes ([ef6828e](https://github.com/mzogheib/quoll/commit/ef6828e39ad49f8a9095caa5152b91ae6a7262d9))
+
 ## [0.5.7](https://github.com/mzogheib/quoll/compare/@quoll/lib@0.5.6...@quoll/lib@0.5.7) (2024-09-08)
 
 **Note:** Version bump only for package @quoll/lib

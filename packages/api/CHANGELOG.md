@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.16.0](https://github.com/mzogheib/quoll/compare/@quoll/api@0.15.7...@quoll/api@0.16.0) (2025-02-08)
+
+### Features
+
+- change `/user/me` endpoint to `/users/me` ([4b623f1](https://github.com/mzogheib/quoll/commit/4b623f1b5f1865a403daf4a56383bf18359377b9))
+
 ## [0.15.7](https://github.com/mzogheib/quoll/compare/@quoll/api@0.15.6...@quoll/api@0.15.7) (2024-12-30)
 
 **Note:** Version bump only for package @quoll/api
