@@ -21,7 +21,7 @@ RUN yarn workspaces focus @quoll/api
 # Copy the source code and build the workspace dependencies
 COPY packages/lib/src ./packages/lib/src
 COPY packages/lib/tsconfig.json ./packages/lib/
-COPY scripts/build-deps.js ./scripts
+COPY scripts/build-deps.js ./scripts/
 RUN yarn workspace @quoll/lib build
 
 # Copy the source code and build the app
