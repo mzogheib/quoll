@@ -10,8 +10,11 @@ import { get } from "./timeline.route";
 import { RequestWithUserId } from "./types";
 import { authMiddleware } from "./auth";
 import { addUserIdMiddleware, createMeRoute, getMeRoute } from "./users.route";
+import { getHealthRoute } from "./health.route";
 
 const router = Router();
+
+router.route("/health").get(getHealthRoute);
 
 router
   .route("/v2/users/me")
