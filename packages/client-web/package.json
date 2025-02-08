@@ -3,7 +3,7 @@
   "version": "0.16.2",
   "private": true,
   "scripts": {
-    "start": "quoll-build-deps && react-scripts start",
+    "start": "node ../../scripts/build-deps.js && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

@@ -8,9 +8,9 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
-    "start": "quoll-build-deps && tsc --watch",
-    "prepare": "yarn build",
+    "build": "node ../../scripts/build-deps.js && tsc",
+    "start": "node ../../scripts/build-deps.js && tsc --watch",
+    "prepack": "yarn build",
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {
