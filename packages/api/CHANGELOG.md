@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.17.0](https://github.com/mzogheib/quoll/compare/@quoll/api@0.16.2...@quoll/api@0.17.0) (2025-02-08)
+
+### Features
+
+- **api:** add a basic health check endpoint ([9353aee](https://github.com/mzogheib/quoll/commit/9353aee266742218fc4cd2e56835442fa858be07))
+
 ## [0.16.2](https://github.com/mzogheib/quoll/compare/@quoll/api@0.16.1...@quoll/api@0.16.2) (2025-02-08)
 
 **Note:** Version bump only for package @quoll/api
