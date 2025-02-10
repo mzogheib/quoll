@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.18.0](https://github.com/mzogheib/quoll/compare/@quoll/api@0.17.0...@quoll/api@0.18.0) (2025-02-10)
+
+### Features
+
+- **api:** add data to health response ([728a0c6](https://github.com/mzogheib/quoll/commit/728a0c6438efcc00990a07db8715971518c16663))
+
 # [0.17.0](https://github.com/mzogheib/quoll/compare/@quoll/api@0.16.2...@quoll/api@0.17.0) (2025-02-08)
 
 ### Features
