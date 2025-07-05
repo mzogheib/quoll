@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.18.2](https://github.com/mzogheib/quoll/compare/@quoll/api@0.18.1...@quoll/api@0.18.2) (2025-07-05)
+
+### Bug Fixes
+
+- **api:** wait for db connection attempt to finish before starting server ([c18c5d8](https://github.com/mzogheib/quoll/commit/c18c5d85b53f6b1fc6f025d95bdc426bec5b98f0))
+
 ## [0.18.1](https://github.com/mzogheib/quoll/compare/@quoll/api@0.18.0...@quoll/api@0.18.1) (2025-02-10)
 
 **Note:** Version bump only for package @quoll/api
