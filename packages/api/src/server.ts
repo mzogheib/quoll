@@ -25,7 +25,7 @@ const init = async () => {
 
   app.use(cors({ origin: getEnvVariable("CORS_ALLOWED_ORIGIN") }));
 
-  app.use("/api", routes);
+  app.use("", routes);
 
   const port = app.get("port");
 
