@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.19.0](https://github.com/mzogheib/quoll/compare/@quoll/api@0.18.2...@quoll/api@0.19.0) (2025-07-16)
+
+### Features
+
+- **api:** remove api subpath ([884c32a](https://github.com/mzogheib/quoll/commit/884c32ad899d3f43f2a22d3cd76f5a3550f4b549))
+
 ## [0.18.2](https://github.com/mzogheib/quoll/compare/@quoll/api@0.18.1...@quoll/api@0.18.2) (2025-07-05)
 
 ### Bug Fixes
