@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import MapView from "react-native-maps";
 
 import styles from "./styles";
@@ -18,16 +18,17 @@ type Props = {
 
 export const Map = ({ markers, onMarkerPress }: Props) => {
   const { isConnected } = useGeolocationViewModel();
-  const { region } = useRegion({ markers });
-  const { clusters, updateClusters } = useClusters({ markers, region });
+  const { region: initialRegion } = useRegion({ markers });
+  const [region, setRegion] = useState(initialRegion);
+  const { clusters } = useClusters({ markers, region });
 
   return (
     <MapView
       style={styles.wrapper}
-      region={region}
+      region={initialRegion}
       showsUserLocation={isConnected}
       onPress={() => onMarkerPress(null)}
-      onRegionChangeComplete={updateClusters}
+      onRegionChangeComplete={setRegion}
     >
       {clusters?.map((cluster) => {
         const [longitude, latitude] = cluster.geometry.coordinates;

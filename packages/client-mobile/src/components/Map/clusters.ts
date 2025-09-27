@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useEffect } from "react";
+import { useMemo } from "react";
 import { ImageURISource } from "react-native";
 import { Region } from "react-native-maps";
 import Supercluster, { ClusterProperties, ClusterFeature } from "supercluster";
@@ -23,8 +23,6 @@ export const useClusters = (params: {
   region: Region;
 }) => {
   const { markers, region } = params;
-
-  const [clusters, setClusters] = useState<Cluster[] | null>(null);
 
   const supercluster = useMemo(() => {
     if (!markers) return null;
@@ -55,30 +53,28 @@ export const useClusters = (params: {
     return _supercluster;
   }, [markers]);
 
-  const updateClusters = useCallback(
-    (newRegion: Region) => {
-      const bbox = [
-        newRegion.longitude - newRegion.longitudeDelta,
-        newRegion.latitude - newRegion.latitudeDelta,
-        newRegion.longitude + newRegion.longitudeDelta,
-        newRegion.latitude + newRegion.latitudeDelta,
-      ] as [number, number, number, number];
+  const clusters = useMemo(() => {
+    const bbox = [
+      region.longitude - region.longitudeDelta,
+      region.latitude - region.latitudeDelta,
+      region.longitude + region.longitudeDelta,
+      region.latitude + region.latitudeDelta,
+    ] as [number, number, number, number];
 
-      const zoom = Math.floor(Math.log2(360 / newRegion.longitudeDelta)) - 1;
-      const _clusters =
-        supercluster === null
-          ? null
-          : (supercluster.getClusters(bbox, zoom) as Cluster[]); // Looks like the type is wrong in the library
+    const zoom = Math.floor(Math.log2(360 / region.longitudeDelta)) - 1;
+    const _clusters =
+      supercluster === null
+        ? null
+        : (supercluster.getClusters(bbox, zoom) as Cluster[]); // Looks like the type is wrong in the library
 
-      setClusters(_clusters);
-    },
-    [markers, supercluster],
-  );
+    return _clusters;
+  }, [
+    region.latitude,
+    region.latitudeDelta,
+    region.longitude,
+    region.longitudeDelta,
+    supercluster,
+  ]);
 
-  // Markers will change on a date change hence we need to update clusters
-  useEffect(() => {
-    updateClusters(region);
-  }, [markers]);
-
-  return { clusters, updateClusters };
+  return { clusters };
 };
