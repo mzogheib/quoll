@@ -172,10 +172,10 @@ export const useRegion = (params: {
     setRegion({
       latitude: center.latitude,
       longitude: center.longitude,
-      latitudeDelta: 0.01,
-      longitudeDelta: 0.01,
+      latitudeDelta: region.latitudeDelta,
+      longitudeDelta: region.longitudeDelta,
     });
-  }, [center]);
+  }, [center, region.latitudeDelta, region.longitudeDelta]);
 
   useEffect(() => {
     if (isCheckingPermission) return;
