@@ -1,7 +1,7 @@
+import React, { ReactNode } from "react";
 import { Button, Text, View } from "react-native";
 
 import styles from "./styles";
-import { ReactNode } from "react";
 
 type Props = {
   title: string;
