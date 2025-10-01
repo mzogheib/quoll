@@ -55,7 +55,7 @@ export const Map = ({ markers, onMarkerPress }: Props) => {
           ? () => <OriginalAspectRatioImage source={image} width={325} />
           : undefined;
         const markerChildren = image ? (
-          <OriginalAspectRatioImage source={image} width={40} height={40} />
+          <OriginalAspectRatioImage source={image} width={40} maxHeight={40} />
         ) : null;
 
         return (
