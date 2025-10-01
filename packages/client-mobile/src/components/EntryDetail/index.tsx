@@ -1,18 +1,24 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
+import { TimelineEntry } from "@quoll/lib/modules";
 
 import styles from "./styles";
 
-import { TimelineEntry } from "@quoll/lib/modules";
+import { OriginalAspectRatioImage } from "@components/OriginalAspectRatioImage";
 
 type Props = {
   entry: TimelineEntry;
 };
 
 const EntryDetail = ({ entry }: Props) => {
+  const { mediaUri } = entry;
+
+  console.log({ entry });
   return (
     <View style={styles.wrapper}>
-      <Text>{entry.title}</Text>
+      {mediaUri && (
+        <OriginalAspectRatioImage source={{ uri: mediaUri }} width={325} />
+      )}
     </View>
   );
 };

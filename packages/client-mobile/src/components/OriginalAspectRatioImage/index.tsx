@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Image, ImageURISource } from "react-native";
 
 import makeStyles from "./styles";
@@ -20,7 +20,7 @@ export const OriginalAspectRatioImage = ({ source, width, height }: Props) => {
       setImageWidth(width_);
       setImageHeight(height_);
     });
-  }, []);
+  }, [source.uri]);
 
   const hasSize = imageWidth !== undefined && imageHeight !== undefined;
 

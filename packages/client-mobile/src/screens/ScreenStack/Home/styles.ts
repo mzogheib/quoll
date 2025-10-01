@@ -16,10 +16,7 @@ const stylesDefault = StyleSheet.create({
     position: "absolute",
     top: 0,
     left: "5%",
-    right: "5%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    zIndex: 99,
     marginBlockStart: 20,
   },
 });

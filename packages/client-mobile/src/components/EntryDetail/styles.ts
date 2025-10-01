@@ -4,7 +4,6 @@ const styles = StyleSheet.create({
   wrapper: {
     padding: 10,
     backgroundColor: "white",
-    width: "100%",
   },
 });
 
