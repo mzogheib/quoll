@@ -23,11 +23,17 @@ const HomeScreen = ({ route }: ScreenProps<"home">) => {
     handleDateChange,
   } = useController();
 
+  const mapCenter = selectedEntry?.locationStart ?? undefined;
+
   return (
     <ScreenTemplate screenName={route.name}>
       <View style={styles.wrapper}>
         <View style={styles.map}>
-          <Map markers={markers} onMarkerPress={handleEntrySelect} />
+          <Map
+            center={mapCenter}
+            markers={markers}
+            onMarkerPress={handleEntrySelect}
+          />
           {selectedEntry && (
             <View style={styles.entryDetail}>
               <EntryDetail entry={selectedEntry} />

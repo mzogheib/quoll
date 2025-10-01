@@ -1,5 +1,5 @@
 import React from "react";
-import MapView, { Marker } from "react-native-maps";
+import MapView, { LatLng, Marker } from "react-native-maps";
 
 import styles from "./styles";
 
@@ -8,13 +8,14 @@ import { useGeolocationViewModel } from "@modules/geolocation/view-model";
 import { MarkerProps } from "./types";
 
 type Props = {
+  center?: LatLng;
   markers: MarkerProps[] | null;
   onMarkerPress: (id: string | null) => void;
 };
 
-export const Map = ({ markers, onMarkerPress }: Props) => {
+export const Map = ({ center, markers, onMarkerPress }: Props) => {
   const { isConnected } = useGeolocationViewModel();
-  const { region } = useRegion({ markers });
+  const { region } = useRegion({ center, markers });
 
   return (
     <MapView

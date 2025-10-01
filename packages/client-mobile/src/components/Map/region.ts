@@ -1,7 +1,9 @@
 import { LatLng, Region } from "react-native-maps";
-import { MarkerProps } from "./types";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+
 import { useGeolocationViewModel } from "@modules/geolocation/view-model";
+import { MarkerProps } from "./types";
+import { usePrevious } from "@utils/hooks";
 
 type Bounds = {
   minLat: number;
@@ -103,6 +105,7 @@ const defaultCoords = {
 
 /**
  * Calculates the region to display on the map. Region precedence is:
+ * 1. Center (if provided)
  * 1. Markers
  * 1. User's location
  * 1. Default location
@@ -110,9 +113,10 @@ const defaultCoords = {
  * @returns region The region to display on the map.
  */
 export const useRegion = (params: {
+  center?: LatLng;
   markers: MarkerProps[] | null;
 }): { region: Region } => {
-  const { markers } = params;
+  const { center, markers } = params;
 
   const {
     value: coords,
@@ -143,7 +147,35 @@ export const useRegion = (params: {
     longitudeDelta: 50,
   };
 
-  const region = markersRegion ?? userRegion ?? defaultRegion;
+  // This is the initial region when a new set of markers is provided
+  const initialRegion = markersRegion ?? userRegion ?? defaultRegion;
+
+  const [region, setRegion] = useState(initialRegion);
+
+  // If any of the region inputs change, update the current region
+  const prevRegion = usePrevious(initialRegion);
+  useEffect(() => {
+    if (
+      initialRegion.latitude === prevRegion?.latitude &&
+      initialRegion.longitude === prevRegion?.longitude
+    ) {
+      return;
+    }
+
+    setRegion(initialRegion);
+  }, [center, prevRegion, initialRegion]);
+
+  // If a center is provided, override the region with this one
+  useEffect(() => {
+    if (center === undefined) return;
+
+    setRegion({
+      latitude: center.latitude,
+      longitude: center.longitude,
+      latitudeDelta: 0.01,
+      longitudeDelta: 0.01,
+    });
+  }, [center]);
 
   useEffect(() => {
     if (isCheckingPermission) return;
