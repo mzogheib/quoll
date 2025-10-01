@@ -20,6 +20,7 @@ const EntryDetail = ({ entry }: Props) => {
         <OriginalAspectRatioImage
           source={{ uri: mediaUri }}
           width={contentWidth}
+          maxHeight={400}
         />
       )}
       {description && (
