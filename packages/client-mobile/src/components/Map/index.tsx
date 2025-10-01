@@ -27,7 +27,10 @@ export const Map = ({ markers, onMarkerPress }: Props) => {
         <Marker
           key={id}
           coordinate={coordinate}
-          onPress={() => onMarkerPress(id)}
+          onPress={(event) => {
+            onMarkerPress(id);
+            event.stopPropagation();
+          }}
         />
       ))}
     </MapView>
