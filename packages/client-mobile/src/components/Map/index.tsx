@@ -1,13 +1,11 @@
 import React from "react";
-import MapView from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
 
 import styles from "./styles";
 
 import { useRegion } from "@components/Map/region";
 import { useGeolocationViewModel } from "@modules/geolocation/view-model";
-import Marker from "./Marker";
 import { MarkerProps } from "./types";
-import { OriginalAspectRatioImage } from "@components/OriginalAspectRatioImage";
 
 type Props = {
   markers: MarkerProps[] | null;
@@ -25,24 +23,13 @@ export const Map = ({ markers, onMarkerPress }: Props) => {
       showsUserLocation={isConnected}
       onPress={() => onMarkerPress(null)}
     >
-      {markers?.map(({ coordinate, id, image, isSelected }) => {
-        const { longitude, latitude } = coordinate;
-        const renderCallout = image
-          ? () => <OriginalAspectRatioImage source={image} width={325} />
-          : undefined;
-
-        return (
-          <Marker
-            key={id}
-            id={id}
-            coordinate={{ latitude, longitude }}
-            onPress={() => onMarkerPress(id)}
-            shouldShowCallout={isSelected}
-            children={undefined}
-            renderCallout={renderCallout}
-          />
-        );
-      })}
+      {markers?.map(({ coordinate, id }) => (
+        <Marker
+          key={id}
+          coordinate={coordinate}
+          onPress={() => onMarkerPress(id)}
+        />
+      ))}
     </MapView>
   );
 };
