@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { Text, View } from "react-native";
 import { TimelineEntry } from "@quoll/lib/modules";
 
 import styles from "./styles";
@@ -11,13 +11,19 @@ type Props = {
 };
 
 const EntryDetail = ({ entry }: Props) => {
-  const { mediaUri } = entry;
+  const { mediaUri, description } = entry;
+  const contentWidth = styles.wrapper.maxWidth - 2 * styles.wrapper.padding;
 
-  console.log({ entry });
   return (
     <View style={styles.wrapper}>
       {mediaUri && (
-        <OriginalAspectRatioImage source={{ uri: mediaUri }} width={325} />
+        <OriginalAspectRatioImage
+          source={{ uri: mediaUri }}
+          width={contentWidth}
+        />
+      )}
+      {description && (
+        <Text style={{ maxWidth: contentWidth }}>{description}</Text>
       )}
     </View>
   );
