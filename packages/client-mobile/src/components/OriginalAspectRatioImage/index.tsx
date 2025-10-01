@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Image, ImageURISource } from "react-native";
 
 import makeStyles from "./styles";
+import { applyConstraints, calculateRectDimensions } from "./utils";
 
 type PropsWidth = {
   source: ImageURISource;
@@ -20,51 +21,6 @@ type PropsHeight = {
 };
 
 type Props = PropsWidth | PropsHeight;
-
-const calculateBaseDimensions = ({
-  width,
-  height,
-  aspectRatio,
-}: {
-  width: number | undefined;
-  height: number | undefined;
-  aspectRatio: number;
-}) => {
-  // If width is provided, calculate height based on aspect ratio
-  if (width && !height) return { width, height: width / aspectRatio };
-
-  // If height is provided, calculate width based on aspect ratio
-  if (height && !width) return { width: height * aspectRatio, height };
-
-  // Both or neither provided
-  return { width, height };
-};
-
-const applyConstraints = ({
-  dimensions,
-  maxWidth,
-  maxHeight,
-  aspectRatio,
-}: {
-  dimensions: { width: number | undefined; height: number | undefined };
-  maxWidth: number | undefined;
-  maxHeight: number | undefined;
-  aspectRatio: number;
-}) => {
-  const { width: baseWidth, height: baseHeight } = dimensions;
-
-  // Apply maxHeight constraint if provided and needed
-  if (maxHeight && baseHeight && baseHeight > maxHeight) {
-    return { width: maxHeight * aspectRatio, height: maxHeight };
-  }
-
-  // Apply maxWidth constraint if provided and needed
-  if (maxWidth && baseWidth && baseWidth > maxWidth) {
-    return { width: maxWidth, height: maxWidth / aspectRatio };
-  }
-
-  return dimensions;
-};
 
 export const OriginalAspectRatioImage = ({
   source,
@@ -92,12 +48,13 @@ export const OriginalAspectRatioImage = ({
   const finalDimensions = useMemo(() => {
     if (!aspectRatio) return { width, height };
 
-    return applyConstraints({
-      dimensions: calculateBaseDimensions({ width, height, aspectRatio }),
-      maxWidth,
-      maxHeight,
-      aspectRatio,
-    });
+    /** The unconstrained dimensions of the image */
+    const dimensions =
+      width !== undefined
+        ? calculateRectDimensions({ width, aspectRatio })
+        : calculateRectDimensions({ height, aspectRatio });
+
+    return applyConstraints({ dimensions, maxWidth, maxHeight });
   }, [width, height, maxHeight, maxWidth, aspectRatio]);
 
   const styles = useMemo(
