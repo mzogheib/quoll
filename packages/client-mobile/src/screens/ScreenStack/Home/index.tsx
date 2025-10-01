@@ -1,9 +1,10 @@
 import React from "react";
-import { ScrollView, View } from "react-native";
+import { ScrollView, View, Pressable } from "react-native";
 
 import { useStyles } from "./styles";
 
 import { Map } from "@components/Map";
+import EntryDetail from "@components/EntryDetail";
 import { DateBar } from "@modules/date/ui/DateBar";
 import Timeline from "@modules/timeline/views/Timeline";
 import { ScreenProps } from "../../config";
@@ -13,14 +14,34 @@ import useController from "./controller";
 const HomeScreen = ({ route }: ScreenProps<"home">) => {
   const styles = useStyles();
 
-  const { entries, markers, date, handleEntrySelect, handleDateChange } =
-    useController();
+  const {
+    entries,
+    selectedEntry,
+    markers,
+    date,
+    handleEntrySelect,
+    handleEntryDeselect,
+    handleDateChange,
+  } = useController();
+
+  const mapCenter = selectedEntry?.locationStart ?? undefined;
 
   return (
     <ScreenTemplate screenName={route.name}>
       <View style={styles.wrapper}>
         <View style={styles.map}>
-          <Map markers={markers} onMarkerPress={handleEntrySelect} />
+          <Map
+            center={mapCenter}
+            markers={markers}
+            onMarkerPress={handleEntrySelect}
+          />
+          {selectedEntry && (
+            <Pressable style={styles.entryDetail} onPress={handleEntryDeselect}>
+              <Pressable>
+                <EntryDetail entry={selectedEntry} />
+              </Pressable>
+            </Pressable>
+          )}
         </View>
         <View style={styles.sideBar}>
           <DateBar date={new Date(date)} onDateChange={handleDateChange} />

@@ -8,9 +8,21 @@ const stylesDefault = StyleSheet.create({
   },
   map: {
     flex: 5,
+    position: "relative",
   },
   sideBar: {
     flex: 2,
+  },
+  entryDetail: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    bottom: 20,
+    left: 0,
+    display: "flex",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    zIndex: 99,
   },
 });
 
@@ -21,10 +33,12 @@ const stylesWide = StyleSheet.create({
   },
   map: {
     flex: 1,
+    position: "relative",
   },
   sideBar: {
     maxWidth: 350,
   },
+  entryDetail: stylesDefault.entryDetail,
 });
 
 export const useStyles = () =>
