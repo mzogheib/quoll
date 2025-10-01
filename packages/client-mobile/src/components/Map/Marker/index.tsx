@@ -1,3 +1,4 @@
+import React, { ReactNode, useEffect, useRef, useState } from "react";
 import { View } from "react-native";
 import {
   MapMarkerProps,
@@ -5,7 +6,6 @@ import {
   Callout,
   MapMarker,
 } from "react-native-maps";
-import { ReactNode, useEffect, useRef, useState } from "react";
 
 import styles from "./styles";
 
@@ -56,8 +56,9 @@ const Marker = ({
   }, [shouldShowCallout]);
 
   useEffect(() => {
+    const marker = markerRef.current;
     return () => {
-      markerRef.current?.hideCallout();
+      marker?.hideCallout();
     };
   }, []);
 

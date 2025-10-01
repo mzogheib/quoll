@@ -1,5 +1,7 @@
+import React from "react";
 import { View, Text } from "react-native";
 import { MapMarkerProps, Marker } from "react-native-maps";
+
 import styles from "./styles";
 
 type Props = {

@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useMemo, useState } from "react";
 import { Image, ImageURISource } from "react-native";
 
@@ -20,6 +21,7 @@ export const OriginalAspectRatioImage = ({ source, width, height }: Props) => {
       setImageWidth(width_);
       setImageHeight(height_);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const hasSize = imageWidth !== undefined && imageHeight !== undefined;

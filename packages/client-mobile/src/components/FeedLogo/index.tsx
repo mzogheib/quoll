@@ -1,3 +1,4 @@
+import React from "react";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { FeedName } from "@quoll/lib/modules";
 import { colorPalette } from "@quoll/ui-primitives";
