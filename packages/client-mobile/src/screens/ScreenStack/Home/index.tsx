@@ -1,9 +1,10 @@
 import React from "react";
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, View } from "react-native";
 
 import { useStyles } from "./styles";
 
 import { Map } from "@components/Map";
+import EntryDetail from "@components/EntryDetail";
 import { DateBar } from "@modules/date/ui/DateBar";
 import Timeline from "@modules/timeline/views/Timeline";
 import { ScreenProps } from "../../config";
@@ -28,8 +29,8 @@ const HomeScreen = ({ route }: ScreenProps<"home">) => {
         <View style={styles.map}>
           <Map markers={markers} onMarkerPress={handleEntrySelect} />
           {selectedEntry && (
-            <View>
-              <Text>{selectedEntry.title}</Text>
+            <View style={styles.entryDetail}>
+              <EntryDetail entry={selectedEntry} />
             </View>
           )}
         </View>

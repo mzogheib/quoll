@@ -12,6 +12,16 @@ const stylesDefault = StyleSheet.create({
   sideBar: {
     flex: 2,
   },
+  entryDetail: {
+    position: "absolute",
+    top: 0,
+    left: "5%",
+    right: "5%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBlockStart: 20,
+  },
 });
 
 const stylesWide = StyleSheet.create({
@@ -25,6 +35,7 @@ const stylesWide = StyleSheet.create({
   sideBar: {
     maxWidth: 350,
   },
+  entryDetail: stylesDefault.entryDetail,
 });
 
 export const useStyles = () =>
