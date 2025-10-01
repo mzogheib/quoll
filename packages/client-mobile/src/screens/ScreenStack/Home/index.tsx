@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView, View } from "react-native";
+import { ScrollView, View, Pressable } from "react-native";
 
 import { useStyles } from "./styles";
 
@@ -20,6 +20,7 @@ const HomeScreen = ({ route }: ScreenProps<"home">) => {
     markers,
     date,
     handleEntrySelect,
+    handleEntryDeselect,
     handleDateChange,
   } = useController();
 
@@ -35,9 +36,11 @@ const HomeScreen = ({ route }: ScreenProps<"home">) => {
             onMarkerPress={handleEntrySelect}
           />
           {selectedEntry && (
-            <View style={styles.entryDetail}>
-              <EntryDetail entry={selectedEntry} />
-            </View>
+            <Pressable style={styles.entryDetail} onPress={handleEntryDeselect}>
+              <Pressable>
+                <EntryDetail entry={selectedEntry} />
+              </Pressable>
+            </Pressable>
           )}
         </View>
         <View style={styles.sideBar}>

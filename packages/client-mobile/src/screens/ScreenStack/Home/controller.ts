@@ -22,6 +22,8 @@ const useController = () => {
 
   const handleEntrySelect = (id: string | null) => setSelectedEntryId(id);
 
+  const handleEntryDeselect = () => setSelectedEntryId(null);
+
   const handleDateChange = (newDate: Date) => {
     setSelectedEntryId(null);
     const formattedDate = makeISO8601Date(newDate);
@@ -62,6 +64,7 @@ const useController = () => {
     markers,
     date,
     handleEntrySelect,
+    handleEntryDeselect,
     handleDateChange,
   };
 };
