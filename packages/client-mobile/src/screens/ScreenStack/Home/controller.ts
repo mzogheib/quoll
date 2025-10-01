@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { makeISO8601Date } from "@quoll/lib/modules";
 
 import { MarkerProps } from "@components/Map/types";
@@ -36,7 +36,7 @@ const useController = () => {
     entries === null
       ? null
       : entries
-          .filter(({ locationStart, polyline, mediaUri }) => {
+          .filter(({ locationStart, polyline }) => {
             const hasLocation =
               locationStart?.latitude && locationStart.longitude;
 
@@ -50,11 +50,15 @@ const useController = () => {
               longitude: locationStart!.longitude,
             },
             image: mediaUri === null ? null : { uri: mediaUri },
-            isSelected: id === selectedEntryId,
           }));
+
+  const selectedEntry = useMemo(() => {
+    return entries?.find((entry) => entry.id === selectedEntryId) || null;
+  }, [entries, selectedEntryId]);
 
   return {
     entries,
+    selectedEntry,
     markers,
     date,
     handleEntrySelect,
