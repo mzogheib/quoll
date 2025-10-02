@@ -72,7 +72,7 @@ export const requestPermission = async () => {
 
 export const getMedia = async (filter: DateFilter) =>
   await CameraRoll.getPhotos({
-    first: 100,
+    first: 500,
     fromTime: filter.createdAfter.getTime(),
     toTime: filter.createdBefore.getTime(),
   });
