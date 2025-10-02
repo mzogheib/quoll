@@ -16,7 +16,8 @@ type Props = {
 
 const EntryDetail = ({ entry, onClose, onClickPrev, onClickNext }: Props) => {
   const { mediaUri, description, title } = entry;
-  const contentWidth = styles.wrapper.maxWidth - 2 * styles.wrapper.padding;
+  const contentWidth =
+    styles.wrapper.maxWidth - 2 * styles.wrapper.padding - 60; // padding + navigation buttons
 
   return (
     <View style={styles.wrapper}>

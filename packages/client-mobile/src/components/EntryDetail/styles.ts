@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-const WRAPPER_WIDTH = 420;
+const WRAPPER_WIDTH = 380;
 
 const styles = StyleSheet.create({
   wrapper: {
