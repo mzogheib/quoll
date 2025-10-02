@@ -38,7 +38,10 @@ const HomeScreen = ({ route }: ScreenProps<"home">) => {
           {selectedEntry && (
             <Pressable style={styles.entryDetail} onPress={handleEntryDeselect}>
               <Pressable>
-                <EntryDetail entry={selectedEntry} />
+                <EntryDetail
+                  entry={selectedEntry}
+                  onClose={handleEntryDeselect}
+                />
               </Pressable>
             </Pressable>
           )}
