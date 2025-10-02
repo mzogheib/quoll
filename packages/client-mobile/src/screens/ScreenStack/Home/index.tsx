@@ -20,6 +20,8 @@ const HomeScreen = ({ route }: ScreenProps<"home">) => {
     markers,
     date,
     handleEntrySelect,
+    handleEntrySelectNext,
+    handleEntrySelectPrev,
     handleEntryDeselect,
     handleDateChange,
   } = useController();
@@ -41,6 +43,8 @@ const HomeScreen = ({ route }: ScreenProps<"home">) => {
                 <EntryDetail
                   entry={selectedEntry}
                   onClose={handleEntryDeselect}
+                  onClickNext={handleEntrySelectNext}
+                  onClickPrev={handleEntrySelectPrev}
                 />
               </Pressable>
             </Pressable>

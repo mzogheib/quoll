@@ -13,6 +13,16 @@ const useController = () => {
   const [didFetchOnce, setDidFetchOnce] = useState(false);
   const [selectedEntryId, setSelectedEntryId] = useState<string | null>(null);
 
+  const selectedEntry = useMemo(() => {
+    return entries?.find((entry) => entry.id === selectedEntryId) || null;
+  }, [entries, selectedEntryId]);
+
+  const selectedEntryIndex = useMemo(() => {
+    if (entries === null || selectedEntryId === null) return -1;
+
+    return entries.findIndex((entry) => entry.id === selectedEntryId);
+  }, [entries, selectedEntryId]);
+
   useEffect(() => {
     if (didFetchOnce || !isAuthenticated) return;
 
@@ -21,6 +31,28 @@ const useController = () => {
   }, [date, didFetchOnce, fetchTimeline, isAuthenticated]);
 
   const handleEntrySelect = (id: string | null) => setSelectedEntryId(id);
+
+  const handleEntrySelectNext = () => {
+    if (
+      entries === null ||
+      selectedEntryIndex === -1 ||
+      selectedEntryIndex === entries.length - 1
+    ) {
+      return;
+    }
+
+    const nextEntry = entries[selectedEntryIndex + 1];
+    setSelectedEntryId(nextEntry.id);
+  };
+
+  const handleEntrySelectPrev = () => {
+    if (entries === null || selectedEntryIndex <= 0) {
+      return;
+    }
+
+    const prevEntry = entries[selectedEntryIndex - 1];
+    setSelectedEntryId(prevEntry.id);
+  };
 
   const handleEntryDeselect = () => setSelectedEntryId(null);
 
@@ -54,16 +86,14 @@ const useController = () => {
             image: mediaUri === null ? null : { uri: mediaUri },
           }));
 
-  const selectedEntry = useMemo(() => {
-    return entries?.find((entry) => entry.id === selectedEntryId) || null;
-  }, [entries, selectedEntryId]);
-
   return {
     entries,
     selectedEntry,
     markers,
     date,
     handleEntrySelect,
+    handleEntrySelectNext,
+    handleEntrySelectPrev,
     handleEntryDeselect,
     handleDateChange,
   };

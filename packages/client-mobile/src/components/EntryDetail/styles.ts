@@ -1,10 +1,12 @@
 import { StyleSheet } from "react-native";
 
+const WRAPPER_WIDTH = 420;
+
 const styles = StyleSheet.create({
   wrapper: {
     padding: 10,
     backgroundColor: "white",
-    maxWidth: 360,
+    maxWidth: WRAPPER_WIDTH,
     borderRadius: 4,
     shadowColor: "rgba(0, 0, 0, 0.25)",
     shadowOffset: { width: 0, height: 4 },
@@ -19,8 +21,18 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
+  main: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
   content: {
     marginBlockStart: 15,
+  },
+  description: {
+    maxWidth: WRAPPER_WIDTH - 100,
+  },
+  navigateAction: {
+    justifyContent: "center",
   },
 });
 
