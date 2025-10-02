@@ -46,7 +46,7 @@ const requestPermissionAndroid = async () => {
       const mediaImagesResult = result["android.permission.READ_MEDIA_IMAGES"];
       const mediaVideoResult = result["android.permission.READ_MEDIA_VIDEO"];
       return [mediaImagesResult, mediaVideoResult].every(
-        (result) => result === "granted",
+        (value) => value === "granted",
       );
     } else {
       return result["android.permission.READ_EXTERNAL_STORAGE"] === "granted";
