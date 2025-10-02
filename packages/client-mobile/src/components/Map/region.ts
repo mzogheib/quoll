@@ -115,7 +115,7 @@ const defaultCoords = {
 export const useRegion = (params: {
   center?: LatLng;
   markers: MarkerProps[] | null;
-}): { region: Region } => {
+}) => {
   const { center, markers } = params;
 
   const {
@@ -150,7 +150,7 @@ export const useRegion = (params: {
   // This is the initial region when a new set of markers is provided
   const initialRegion = markersRegion ?? userRegion ?? defaultRegion;
 
-  const [region, setRegion] = useState(initialRegion);
+  const [region, setRegion] = useState<Region>(initialRegion);
 
   // If any of the region inputs change, update the current region
   const prevRegion = usePrevious(initialRegion);
@@ -169,13 +169,15 @@ export const useRegion = (params: {
   useEffect(() => {
     if (center === undefined) return;
 
+    // Set 0 deltas to maintain the current zoom level
+    // This doesn't seem to be documented behaviour but works in practice
     setRegion({
       latitude: center.latitude,
       longitude: center.longitude,
-      latitudeDelta: region.latitudeDelta,
-      longitudeDelta: region.longitudeDelta,
+      latitudeDelta: 0,
+      longitudeDelta: 0,
     });
-  }, [center, region.latitudeDelta, region.longitudeDelta]);
+  }, [center]);
 
   useEffect(() => {
     if (isCheckingPermission) return;
