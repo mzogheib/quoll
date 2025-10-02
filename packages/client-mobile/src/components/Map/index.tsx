@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import MapView, { LatLng, Marker } from "react-native-maps";
 
 import styles from "./styles";
@@ -16,11 +16,20 @@ type Props = {
 export const Map = ({ center, markers, onMarkerPress }: Props) => {
   const { isConnected } = useGeolocationViewModel();
   const { region } = useRegion({ center, markers });
+  const mapRef = useRef<MapView>(null);
+
+  // Smooth transition to new region when it changes
+  useEffect(() => {
+    if (mapRef.current === null) return;
+
+    mapRef.current.animateToRegion(region, 500);
+  }, [region]);
 
   return (
     <MapView
+      ref={mapRef}
       style={styles.wrapper}
-      region={region}
+      initialRegion={region}
       showsUserLocation={isConnected}
       onPress={() => onMarkerPress(null)}
     >
