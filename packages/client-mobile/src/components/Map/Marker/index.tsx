@@ -11,17 +11,14 @@ type Props = {
   onPress: (id: string) => void;
 };
 
-const Marker = ({ id, coordinate, onPress }: Props) => {
-  return (
-    <PointAnnotation
-      key={id}
-      id={id}
-      coordinate={coordinate}
-      onSelected={() => onPress(id)}
-    >
-      <View style={styles.point} />
-    </PointAnnotation>
-  );
-};
+const Marker = ({ id, coordinate, onPress }: Props) => (
+  <PointAnnotation
+    id={id}
+    coordinate={coordinate}
+    onSelected={() => onPress(id)}
+  >
+    <View style={styles.point} />
+  </PointAnnotation>
+);
 
 export default Marker;
