@@ -1,5 +1,6 @@
-import { LatLng, Region } from "react-native-maps";
+import { Region } from "react-native-maps";
 import { useEffect, useState } from "react";
+import { Position } from "@rnmapbox/maps/lib/typescript/src/types/Position";
 
 import { useGeolocationViewModel } from "@modules/geolocation/view-model";
 import { MarkerProps } from "./types";
@@ -22,24 +23,25 @@ type Bounds = {
  * @param paddingMeters An optional distance in meters beyond the bounds. This can be used to simulate a zoom level when displaying the bounds on a map.
  * @returns
  */
-const findBounds = (points: LatLng[], paddingMeters: number = 0): Bounds => {
+const findBounds = (points: Position[], paddingMeters: number = 0): Bounds => {
   let minLat = Number.POSITIVE_INFINITY;
   let maxLat = Number.NEGATIVE_INFINITY;
   let minLng = Number.POSITIVE_INFINITY;
   let maxLng = Number.NEGATIVE_INFINITY;
 
   for (const point of points) {
-    if (point.latitude < minLat) {
-      minLat = point.latitude;
+    const [longitude, latitude] = point;
+    if (latitude < minLat) {
+      minLat = latitude;
     }
-    if (point.latitude > maxLat) {
-      maxLat = point.latitude;
+    if (latitude > maxLat) {
+      maxLat = latitude;
     }
-    if (point.longitude < minLng) {
-      minLng = point.longitude;
+    if (longitude < minLng) {
+      minLng = longitude;
     }
-    if (point.longitude > maxLng) {
-      maxLng = point.longitude;
+    if (longitude > maxLng) {
+      maxLng = longitude;
     }
   }
 
@@ -69,18 +71,18 @@ const findBounds = (points: LatLng[], paddingMeters: number = 0): Bounds => {
  * @param bounds The rectangular bounds
  * @returns
  */
-const findCenter = (bounds: Bounds): LatLng => {
+const findCenter = (bounds: Bounds): Position => {
   const centerLat = (bounds.minLat + bounds.maxLat) / 2;
   const centerLng = (bounds.minLng + bounds.maxLng) / 2;
 
-  return { latitude: centerLat, longitude: centerLng };
+  return [centerLng, centerLat];
 };
 
 /**
  * Make a region that covers an array of points. Return `null` if the input
  * array's length is 0.
  */
-const makeRegion = (points: LatLng[]) => {
+const makeRegion = (points: Position[]) => {
   if (points.length === 0) return null;
 
   const bounds = findBounds(points, 500);
@@ -90,7 +92,8 @@ const makeRegion = (points: LatLng[]) => {
   const centre = findCenter(bounds);
 
   return {
-    ...centre,
+    latitude: centre[1],
+    longitude: centre[0],
     latitudeDelta: maxLat - minLat,
     longitudeDelta: maxLng - minLng,
   };
@@ -113,7 +116,7 @@ const defaultCoords = {
  * @returns region The region to display on the map.
  */
 export const useRegion = (params: {
-  center?: LatLng;
+  center?: Position;
   markers: MarkerProps[] | null;
 }) => {
   const { center, markers } = params;
@@ -172,8 +175,8 @@ export const useRegion = (params: {
     // Set 0 deltas to maintain the current zoom level
     // This doesn't seem to be documented behaviour but works in practice
     setRegion({
-      latitude: center.latitude,
-      longitude: center.longitude,
+      latitude: center[1],
+      longitude: center[0],
       latitudeDelta: 0,
       longitudeDelta: 0,
     });
