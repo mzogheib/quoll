@@ -26,7 +26,12 @@ const HomeScreen = ({ route }: ScreenProps<"home">) => {
     handleDateChange,
   } = useController();
 
-  const mapCenter = selectedEntry?.locationStart ?? undefined;
+  const mapCenter = selectedEntry?.locationStart
+    ? [
+        selectedEntry.locationStart.longitude,
+        selectedEntry.locationStart.latitude,
+      ]
+    : undefined;
 
   return (
     <ScreenTemplate screenName={route.name}>
