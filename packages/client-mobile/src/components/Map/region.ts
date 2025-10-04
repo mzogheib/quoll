@@ -169,18 +169,17 @@ export const useRegion = (params: {
   }, [center, prevRegion, initialRegion]);
 
   // If a center is provided, override the region with this one
+  // Use the existing deltas to maintain the current zoom level
   useEffect(() => {
     if (center === undefined) return;
 
-    // Set 0 deltas to maintain the current zoom level
-    // This doesn't seem to be documented behaviour but works in practice
     setRegion({
       latitude: center[1],
       longitude: center[0],
-      latitudeDelta: 0,
-      longitudeDelta: 0,
+      latitudeDelta: region.latitudeDelta,
+      longitudeDelta: region.longitudeDelta,
     });
-  }, [center]);
+  }, [center, region.latitudeDelta, region.longitudeDelta]);
 
   useEffect(() => {
     if (isCheckingPermission) return;

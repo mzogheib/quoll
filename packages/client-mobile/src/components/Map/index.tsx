@@ -32,17 +32,30 @@ export const Map = ({ center, markers, onMarkerPress }: Props) => {
     if (cameraRef.current === null) return;
 
     cameraRef.current.setCamera({
-      centerCoordinate: [region.longitude, region.latitude],
+      // centerCoordinate: [region.longitude, region.latitude],
+      bounds: {
+        ne: [
+          region.longitude + region.longitudeDelta / 2,
+          region.latitude + region.latitudeDelta / 2,
+        ],
+        sw: [
+          region.longitude - region.longitudeDelta / 2,
+          region.latitude - region.latitudeDelta / 2,
+        ],
+      },
+      padding: {
+        paddingTop: 50,
+        paddingBottom: 50,
+        paddingLeft: 50,
+        paddingRight: 50,
+      },
       animationDuration: 500,
     });
   }, [region]);
 
   return (
     <MapView style={styles.wrapper} onPress={() => onMarkerPress(null)}>
-      <Camera
-        ref={cameraRef}
-        centerCoordinate={[region.longitude, region.latitude]}
-      />
+      <Camera ref={cameraRef} />
       {isConnected && <UserLocation />}
 
       {markers?.map(({ coordinate, id }) => (
