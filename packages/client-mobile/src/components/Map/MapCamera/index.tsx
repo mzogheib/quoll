@@ -3,6 +3,11 @@ import { Camera } from "@rnmapbox/maps";
 import { Position } from "@rnmapbox/maps/lib/typescript/src/types/Position";
 
 import { MarkerProps } from "../types";
+import { useGeolocationViewModel } from "@modules/geolocation/view-model";
+
+// TODO: cycle through different world locations
+// Centre of Australia
+const defaultCenter: Position = [133.843298, -25.898716];
 
 type Props = {
   center?: Position;
@@ -11,6 +16,22 @@ type Props = {
 
 export const MapCamera = ({ center, markers }: Props) => {
   const cameraRef = useRef<Camera>(null);
+
+  const {
+    value: coords,
+    isConnected,
+    isCheckingPermission,
+    refresh,
+  } = useGeolocationViewModel();
+
+  useEffect(() => {
+    if (isCheckingPermission) return;
+
+    if (isConnected) refresh();
+  }, [isCheckingPermission, isConnected, refresh]);
+
+  const userCenter: Position | null =
+    isConnected && coords ? [coords.longitude, coords.latitude] : null;
 
   const markersCenter: Position | undefined = useMemo(() => {
     if (markers === null || markers.length === 0) return undefined;
@@ -30,22 +51,24 @@ export const MapCamera = ({ center, markers }: Props) => {
     return [centerLng, centerLat];
   }, [markers]);
 
-  // Smooth transition to new markers center when it changes
-  const markersCenterLng = markersCenter?.[0];
-  const markersCenterLat = markersCenter?.[1];
+  const initialCenter: Position = markersCenter ?? userCenter ?? defaultCenter;
+
+  // Smooth transition to new initial center when it changes
+  const initialCenterLng = initialCenter?.[0];
+  const initialCenterLat = initialCenter?.[1];
   useEffect(() => {
     if (
       cameraRef.current === null ||
-      markersCenterLng === undefined ||
-      markersCenterLat === undefined
+      initialCenterLng === undefined ||
+      initialCenterLat === undefined
     ) {
       return;
     }
 
     cameraRef.current.setCamera({
-      centerCoordinate: [markersCenterLng, markersCenterLat],
+      centerCoordinate: [initialCenterLng, initialCenterLat],
     });
-  }, [markersCenterLng, markersCenterLat]);
+  }, [initialCenterLng, initialCenterLat]);
 
   // Smooth transition to new center when it changes
   useEffect(() => {
