@@ -4,4 +4,5 @@ declare module "@env" {
   export const AUTH0_DOMAIN: string | undefined;
   export const AUTH0_CLIENT_ID: string | undefined;
   export const AUTH0_AUDIENCE: string | undefined;
+  export const MAPBOX_ACCESS_TOKEN_PUBLIC: string | undefined;
 }

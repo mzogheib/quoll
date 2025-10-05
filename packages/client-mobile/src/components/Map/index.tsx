@@ -1,46 +1,52 @@
 import React, { useEffect, useRef } from "react";
-import MapView, { LatLng, Marker } from "react-native-maps";
+import Mapbox, { MapView, Camera, UserLocation } from "@rnmapbox/maps";
+import { Position } from "@rnmapbox/maps/lib/typescript/src/types/Position";
 
 import styles from "./styles";
 
-import { useRegion } from "@components/Map/region";
+import { MAPBOX_ACCESS_TOKEN_PUBLIC } from "@env";
 import { useGeolocationViewModel } from "@modules/geolocation/view-model";
 import { MarkerProps } from "./types";
+import Marker from "./Marker";
+import { MapCamera } from "./MapCamera";
+
+if (MAPBOX_ACCESS_TOKEN_PUBLIC === undefined) {
+  throw new Error("MAPBOX_ACCESS_TOKEN_PUBLIC is not defined");
+}
+
+Mapbox.setAccessToken(MAPBOX_ACCESS_TOKEN_PUBLIC);
 
 type Props = {
-  center?: LatLng;
+  center?: Position;
   markers: MarkerProps[] | null;
   onMarkerPress: (id: string | null) => void;
 };
 
 export const Map = ({ center, markers, onMarkerPress }: Props) => {
   const { isConnected } = useGeolocationViewModel();
-  const { region } = useRegion({ center, markers });
-  const mapRef = useRef<MapView>(null);
+  // const { bounds } = useBounds({ center, markers });
+  const cameraRef = useRef<Camera>(null);
 
   // Smooth transition to new region when it changes
   useEffect(() => {
-    if (mapRef.current === null) return;
+    if (cameraRef.current === null) return;
 
-    mapRef.current.animateToRegion(region, 500);
-  }, [region]);
+    cameraRef.current.setCamera({
+      centerCoordinate: center,
+    });
+  }, [center]);
 
   return (
-    <MapView
-      ref={mapRef}
-      style={styles.wrapper}
-      initialRegion={region}
-      showsUserLocation={isConnected}
-      onPress={() => onMarkerPress(null)}
-    >
+    <MapView style={styles.wrapper} onPress={() => onMarkerPress(null)}>
+      <MapCamera center={center} markers={markers} />
+      {isConnected && <UserLocation />}
+
       {markers?.map(({ coordinate, id }) => (
         <Marker
+          id={id}
           key={id}
           coordinate={coordinate}
-          onPress={(event) => {
-            onMarkerPress(id);
-            event.stopPropagation();
-          }}
+          onPress={onMarkerPress}
         />
       ))}
     </MapView>

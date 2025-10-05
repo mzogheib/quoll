@@ -79,10 +79,7 @@ const useController = () => {
           .map(({ id, locationStart, mediaUri }) => ({
             // The ! assertions are safe based on above filter
             id,
-            coordinate: {
-              latitude: locationStart!.latitude,
-              longitude: locationStart!.longitude,
-            },
+            coordinate: [locationStart!.longitude, locationStart!.latitude],
             image: mediaUri === null ? null : { uri: mediaUri },
           }));
 
