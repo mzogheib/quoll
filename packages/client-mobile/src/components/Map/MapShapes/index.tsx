@@ -5,30 +5,7 @@ import { OnPressEvent } from "@rnmapbox/maps/lib/typescript/src/types/OnPressEve
 import { clusterCountStyle, clusterStyle, markerStyle } from "./styles";
 
 import { MarkerProps } from "../types";
-
-type FeaturePropertiesMarker = {
-  id: string;
-};
-
-type FeaturePropertiesCluster = {
-  cluster: boolean;
-  cluster_id: number;
-  point_count: number;
-  point_count_abbreviated: string;
-};
-
-type FeatureProperties = FeaturePropertiesMarker | FeaturePropertiesCluster;
-
-/**
- * Type guard to check if properties are for a marker
- */
-const isMarkerProperties = (
-  properties: unknown,
-): properties is FeaturePropertiesMarker => {
-  if (typeof properties !== "object" || properties === null) return false;
-
-  return "id" in properties;
-};
+import { FeatureProperties, isMarkerProperties } from "./types";
 
 type Props = {
   markers: MarkerProps[] | null;
