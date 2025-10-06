@@ -6,7 +6,7 @@ import { useGeolocationViewModel } from "@modules/geolocation/view-model";
 import { MarkerProps } from "./types";
 import { usePrevious } from "@utils/hooks";
 
-type Bounds = {
+export type Bounds = {
   minLat: number;
   maxLat: number;
   minLng: number;
@@ -23,7 +23,10 @@ type Bounds = {
  * @param paddingMeters An optional distance in meters beyond the bounds. This can be used to simulate a zoom level when displaying the bounds on a map.
  * @returns
  */
-const findBounds = (points: Position[], paddingMeters: number = 0): Bounds => {
+export const findBounds = (
+  points: Position[],
+  paddingMeters: number = 0,
+): Bounds => {
   let minLat = Number.POSITIVE_INFINITY;
   let maxLat = Number.NEGATIVE_INFINITY;
   let minLng = Number.POSITIVE_INFINITY;
