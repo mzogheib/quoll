@@ -17,7 +17,7 @@ export const MapShapes = ({ markers, onMarkerPress }: Props) => {
     GeoJSON.Geometry,
     FeatureProperties
   > = useMemo(() => {
-    if (!markers) return { type: "FeatureCollection", features: [] };
+    if (markers === null) return { type: "FeatureCollection", features: [] };
 
     return {
       type: "FeatureCollection",
