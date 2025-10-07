@@ -8,8 +8,8 @@ import { MarkerProps } from "../types";
 import { FeatureProperties, isMarkerProperties } from "./types";
 
 type Props = {
-  markers: MarkerProps[] | null;
-  onMarkerPress: (id: string | null) => void;
+  markers: MarkerProps[];
+  onMarkerPress: (id: string) => void;
 };
 
 export const MapShapes = ({ markers, onMarkerPress }: Props) => {

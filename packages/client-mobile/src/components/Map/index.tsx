@@ -30,7 +30,9 @@ export const Map = ({ center, markers, onMarkerPress }: Props) => {
       <MapCamera center={center} markers={markers} />
       {isConnected && <UserLocation />}
 
-      <MapShapes markers={markers} onMarkerPress={onMarkerPress} />
+      {markers !== null && (
+        <MapShapes markers={markers} onMarkerPress={onMarkerPress} />
+      )}
     </MapView>
   );
 };
