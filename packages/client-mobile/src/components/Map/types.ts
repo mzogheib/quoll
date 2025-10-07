@@ -4,5 +4,5 @@ import { ImageURISource } from "react-native";
 export type MarkerProps = {
   id: string;
   image: ImageURISource | null;
-  coordinate: Position;
+  position: Position;
 };

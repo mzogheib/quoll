@@ -32,7 +32,7 @@ export const MapShapes = ({ markers, onMarkerPress }: Props) => {
         id: marker.id,
         geometry: {
           type: "Point",
-          coordinates: marker.coordinate,
+          coordinates: marker.position,
         },
         properties: {
           id: marker.id,

@@ -4,7 +4,7 @@ import { Position } from "@rnmapbox/maps/lib/typescript/src/types/Position";
 
 import { MarkerProps } from "../types";
 import { useGeolocationViewModel } from "@modules/geolocation/view-model";
-import { findBounds } from "./utils";
+import { getCameraBounds } from "./utils";
 
 // TODO: cycle through different world locations
 // Centre of Australia
@@ -59,7 +59,7 @@ export const MapCamera = ({ center, markers }: Props) => {
   const markersBounds = useMemo(() => {
     if (markers === null || markers.length === 0) return undefined;
 
-    return findBounds(markers.map((marker) => marker.coordinate));
+    return getCameraBounds(markers.map((marker) => marker.position));
   }, [markers]);
 
   const initialBounds = markersBounds ?? userBounds ?? defaultBounds;
