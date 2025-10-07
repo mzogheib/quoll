@@ -1,11 +1,5 @@
+import { CameraBounds } from "@rnmapbox/maps";
 import { Position } from "@rnmapbox/maps/lib/typescript/src/types/Position";
-
-export type Bounds = {
-  minLat: number;
-  maxLat: number;
-  minLng: number;
-  maxLng: number;
-};
 
 /**
  * Calculate the outer bounds for a given array of points.
@@ -20,7 +14,7 @@ export type Bounds = {
 export const findBounds = (
   points: Position[],
   paddingMeters: number = 0,
-): Bounds => {
+): CameraBounds => {
   let minLat = Number.POSITIVE_INFINITY;
   let maxLat = Number.NEGATIVE_INFINITY;
   let minLng = Number.POSITIVE_INFINITY;
@@ -56,5 +50,5 @@ export const findBounds = (
     maxLng += paddingLng;
   }
 
-  return { minLat, maxLat, minLng, maxLng };
+  return { ne: [maxLng, maxLat], sw: [minLng, minLat] };
 };

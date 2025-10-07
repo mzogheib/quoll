@@ -1,18 +1,16 @@
 import React, { useEffect, useMemo, useRef } from "react";
-import { Camera } from "@rnmapbox/maps";
+import { Camera, CameraBounds } from "@rnmapbox/maps";
 import { Position } from "@rnmapbox/maps/lib/typescript/src/types/Position";
 
 import { MarkerProps } from "../types";
 import { useGeolocationViewModel } from "@modules/geolocation/view-model";
-import { Bounds, findBounds } from "./utils";
+import { findBounds } from "./utils";
 
 // TODO: cycle through different world locations
 // Centre of Australia
-const defaultBounds: Bounds = {
-  minLat: -25.898716,
-  maxLat: -25.898716,
-  minLng: 133.843298,
-  maxLng: 133.843298,
+const defaultBounds: CameraBounds = {
+  ne: [133.843298, -25.898716],
+  sw: [133.843298, -25.898716],
 };
 
 type Props = {
@@ -36,17 +34,13 @@ export const MapCamera = ({ center, markers }: Props) => {
     if (isConnected) refresh();
   }, [isCheckingPermission, isConnected, refresh]);
 
-  const userBounds: Bounds | undefined = useMemo(() => {
+  // Not really a bounds but building it as such for consistency
+  const userBounds: CameraBounds | undefined = useMemo(() => {
     if (!isConnected || !coords) return undefined;
 
-    const deltaLat = 0.05;
-    const deltaLng = 0.05;
-
     return {
-      minLat: coords.latitude - deltaLat,
-      maxLat: coords.latitude + deltaLat,
-      minLng: coords.longitude - deltaLng,
-      maxLng: coords.longitude + deltaLng,
+      ne: [coords.longitude, coords.latitude],
+      sw: [coords.longitude, coords.latitude],
     };
   }, [isConnected, coords]);
 
@@ -59,10 +53,10 @@ export const MapCamera = ({ center, markers }: Props) => {
   const initialBounds = markersBounds ?? userBounds ?? defaultBounds;
 
   // Smooth transition to new initial bounds when it changes
-  const initialMinLng = initialBounds.minLng;
-  const initialMinLat = initialBounds.minLat;
-  const initialMaxLng = initialBounds.maxLng;
-  const initialMaxLat = initialBounds.maxLat;
+  const initialMinLng = initialBounds.sw[0];
+  const initialMinLat = initialBounds.sw[1];
+  const initialMaxLng = initialBounds.ne[0];
+  const initialMaxLat = initialBounds.ne[1];
   useEffect(() => {
     if (cameraRef.current === null) return;
 
