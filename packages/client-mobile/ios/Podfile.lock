@@ -1326,8 +1326,6 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - react-native-maps (1.20.1):
-    - React-Core
   - react-native-mmkv-storage (0.11.2):
     - DoubleConversion
     - glog
@@ -1821,7 +1819,6 @@ DEPENDENCIES:
   - "react-native-cameraroll (from `../node_modules/@react-native-camera-roll/camera-roll`)"
   - react-native-date-picker (from `../node_modules/react-native-date-picker`)
   - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
-  - react-native-maps (from `../node_modules/react-native-maps`)
   - react-native-mmkv-storage (from `../node_modules/react-native-mmkv-storage`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-nativeconfig (from `../node_modules/react-native/ReactCommon`)
@@ -1950,8 +1947,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-date-picker"
   react-native-geolocation:
     :path: "../node_modules/@react-native-community/geolocation"
-  react-native-maps:
-    :path: "../node_modules/react-native-maps"
   react-native-mmkv-storage:
     :path: "../node_modules/react-native-mmkv-storage"
   react-native-safe-area-context:
@@ -2067,7 +2062,6 @@ SPEC CHECKSUMS:
   react-native-cameraroll: 31e39d303319ba20657808f33104afa9d52d83aa
   react-native-date-picker: d668a2e77115cf64128c2e0106afd828470294bc
   react-native-geolocation: 79343c06877301c296102ceef9d64e7e077a2af0
-  react-native-maps: 9febd31278b35cd21e4fad2cf6fa708993be5dab
   react-native-mmkv-storage: bd8c7ac907b3e5d081a136c951cde0d3a262a21c
   react-native-safe-area-context: 2985d96d364676d1e2e2d5e77f64860874e31e13
   React-nativeconfig: f7ab6c152e780b99a8c17448f2d99cf5f69a2311
