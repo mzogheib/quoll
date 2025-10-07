@@ -4,7 +4,7 @@ import { Position } from "@rnmapbox/maps/lib/typescript/src/types/Position";
 
 import { MarkerProps } from "../types";
 import { useGeolocationViewModel } from "@modules/geolocation/view-model";
-import { Bounds, findBounds } from "../region";
+import { Bounds, findBounds } from "./utils";
 
 // TODO: cycle through different world locations
 // Centre of Australia
