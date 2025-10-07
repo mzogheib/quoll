@@ -1,8 +1,8 @@
+import { Position } from "@rnmapbox/maps/lib/typescript/src/types/Position";
 import { ImageURISource } from "react-native";
-import { MapMarkerProps } from "react-native-maps";
 
 export type MarkerProps = {
   id: string;
   image: ImageURISource | null;
-  coordinate: MapMarkerProps["coordinate"];
+  position: Position;
 };
