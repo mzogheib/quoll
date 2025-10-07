@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.31.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.30.2...@quoll/client-mobile@0.31.0) (2025-10-07)
+
+### Bug Fixes
+
+- **client-mobile:** fetch more media ([36c9516](https://github.com/mzogheib/quoll/commit/36c95161cbe38e40facad44e09fdeb558da9c5ab))
+- **client-mobile:** fix various lint warnings and errors ([12bd0fe](https://github.com/mzogheib/quoll/commit/12bd0fe3ccee316750b06e835714c6cf46ef061d))
+- **client-mobile:** fix various map marker and clustering issues ([#255](https://github.com/mzogheib/quoll/issues/255)) ([46e361a](https://github.com/mzogheib/quoll/commit/46e361a695d2d4481ed212f8d848f78c3e75ab32))
+- **client-mobile:** improve entry detail width for wide images ([9667bd5](https://github.com/mzogheib/quoll/commit/9667bd512eeac5350a257e09b94a29472a949051))
+- **client-mobile:** maintain zoom level while animating to map region ([5404477](https://github.com/mzogheib/quoll/commit/540447710bdbd8003227f5b0b940a384ecd666e3))
+- **client-mobile:** remove dependence on timeline when fetching media ([f5238f9](https://github.com/mzogheib/quoll/commit/f5238f9c012430ef73ee578bbf0c905811703eb9))
+
+### Features
+
+- **client-mobile:** add close button to entry detail ([9434dab](https://github.com/mzogheib/quoll/commit/9434dabdf842423fded6a23992c1d7c572b00f00))
+- **client-mobile:** add prev and next buttons to entry detail ([948db89](https://github.com/mzogheib/quoll/commit/948db89f52d8f948ea52dbe72976fbefb5803cbc))
+- **client-mobile:** animate to new map region ([e2ec56d](https://github.com/mzogheib/quoll/commit/e2ec56d3731550718ebe1e8cf7c5aaeee9f51b0e))
+- **client-mobile:** change map implementation ([#256](https://github.com/mzogheib/quoll/issues/256)) ([a04980c](https://github.com/mzogheib/quoll/commit/a04980c421df8ebb0d7ad7aeb5080d7220460b8f))
+- **client-mobile:** display photos in original aspect ratio on the map ([444d2f0](https://github.com/mzogheib/quoll/commit/444d2f0b9796551781d3e7bb7733579b34bdab09))
+
 ## [0.30.2](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.30.1...@quoll/client-mobile@0.30.2) (2025-02-08)
 
 **Note:** Version bump only for package @quoll/client-mobile
