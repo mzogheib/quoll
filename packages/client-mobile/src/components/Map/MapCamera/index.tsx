@@ -14,10 +14,22 @@ const defaultBounds: CameraBounds = {
 };
 
 type Props = {
+  /** If specified, the camera will center on this position. */
   center?: Position;
+  /** The markers to contain within the camera view. */
   markers: MarkerProps[] | null;
 };
 
+/**
+ * Transitions the map camera to follow the markers, user location or a given
+ * center position.
+ *
+ * The order of precedence is:
+ * 1. Given center position
+ * 2. Markers bounds
+ * 3. User location
+ * 4. Default bounds
+ */
 export const MapCamera = ({ center, markers }: Props) => {
   const cameraRef = useRef<Camera>(null);
 
