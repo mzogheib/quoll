@@ -1,4 +1,4 @@
-import FeedLogo from "@components/FeedLogo";
+import React from "react";
 import { getTimelineEntryImage } from "@quoll/client-lib/modules";
 import {
   TimelineEntry as ITimelineEntry,
@@ -6,7 +6,10 @@ import {
   makeTimeString,
 } from "@quoll/lib/modules";
 import { TouchableHighlight, Text, View } from "react-native";
+
 import styles from "./styles";
+
+import FeedLogo from "@components/FeedLogo";
 
 interface Props {
   entry: ITimelineEntry;
