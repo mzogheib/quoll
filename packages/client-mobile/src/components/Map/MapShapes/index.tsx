@@ -2,7 +2,12 @@ import React, { useMemo } from "react";
 import { ShapeSource, CircleLayer, SymbolLayer } from "@rnmapbox/maps";
 import { OnPressEvent } from "@rnmapbox/maps/lib/typescript/src/types/OnPressEvent";
 
-import { clusterCountStyle, clusterStyle, markerStyle } from "./styles";
+import {
+  clusterCountStyle,
+  clusterStyle,
+  imageMarkerStyle,
+  markerStyle,
+} from "./styles";
 
 import { MarkerProps } from "../types";
 import { FeatureProperties, isMarkerProperties } from "./types";
@@ -36,6 +41,7 @@ export const MapShapes = ({ markers, onMarkerPress }: Props) => {
         },
         properties: {
           id: marker.id,
+          image: marker.image,
         },
       })),
     };
@@ -74,10 +80,17 @@ export const MapShapes = ({ markers, onMarkerPress }: Props) => {
         style={clusterCountStyle}
       />
 
-      {/* Individual unclustered markers */}
+      {/* Individual unclustered markers with images */}
+      <CircleLayer
+        id="unclustered-image-point"
+        filter={["all", ["!", ["has", "point_count"]], ["has", "image"]]}
+        style={imageMarkerStyle}
+      />
+
+      {/* Individual unclustered markers without images */}
       <CircleLayer
         id="unclustered-point"
-        filter={["!", ["has", "point_count"]]}
+        filter={["all", ["!", ["has", "point_count"]], ["!", ["has", "image"]]]}
         style={markerStyle}
       />
     </ShapeSource>

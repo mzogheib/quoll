@@ -28,6 +28,13 @@ export const clusterCountStyle = {
   textFont: ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
 };
 
+export const imageMarkerStyle = {
+  circleColor: "#ff0000",
+  circleRadius: 6,
+  circleStrokeWidth: 2,
+  circleStrokeColor: "#ffffff",
+};
+
 export const markerStyle = {
   circleColor: "#007cbf",
   circleRadius: 6,
