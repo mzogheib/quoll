@@ -1,5 +1,7 @@
 import React from "react";
 import { Text, View } from "react-native";
+import { FeedName } from "@quoll/lib/modules";
+
 import styles from "./styles";
 
 import { ScreenProps } from "../../config";
@@ -49,6 +51,19 @@ const SettingsScreen = ({ route }: ScreenProps<"settings">) => {
   if (stravaFeed === undefined) throw new Error("strava feed not found");
   if (toshlFeed === undefined) throw new Error("toshl feed not found");
 
+  const handleFeedConnect = (name: FeedName) => async () => {
+    try {
+      const config = await feedsViewModel.connect(name);
+
+      if (config.type === "personal-token") {
+        console.log("Show personal token input");
+        return;
+      }
+    } catch {
+      // TODO: do something...
+    }
+  };
+
   const feeds = [
     {
       ...photosFeedSettings,
@@ -61,14 +76,14 @@ const SettingsScreen = ({ route }: ScreenProps<"settings">) => {
       ...stravaFeedSettings,
       isConnected: stravaFeed.isConnected,
       isConnecting: stravaFeed.isAuthenticating,
-      onConnect: () => feedsViewModel.connect("strava"),
+      onConnect: handleFeedConnect("strava"),
       onDisconnect: () => feedsViewModel.disconnect("strava"),
     },
     {
       ...toshlFeedSettings,
       isConnected: toshlFeed.isConnected,
       isConnecting: toshlFeed.isAuthenticating,
-      onConnect: () => feedsViewModel.connect("toshl"),
+      onConnect: handleFeedConnect("toshl"),
       onDisconnect: () => feedsViewModel.disconnect("toshl"),
     },
   ];
