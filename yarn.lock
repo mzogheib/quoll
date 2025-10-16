@@ -8076,6 +8076,7 @@ __metadata:
     eslint: "npm:^8.55.0"
     eslint-config-prettier: "npm:^9.1.0"
     jest: "npm:^29.2.1"
+    polished: "npm:^4.3.1"
     react: "npm:18.3.1"
     react-native: "npm:^0.76.5"
     react-native-auth0: "npm:^3.2.1"
@@ -27318,7 +27319,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"polished@npm:^4.2.2":
+"polished@npm:^4.2.2, polished@npm:^4.3.1":
   version: 4.3.1
   resolution: "polished@npm:4.3.1"
   dependencies:

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Button, Modal, View, TextInput } from "react-native";
+import { Modal, View, TextInput } from "react-native";
 
 import styles from "./styles";
+import { Button } from "../../../../ui-components/Button";
 
 interface Props {
   isOpen: boolean;
@@ -37,7 +38,7 @@ const TokenModal = ({ isOpen, onCancel, onSubmit }: Props) => {
           </View>
           <View style={styles.actions}>
             <Button onPress={onCancel} title="Cancel" />
-            <Button onPress={handleSubmit} title="Submit" />
+            <Button variant="primary" onPress={handleSubmit} title="Submit" />
           </View>
         </View>
       </View>

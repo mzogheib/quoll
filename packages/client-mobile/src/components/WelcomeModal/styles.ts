@@ -33,8 +33,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   actions: {
-    alignItems: "center",
-    paddingVertical: 30,
+    padding: 20,
+    gap: 10,
   },
 });
 

@@ -1,9 +1,10 @@
 import React from "react";
-import { Button, View } from "react-native";
+import { View } from "react-native";
 
 import styles from "./styles";
 
 import { useAuthViewModel } from "@modules/auth/view-model";
+import { Button } from "../../ui-components/Button";
 
 interface Props {
   onConnectFeeds: () => void;
@@ -15,7 +16,12 @@ const WelcomeModalActions = ({ onConnectFeeds }: Props) => {
 
   const renderUnauthed = () => (
     <View style={styles.actions}>
-      <Button onPress={login} disabled={isAuthenticating} title="Log in" />
+      <Button
+        variant="primary"
+        onPress={login}
+        disabled={isAuthenticating}
+        title="Log in"
+      />
       <Button
         onPress={signup}
         disabled={isAuthenticating}
@@ -27,6 +33,7 @@ const WelcomeModalActions = ({ onConnectFeeds }: Props) => {
   const renderAuthed = () => (
     <View style={styles.actions}>
       <Button
+        variant="primary"
         onPress={onConnectFeeds}
         disabled={isAuthenticating}
         title="Connect feeds"

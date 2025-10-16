@@ -1,7 +1,9 @@
 import React, { ReactNode } from "react";
-import { Button, Text, View } from "react-native";
+import { Text, View } from "react-native";
 
 import styles from "./styles";
+
+import { Button } from "../../ui-components/Button";
 
 type Props = {
   title: string;
@@ -40,6 +42,7 @@ const FeedSettings = ({
         </View>
         <View style={styles.button}>
           <Button
+            variant="plain"
             title={buttonLabel}
             disabled={isConnecting}
             onPress={onClick}
