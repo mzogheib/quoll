@@ -1,10 +1,8 @@
 import React from "react";
-import { View } from "react-native";
-
-import styles from "./styles";
 
 import { useAuthViewModel } from "@modules/auth/view-model";
 import { Button } from "../../ui-components/Button";
+import { Modal } from "../../ui-components/Modal";
 
 interface Props {
   onConnectFeeds: () => void;
@@ -15,7 +13,7 @@ const WelcomeModalActions = ({ onConnectFeeds }: Props) => {
     useAuthViewModel();
 
   const renderUnauthed = () => (
-    <View style={styles.actions}>
+    <Modal.Actions align="center" direction="column">
       <Button
         variant="primary"
         onPress={login}
@@ -27,11 +25,11 @@ const WelcomeModalActions = ({ onConnectFeeds }: Props) => {
         disabled={isAuthenticating}
         title="or, sign up"
       />
-    </View>
+    </Modal.Actions>
   );
 
   const renderAuthed = () => (
-    <View style={styles.actions}>
+    <Modal.Actions align="center" direction="column">
       <Button
         variant="primary"
         onPress={onConnectFeeds}
@@ -39,7 +37,7 @@ const WelcomeModalActions = ({ onConnectFeeds }: Props) => {
         title="Connect feeds"
       />
       <Button onPress={logout} disabled={isAuthenticating} title="Log out" />
-    </View>
+    </Modal.Actions>
   );
 
   return isAuthenticated ? renderAuthed() : renderUnauthed();

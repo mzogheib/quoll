@@ -1,8 +1,8 @@
+import { colorPalette } from "@quoll/ui-primitives";
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  // TODO: move these to a separate modal component
-  wrapper: {
+  overlay: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
@@ -12,20 +12,22 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 4,
   },
-  content: {
-    backgroundColor: "white",
+  base: {
     width: "100%",
     maxWidth: 400,
+    backgroundColor: colorPalette.white,
     borderRadius: 4,
-    padding: 20,
+    boxShadow: "0 4px 4px rgba(0, 0, 0, 0.25)",
   },
-  message: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  actions: {
+  header: {
     flexDirection: "row",
     justifyContent: "flex-end",
+    alignItems: "center",
+  },
+  inner: {
+    padding: 20,
+  },
+  actions: {
     gap: 10,
     marginTop: 15,
   },

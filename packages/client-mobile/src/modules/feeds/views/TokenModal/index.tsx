@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { Modal, View } from "react-native";
-
-import styles from "./styles";
 
 import { Button } from "../../../../ui-components/Button";
 import { TextInput } from "../../../../ui-components/TextInput";
+import { Modal } from "../../../../ui-components/Modal";
 
 interface Props {
   isOpen: boolean;
@@ -23,27 +21,18 @@ const TokenModal = ({ isOpen, onCancel, onSubmit }: Props) => {
   };
 
   return (
-    <Modal
-      transparent={true}
-      visible={isOpen}
-      onRequestClose={onCancel}
-      supportedOrientations={["portrait", "landscape"]}
-    >
-      <View style={styles.wrapper}>
-        <View style={styles.content}>
-          <View style={styles.message}>
-            <TextInput
-              placeholder="Enter your personal access token"
-              value={value}
-              onChange={(e) => setValue(e.nativeEvent.text)}
-            />
-          </View>
-          <View style={styles.actions}>
-            <Button onPress={onCancel} title="Cancel" />
-            <Button variant="primary" onPress={handleSubmit} title="Submit" />
-          </View>
-        </View>
-      </View>
+    <Modal isOpen={isOpen} onRequestClose={onCancel}>
+      <Modal.Inner>
+        <TextInput
+          placeholder="Enter your personal access token"
+          value={value}
+          onChange={(e) => setValue(e.nativeEvent.text)}
+        />
+        <Modal.Actions>
+          <Button onPress={onCancel} title="Cancel" />
+          <Button variant="primary" onPress={handleSubmit} title="Submit" />
+        </Modal.Actions>
+      </Modal.Inner>
     </Modal>
   );
 };
