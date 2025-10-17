@@ -12,6 +12,7 @@ import { useGeolocationViewModel } from "@modules/geolocation/view-model";
 import FeedLogo from "@components/FeedLogo";
 import { useFeedsViewModel } from "@modules/feeds/view-model";
 import TokenModal from "@modules/feeds/views/TokenModal";
+import { makeAuthUrl } from "../../../services/oauth";
 
 const photosFeedSettings = {
   title: "Photos",
@@ -59,6 +60,16 @@ const SettingsScreen = ({ route }: ScreenProps<"settings">) => {
   const handleFeedConnect = (name: FeedName) => async () => {
     try {
       const config = await feedsViewModel.connect(name);
+
+      if (config.type === "oauth") {
+        const { url } = config.data;
+
+        const authUrl = makeAuthUrl(url);
+        console.log("OAuth URL with state token:", authUrl);
+
+        // TODO: Open in-app browser with authUrl
+        return;
+      }
 
       if (config.type === "personal-token") {
         openTokenModal();
