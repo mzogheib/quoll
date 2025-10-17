@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { Modal, View, TextInput } from "react-native";
+import { Modal, View } from "react-native";
 
 import styles from "./styles";
+
 import { Button } from "../../../../ui-components/Button";
+import { TextInput } from "../../../../ui-components/TextInput";
 
 interface Props {
   isOpen: boolean;
