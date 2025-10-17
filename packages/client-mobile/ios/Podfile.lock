@@ -1681,6 +1681,8 @@ PODS:
     - React-logger (= 0.76.5)
     - React-perflogger (= 0.76.5)
     - React-utils (= 0.76.5)
+  - RNInAppBrowser (3.7.0):
+    - React-Core
   - rnmapbox-maps (10.1.45):
     - MapboxMaps (~> 10.19.0)
     - React
@@ -1848,6 +1850,7 @@ DEPENDENCIES:
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCodegen (from `build/generated/ios`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - RNInAppBrowser (from `../node_modules/react-native-inappbrowser-reborn`)
   - "rnmapbox-maps (from `../node_modules/@rnmapbox/maps`)"
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
@@ -2005,6 +2008,8 @@ EXTERNAL SOURCES:
     :path: build/generated/ios
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNInAppBrowser:
+    :path: "../node_modules/react-native-inappbrowser-reborn"
   rnmapbox-maps:
     :path: "../node_modules/@rnmapbox/maps"
   RNScreens:
@@ -2091,6 +2096,7 @@ SPEC CHECKSUMS:
   React-utils: f584a494ac233c7857bab176416b0c49cb4037ba
   ReactCodegen: 3a68408bf68d0957abcd13d610f76420005c1d91
   ReactCommon: 5809a8ee421b7219221a475b78180f8f34b5c5ec
+  RNInAppBrowser: 6d3eb68d471b9834335c664704719b8be1bfdb20
   rnmapbox-maps: 6b4c71c7d6f4e541e93b2f375917684fa5369f7f
   RNScreens: 74536418fef8086457d39df36a55b36efd5329c9
   RNVectorIcons: 3527ca32c86ba87ad1b798c7bbb7c0b064615fa1

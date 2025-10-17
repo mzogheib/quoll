@@ -8082,6 +8082,7 @@ __metadata:
     react-native-auth0: "npm:^3.2.1"
     react-native-date-picker: "npm:^5.0.8"
     react-native-dotenv: "npm:^3.4.10"
+    react-native-inappbrowser-reborn: "npm:^3.7.0"
     react-native-mmkv-storage: "npm:^0.11.2"
     react-native-safe-area-context: "npm:^4.12.0"
     react-native-screens: "npm:^3.34.0"
@@ -26596,6 +26597,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"opencollective-postinstall@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "opencollective-postinstall@npm:2.0.3"
+  bin:
+    opencollective-postinstall: index.js
+  checksum: 10c0/8a0104a218bc1afaae943f0af378461eeb2836f9848bad872bbd067ec5d1d9791636f307454ab77d0746f10341366f295384656a340ebdb87a2585058e8567e5
+  languageName: node
+  linkType: hard
+
 "optionator@npm:^0.8.1, optionator@npm:^0.8.3":
   version: 0.8.3
   resolution: "optionator@npm:0.8.3"
@@ -29012,6 +29022,18 @@ __metadata:
   peerDependencies:
     "@babel/runtime": ^7.20.6
   checksum: 10c0/d5e6166ef6d87ca167a22653ae5ef789128e06ce161e7d4e8a9f1e0319fe7ed0b13aa1a7ba052d6d61b6931d42992e19b954ae9addca5999b138b6b5049c20dd
+  languageName: node
+  linkType: hard
+
+"react-native-inappbrowser-reborn@npm:^3.7.0":
+  version: 3.7.0
+  resolution: "react-native-inappbrowser-reborn@npm:3.7.0"
+  dependencies:
+    invariant: "npm:^2.2.4"
+    opencollective-postinstall: "npm:^2.0.3"
+  peerDependencies:
+    react-native: ">=0.56"
+  checksum: 10c0/b14d564925eec2c95fc6f8931b68f9ae7c418b5ccad2494748282ee9f7460f7094eec3c6e3a6304062124277624c0f6f647f41a7950ab263b7ebb7c6b0d50d4d
   languageName: node
   linkType: hard
 
