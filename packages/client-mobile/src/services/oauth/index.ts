@@ -1,5 +1,7 @@
 import { generateRandomString } from "@quoll/lib/modules";
+
 import { makeStorage } from "@utils/storage";
+import { OAuthResponse } from "./types";
 
 const storage = makeStorage<{ token: string }>("oauth");
 
@@ -55,15 +57,6 @@ export const makeAuthUrl = (url: string): string => {
   newUrl.searchParams.append("state", token);
   return newUrl.toString();
 };
-
-/**
- * OAuth response data from the deep link callback.
- */
-interface OAuthResponse {
-  code?: string;
-  state?: string;
-  error?: string;
-}
 
 /**
  * Validates an OAuth response and returns the authorization code if valid.
