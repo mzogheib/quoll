@@ -73,19 +73,16 @@ export const validateOAuthResponse = (response: OAuthResponse): string => {
 
   const { code, state, error } = response;
 
-  // Check if user denied access
   if (error === "access_denied") {
     storage.clear();
     throw "Access denied.";
   }
 
-  // Check if we have a code
   if (!code) {
     storage.clear();
     throw "No authorization code received.";
   }
 
-  // Validate the state token (CSRF protection)
   if (!isValidToken(state)) {
     throw "Invalid state token. Please try again.";
   }
