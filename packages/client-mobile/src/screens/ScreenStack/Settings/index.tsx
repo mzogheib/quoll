@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Text, View } from "react-native";
+import { InAppBrowser } from "react-native-inappbrowser-reborn";
 import { FeedName } from "@quoll/lib/modules";
 
 import styles from "./styles";
@@ -60,12 +61,23 @@ const SettingsScreen = ({ route }: ScreenProps<"settings">) => {
     try {
       const config = await feedsViewModel.connect(name);
 
+      if (config.type === "oauth") {
+        if (!(await InAppBrowser.isAvailable())) {
+          throw new Error("InAppBrowser is not available");
+        }
+
+        const url = new URL(config.data.url);
+
+        await InAppBrowser.open(url.toString());
+      }
+
       if (config.type === "personal-token") {
         openTokenModal();
         return;
       }
-    } catch {
+    } catch (error) {
       // TODO: do something...
+      console.error("Failed to connect feed", error);
     }
   };
 
