@@ -12,7 +12,6 @@ import { useGeolocationViewModel } from "@modules/geolocation/view-model";
 import FeedLogo from "@components/FeedLogo";
 import { useFeedsViewModel } from "@modules/feeds/view-model";
 import TokenModal from "@modules/feeds/views/TokenModal";
-import { makeAuthUrl } from "../../../services/oauth";
 
 const photosFeedSettings = {
   title: "Photos",
@@ -64,10 +63,9 @@ const SettingsScreen = ({ route }: ScreenProps<"settings">) => {
       if (config.type === "oauth") {
         const { url } = config.data;
 
-        const authUrl = makeAuthUrl(url);
-        console.log("OAuth URL with state token:", authUrl);
+        console.log("OAuth URL:", url);
 
-        // TODO: Open in-app browser with authUrl
+        // TODO: Open in-app browser with url
         return;
       }
 
