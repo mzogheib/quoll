@@ -1,6 +1,5 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import "react-native-url-polyfill/auto";
 
 import AppRoot from "./AppRoot";
 import reportWebVitals from "./reportWebVitals";

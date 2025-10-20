@@ -1,9 +1,10 @@
 import React from "react";
 import { SafeAreaView } from "react-native";
-import NavigationContainer from "@screens/NavigationContainer";
+import "react-native-url-polyfill/auto";
 
 import styles from "./styles";
 
+import NavigationContainer from "@screens/NavigationContainer";
 import App from "../App";
 import AuthProvider from "./AuthProvider";
 
