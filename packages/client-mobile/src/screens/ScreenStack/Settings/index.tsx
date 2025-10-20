@@ -61,9 +61,9 @@ const SettingsScreen = ({ route }: ScreenProps<"settings">) => {
       const config = await feedsViewModel.connect(name);
 
       if (config.type === "oauth") {
-        const { url } = config.data;
+        const url = new URL(config.data.url);
 
-        console.log("OAuth URL:", url);
+        console.log("OAuth URL:", url.origin, url.pathname, url.search);
 
         // TODO: Open in-app browser with url
         return;
