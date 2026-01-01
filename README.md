@@ -20,31 +20,25 @@ Previously supported:
 
 ## Getting Started
 
-1. Clone the repo
-
-```
-git clone https://github.com/mzogheib/quoll.git
-```
-
-2. Install yarn
-
-```
-npm install -g yarn
-```
-
-3. Install dependencies
-
-```
-cd quoll && yarn
-```
-
-4. Add environment variables for 3rd party API credentials. Refer to to `packages/api/feed-apis/` for usage.
-
-5. From the root directory run the following and select which package to run. To run another package, open a new terminal and repeat.
-
-```
-yarn start
-```
+1. Clone the repo and navigate to it
+   ```sh
+   git clone https://github.com/mzogheib/quoll.git
+   cd quoll
+   ```
+1. Install the specified Node.js version and enable [corepack](https://github.com/nodejs/corepack)
+   ```sh
+   corepack enable
+   ```
+1. Install dependencies and prepare Husky
+   ```sh
+   yarn
+   yarn prepare
+   ```
+1. Add environment variables for 3rd party API credentials. Refer to to `packages/api/feed-apis/` for usage.
+1. From the root directory run the following and select which package to run. To run another package, open a new terminal and repeat.
+   ```sh
+   yarn start
+   ```
 
 ## Release process
 
