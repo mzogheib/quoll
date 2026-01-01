@@ -9,7 +9,7 @@
     "release": "./scripts/release.sh",
     "clean-build": "lerna exec -- rm -rf ./build ./dist && rm -rf ./build ./dist",
     "clean-node-modules": "lerna clean && rm -rf ./node_modules",
-    "prepare": "husky install",
+    "prepare": "husky",
     "format": "prettier --write"
   },
   "commitlint": {
