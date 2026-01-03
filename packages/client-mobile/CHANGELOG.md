@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.32.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.31.0...@quoll/client-mobile@0.32.0) (2026-01-03)
+
+### Features
+
+- **client-mobile:** add OAuth connection foundations ([#258](https://github.com/mzogheib/quoll/issues/258)) ([bc3b87b](https://github.com/mzogheib/quoll/commit/bc3b87b0fb7da00e3e74611c6950e7e0b43048e3))
+- **client-mobile:** align Button to app theme ([5c48eb3](https://github.com/mzogheib/quoll/commit/5c48eb3dfb80ab16279ced35b1e4c8fb72559692))
+- **client-mobile:** change marker style for images ([23fd52f](https://github.com/mzogheib/quoll/commit/23fd52f8737cb2fd3c50d253226736148119a063))
+- **client-mobile:** style the token modal input ([88267f8](https://github.com/mzogheib/quoll/commit/88267f8a8fc6a3c226aac73a5f98949fa4805b12))
+- **client-mobile:** support connecting to Toshl ([#257](https://github.com/mzogheib/quoll/issues/257)) ([62a1cae](https://github.com/mzogheib/quoll/commit/62a1cae515060a1f5e7c4a8d6f98da462eda4e27))
+- **client-mobile:** tidy up token modal buttons ([2f36d9a](https://github.com/mzogheib/quoll/commit/2f36d9a75d30b29c22b112b0741967d0366e84ee))
+
 # [0.31.0](https://github.com/mzogheib/quoll/compare/@quoll/client-mobile@0.30.2...@quoll/client-mobile@0.31.0) (2025-10-07)
 
 ### Bug Fixes

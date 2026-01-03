@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.4](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.16.3...@quoll/client-web@0.16.4) (2026-01-03)
+
+### Bug Fixes
+
+- **client-web:** logout if error during user init ([06f8733](https://github.com/mzogheib/quoll/commit/06f87338583c99e35a803aad5d766fbbed49188b))
+
 ## [0.16.3](https://github.com/mzogheib/quoll/compare/@quoll/client-web@0.16.2...@quoll/client-web@0.16.3) (2025-02-08)
 
 ### Bug Fixes
