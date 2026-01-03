@@ -4,7 +4,7 @@ import { useFeedsViewModel } from "modules/feeds/view-model";
 import { useEffect, useState } from "react";
 
 export const useBootstrapApp = (onUnauthenticated: () => void) => {
-  const { isAuthenticated, isAuthenticating } = useAuthViewModel();
+  const { isAuthenticated, isAuthenticating, logout } = useAuthViewModel();
   const { getMe, createMe } = useUserViewModel();
   const { setConnected } = useFeedsViewModel();
 
@@ -21,16 +21,21 @@ export const useBootstrapApp = (onUnauthenticated: () => void) => {
     }
 
     const initUser = async () => {
-      const me = await getMe();
+      try {
+        const me = await getMe();
 
-      if (me !== null) {
-        me.feeds.forEach(({ name, isConnected }) => {
-          setConnected(name, isConnected);
-        });
-        return;
+        if (me !== null) {
+          me.feeds.forEach(({ name, isConnected }) => {
+            setConnected(name, isConnected);
+          });
+          return;
+        }
+
+        await createMe();
+      } catch {
+        console.error("Error initializing user");
+        if (isAuthenticated) await logout();
       }
-
-      await createMe();
     };
 
     initUser();
@@ -40,6 +45,7 @@ export const useBootstrapApp = (onUnauthenticated: () => void) => {
     getMe,
     isAuthenticated,
     isAuthenticating,
+    logout,
     onUnauthenticated,
     setConnected,
   ]);
